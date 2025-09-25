@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  converter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: svg-converter:latest
+    container_name: svg-converter
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MAX_WORKERS=4
+    volumes:
+      # Mount data directories
+      - ./data:/app/data
+      - ./cache:/app/cache
+      - ./results:/app/results
+      # Mount for development (optional)
+      # - ./converters:/app/converters
+      # - ./utils:/app/utils
+    restart: unless-stopped
+    networks:
+      - svg-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: svg-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - converter
+    networks:
+      - svg-network
+    profiles:
+      - production
+
+  # Optional: Redis for caching (production)
+  redis:
+    image: redis:alpine
+    container_name: svg-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - svg-network
+    profiles:
+      - production
+
+networks:
+  svg-network:
+    driver: bridge
+
+volumes:
+  redis-data:
