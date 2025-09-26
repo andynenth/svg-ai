@@ -1,0 +1,28 @@
+# AI/ML dependencies for enhanced logo detection and optimization
+# Install with: pip install -r requirements_ai.txt
+
+# Deep Learning Framework
+torch==2.1.0
+torchvision==0.16.0
+
+# Hugging Face Transformers for CLIP
+transformers==4.36.0
+tokenizers==0.15.0
+
+# Machine Learning
+scikit-learn==1.3.2
+
+# Optional: Text Detection and OCR
+# Uncomment if you want OCR capabilities
+# easyocr==1.7.1
+
+# Optional: Advanced SVG Generation
+# Uncomment for DeepSVG integration
+# deepsvg @ git+https://github.com/alexandre01/deepsvg.git
+
+# Image Processing (if not already installed)
+pillow>=10.1.0
+numpy>=1.24.3
+
+# Utilities
+tqdm>=4.66.1

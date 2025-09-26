@@ -86,15 +86,30 @@ class IterativeOptimizer:
             # Detect gradients
             gradient_score = self._detect_gradients(pixels)
 
-            # Classification logic
+            print(f"\nAnalyzing: {self.input_path.name}")
+            print(f"  Raw metrics: unique_colors={unique_colors}, edge_ratio={edge_ratio:.3f}, "
+                  f"gradient_score={gradient_score:.3f}")
+
+            # IMPORTANT: Check for text BEFORE gradients to avoid misclassification
+
+            # 1. Check for simple geometric shapes first
             if unique_colors <= 10 and edge_ratio < 0.1:
+                print(f"  → Classified as SIMPLE (few colors, low edges)")
                 return 'simple'
-            elif gradient_score > 0.3 or unique_colors > 100:
-                return 'gradient'
-            elif edge_ratio > 0.2 and unique_colors < 50:
+
+            # 2. Check for text characteristics (BEFORE gradient check)
+            if self._is_text_logo(pixels, unique_colors, edge_ratio):
+                print(f"  → Classified as TEXT")
                 return 'text'
-            else:
-                return 'complex'
+
+            # 3. Check for true gradients (after ruling out text)
+            if gradient_score > 0.3 or (unique_colors > 100 and gradient_score > 0.15):
+                print(f"  → Classified as GRADIENT")
+                return 'gradient'
+
+            # 4. Default to complex for everything else
+            print(f"  → Classified as COMPLEX (default)")
+            return 'complex'
 
         except Exception as e:
             print(f"Error detecting logo type: {e}")
@@ -114,6 +129,120 @@ class IterativeOptimizer:
         gradient_score = (h_changes + v_changes) / 510.0  # Normalize
 
         return min(gradient_score, 1.0)
+
+    def _get_base_colors(self, pixels: np.ndarray) -> int:
+        """Get the number of dominant colors, excluding anti-aliasing artifacts."""
+        if pixels.shape[-1] < 3:
+            return 1
+
+        # Convert to RGB only (ignore alpha)
+        rgb = pixels[:, :, :3] if pixels.shape[-1] >= 3 else pixels
+        flat_pixels = rgb.reshape(-1, 3 if len(rgb.shape) > 2 else 1)
+
+        # Count color frequencies
+        unique_colors, counts = np.unique(flat_pixels, axis=0, return_counts=True)
+        total_pixels = counts.sum()
+
+        # Filter out colors that appear in less than 1% of pixels (likely anti-aliasing)
+        significant_threshold = total_pixels * 0.01
+        significant_colors = unique_colors[counts >= significant_threshold]
+
+        return len(significant_colors)
+
+    def _detect_antialiasing_colors(self, pixels: np.ndarray) -> float:
+        """Calculate the ratio of colors that appear only at edges (anti-aliasing)."""
+        if pixels.shape[-1] < 3:
+            return 0.0
+
+        rgb = pixels[:, :, :3] if pixels.shape[-1] >= 3 else pixels
+        height, width = rgb.shape[:2]
+
+        # Create edge mask using simple gradient
+        gray = np.mean(rgb, axis=2) if len(rgb.shape) > 2 else rgb
+        h_grad = np.abs(np.diff(gray, axis=0, prepend=gray[0:1, :]))
+        v_grad = np.abs(np.diff(gray, axis=1, prepend=gray[:, 0:1]))
+        edge_mask = (h_grad + v_grad) > 10  # Threshold for edge detection
+
+        # Get colors at edges vs non-edges
+        edge_pixels = rgb[edge_mask]
+        non_edge_pixels = rgb[~edge_mask]
+
+        if len(edge_pixels) == 0 or len(non_edge_pixels) == 0:
+            return 0.0
+
+        # Find unique colors at edges
+        edge_colors = set(map(tuple, edge_pixels.reshape(-1, 3 if len(rgb.shape) > 2 else 1)))
+        non_edge_colors = set(map(tuple, non_edge_pixels.reshape(-1, 3 if len(rgb.shape) > 2 else 1)))
+
+        # Colors that only appear at edges are likely anti-aliasing
+        edge_only_colors = edge_colors - non_edge_colors
+
+        if len(edge_colors) == 0:
+            return 0.0
+
+        return len(edge_only_colors) / len(edge_colors)
+
+    def _calculate_contrast_ratio(self, pixels: np.ndarray) -> float:
+        """Calculate contrast ratio between dominant colors."""
+        if pixels.shape[-1] < 3:
+            return 1.0
+
+        rgb = pixels[:, :, :3] if pixels.shape[-1] >= 3 else pixels
+        flat_pixels = rgb.reshape(-1, 3 if len(rgb.shape) > 2 else 1)
+
+        # Get top 2 most common colors
+        unique_colors, counts = np.unique(flat_pixels, axis=0, return_counts=True)
+        if len(unique_colors) < 2:
+            return 1.0
+
+        # Sort by frequency and get top 2
+        sorted_indices = np.argsort(counts)[::-1]
+        color1 = unique_colors[sorted_indices[0]]
+        color2 = unique_colors[sorted_indices[1]]
+
+        # Calculate luminance (simplified)
+        lum1 = np.mean(color1)
+        lum2 = np.mean(color2)
+
+        # Calculate contrast ratio
+        if lum1 == lum2:
+            return 1.0
+
+        return abs(lum1 - lum2) / 255.0
+
+    def _is_text_logo(self, pixels: np.ndarray, unique_colors: int, edge_ratio: float) -> bool:
+        """Determine if the logo is text-based using multiple indicators."""
+        # Get base colors without anti-aliasing
+        base_colors = self._get_base_colors(pixels)
+
+        # Check for anti-aliasing presence
+        antialiasing_ratio = self._detect_antialiasing_colors(pixels)
+
+        # Calculate contrast between dominant colors
+        contrast = self._calculate_contrast_ratio(pixels)
+
+        # Debug output
+        print(f"  Detection metrics: base_colors={base_colors}, unique={unique_colors}, "
+              f"edge={edge_ratio:.3f}, aa_ratio={antialiasing_ratio:.3f}, contrast={contrast:.3f}")
+
+        # Text indicators:
+        # 1. Few base colors but many total colors (anti-aliasing)
+        if base_colors <= 5 and unique_colors > 50:
+            if antialiasing_ratio > 0.3:  # Significant anti-aliasing
+                print(f"  → Detected as text (anti-aliased with {base_colors} base colors)")
+                return True
+
+        # 2. High contrast with limited palette and edges
+        if base_colors <= 10 and contrast > 0.5 and edge_ratio > 0.15:
+            print(f"  → Detected as text (high contrast with sharp edges)")
+            return True
+
+        # 3. Strong anti-aliasing with moderate edge presence
+        if antialiasing_ratio > 0.5 and edge_ratio > 0.1 and base_colors <= 8:
+            print(f"  → Detected as text (strong anti-aliasing)")
+            return True
+
+        return False
 
     def optimize(self) -> Dict[str, Any]:
         """Run iterative optimization."""

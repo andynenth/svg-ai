@@ -1,0 +1,369 @@
+{
+  "timestamp": "2025-09-26T12:08:56.526929",
+  "categories": {
+    "simple_geometric": {
+      "files": [
+        {
+          "filename": "cross_08.png",
+          "path": "data/logos/simple_geometric/cross_08.png",
+          "detection": {
+            "detected_type": "simple",
+            "confidence": 0.13575304858386517,
+            "scores": {
+              "text": 0.008484884960732112,
+              "simple": 0.13575304858386517,
+              "gradient": 0.015684153273468837,
+              "complex": 0.006744562832561011
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.01183009147644043,
+            "png_size": 903,
+            "svg_size": 540,
+            "size_reduction": 40.199335548172755,
+            "output_path": "data/logos/simple_geometric/cross_08.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0.06286204743177863,
+            "mse": 43243.42088699341,
+            "psnr": 1.7716031819582239,
+            "success": true
+          }
+        },
+        {
+          "filename": "square_01.png",
+          "path": "data/logos/simple_geometric/square_01.png",
+          "detection": {
+            "detected_type": "simple",
+            "confidence": 0.1002381316696604,
+            "scores": {
+              "text": 0.004071547989345466,
+              "simple": 0.1002381316696604,
+              "gradient": 0.05876236335219195,
+              "complex": 0.0035946190898054433
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.009413957595825195,
+            "png_size": 883,
+            "svg_size": 337,
+            "size_reduction": 61.83465458663646,
+            "output_path": "data/logos/simple_geometric/square_01.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0.22024777582449445,
+            "mse": 36385.31541824341,
+            "psnr": 2.521542167675416,
+            "success": true
+          }
+        }
+      ],
+      "stats": {
+        "total_files": 2,
+        "detection_accuracy": 100.0,
+        "avg_confidence": 0.11799559012676278,
+        "conversion_success_rate": 100.0,
+        "avg_conversion_time": 0.010622024536132812,
+        "avg_size_reduction": 51.01699506740461,
+        "avg_ssim": 0.14155491162813655
+      }
+    },
+    "text_based": {
+      "files": [
+        {
+          "filename": "text_web_05.png",
+          "path": "data/logos/text_based/text_web_05.png",
+          "detection": {
+            "detected_type": "text",
+            "confidence": 0.056628987503548465,
+            "scores": {
+              "text": 0.056628987503548465,
+              "simple": 0.03740113570044438,
+              "gradient": 0.05583298970789959,
+              "complex": 0.01680354013903222
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.010445117950439453,
+            "png_size": 2649,
+            "svg_size": 2372,
+            "size_reduction": 10.456776141940349,
+            "output_path": "data/logos/text_based/text_web_05.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0,
+            "mse": 47468.95275861025,
+            "psnr": 1.3667071027813014,
+            "success": false
+          }
+        },
+        {
+          "filename": "text_data_02.png",
+          "path": "data/logos/text_based/text_data_02.png",
+          "detection": {
+            "detected_type": "text",
+            "confidence": 0.08612575948548813,
+            "scores": {
+              "text": 0.08612575948548813,
+              "simple": 0.040133896846479424,
+              "gradient": 0.03353483812922301,
+              "complex": 0.006872172317040774
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.008227825164794922,
+            "png_size": 2427,
+            "svg_size": 2788,
+            "size_reduction": -14.874330449114126,
+            "output_path": "data/logos/text_based/text_data_02.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0,
+            "mse": 47511.68336570263,
+            "psnr": 1.362799428779977,
+            "success": false
+          }
+        }
+      ],
+      "stats": {
+        "total_files": 2,
+        "detection_accuracy": 100.0,
+        "avg_confidence": 0.0713773734945183,
+        "conversion_success_rate": 100.0,
+        "avg_conversion_time": 0.009336471557617188,
+        "avg_size_reduction": -2.2087771535868885,
+        "avg_ssim": 0
+      }
+    },
+    "gradients": {
+      "files": [
+        {
+          "filename": "gradient_radial_06.png",
+          "path": "data/logos/gradients/gradient_radial_06.png",
+          "detection": {
+            "detected_type": "gradient",
+            "confidence": 0.09517345484346151,
+            "scores": {
+              "text": 0.0007684387516443773,
+              "simple": 0.0689941505746295,
+              "gradient": 0.09517345484346151,
+              "complex": 0.00173062188446238
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.03386092185974121,
+            "png_size": 3974,
+            "svg_size": 7815,
+            "size_reduction": -96.65324609964772,
+            "output_path": "data/logos/gradients/gradient_radial_06.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0.34308290664172597,
+            "mse": 26897.41917103529,
+            "psnr": 3.833697497706744,
+            "success": true
+          }
+        },
+        {
+          "filename": "gradient_radial_07.png",
+          "path": "data/logos/gradients/gradient_radial_07.png",
+          "detection": {
+            "detected_type": "simple",
+            "confidence": 0.08474919913957517,
+            "scores": {
+              "text": 0.0004324445787157553,
+              "simple": 0.08474919913957517,
+              "gradient": 0.07820520922541618,
+              "complex": 0.003279816835250434
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.03790998458862305,
+            "png_size": 4117,
+            "svg_size": 7376,
+            "size_reduction": -79.15958222006316,
+            "output_path": "data/logos/gradients/gradient_radial_07.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0.37150863484725744,
+            "mse": 26830.860194563866,
+            "psnr": 3.8444576453723296,
+            "success": true
+          }
+        }
+      ],
+      "stats": {
+        "total_files": 2,
+        "detection_accuracy": 50.0,
+        "avg_confidence": 0.08996132699151835,
+        "conversion_success_rate": 100.0,
+        "avg_conversion_time": 0.03588545322418213,
+        "avg_size_reduction": -87.90641415985544,
+        "avg_ssim": 0.3572957707444917
+      }
+    },
+    "abstract": {
+      "files": [
+        {
+          "filename": "abstract_1_06.png",
+          "path": "data/logos/abstract/abstract_1_06.png",
+          "detection": {
+            "detected_type": "gradient",
+            "confidence": 0.15824606300642094,
+            "scores": {
+              "text": 0.0007527903993225967,
+              "simple": 0.004751944215968251,
+              "gradient": 0.15824606300642094,
+              "complex": 0.0029158587622835816
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.013079166412353516,
+            "png_size": 3656,
+            "svg_size": 8956,
+            "size_reduction": -144.9671772428884,
+            "output_path": "data/logos/abstract/abstract_1_06.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0,
+            "mse": 44269.56783235073,
+            "psnr": 1.6697507853083917,
+            "success": false
+          }
+        },
+        {
+          "filename": "abstract_3_03.png",
+          "path": "data/logos/abstract/abstract_3_03.png",
+          "detection": {
+            "detected_type": "gradient",
+            "confidence": 0.1012862987505893,
+            "scores": {
+              "text": 0.0029900850713602267,
+              "simple": 0.039117106314127646,
+              "gradient": 0.1012862987505893,
+              "complex": 0.023273179814926454
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.02696704864501953,
+            "png_size": 2821,
+            "svg_size": 20401,
+            "size_reduction": -623.1832683445587,
+            "output_path": "data/logos/abstract/abstract_3_03.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0,
+            "mse": 45296.58683091402,
+            "psnr": 1.5701488239472605,
+            "success": false
+          }
+        }
+      ],
+      "stats": {
+        "total_files": 2,
+        "detection_accuracy": 0.0,
+        "avg_confidence": 0.1297661808785051,
+        "conversion_success_rate": 100.0,
+        "avg_conversion_time": 0.020023107528686523,
+        "avg_size_reduction": -384.0752227937235,
+        "avg_ssim": 0
+      }
+    },
+    "complex": {
+      "files": [
+        {
+          "filename": "complex_multi_08.png",
+          "path": "data/logos/complex/complex_multi_08.png",
+          "detection": {
+            "detected_type": "gradient",
+            "confidence": 0.12232450690741341,
+            "scores": {
+              "text": 0.0028609114475936317,
+              "simple": 0.035239826422184706,
+              "gradient": 0.12232450690741341,
+              "complex": 0.006241409080151546
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.010681867599487305,
+            "png_size": 1745,
+            "svg_size": 3751,
+            "size_reduction": -114.9570200573066,
+            "output_path": "data/logos/complex/complex_multi_08.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0.060032233163647586,
+            "mse": 41638.269370794296,
+            "psnr": 1.9358769042166997,
+            "success": true
+          }
+        },
+        {
+          "filename": "complex_multi_09.png",
+          "path": "data/logos/complex/complex_multi_09.png",
+          "detection": {
+            "detected_type": "simple",
+            "confidence": 0.1314091494617363,
+            "scores": {
+              "text": 0.0013579575049031216,
+              "simple": 0.1314091494617363,
+              "gradient": 0.027015615177030366,
+              "complex": 0.00688394369596305
+            },
+            "success": true
+          },
+          "conversion": {
+            "conversion_time": 0.014551162719726562,
+            "png_size": 1399,
+            "svg_size": 4089,
+            "size_reduction": -192.28020014295925,
+            "output_path": "data/logos/complex/complex_multi_09.baseline.svg",
+            "success": true
+          },
+          "quality": {
+            "ssim": 0.11443421337206836,
+            "mse": 40335.73582023382,
+            "psnr": 2.073903769472413,
+            "success": true
+          }
+        }
+      ],
+      "stats": {
+        "total_files": 2,
+        "detection_accuracy": 0.0,
+        "avg_confidence": 0.12686682818457484,
+        "conversion_success_rate": 100.0,
+        "avg_conversion_time": 0.012616515159606934,
+        "avg_size_reduction": -153.6186101001329,
+        "avg_ssim": 0.08723322326785797
+      }
+    }
+  },
+  "summary": {
+    "overall_detection_accuracy": 50.0,
+    "overall_avg_confidence": 0.10719345993517589,
+    "overall_conversion_rate": 100.0,
+    "overall_avg_time": 0.017696714401245116,
+    "overall_size_reduction": -115.35840582797883,
+    "overall_avg_ssim": 0.11721678112809723,
+    "categories_tested": 5
+  }
+}
