@@ -7,6 +7,7 @@ __pycache__/
 venv/
 env/
 ENV/
+venv39/
 
 # IDE
 .vscode/
@@ -45,3 +46,18 @@ models/weights/
 *.pth
 *.onnx
 *.pkl
+
+# Test/temporary scripts
+convert_test.py
+test_components.py
+test_foundation.py
+
+# Installation/setup scripts
+fix_vtracer_install.sh
+setup_python39.sh
+
+# Mock/test converters
+converters/mock_converter.py
+
+# Claude files
+@CLAUDE.md

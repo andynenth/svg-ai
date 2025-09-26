@@ -1,0 +1,421 @@
+{
+  "summary": {
+    "total_files": 11,
+    "successful": 10,
+    "failed": 1,
+    "success_rate": 90.9090909090909,
+    "target_ssim": 0.9,
+    "max_iterations": 10
+  },
+  "performance": {
+    "average_ssim": 0.99342849402308,
+    "average_time": 0.23839659690856935,
+    "average_iterations": 1.0,
+    "total_time": 9.459252834320068
+  },
+  "by_type": {
+    "simple": {
+      "count": 10,
+      "average_ssim": 0.99342849402308
+    }
+  },
+  "quality_distribution": {
+    "excellent (>0.95)": 10,
+    "good (0.90-0.95)": 0,
+    "acceptable (0.85-0.90)": 0,
+    "poor (<0.85)": 0
+  },
+  "failures": [
+    {
+      "file": "data/logos/simple_geometric/circle_00.optimized.comparison.png",
+      "error": "Unknown error"
+    }
+  ],
+  "detailed_results": [
+    {
+      "file": "data/logos/simple_geometric/square_01.png",
+      "success": true,
+      "ssim": 1.0,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.4972970485687256,
+      "svg_path": "data/logos/simple_geometric/optimized/square_01.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 1.0,
+        "mse": 0.0,
+        "psnr": 100.0,
+        "time": 0.3570230007171631,
+        "svg_size": 337,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/cross_08.png",
+      "success": true,
+      "ssim": 1.0,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.4985320568084717,
+      "svg_path": "data/logos/simple_geometric/optimized/cross_08.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 1.0,
+        "mse": 0.0,
+        "psnr": 100.0,
+        "time": 0.35687899589538574,
+        "svg_size": 540,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/hexagon_04.png",
+      "success": true,
+      "ssim": 0.9942633411242001,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.17224597930908203,
+      "svg_path": "data/logos/simple_geometric/optimized/hexagon_04.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.9942633411242001,
+        "mse": 13.465835571289062,
+        "psnr": 36.83847053789438,
+        "time": 0.03538799285888672,
+        "svg_size": 1104,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/oval_07.png",
+      "success": true,
+      "ssim": 0.988038275152919,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.17336535453796387,
+      "svg_path": "data/logos/simple_geometric/optimized/oval_07.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.988038275152919,
+        "mse": 81.91328938802083,
+        "psnr": 28.99725994642496,
+        "time": 0.037905216217041016,
+        "svg_size": 985,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/circle_00.png",
+      "success": true,
+      "ssim": 0.9882263259464928,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.1719520092010498,
+      "svg_path": "data/logos/simple_geometric/optimized/circle_00.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.9882263259464928,
+        "mse": 54.259969075520836,
+        "psnr": 30.78600818960477,
+        "time": 0.033460140228271484,
+        "svg_size": 759,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/star_05.png",
+      "success": true,
+      "ssim": 0.9885667637814545,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.17229580879211426,
+      "svg_path": "data/logos/simple_geometric/optimized/star_05.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.9885667637814545,
+        "mse": 28.0086669921875,
+        "psnr": 33.657879207952604,
+        "time": 0.0292360782623291,
+        "svg_size": 3536,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/pentagon_03.png",
+      "success": true,
+      "ssim": 0.9927243587283919,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.17742705345153809,
+      "svg_path": "data/logos/simple_geometric/optimized/pentagon_03.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.9927243587283919,
+        "mse": 15.719156901041666,
+        "psnr": 36.16651111979054,
+        "time": 0.033709049224853516,
+        "svg_size": 1914,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/arrow_09.png",
+      "success": true,
+      "ssim": 0.9972868420535849,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.1776721477508545,
+      "svg_path": "data/logos/simple_geometric/optimized/arrow_09.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.9972868420535849,
+        "mse": 10.834274291992188,
+        "psnr": 37.7828053441729,
+        "time": 0.03395199775695801,
+        "svg_size": 1178,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/diamond_06.png",
+      "success": true,
+      "ssim": 0.9932605745688144,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.17139029502868652,
+      "svg_path": "data/logos/simple_geometric/optimized/diamond_06.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.9932605745688144,
+        "mse": 16.246877034505207,
+        "psnr": 36.023104673699734,
+        "time": 0.03416585922241211,
+        "svg_size": 2234,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/triangle_02.png",
+      "success": true,
+      "ssim": 0.9919184588749421,
+      "logo_type": "simple",
+      "iterations": 1,
+      "processing_time": 0.17178821563720703,
+      "svg_path": "data/logos/simple_geometric/optimized/triangle_02.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 4,
+        "layer_difference": 32,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "length_threshold": 2.0,
+        "splice_threshold": 45,
+        "max_iterations": 10
+      },
+      "metrics": {
+        "ssim": 0.9919184588749421,
+        "mse": 20.41900634765625,
+        "psnr": 35.0304575672278,
+        "time": 0.034639835357666016,
+        "svg_size": 2256,
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 32,
+          "corner_threshold": 30,
+          "path_precision": 8,
+          "length_threshold": 2.0,
+          "splice_threshold": 45,
+          "max_iterations": 10
+        }
+      }
+    },
+    {
+      "file": "data/logos/simple_geometric/circle_00.optimized.comparison.png",
+      "success": false,
+      "ssim": 0.5130404875959241,
+      "logo_type": "gradient",
+      "iterations": 10,
+      "processing_time": 7.075286865234375,
+      "svg_path": "data/logos/simple_geometric/optimized/circle_00.optimized.comparison.optimized.svg",
+      "comparison_path": null,
+      "best_params": {
+        "color_precision": 8,
+        "layer_difference": 8,
+        "corner_threshold": 60,
+        "path_precision": 6,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "max_iterations": 15
+      },
+      "metrics": {
+        "ssim": 0.5130404875959241,
+        "mse": 28112.902954032714,
+        "psnr": 3.641746674545931,
+        "time": 0.7240588665008545,
+        "svg_size": 199006,
+        "params": {
+          "color_precision": 8,
+          "layer_difference": 8,
+          "corner_threshold": 60,
+          "path_precision": 6,
+          "length_threshold": 3.0,
+          "splice_threshold": 60,
+          "max_iterations": 15
+        }
+      }
+    }
+  ]
+}

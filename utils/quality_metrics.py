@@ -188,6 +188,15 @@ class SVGRenderer:
     """Render SVG to PNG for comparison."""
 
     @staticmethod
+    def render_to_array(svg_content: str, width: int, height: int) -> np.ndarray:
+        """Render SVG to numpy array at specified size."""
+        result = SVGRenderer.svg_to_png(svg_content, (width, height))
+        if result is None:
+            # Return blank array if rendering fails
+            return np.zeros((height, width, 3), dtype=np.uint8)
+        return result
+
+    @staticmethod
     def svg_to_png(svg_content: str, target_size: Tuple[int, int] = (256, 256)) -> Optional[np.ndarray]:
         """
         Convert SVG content to PNG array.
@@ -211,6 +220,14 @@ class SVGRenderer:
 
             # Load as PIL Image and convert to numpy array
             img = Image.open(io.BytesIO(png_bytes))
+            # Ensure RGB format
+            if img.mode == 'RGBA':
+                # Create white background
+                background = Image.new('RGB', img.size, (255, 255, 255))
+                background.paste(img, mask=img.split()[3] if len(img.split()) > 3 else None)
+                img = background
+            elif img.mode != 'RGB':
+                img = img.convert('RGB')
             return np.array(img)
 
         except ImportError:
@@ -239,6 +256,51 @@ class ComprehensiveMetrics:
     def __init__(self):
         self.quality_calc = QualityMetrics()
         self.renderer = SVGRenderer()
+
+    def compare_images(self, original_path: str, svg_path: str) -> Dict[str, float]:
+        """
+        Compare original PNG with SVG file.
+
+        Args:
+            original_path: Path to original PNG
+            svg_path: Path to SVG file
+
+        Returns:
+            Dictionary with SSIM, MSE, and PSNR metrics
+        """
+        # Load original image
+        original = Image.open(original_path).convert('RGB')
+        original_array = np.array(original)
+
+        # Read SVG content
+        with open(svg_path, 'r') as f:
+            svg_content = f.read()
+
+        # Render SVG to same size as original
+        rendered_array = self.renderer.render_to_array(
+            svg_content,
+            width=original.width,
+            height=original.height
+        )
+
+        # Ensure both arrays have the same shape (RGB, no alpha)
+        if rendered_array.shape[-1] == 4:
+            # Remove alpha channel if present
+            rendered_array = rendered_array[:, :, :3]
+
+        if original_array.shape != rendered_array.shape:
+            # Resize if needed
+            from PIL import Image as PILImage
+            rendered_img = PILImage.fromarray(rendered_array.astype('uint8'))
+            rendered_img = rendered_img.resize((original.width, original.height), PILImage.LANCZOS)
+            rendered_array = np.array(rendered_img)
+
+        # Calculate metrics
+        return {
+            'ssim': self.quality_calc.calculate_ssim(original_array, rendered_array),
+            'mse': self.quality_calc.calculate_mse(original_array, rendered_array),
+            'psnr': self.quality_calc.calculate_psnr(original_array, rendered_array)
+        }
 
     def evaluate(self, png_path: str, svg_content: str,
                 conversion_time: float) -> Dict[str, Any]:

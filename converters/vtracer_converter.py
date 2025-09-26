@@ -67,10 +67,25 @@ class VTracerConverter(BaseConverter):
         }
 
         # Convert image to SVG
-        svg_string = vtracer.convert_image_to_svg_py(
+        # VTracer 0.6.11 requires an output path
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.svg', delete=False) as tmp:
+            tmp_path = tmp.name
+
+        # Convert to SVG file
+        vtracer.convert_image_to_svg_py(
             image_path,
+            tmp_path,
             **params
         )
+
+        # Read the SVG content
+        with open(tmp_path, 'r') as f:
+            svg_string = f.read()
+
+        # Clean up temp file
+        import os as os_cleanup
+        os_cleanup.unlink(tmp_path)
 
         return svg_string
 
@@ -89,11 +104,30 @@ class VTracerConverter(BaseConverter):
             Optimized SVG string
         """
         # Logos typically have fewer colors and cleaner edges
-        return self.convert(
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.svg', delete=False) as tmp:
+            tmp_path = tmp.name
+
+        # Convert with optimized settings
+        vtracer.convert_image_to_svg_py(
             image_path,
+            tmp_path,
+            colormode='color',
             color_precision=4,  # Fewer color levels for logos
             layer_difference=32,  # Higher difference for cleaner separation
             path_precision=6,  # Higher precision for sharp edges
             corner_threshold=45,  # Lower threshold for sharper corners
-            length_threshold=3.0  # Keep smaller details
+            length_threshold=3.0,  # Keep smaller details
+            max_iterations=10,
+            splice_threshold=45
         )
+
+        # Read the SVG content
+        with open(tmp_path, 'r') as f:
+            svg_string = f.read()
+
+        # Clean up temp file
+        import os as os_cleanup
+        os_cleanup.unlink(tmp_path)
+
+        return svg_string
