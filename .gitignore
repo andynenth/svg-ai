@@ -17,10 +17,16 @@ venv39/
 
 # Project specific
 data/output/
+data/logos/
 cache/
 *.svg
 temp/
 *.log
+
+# Large test files
+*.png
+*.jpg
+*.jpeg
 
 # OS
 .DS_Store
