@@ -1,0 +1,20 @@
+{
+  "base": {
+    "correct": 9,
+    "total": 10
+  },
+  "ocr": {
+    "correct": 8,
+    "total": 10
+  },
+  "by_category": {
+    "simple_geometric": {
+      "base_accuracy": 80.0,
+      "ocr_accuracy": 60.0
+    },
+    "text_based": {
+      "base_accuracy": 100.0,
+      "ocr_accuracy": 100.0
+    }
+  }
+}

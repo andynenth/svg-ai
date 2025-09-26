@@ -37,39 +37,39 @@ class AILogoDetector:
     SVG conversion parameters.
     """
 
-    # Logo type descriptions for CLIP classification
+    # Logo type descriptions for CLIP classification - optimized prompts
     LOGO_DESCRIPTIONS = {
         'text': [
-            "text only logo",
-            "typography logo with words",
-            "company name written in text",
-            "wordmark with letters",
-            "text-based brand name",
-            "words and letters logo"
+            "text only logo",  # Best performer: 0.134 score
+            "lettermark logo",
+            "text logo without images",
+            "typeset brand name",
+            "logotype with text",
+            "typography logo with words"  # Keep one original for stability
         ],
         'simple': [
-            "simple geometric shape",
-            "basic circle or square logo",
+            "simple flat icon",  # Best performer: 0.174 score
             "minimalist icon",
+            "basic circle or square logo",
+            "fundamental geometric icon",
             "simple symbol design",
-            "flat geometric logo",
-            "basic shape icon"
+            "simple geometric shape"  # Keep one original
         ],
         'gradient': [
-            "gradient colored logo",
-            "smooth color transition design",
-            "shaded logo with gradients",
-            "blended color logo",
+            "shaded logo with gradients",  # Best performer: 0.121 score
+            "smooth gradient transition",
             "gradient fill design",
-            "color fade logo"
+            "gradual color blend design",
+            "smooth shading design",
+            "gradient colored logo"  # Keep one original
         ],
         'complex': [
-            "detailed illustration",
+            "complex visual composition",  # Best performer: 0.053 score
+            "detailed graphic design",
             "complex artwork logo",
-            "photorealistic emblem",
-            "intricate detailed design",
-            "complicated mascot logo",
-            "complex multi-element logo"
+            "comprehensive illustration",
+            "rich detailed imagery",
+            "detailed illustration"  # Keep one original
         ]
     }
 
@@ -131,13 +131,15 @@ class AILogoDetector:
                 self.prompts.append(desc)
                 self.prompt_labels.append(logo_type)
 
-    def detect_logo_type(self, image_path: str, threshold: float = 0.0) -> Tuple[str, float, Dict[str, float]]:
+    def detect_logo_type(self, image_path: str, threshold: float = 0.0,
+                        use_voting: bool = True) -> Tuple[str, float, Dict[str, float]]:
         """
         Detect the type of logo using CLIP zero-shot classification.
 
         Args:
             image_path: Path to the image file
             threshold: Minimum confidence threshold (0.0 = always return best match)
+            use_voting: Use ensemble voting with multiple scoring methods
 
         Returns:
             Tuple of (detected_type, confidence, all_scores)
@@ -173,16 +175,32 @@ class AILogoDetector:
 
         # Aggregate scores by logo type
         type_scores = {}
+        type_max_scores = {}  # Track max score per type
+        type_top3_scores = {}  # Track top 3 scores per type
+
         for i, (prompt, label) in enumerate(zip(self.prompts, self.prompt_labels)):
             score = probs[0][i].item()
             if label not in type_scores:
                 type_scores[label] = []
             type_scores[label].append(score)
 
-        # Average scores for each type
+        # Calculate different scoring methods
         avg_scores = {}
         for logo_type, scores in type_scores.items():
-            avg_scores[logo_type] = np.mean(scores)
+            # Sort scores for this type
+            sorted_scores = sorted(scores, reverse=True)
+
+            if use_voting:
+                # Ensemble voting: combine multiple methods
+                avg_score = np.mean(scores)
+                max_score = sorted_scores[0] if sorted_scores else 0
+                top3_avg = np.mean(sorted_scores[:3]) if len(sorted_scores) >= 3 else np.mean(sorted_scores)
+
+                # Weighted ensemble (max gets more weight for confidence)
+                avg_scores[logo_type] = (avg_score * 0.3 + max_score * 0.4 + top3_avg * 0.3)
+            else:
+                # Simple average
+                avg_scores[logo_type] = np.mean(scores)
 
         # Find best match
         best_type = max(avg_scores, key=avg_scores.get)

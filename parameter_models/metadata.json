@@ -1,0 +1,29 @@
+{
+  "feature_names": [
+    "aspect_ratio",
+    "color_complexity",
+    "detection_confidence",
+    "has_transparency",
+    "height",
+    "max_edge_strength",
+    "mean_b",
+    "mean_edge_strength",
+    "mean_g",
+    "mean_r",
+    "score_complex",
+    "score_gradient",
+    "score_simple",
+    "score_text",
+    "std_b",
+    "std_g",
+    "std_r",
+    "total_pixels",
+    "transparency_ratio",
+    "type_complex",
+    "type_gradient",
+    "type_simple",
+    "type_text",
+    "unique_colors",
+    "width"
+  ]
+}

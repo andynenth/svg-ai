@@ -63,23 +63,41 @@ class VisualComparer:
         diff_enhanced = Image.new('RGBA', self.comparison_size, (255, 255, 255, 255))
         diff_data = np.array(diff)
 
-        # Calculate diff metrics
+        # Calculate diff metrics - handle alpha channel properly
         total_pixels = diff_data.shape[0] * diff_data.shape[1]
-        diff_threshold = 10  # Pixels with difference > threshold
 
-        # Count pixels with significant differences
-        significant_diff = np.sum(np.max(diff_data[:, :, :3], axis=2) > diff_threshold)
-        diff_percentage = (significant_diff / total_pixels) * 100
+        # Check if we need to compare alpha channels instead of RGB
+        orig_array = np.array(original)
+        conv_array = np.array(converted)
+
+        # If RGB is all black/same, use alpha channel for comparison
+        if orig_array.shape[2] >= 4 and np.std(orig_array[:, :, :3]) < 10:
+            # Compare using alpha channels
+            alpha_diff = np.abs(orig_array[:, :, 3].astype(float) - conv_array[:, :, 3].astype(float))
+            significant_diff = np.sum(alpha_diff > 3)
+            diff_percentage = (significant_diff / total_pixels) * 100
+
+            # Update diff_data to use alpha comparison for visualization
+            for i in range(3):
+                diff_data[:, :, i] = alpha_diff
+        else:
+            # Standard RGB comparison
+            diff_threshold = 3  # Lower threshold for detecting differences
+            any_diff = np.sum(np.max(diff_data[:, :, :3], axis=2) > 0)
+            significant_diff = np.sum(np.max(diff_data[:, :, :3], axis=2) > diff_threshold)
+            diff_percentage = (significant_diff / total_pixels) * 100
 
         # Create heatmap visualization
         for y in range(diff_data.shape[0]):
             for x in range(diff_data.shape[1]):
                 pixel_diff = np.max(diff_data[y, x, :3])
                 if pixel_diff > 0:
-                    # Color based on difference intensity
-                    if pixel_diff < 10:
+                    # Color based on difference intensity - more sensitive thresholds
+                    if pixel_diff < 3:
+                        color = (100, 100, 255, 50)  # Light blue for tiny differences
+                    elif pixel_diff < 10:
                         color = (0, 255, 0, 100)  # Green for small differences
-                    elif pixel_diff < 50:
+                    elif pixel_diff < 30:
                         color = (255, 255, 0, 150)  # Yellow for moderate
                     else:
                         color = (255, 0, 0, 200)  # Red for large differences

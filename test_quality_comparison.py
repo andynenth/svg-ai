@@ -125,43 +125,49 @@ class QualityComparison:
 
     def calculate_ssim_simple(self, img1: 'np.ndarray', img2: 'np.ndarray') -> float:
         """
-        Calculate a simplified SSIM (Structural Similarity Index).
-
-        This is a basic implementation for testing.
+        Calculate SSIM using the fixed QualityMetrics implementation.
         """
-        if img1.shape != img2.shape:
-            return 0.0
+        try:
+            from utils.quality_metrics import QualityMetrics
+            metrics = QualityMetrics()
+            return metrics.calculate_ssim(img1, img2)
+        except Exception as e:
+            logger.warning(f"Failed to use QualityMetrics, falling back to simple SSIM: {e}")
 
-        # Convert to grayscale for simplicity
-        if len(img1.shape) == 3:
-            gray1 = self.np.mean(img1[:,:,:3], axis=2)  # Ignore alpha
-            gray2 = self.np.mean(img2[:,:,:3], axis=2)
-        else:
-            gray1 = img1
-            gray2 = img2
+            # Fallback to simple implementation
+            if img1.shape != img2.shape:
+                return 0.0
 
-        # Calculate means
-        mu1 = self.np.mean(gray1)
-        mu2 = self.np.mean(gray2)
+            # Convert to grayscale for simplicity
+            if len(img1.shape) == 3:
+                gray1 = self.np.mean(img1[:,:,:3], axis=2)  # Ignore alpha
+                gray2 = self.np.mean(img2[:,:,:3], axis=2)
+            else:
+                gray1 = img1
+                gray2 = img2
 
-        # Calculate variances and covariance
-        var1 = self.np.var(gray1)
-        var2 = self.np.var(gray2)
-        cov = self.np.mean((gray1 - mu1) * (gray2 - mu2))
+            # Calculate means
+            mu1 = self.np.mean(gray1)
+            mu2 = self.np.mean(gray2)
 
-        # SSIM formula constants
-        c1 = 0.01 ** 2
-        c2 = 0.03 ** 2
+            # Calculate variances and covariance
+            var1 = self.np.var(gray1)
+            var2 = self.np.var(gray2)
+            cov = self.np.mean((gray1 - mu1) * (gray2 - mu2))
 
-        # Calculate SSIM
-        numerator = (2 * mu1 * mu2 + c1) * (2 * cov + c2)
-        denominator = (mu1 ** 2 + mu2 ** 2 + c1) * (var1 + var2 + c2)
+            # SSIM formula constants
+            c1 = 0.01 ** 2
+            c2 = 0.03 ** 2
 
-        if denominator == 0:
-            return 1.0 if numerator == 0 else 0.0
+            # Calculate SSIM
+            numerator = (2 * mu1 * mu2 + c1) * (2 * cov + c2)
+            denominator = (mu1 ** 2 + mu2 ** 2 + c1) * (var1 + var2 + c2)
 
-        ssim = numerator / denominator
-        return float(max(0, min(1, ssim)))
+            if denominator == 0:
+                return 1.0 if numerator == 0 else 0.0
+
+            ssim = numerator / denominator
+            return float(max(0, min(1, ssim)))
 
     def compare(self, png_path: str, svg_path: str) -> Dict[str, float]:
         """

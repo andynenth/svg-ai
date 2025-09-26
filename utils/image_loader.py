@@ -28,6 +28,11 @@ except ImportError as e:
 class ImageLoader:
     """Utility class for loading images in various formats."""
 
+    def load_image(self, path: str) -> np.ndarray:
+        """Load an image from file path."""
+        img = Image.open(path).convert("RGBA")
+        return np.array(img)
+
     @staticmethod
     def load_png(png_path: str) -> Optional[np.ndarray]:
         """
@@ -54,6 +59,21 @@ class ImageLoader:
         except Exception as e:
             logger.error(f"Failed to load PNG {png_path}: {e}")
             return None
+
+    @staticmethod
+    def load_svg_as_image(svg_path: str, width: int, height: int) -> np.ndarray:
+        """
+        Load SVG and render as image with specified dimensions.
+
+        Args:
+            svg_path: Path to SVG file
+            width: Target width for rendering
+            height: Target height for rendering
+
+        Returns:
+            Numpy array of rendered image
+        """
+        return ImageLoader.load_svg(svg_path, width, height)
 
     @staticmethod
     def load_svg(svg_path: str, width: Optional[int] = None,

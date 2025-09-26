@@ -1,0 +1,92 @@
+{
+  "f360e426fcf79123fd14251b42cc0744_0.983": {
+    "image_path": "data/logos/simple_geometric/hexagon_04.png",
+    "image_hash": "f360e426fcf79123fd14251b42cc0744",
+    "timestamp": "2025-09-26T13:58:50.587760",
+    "features": {
+      "width": 256,
+      "height": 256,
+      "aspect_ratio": 1.0,
+      "total_pixels": 65536,
+      "has_transparency": 1,
+      "transparency_ratio": 0.83428955078125,
+      "mean_r": 0.0,
+      "mean_g": 128.0,
+      "mean_b": 128.0,
+      "std_r": 0.0,
+      "std_g": 0.0,
+      "std_b": 0.0,
+      "unique_colors": 1,
+      "color_complexity": 9.208103130755064e-05,
+      "mean_edge_strength": 1.0227176950409709,
+      "max_edge_strength": 116.8469207173428,
+      "type_simple": 0,
+      "type_text": 0,
+      "type_gradient": 1,
+      "type_complex": 0,
+      "detection_confidence": 0.1880023475154303,
+      "score_text": 0.016251216523960468,
+      "score_simple": 0.15179404988884926,
+      "score_gradient": 0.1880023475154303,
+      "score_complex": 0.006006646290370555
+    },
+    "parameters": {
+      "color_precision": 8,
+      "layer_difference": 8,
+      "corner_threshold": 50,
+      "length_threshold": 5.0,
+      "max_iterations": 15,
+      "splice_threshold": 60,
+      "path_precision": 6
+    },
+    "metrics": {
+      "ssim": 0.9829371321597593,
+      "size_ratio": 0.8145224940805051
+    }
+  },
+  "db6c3bc8713aa10d1312c7f5d493342f_0.997": {
+    "image_path": "data/logos/simple_geometric/arrow_09.png",
+    "image_hash": "db6c3bc8713aa10d1312c7f5d493342f",
+    "timestamp": "2025-09-26T13:59:10.217194",
+    "features": {
+      "width": 256,
+      "height": 256,
+      "aspect_ratio": 1.0,
+      "total_pixels": 65536,
+      "has_transparency": 1,
+      "transparency_ratio": 0.9350433349609375,
+      "mean_r": 255.0,
+      "mean_g": 255.0,
+      "mean_b": 0.0,
+      "std_r": 0.0,
+      "std_g": 0.0,
+      "std_b": 0.0,
+      "unique_colors": 1,
+      "color_complexity": 0.0002349072116513977,
+      "mean_edge_strength": 0.1538860662350781,
+      "max_edge_strength": 20.55559412909293,
+      "type_simple": 1,
+      "type_text": 0,
+      "type_gradient": 0,
+      "type_complex": 0,
+      "detection_confidence": 0.20063858260400594,
+      "score_text": 0.058179337036563084,
+      "score_simple": 0.20063858260400594,
+      "score_gradient": 0.021888930397108198,
+      "score_complex": 0.028278497373685242
+    },
+    "parameters": {
+      "color_precision": 3,
+      "layer_difference": 4,
+      "corner_threshold": 30,
+      "length_threshold": 4.0,
+      "max_iterations": 10,
+      "splice_threshold": 45,
+      "path_precision": 8
+    },
+    "metrics": {
+      "ssim": 0.9972909988610907,
+      "size_ratio": 1.0701754385964912
+    }
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "by_category": {
+    "simple_geometric": {
+      "total": 5,
+      "correct": 5,
+      "accuracy": 100.0,
+      "avg_confidence": 0.12007404314354062,
+      "expected_type": "simple",
+      "details": [
+        {
+          "file": "cross_08.png",
+          "expected": "simple",
+          "detected": "simple",
+          "correct": true,
+          "confidence": 0.13575304858386517,
+          "scores": {
+            "text": 0.008484884960732112,
+            "simple": 0.13575304858386517,
+            "gradient": 0.015684153273468837,
+            "complex": 0.006744562832561011
+          }
+        },
+        {
+          "file": "square_01.png",
+          "expected": "simple",
+          "detected": "simple",
+          "correct": true,
+          "confidence": 0.1002381316696604,
+          "scores": {
+            "text": 0.004071547989345466,
+            "simple": 0.1002381316696604,
+            "gradient": 0.05876236335219195,
+            "complex": 0.0035946190898054433
+          }
+        },
+        {
+          "file": "oval_07.png",
+          "expected": "simple",
+          "detected": "simple",
+          "correct": true,
+          "confidence": 0.11812754580751061,
+          "scores": {
+            "text": 0.004025037300986393,
+            "simple": 0.11812754580751061,
+            "gradient": 0.03637761063873768,
+            "complex": 0.008136468544156136
+          }
+        },
+        {
+          "file": "hexagon_04.png",
+          "expected": "simple",
+          "detected": "simple",
+          "correct": true,
+          "confidence": 0.10667906546344359,
+          "scores": {
+            "text": 0.0010415382785140537,
+            "simple": 0.10667906546344359,
+            "gradient": 0.05606559272079418,
+            "complex": 0.00288048804365341
+          }
+        },
+        {
+          "file": "circle_00.png",
+          "expected": "simple",
+          "detected": "simple",
+          "correct": true,
+          "confidence": 0.13957242419322333,
+          "scores": {
+            "text": 0.0003200656712086432,
+            "simple": 0.13957242419322333,
+            "gradient": 0.02514530159533024,
+            "complex": 0.0016288707851496536
+          }
+        }
+      ]
+    },
+    "text_based": {
+      "total": 5,
+      "correct": 4,
+      "accuracy": 80.0,
+      "avg_confidence": 0.07532817972435926,
+      "expected_type": "text",
+      "details": [
+        {
+          "file": "text_web_05.png",
+          "expected": "text",
+          "detected": "text",
+          "correct": true,
+          "confidence": 0.056628987503548465,
+          "scores": {
+            "text": 0.056628987503548465,
+            "simple": 0.03740113570044438,
+            "gradient": 0.05583298970789959,
+            "complex": 0.01680354013903222
+          }
+        },
+        {
+          "file": "text_data_02.png",
+          "expected": "text",
+          "detected": "text",
+          "correct": true,
+          "confidence": 0.08612575948548813,
+          "scores": {
+            "text": 0.08612575948548813,
+            "simple": 0.040133896846479424,
+            "gradient": 0.03353483812922301,
+            "complex": 0.006872172317040774
+          }
+        },
+        {
+          "file": "text_net_07.png",
+          "expected": "text",
+          "detected": "text",
+          "correct": true,
+          "confidence": 0.08084310032427311,
+          "scores": {
+            "text": 0.08084310032427311,
+            "simple": 0.0426527684321627,
+            "gradient": 0.040141324046999216,
+            "complex": 0.003029464884699943
+          }
+        },
+        {
+          "file": "text_tech_00.png",
+          "expected": "text",
+          "detected": "text",
+          "correct": true,
+          "confidence": 0.07852005124247323,
+          "scores": {
+            "text": 0.07852005124247323,
+            "simple": 0.02803404017079932,
+            "gradient": 0.05751044935459504,
+            "complex": 0.0026021271684536864
+          }
+        },
+        {
+          "file": "text_soft_08.png",
+          "expected": "text",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.07452300006601338,
+          "scores": {
+            "text": 0.048989232163876295,
+            "simple": 0.04261706890489828,
+            "gradient": 0.07452300006601338,
+            "complex": 0.0005373808283669254
+          }
+        }
+      ]
+    },
+    "gradients": {
+      "total": 5,
+      "correct": 3,
+      "accuracy": 60.0,
+      "avg_confidence": 0.09846939217920106,
+      "expected_type": "gradient",
+      "details": [
+        {
+          "file": "gradient_radial_06.png",
+          "expected": "gradient",
+          "detected": "gradient",
+          "correct": true,
+          "confidence": 0.09517345484346151,
+          "scores": {
+            "text": 0.0007684387516443773,
+            "simple": 0.0689941505746295,
+            "gradient": 0.09517345484346151,
+            "complex": 0.00173062188446238
+          }
+        },
+        {
+          "file": "gradient_radial_07.png",
+          "expected": "gradient",
+          "detected": "simple",
+          "correct": false,
+          "confidence": 0.08474919913957517,
+          "scores": {
+            "text": 0.0004324445787157553,
+            "simple": 0.08474919913957517,
+            "gradient": 0.07820520922541618,
+            "complex": 0.003279816835250434
+          }
+        },
+        {
+          "file": "gradient_radial_05.png",
+          "expected": "gradient",
+          "detected": "gradient",
+          "correct": true,
+          "confidence": 0.1019408858070771,
+          "scores": {
+            "text": 0.0002562361993720212,
+            "simple": 0.062432619432608284,
+            "gradient": 0.1019408858070771,
+            "complex": 0.0020369288502782488
+          }
+        },
+        {
+          "file": "gradient_radial_04.png",
+          "expected": "gradient",
+          "detected": "gradient",
+          "correct": true,
+          "confidence": 0.10253738674024741,
+          "scores": {
+            "text": 0.00033982746011436876,
+            "simple": 0.06180039521617194,
+            "gradient": 0.10253738674024741,
+            "complex": 0.001989063886715788
+          }
+        },
+        {
+          "file": "gradient_radial_00.png",
+          "expected": "gradient",
+          "detected": "simple",
+          "correct": false,
+          "confidence": 0.10794603436564405,
+          "scores": {
+            "text": 0.0009115665804226106,
+            "simple": 0.10794603436564405,
+            "gradient": 0.05069267718742291,
+            "complex": 0.007116376688221256
+          }
+        }
+      ]
+    },
+    "abstract": {
+      "total": 5,
+      "correct": 0,
+      "accuracy": 0.0,
+      "avg_confidence": 0.1321948055798809,
+      "expected_type": "complex",
+      "details": [
+        {
+          "file": "abstract_1_06.png",
+          "expected": "complex",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.15824606300642094,
+          "scores": {
+            "text": 0.0007527903993225967,
+            "simple": 0.004751944215968251,
+            "gradient": 0.15824606300642094,
+            "complex": 0.0029158587622835816
+          }
+        },
+        {
+          "file": "abstract_3_03.png",
+          "expected": "complex",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.1012862987505893,
+          "scores": {
+            "text": 0.0029900850713602267,
+            "simple": 0.039117106314127646,
+            "gradient": 0.1012862987505893,
+            "complex": 0.023273179814926454
+          }
+        },
+        {
+          "file": "abstract_4_09.png",
+          "expected": "complex",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.09248775492111842,
+          "scores": {
+            "text": 0.0042316831192389754,
+            "simple": 0.03513308377781262,
+            "gradient": 0.09248775492111842,
+            "complex": 0.03481414320413023
+          }
+        },
+        {
+          "file": "abstract_1_01.png",
+          "expected": "complex",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.15824606300642094,
+          "scores": {
+            "text": 0.0007527903993225967,
+            "simple": 0.004751944215968251,
+            "gradient": 0.15824606300642094,
+            "complex": 0.0029158587622835816
+          }
+        },
+        {
+          "file": "abstract_0_05.png",
+          "expected": "complex",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.1507078482148548,
+          "scores": {
+            "text": 0.00021483776193538992,
+            "simple": 0.012486325072435042,
+            "gradient": 0.1507078482148548,
+            "complex": 0.0032576392956495206
+          }
+        }
+      ]
+    },
+    "complex": {
+      "total": 5,
+      "correct": 0,
+      "accuracy": 0.0,
+      "avg_confidence": 0.12115491041913629,
+      "expected_type": "complex",
+      "details": [
+        {
+          "file": "complex_multi_08.png",
+          "expected": "complex",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.12232450690741341,
+          "scores": {
+            "text": 0.0028609114475936317,
+            "simple": 0.035239826422184706,
+            "gradient": 0.12232450690741341,
+            "complex": 0.006241409080151546
+          }
+        },
+        {
+          "file": "complex_multi_09.png",
+          "expected": "complex",
+          "detected": "simple",
+          "correct": false,
+          "confidence": 0.1314091494617363,
+          "scores": {
+            "text": 0.0013579575049031216,
+            "simple": 0.1314091494617363,
+            "gradient": 0.027015615177030366,
+            "complex": 0.00688394369596305
+          }
+        },
+        {
+          "file": "complex_multi_02.png",
+          "expected": "complex",
+          "detected": "simple",
+          "correct": false,
+          "confidence": 0.13178422565882406,
+          "scores": {
+            "text": 0.0005317035459029285,
+            "simple": 0.13178422565882406,
+            "gradient": 0.03191111392031113,
+            "complex": 0.0024396273787109144
+          }
+        },
+        {
+          "file": "complex_multi_03.png",
+          "expected": "complex",
+          "detected": "simple",
+          "correct": false,
+          "confidence": 0.11452912259846926,
+          "scores": {
+            "text": 0.000451859586367694,
+            "simple": 0.11452912259846926,
+            "gradient": 0.046473577075327434,
+            "complex": 0.005212113256675366
+          }
+        },
+        {
+          "file": "complex_multi_01.png",
+          "expected": "complex",
+          "detected": "gradient",
+          "correct": false,
+          "confidence": 0.10572754746923844,
+          "scores": {
+            "text": 0.0006134631670041321,
+            "simple": 0.058270085137337446,
+            "gradient": 0.10572754746923844,
+            "complex": 0.0020555506619833372
+          }
+        }
+      ]
+    }
+  },
+  "overall": {
+    "total_files": 25,
+    "total_correct": 12,
+    "overall_accuracy": 48.0,
+    "overall_avg_confidence": 0.10944426620922362
+  },
+  "confusion_matrix": {
+    "simple->simple": 5,
+    "text->text": 4,
+    "text->gradient": 1,
+    "gradient->gradient": 3,
+    "gradient->simple": 2,
+    "complex->gradient": 7,
+    "complex->simple": 3
+  }
+}

@@ -1,0 +1,380 @@
+{
+  "simple_geometric": [
+    {
+      "image": "data/logos/simple_geometric/cross_08.png",
+      "logo_type": "simple",
+      "combinations_tested": 1,
+      "time_elapsed": 0.06894493103027344,
+      "best_result": {
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 4,
+          "corner_threshold": 40,
+          "length_threshold": 5.0,
+          "max_iterations": 5,
+          "splice_threshold": 45,
+          "path_precision": 8
+        },
+        "success": true,
+        "ssim": 1.0,
+        "size_reduction": 40.199335548172755,
+        "png_size": 903,
+        "svg_size": 540,
+        "conversion_time": 0.004535198211669922
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 4,
+            "layer_difference": 4,
+            "corner_threshold": 40,
+            "length_threshold": 5.0,
+            "max_iterations": 5,
+            "splice_threshold": 45,
+            "path_precision": 8
+          },
+          "success": true,
+          "ssim": 1.0,
+          "size_reduction": 40.199335548172755,
+          "png_size": 903,
+          "svg_size": 540,
+          "conversion_time": 0.004535198211669922
+        }
+      ]
+    },
+    {
+      "image": "data/logos/simple_geometric/square_01.png",
+      "logo_type": "simple",
+      "combinations_tested": 1,
+      "time_elapsed": 0.03318667411804199,
+      "best_result": {
+        "params": {
+          "color_precision": 4,
+          "layer_difference": 4,
+          "corner_threshold": 40,
+          "length_threshold": 5.0,
+          "max_iterations": 5,
+          "splice_threshold": 45,
+          "path_precision": 8
+        },
+        "success": true,
+        "ssim": 1.0,
+        "size_reduction": 61.83465458663646,
+        "png_size": 883,
+        "svg_size": 337,
+        "conversion_time": 0.004864215850830078
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 4,
+            "layer_difference": 4,
+            "corner_threshold": 40,
+            "length_threshold": 5.0,
+            "max_iterations": 5,
+            "splice_threshold": 45,
+            "path_precision": 8
+          },
+          "success": true,
+          "ssim": 1.0,
+          "size_reduction": 61.83465458663646,
+          "png_size": 883,
+          "svg_size": 337,
+          "conversion_time": 0.004864215850830078
+        }
+      ]
+    }
+  ],
+  "text_based": [
+    {
+      "image": "data/logos/text_based/text_web_05.png",
+      "logo_type": "text",
+      "combinations_tested": 1,
+      "time_elapsed": 0.03396892547607422,
+      "best_result": {
+        "params": {
+          "color_precision": 1,
+          "layer_difference": 4,
+          "corner_threshold": 30,
+          "length_threshold": 4.0,
+          "max_iterations": 10,
+          "splice_threshold": 30,
+          "path_precision": 10
+        },
+        "success": true,
+        "ssim": 0.9898744464500374,
+        "size_reduction": -2.9822574556436443,
+        "png_size": 2649,
+        "svg_size": 2728,
+        "conversion_time": 0.004225015640258789
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 1,
+            "layer_difference": 4,
+            "corner_threshold": 30,
+            "length_threshold": 4.0,
+            "max_iterations": 10,
+            "splice_threshold": 30,
+            "path_precision": 10
+          },
+          "success": true,
+          "ssim": 0.9898744464500374,
+          "size_reduction": -2.9822574556436443,
+          "png_size": 2649,
+          "svg_size": 2728,
+          "conversion_time": 0.004225015640258789
+        }
+      ]
+    },
+    {
+      "image": "data/logos/text_based/text_data_02.png",
+      "logo_type": "text",
+      "combinations_tested": 1,
+      "time_elapsed": 0.047006845474243164,
+      "best_result": {
+        "params": {
+          "color_precision": 1,
+          "layer_difference": 4,
+          "corner_threshold": 30,
+          "length_threshold": 4.0,
+          "max_iterations": 10,
+          "splice_threshold": 30,
+          "path_precision": 10
+        },
+        "success": true,
+        "ssim": 0.986017539536633,
+        "size_reduction": -17.05809641532756,
+        "png_size": 2427,
+        "svg_size": 2841,
+        "conversion_time": 0.005509853363037109
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 1,
+            "layer_difference": 4,
+            "corner_threshold": 30,
+            "length_threshold": 4.0,
+            "max_iterations": 10,
+            "splice_threshold": 30,
+            "path_precision": 10
+          },
+          "success": true,
+          "ssim": 0.986017539536633,
+          "size_reduction": -17.05809641532756,
+          "png_size": 2427,
+          "svg_size": 2841,
+          "conversion_time": 0.005509853363037109
+        }
+      ]
+    }
+  ],
+  "gradients": [
+    {
+      "image": "data/logos/gradients/gradient_radial_06.png",
+      "logo_type": "gradient",
+      "combinations_tested": 2,
+      "time_elapsed": 0.10173916816711426,
+      "best_result": {
+        "params": {
+          "color_precision": 6,
+          "layer_difference": 8,
+          "corner_threshold": 50,
+          "length_threshold": 5.0,
+          "max_iterations": 10,
+          "splice_threshold": 60,
+          "path_precision": 8
+        },
+        "success": true,
+        "ssim": 0.9768081335069836,
+        "size_reduction": -91.69602415702063,
+        "png_size": 3974,
+        "svg_size": 7618,
+        "conversion_time": 0.016297101974487305
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 10,
+            "layer_difference": 10,
+            "corner_threshold": 60,
+            "length_threshold": 5.0,
+            "max_iterations": 10,
+            "splice_threshold": 45,
+            "path_precision": 6
+          },
+          "success": true,
+          "ssim": 0.9089324605329309,
+          "size_reduction": 83.241066935078,
+          "png_size": 3974,
+          "svg_size": 666,
+          "conversion_time": 0.008259057998657227
+        },
+        {
+          "params": {
+            "color_precision": 6,
+            "layer_difference": 8,
+            "corner_threshold": 50,
+            "length_threshold": 5.0,
+            "max_iterations": 10,
+            "splice_threshold": 60,
+            "path_precision": 8
+          },
+          "success": true,
+          "ssim": 0.9768081335069836,
+          "size_reduction": -91.69602415702063,
+          "png_size": 3974,
+          "svg_size": 7618,
+          "conversion_time": 0.016297101974487305
+        }
+      ]
+    },
+    {
+      "image": "data/logos/gradients/gradient_radial_07.png",
+      "logo_type": "gradient",
+      "combinations_tested": 2,
+      "time_elapsed": 0.08440399169921875,
+      "best_result": {
+        "params": {
+          "color_precision": 6,
+          "layer_difference": 8,
+          "corner_threshold": 50,
+          "length_threshold": 5.0,
+          "max_iterations": 10,
+          "splice_threshold": 60,
+          "path_precision": 8
+        },
+        "success": true,
+        "ssim": 0.9762938044744304,
+        "size_reduction": -69.10371629827546,
+        "png_size": 4117,
+        "svg_size": 6962,
+        "conversion_time": 0.016086101531982422
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 10,
+            "layer_difference": 10,
+            "corner_threshold": 60,
+            "length_threshold": 5.0,
+            "max_iterations": 10,
+            "splice_threshold": 45,
+            "path_precision": 6
+          },
+          "success": true,
+          "ssim": 0.8438630663883228,
+          "size_reduction": 83.82317221277629,
+          "png_size": 4117,
+          "svg_size": 666,
+          "conversion_time": 0.00609898567199707
+        },
+        {
+          "params": {
+            "color_precision": 6,
+            "layer_difference": 8,
+            "corner_threshold": 50,
+            "length_threshold": 5.0,
+            "max_iterations": 10,
+            "splice_threshold": 60,
+            "path_precision": 8
+          },
+          "success": true,
+          "ssim": 0.9762938044744304,
+          "size_reduction": -69.10371629827546,
+          "png_size": 4117,
+          "svg_size": 6962,
+          "conversion_time": 0.016086101531982422
+        }
+      ]
+    }
+  ],
+  "complex": [
+    {
+      "image": "data/logos/complex/complex_multi_08.png",
+      "logo_type": "complex",
+      "combinations_tested": 1,
+      "time_elapsed": 0.035151004791259766,
+      "best_result": {
+        "params": {
+          "color_precision": 12,
+          "layer_difference": 12,
+          "corner_threshold": 70,
+          "length_threshold": 5.0,
+          "max_iterations": 15,
+          "splice_threshold": 75,
+          "path_precision": 6
+        },
+        "success": true,
+        "ssim": 0.9778002572468463,
+        "size_reduction": -128.02292263610315,
+        "png_size": 1745,
+        "svg_size": 3979,
+        "conversion_time": 0.005647897720336914
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 12,
+            "layer_difference": 12,
+            "corner_threshold": 70,
+            "length_threshold": 5.0,
+            "max_iterations": 15,
+            "splice_threshold": 75,
+            "path_precision": 6
+          },
+          "success": true,
+          "ssim": 0.9778002572468463,
+          "size_reduction": -128.02292263610315,
+          "png_size": 1745,
+          "svg_size": 3979,
+          "conversion_time": 0.005647897720336914
+        }
+      ]
+    },
+    {
+      "image": "data/logos/complex/complex_multi_09.png",
+      "logo_type": "complex",
+      "combinations_tested": 1,
+      "time_elapsed": 0.0426020622253418,
+      "best_result": {
+        "params": {
+          "color_precision": 12,
+          "layer_difference": 12,
+          "corner_threshold": 70,
+          "length_threshold": 5.0,
+          "max_iterations": 15,
+          "splice_threshold": 75,
+          "path_precision": 6
+        },
+        "success": true,
+        "ssim": 0.986620808760759,
+        "size_reduction": -169.4067190850608,
+        "png_size": 1399,
+        "svg_size": 3769,
+        "conversion_time": 0.008115768432617188
+      },
+      "all_results": [
+        {
+          "params": {
+            "color_precision": 12,
+            "layer_difference": 12,
+            "corner_threshold": 70,
+            "length_threshold": 5.0,
+            "max_iterations": 15,
+            "splice_threshold": 75,
+            "path_precision": 6
+          },
+          "success": true,
+          "ssim": 0.986620808760759,
+          "size_reduction": -169.4067190850608,
+          "png_size": 1399,
+          "svg_size": 3769,
+          "conversion_time": 0.008115768432617188
+        }
+      ]
+    }
+  ]
+}

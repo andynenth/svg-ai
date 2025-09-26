@@ -93,6 +93,49 @@ class VTracerConverter(BaseConverter):
         """Get converter name."""
         return f"VTracer(color_precision={self.color_precision}, layer_diff={self.layer_difference})"
 
+    def convert_with_params(self, image_path: str, output_path: str, **params) -> dict:
+        """
+        Convert with specific parameters.
+
+        Args:
+            image_path: Input PNG path
+            output_path: Output SVG path
+            **params: VTracer parameters
+
+        Returns:
+            Result dictionary with success status
+        """
+        import time
+
+        try:
+            start_time = time.time()
+
+            # Convert with given parameters
+            vtracer.convert_image_to_svg_py(
+                image_path,
+                output_path,
+                colormode=params.get('colormode', 'color'),
+                color_precision=params.get('color_precision', 6),
+                layer_difference=params.get('layer_difference', 16),
+                path_precision=params.get('path_precision', 5),
+                corner_threshold=params.get('corner_threshold', 60),
+                length_threshold=params.get('length_threshold', 5.0),
+                max_iterations=params.get('max_iterations', 10),
+                splice_threshold=params.get('splice_threshold', 45)
+            )
+
+            conversion_time = time.time() - start_time
+
+            return {
+                'success': True,
+                'conversion_time': conversion_time
+            }
+        except Exception as e:
+            return {
+                'success': False,
+                'error': str(e)
+            }
+
     def optimize_for_logos(self, image_path: str) -> str:
         """
         Convert with settings optimized for logo conversion.

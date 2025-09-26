@@ -14,6 +14,144 @@ class QualityMetrics:
     """Calculate visual quality metrics for SVG conversion."""
 
     @staticmethod
+    def calculate_mse(img1: np.ndarray, img2: np.ndarray) -> float:
+        """
+        Calculate Mean Squared Error.
+
+        Args:
+            img1, img2: Input images as numpy arrays
+
+        Returns:
+            MSE value (lower is better, 0 = identical)
+        """
+        if img1.shape != img2.shape:
+            raise ValueError("Images must have the same dimensions")
+
+        # Handle RGBA images
+        if len(img1.shape) == 3 and img1.shape[2] == 4:
+            alpha1 = img1[:,:,3:4] / 255.0
+            rgb1 = img1[:,:,:3]
+            white = np.ones_like(rgb1) * 255
+            img1 = (rgb1 * alpha1 + white * (1 - alpha1)).astype(np.uint8)
+
+        if len(img2.shape) == 3 and img2.shape[2] == 4:
+            alpha2 = img2[:,:,3:4] / 255.0
+            rgb2 = img2[:,:,:3]
+            white = np.ones_like(rgb2) * 255
+            img2 = (rgb2 * alpha2 + white * (1 - alpha2)).astype(np.uint8)
+
+        return np.mean((img1.astype(float) - img2.astype(float)) ** 2)
+
+    @staticmethod
+    def calculate_psnr(img1: np.ndarray, img2: np.ndarray) -> float:
+        """
+        Calculate Peak Signal-to-Noise Ratio.
+
+        Args:
+            img1, img2: Input images as numpy arrays
+
+        Returns:
+            PSNR value in dB (higher is better, >30 is good)
+        """
+        mse = QualityMetrics.calculate_mse(img1, img2)
+
+        if mse == 0:
+            return float('inf')
+
+        max_pixel = 255.0
+        psnr = 20 * np.log10(max_pixel / np.sqrt(mse))
+        return psnr
+
+    @staticmethod
+    def calculate_perceptual_loss(img1: np.ndarray, img2: np.ndarray) -> float:
+        """
+        Calculate simple perceptual loss based on edge and color differences.
+
+        Args:
+            img1, img2: Input images as numpy arrays
+
+        Returns:
+            Perceptual loss value (lower is better)
+        """
+        from scipy import ndimage
+
+        if img1.shape != img2.shape:
+            raise ValueError("Images must have the same dimensions")
+
+        # Handle RGBA
+        if len(img1.shape) == 3 and img1.shape[2] == 4:
+            alpha1 = img1[:,:,3:4] / 255.0
+            rgb1 = img1[:,:,:3]
+            white = np.ones_like(rgb1) * 255
+            img1 = (rgb1 * alpha1 + white * (1 - alpha1)).astype(np.uint8)
+
+        if len(img2.shape) == 3 and img2.shape[2] == 4:
+            alpha2 = img2[:,:,3:4] / 255.0
+            rgb2 = img2[:,:,:3]
+            white = np.ones_like(rgb2) * 255
+            img2 = (rgb2 * alpha2 + white * (1 - alpha2)).astype(np.uint8)
+
+        # Convert to grayscale for edge detection
+        if len(img1.shape) == 3:
+            gray1 = np.mean(img1, axis=2)
+            gray2 = np.mean(img2, axis=2)
+        else:
+            gray1 = img1
+            gray2 = img2
+
+        # Edge detection using Sobel filters
+        edges1 = ndimage.sobel(gray1)
+        edges2 = ndimage.sobel(gray2)
+
+        # Edge difference
+        edge_diff = np.mean(np.abs(edges1 - edges2))
+
+        # Color difference (if color image)
+        if len(img1.shape) == 3:
+            color_diff = np.mean(np.abs(img1.astype(float) - img2.astype(float)))
+        else:
+            color_diff = np.mean(np.abs(gray1.astype(float) - gray2.astype(float)))
+
+        # Combined perceptual loss (weighted sum)
+        perceptual_loss = 0.7 * edge_diff + 0.3 * color_diff
+
+        return perceptual_loss
+
+    @staticmethod
+    def calculate_unified_score(ssim: float, psnr: float, perceptual: float,
+                              file_size_ratio: float) -> float:
+        """
+        Calculate unified quality score combining all metrics.
+
+        Args:
+            ssim: SSIM score (0-1)
+            psnr: PSNR value in dB
+            perceptual: Perceptual loss (lower is better)
+            file_size_ratio: SVG/PNG size ratio
+
+        Returns:
+            Unified score (0-100)
+        """
+        # Normalize PSNR (30-50 dB range to 0-1)
+        psnr_norm = min(max((psnr - 30) / 20, 0), 1) if psnr != float('inf') else 1.0
+
+        # Normalize perceptual loss (inverse, assume 0-100 range)
+        perceptual_norm = max(1 - perceptual / 100, 0)
+
+        # Normalize file size (bonus for smaller files)
+        size_norm = max(1 - file_size_ratio, 0) if file_size_ratio < 1 else 0.5 / file_size_ratio
+
+        # Weighted combination
+        unified = (
+            0.4 * ssim +           # Visual similarity most important
+            0.2 * psnr_norm +      # Signal quality
+            0.2 * perceptual_norm + # Perceptual quality
+            0.2 * size_norm        # File size efficiency
+        ) * 100
+
+        return min(max(unified, 0), 100)
+
+    @staticmethod
     def calculate_ssim(img1: np.ndarray, img2: np.ndarray,
                        k1: float = 0.01, k2: float = 0.03, win_size: int = 11) -> float:
         """
@@ -29,6 +167,21 @@ class QualityMetrics:
         """
         if img1.shape != img2.shape:
             raise ValueError("Images must have the same dimensions")
+
+        # Handle RGBA images with transparency by compositing on white
+        if len(img1.shape) == 3 and img1.shape[2] == 4:
+            # Composite on white background
+            alpha1 = img1[:,:,3:4] / 255.0
+            rgb1 = img1[:,:,:3]
+            white = np.ones_like(rgb1) * 255
+            img1 = (rgb1 * alpha1 + white * (1 - alpha1)).astype(np.uint8)
+
+        if len(img2.shape) == 3 and img2.shape[2] == 4:
+            # Composite on white background
+            alpha2 = img2[:,:,3:4] / 255.0
+            rgb2 = img2[:,:,:3]
+            white = np.ones_like(rgb2) * 255
+            img2 = (rgb2 * alpha2 + white * (1 - alpha2)).astype(np.uint8)
 
         # Convert to grayscale if needed
         if len(img1.shape) == 3:

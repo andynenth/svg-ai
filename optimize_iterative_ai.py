@@ -31,6 +31,7 @@ from converters.vtracer_converter import VTracerConverter
 from utils.quality_metrics import QualityMetrics
 from utils.svg_optimizer import SVGOptimizer
 from utils.ai_detector import create_detector, AILogoDetector, FallbackDetector
+from utils.image_loader import QualityMetricsWrapper
 
 
 class AIEnhancedOptimizer:
@@ -99,7 +100,7 @@ class AIEnhancedOptimizer:
 
         # Initialize components
         self.converter = VTracerConverter()
-        self.metrics = QualityMetrics()
+        self.metrics = QualityMetricsWrapper()  # Use wrapper that handles file paths
         self.svg_optimizer = SVGOptimizer()
 
         # Initialize AI detector
@@ -170,8 +171,8 @@ class AIEnhancedOptimizer:
             with open(output_path, 'w') as f:
                 f.write(result)
 
-            # Measure quality
-            ssim = self.metrics.calculate_ssim(str(self.input_path), str(output_path))
+            # Measure quality using the wrapper that handles file paths
+            ssim = self.metrics.calculate_ssim_from_paths(str(self.input_path), str(output_path))
 
             return ssim, str(output_path)
 
