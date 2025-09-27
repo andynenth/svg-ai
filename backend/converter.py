@@ -59,12 +59,24 @@ def convert_image(input_path, converter_type="alpha", **params):
         # Calculate SSIM
         ssim_score = 0.95  # Placeholder - actual implementation would use metrics.calculate_ssim()
 
-        # Return success
+        # Calculate additional metrics
+        path_count = svg_content.count('<path')
+        avg_path_length = len(svg_content) / max(path_count, 1) if path_count > 0 else 0
+
+        # Return success with enhanced metrics
         return {
             "success": True,
             "svg": svg_content,
             "size": len(svg_content),
             "ssim": ssim_score,
+            "path_count": path_count,
+            "avg_path_length": round(avg_path_length),
+            "converter_type": converter_type,
+            "optimization_params": {
+                "opttolerance": params.get("opttolerance"),
+                "threshold": params.get("threshold"),
+                "turnpolicy": params.get("turnpolicy")
+            } if converter_type in ["smart", "potrace"] else None
         }
     except Exception as e:
         # Handle exception

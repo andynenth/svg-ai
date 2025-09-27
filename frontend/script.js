@@ -126,7 +126,7 @@ document.getElementById('potraceAlphamax').addEventListener('input', (e) => {
 });
 
 document.getElementById('potraceOpttolerance').addEventListener('input', (e) => {
-    const value = (parseFloat(e.target.value) / 100).toFixed(2); // Convert 1-100 to 0.01-1.00
+    const value = (parseFloat(e.target.value) / 100).toFixed(2); // Convert 0-100 to 0.00-1.00
     document.getElementById('potraceOpttoleranceValue').textContent = value;
 });
 
@@ -184,6 +184,22 @@ function applyPotracePreset(preset) {
             document.getElementById('potraceTurdsize').value = 1; // Minimal noise removal
             document.getElementById('potraceAlphamax').value = 100; // Default smoothness (1.0)
             document.getElementById('potraceOpttolerance').value = 20; // Default accuracy (0.2)
+            break;
+        case 'ultra-precise':
+            // Ultra-precise preset: maximum accuracy, larger files
+            document.getElementById('potraceThreshold').value = 128;
+            document.getElementById('potraceTurnpolicy').value = 'white'; // Smooth corners
+            document.getElementById('potraceTurdsize').value = 2; // Standard noise removal
+            document.getElementById('potraceAlphamax').value = 120; // More smoothness (1.2)
+            document.getElementById('potraceOpttolerance').value = 1; // Ultra precise (0.01)
+            break;
+        case 'ultra-fast':
+            // Ultra-fast preset: aggressive optimization, much smaller files
+            document.getElementById('potraceThreshold').value = 128;
+            document.getElementById('potraceTurnpolicy').value = 'black'; // Sharp corners
+            document.getElementById('potraceTurdsize').value = 1; // Minimal noise removal
+            document.getElementById('potraceAlphamax').value = 80; // Less smoothness (0.8)
+            document.getElementById('potraceOpttolerance').value = 80; // Aggressive optimization (0.8)
             break;
     }
     updatePotraceDisplayValues();
@@ -404,6 +420,9 @@ async function handleConvert() {
 
         document.getElementById('ssimScore').textContent = (result.ssim * 100).toFixed(1) + '%';
         document.getElementById('fileSize').textContent = formatFileSize(result.size);
+        document.getElementById('pathCount').textContent = result.path_count || '-';
+        document.getElementById('avgPathLength').textContent = result.avg_path_length || '-';
+
         metricsDiv.classList.remove('hidden');
 
     } catch (error) {

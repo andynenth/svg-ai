@@ -210,11 +210,17 @@ class SmartPotraceConverter(BaseConverter):
                     if alphamax != 1.0:
                         cmd.extend(['-a', str(alphamax)])
                     if opttolerance != 0.2:
-                        cmd.extend(['-O', str(opttolerance)])
+                        # Potrace requires opttolerance > 0, so use minimum 0.001 for slider position 0
+                        actual_opttolerance = max(0.001, opttolerance)
+                        cmd.extend(['-O', str(actual_opttolerance)])
 
                     # Debug: Log the actual Potrace command
-                    print(f"[Smart Potrace] Running command: {' '.join(map(str, cmd))}")
-                    print(f"[Smart Potrace] Parameters - threshold: {kwargs.get('threshold')}, turnpolicy: {turnpolicy}, turdsize: {turdsize}, alphamax: {alphamax}, opttolerance: {opttolerance}")
+                    import logging
+                    logger = logging.getLogger(__name__)
+                    logger.info(f"[Smart Potrace] Running command: {' '.join(map(str, cmd))}")
+                    logger.info(f"[Smart Potrace] Parameters - threshold: {kwargs.get('threshold')}, turnpolicy: {turnpolicy}, turdsize: {turdsize}, alphamax: {alphamax}, opttolerance: {opttolerance}")
+                    print(f"[Smart Potrace DEBUG] Command: {' '.join(map(str, cmd))}")
+                    print(f"[Smart Potrace DEBUG] opttolerance={opttolerance}, actual flag: {'-O' if opttolerance != 0.2 else 'default'}")
 
                     # Run Potrace
                     result = subprocess.run(
@@ -241,7 +247,13 @@ class SmartPotraceConverter(BaseConverter):
                     if hex_color != '#000000':
                         svg_content = svg_content.replace('fill="#000000"', f'fill="{hex_color}"')
 
-                    print(f"[Smart Potrace] Successfully generated SVG with color {hex_color}")
+                    # Analyze SVG for optimization metrics
+                    path_count = svg_content.count('<path')
+                    svg_size = len(svg_content)
+
+                    logger.info(f"[Smart Potrace] SVG generated - Size: {svg_size} bytes, Paths: {path_count}, opttolerance: {opttolerance}")
+                    print(f"[Smart Potrace DEBUG] SVG metrics - Size: {svg_size}B, Paths: {path_count}, Color: {hex_color}")
+
                     return svg_content
 
                 finally:

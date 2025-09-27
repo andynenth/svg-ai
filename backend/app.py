@@ -187,8 +187,8 @@ def convert():
                 return jsonify({"error": "turdsize must be between 0 and 100"}), 400
             if not (0 <= alphamax <= 1.34):
                 return jsonify({"error": "alphamax must be between 0 and 1.34"}), 400
-            if not (0.01 <= opttolerance <= 1.0):
-                return jsonify({"error": "opttolerance must be between 0.01 and 1.0"}), 400
+            if not (0.0 <= opttolerance <= 1.0):
+                return jsonify({"error": "opttolerance must be between 0.0 and 1.0"}), 400
 
         elif converter_type == "vtracer":
             if colormode not in ["color", "binary"]:
