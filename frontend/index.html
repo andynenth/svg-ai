@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG to SVG Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PNG to SVG Converter</h1>
+        <p class="subtitle">Convert PNG images to scalable SVG format</p>
+
+        <div class="upload-section">
+            <div id="dropzone" class="dropzone">
+                <input type="file" id="fileInput" hidden accept=".png,.jpg,.jpeg" name="file">
+                <div class="upload-icon">📤</div>
+                <p>Drag & Drop your PNG here</p>
+                <p class="small">or click to browse</p>
+            </div>
+        </div>
+
+        <div id="mainContent" class="hidden">
+            <div class="image-display">
+                <div class="image-container">
+                    <h3>Original</h3>
+                    <img id="originalImage" alt="Original">
+                </div>
+                <div class="image-container">
+                    <h3>Converted</h3>
+                    <div id="svgContainer"></div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <h2>Parameters</h2>
+                <div class="control-group">
+                    <label for="threshold">Threshold: <span id="thresholdValue">128</span></label>
+                    <input type="range" id="threshold" min="0" max="255" value="128">
+                </div>
+                <div class="control-group">
+                    <label for="converter">Converter:</label>
+                    <select id="converter">
+                        <option value="alpha">Alpha-aware (Best for icons)</option>
+                        <option value="potrace">Potrace (Black & White)</option>
+                        <option value="vtracer">VTracer (Color)</option>
+                    </select>
+                </div>
+                <button id="convertBtn" class="btn-primary">Convert to SVG</button>
+
+                <div id="metrics" class="metrics hidden">
+                    <p>Quality Score (SSIM): <span id="ssimScore">-</span></p>
+                    <p>File Size: <span id="fileSize">-</span></p>
+                    <button id="downloadBtn" class="btn-secondary">Download SVG</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Converting your image...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -25,7 +25,7 @@ temp/
 backend/uploads/*
 
 # Large test files
-*.png
+# *.png (commented out to track PNG test files)
 *.jpg
 *.jpeg
 

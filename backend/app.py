@@ -14,7 +14,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional, Tuple
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
@@ -28,7 +28,9 @@ from utils.quality_metrics import QualityMetrics
 app = Flask(__name__)
 
 # Enable CORS for frontend communication
-CORS(app, origins=["http://localhost:8080", "http://127.0.0.1:8080"])
+CORS(app, origins=['http://localhost:3000', 'http://localhost:8080', 'http://localhost:8000'],
+     methods=['GET', 'POST', 'OPTIONS'],
+     allow_headers=['Content-Type'])
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -44,6 +46,16 @@ if not os.path.exists(UPLOAD_FOLDER):
 # Initialize components
 metrics = QualityMetrics()
 
+
+@app.route("/")
+def serve_frontend():
+    """Serve the frontend index.html"""
+    return send_from_directory('../frontend', 'index.html')
+
+@app.route("/<path:path>")
+def serve_static(path):
+    """Serve static frontend files"""
+    return send_from_directory('../frontend', path)
 
 @app.route("/health")
 def health_check():
