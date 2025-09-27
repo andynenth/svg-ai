@@ -24,7 +24,15 @@
             <div class="image-display">
                 <div class="image-container">
                     <h3>Original</h3>
-                    <img id="originalImage" alt="Original">
+                    <div id="originalImageContainer">
+                        <div id="imagePlaceholder" class="image-placeholder hidden">
+                            <div class="placeholder-skeleton"></div>
+                            <div class="placeholder-info">
+                                <p id="imageInfo">Loading image...</p>
+                            </div>
+                        </div>
+                        <img id="originalImage" alt="Original" class="fade-in">
+                    </div>
                 </div>
                 <div class="image-container">
                     <h3>Converted</h3>

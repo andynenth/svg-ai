@@ -311,6 +311,9 @@ async function handleFile(file) {
         return;
     }
 
+    // Show progressive loading
+    showImagePlaceholder(file);
+
     const formData = new FormData();
     formData.append('file', file);
 
@@ -323,21 +326,61 @@ async function handleFile(file) {
         const data = await response.json();
 
         if (data.error) {
+            hideImagePlaceholder();
             alert(data.error);
             return;
         }
 
         currentFileId = data.file_id;
 
-        // Display Original Image
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            document.getElementById('originalImage').src = e.target.result;
-            mainContent.classList.remove('hidden');
+        // Display Original Image with memory-efficient object URL
+        const imageElement = document.getElementById('originalImage');
+
+        // Clean up any existing object URL to prevent memory leaks
+        if (imageElement.src && imageElement.src.startsWith('blob:')) {
+            URL.revokeObjectURL(imageElement.src);
+        }
+
+        // Create object URL for immediate, memory-efficient display
+        const objectURL = URL.createObjectURL(file);
+        imageElement.src = objectURL;
+
+        // Store object URL for cleanup later
+        imageElement.dataset.objectUrl = objectURL;
+
+        // Progressive loading completion
+        imageElement.onload = () => {
+            console.log('[Progressive] Image loaded successfully');
+            adjustContainerSizing(imageElement);
+            hideImagePlaceholder();
+
+            // Remove inline opacity and add loaded class for CSS transition
+            imageElement.style.opacity = '';
+            imageElement.classList.add('loaded');
+
+            console.log('[Progressive] Image should now be visible with opacity:', getComputedStyle(imageElement).opacity);
         };
-        reader.readAsDataURL(file);
+
+        // Handle image load errors
+        imageElement.onerror = () => {
+            console.error('[Progressive] Image failed to load');
+            hideImagePlaceholder();
+            const container = document.getElementById('originalImageContainer');
+            container.innerHTML = '<p class="error">Failed to load image</p>';
+        };
+
+        // Fallback timeout to hide placeholder if something goes wrong
+        setTimeout(() => {
+            if (!imageElement.classList.contains('loaded')) {
+                console.warn('[Progressive] Image taking too long, hiding placeholder');
+                hideImagePlaceholder();
+            }
+        }, 5000); // 5 second timeout
+
+        mainContent.classList.remove('hidden');
 
     } catch (error) {
+        hideImagePlaceholder();
         alert('Upload failed: ' + error.message);
     }
 }
@@ -400,17 +443,15 @@ async function handleConvert() {
             return;
         }
 
-        // Display Results
+        // Display Results with optimized SVG handling
         currentSvgContent = result.svg;
 
         // Debug SVG content
         console.log('[Frontend] SVG length:', result.svg.length);
         console.log('[Frontend] SVG preview:', result.svg.substring(0, 300));
-        console.log('[Frontend] SVG contains <rect>:', result.svg.includes('<rect'));
-        console.log('[Frontend] SVG contains fill="white":', result.svg.includes('fill="white"'));
-        console.log('[Frontend] SVG contains fill="#000000":', result.svg.includes('fill="#000000"'));
 
-        document.getElementById('svgContainer').innerHTML = result.svg;
+        // Optimize and display SVG
+        displayOptimizedSVG(result.svg);
 
         // Check what actually rendered
         const svgElement = document.querySelector('#svgContainer svg');
@@ -539,3 +580,208 @@ window.addEventListener('load', () => {
     console.log('[Tooltips] Window loaded, re-initializing tooltips');
     setTimeout(initializeTooltips, 100);
 });
+
+// Memory Management: Clean up object URLs
+function cleanupObjectURLs() {
+    const imageElement = document.getElementById('originalImage');
+    if (imageElement && imageElement.dataset.objectUrl) {
+        URL.revokeObjectURL(imageElement.dataset.objectUrl);
+        delete imageElement.dataset.objectUrl;
+    }
+}
+
+// Clean up on page unload to prevent memory leaks
+window.addEventListener('beforeunload', cleanupObjectURLs);
+
+// Clean up on visibility change (tab switch)
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        cleanupObjectURLs();
+    }
+});
+
+// Dynamic Container Sizing
+function adjustContainerSizing(imageElement) {
+    const container = imageElement.closest('.image-container');
+    const svgContainer = document.getElementById('svgContainer');
+
+    // Get actual image dimensions
+    const naturalWidth = imageElement.naturalWidth;
+    const naturalHeight = imageElement.naturalHeight;
+    const aspectRatio = naturalWidth / naturalHeight;
+
+    // Calculate optimal display dimensions
+    const containerWidth = container.clientWidth - 30; // Account for padding
+    const maxHeight = window.innerWidth < 768 ? 350 : 500; // Mobile vs desktop
+    const minHeight = window.innerWidth < 768 ? 150 : 200;
+
+    // Calculate height based on aspect ratio
+    let optimalHeight = containerWidth / aspectRatio;
+
+    // Clamp to min/max bounds
+    optimalHeight = Math.max(minHeight, Math.min(maxHeight, optimalHeight));
+
+    // Apply consistent height to both containers
+    const heightPx = Math.round(optimalHeight) + 'px';
+
+    // Update image container
+    imageElement.style.height = heightPx;
+
+    // Update SVG container to match
+    svgContainer.style.height = heightPx;
+
+    console.log(`[Sizing] Image: ${naturalWidth}x${naturalHeight}, ratio: ${aspectRatio.toFixed(2)}, container: ${heightPx}`);
+}
+
+// Re-adjust sizing on window resize
+window.addEventListener('resize', () => {
+    const imageElement = document.getElementById('originalImage');
+    if (imageElement && imageElement.complete) {
+        adjustContainerSizing(imageElement);
+    }
+});
+
+// Progressive Loading Management
+function showImagePlaceholder(file) {
+    const placeholder = document.getElementById('imagePlaceholder');
+    const imageInfo = document.getElementById('imageInfo');
+    const imageElement = document.getElementById('originalImage');
+
+    // Reset image state completely
+    imageElement.classList.remove('loaded');
+    imageElement.src = '';
+    imageElement.style.opacity = '0';
+
+    // Ensure placeholder is visible
+    placeholder.classList.remove('hidden');
+    placeholder.style.opacity = '1';
+    placeholder.style.display = 'flex';
+
+    // Display file information
+    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+    imageInfo.innerHTML = `
+        <strong>${file.name}</strong><br>
+        Size: ${fileSizeMB} MB<br>
+        Type: ${file.type}<br>
+        <em>Loading preview...</em>
+    `;
+
+    console.log('[Progressive] Showing placeholder for:', file.name);
+}
+
+function hideImagePlaceholder() {
+    const placeholder = document.getElementById('imagePlaceholder');
+
+    if (placeholder) {
+        // Immediate hide with CSS class
+        placeholder.classList.add('hidden');
+        console.log('[Progressive] Placeholder hidden');
+    }
+}
+
+// Optimized SVG Display
+function displayOptimizedSVG(svgContent) {
+    const container = document.getElementById('svgContainer');
+
+    // Clear container
+    container.innerHTML = '';
+
+    // Create wrapper for zoom functionality
+    const svgWrapper = document.createElement('div');
+    svgWrapper.className = 'svg-wrapper';
+    svgWrapper.innerHTML = svgContent;
+
+    // Get SVG element
+    const svgElement = svgWrapper.querySelector('svg');
+    if (!svgElement) {
+        container.innerHTML = '<p class="error">Invalid SVG content</p>';
+        return;
+    }
+
+    // Optimize SVG attributes for proper scaling
+    optimizeSVGAttributes(svgElement);
+
+    // Add zoom controls
+    const zoomControls = createZoomControls();
+    container.appendChild(zoomControls);
+    container.appendChild(svgWrapper);
+
+    // Initialize zoom functionality
+    initializeZoom(svgWrapper, svgElement);
+
+    console.log('[SVG] Optimized SVG display complete');
+}
+
+function optimizeSVGAttributes(svgElement) {
+    // Ensure proper viewBox for scaling
+    if (!svgElement.getAttribute('viewBox')) {
+        const width = svgElement.getAttribute('width') || '100';
+        const height = svgElement.getAttribute('height') || '100';
+        svgElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    }
+
+    // Remove fixed dimensions to allow responsive scaling
+    svgElement.removeAttribute('width');
+    svgElement.removeAttribute('height');
+
+    // Add responsive styling
+    svgElement.style.width = '100%';
+    svgElement.style.height = 'auto';
+    svgElement.style.maxWidth = '100%';
+    svgElement.style.maxHeight = '100%';
+
+    console.log('[SVG] Optimized attributes for responsive scaling');
+}
+
+function createZoomControls() {
+    const controls = document.createElement('div');
+    controls.className = 'zoom-controls';
+    controls.innerHTML = `
+        <button class="zoom-btn" data-action="zoom-in" title="Zoom In">+</button>
+        <button class="zoom-btn" data-action="zoom-out" title="Zoom Out">−</button>
+        <button class="zoom-btn" data-action="zoom-reset" title="Reset Zoom">⌂</button>
+    `;
+    return controls;
+}
+
+function initializeZoom(wrapper, svgElement) {
+    let currentZoom = 1;
+    const minZoom = 0.25;
+    const maxZoom = 4;
+    const zoomStep = 0.25;
+
+    const controls = wrapper.parentElement.querySelector('.zoom-controls');
+
+    controls.addEventListener('click', (e) => {
+        if (!e.target.matches('.zoom-btn')) return;
+
+        const action = e.target.getAttribute('data-action');
+
+        switch (action) {
+            case 'zoom-in':
+                currentZoom = Math.min(maxZoom, currentZoom + zoomStep);
+                break;
+            case 'zoom-out':
+                currentZoom = Math.max(minZoom, currentZoom - zoomStep);
+                break;
+            case 'zoom-reset':
+                currentZoom = 1;
+                break;
+        }
+
+        // Apply zoom
+        wrapper.style.transform = `scale(${currentZoom})`;
+        wrapper.style.transformOrigin = 'center center';
+
+        console.log('[SVG] Zoom level:', currentZoom);
+    });
+
+    // Mouse wheel zoom
+    wrapper.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
+        currentZoom = Math.max(minZoom, Math.min(maxZoom, currentZoom + delta));
+        wrapper.style.transform = `scale(${currentZoom})`;
+        wrapper.style.transformOrigin = 'center center';
+    });
+}
