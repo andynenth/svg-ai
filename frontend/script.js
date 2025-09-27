@@ -608,6 +608,12 @@ function adjustContainerSizing(imageElement) {
     const container = imageElement.closest('.image-container');
     const svgContainer = document.getElementById('svgContainer');
 
+    // Skip if no container found (grid view removed)
+    if (!container) {
+        console.log('[Sizing] No container found, skipping sizing adjustment');
+        return;
+    }
+
     // Get actual image dimensions
     const naturalWidth = imageElement.naturalWidth;
     const naturalHeight = imageElement.naturalHeight;
@@ -700,23 +706,29 @@ function showImagePlaceholder(file) {
     const imageElement = document.getElementById('originalImage');
 
     // Reset image state completely
-    imageElement.classList.remove('loaded');
-    imageElement.src = '';
-    imageElement.style.opacity = '0';
+    if (imageElement) {
+        imageElement.classList.remove('loaded');
+        imageElement.src = '';
+        imageElement.style.opacity = '0';
+    }
 
-    // Ensure placeholder is visible
-    placeholder.classList.remove('hidden');
-    placeholder.style.opacity = '1';
-    placeholder.style.display = 'flex';
+    // Ensure placeholder is visible (only if it exists)
+    if (placeholder) {
+        placeholder.classList.remove('hidden');
+        placeholder.style.opacity = '1';
+        placeholder.style.display = 'flex';
+    }
 
-    // Display file information
-    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
-    imageInfo.innerHTML = `
-        <strong>${file.name}</strong><br>
-        Size: ${fileSizeMB} MB<br>
-        Type: ${file.type}<br>
-        <em>Loading preview...</em>
-    `;
+    // Display file information (only if element exists)
+    if (imageInfo) {
+        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+        imageInfo.innerHTML = `
+            <strong>${file.name}</strong><br>
+            Size: ${fileSizeMB} MB<br>
+            Type: ${file.type}<br>
+            <em>Loading preview...</em>
+        `;
+    }
 
     console.log('[Progressive] Showing placeholder for:', file.name);
 }
@@ -728,6 +740,9 @@ function hideImagePlaceholder() {
         // Immediate hide with CSS class
         placeholder.classList.add('hidden');
         console.log('[Progressive] Placeholder hidden');
+    } else {
+        // Grid view removed, no placeholder to hide
+        console.log('[Progressive] No placeholder to hide (split view only)');
     }
 }
 
@@ -753,13 +768,8 @@ function displayOptimizedSVG(svgContent) {
     // Optimize SVG attributes for proper scaling
     optimizeSVGAttributes(svgElement);
 
-    // Add zoom controls
-    const zoomControls = createZoomControls();
-    container.appendChild(zoomControls);
+    // Only add container and wrapper (no zoom controls - split view has its own)
     container.appendChild(svgWrapper);
-
-    // Initialize zoom functionality
-    initializeZoom(svgWrapper, svgElement);
 
     console.log('[SVG] Optimized SVG display complete');
 }
@@ -785,55 +795,329 @@ function optimizeSVGAttributes(svgElement) {
     console.log('[SVG] Optimized attributes for responsive scaling');
 }
 
-function createZoomControls() {
-    const controls = document.createElement('div');
-    controls.className = 'zoom-controls';
-    controls.innerHTML = `
-        <button class="zoom-btn" data-action="zoom-in" title="Zoom In">+</button>
-        <button class="zoom-btn" data-action="zoom-out" title="Zoom Out">−</button>
-        <button class="zoom-btn" data-action="zoom-reset" title="Reset Zoom">⌂</button>
-    `;
-    return controls;
-}
 
-function initializeZoom(wrapper, svgElement) {
-    let currentZoom = 1;
-    const minZoom = 0.25;
-    const maxZoom = 4;
-    const zoomStep = 0.25;
+// Split View Implementation - Complete functionality
+class SplitViewController {
+    constructor() {
+        this.splitContainer = document.getElementById('splitViewContainer');
+        this.isActive = true; // Always active since it's the only view
+        this.isDragging = false;
+        this.imageSynchronizer = null;
 
-    const controls = wrapper.parentElement.querySelector('.zoom-controls');
+        // Drag state
+        this.minPercentage = 20;
+        this.maxPercentage = 80;
 
-    controls.addEventListener('click', (e) => {
-        if (!e.target.matches('.zoom-btn')) return;
+        this.init();
+    }
 
-        const action = e.target.getAttribute('data-action');
-
-        switch (action) {
-            case 'zoom-in':
-                currentZoom = Math.min(maxZoom, currentZoom + zoomStep);
-                break;
-            case 'zoom-out':
-                currentZoom = Math.max(minZoom, currentZoom - zoomStep);
-                break;
-            case 'zoom-reset':
-                currentZoom = 1;
-                break;
+    init() {
+        if (!this.splitContainer) {
+            console.log('Split view container not found');
+            return;
         }
 
-        // Apply zoom
-        wrapper.style.transform = `scale(${currentZoom})`;
-        wrapper.style.transformOrigin = 'center center';
+        this.setupDragHandlers();
+        this.setupZoomControls();
+        this.setupKeyboardHandlers();
 
-        console.log('[SVG] Zoom level:', currentZoom);
-    });
+        // Initialize immediately since it's the only view
+        this.loadSavedSplit();
+    }
 
-    // Mouse wheel zoom
-    wrapper.addEventListener('wheel', (e) => {
+
+    syncImages() {
+        // Copy original image
+        const originalImg = document.getElementById('originalImage');
+        const splitOriginalImg = document.getElementById('splitOriginalImage');
+
+        if (originalImg && originalImg.src && splitOriginalImg) {
+            splitOriginalImg.onerror = () => this.showImageError('left');
+            splitOriginalImg.onload = () => this.initializeImageSync();
+            splitOriginalImg.src = originalImg.src;
+            splitOriginalImg.style.display = 'block';
+        }
+
+        // Copy SVG
+        const originalSvg = document.getElementById('svgContainer');
+        const splitSvg = document.getElementById('splitSvgContainer');
+
+        if (originalSvg && splitSvg) {
+            splitSvg.innerHTML = originalSvg.innerHTML;
+        }
+    }
+
+    // Drag functionality
+    setupDragHandlers() {
+        const divider = document.getElementById('splitDivider');
+        if (!divider) return;
+
+        // Mouse events
+        divider.addEventListener('mousedown', (e) => this.startDrag(e));
+        document.addEventListener('mousemove', (e) => this.onDrag(e));
+        document.addEventListener('mouseup', () => this.endDrag());
+
+        // Touch events
+        divider.addEventListener('touchstart', (e) => this.startDrag(e.touches[0]));
+        document.addEventListener('touchmove', (e) => this.onDrag(e.touches[0]));
+        document.addEventListener('touchend', () => this.endDrag());
+    }
+
+    startDrag(e) {
+        if (!this.isActive) return;
+
+        this.isDragging = true;
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        document.getElementById('splitDivider').classList.add('dragging');
         e.preventDefault();
-        const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
-        currentZoom = Math.max(minZoom, Math.min(maxZoom, currentZoom + delta));
-        wrapper.style.transform = `scale(${currentZoom})`;
-        wrapper.style.transformOrigin = 'center center';
+    }
+
+    onDrag(e) {
+        if (!this.isDragging || !this.isActive) return;
+
+        const containerRect = this.splitContainer.getBoundingClientRect();
+        const mouseX = e.clientX - containerRect.left;
+        const containerWidth = containerRect.width;
+        let percentage = (mouseX / containerWidth) * 100;
+        percentage = Math.max(this.minPercentage, Math.min(this.maxPercentage, percentage));
+
+        this.updateSplit(percentage);
+        e.preventDefault();
+    }
+
+    endDrag() {
+        if (!this.isDragging) return;
+
+        this.isDragging = false;
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        document.getElementById('splitDivider').classList.remove('dragging');
+
+        // Save preference
+        localStorage.setItem('splitViewColumns', this.splitContainer.style.gridTemplateColumns);
+    }
+
+    updateSplit(leftPercentage) {
+        const rightPercentage = 100 - leftPercentage;
+        this.splitContainer.style.gridTemplateColumns = `${leftPercentage}% 6px ${rightPercentage}%`;
+    }
+
+    loadSavedSplit() {
+        const saved = localStorage.getItem('splitViewColumns');
+        if (saved) {
+            this.splitContainer.style.gridTemplateColumns = saved;
+        }
+    }
+
+    // Zoom functionality
+    setupZoomControls() {
+        const zoomButtons = this.splitContainer.querySelectorAll('.zoom-btn');
+        console.log(`[Zoom] Found ${zoomButtons.length} zoom buttons`);
+
+        zoomButtons.forEach((btn, index) => {
+            console.log(`[Zoom] Setting up button ${index}: ${btn.getAttribute('data-action')}`);
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const action = e.target.getAttribute('data-action');
+                console.log(`[Zoom] Button clicked: ${action}`);
+                this.handleZoom(action);
+            });
+        });
+
+        // Mouse wheel zoom
+        this.splitContainer.addEventListener('wheel', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                this.zoom(delta);
+            }
+        });
+    }
+
+    handleZoom(action) {
+        console.log(`[Zoom] Handling action: ${action}`);
+        switch (action) {
+            case 'zoom-in':
+                this.zoom(1.25);
+                break;
+            case 'zoom-out':
+                this.zoom(0.8);
+                break;
+            case 'zoom-reset':
+                this.resetZoom();
+                break;
+        }
+    }
+
+    zoom(factor) {
+        console.log(`[Zoom] Applying zoom factor: ${factor}`);
+
+        // Target specific elements in split view
+        const leftImg = document.getElementById('splitOriginalImage');
+        const rightSvg = document.querySelector('#splitSvgContainer svg');
+
+        const elements = [leftImg, rightSvg].filter(el => el);
+        console.log(`[Zoom] Found ${elements.length} elements to zoom`);
+
+        elements.forEach(element => {
+            const currentTransform = element.style.transform || 'scale(1)';
+            const currentScale = parseFloat(currentTransform.match(/scale\(([\d.]+)\)/)?.[1] || '1');
+            const newScale = Math.max(0.1, Math.min(5, currentScale * factor));
+            element.style.transform = `scale(${newScale})`;
+            element.style.transformOrigin = 'center center';
+            console.log(`[Zoom] Applied scale ${newScale} to element`);
+        });
+
+        this.updateZoomDisplay();
+    }
+
+    resetZoom() {
+        console.log('[Zoom] Resetting zoom to 100%');
+
+        const leftImg = document.getElementById('splitOriginalImage');
+        const rightSvg = document.querySelector('#splitSvgContainer svg');
+
+        const elements = [leftImg, rightSvg].filter(el => el);
+        elements.forEach(element => {
+            element.style.transform = 'scale(1)';
+            element.style.transformOrigin = 'center center';
+        });
+
+        this.updateZoomDisplay();
+    }
+
+    updateZoomDisplay() {
+        const leftImg = document.getElementById('splitOriginalImage');
+        if (!leftImg) {
+            console.log('[Zoom] No image found for zoom display update');
+            return;
+        }
+
+        const transform = leftImg.style.transform || 'scale(1)';
+        const scale = parseFloat(transform.match(/scale\(([\d.]+)\)/)?.[1] || '1');
+        const percentage = Math.round(scale * 100);
+
+        // Update all zoom level displays in split view
+        this.splitContainer.querySelectorAll('.zoom-level').forEach(display => {
+            display.textContent = percentage + '%';
+        });
+
+        console.log(`[Zoom] Updated zoom display to ${percentage}%`);
+    }
+
+    initializeImageSync() {
+        if (!this.imageSynchronizer) {
+            this.imageSynchronizer = new ImageSynchronizer(
+                document.getElementById('splitLeftViewer'),
+                document.getElementById('splitRightViewer')
+            );
+        }
+
+        const leftImg = document.getElementById('splitOriginalImage');
+        const rightContainer = document.getElementById('splitSvgContainer');
+        this.imageSynchronizer.synchronizeImages(leftImg, rightContainer);
+        this.updateZoomDisplay();
+    }
+
+    // Keyboard shortcuts
+    setupKeyboardHandlers() {
+        document.addEventListener('keydown', (e) => {
+            if (!this.isActive) return;
+            if (e.target.matches('input, textarea, select')) return;
+
+            const step = 5;
+
+            if (e.code === 'ArrowLeft' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                this.adjustSplit(-step);
+            }
+
+            if (e.code === 'ArrowRight' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                this.adjustSplit(step);
+            }
+
+            if (e.code === 'KeyR' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                this.updateSplit(50);
+            }
+        });
+    }
+
+    adjustSplit(delta) {
+        const current = this.getCurrentSplitPercentage();
+        const newPercentage = Math.max(this.minPercentage,
+                                      Math.min(this.maxPercentage, current + delta));
+        this.updateSplit(newPercentage);
+    }
+
+    getCurrentSplitPercentage() {
+        const columns = this.splitContainer.style.gridTemplateColumns;
+        const match = columns.match(/^([\d.]+)%/);
+        return match ? parseFloat(match[1]) : 50;
+    }
+
+    showImageError(side) {
+        const errorMessage = '<div class="image-error">Image not available</div>';
+        if (side === 'left') {
+            document.getElementById('splitLeftViewer').innerHTML = errorMessage;
+        }
+    }
+
+    showError(message) {
+        console.error(message);
+        // Could show user-facing error message here
+    }
+
+
+    // Public method for integration
+    updateConversion() {
+        // Always sync images since split view is the only interface
+        this.syncImages();
+    }
+
+}
+
+// Image Synchronizer Class
+class ImageSynchronizer {
+    constructor(leftViewer, rightViewer) {
+        this.leftViewer = leftViewer;
+        this.rightViewer = rightViewer;
+    }
+
+    synchronizeImages(leftImg, rightContainer) {
+        if (!leftImg || !rightContainer) return;
+
+        // Simple approach: let CSS handle the scaling consistently
+        leftImg.style.maxWidth = '100%';
+        leftImg.style.maxHeight = '100%';
+        leftImg.style.objectFit = 'contain';
+
+        const svg = rightContainer.querySelector('svg');
+        if (svg) {
+            svg.style.maxWidth = '100%';
+            svg.style.maxHeight = '100%';
+        }
+    }
+}
+
+// Initialize Split View Controller
+let splitViewController;
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        splitViewController = new SplitViewController();
+    }, 100);
+});
+
+// Integration hook - add to existing convert button handler
+const originalConvertBtn = document.getElementById('convertBtn');
+if (originalConvertBtn) {
+    originalConvertBtn.addEventListener('click', function() {
+        setTimeout(() => {
+            if (splitViewController) {
+                splitViewController.updateConversion();
+            }
+        }, 1000);
     });
 }

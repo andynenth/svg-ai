@@ -21,29 +21,46 @@
         </div>
 
         <div id="mainContent" class="hidden">
-            <div class="image-display">
-                <div class="image-container">
-                    <h3>Original</h3>
-                    <div id="originalImageContainer" class="image-viewer">
-                        <div id="imagePlaceholder" class="image-placeholder hidden">
-                            <div class="placeholder-skeleton"></div>
-                            <div class="placeholder-info">
-                                <p id="imageInfo">Loading image...</p>
-                            </div>
-                        </div>
-                        <div class="image-controls">
-                            <button class="zoom-btn" data-action="zoom-in" data-target="original" title="Zoom In">+</button>
-                            <button class="zoom-btn" data-action="zoom-out" data-target="original" title="Zoom Out">−</button>
-                            <button class="zoom-btn" data-action="zoom-reset" data-target="original" title="Reset Zoom">⌂</button>
-                        </div>
-                        <div class="image-wrapper">
-                            <img id="originalImage" alt="Original" class="fade-in">
-                        </div>
+            <!-- Hidden elements for upload/conversion process -->
+            <div style="display: none;">
+                <img id="originalImage" alt="Original">
+                <div id="svgContainer"></div>
+            </div>
+
+            <!-- Split View Container - Only Interface -->
+            <div id="splitViewContainer" class="split-view-container">
+                <div class="split-panel left-panel">
+                    <div class="panel-header">
+                        <h3>Original PNG</h3>
+                    </div>
+                    <div class="image-viewer" id="splitLeftViewer">
+                        <img id="splitOriginalImage" alt="Original" style="display:none;">
                     </div>
                 </div>
-                <div class="image-container">
-                    <h3>Converted</h3>
-                    <div id="svgContainer"></div>
+
+                <div class="split-divider"
+                     id="splitDivider"
+                     role="separator"
+                     aria-label="Resize split panels"
+                     tabindex="0">
+                    <div class="divider-handle">⋮⋮</div>
+                </div>
+
+                <div class="split-panel right-panel">
+                    <div class="panel-header">
+                        <h3>Converted SVG</h3>
+                        <div class="panel-controls">
+                            <div class="zoom-controls">
+                                <button class="zoom-btn" data-action="zoom-in" title="Zoom In">+</button>
+                                <button class="zoom-btn" data-action="zoom-out" title="Zoom Out">−</button>
+                                <button class="zoom-btn" data-action="zoom-reset" title="Reset">⌂</button>
+                                <span class="zoom-level">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-viewer" id="splitRightViewer">
+                        <div id="splitSvgContainer"></div>
+                    </div>
                 </div>
             </div>
 
