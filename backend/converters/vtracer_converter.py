@@ -87,6 +87,24 @@ class VTracerConverter(BaseConverter):
         import os as os_cleanup
         os_cleanup.unlink(tmp_path)
 
+        # Fix VTracer SVG: Add viewBox if missing for proper scaling
+        import re
+        if 'viewBox' not in svg_string:
+            # Extract width and height
+            width_match = re.search(r'width="(\d+)"', svg_string)
+            height_match = re.search(r'height="(\d+)"', svg_string)
+
+            if width_match and height_match:
+                width = width_match.group(1)
+                height = height_match.group(1)
+                # Add viewBox attribute to the svg tag
+                svg_string = re.sub(
+                    r'<svg([^>]*?)width="(\d+)"([^>]*?)height="(\d+)"',
+                    f'<svg\\1width="\\2"\\3height="\\4" viewBox="0 0 \\2 \\4"',
+                    svg_string
+                )
+                print(f"[VTracer] Added viewBox=\"0 0 {width} {height}\" for proper scaling")
+
         return svg_string
 
     def get_name(self) -> str:
