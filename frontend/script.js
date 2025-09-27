@@ -9,13 +9,16 @@ const API_BASE = '';
 const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('fileInput');
 const mainContent = document.getElementById('mainContent');
-const thresholdSlider = document.getElementById('threshold');
-const thresholdValue = document.getElementById('thresholdValue');
 const convertBtn = document.getElementById('convertBtn');
 const converterSelect = document.getElementById('converter');
 const loadingDiv = document.getElementById('loading');
 const metricsDiv = document.getElementById('metrics');
 const downloadBtn = document.getElementById('downloadBtn');
+
+// Parameter containers
+const potraceParams = document.getElementById('potraceParams');
+const vtracerParams = document.getElementById('vtracerParams');
+const alphaParams = document.getElementById('alphaParams');
 
 // Setup Click to Upload
 dropzone.addEventListener('click', () => {
@@ -45,42 +48,234 @@ fileInput.addEventListener('change', (e) => {
     handleFile(file);
 });
 
-// Handle Slider Change
-thresholdSlider.addEventListener('input', (e) => {
-    thresholdValue.textContent = e.target.value;
-});
+// Parameter Management Functions
+function showConverterParams(converter) {
+    // Hide all parameter groups
+    potraceParams.classList.add('hidden');
+    vtracerParams.classList.add('hidden');
+    alphaParams.classList.add('hidden');
 
-// Update threshold hint based on selected converter
-function updateThresholdHint() {
-    const thresholdHint = document.getElementById('thresholdHint');
-    const converter = converterSelect.value;
-
+    // Show the selected converter's parameters
     switch(converter) {
         case 'potrace':
-            thresholdHint.textContent = 'Black/white cutoff (lower = more black)';
+            potraceParams.classList.remove('hidden');
             break;
         case 'vtracer':
-            thresholdHint.textContent = 'Color mode: <128 = B&W, >128 = colors';
+            vtracerParams.classList.remove('hidden');
             break;
         case 'alpha':
-            thresholdHint.textContent = 'Transparency cutoff level';
+            alphaParams.classList.remove('hidden');
             break;
-        default:
-            thresholdHint.textContent = 'Adjusts conversion threshold';
     }
 }
 
-// Update hint when converter changes
-converterSelect.addEventListener('change', updateThresholdHint);
+function collectPotraceParams() {
+    return {
+        threshold: parseInt(document.getElementById('potraceThreshold').value),
+        turnpolicy: document.getElementById('potraceTurnpolicy').value,
+        turdsize: parseInt(document.getElementById('potraceTurdsize').value),
+        alphamax: parseFloat(document.getElementById('potraceAlphamax').value) / 100, // Convert 0-134 to 0-1.34
+        opttolerance: parseFloat(document.getElementById('potraceOpttolerance').value) / 100 // Convert 1-100 to 0.01-1.0
+    };
+}
 
-// Set initial hint
-updateThresholdHint();
+function collectVTracerParams() {
+    return {
+        threshold: 128, // VTracer uses its own threshold mapping
+        colormode: document.querySelector('input[name="vtracerColormode"]:checked').value,
+        color_precision: parseInt(document.getElementById('vtracerColorPrecision').value),
+        layer_difference: parseInt(document.getElementById('vtracerLayerDifference').value),
+        path_precision: parseInt(document.getElementById('vtracerPathPrecision').value),
+        corner_threshold: parseInt(document.getElementById('vtracerCornerThreshold').value),
+        length_threshold: parseFloat(document.getElementById('vtracerLengthThreshold').value),
+        max_iterations: parseInt(document.getElementById('vtracerMaxIterations').value),
+        splice_threshold: parseInt(document.getElementById('vtracerSpliceThreshold').value)
+    };
+}
+
+function collectAlphaParams() {
+    return {
+        threshold: parseInt(document.getElementById('alphaThreshold').value),
+        use_potrace: document.getElementById('alphaUsePotrace').checked,
+        preserve_antialiasing: document.getElementById('alphaPreserveAntialiasing').checked
+    };
+}
+
+// Update converter change handler
+converterSelect.addEventListener('change', (e) => {
+    showConverterParams(e.target.value);
+});
+
+// Set initial parameter display
+showConverterParams(converterSelect.value);
+
+// Real-time value displays for sliders
+document.getElementById('potraceThreshold').addEventListener('input', (e) => {
+    document.getElementById('potraceThresholdValue').textContent = e.target.value;
+});
+
+document.getElementById('potraceAlphamax').addEventListener('input', (e) => {
+    const value = (parseFloat(e.target.value) / 100).toFixed(2); // Convert 0-134 to 0.00-1.34
+    document.getElementById('potraceAlphamaxValue').textContent = value;
+});
+
+document.getElementById('potraceOpttolerance').addEventListener('input', (e) => {
+    const value = (parseFloat(e.target.value) / 100).toFixed(2); // Convert 1-100 to 0.01-1.00
+    document.getElementById('potraceOpttoleranceValue').textContent = value;
+});
+
+// VTracer slider value displays
+document.getElementById('vtracerColorPrecision').addEventListener('input', (e) => {
+    document.getElementById('vtracerColorPrecisionValue').textContent = e.target.value;
+});
+
+document.getElementById('vtracerLayerDifference').addEventListener('input', (e) => {
+    document.getElementById('vtracerLayerDifferenceValue').textContent = e.target.value;
+});
+
+document.getElementById('vtracerPathPrecision').addEventListener('input', (e) => {
+    document.getElementById('vtracerPathPrecisionValue').textContent = e.target.value;
+});
+
+document.getElementById('vtracerCornerThreshold').addEventListener('input', (e) => {
+    document.getElementById('vtracerCornerThresholdValue').textContent = e.target.value;
+});
+
+document.getElementById('vtracerMaxIterations').addEventListener('input', (e) => {
+    document.getElementById('vtracerMaxIterationsValue').textContent = e.target.value;
+});
+
+document.getElementById('vtracerSpliceThreshold').addEventListener('input', (e) => {
+    document.getElementById('vtracerSpliceThresholdValue').textContent = e.target.value;
+});
+
+// Alpha slider value display
+document.getElementById('alphaThreshold').addEventListener('input', (e) => {
+    document.getElementById('alphaThresholdValue').textContent = e.target.value;
+});
 
 // Setup Convert Button
 convertBtn.addEventListener('click', handleConvert);
 
 // Setup Download Button
 downloadBtn.addEventListener('click', handleDownload);
+
+// Parameter Preset Functions
+function applyPotracePreset(preset) {
+    switch(preset) {
+        case 'quality':
+            // Quality preset: smooth, accurate settings
+            document.getElementById('potraceThreshold').value = 128;
+            document.getElementById('potraceTurnpolicy').value = 'white'; // Smooth corners
+            document.getElementById('potraceTurdsize').value = 5; // Remove more noise
+            document.getElementById('potraceAlphamax').value = 120; // More smoothness (1.2)
+            document.getElementById('potraceOpttolerance').value = 10; // Higher accuracy (0.1)
+            break;
+        case 'fast':
+            // Fast preset: basic, quick settings
+            document.getElementById('potraceThreshold').value = 128;
+            document.getElementById('potraceTurnpolicy').value = 'black'; // Sharp corners
+            document.getElementById('potraceTurdsize').value = 1; // Minimal noise removal
+            document.getElementById('potraceAlphamax').value = 100; // Default smoothness (1.0)
+            document.getElementById('potraceOpttolerance').value = 20; // Default accuracy (0.2)
+            break;
+    }
+    updatePotraceDisplayValues();
+}
+
+function applyVTracerPreset(preset) {
+    switch(preset) {
+        case 'quality':
+            // Quality preset: high precision, more colors
+            document.querySelector('input[name="vtracerColormode"][value="color"]').checked = true;
+            document.getElementById('vtracerColorPrecision').value = 8; // More colors
+            document.getElementById('vtracerLayerDifference').value = 8; // Gradients
+            document.getElementById('vtracerPathPrecision').value = 8; // High precision
+            document.getElementById('vtracerCornerThreshold').value = 30; // Gentle corners
+            document.getElementById('vtracerLengthThreshold').value = 2.0; // Keep more paths
+            document.getElementById('vtracerMaxIterations').value = 20; // More iterations
+            document.getElementById('vtracerSpliceThreshold').value = 60; // Connect more paths
+            break;
+        case 'fast':
+            // Fast preset: basic settings for speed
+            document.querySelector('input[name="vtracerColormode"][value="color"]').checked = true;
+            document.getElementById('vtracerColorPrecision').value = 4; // Fewer colors
+            document.getElementById('vtracerLayerDifference').value = 16; // Less gradients
+            document.getElementById('vtracerPathPrecision').value = 3; // Lower precision
+            document.getElementById('vtracerCornerThreshold').value = 60; // More corners
+            document.getElementById('vtracerLengthThreshold').value = 5.0; // Remove short paths
+            document.getElementById('vtracerMaxIterations').value = 5; // Fewer iterations
+            document.getElementById('vtracerSpliceThreshold').value = 30; // Less path joining
+            break;
+    }
+    updateVTracerDisplayValues();
+}
+
+function applyAlphaPreset(preset) {
+    switch(preset) {
+        case 'quality':
+            // Quality preset: preserve transparency, clean edges
+            document.getElementById('alphaThreshold').value = 64; // Lower threshold for semi-transparency
+            document.getElementById('alphaUsePotrace').checked = true; // Clean edges
+            document.getElementById('alphaPreserveAntialiasing').checked = true; // Smooth edges
+            break;
+        case 'fast':
+            // Fast preset: basic transparency handling
+            document.getElementById('alphaThreshold').value = 128; // Standard threshold
+            document.getElementById('alphaUsePotrace').checked = true; // Clean edges
+            document.getElementById('alphaPreserveAntialiasing').checked = false; // No antialiasing
+            break;
+    }
+    updateAlphaDisplayValues();
+}
+
+function resetPotraceDefaults() {
+    document.getElementById('potraceThreshold').value = 128;
+    document.getElementById('potraceTurnpolicy').value = 'black';
+    document.getElementById('potraceTurdsize').value = 2;
+    document.getElementById('potraceAlphamax').value = 100; // 1.0
+    document.getElementById('potraceOpttolerance').value = 20; // 0.2
+    updatePotraceDisplayValues();
+}
+
+function resetVTracerDefaults() {
+    document.querySelector('input[name="vtracerColormode"][value="color"]').checked = true;
+    document.getElementById('vtracerColorPrecision').value = 6;
+    document.getElementById('vtracerLayerDifference').value = 16;
+    document.getElementById('vtracerPathPrecision').value = 5;
+    document.getElementById('vtracerCornerThreshold').value = 60;
+    document.getElementById('vtracerLengthThreshold').value = 5.0;
+    document.getElementById('vtracerMaxIterations').value = 10;
+    document.getElementById('vtracerSpliceThreshold').value = 45;
+    updateVTracerDisplayValues();
+}
+
+function resetAlphaDefaults() {
+    document.getElementById('alphaThreshold').value = 128;
+    document.getElementById('alphaUsePotrace').checked = true;
+    document.getElementById('alphaPreserveAntialiasing').checked = false;
+    updateAlphaDisplayValues();
+}
+
+// Helper functions to update display values
+function updatePotraceDisplayValues() {
+    document.getElementById('potraceThresholdValue').textContent = document.getElementById('potraceThreshold').value;
+    document.getElementById('potraceAlphamaxValue').textContent = (parseFloat(document.getElementById('potraceAlphamax').value) / 100).toFixed(2);
+    document.getElementById('potraceOpttoleranceValue').textContent = (parseFloat(document.getElementById('potraceOpttolerance').value) / 100).toFixed(2);
+}
+
+function updateVTracerDisplayValues() {
+    document.getElementById('vtracerColorPrecisionValue').textContent = document.getElementById('vtracerColorPrecision').value;
+    document.getElementById('vtracerLayerDifferenceValue').textContent = document.getElementById('vtracerLayerDifference').value;
+    document.getElementById('vtracerPathPrecisionValue').textContent = document.getElementById('vtracerPathPrecision').value;
+    document.getElementById('vtracerCornerThresholdValue').textContent = document.getElementById('vtracerCornerThreshold').value;
+    document.getElementById('vtracerMaxIterationsValue').textContent = document.getElementById('vtracerMaxIterations').value;
+    document.getElementById('vtracerSpliceThresholdValue').textContent = document.getElementById('vtracerSpliceThreshold').value;
+}
+
+function updateAlphaDisplayValues() {
+    document.getElementById('alphaThresholdValue').textContent = document.getElementById('alphaThreshold').value;
+}
 
 // File Handler Function
 async function handleFile(file) {
@@ -137,11 +332,25 @@ async function handleConvert() {
     convertBtn.disabled = true;
     convertBtn.textContent = 'Converting...';
 
-    const requestData = {
+    // Collect parameters based on selected converter
+    const converter = converterSelect.value;
+    let requestData = {
         file_id: currentFileId,
-        threshold: parseInt(thresholdSlider.value),
-        converter: converterSelect.value
+        converter: converter
     };
+
+    // Add converter-specific parameters
+    switch(converter) {
+        case 'potrace':
+            Object.assign(requestData, collectPotraceParams());
+            break;
+        case 'vtracer':
+            Object.assign(requestData, collectVTracerParams());
+            break;
+        case 'alpha':
+            Object.assign(requestData, collectAlphaParams());
+            break;
+    }
 
     console.log('[Frontend] Sending conversion request:', requestData);
 

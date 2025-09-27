@@ -43,66 +43,66 @@ Implement converter-specific parameter controls that dynamically show/hide based
 ## Implementation Checklist
 
 ### Phase 1: Backend - Potrace Converter Enhancement
-- [ ] Add parameter fields to `PotraceCon verter.__init__()`:
-  - [ ] `turnpolicy: str = 'black'`
-  - [ ] `turdsize: int = 2`
-  - [ ] `alphamax: float = 1.0`
-  - [ ] `opttolerance: float = 0.2`
-- [ ] Update `convert()` method to read parameters from kwargs:
-  - [ ] Extract `turnpolicy` from kwargs
-  - [ ] Extract `turdsize` from kwargs
-  - [ ] Extract `alphamax` from kwargs
-  - [ ] Extract `opttolerance` from kwargs
-- [ ] Build Potrace command with parameters:
-  - [ ] Add `-z/--turnpolicy` flag when not default
-  - [ ] Add `-t/--turdsize` flag when not default
-  - [ ] Add `-a/--alphamax` flag when not default
-  - [ ] Add `-O/--opttolerance` flag when not default
-  - [ ] Remove `--flat` flag to enable curves
-- [ ] Test Potrace with each parameter individually
-- [ ] Test Potrace with combined parameters
+- [x] Add parameter fields to `PotraceConverter.__init__()`:
+  - [x] `turnpolicy: str = 'black'`
+  - [x] `turdsize: int = 2`
+  - [x] `alphamax: float = 1.0`
+  - [x] `opttolerance: float = 0.2`
+- [x] Update `convert()` method to read parameters from kwargs:
+  - [x] Extract `turnpolicy` from kwargs
+  - [x] Extract `turdsize` from kwargs
+  - [x] Extract `alphamax` from kwargs
+  - [x] Extract `opttolerance` from kwargs
+- [x] Build Potrace command with parameters:
+  - [x] Add `-z/--turnpolicy` flag when not default
+  - [x] Add `-t/--turdsize` flag when not default
+  - [x] Add `-a/--alphamax` flag when not default
+  - [x] Add `-O/--opttolerance` flag when not default
+  - [x] Remove `--flat` flag to enable curves (N/A - no flat flag in code)
+- [x] Test Potrace with each parameter individually
+- [x] Test Potrace with combined parameters
 
 ### Phase 2: Backend - API Endpoint Update
-- [ ] Update `/api/convert` endpoint in `app.py`:
-  - [ ] Accept all Potrace parameters in request
-  - [ ] Accept all VTracer parameters in request
-  - [ ] Accept all Alpha-aware parameters in request
-- [ ] Pass parameters to appropriate converter:
-  - [ ] Map Potrace params when `converter == 'potrace'`
-  - [ ] Map VTracer params when `converter == 'vtracer'`
-  - [ ] Map Alpha params when `converter == 'alpha'`
-- [ ] Add parameter validation:
-  - [ ] Validate numeric ranges
-  - [ ] Validate string enums (turnpolicy)
-  - [ ] Set defaults for missing parameters
-- [ ] Test API with each converter's parameters
+- [x] Update `/api/convert` endpoint in `app.py`:
+  - [x] Accept all Potrace parameters in request
+  - [x] Accept all VTracer parameters in request
+  - [x] Accept all Alpha-aware parameters in request
+- [x] Pass parameters to appropriate converter:
+  - [x] Map Potrace params when `converter == 'potrace'`
+  - [x] Map VTracer params when `converter == 'vtracer'`
+  - [x] Map Alpha params when `converter == 'alpha'`
+- [x] Add parameter validation:
+  - [x] Validate numeric ranges
+  - [x] Validate string enums (turnpolicy)
+  - [x] Set defaults for missing parameters (done via data.get() with defaults)
+- [x] Test API with each converter's parameters
 
 ### Phase 3: Frontend - HTML Structure
-- [ ] Create parameter container divs in `index.html`:
-  - [ ] Add `<div id="potraceParams" class="param-group hidden">`
-  - [ ] Add `<div id="vtracerParams" class="param-group hidden">`
-  - [ ] Add `<div id="alphaParams" class="param-group hidden">`
-- [ ] Remove existing threshold control (will be replaced)
-- [ ] Add Potrace controls:
-  - [ ] Threshold slider with value display
-  - [ ] Turn Policy dropdown
-  - [ ] Speckle Size number input
-  - [ ] Corner Smoothness slider (0-134, step 1, display as 0-1.34)
-  - [ ] Curve Accuracy slider (1-100, display as 0.01-1.0)
-- [ ] Add VTracer controls:
-  - [ ] Color Mode radio buttons
-  - [ ] Color Count slider (1-10)
-  - [ ] Color Separation slider (0-256)
-  - [ ] Path Smoothness slider (0-10)
-  - [ ] Corner Detection slider (0-180)
-  - [ ] Min Path Length number input
-  - [ ] Optimization Passes slider (1-50)
-  - [ ] Path Joining slider (0-180)
-- [ ] Add Alpha-aware controls:
-  - [ ] Transparency Cutoff slider
-  - [ ] Use Potrace checkbox
-  - [ ] Keep Soft Edges checkbox
-- [ ] Add help tooltips for each control
+- [x] Create parameter container divs in `index.html`:
+  - [x] Add `<div id="potraceParams" class="param-group hidden">`
+  - [x] Add `<div id="vtracerParams" class="param-group hidden">`
+  - [x] Add `<div id="alphaParams" class="param-group hidden">`
+- [x] Remove existing threshold control (will be replaced)
+- [x] Add Potrace controls:
+  - [x] Threshold slider with value display
+  - [x] Turn Policy dropdown
+  - [x] Speckle Size number input
+  - [x] Corner Smoothness slider (0-134, step 1, display as 0-1.34)
+  - [x] Curve Accuracy slider (1-100, display as 0.01-1.0)
+- [x] Add VTracer controls:
+  - [x] Color Mode radio buttons
+  - [x] Color Count slider (1-10)
+  - [x] Color Separation slider (0-256)
+  - [x] Path Smoothness slider (0-10)
+  - [x] Corner Detection slider (0-180)
+  - [x] Min Path Length number input
+  - [x] Optimization Passes slider (1-50)
+  - [x] Path Joining slider (0-180)
+- [x] Add Alpha-aware controls:
+  - [x] Transparency Cutoff slider
+  - [x] Use Potrace checkbox
+  - [x] Keep Soft Edges checkbox
+- [x] Add help tooltips for each control
 
 ### Phase 4: Frontend - JavaScript Logic
 - [ ] Create parameter management functions in `script.js`:

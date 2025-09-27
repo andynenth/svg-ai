@@ -133,16 +133,86 @@ def convert():
     # Get file_id
     file_id = data.get("file_id")
 
-    # Get threshold
-    threshold = data.get("threshold", 128)
-
     # Get converter
     converter_type = data.get("converter", "alpha")
 
+    # Get common parameters
+    threshold = data.get("threshold", 128)
+
+    # Get Potrace-specific parameters
+    turnpolicy = data.get("turnpolicy", "black")
+    turdsize = data.get("turdsize", 2)
+    alphamax = data.get("alphamax", 1.0)
+    opttolerance = data.get("opttolerance", 0.2)
+
+    # Get VTracer-specific parameters
+    colormode = data.get("colormode", "color")
+    color_precision = data.get("color_precision", 6)
+    layer_difference = data.get("layer_difference", 16)
+    path_precision = data.get("path_precision", 5)
+    corner_threshold = data.get("corner_threshold", 60)
+    length_threshold = data.get("length_threshold", 5.0)
+    max_iterations = data.get("max_iterations", 10)
+    splice_threshold = data.get("splice_threshold", 45)
+
+    # Get Alpha-aware-specific parameters
+    use_potrace = data.get("use_potrace", True)
+    preserve_antialiasing = data.get("preserve_antialiasing", False)
+
     # Debug log the parameters
     print(f"[API] Convert request - file_id: {file_id}, converter: {converter_type}, threshold: {threshold}")
+    if converter_type == "potrace":
+        print(f"[API] Potrace params - turnpolicy: {turnpolicy}, turdsize: {turdsize}, alphamax: {alphamax}, opttolerance: {opttolerance}")
+    elif converter_type == "vtracer":
+        print(f"[API] VTracer params - colormode: {colormode}, color_precision: {color_precision}, corner_threshold: {corner_threshold}")
+    elif converter_type == "alpha":
+        print(f"[API] Alpha params - use_potrace: {use_potrace}, preserve_antialiasing: {preserve_antialiasing}")
 
-    # Check file_id
+    # Parameter validation (before file checks)
+    print(f"[API] Validating parameters...")
+
+    try:
+        # Validate common parameters
+        if not (0 <= threshold <= 255):
+            return jsonify({"error": "threshold must be between 0 and 255"}), 400
+
+        # Validate converter-specific parameters
+        if converter_type == "potrace":
+            if turnpolicy not in ["black", "white", "right", "left", "minority", "majority"]:
+                return jsonify({"error": "Invalid turnpolicy value"}), 400
+            if not (0 <= turdsize <= 100):
+                return jsonify({"error": "turdsize must be between 0 and 100"}), 400
+            if not (0 <= alphamax <= 1.34):
+                return jsonify({"error": "alphamax must be between 0 and 1.34"}), 400
+            if not (0.01 <= opttolerance <= 1.0):
+                return jsonify({"error": "opttolerance must be between 0.01 and 1.0"}), 400
+
+        elif converter_type == "vtracer":
+            if colormode not in ["color", "binary"]:
+                return jsonify({"error": "colormode must be 'color' or 'binary'"}), 400
+            if not (1 <= color_precision <= 10):
+                return jsonify({"error": "color_precision must be between 1 and 10"}), 400
+            if not (0 <= layer_difference <= 256):
+                return jsonify({"error": "layer_difference must be between 0 and 256"}), 400
+            if not (0 <= path_precision <= 10):
+                return jsonify({"error": "path_precision must be between 0 and 10"}), 400
+            if not (0 <= corner_threshold <= 180):
+                return jsonify({"error": "corner_threshold must be between 0 and 180"}), 400
+            if not (0 <= length_threshold <= 100):
+                return jsonify({"error": "length_threshold must be between 0 and 100"}), 400
+            if not (1 <= max_iterations <= 50):
+                return jsonify({"error": "max_iterations must be between 1 and 50"}), 400
+            if not (0 <= splice_threshold <= 180):
+                return jsonify({"error": "splice_threshold must be between 0 and 180"}), 400
+
+        # Alpha-aware parameters are boolean, no validation needed for use_potrace and preserve_antialiasing
+
+    except (TypeError, ValueError) as e:
+        return jsonify({"error": f"Invalid parameter type: {str(e)}"}), 400
+
+    print(f"[API] Parameters validated successfully")
+
+    # Check file_id after validation
     if not file_id:
         return jsonify({"error": "No file_id"}), 400
 
@@ -156,9 +226,36 @@ def convert():
     # Log conversion
     app.logger.info(f"Converting: {file_id}")
 
-    # Call function with threshold
-    print(f"[API] Calling convert_image with threshold={threshold}")
-    result = convert_image(filepath, converter_type, threshold=threshold)
+    # Build parameter dictionary based on converter type
+    params = {"threshold": threshold}
+
+    if converter_type == "potrace":
+        params.update({
+            "turnpolicy": turnpolicy,
+            "turdsize": turdsize,
+            "alphamax": alphamax,
+            "opttolerance": opttolerance
+        })
+    elif converter_type == "vtracer":
+        params.update({
+            "colormode": colormode,
+            "color_precision": color_precision,
+            "layer_difference": layer_difference,
+            "path_precision": path_precision,
+            "corner_threshold": corner_threshold,
+            "length_threshold": length_threshold,
+            "max_iterations": max_iterations,
+            "splice_threshold": splice_threshold
+        })
+    elif converter_type == "alpha":
+        params.update({
+            "use_potrace": use_potrace,
+            "preserve_antialiasing": preserve_antialiasing
+        })
+
+    # Call function with all parameters
+    print(f"[API] Calling convert_image with {len(params)} parameters")
+    result = convert_image(filepath, converter_type, **params)
 
     # Check success
     if not result["success"]:
@@ -186,4 +283,4 @@ def internal_error(error):
 
 if __name__ == "__main__":
     # Development server
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=8001)

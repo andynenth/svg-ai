@@ -239,6 +239,231 @@ h3 {
     color: #e74c3c;
 }
 
+/* Parameter Groups Styling */
+.param-group {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.param-group.hidden {
+    display: none;
+}
+
+.param-group h3 {
+    color: #495057;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Enhanced Control Groups */
+.control-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* Enhanced Input Styling */
+.control-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #dee2e6;
+    outline: none;
+    margin: 10px 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4a90e2;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb:hover {
+    background: #357abd;
+    transform: scale(1.1);
+}
+
+.control-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4a90e2;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.control-group input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.control-group input[type="number"]:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Enhanced Select Styling */
+.control-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 36px;
+}
+
+.control-group select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Radio Button Group Styling */
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.radio-group input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+/* Checkbox Styling */
+.control-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.control-group label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Tooltip Styling */
+.tooltip {
+    display: block;
+    font-size: 12px;
+    color: #6c757d;
+    font-style: italic;
+    margin-top: 4px;
+    line-height: 1.4;
+    background: #f8f9fa;
+    padding: 6px 8px;
+    border-radius: 4px;
+    border-left: 3px solid #4a90e2;
+}
+
+/* Preset Buttons Styling */
+.preset-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+}
+
+.btn-preset {
+    flex: 1;
+    background: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-preset:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-preset:active {
+    transform: translateY(0);
+}
+
+.btn-preset:nth-child(1) {
+    background: #28a745;
+}
+
+.btn-preset:nth-child(1):hover {
+    background: #218838;
+}
+
+.btn-preset:nth-child(2) {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-preset:nth-child(2):hover {
+    background: #e0a800;
+}
+
+.btn-preset:nth-child(3) {
+    background: #dc3545;
+}
+
+.btn-preset:nth-child(3):hover {
+    background: #c82333;
+}
+
 @media (max-width: 768px) {
     .image-display {
         grid-template-columns: 1fr;
@@ -259,5 +484,51 @@ h3 {
     .image-container img,
     #svgContainer {
         height: 250px;
+    }
+
+    /* Mobile Responsive Parameter Controls */
+    .param-group {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .control-group {
+        margin-bottom: 15px;
+    }
+
+    .control-group label {
+        font-size: 13px;
+    }
+
+    .control-group input[type="range"]::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .preset-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-preset {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    /* Touch-friendly controls */
+    .control-group input,
+    .control-group select {
+        padding: 12px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .tooltip {
+        font-size: 11px;
+        padding: 4px 6px;
     }
 }

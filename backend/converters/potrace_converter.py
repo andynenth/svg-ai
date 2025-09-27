@@ -13,9 +13,13 @@ from .base import BaseConverter
 class PotraceConverter(BaseConverter):
     """Potrace-based PNG to SVG converter."""
 
-    def __init__(self):
+    def __init__(self, turnpolicy: str = 'black', turdsize: int = 2, alphamax: float = 1.0, opttolerance: float = 0.2):
         super().__init__(name="Potrace")
         self.potrace_cmd = self._find_potrace()
+        self.turnpolicy = turnpolicy
+        self.turdsize = turdsize
+        self.alphamax = alphamax
+        self.opttolerance = opttolerance
 
     def _find_potrace(self):
         """Find potrace command."""
@@ -71,6 +75,12 @@ class PotraceConverter(BaseConverter):
         threshold = kwargs.get('threshold', 128)
         print(f"[Potrace] Applying threshold: {threshold}")
 
+        # Extract additional Potrace parameters from kwargs
+        turnpolicy = kwargs.get('turnpolicy', self.turnpolicy)
+        turdsize = kwargs.get('turdsize', self.turdsize)
+        alphamax = kwargs.get('alphamax', self.alphamax)
+        opttolerance = kwargs.get('opttolerance', self.opttolerance)
+
         # Debug: Check image stats before threshold
         import numpy as np
         img_array = np.array(img)
@@ -100,8 +110,23 @@ class PotraceConverter(BaseConverter):
             # Convert PBM to SVG using potrace
             with tempfile.NamedTemporaryFile(suffix='.svg', delete=False) as tmp_svg:
                 try:
+                    # Build Potrace command with parameters
+                    cmd = [self.potrace_cmd, '-s', tmp_pbm.name, '-o', tmp_svg.name]
+
+                    # Add parameter flags when not default
+                    if turnpolicy != 'black':
+                        cmd.extend(['-z', turnpolicy])
+                    if turdsize != 2:
+                        cmd.extend(['-t', str(turdsize)])
+                    if alphamax != 1.0:
+                        cmd.extend(['-a', str(alphamax)])
+                    if opttolerance != 0.2:
+                        cmd.extend(['-O', str(opttolerance)])
+
+                    print(f"[Potrace] Command: {' '.join(cmd)}")
+
                     result = subprocess.run(
-                        [self.potrace_cmd, '-s', tmp_pbm.name, '-o', tmp_svg.name],
+                        cmd,
                         capture_output=True,
                         text=True
                     )

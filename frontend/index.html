@@ -35,13 +35,6 @@
             <div class="controls">
                 <h2>Parameters</h2>
                 <div class="control-group">
-                    <label for="threshold">Threshold: <span id="thresholdValue">128</span></label>
-                    <input type="range" id="threshold" min="0" max="255" value="128">
-                    <small id="thresholdHint" style="display: block; color: #666; margin-top: 4px;">
-                        Adjusts black/white cutoff
-                    </small>
-                </div>
-                <div class="control-group">
                     <label for="converter">Converter:</label>
                     <select id="converter">
                         <option value="alpha">Alpha-aware (Best for icons)</option>
@@ -49,6 +42,146 @@
                         <option value="vtracer">VTracer (Color)</option>
                     </select>
                 </div>
+
+                <!-- Dynamic Parameter Containers -->
+                <div id="potraceParams" class="param-group hidden">
+                    <h3>Potrace Parameters</h3>
+
+                    <div class="control-group">
+                        <label for="potraceThreshold">Black Level: <span id="potraceThresholdValue">128</span></label>
+                        <input type="range" id="potraceThreshold" min="0" max="255" value="128">
+                        <small class="tooltip">How dark must a pixel be to become black? Lower = more black areas</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceTurnpolicy">Corner Style:</label>
+                        <select id="potraceTurnpolicy">
+                            <option value="black">Black (Sharp)</option>
+                            <option value="white">White (Smooth)</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                            <option value="minority">Minority</option>
+                            <option value="majority">Majority</option>
+                        </select>
+                        <small class="tooltip">How to handle ambiguous corners. Black = sharp, White = smooth</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceTurdsize">Remove Noise:</label>
+                        <input type="number" id="potraceTurdsize" min="0" max="100" value="2">
+                        <small class="tooltip">Removes spots smaller than this many pixels</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceAlphamax">Smoothness: <span id="potraceAlphamaxValue">1.0</span></label>
+                        <input type="range" id="potraceAlphamax" min="0" max="134" step="1" value="100">
+                        <small class="tooltip">How rounded corners should be. Higher = smoother</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceOpttolerance">Accuracy: <span id="potraceOpttoleranceValue">0.20</span></label>
+                        <input type="range" id="potraceOpttolerance" min="1" max="100" step="1" value="20">
+                        <small class="tooltip">How closely curves match original. Lower = more precise</small>
+                    </div>
+
+                    <div class="preset-buttons">
+                        <button type="button" class="btn-preset" onclick="applyPotracePreset('quality')">Quality</button>
+                        <button type="button" class="btn-preset" onclick="applyPotracePreset('fast')">Fast</button>
+                        <button type="button" class="btn-preset" onclick="resetPotraceDefaults()">Reset</button>
+                    </div>
+                </div>
+
+                <div id="vtracerParams" class="param-group hidden">
+                    <h3>VTracer Parameters</h3>
+
+                    <div class="control-group">
+                        <label>Mode:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="vtracerColormode" value="color" checked> Color</label>
+                            <label><input type="radio" name="vtracerColormode" value="binary"> B&W</label>
+                        </div>
+                        <small class="tooltip">Color mode or black & white</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerColorPrecision">Colors: <span id="vtracerColorPrecisionValue">6</span></label>
+                        <input type="range" id="vtracerColorPrecision" min="1" max="10" value="6">
+                        <small class="tooltip">Number of colors to detect. Lower = simpler image</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerLayerDifference">Color Diff: <span id="vtracerLayerDifferenceValue">16</span></label>
+                        <input type="range" id="vtracerLayerDifference" min="0" max="256" value="16">
+                        <small class="tooltip">Minimum difference between colors. Higher = fewer colors</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerPathPrecision">Smoothness: <span id="vtracerPathPrecisionValue">5</span></label>
+                        <input type="range" id="vtracerPathPrecision" min="0" max="10" value="5">
+                        <small class="tooltip">Path curve smoothness. Higher = smoother</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerCornerThreshold">Corner Angle: <span id="vtracerCornerThresholdValue">60</span>°</label>
+                        <input type="range" id="vtracerCornerThreshold" min="0" max="180" value="60">
+                        <small class="tooltip">Angle that defines a corner. Higher = fewer corners</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerLengthThreshold">Min Path:</label>
+                        <input type="number" id="vtracerLengthThreshold" min="0" max="100" step="0.1" value="5.0">
+                        <small class="tooltip">Ignore paths shorter than this</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerMaxIterations">Quality: <span id="vtracerMaxIterationsValue">10</span></label>
+                        <input type="range" id="vtracerMaxIterations" min="1" max="50" value="10">
+                        <small class="tooltip">Number of refinement passes. More = better but slower</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerSpliceThreshold">Join Paths: <span id="vtracerSpliceThresholdValue">45</span>°</label>
+                        <input type="range" id="vtracerSpliceThreshold" min="0" max="180" value="45">
+                        <small class="tooltip">Angle for connecting paths. Higher = more connected</small>
+                    </div>
+
+                    <div class="preset-buttons">
+                        <button type="button" class="btn-preset" onclick="applyVTracerPreset('quality')">Quality</button>
+                        <button type="button" class="btn-preset" onclick="applyVTracerPreset('fast')">Fast</button>
+                        <button type="button" class="btn-preset" onclick="resetVTracerDefaults()">Reset</button>
+                    </div>
+                </div>
+
+                <div id="alphaParams" class="param-group hidden">
+                    <h3>Alpha-aware Parameters</h3>
+
+                    <div class="control-group">
+                        <label for="alphaThreshold">Alpha Level: <span id="alphaThresholdValue">128</span></label>
+                        <input type="range" id="alphaThreshold" min="0" max="255" value="128">
+                        <small class="tooltip">Minimum opacity to include. Lower = more semi-transparent areas</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="alphaUsePotrace" checked> Clean Edges
+                        </label>
+                        <small class="tooltip">Use Potrace for sharper edges. Off preserves soft edges</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="alphaPreserveAntialiasing"> Anti-aliasing
+                        </label>
+                        <small class="tooltip">Preserve smooth edges. Larger file but smoother</small>
+                    </div>
+
+                    <div class="preset-buttons">
+                        <button type="button" class="btn-preset" onclick="applyAlphaPreset('quality')">Quality</button>
+                        <button type="button" class="btn-preset" onclick="applyAlphaPreset('fast')">Fast</button>
+                        <button type="button" class="btn-preset" onclick="resetAlphaDefaults()">Reset</button>
+                    </div>
+                </div>
+
                 <button id="convertBtn" class="btn-primary">Convert to SVG</button>
 
                 <div id="metrics" class="metrics hidden">

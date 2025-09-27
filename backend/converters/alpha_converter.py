@@ -207,12 +207,16 @@ class AlphaConverter(BaseConverter):
         # Use vtracer as fallback
         import vtracer
 
+        # Filter parameters for VTracer (exclude Alpha-specific parameters)
+        vtracer_params = {k: v for k, v in kwargs.items()
+                         if k not in ['threshold', 'use_potrace', 'preserve_antialiasing']}
+
         with tempfile.NamedTemporaryFile(suffix='.svg', delete=False) as tmp:
             try:
                 vtracer.convert_image_to_svg_py(
                     image_path,
                     tmp.name,
-                    **kwargs
+                    **vtracer_params
                 )
                 with open(tmp.name, 'r') as f:
                     return f.read()
