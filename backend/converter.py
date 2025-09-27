@@ -44,8 +44,9 @@ def convert_image(input_path, converter_type="alpha", **params):
 
     # Try conversion
     try:
-        # Call convert - Note: converters only accept input_path
-        svg_content = converter.convert(input_path)
+        # Call convert with parameters
+        print(f"[Converter] Using {converter_type} with threshold={params.get('threshold', 128)}")
+        svg_content = converter.convert(input_path, **params)
 
         # Calculate SSIM (in converter.py)
         # Save SVG temporarily for SSIM calculation

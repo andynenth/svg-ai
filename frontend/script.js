@@ -117,6 +117,8 @@ async function handleConvert() {
         converter: converterSelect.value
     };
 
+    console.log('[Frontend] Sending conversion request:', requestData);
+
     try {
         const response = await fetch(`${API_BASE}/api/convert`, {
             method: 'POST',
@@ -133,7 +135,25 @@ async function handleConvert() {
 
         // Display Results
         currentSvgContent = result.svg;
+
+        // Debug SVG content
+        console.log('[Frontend] SVG length:', result.svg.length);
+        console.log('[Frontend] SVG preview:', result.svg.substring(0, 300));
+        console.log('[Frontend] SVG contains <rect>:', result.svg.includes('<rect'));
+        console.log('[Frontend] SVG contains fill="white":', result.svg.includes('fill="white"'));
+        console.log('[Frontend] SVG contains fill="#000000":', result.svg.includes('fill="#000000"'));
+
         document.getElementById('svgContainer').innerHTML = result.svg;
+
+        // Check what actually rendered
+        const svgElement = document.querySelector('#svgContainer svg');
+        if (svgElement) {
+            console.log('[Frontend] SVG rendered with dimensions:', svgElement.getAttribute('width'), 'x', svgElement.getAttribute('height'));
+            console.log('[Frontend] SVG viewBox:', svgElement.getAttribute('viewBox'));
+        } else {
+            console.log('[Frontend] ERROR: No SVG element found in container');
+        }
+
         document.getElementById('ssimScore').textContent = (result.ssim * 100).toFixed(1) + '%';
         document.getElementById('fileSize').textContent = formatFileSize(result.size);
         metricsDiv.classList.remove('hidden');

@@ -19,7 +19,7 @@ venv39/
 data/output/
 data/logos/
 cache/
-*.svg
+# *.svg
 temp/
 *.log
 backend/uploads/*
@@ -28,6 +28,8 @@ backend/uploads/*
 # *.png (commented out to track PNG test files)
 *.jpg
 *.jpeg
+*.alpha_aa.svg  # These SVG files are too large (multi-MB)
+potrace.png     # Specific screenshot file
 
 # OS
 .DS_Store

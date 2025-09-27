@@ -139,6 +139,9 @@ def convert():
     # Get converter
     converter_type = data.get("converter", "alpha")
 
+    # Debug log the parameters
+    print(f"[API] Convert request - file_id: {file_id}, converter: {converter_type}, threshold: {threshold}")
+
     # Check file_id
     if not file_id:
         return jsonify({"error": "No file_id"}), 400
@@ -153,7 +156,8 @@ def convert():
     # Log conversion
     app.logger.info(f"Converting: {file_id}")
 
-    # Call function
+    # Call function with threshold
+    print(f"[API] Calling convert_image with threshold={threshold}")
     result = convert_image(filepath, converter_type, threshold=threshold)
 
     # Check success
