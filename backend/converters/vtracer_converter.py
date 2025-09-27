@@ -54,10 +54,30 @@ class VTracerConverter(BaseConverter):
         if not os.path.exists(image_path):
             raise FileNotFoundError(f"Image not found: {image_path}")
 
+        # Handle threshold parameter for UI compatibility
+        threshold = kwargs.get('threshold', None)
+        if threshold is not None:
+            # Map threshold (0-255) to meaningful VTracer parameters
+            if threshold < 128:
+                # Lower threshold = binary mode (black & white)
+                colormode = 'binary'
+                # Map to color_precision (1-10): lower threshold = less colors
+                color_precision = max(1, min(10, int(threshold / 25.5)))
+            else:
+                # Higher threshold = color mode with more precision
+                colormode = 'color'
+                # Map to color_precision: higher threshold = more colors
+                color_precision = max(1, min(10, int((threshold - 128) / 12.7) + 3))
+
+            print(f"[VTracer] Threshold {threshold} mapped to mode='{colormode}', color_precision={color_precision}")
+        else:
+            colormode = self.colormode
+            color_precision = self.color_precision
+
         # Override default parameters with kwargs
         params = {
-            'colormode': kwargs.get('colormode', self.colormode),
-            'color_precision': kwargs.get('color_precision', self.color_precision),
+            'colormode': kwargs.get('colormode', colormode),
+            'color_precision': kwargs.get('color_precision', color_precision),
             'layer_difference': kwargs.get('layer_difference', self.layer_difference),
             'path_precision': kwargs.get('path_precision', self.path_precision),
             'corner_threshold': kwargs.get('corner_threshold', self.corner_threshold),

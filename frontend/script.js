@@ -50,6 +50,32 @@ thresholdSlider.addEventListener('input', (e) => {
     thresholdValue.textContent = e.target.value;
 });
 
+// Update threshold hint based on selected converter
+function updateThresholdHint() {
+    const thresholdHint = document.getElementById('thresholdHint');
+    const converter = converterSelect.value;
+
+    switch(converter) {
+        case 'potrace':
+            thresholdHint.textContent = 'Black/white cutoff (lower = more black)';
+            break;
+        case 'vtracer':
+            thresholdHint.textContent = 'Color mode: <128 = B&W, >128 = colors';
+            break;
+        case 'alpha':
+            thresholdHint.textContent = 'Transparency cutoff level';
+            break;
+        default:
+            thresholdHint.textContent = 'Adjusts conversion threshold';
+    }
+}
+
+// Update hint when converter changes
+converterSelect.addEventListener('change', updateThresholdHint);
+
+// Set initial hint
+updateThresholdHint();
+
 // Setup Convert Button
 convertBtn.addEventListener('click', handleConvert);
 
