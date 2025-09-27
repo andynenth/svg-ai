@@ -136,6 +136,9 @@ def convert():
     # Get converter
     converter_type = data.get("converter", "alpha")
 
+    # Debug: Log what we receive
+    app.logger.info(f"[API] Received request - converter: {converter_type}, full data: {data}")
+
     # Get common parameters
     threshold = data.get("threshold", 128)
 
@@ -160,16 +163,16 @@ def convert():
     preserve_antialiasing = data.get("preserve_antialiasing", False)
 
     # Debug log the parameters
-    print(f"[API] Convert request - file_id: {file_id}, converter: {converter_type}, threshold: {threshold}")
-    if converter_type == "potrace":
-        print(f"[API] Potrace params - turnpolicy: {turnpolicy}, turdsize: {turdsize}, alphamax: {alphamax}, opttolerance: {opttolerance}")
+    app.logger.info(f"[API] Convert request - file_id: {file_id}, converter: {converter_type}, threshold: {threshold}")
+    if converter_type in ["potrace", "smart"]:
+        app.logger.info(f"[API] {converter_type.title()} params - turnpolicy: {turnpolicy}, turdsize: {turdsize}, alphamax: {alphamax}, opttolerance: {opttolerance}")
     elif converter_type == "vtracer":
-        print(f"[API] VTracer params - colormode: {colormode}, color_precision: {color_precision}, corner_threshold: {corner_threshold}")
+        app.logger.info(f"[API] VTracer params - colormode: {colormode}, color_precision: {color_precision}, corner_threshold: {corner_threshold}")
     elif converter_type == "alpha":
-        print(f"[API] Alpha params - use_potrace: {use_potrace}, preserve_antialiasing: {preserve_antialiasing}")
+        app.logger.info(f"[API] Alpha params - use_potrace: {use_potrace}, preserve_antialiasing: {preserve_antialiasing}")
 
     # Parameter validation (before file checks)
-    print(f"[API] Validating parameters...")
+    app.logger.info(f"[API] Validating parameters...")
 
     try:
         # Validate common parameters
@@ -177,7 +180,7 @@ def convert():
             return jsonify({"error": "threshold must be between 0 and 255"}), 400
 
         # Validate converter-specific parameters
-        if converter_type == "potrace":
+        if converter_type in ["potrace", "smart"]:
             if turnpolicy not in ["black", "white", "right", "left", "minority", "majority"]:
                 return jsonify({"error": "Invalid turnpolicy value"}), 400
             if not (0 <= turdsize <= 100):
@@ -210,7 +213,7 @@ def convert():
     except (TypeError, ValueError) as e:
         return jsonify({"error": f"Invalid parameter type: {str(e)}"}), 400
 
-    print(f"[API] Parameters validated successfully")
+    app.logger.info(f"[API] Parameters validated successfully")
 
     # Check file_id after validation
     if not file_id:
@@ -229,13 +232,14 @@ def convert():
     # Build parameter dictionary based on converter type
     params = {"threshold": threshold}
 
-    if converter_type == "potrace":
+    if converter_type in ["potrace", "smart"]:
         params.update({
             "turnpolicy": turnpolicy,
             "turdsize": turdsize,
             "alphamax": alphamax,
             "opttolerance": opttolerance
         })
+        app.logger.info(f"[API] Added Potrace/Smart parameters to params: {params}")
     elif converter_type == "vtracer":
         params.update({
             "colormode": colormode,
@@ -247,14 +251,16 @@ def convert():
             "max_iterations": max_iterations,
             "splice_threshold": splice_threshold
         })
+        app.logger.info(f"[API] Added VTracer parameters to params")
     elif converter_type == "alpha":
         params.update({
             "use_potrace": use_potrace,
             "preserve_antialiasing": preserve_antialiasing
         })
+        app.logger.info(f"[API] Added Alpha parameters to params")
 
     # Call function with all parameters
-    print(f"[API] Calling convert_image with {len(params)} parameters")
+    app.logger.info(f"[API] Calling convert_image with {len(params)} parameters: {params}")
     result = convert_image(filepath, converter_type, **params)
 
     # Check success

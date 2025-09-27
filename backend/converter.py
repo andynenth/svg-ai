@@ -7,6 +7,7 @@ import tempfile
 from converters.alpha_converter import AlphaConverter
 from converters.vtracer_converter import VTracerConverter
 from converters.potrace_converter import PotraceConverter
+from converters.smart_potrace_converter import SmartPotraceConverter
 from utils.quality_metrics import QualityMetrics
 
 # Create instance
@@ -28,6 +29,7 @@ def convert_image(input_path, converter_type="alpha", **params):
     # Create converter dict
     converters = {
         "alpha": AlphaConverter(),
+        "smart": SmartPotraceConverter(),
         "vtracer": VTracerConverter(),
         "potrace": PotraceConverter(),
     }

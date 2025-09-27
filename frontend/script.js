@@ -57,6 +57,10 @@ function showConverterParams(converter) {
 
     // Show the selected converter's parameters
     switch(converter) {
+        case 'smart':
+            // Smart Potrace uses same parameters as regular Potrace
+            potraceParams.classList.remove('hidden');
+            break;
         case 'potrace':
             potraceParams.classList.remove('hidden');
             break;
@@ -70,13 +74,15 @@ function showConverterParams(converter) {
 }
 
 function collectPotraceParams() {
-    return {
+    const params = {
         threshold: parseInt(document.getElementById('potraceThreshold').value),
         turnpolicy: document.getElementById('potraceTurnpolicy').value,
         turdsize: parseInt(document.getElementById('potraceTurdsize').value),
         alphamax: parseFloat(document.getElementById('potraceAlphamax').value) / 100, // Convert 0-134 to 0-1.34
         opttolerance: parseFloat(document.getElementById('potraceOpttolerance').value) / 100 // Convert 1-100 to 0.01-1.0
     };
+    console.log('[Frontend] Collected Potrace params:', params);
+    return params;
 }
 
 function collectVTracerParams() {
@@ -340,7 +346,14 @@ async function handleConvert() {
     };
 
     // Add converter-specific parameters
+    console.log('[Frontend] Selected converter:', converter);
     switch(converter) {
+        case 'smart':
+            // Smart Potrace uses same parameters as regular Potrace
+            const smartParams = collectPotraceParams();
+            console.log('[Frontend] Smart Potrace params:', smartParams);
+            Object.assign(requestData, smartParams);
+            break;
         case 'potrace':
             Object.assign(requestData, collectPotraceParams());
             break;
