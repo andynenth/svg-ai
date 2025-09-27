@@ -24,14 +24,21 @@
             <div class="image-display">
                 <div class="image-container">
                     <h3>Original</h3>
-                    <div id="originalImageContainer">
+                    <div id="originalImageContainer" class="image-viewer">
                         <div id="imagePlaceholder" class="image-placeholder hidden">
                             <div class="placeholder-skeleton"></div>
                             <div class="placeholder-info">
                                 <p id="imageInfo">Loading image...</p>
                             </div>
                         </div>
-                        <img id="originalImage" alt="Original" class="fade-in">
+                        <div class="image-controls">
+                            <button class="zoom-btn" data-action="zoom-in" data-target="original" title="Zoom In">+</button>
+                            <button class="zoom-btn" data-action="zoom-out" data-target="original" title="Zoom Out">−</button>
+                            <button class="zoom-btn" data-action="zoom-reset" data-target="original" title="Reset Zoom">⌂</button>
+                        </div>
+                        <div class="image-wrapper">
+                            <img id="originalImage" alt="Original" class="fade-in">
+                        </div>
                     </div>
                 </div>
                 <div class="image-container">

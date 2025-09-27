@@ -84,6 +84,19 @@ h3 {
     border-radius: 8px;
 }
 
+/* Image Viewer Container - Consistent styling for both sides */
+.image-viewer {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    max-height: 500px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
 #originalImageContainer {
     position: relative;
     width: 100%;
@@ -169,8 +182,9 @@ h3 {
     position: relative;
 }
 
-/* Zoom Controls */
-.zoom-controls {
+/* Image Controls - Shared styling for both original and SVG */
+.zoom-controls,
+.image-controls {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -208,8 +222,9 @@ h3 {
     transform: scale(0.95);
 }
 
-/* SVG Wrapper */
-.svg-wrapper {
+/* Image and SVG Wrappers - Consistent styling */
+.svg-wrapper,
+.image-wrapper {
     flex: 1;
     display: flex;
     align-items: center;
@@ -218,7 +233,8 @@ h3 {
     transition: transform 0.2s ease;
 }
 
-.svg-wrapper svg {
+.svg-wrapper svg,
+.image-wrapper img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
@@ -724,7 +740,8 @@ h3 {
     }
 
     .image-container img,
-    #svgContainer {
+    #svgContainer,
+    .image-viewer {
         max-height: 350px;
         min-height: 150px;
     }

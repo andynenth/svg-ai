@@ -358,6 +358,9 @@ async function handleFile(file) {
             imageElement.style.opacity = '';
             imageElement.classList.add('loaded');
 
+            // Initialize zoom functionality for original image
+            initializeOriginalImageZoom();
+
             console.log('[Progressive] Image should now be visible with opacity:', getComputedStyle(imageElement).opacity);
         };
 
@@ -640,6 +643,55 @@ window.addEventListener('resize', () => {
         adjustContainerSizing(imageElement);
     }
 });
+
+// Initialize zoom for original image
+function initializeOriginalImageZoom() {
+    const controls = document.querySelector('.image-controls');
+    const wrapper = document.querySelector('.image-wrapper');
+
+    if (!controls || !wrapper) return;
+
+    let currentZoom = 1;
+    const minZoom = 0.25;
+    const maxZoom = 4;
+    const zoomStep = 0.25;
+
+    controls.addEventListener('click', (e) => {
+        if (!e.target.matches('.zoom-btn')) return;
+
+        const action = e.target.getAttribute('data-action');
+        const target = e.target.getAttribute('data-target');
+
+        if (target !== 'original') return;
+
+        switch (action) {
+            case 'zoom-in':
+                currentZoom = Math.min(maxZoom, currentZoom + zoomStep);
+                break;
+            case 'zoom-out':
+                currentZoom = Math.max(minZoom, currentZoom - zoomStep);
+                break;
+            case 'zoom-reset':
+                currentZoom = 1;
+                break;
+        }
+
+        // Apply zoom
+        wrapper.style.transform = `scale(${currentZoom})`;
+        wrapper.style.transformOrigin = 'center center';
+
+        console.log('[Image] Zoom level:', currentZoom);
+    });
+
+    // Mouse wheel zoom
+    wrapper.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
+        currentZoom = Math.max(minZoom, Math.min(maxZoom, currentZoom + delta));
+        wrapper.style.transform = `scale(${currentZoom})`;
+        wrapper.style.transformOrigin = 'center center';
+    });
+}
 
 // Progressive Loading Management
 function showImagePlaceholder(file) {
