@@ -168,20 +168,34 @@ class QualityMetrics:
         if img1.shape != img2.shape:
             raise ValueError("Images must have the same dimensions")
 
-        # Handle RGBA images with transparency by compositing on white
+        # Handle RGBA images with transparency
+        # Check if images are alpha-based (uniform RGB with varying alpha)
+        alpha_based = False
+
         if len(img1.shape) == 3 and img1.shape[2] == 4:
-            # Composite on white background
-            alpha1 = img1[:,:,3:4] / 255.0
-            rgb1 = img1[:,:,:3]
-            white = np.ones_like(rgb1) * 255
-            img1 = (rgb1 * alpha1 + white * (1 - alpha1)).astype(np.uint8)
+            # Check if RGB is uniform (alpha-based icon)
+            rgb_std1 = np.std(img1[:,:,:3])
+            if rgb_std1 < 10:  # RGB is uniform, use alpha channel
+                alpha_based = True
+                # Use inverted alpha as the image (so shape is dark)
+                img1 = 255 - img1[:,:,3]
+            else:
+                # Composite on white background for normal RGBA
+                alpha1 = img1[:,:,3:4] / 255.0
+                rgb1 = img1[:,:,:3]
+                white = np.ones_like(rgb1) * 255
+                img1 = (rgb1 * alpha1 + white * (1 - alpha1)).astype(np.uint8)
 
         if len(img2.shape) == 3 and img2.shape[2] == 4:
-            # Composite on white background
-            alpha2 = img2[:,:,3:4] / 255.0
-            rgb2 = img2[:,:,:3]
-            white = np.ones_like(rgb2) * 255
-            img2 = (rgb2 * alpha2 + white * (1 - alpha2)).astype(np.uint8)
+            if alpha_based:
+                # Use inverted alpha for comparison
+                img2 = 255 - img2[:,:,3]
+            else:
+                # Composite on white background for normal RGBA
+                alpha2 = img2[:,:,3:4] / 255.0
+                rgb2 = img2[:,:,:3]
+                white = np.ones_like(rgb2) * 255
+                img2 = (rgb2 * alpha2 + white * (1 - alpha2)).astype(np.uint8)
 
         # Convert to grayscale if needed
         if len(img1.shape) == 3:

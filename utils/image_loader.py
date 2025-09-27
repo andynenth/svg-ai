@@ -61,6 +61,43 @@ class ImageLoader:
             return None
 
     @staticmethod
+    def load_svg_from_string(svg_content: str, target_size: Tuple[int, int]) -> Optional[np.ndarray]:
+        """
+        Load SVG from string content and render to specified size.
+
+        Args:
+            svg_content: SVG content as string
+            target_size: Target size as (height, width)
+
+        Returns:
+            Image as numpy array or None if loading fails
+        """
+        if not DEPENDENCIES_AVAILABLE:
+            logger.error("Dependencies not available. Install with: pip install numpy pillow cairosvg")
+            return None
+
+        try:
+            import cairosvg
+            import io
+
+            # Render SVG to PNG bytes
+            png_bytes = cairosvg.svg2png(
+                bytestring=svg_content.encode('utf-8'),
+                output_width=target_size[1],
+                output_height=target_size[0]
+            )
+
+            # Load as PIL image
+            img = Image.open(io.BytesIO(png_bytes))
+
+            # Convert to numpy array
+            return np.array(img)
+
+        except Exception as e:
+            logger.error(f"Failed to load SVG from string: {e}")
+            return None
+
+    @staticmethod
     def load_svg_as_image(svg_path: str, width: int, height: int) -> np.ndarray:
         """
         Load SVG and render as image with specified dimensions.
