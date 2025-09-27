@@ -62,9 +62,9 @@ class AlphaConverter(BaseConverter):
         if img.mode == 'RGBA':
             arr = np.array(img)
             rgb_std = np.std(arr[:, :, :3])
+            alpha_variation = np.std(arr[:, :, 3])
 
             if rgb_std < 10:  # RGB channels are uniform (likely all black or white)
-                # This is an alpha-based icon
                 return self._convert_alpha_icon(img, arr, **kwargs)
 
         # Fall back to standard conversion for non-alpha images
@@ -91,9 +91,29 @@ class AlphaConverter(BaseConverter):
 
     def _convert_with_potrace(self, alpha: np.ndarray, rgb_color: np.ndarray, threshold: int) -> str:
         """Convert using potrace for perfect edges."""
-        # Create binary image (invert so shape is black)
-        binary = (alpha > threshold).astype(np.uint8) * 255
-        binary = 255 - binary  # Invert for potrace
+        # Stage 1: Data Preservation - analyze data loss first
+        inclusion_threshold = max(16, threshold // 8)  # Much lower threshold for data retention
+        significant_pixels = alpha > inclusion_threshold
+
+        # Debug info to track data retention
+        total_pixels = alpha.size
+        significant_count = np.sum(significant_pixels)
+        quality_count = np.sum(alpha > threshold)
+        data_retention_ratio = significant_count / total_pixels
+
+        # Stage 2: Choose conversion strategy based on data loss
+        if data_retention_ratio < 0.6:  # If losing >40% of data
+            print(f"[Alpha] High data loss detected, using direct alpha conversion (preserving {100*data_retention_ratio:.1f}% of image)")
+            binary = alpha.astype(np.uint8)  # Use alpha channel as grayscale
+            binary = 255 - binary  # Invert for potrace
+        else:
+            # Quality Control - apply user threshold only within significant areas
+            if data_retention_ratio < 0.8:
+                print(f"[Alpha] WARNING: Moderate data loss detected ({100*(1-data_retention_ratio):.1f}% lost), consider lower threshold")
+
+            binary = np.zeros_like(alpha, dtype=np.uint8)
+            binary[significant_pixels] = (alpha[significant_pixels] > threshold).astype(np.uint8) * 255
+            binary = 255 - binary  # Invert for potrace
 
         # Save as PBM for potrace
         img_binary = Image.fromarray(binary, mode='L').convert('1')
@@ -141,12 +161,25 @@ class AlphaConverter(BaseConverter):
         ]
 
         if preserve_antialiasing:
+            # Stage 1: Data Preservation - analyze data loss first
+            inclusion_threshold = max(16, threshold // 8)  # Much lower threshold for data retention
+            significant_pixels = alpha > inclusion_threshold
+
+            # Debug info to track data retention
+            total_pixels = alpha.size
+            significant_count = np.sum(significant_pixels)
+            data_retention_ratio = significant_count / total_pixels
+
+            # Stage 2: Apply user threshold within significant areas for anti-aliasing
+            if data_retention_ratio < 0.8:
+                print(f"[Alpha-AA] WARNING: Moderate data loss detected ({100*(1-data_retention_ratio):.1f}% lost), consider lower threshold")
+
             # Create multiple opacity levels for antialiasing
             opacity_levels = {}
             for y in range(height):
                 for x in range(width):
                     a = alpha[y, x]
-                    if a > 0:
+                    if a > inclusion_threshold:  # Use inclusion threshold instead of > 0
                         opacity = round(a / 255, 2)
                         if opacity not in opacity_levels:
                             opacity_levels[opacity] = []
@@ -158,10 +191,11 @@ class AlphaConverter(BaseConverter):
             )
 
             for opacity, pixels in opacity_levels.items():
-                # Group adjacent pixels
-                for x, y in pixels:
+                # Consolidate adjacent pixels into larger rectangles
+                rectangles = self._consolidate_pixels_to_rectangles(pixels, width, height)
+                for rect in rectangles:
                     svg_parts.append(
-                        f'<rect x="{x}" y="{y}" width="1" height="1" '
+                        f'<rect x="{rect["x"]}" y="{rect["y"]}" width="{rect["width"]}" height="{rect["height"]}" '
                         f'fill="{hex_color}" opacity="{opacity}"/>'
                     )
         else:
@@ -184,18 +218,9 @@ class AlphaConverter(BaseConverter):
             for y in range(height):
                 for x in range(width):
                     if binary[y, x]:
-                        # Check if this is an edge pixel
-                        is_edge = False
-                        if x == 0 or x == width-1 or y == 0 or y == height-1:
-                            is_edge = True
-                        else:
-                            # Check neighbors
-                            if not (binary[y-1, x] and binary[y+1, x] and
-                                   binary[y, x-1] and binary[y, x+1]):
-                                is_edge = True
-
-                        if is_edge:
-                            svg_parts.append(f'<rect x="{x}" y="{y}" width="1" height="1"/>')
+                        # Draw ALL pixels above threshold, not just edges
+                        # This ensures filled shapes instead of hollow outlines
+                        svg_parts.append(f'<rect x="{x}" y="{y}" width="1" height="1"/>')
 
             svg_parts.append('</g>')
 
@@ -251,6 +276,85 @@ class AlphaConverter(BaseConverter):
                 'success': False,
                 'error': str(e)
             }
+
+    def _consolidate_pixels_to_rectangles(self, pixels, width, height):
+        """
+        Consolidate a list of pixels into larger rectangles for optimization.
+
+        Args:
+            pixels: List of (x, y) tuples representing pixels with same opacity
+            width: Image width
+            height: Image height
+
+        Returns:
+            List of rectangle dictionaries with x, y, width, height
+        """
+        if not pixels:
+            return []
+
+        # Convert to set for faster lookup
+        pixel_set = set(pixels)
+        rectangles = []
+        processed = set()
+
+        for x, y in pixels:
+            if (x, y) in processed:
+                continue
+
+            # Find the largest rectangle starting at this pixel
+            rect = self._find_largest_rectangle(x, y, pixel_set, processed, width, height)
+            if rect:
+                rectangles.append(rect)
+
+        return rectangles
+
+    def _find_largest_rectangle(self, start_x, start_y, pixel_set, processed, width, height):
+        """
+        Find the largest rectangle starting at (start_x, start_y).
+        Uses a greedy algorithm to find rectangular regions.
+        """
+        if (start_x, start_y) in processed or (start_x, start_y) not in pixel_set:
+            return None
+
+        # Start with a 1x1 rectangle
+        rect_width = 1
+        rect_height = 1
+
+        # Expand width as much as possible
+        while start_x + rect_width < width:
+            # Check if we can extend the width
+            can_extend = True
+            for y in range(start_y, start_y + rect_height):
+                if (start_x + rect_width, y) not in pixel_set or (start_x + rect_width, y) in processed:
+                    can_extend = False
+                    break
+            if not can_extend:
+                break
+            rect_width += 1
+
+        # Expand height as much as possible
+        while start_y + rect_height < height:
+            # Check if we can extend the height
+            can_extend = True
+            for x in range(start_x, start_x + rect_width):
+                if (x, start_y + rect_height) not in pixel_set or (x, start_y + rect_height) in processed:
+                    can_extend = False
+                    break
+            if not can_extend:
+                break
+            rect_height += 1
+
+        # Mark all pixels in this rectangle as processed
+        for y in range(start_y, start_y + rect_height):
+            for x in range(start_x, start_x + rect_width):
+                processed.add((x, y))
+
+        return {
+            'x': start_x,
+            'y': start_y,
+            'width': rect_width,
+            'height': rect_height
+        }
 
 
 def test_alpha_converter():
