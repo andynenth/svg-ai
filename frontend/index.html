@@ -49,13 +49,12 @@
                     <h3>Potrace Parameters</h3>
 
                     <div class="control-group">
-                        <label for="potraceThreshold">Black Level: <span id="potraceThresholdValue">128</span></label>
+                        <label for="potraceThreshold">Black Level: <span id="potraceThresholdValue">128</span><span class="info-icon" data-tooltip="How dark must a pixel be to become black? Lower = more black areas">i</span></label>
                         <input type="range" id="potraceThreshold" min="0" max="255" value="128">
-                        <small class="tooltip">How dark must a pixel be to become black? Lower = more black areas</small>
                     </div>
 
                     <div class="control-group">
-                        <label for="potraceTurnpolicy">Corner Style:</label>
+                        <label for="potraceTurnpolicy">Corner Style:<span class="info-icon" data-tooltip="How to handle ambiguous corners. Black = sharp, White = smooth">i</span></label>
                         <select id="potraceTurnpolicy">
                             <option value="black">Black (Sharp)</option>
                             <option value="white">White (Smooth)</option>
@@ -64,25 +63,21 @@
                             <option value="minority">Minority</option>
                             <option value="majority">Majority</option>
                         </select>
-                        <small class="tooltip">How to handle ambiguous corners. Black = sharp, White = smooth</small>
                     </div>
 
                     <div class="control-group">
-                        <label for="potraceTurdsize">Remove Noise:</label>
+                        <label for="potraceTurdsize">Remove Noise:<span class="info-icon" data-tooltip="Removes spots smaller than this many pixels">i</span></label>
                         <input type="number" id="potraceTurdsize" min="0" max="100" value="2">
-                        <small class="tooltip">Removes spots smaller than this many pixels</small>
                     </div>
 
                     <div class="control-group">
-                        <label for="potraceAlphamax">Smoothness: <span id="potraceAlphamaxValue">1.0</span></label>
+                        <label for="potraceAlphamax">Smoothness: <span id="potraceAlphamaxValue">1.0</span><span class="info-icon" data-tooltip="How rounded corners should be. Higher = smoother">i</span></label>
                         <input type="range" id="potraceAlphamax" min="0" max="134" step="1" value="100">
-                        <small class="tooltip">How rounded corners should be. Higher = smoother</small>
                     </div>
 
                     <div class="control-group">
-                        <label for="potraceOpttolerance">Accuracy: <span id="potraceOpttoleranceValue">0.20</span></label>
+                        <label for="potraceOpttolerance">Accuracy: <span id="potraceOpttoleranceValue">0.20</span><span class="info-icon" data-tooltip="Curve optimization tolerance. Lower = more precise curves & larger files. Higher = simplified curves & smaller files.">i</span></label>
                         <input type="range" id="potraceOpttolerance" min="0" max="100" step="1" value="20">
-                        <small class="tooltip">Curve optimization tolerance. Lower = more precise curves & larger files. Higher = simplified curves & smaller files.</small>
                     </div>
 
                     <div class="preset-buttons">
@@ -98,18 +93,16 @@
                     <h3>VTracer Parameters</h3>
 
                     <div class="control-group">
-                        <label>Mode:</label>
+                        <label>Mode:<span class="info-icon" data-tooltip="Color mode or black & white">i</span></label>
                         <div class="radio-group">
                             <label><input type="radio" name="vtracerColormode" value="color" checked> Color</label>
                             <label><input type="radio" name="vtracerColormode" value="binary"> B&W</label>
                         </div>
-                        <small class="tooltip">Color mode or black & white</small>
                     </div>
 
                     <div class="control-group">
-                        <label for="vtracerColorPrecision">Colors: <span id="vtracerColorPrecisionValue">6</span></label>
+                        <label for="vtracerColorPrecision">Colors: <span id="vtracerColorPrecisionValue">6</span><span class="info-icon" data-tooltip="Number of colors to detect. Lower = simpler image">i</span></label>
                         <input type="range" id="vtracerColorPrecision" min="1" max="10" value="6">
-                        <small class="tooltip">Number of colors to detect. Lower = simpler image</small>
                     </div>
 
                     <div class="control-group">
@@ -159,23 +152,20 @@
                     <h3>Alpha-aware Parameters</h3>
 
                     <div class="control-group">
-                        <label for="alphaThreshold">Alpha Level: <span id="alphaThresholdValue">128</span></label>
+                        <label for="alphaThreshold">Alpha Level: <span id="alphaThresholdValue">128</span><span class="info-icon" data-tooltip="Minimum opacity to include. Lower = more semi-transparent areas">i</span></label>
                         <input type="range" id="alphaThreshold" min="0" max="255" value="128">
-                        <small class="tooltip">Minimum opacity to include. Lower = more semi-transparent areas</small>
                     </div>
 
                     <div class="control-group">
                         <label>
-                            <input type="checkbox" id="alphaUsePotrace" checked> Clean Edges
+                            <input type="checkbox" id="alphaUsePotrace" checked> Clean Edges<span class="info-icon" data-tooltip="Use Potrace for sharper edges. Off preserves soft edges">i</span>
                         </label>
-                        <small class="tooltip">Use Potrace for sharper edges. Off preserves soft edges</small>
                     </div>
 
                     <div class="control-group">
                         <label>
-                            <input type="checkbox" id="alphaPreserveAntialiasing"> Anti-aliasing
+                            <input type="checkbox" id="alphaPreserveAntialiasing"> Anti-aliasing<span class="info-icon" data-tooltip="Preserve smooth edges. Larger file but smoother">i</span>
                         </label>
-                        <small class="tooltip">Preserve smooth edges. Larger file but smoother</small>
                     </div>
 
                     <div class="preset-buttons">

@@ -162,6 +162,90 @@ h3 {
     margin-bottom: 0;
 }
 
+/* Flowbite-Style Tooltip System */
+.info-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #6c757d;
+    color: white;
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+    margin-left: 6px;
+    cursor: help;
+    transition: background-color 0.2s ease;
+    user-select: none;
+    font-weight: bold;
+    position: relative;
+}
+
+.info-icon:hover {
+    background: #495057;
+}
+
+/* Tooltip Styling */
+.tooltip {
+    position: absolute;
+    z-index: 1000;
+    padding: 8px 12px;
+    background: #1f2937;
+    color: white;
+    font-size: 12px;
+    line-height: 1.4;
+    border-radius: 6px;
+    white-space: normal;
+    max-width: 250px;
+    min-width: max-content;
+    width: auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+    pointer-events: none;
+    font-weight: normal;
+}
+
+.tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tooltip Arrow */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1f2937 transparent transparent transparent;
+}
+
+/* Tooltip positioning variants */
+.tooltip.bottom {
+    transform: translateY(8px);
+}
+
+.tooltip.bottom.show {
+    transform: translateY(0);
+}
+
+.tooltip.bottom::after {
+    top: -10px;
+    border-color: transparent transparent #1f2937 transparent;
+}
+
+/* Responsive tooltip text wrapping for mobile */
+@media (max-width: 768px) {
+    .tooltip {
+        white-space: normal;
+        max-width: 250px;
+    }
+}
+
 .btn-primary {
     background: #4a90e2;
     color: white;
@@ -436,19 +520,7 @@ h3 {
     cursor: pointer;
 }
 
-/* Tooltip Styling */
-.tooltip {
-    display: block;
-    font-size: 12px;
-    color: #6c757d;
-    font-style: italic;
-    margin-top: 4px;
-    line-height: 1.4;
-    background: #f8f9fa;
-    padding: 6px 8px;
-    border-radius: 4px;
-    border-left: 3px solid #4a90e2;
-}
+/* Old tooltip styles removed - using Flowbite-style tooltips above */
 
 /* Preset Buttons Styling */
 .preset-buttons {

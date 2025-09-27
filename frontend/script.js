@@ -71,6 +71,9 @@ function showConverterParams(converter) {
             alphaParams.classList.remove('hidden');
             break;
     }
+
+    // Re-initialize tooltips after showing parameters
+    setTimeout(initializeTooltips, 100);
 }
 
 function collectPotraceParams() {
@@ -455,3 +458,84 @@ function formatFileSize(bytes) {
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
 }
+
+// Flowbite-style Tooltip System
+function initializeTooltips() {
+    // Remove existing event listeners by cloning icons
+    const infoIcons = document.querySelectorAll('.info-icon[data-tooltip]');
+    console.log(`[Tooltips] Found ${infoIcons.length} info icons`);
+
+    infoIcons.forEach((icon, index) => {
+        // Clone to remove old event listeners
+        const newIcon = icon.cloneNode(true);
+        icon.parentNode.replaceChild(newIcon, icon);
+
+        let tooltip = null;
+        console.log(`[Tooltips] Setting up icon ${index + 1}:`, newIcon.getAttribute('data-tooltip'));
+
+        // Create tooltip on mouseenter
+        newIcon.addEventListener('mouseenter', () => {
+            console.log('[Tooltips] Mouseenter on icon:', newIcon.getAttribute('data-tooltip'));
+
+            // Remove any existing tooltip
+            if (tooltip) {
+                tooltip.remove();
+            }
+
+            // Create new tooltip
+            tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = newIcon.getAttribute('data-tooltip');
+
+            // Position tooltip
+            document.body.appendChild(tooltip);
+
+            const iconRect = newIcon.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            // Position directly above the icon, centered
+            const left = iconRect.left + (iconRect.width / 2) - (tooltipRect.width / 2);
+            const top = iconRect.top - tooltipRect.height - 8 + window.scrollY;
+
+            // Adjust if tooltip goes off-screen horizontally
+            const adjustedLeft = Math.max(8, Math.min(left, window.innerWidth - tooltipRect.width - 8));
+
+            tooltip.style.position = 'absolute';
+            tooltip.style.left = adjustedLeft + 'px';
+            tooltip.style.top = top + 'px';
+
+            console.log(`[Tooltips] Positioned tooltip at (${adjustedLeft}, ${top})`);
+
+            // Show tooltip with animation
+            requestAnimationFrame(() => {
+                tooltip.classList.add('show');
+            });
+        });
+
+        // Remove tooltip on mouseleave
+        newIcon.addEventListener('mouseleave', () => {
+            console.log('[Tooltips] Mouseleave on icon');
+            if (tooltip) {
+                tooltip.classList.remove('show');
+                setTimeout(() => {
+                    if (tooltip && tooltip.parentNode) {
+                        tooltip.remove();
+                    }
+                }, 150); // Match CSS transition duration
+                tooltip = null;
+            }
+        });
+    });
+}
+
+// Initialize tooltips when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('[Tooltips] DOM loaded, initializing tooltips');
+    initializeTooltips();
+});
+
+// Also initialize on window load as backup
+window.addEventListener('load', () => {
+    console.log('[Tooltips] Window loaded, re-initializing tooltips');
+    setTimeout(initializeTooltips, 100);
+});
