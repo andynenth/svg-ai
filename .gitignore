@@ -22,6 +22,7 @@ cache/
 *.svg
 temp/
 *.log
+backend/uploads/*
 
 # Large test files
 *.png
