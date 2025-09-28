@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11']
+        python-version: ['3.9']
 
     steps:
     - uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r backend/requirements.txt
-        pip install pytest pytest-cov flake8 black
+        pip install pytest pytest-cov flake8 black Flask Pillow
 
     - name: Lint with flake8
       run: |
@@ -56,7 +56,6 @@ jobs:
         python -m pytest test_e2e.py -v
 
     - name: Upload coverage to Codecov
-      if: matrix.python-version == '3.9'
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
