@@ -383,29 +383,42 @@ h3 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    flex-direction: column;
+    pointer-events: none; /* Allow clicks through transparent overlay */
 }
 
 .loading.hidden {
     display: none;
 }
 
+/* Card container for loading message */
+.loading-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto; /* Re-enable pointer events for the card */
+}
+
 .loading p {
-    color: white;
+    color: #333;
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #4a90e2;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e0e0e0;
+    border-top: 3px solid #4a90e2;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }

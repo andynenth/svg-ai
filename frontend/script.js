@@ -1448,7 +1448,7 @@ class ImageSynchronizer {
 // Initialize Split View Controller
 let splitViewController;
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('[INIT] Script version 7 loaded - hide both panels until ready');
+    console.log('[INIT] Script version 8 loaded - loading card without overlay');
     // Initialize immediately for auto-convert support
     splitViewController = new SplitViewController();
 });
