@@ -211,9 +211,7 @@ class ShapeDetector:
 
 def test_shape_detection():
     """Test shape detection on sample images."""
-    import sys
-    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from utils.ai_detector import create_detector
+    from backend.utils.ai_detector import create_detector
 
     print("="*60)
     print("SHAPE DETECTION TEST")

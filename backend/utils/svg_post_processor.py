@@ -184,8 +184,9 @@ class SVGPostProcessor:
                 distance = math.sqrt(sum((a - b) ** 2 for a, b in zip(rgb1, rgb2)))
                 return distance < threshold
 
-        except:
-            pass
+        except (ValueError, AttributeError, TypeError) as e:
+            logger.debug(f"Color similarity comparison failed for {color1} and {color2}: {e}")
+            logger.debug("Colors will be treated as dissimilar")
 
         return False
 

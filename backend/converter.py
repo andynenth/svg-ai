@@ -4,12 +4,16 @@ Converter wrapper module for backend API
 """
 
 import tempfile
+import logging
 from converters.alpha_converter import AlphaConverter
 from converters.vtracer_converter import VTracerConverter
 from converters.potrace_converter import PotraceConverter
 from converters.smart_potrace_converter import SmartPotraceConverter
 from converters.smart_auto_converter import SmartAutoConverter
 from utils.quality_metrics import QualityMetrics
+from utils.error_messages import ErrorMessageFactory, log_error_with_context
+
+logger = logging.getLogger(__name__)
 
 # Create instance
 metrics = QualityMetrics()
@@ -41,7 +45,11 @@ def convert_image(input_path, converter_type="alpha", **params):
 
     # Check if exists
     if not converter:
-        return {"success": False, "error": "Unknown converter"}
+        error = ErrorMessageFactory.create_error("CONVERTER_NOT_AVAILABLE",
+                                                {"converter": converter_type})
+        error.log(logger)
+        return {"success": False, "error": error.user_message,
+                "debug": {"technical_message": error.developer_message}}
 
     # Create temp output
     output_path = tempfile.mktemp(suffix=".svg")
@@ -104,5 +112,11 @@ def convert_image(input_path, converter_type="alpha", **params):
 
         return result
     except Exception as e:
-        # Handle exception
-        return {"success": False, "error": str(e)}
+        # Handle exception with standardized error
+        error = log_error_with_context("CONVERSION_FAILED",
+                                     {"converter": converter_type,
+                                      "image_path": input_path},
+                                     e,
+                                     logger)
+        return {"success": False, "error": error.user_message,
+                "debug": {"technical_message": error.developer_message}}

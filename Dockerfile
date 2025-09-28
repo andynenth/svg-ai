@@ -16,10 +16,10 @@ RUN apt-get update && apt-get install -y \
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Copy requirements and install dependencies
-COPY requirements.txt .
+# Copy requirements structure and install dependencies
+COPY requirements/ ./requirements/
 RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements/prod.txt
 
 # Production stage
 FROM python:3.9-slim

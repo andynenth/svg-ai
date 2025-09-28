@@ -1,0 +1,27 @@
+# Development dependencies for SVG-AI
+# Includes all base requirements plus development tools
+
+# Include base requirements
+-r base.txt
+
+# Testing framework
+pytest==8.4.2
+pytest-cov==7.0.0
+pytest-asyncio==1.2.0
+
+# Code quality and linting
+black==25.9.0
+flake8==7.3.0
+mypy==1.7.1
+pip-audit==2.7.3
+
+# Development tools
+ipython==8.17.2
+
+# Documentation and analysis tools
+matplotlib==3.9.4
+seaborn==0.13.2
+rich==13.7.0
+
+# Additional development packages that may be needed
+# for debugging and development workflow

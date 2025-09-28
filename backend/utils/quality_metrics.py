@@ -4,10 +4,13 @@ Advanced quality metrics for PNG to SVG conversion.
 
 import os
 import io
+import logging
 import numpy as np
 from PIL import Image
 from typing import Dict, Any, Optional, Tuple
 import time
+
+logger = logging.getLogger(__name__)
 
 
 class QualityMetrics:
@@ -409,7 +412,9 @@ class SVGRenderer:
                 img = img.resize(target_size, Image.LANCZOS)
                 return np.array(img)
 
-            except:
+            except (ImportError, AttributeError, OSError, ValueError) as e:
+                logger.warning(f"SVG rendering failed with svglib fallback: {e}")
+                logger.info("Suggestion: Install cairosvg for better SVG rendering: pip install cairosvg")
                 return None
 
         except Exception as e:

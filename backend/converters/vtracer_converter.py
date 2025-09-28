@@ -1,7 +1,11 @@
-import vtracer
-from .base import BaseConverter
-from typing import Optional
 import os
+import tempfile
+from typing import Optional, Dict, Any
+
+import vtracer
+
+from backend.converters.base import BaseConverter
+from backend.utils.svg_validator import SVGValidator
 
 
 class VTracerConverter(BaseConverter):
@@ -22,14 +26,14 @@ class VTracerConverter(BaseConverter):
         Initialize VTracer converter with parameters.
 
         Args:
-            colormode: 'color' or 'binary'
-            color_precision: Number of significant bits for colors (1-10)
-            layer_difference: Minimum difference between layers (0-256)
-            path_precision: Decimal precision for path coordinates (0-10)
-            corner_threshold: Threshold for detecting corners (0-180)
-            length_threshold: Minimum path length
-            max_iterations: Maximum optimization iterations
-            splice_threshold: Threshold for splicing paths
+            colormode (str): 'color' or 'binary' processing mode.
+            color_precision (int): Number of significant bits for colors (1-10).
+            layer_difference (int): Minimum difference between layers (0-256).
+            path_precision (int): Decimal precision for path coordinates (0-10).
+            corner_threshold (int): Threshold for detecting corners (0-180).
+            length_threshold (float): Minimum path length threshold.
+            max_iterations (int): Maximum optimization iterations.
+            splice_threshold (int): Threshold for splicing paths.
         """
         super().__init__(name="VTracer")
         self.colormode = colormode
@@ -46,10 +50,11 @@ class VTracerConverter(BaseConverter):
         Convert PNG to SVG using VTracer.
 
         Args:
-            image_path: Path to PNG image
+            image_path (str): Path to PNG image file to convert.
+            **kwargs: Additional VTracer parameters that override defaults.
 
         Returns:
-            SVG content as string
+            str: Complete SVG content as string with optimizations applied.
         """
         if not os.path.exists(image_path):
             raise FileNotFoundError(f"Image not found: {image_path}")
@@ -107,23 +112,13 @@ class VTracerConverter(BaseConverter):
         import os as os_cleanup
         os_cleanup.unlink(tmp_path)
 
-        # Fix VTracer SVG: Add viewBox if missing for proper scaling
-        import re
-        if 'viewBox' not in svg_string:
-            # Extract width and height
-            width_match = re.search(r'width="(\d+)"', svg_string)
-            height_match = re.search(r'height="(\d+)"', svg_string)
+        # Fix VTracer SVG: Add viewBox if missing for proper scaling using SVGValidator
+        svg_string = SVGValidator.add_viewbox_if_missing(svg_string)
 
-            if width_match and height_match:
-                width = width_match.group(1)
-                height = height_match.group(1)
-                # Add viewBox attribute to the svg tag
-                svg_string = re.sub(
-                    r'<svg([^>]*?)width="(\d+)"([^>]*?)height="(\d+)"',
-                    f'<svg\\1width="\\2"\\3height="\\4" viewBox="0 0 \\2 \\4"',
-                    svg_string
-                )
-                print(f"[VTracer] Added viewBox=\"0 0 {width} {height}\" for proper scaling")
+        # Apply basic SVG optimizations
+        svg_string = SVGValidator.optimize_svg_structure(svg_string)
+
+        print(f"[VTracer] Applied SVG validation and optimization")
 
         return svg_string
 
@@ -131,17 +126,20 @@ class VTracerConverter(BaseConverter):
         """Get converter name."""
         return f"VTracer(color_precision={self.color_precision}, layer_diff={self.layer_difference})"
 
-    def convert_with_params(self, image_path: str, output_path: str, **params) -> dict:
+    def convert_with_params(self, image_path: str, output_path: str, **params) -> Dict[str, Any]:
         """
         Convert with specific parameters.
 
         Args:
-            image_path: Input PNG path
-            output_path: Output SVG path
-            **params: VTracer parameters
+            image_path (str): Input PNG path to convert.
+            output_path (str): Output SVG path for result.
+            **params: VTracer parameters to override defaults.
 
         Returns:
-            Result dictionary with success status
+            Dict[str, Any]: Result dictionary with success status and timing:
+                - success (bool): Whether conversion succeeded.
+                - conversion_time (float): Time taken in seconds (if successful).
+                - error (str): Error message (if failed).
         """
         import time
 
@@ -179,10 +177,10 @@ class VTracerConverter(BaseConverter):
         Convert with settings optimized for logo conversion.
 
         Args:
-            image_path: Path to logo PNG
+            image_path (str): Path to logo PNG file to convert.
 
         Returns:
-            Optimized SVG string
+            str: Optimized SVG string with logo-specific parameter tuning.
         """
         # Logos typically have fewer colors and cleaner edges
         import tempfile

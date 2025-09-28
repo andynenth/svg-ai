@@ -2,17 +2,41 @@
 """
 Color detection utility for automatic converter routing.
 
-This module provides functions to analyze images and determine their color characteristics,
-enabling smart routing between VTracer (for colored images) and Smart Potrace (for B&W images).
+This module provides comprehensive image color analysis capabilities for the Smart Auto
+Converter. It analyzes PNG and JPEG images to detect color characteristics, enabling
+intelligent routing between VTracer (for colored/gradient images) and Smart Potrace
+(for black & white/grayscale images).
+
+The module includes sophisticated algorithms for:
+- Color distribution analysis and unique color counting
+- Gradient detection using variance analysis
+- Grayscale similarity calculation with MSE comparison
+- RGB channel correlation analysis for grayscale detection
+- Confidence scoring based on multiple image characteristics
+
+Example:
+    Basic color detection:
+
+    from backend.utils.color_detector import ColorDetector
+    detector = ColorDetector()
+    result = detector.analyze_image("logo.png")
+    print(f"Recommended: {result['recommended_converter']}")
+
+    Quick detection utility:
+
+    from backend.utils.color_detector import detect_image_type
+    converter, confidence = detect_image_type("logo.png")
 """
 
 import logging
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Any
 from pathlib import Path
 
 try:
     import numpy as np
     from PIL import Image
+
+    from backend.utils.image_utils import ImageUtils
     DEPENDENCIES_AVAILABLE = True
 except ImportError:
     DEPENDENCIES_AVAILABLE = False
@@ -21,45 +45,104 @@ logger = logging.getLogger(__name__)
 
 
 class ColorDetector:
-    """
-    Utility class for detecting image color characteristics.
+    """Advanced color analysis utility for intelligent converter routing.
 
-    Determines whether an image should be processed as:
-    - Colored (multi-color, gradients) → VTracer
-    - Grayscale/Monochrome → Smart Potrace
+    Analyzes image color characteristics using multiple algorithms to determine
+    the optimal conversion strategy. Combines color distribution analysis,
+    gradient detection, grayscale similarity, and channel correlation to make
+    confident routing decisions between VTracer and Smart Potrace converters.
+
+    The detector uses sophisticated algorithms including:
+    - Unique color counting with transparent pixel handling
+    - Color variance analysis for gradient detection
+    - Grayscale similarity using MSE comparison
+    - RGB channel correlation matrix analysis
+    - Multi-factor confidence scoring
+
+    Attributes:
+        None: All analysis is performed statically on input images.
+
+    Example:
+        Basic usage:
+
+        detector = ColorDetector()
+        result = detector.analyze_image("complex_logo.png")
+        if result['is_colored']:
+            print(f"Use VTracer (confidence: {result['confidence']:.1%})")
+        else:
+            print(f"Use Smart Potrace (confidence: {result['confidence']:.1%})")
+
+        Detailed analysis:
+
+        result = detector.analyze_image("gradient_logo.png")
+        details = result['analysis_details']
+        print(f"Unique colors: {result['unique_colors']}")
+        print(f"Has gradients: {result['has_gradients']}")
+        print(f"Grayscale similarity: {details['grayscale_similarity']:.3f}")
     """
 
     def __init__(self):
-        """Initialize the color detector."""
-        if not DEPENDENCIES_AVAILABLE:
-            raise ImportError("Required dependencies not available. Install with: pip install numpy pillow")
+        """Initialize the color detector with dependency validation.
 
-    def analyze_image(self, image_path: str) -> Dict[str, any]:
+        Checks for required dependencies (numpy, PIL, ImageUtils) and raises
+        ImportError if any are missing. The detector requires these packages
+        for image processing and color analysis operations.
+
+        Raises:
+            ImportError: If numpy, PIL, or ImageUtils dependencies are not available.
+                Includes installation instructions in the error message.
         """
-        Analyze an image to determine its color characteristics.
+        if not DEPENDENCIES_AVAILABLE:
+            raise ImportError(
+                "Required dependencies not available. Install with: "
+                "pip install numpy pillow"
+            )
+
+    def analyze_image(self, image_path: str) -> Dict[str, Any]:
+        """Analyze an image to determine its color characteristics and optimal converter.
+
+        Performs comprehensive color analysis including unique color counting,
+        gradient detection, grayscale similarity calculation, and channel correlation
+        analysis. Handles transparent pixels appropriately and provides detailed
+        metadata for routing decisions.
 
         Args:
-            image_path: Path to the image file
+            image_path (str): Path to PNG or JPEG image file to analyze.
+                Must be a valid image file readable by PIL.
 
         Returns:
-            Dictionary with analysis results:
-            {
-                'is_colored': bool,
-                'unique_colors': int,
-                'has_gradients': bool,
-                'color_variance': float,
-                'recommended_converter': str,
-                'confidence': float,
-                'analysis_details': dict
-            }
+            Dict[str, Any]: Comprehensive analysis results:
+                - is_colored (bool): True if image contains significant color information.
+                - unique_colors (int): Number of unique RGB colors detected.
+                - has_gradients (bool): True if gradients are detected via variance analysis.
+                - color_variance (float): Average color variance across RGB channels.
+                - recommended_converter (str): Either 'vtracer' or 'smart' (Potrace).
+                - confidence (float): Confidence level in routing decision (0.0-1.0).
+                - analysis_details (Dict): Detailed metrics including:
+                    - grayscale_similarity (float): Similarity to grayscale version (0-1).
+                    - channel_correlation (float): RGB channel correlation (0-1).
+                    - total_pixels (int): Number of pixels analyzed.
+
+        Example:
+            Color analysis workflow:
+
+            detector = ColorDetector()
+            result = detector.analyze_image("logo.png")
+
+            if result['confidence'] > 0.8:
+                converter = result['recommended_converter']
+                print(f"High confidence routing to {converter}")
+            else:
+                print(f"Low confidence, manual review recommended")
+
+        Note:
+            Transparent pixels are excluded from color analysis. Fully transparent
+            images default to Smart Potrace routing with maximum confidence.
+            Analysis failures default to VTracer routing for safety.
         """
         try:
-            # Load image
-            image = Image.open(image_path)
-
-            # Convert to RGBA for consistent handling
-            if image.mode != 'RGBA':
-                image = image.convert('RGBA')
+            # Load and convert image to RGBA using ImageUtils
+            image = ImageUtils.convert_to_rgba(image_path)
 
             # Convert to numpy array
             pixels = np.array(image)
@@ -103,15 +186,30 @@ class ColorDetector:
             # Default to colored (VTracer) for safety
             return self._create_result(True, 0, "vtracer", 0.0, f"Analysis failed: {e}")
 
-    def _analyze_color_distribution(self, rgb_pixels: np.ndarray) -> Dict[str, any]:
-        """
-        Analyze the color distribution of RGB pixels.
+    def _analyze_color_distribution(self, rgb_pixels: np.ndarray) -> Dict[str, Any]:
+        """Analyze the color distribution and characteristics of RGB pixels.
+
+        Performs comprehensive analysis of color distribution including unique color
+        counting, variance calculation, gradient detection, grayscale similarity,
+        and RGB channel correlation analysis for routing decision support.
 
         Args:
-            rgb_pixels: Flattened array of RGB pixel values
+            rgb_pixels (np.ndarray): Flattened array of RGB pixel values with shape
+                (n_pixels, 3) where each row contains [R, G, B] values (0-255).
 
         Returns:
-            Dictionary with color distribution analysis
+            Dict[str, Any]: Color distribution analysis containing:
+                - unique_colors (int): Number of unique RGB color combinations.
+                - color_variance (float): Average variance across RGB channels.
+                - has_gradients (bool): True if variance suggests gradient presence.
+                - grayscale_similarity (float): Similarity to grayscale version (0-1).
+                - channel_correlation (float): Average RGB channel correlation (0-1).
+                - total_pixels (int): Total number of pixels analyzed.
+
+        Note:
+            This is a private method used internally by analyze_image().
+            High unique color counts and variance suggest colored images,
+            while high grayscale similarity and channel correlation suggest B&W.
         """
         # Count unique colors
         unique_colors = len(np.unique(rgb_pixels.view(np.void), axis=0))
@@ -137,16 +235,28 @@ class ColorDetector:
             'total_pixels': len(rgb_pixels)
         }
 
-    def _is_image_colored(self, rgb_pixels: np.ndarray, analysis: Dict) -> bool:
-        """
-        Determine if an image should be considered colored.
+    def _is_image_colored(self, rgb_pixels: np.ndarray, analysis: Dict[str, Any]) -> bool:
+        """Determine if an image should be considered colored using multiple criteria.
+
+        Applies a series of heuristic tests to classify images as colored or
+        grayscale/monochrome. Uses thresholds for grayscale similarity, channel
+        correlation, unique color count, and color variance to make the decision.
 
         Args:
-            rgb_pixels: RGB pixel array
-            analysis: Color analysis results
+            rgb_pixels (np.ndarray): RGB pixel array with shape (n_pixels, 3).
+            analysis (Dict[str, Any]): Color analysis results from _analyze_color_distribution().
 
         Returns:
-            True if image is colored, False if grayscale/monochrome
+            bool: True if image should be processed as colored (VTracer),
+                False if grayscale/monochrome (Smart Potrace).
+
+        Note:
+            Classification criteria (in order of evaluation):
+            1. Grayscale similarity > 0.95 → grayscale
+            2. Channel correlation > 0.98 → grayscale
+            3. Unique colors ≤ 5 → simple B&W
+            4. Low variance (<10) + few colors (<50) → monochrome with antialiasing
+            5. Otherwise → colored
         """
         # Multiple criteria for determining if image is colored
 
@@ -175,21 +285,56 @@ class ColorDetector:
         return True
 
     def _detect_gradients(self, rgb_pixels: np.ndarray) -> bool:
-        """
-        Detect if the image contains gradients.
+        """Detect if the image contains gradients using variance analysis.
 
-        Simple heuristic: high color variance suggests gradients.
+        Uses a simple but effective heuristic where high color variance across
+        RGB channels suggests the presence of gradients or smooth color transitions.
+        This helps optimize VTracer parameters for gradient-heavy images.
+
+        Args:
+            rgb_pixels (np.ndarray): RGB pixel array with shape (n_pixels, 3).
+
+        Returns:
+            bool: True if gradients are likely present (variance > 50).
+
+        Note:
+            This is a simplified gradient detection algorithm. More sophisticated
+            edge detection could be implemented for better accuracy if needed.
         """
         return np.var(rgb_pixels, axis=0).mean() > 50
 
     def _calculate_grayscale_similarity(self, rgb_pixels: np.ndarray) -> float:
-        """
-        Calculate how similar the image is to its grayscale version.
+        """Calculate similarity between original image and its grayscale version.
 
-        Returns value between 0 (very colored) and 1 (pure grayscale).
+        Converts the RGB image to grayscale using ImageUtils and compares it
+        with the original using Mean Squared Error (MSE). High similarity
+        indicates the image is already effectively grayscale.
+
+        Args:
+            rgb_pixels (np.ndarray): RGB pixel array with shape (n_pixels, 3).
+
+        Returns:
+            float: Similarity score between 0.0 (very colored) and 1.0 (pure grayscale).
+                Values > 0.95 typically indicate grayscale images.
+
+        Note:
+            Uses temporary image reconstruction for grayscale conversion consistency
+            with ImageUtils. Handles non-square pixel arrays by reshaping appropriately.
         """
-        # Convert to grayscale using standard luminance formula
-        grayscale = 0.299 * rgb_pixels[:, 0] + 0.587 * rgb_pixels[:, 1] + 0.114 * rgb_pixels[:, 2]
+        # Convert to grayscale using ImageUtils for consistency
+        # For pixel array analysis, we'll create a temporary image and convert it
+        temp_img_data = rgb_pixels.reshape(-1, 3).astype(np.uint8)
+        height = int(np.sqrt(len(temp_img_data)))
+        width = len(temp_img_data) // height if height > 0 else 1
+
+        if height * width != len(temp_img_data):
+            # Handle non-square images by using actual dimensions
+            height = len(temp_img_data)
+            width = 1
+
+        temp_img = Image.fromarray(temp_img_data.reshape(height, width, 3), 'RGB')
+        grayscale_img = ImageUtils.convert_to_grayscale(temp_img)
+        grayscale = np.array(grayscale_img).flatten()
 
         # Create grayscale RGB version
         grayscale_rgb = np.column_stack([grayscale, grayscale, grayscale])
@@ -204,10 +349,24 @@ class ColorDetector:
         return max(0, min(1, similarity))
 
     def _analyze_channel_correlation(self, rgb_pixels: np.ndarray) -> float:
-        """
-        Analyze correlation between RGB channels.
+        """Analyze correlation between RGB channels to detect grayscale images.
 
-        High correlation suggests grayscale image.
+        Calculates the correlation matrix between R, G, and B channels and
+        returns the average correlation. High correlation (>0.98) between
+        all channels strongly suggests a grayscale image.
+
+        Args:
+            rgb_pixels (np.ndarray): RGB pixel array with shape (n_pixels, 3).
+
+        Returns:
+            float: Average correlation between RGB channels (0.0-1.0).
+                Values > 0.98 typically indicate grayscale images.
+                Returns 1.0 for images with < 2 pixels or constant channels.
+
+        Note:
+            Filters out NaN correlations that can occur with constant color channels.
+            This is a strong indicator for grayscale detection when combined with
+            other metrics.
         """
         if len(rgb_pixels) < 2:
             return 1.0
@@ -231,16 +390,29 @@ class ColorDetector:
         # Return average correlation
         return np.mean(correlations)
 
-    def _calculate_confidence(self, analysis: Dict, is_colored: bool) -> float:
-        """
-        Calculate confidence in the color detection decision.
+    def _calculate_confidence(self, analysis: Dict[str, Any], is_colored: bool) -> float:
+        """Calculate confidence in the color detection decision using multiple factors.
+
+        Computes confidence based on different criteria for colored vs grayscale
+        classifications. For colored images, considers color count, variance, and
+        grayscale similarity. For grayscale images, considers similarity, correlation,
+        and inverse variance.
 
         Args:
-            analysis: Color analysis results
-            is_colored: Detection result
+            analysis (Dict[str, Any]): Color analysis results from _analyze_color_distribution().
+            is_colored (bool): The classification decision to evaluate.
 
         Returns:
-            Confidence score between 0 and 1
+            float: Confidence score between 0.1 and 1.0 where:
+                - 1.0 indicates very high confidence in the classification
+                - 0.5 indicates moderate confidence
+                - 0.1 indicates low confidence (minimum bound)
+
+        Note:
+            Confidence calculation differs by classification:
+            - Colored: Higher with more colors, variance, lower grayscale similarity
+            - Grayscale: Higher with grayscale similarity, channel correlation, lower variance
+            Minimum confidence of 0.1 ensures reasonable bounds for all cases.
         """
         if is_colored:
             # For colored images, confidence is higher with:
@@ -267,8 +439,27 @@ class ColorDetector:
 
     def _create_result(self, is_colored: bool, unique_colors: int,
                       recommended_converter: str, confidence: float,
-                      details: any) -> Dict[str, any]:
-        """Create standardized result dictionary."""
+                      details: Any) -> Dict[str, Any]:
+        """Create standardized result dictionary with analysis metadata.
+
+        Constructs the final analysis result dictionary with all required fields
+        and proper error handling for analysis details. Ensures consistent format
+        for all analysis results regardless of success or failure.
+
+        Args:
+            is_colored (bool): Whether image is classified as colored.
+            unique_colors (int): Number of unique colors detected.
+            recommended_converter (str): Either 'vtracer' or 'smart'.
+            confidence (float): Confidence level in the decision (0.0-1.0).
+            details (Any): Either analysis dictionary or error string.
+
+        Returns:
+            Dict[str, Any]: Standardized result dictionary with all required fields.
+
+        Note:
+            This method ensures consistent result format even when analysis fails.
+            Error details are wrapped in a dictionary for consistent access patterns.
+        """
         return {
             'is_colored': is_colored,
             'unique_colors': unique_colors,
@@ -281,14 +472,32 @@ class ColorDetector:
 
 
 def detect_image_type(image_path: str) -> Tuple[str, float]:
-    """
-    Simple function to detect if an image is colored or grayscale.
+    """Simple utility function to detect image type and get converter recommendation.
+
+    Convenience function that creates a ColorDetector instance and returns
+    just the essential routing information. Useful for quick converter selection
+    without needing detailed analysis results.
 
     Args:
-        image_path: Path to the image file
+        image_path (str): Path to PNG or JPEG image file to analyze.
 
     Returns:
-        Tuple of (recommended_converter, confidence)
+        Tuple[str, float]: Tuple containing:
+            - recommended_converter (str): Either 'vtracer' or 'smart'
+            - confidence (float): Confidence level in decision (0.0-1.0)
+
+    Example:
+        Quick converter selection:
+
+        converter, confidence = detect_image_type("logo.png")
+        if converter == 'vtracer':
+            print(f"Use VTracer (confidence: {confidence:.1%})")
+        else:
+            print(f"Use Smart Potrace (confidence: {confidence:.1%})")
+
+    Note:
+        This function creates a new ColorDetector instance for each call.
+        For batch processing, consider reusing a single ColorDetector instance.
     """
     detector = ColorDetector()
     result = detector.analyze_image(image_path)
@@ -296,7 +505,27 @@ def detect_image_type(image_path: str) -> Tuple[str, float]:
 
 
 def main():
-    """Test the color detector on sample images."""
+    """Test the color detector on sample images from the dataset.
+
+    Runs comprehensive testing of the ColorDetector on sample images from
+    each category in the data/logos directory. Displays detailed analysis
+    results including color characteristics, routing decisions, and confidence
+    levels for debugging and validation purposes.
+
+    Requires:
+        - data/logos directory with sample images
+        - Subdirectories: simple_geometric, text_based, gradient, complex
+        - PNG image files in each subdirectory
+
+    Example:
+        Run from project root:
+
+        python -m backend.utils.color_detector
+
+        Or directly:
+
+        cd backend/utils && python color_detector.py
+    """
     import sys
     from pathlib import Path
 

@@ -1,0 +1,36 @@
+# Core dependencies for SVG-AI
+# These are the minimum requirements for basic functionality
+
+# Core Python packages
+pillow==11.3.0
+numpy==2.0.2
+click==8.1.8
+requests==2.32.5
+
+# VTracer - PNG to SVG conversion (core functionality)
+vtracer==0.6.11
+
+# Image processing and metrics (required for conversion)
+opencv-python==4.12.0.88
+scikit-image==0.24.0
+
+# SVG rendering and manipulation (core functionality)
+cairosvg==2.8.2
+svgwrite==1.4.3
+svgpathtools==1.7.1
+
+# Web server (required for API)
+fastapi==0.117.1
+uvicorn[standard]==0.37.0
+python-multipart==0.0.20
+websockets==15.0.1
+
+# Data handling (required for processing)
+pandas==2.3.2
+pydantic==2.11.9
+
+# Parallel processing (performance optimization)
+joblib==1.5.2
+
+# Progress indicators (user experience)
+tqdm==4.67.1

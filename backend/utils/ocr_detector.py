@@ -177,9 +177,7 @@ class OCRDetector:
 
 def test_ocr_detection():
     """Test OCR detection on sample images."""
-    import sys
-    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from utils.ai_detector import create_detector
+    from backend.utils.ai_detector import create_detector
 
     print("="*60)
     print("OCR DETECTION TEST")

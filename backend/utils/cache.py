@@ -6,10 +6,13 @@ import hashlib
 import json
 import pickle
 import os
+import logging
 from pathlib import Path
 from typing import Optional, Dict, Any
 from datetime import datetime, timedelta
 import threading
+
+logger = logging.getLogger(__name__)
 
 
 class ConversionCache:
@@ -36,7 +39,9 @@ class ConversionCache:
             try:
                 with open(self.index_file, 'r') as f:
                     return json.load(f)
-            except:
+            except (FileNotFoundError, json.JSONDecodeError, PermissionError) as e:
+                logger.error(f"Failed to load cache index from {self.index_file}: {e}")
+                logger.info("Cache index will be recreated from scratch")
                 return {}
         return {}
 

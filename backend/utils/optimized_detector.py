@@ -101,7 +101,9 @@ class OptimizedDetector:
                     use_safetensors=True
                 )
                 OptimizedDetector._processor = CLIPProcessor.from_pretrained(model_name)
-            except:
+            except (OSError, ValueError, ImportError) as e:
+                logger.warning(f"Failed to load model with safetensors: {e}")
+                logger.info("Falling back to loading model without safetensors")
                 # Fallback without safetensors
                 OptimizedDetector._model = CLIPModel.from_pretrained(model_name)
                 OptimizedDetector._processor = CLIPProcessor.from_pretrained(model_name)
@@ -155,7 +157,9 @@ class OptimizedDetector:
             try:
                 with open(self.cache_file, 'rb') as f:
                     return pickle.load(f)
-            except:
+            except (FileNotFoundError, pickle.PickleError, PermissionError) as e:
+                logger.warning(f"Failed to load detection cache from {self.cache_file}: {e}")
+                logger.info("Detection cache will be rebuilt as images are analyzed")
                 return {}
         return {}
 
@@ -317,9 +321,7 @@ class OptimizedDetector:
 
 def benchmark_detector():
     """Benchmark optimized vs standard detector."""
-    import sys
-    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from utils.ai_detector import create_detector
+    from backend.utils.ai_detector import create_detector
 
     print("="*60)
     print("DETECTOR PERFORMANCE BENCHMARK")

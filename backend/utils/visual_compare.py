@@ -3,11 +3,14 @@ Visual comparison utilities for PNG to SVG conversion.
 """
 
 import numpy as np
+import logging
 from PIL import Image, ImageDraw, ImageChops
 from pathlib import Path
 from typing import Tuple, Dict, Optional
 import cairosvg
 import io
+
+logger = logging.getLogger(__name__)
 
 
 class VisualComparer:
@@ -147,15 +150,17 @@ class VisualComparer:
             # Try to use a better font if available
             try:
                 font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 24)
-            except:
+            except (OSError, IOError) as e:
+                logger.debug(f"Could not load custom font: {e}, using default font")
                 font = ImageFont.load_default()
 
             draw.text((10, 10), "Original PNG", fill=(0, 0, 0), font=font)
             draw.text((self.comparison_size[0] + 20, 10), "Converted SVG", fill=(0, 0, 0), font=font)
             draw.text((self.comparison_size[0] * 2 + 30, 10), f"Difference ({metrics['diff_percentage']:.1f}%)",
                      fill=(0, 0, 0), font=font)
-        except:
-            pass
+        except (ImportError, AttributeError) as e:
+            logger.debug(f"Could not add text labels to comparison image: {e}")
+            logger.debug("Image comparison will proceed without text labels")
 
         return grid
 
@@ -217,7 +222,9 @@ class VisualComparer:
             # Calculate preservation score
             preservation = 100 - (np.mean(diff_array) / 255 * 100)
             return max(0, min(100, preservation))
-        except:
+        except (AttributeError, ValueError, TypeError) as e:
+            logger.warning(f"Edge preservation calculation failed: {e}")
+            logger.debug("Returning edge preservation score of 0")
             return 0
 
     def _calculate_quality_rating(self, diff_metrics: Dict, edge_score: float) -> str:

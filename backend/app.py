@@ -24,6 +24,7 @@ from PIL import Image
 # Import converter module
 from converter import convert_image
 from utils.quality_metrics import QualityMetrics
+from utils.error_messages import ErrorMessageFactory, create_api_error_response, log_error_with_context
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -152,13 +153,19 @@ def upload_file():
     try:
         # Check if file is in request
         if "file" not in request.files:
-            return jsonify({"error": "No file provided"}), 400
+            error = ErrorMessageFactory.create_error("INVALID_PARAMETERS",
+                                                    {"invalid_params": "missing file"})
+            error.log(app.logger)
+            return jsonify(create_api_error_response(error)), 400
 
         file = request.files["file"]
 
         # Check if file is selected
         if file.filename == "":
-            return jsonify({"error": "No file selected"}), 400
+            error = ErrorMessageFactory.create_error("INVALID_PARAMETERS",
+                                                    {"invalid_params": "empty filename"})
+            error.log(app.logger)
+            return jsonify(create_api_error_response(error)), 400
 
         # Read file content first for validation
         content = file.read()
@@ -166,8 +173,12 @@ def upload_file():
         # Validate file content (checks both extension and magic bytes)
         is_valid, error_msg = validate_file_content(content, file.filename)
         if not is_valid:
-            app.logger.warning(f"Invalid file upload attempt: {file.filename} - {error_msg}")
-            return jsonify({"error": error_msg}), 400
+            error = ErrorMessageFactory.create_error("INVALID_FILE_FORMAT",
+                                                    {"file_format": "unknown",
+                                                     "expected_formats": "PNG, JPEG",
+                                                     "file_path": file.filename})
+            error.log(app.logger)
+            return jsonify(create_api_error_response(error)), 400
 
         # Generate MD5
         file_hash = hashlib.md5(content).hexdigest()
@@ -195,11 +206,19 @@ def upload_file():
         return jsonify(response)
 
     except RequestEntityTooLarge:
-        return jsonify({"error": "File too large (max 10MB)"}), 413
+        error = ErrorMessageFactory.create_error("INSUFFICIENT_MEMORY",
+                                                {"image_size": "large",
+                                                 "available_memory": "limited"})
+        error.log(app.logger)
+        return jsonify(create_api_error_response(error)), 413
 
     except Exception as e:
-        app.logger.error(f"Upload error: {str(e)}\n{traceback.format_exc()}")
-        return jsonify({"error": "Upload failed"}), 500
+        error = log_error_with_context("CONVERSION_FAILED",
+                                     {"converter": "upload_handler",
+                                      "image_path": "upload"},
+                                     e,
+                                     app.logger)
+        return jsonify(create_api_error_response(error)), 500
 
 
 @app.route("/api/convert", methods=["POST"])
@@ -315,7 +334,10 @@ def convert():
 
     # Check exists
     if not os.path.exists(filepath):
-        return jsonify({"error": "File not found"}), 404
+        error = ErrorMessageFactory.create_error("FILE_NOT_FOUND",
+                                                {"file_path": filepath})
+        error.log(app.logger)
+        return jsonify(create_api_error_response(error)), 404
 
     # Log conversion
     app.logger.info(f"Converting: {file_id}")
@@ -368,14 +390,21 @@ def convert():
 @app.errorhandler(404)
 def not_found(error):
     """Handle 404 errors"""
-    return jsonify({"error": "Not found"}), 404
+    error_obj = ErrorMessageFactory.create_error("FILE_NOT_FOUND",
+                                                {"file_path": "requested resource"})
+    error_obj.log(app.logger)
+    return jsonify(create_api_error_response(error_obj)), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
     """Handle 500 errors"""
-    app.logger.error(f"Internal error: {error}")
-    return jsonify({"error": "Internal server error"}), 500
+    error_obj = log_error_with_context("CONVERSION_FAILED",
+                                     {"converter": "server",
+                                      "image_path": "unknown"},
+                                     error,
+                                     app.logger)
+    return jsonify(create_api_error_response(error_obj)), 500
 
 
 if __name__ == "__main__":

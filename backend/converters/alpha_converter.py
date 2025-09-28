@@ -7,16 +7,17 @@ by the alpha channel, common in modern icons.
 """
 
 import os
-import tempfile
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Dict, Optional, Tuple
+
 import numpy as np
 from PIL import Image
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from converters.base import BaseConverter
+
+from backend.converters.base import BaseConverter
+from backend.utils.image_utils import ImageUtils
+from backend.utils.svg_validator import SVGValidator
 
 
 class AlphaConverter(BaseConverter):
@@ -56,7 +57,9 @@ class AlphaConverter(BaseConverter):
         Returns:
             SVG content string
         """
-        img = Image.open(image_path)
+        img = ImageUtils.safe_image_load(image_path)
+        if img is None:
+            raise FileNotFoundError(f"Could not load image: {image_path}")
 
         # Detect if this is an alpha-based image
         if img.mode == 'RGBA':
@@ -115,8 +118,9 @@ class AlphaConverter(BaseConverter):
             binary[significant_pixels] = (alpha[significant_pixels] > threshold).astype(np.uint8) * 255
             binary = 255 - binary  # Invert for potrace
 
-        # Save as PBM for potrace
-        img_binary = Image.fromarray(binary, mode='L').convert('1')
+        # Create binary mask for potrace
+        img_binary = Image.fromarray(binary, mode='L')
+        img_binary = ImageUtils.create_binary_mask(img_binary, threshold=128, invert=False)
 
         with tempfile.NamedTemporaryFile(suffix='.pbm', delete=False) as tmp_pbm:
             img_binary.save(tmp_pbm.name)
@@ -134,11 +138,11 @@ class AlphaConverter(BaseConverter):
                         with open(tmp_svg.name, 'r') as f:
                             svg_content = f.read()
 
-                        # Replace black fill with original color
+                        # Replace black fill with original color using SVGValidator
                         hex_color = '#{:02x}{:02x}{:02x}'.format(
                             int(rgb_color[0]), int(rgb_color[1]), int(rgb_color[2])
                         )
-                        svg_content = svg_content.replace('fill="#000000"', f'fill="{hex_color}"')
+                        svg_content = SVGValidator.replace_fill_color(svg_content, "#000000", hex_color)
 
                         return svg_content
                     else:
@@ -154,11 +158,9 @@ class AlphaConverter(BaseConverter):
         """Generate SVG paths directly with optional antialiasing."""
         height, width = alpha.shape
 
-        # Start SVG
-        svg_parts = [
-            f'<?xml version="1.0" encoding="UTF-8"?>',
-            f'<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">'
-        ]
+        # Start SVG using SVGValidator
+        svg_header = SVGValidator.create_svg_header(width, height)
+        svg_parts = [svg_header]
 
         if preserve_antialiasing:
             # Use gradient-based approach for true vector anti-aliasing
@@ -352,10 +354,10 @@ class AlphaConverter(BaseConverter):
         # Step 3: Create gradient definitions for edge regions
         gradients_svg = self._generate_gradient_edges(alpha, edge_mask, rgb_color, width, height)
 
-        # Step 4: Combine into final SVG
+        # Step 4: Combine into final SVG using SVGValidator
+        svg_header = SVGValidator.create_svg_header(width, height)
         svg_parts = [
-            f'<?xml version="1.0" encoding="UTF-8"?>',
-            f'<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">',
+            svg_header,
             '<defs>',
             gradients_svg,
             '</defs>',

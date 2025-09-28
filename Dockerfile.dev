@@ -1,0 +1,51 @@
+# Development Dockerfile for SVG-AI
+# Includes development tools, testing frameworks, and debugging utilities
+
+FROM python:3.9-slim
+
+# Install system dependencies for development
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    cargo \
+    rustc \
+    libcairo2-dev \
+    pkg-config \
+    python3-dev \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app directory
+WORKDIR /app
+
+# Copy requirements structure and install development dependencies
+COPY requirements/ ./requirements/
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements/dev.txt
+
+# Copy application code
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p cache temp data/logos data/output results
+
+# Create non-root user for development
+RUN useradd -m -u 1000 developer && \
+    chown -R developer:developer /app
+USER developer
+
+# Expose port
+EXPOSE 8000
+
+# Development-specific environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV DEVELOPMENT=1
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD python -c "import requests; requests.get('http://localhost:8000/')" || exit 1
+
+# Default command for development (with auto-reload)
+CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

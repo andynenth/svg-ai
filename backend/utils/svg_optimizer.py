@@ -3,10 +3,13 @@ SVG post-processing and optimization utilities.
 """
 
 import re
+import logging
 from typing import Dict, Optional
 from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
+
+logger = logging.getLogger(__name__)
 
 
 class SVGOptimizer:
@@ -20,7 +23,8 @@ class SVGOptimizer:
         try:
             result = subprocess.run(['which', 'svgo'], capture_output=True)
             return result.returncode == 0
-        except:
+        except (FileNotFoundError, subprocess.SubprocessError, OSError) as e:
+            logger.debug(f"Failed to check for svgo availability: {e}")
             return False
 
     def optimize(self, svg_content: str, aggressive: bool = False) -> str:
@@ -89,7 +93,9 @@ class SVGOptimizer:
                         root.remove(p)
 
             return ET.tostring(root, encoding='unicode')
-        except:
+        except (ET.ParseError, AttributeError, ValueError) as e:
+            logger.warning(f"SVG parsing/optimization failed: {e}")
+            logger.debug("Returning original SVG content without optimization")
             # If parsing fails, return original
             return svg_content
 

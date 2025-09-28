@@ -9,11 +9,14 @@ similarity-based lookup for fast parameter selection.
 import os
 import json
 import hashlib
+import logging
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 import numpy as np
 from datetime import datetime
 import pickle
+
+logger = logging.getLogger(__name__)
 
 
 class ParameterCache:
@@ -40,13 +43,15 @@ class ParameterCache:
         self.memory_cache = {}
         self.max_memory_entries = 100
 
-    def _load_cache(self) -> Dict:
+    def _load_cache(self) -> Dict[str, Any]:
         """Load cache from disk."""
         if self.cache_file.exists():
             try:
                 with open(self.cache_file, 'r') as f:
                     return json.load(f)
-            except:
+            except (FileNotFoundError, json.JSONDecodeError, PermissionError) as e:
+                logger.warning(f"Failed to load parameter cache from {self.cache_file}: {e}")
+                logger.info("Parameter cache will be recreated from scratch")
                 return {}
         return {}
 
@@ -55,13 +60,15 @@ class ParameterCache:
         with open(self.cache_file, 'w') as f:
             json.dump(self.cache, f, indent=2)
 
-    def _load_feature_index(self) -> Dict:
+    def _load_feature_index(self) -> Dict[str, Any]:
         """Load feature index from disk."""
         if self.feature_index_file.exists():
             try:
                 with open(self.feature_index_file, 'rb') as f:
                     return pickle.load(f)
-            except:
+            except (FileNotFoundError, pickle.PickleError, PermissionError) as e:
+                logger.warning(f"Failed to load feature index from {self.feature_index_file}: {e}")
+                logger.info("Feature index will be rebuilt as parameters are cached")
                 return {}
         return {}
 
@@ -148,7 +155,7 @@ class ParameterCache:
         print(f"  ✅ Cached parameters for {Path(image_path).name}")
 
     def find_similar(self, image_features: Dict, similarity_threshold: float = 0.9,
-                    max_results: int = 5) -> List[Dict]:
+                    max_results: int = 5) -> List[Dict[str, Any]]:
         """
         Find similar images in cache.
 
@@ -257,7 +264,7 @@ class ParameterCache:
         print(f"  ❌ Cache miss: no similar images found")
         return None
 
-    def get_statistics(self) -> Dict:
+    def get_statistics(self) -> Dict[str, Any]:
         """Get cache statistics."""
         if not self.cache:
             return {

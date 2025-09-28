@@ -2,13 +2,18 @@
 Potrace-based converter using pypotrace or subprocess.
 """
 
+import logging
 import os
 import shlex
 import subprocess
 import tempfile
 from pathlib import Path
+
 from PIL import Image
-from .base import BaseConverter
+
+from backend.converters.base import BaseConverter
+
+logger = logging.getLogger(__name__)
 
 
 class PotraceConverter(BaseConverter):
@@ -29,8 +34,9 @@ class PotraceConverter(BaseConverter):
             result = subprocess.run(['which', 'potrace'], capture_output=True, text=True)
             if result.returncode == 0:
                 return result.stdout.strip()
-        except:
-            pass
+        except (FileNotFoundError, subprocess.SubprocessError, OSError) as e:
+            logger.debug(f"Failed to check potrace via 'which' command: {e}")
+            logger.debug("Falling back to checking common installation paths")
 
         # Check common locations
         common_paths = [
@@ -217,8 +223,9 @@ class AutoTraceConverter(BaseConverter):
 
                 if result.returncode == 0:
                     return result.stdout
-        except:
-            pass
+        except (FileNotFoundError, subprocess.SubprocessError, OSError) as e:
+            logger.warning(f"AutoTrace conversion failed: {e}")
+            logger.info("AutoTrace may not be installed or the image format may not be supported")
 
         return self._get_install_instructions()
 

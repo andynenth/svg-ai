@@ -3,9 +3,11 @@ Mock converter for testing without VTracer.
 Creates a simple SVG representation for testing the pipeline.
 """
 
-from .base import BaseConverter
-from PIL import Image
 import os
+
+from PIL import Image
+
+from backend.converters.base import BaseConverter
 
 
 class MockConverter(BaseConverter):

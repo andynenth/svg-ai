@@ -9,34 +9,59 @@ This converter analyzes image characteristics and automatically routes:
 
 import logging
 import time
-from typing import Dict, Any
 from pathlib import Path
-import sys
+from typing import Dict, Any
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from converters.base import BaseConverter
-from converters.vtracer_converter import VTracerConverter
-from converters.smart_potrace_converter import SmartPotraceConverter
-from utils.color_detector import ColorDetector
+from backend.converters.base import BaseConverter
+from backend.converters.smart_potrace_converter import SmartPotraceConverter
+from backend.converters.vtracer_converter import VTracerConverter
+from backend.utils.color_detector import ColorDetector
 
 logger = logging.getLogger(__name__)
 
 
 class SmartAutoConverter(BaseConverter):
-    """
-    Smart auto-routing converter that analyzes images and selects optimal conversion method.
+    """Smart auto-routing converter that analyzes images and selects optimal conversion method.
+
+    Automatically analyzes uploaded images to determine their color characteristics
+    and routes them to the most appropriate converter with optimized parameters.
+    Provides detailed routing analytics and decision metadata.
 
     Features:
-    - Automatic image analysis for color characteristics
-    - Intelligent routing to VTracer or Smart Potrace
-    - Optimized parameters for each image type
-    - Detailed routing decision metadata
+        - Automatic image analysis for color characteristics
+        - Intelligent routing to VTracer (colored) or Smart Potrace (B&W)
+        - Optimized parameters for each image type and converter
+        - Detailed routing decision metadata and analytics
+        - Fallback conversion if primary converter fails
+
+    Attributes:
+        color_detector (ColorDetector): Image analysis utility.
+        vtracer_converter (VTracerConverter): Colored image converter.
+        smart_potrace_converter (SmartPotraceConverter): B&W image converter.
+        routing_stats (Dict[str, Any]): Analytics on routing decisions.
+
+    Example:
+        Basic auto-routing:
+
+        converter = SmartAutoConverter()
+        svg = converter.convert("logo.png")
+
+        With detailed analysis:
+
+        result = converter.convert_with_analysis("logo.png")
+        print(f"Routed to: {result['routed_to']}")
+        print(f"Confidence: {result['routing_analysis']['confidence']:.1%}")
     """
 
     def __init__(self):
-        """Initialize the smart auto converter."""
+        """Initialize the smart auto converter.
+
+        Sets up the color detector and sub-converters (VTracer and Smart Potrace)
+        for automatic routing. Initializes analytics tracking for routing decisions.
+
+        Raises:
+            ImportError: If required dependencies are not available.
+        """
         super().__init__(name="Smart Auto")
 
         # Initialize color detector
@@ -59,19 +84,45 @@ class SmartAutoConverter(BaseConverter):
         }
 
     def get_name(self) -> str:
-        """Get converter name."""
+        """Get the human-readable name of this converter.
+
+        Returns:
+            str: The converter name "Smart Auto".
+        """
         return "Smart Auto"
 
     def convert(self, image_path: str, **kwargs) -> str:
-        """
-        Convert image using automatic routing based on color analysis.
+        """Convert image using automatic routing based on color analysis.
+
+        Analyzes the input image to determine its color characteristics and
+        automatically routes it to either VTracer (for colored images) or
+        Smart Potrace (for B&W/grayscale images) with optimized parameters.
 
         Args:
-            image_path: Path to input image
-            **kwargs: Additional parameters (passed to selected converter)
+            image_path (str): Path to PNG or JPEG image file to convert.
+            **kwargs: Additional parameters passed to the selected converter.
+                Common parameters include threshold, color_precision, etc.
 
         Returns:
-            SVG content as string
+            str: SVG content with routing metadata embedded as comments.
+
+        Raises:
+            Exception: If both primary and fallback converters fail.
+            FileNotFoundError: If the input image file doesn't exist.
+
+        Example:
+            Basic conversion with auto-routing:
+
+            converter = SmartAutoConverter()
+            svg = converter.convert("logo.png")
+
+            With custom parameters:
+
+            svg = converter.convert("logo.png", threshold=100, color_precision=8)
+
+        Note:
+            The routing decision is embedded in the SVG output as metadata
+            comments for debugging and analytics purposes.
         """
         start_time = time.time()
 
@@ -156,16 +207,36 @@ class SmartAutoConverter(BaseConverter):
                 logger.error(f"Fallback also failed: {fallback_error}")
                 raise Exception(f"Both converters failed. Primary: {e}, Fallback: {fallback_error}")
 
-    def _get_vtracer_params(self, analysis: Dict, **kwargs) -> Dict:
-        """
-        Get optimized VTracer parameters based on image analysis.
+    def _get_vtracer_params(self, analysis: Dict[str, Any], **kwargs) -> Dict[str, Any]:
+        """Get optimized VTracer parameters based on image analysis.
+
+        Analyzes image characteristics to select optimal VTracer parameters
+        for color precision, layer separation, and path optimization. Adjusts
+        parameters based on color complexity and user overrides.
 
         Args:
-            analysis: Color analysis results
-            **kwargs: User-provided parameters (override defaults)
+            analysis (Dict[str, Any]): Color analysis results containing:
+                - unique_colors (int): Number of unique colors detected.
+                - has_gradients (bool): Whether gradients are present.
+                - confidence (float): Analysis confidence level.
+            **kwargs: User-provided parameters that override computed defaults:
+                - colormode (str): Color processing mode.
+                - color_precision (int): Color reduction level (1-8).
+                - layer_difference (int): Layer separation threshold (1-32).
 
         Returns:
-            Optimized parameter dictionary
+            Dict[str, Any]: Optimized VTracer parameters:
+                - colormode (str): Set to 'color' for multi-color processing.
+                - color_precision (int): Adjusted based on color complexity.
+                - layer_difference (int): Optimized for image characteristics.
+                - path_precision (int): Path simplification level.
+                - corner_threshold (int): Corner detection sensitivity.
+
+        Note:
+            Parameters are optimized as follows:
+            - Few colors (<10): Reduced precision for cleaner output
+            - Many colors (>100): Increased precision for detail retention
+            - Gradients detected: Maximum precision with fine layer separation
         """
         # Start with base parameters optimized for colored images
         params = {
@@ -203,16 +274,37 @@ class SmartAutoConverter(BaseConverter):
 
         return params
 
-    def _get_potrace_params(self, analysis: Dict, **kwargs) -> Dict:
-        """
-        Get optimized Smart Potrace parameters based on image analysis.
+    def _get_potrace_params(self, analysis: Dict[str, Any], **kwargs) -> Dict[str, Any]:
+        """Get optimized Smart Potrace parameters based on image analysis.
+
+        Analyzes grayscale/B&W image characteristics to select optimal Potrace
+        parameters for threshold processing, curve optimization, and noise filtering.
+        Adjusts parameters based on color complexity and antialiasing levels.
 
         Args:
-            analysis: Color analysis results
-            **kwargs: User-provided parameters (override defaults)
+            analysis (Dict[str, Any]): Color analysis results containing:
+                - unique_colors (int): Number of unique colors (should be low for B&W).
+                - is_colored (bool): Should be False for Potrace routing.
+                - confidence (float): Analysis confidence level.
+            **kwargs: User-provided parameters that override computed defaults:
+                - threshold (int): Binarization threshold (0-255).
+                - turnpolicy (str): Turn policy ('black', 'white', 'minority').
+                - turdsize (int): Noise filter size.
+                - opttolerance (float): Curve optimization tolerance.
 
         Returns:
-            Optimized parameter dictionary
+            Dict[str, Any]: Optimized Potrace parameters:
+                - threshold (int): Binarization threshold, default 128.
+                - turnpolicy (str): Turn policy optimized for image type.
+                - turdsize (int): Noise filter size (1-3).
+                - alphamax (float): Corner rounding parameter.
+                - opttolerance (float): Curve optimization tolerance.
+
+        Note:
+            Parameters are optimized as follows:
+            - Pure B&W (≤2 colors): Aggressive optimization for clean output
+            - Antialiased B&W (≤10 colors): Moderate optimization
+            - Complex grayscale (>10 colors): Conservative settings
         """
         # Start with base parameters optimized for B&W images
         params = {
@@ -248,9 +340,23 @@ class SmartAutoConverter(BaseConverter):
 
         return params
 
-    def _create_metadata_comment(self, analysis: Dict, routing_decision: str,
-                               decision_data: Dict, conversion_time: float) -> str:
-        """Create SVG comment with routing metadata."""
+    def _create_metadata_comment(self, analysis: Dict[str, Any], routing_decision: str,
+                               decision_data: Dict[str, Any], conversion_time: float) -> str:
+        """Create SVG comment with routing metadata and performance information.
+
+        Generates a detailed metadata comment that embeds routing decisions,
+        image analysis results, and performance metrics directly into the SVG
+        output for debugging and analytics purposes.
+
+        Args:
+            analysis (Dict[str, Any]): Original color analysis results.
+            routing_decision (str): Converter selected ('VTracer' or 'Smart Potrace').
+            decision_data (Dict[str, Any]): Routing decision data and analytics.
+            conversion_time (float): Time taken for conversion in seconds.
+
+        Returns:
+            str: Formatted SVG comment containing routing metadata.
+        """
         return f"""
 <!-- Smart Auto Converter Metadata
 Routing Decision: {routing_decision}
@@ -262,7 +368,19 @@ Conversion Time: {conversion_time*1000:.1f}ms
 -->"""
 
     def _add_metadata_to_svg(self, svg_content: str, metadata: str) -> str:
-        """Add metadata comment to SVG content."""
+        """Add metadata comment to SVG content after the first line.
+
+        Inserts routing and performance metadata as an SVG comment, preserving
+        the XML declaration or SVG root tag structure while adding debugging
+        information for analysis and troubleshooting.
+
+        Args:
+            svg_content (str): Original SVG content from converter.
+            metadata (str): Formatted metadata comment to insert.
+
+        Returns:
+            str: SVG content with embedded metadata comment.
+        """
         # Insert metadata after the first line (XML declaration or SVG tag)
         lines = svg_content.split('\n')
         if len(lines) > 1:
@@ -271,11 +389,26 @@ Conversion Time: {conversion_time*1000:.1f}ms
             return metadata + '\n' + svg_content
 
     def get_routing_stats(self) -> Dict[str, Any]:
-        """
-        Get routing statistics and analytics.
+        """Get comprehensive routing statistics and analytics.
+
+        Provides detailed analytics about converter routing decisions,
+        including percentages, confidence levels, and performance metrics
+        for monitoring and optimization purposes.
 
         Returns:
-            Dictionary with routing statistics
+            Dict[str, Any]: Routing statistics containing:
+                - total_conversions (int): Total number of conversions processed.
+                - vtracer_routes (int): Number of images routed to VTracer.
+                - potrace_routes (int): Number of images routed to Smart Potrace.
+                - vtracer_percentage (float): Percentage routed to VTracer.
+                - potrace_percentage (float): Percentage routed to Smart Potrace.
+                - average_confidence (float): Average routing confidence level.
+                - average_analysis_time (float): Average analysis time in seconds.
+                - decisions (List[Dict]): Individual routing decisions with metadata.
+
+        Note:
+            Statistics are accumulated across the lifetime of the converter instance.
+            Percentages are calculated only when total_conversions > 0.
         """
         stats = self.routing_stats.copy()
 
@@ -299,15 +432,35 @@ Conversion Time: {conversion_time*1000:.1f}ms
         return stats
 
     def convert_with_analysis(self, image_path: str, **kwargs) -> Dict[str, Any]:
-        """
-        Convert image and return detailed analysis results.
+        """Convert image and return detailed analysis results with routing metadata.
+
+        Performs complete image conversion with detailed color analysis and routing
+        decision tracking. Provides comprehensive results including SVG content,
+        routing analytics, and performance metrics for evaluation and debugging.
 
         Args:
-            image_path: Path to input image
-            **kwargs: Additional parameters
+            image_path (str): Path to PNG or JPEG image file to convert.
+            **kwargs: Additional parameters passed to the selected converter:
+                - color_precision (int): VTracer color precision if routed.
+                - threshold (int): Potrace threshold if routed.
+                - optimize (bool): Whether to optimize output SVG.
 
         Returns:
-            Dictionary with conversion results and routing analysis
+            Dict[str, Any]: Comprehensive conversion results:
+                - svg (str): Complete SVG content with metadata.
+                - routing_analysis (Dict[str, Any]): Original color analysis results.
+                - routed_to (str): Converter used ('vtracer' or 'potrace').
+                - size (int): SVG content size in characters.
+                - total_time (float): Total conversion time in seconds.
+                - success (bool): Always True for successful conversions.
+
+        Example:
+            Detailed conversion with analysis:
+
+            result = converter.convert_with_analysis("logo.png")
+            print(f"Routed to: {result['routed_to']}")
+            print(f"Confidence: {result['routing_analysis']['confidence']:.1%}")
+            print(f"Size: {result['size']} bytes")
         """
         start_time = time.time()
 

@@ -9,18 +9,20 @@ Combines the best of PotraceConverter and AlphaConverter:
 - Single converter that "just works" for all image types
 """
 
+import logging
 import os
 import shlex
-import tempfile
 import subprocess
+import tempfile
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
+
 import numpy as np
 from PIL import Image
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from converters.base import BaseConverter
+
+from backend.converters.base import BaseConverter
+from backend.utils.image_utils import ImageUtils
+from backend.utils.svg_validator import SVGValidator
 
 
 class SmartPotraceConverter(BaseConverter):
@@ -146,21 +148,13 @@ class SmartPotraceConverter(BaseConverter):
         Convert using standard grayscale for opaque images.
         Similar to original PotraceConverter's approach.
         """
-        # Handle different image modes
-        if img.mode == 'RGBA':
-            # Composite on white background (shouldn't happen often due to detection)
-            background = Image.new('RGB', img.size, (255, 255, 255))
-            background.paste(img, mask=img.split()[3])
-            img = background
-            print(f"[Smart Potrace] Composited RGBA on white background")
-        elif img.mode == 'P':
-            img = img.convert('RGB')
-            print(f"[Smart Potrace] Converted palette to RGB")
+        # Handle different image modes using ImageUtils
+        img = ImageUtils.composite_on_background(img, (255, 255, 255))
+        print(f"[Smart Potrace] Processed image format using ImageUtils")
 
-        # Convert to grayscale
-        if img.mode != 'L':
-            img = img.convert('L')
-            print(f"[Smart Potrace] Converted to grayscale")
+        # Convert to grayscale using ImageUtils
+        img = ImageUtils.convert_to_grayscale(img)
+        print(f"[Smart Potrace] Converted to grayscale using ImageUtils")
 
         # Apply threshold
         threshold = kwargs.get('threshold', 128)
@@ -238,7 +232,7 @@ class SmartPotraceConverter(BaseConverter):
                     with open(tmp_svg.name, 'r') as f:
                         svg_content = f.read()
 
-                    # Replace black fill with specified color
+                    # Replace black fill with specified color using SVGValidator
                     hex_color = '#{:02x}{:02x}{:02x}'.format(
                         int(rgb_color[0]),
                         int(rgb_color[1]),
@@ -246,7 +240,7 @@ class SmartPotraceConverter(BaseConverter):
                     )
 
                     if hex_color != '#000000':
-                        svg_content = svg_content.replace('fill="#000000"', f'fill="{hex_color}"')
+                        svg_content = SVGValidator.replace_fill_color(svg_content, "#000000", hex_color)
 
                     # Analyze SVG for optimization metrics
                     path_count = svg_content.count('<path')
@@ -263,17 +257,19 @@ class SmartPotraceConverter(BaseConverter):
                     if os.path.exists(tmp_svg.name):
                         os.unlink(tmp_svg.name)
 
-    def convert_with_params(self, input_path: str, output_path: str, **params) -> Dict:
+    def convert_with_params(self, input_path: str, output_path: str, **params) -> Dict[str, Any]:
         """
         Convert with specific parameters.
 
         Args:
-            input_path: Input image file path
-            output_path: Output SVG file path
-            **params: Conversion parameters
+            input_path (str): Input image file path to convert.
+            output_path (str): Output SVG file path for result.
+            **params: Conversion parameters to override defaults.
 
         Returns:
-            Dictionary with success status and metadata
+            Dict[str, Any]: Dictionary with success status and metadata:
+                - success (bool): Whether conversion succeeded.
+                - error (str): Error message if conversion failed.
         """
         try:
             svg_content = self.convert(input_path, **params)

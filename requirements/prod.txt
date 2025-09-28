@@ -1,0 +1,27 @@
+# Production dependencies for SVG-AI
+# Optimized for production deployment with minimal footprint
+
+# Include base requirements
+-r base.txt
+
+# Production-specific optimizations
+gunicorn==23.0.0          # WSGI server for production deployment
+gevent==24.12.0           # Async support for gunicorn
+
+# Production monitoring and logging
+psutil==6.1.0             # System monitoring
+structlog==25.1.0         # Structured logging
+
+# Security and performance
+cryptography==44.0.0      # Security enhancements
+httpx==0.28.1             # Async HTTP client (more efficient than requests for high load)
+
+# Memory optimization
+pympler==0.9              # Memory profiling and optimization
+
+# Production environment variables
+python-dotenv==1.0.1      # Environment configuration management
+
+# Note: Development tools (pytest, black, flake8, etc.) are excluded
+# Note: Heavy analysis tools (matplotlib, seaborn) are excluded
+# Note: Debug tools (ipython, rich) are excluded for minimal footprint
