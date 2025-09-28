@@ -622,6 +622,9 @@ async function handleConvert() {
         // Update split view after conversion
         if (splitViewController) {
             console.log('[Auto-convert] Updating split view with conversion results');
+            console.log('[Auto-convert] Current SVG container content length:',
+                document.getElementById('svgContainer')?.innerHTML?.length || 0);
+
             splitViewController.updateConversion();
         }
 
@@ -939,11 +942,8 @@ function optimizeSVGAttributes(svgElement) {
     svgElement.removeAttribute('width');
     svgElement.removeAttribute('height');
 
-    // Add responsive styling
-    svgElement.style.width = '100%';
-    svgElement.style.height = 'auto';
-    svgElement.style.maxWidth = '100%';
-    svgElement.style.maxHeight = '100%';
+    // Don't set initial size - let equalizeImageSizes handle it
+    // This prevents the size jump from 100% to calculated pixels
 
     console.log('[SVG] Optimized attributes for responsive scaling');
 }
@@ -980,13 +980,30 @@ class SplitViewController {
 
 
     syncImages() {
+        console.log('[SYNC DEBUG] Starting syncImages()');
+
+        // Hide both panels initially
+        const leftPanel = document.querySelector('.split-panel.left-panel');
+        const rightPanel = document.querySelector('.split-panel.right-panel');
+        if (leftPanel) {
+            leftPanel.style.opacity = '0';
+            leftPanel.style.transition = 'none';
+        }
+        if (rightPanel) {
+            rightPanel.style.opacity = '0';
+            rightPanel.style.transition = 'none';
+        }
+        console.log('[SYNC DEBUG] Hid both panels');
+
         // Copy original image
         const originalImg = document.getElementById('originalImage');
         const splitOriginalImg = document.getElementById('splitOriginalImage');
 
         if (originalImg && originalImg.src && splitOriginalImg) {
+            console.log('[SYNC DEBUG] Copying original image to split view');
             splitOriginalImg.onerror = () => this.showImageError('left');
             splitOriginalImg.onload = () => {
+                console.log('[SYNC DEBUG] Split original image loaded');
                 this.initializeImageSync();
                 this.equalizeImageSizes();
             };
@@ -999,21 +1016,112 @@ class SplitViewController {
         const splitSvg = document.getElementById('splitSvgContainer');
 
         if (originalSvg && splitSvg) {
-            splitSvg.innerHTML = originalSvg.innerHTML;
-            // Equalize sizes after SVG is loaded
-            setTimeout(() => this.equalizeImageSizes(), 100);
+            console.log('[SYNC DEBUG] Copying SVG to split view');
+
+            // Get original SVG element first
+            const originalSvgElement = originalSvg.querySelector('svg');
+            if (!originalSvgElement) {
+                console.log('[SYNC DEBUG] No SVG element found in original container');
+                return;
+            }
+
+            // Clone the SVG element
+            const clonedSvg = originalSvgElement.cloneNode(true);
+
+            // Calculate initial size BEFORE inserting into DOM
+            const leftWidth = splitOriginalImg ? (splitOriginalImg.naturalWidth || 512) : 512;
+            const leftHeight = splitOriginalImg ? (splitOriginalImg.naturalHeight || 512) : 512;
+
+            const viewBox = clonedSvg.getAttribute('viewBox');
+            let rightWidth = leftWidth, rightHeight = leftHeight;
+            if (viewBox) {
+                const parts = viewBox.split(' ');
+                rightWidth = parseFloat(parts[2]) || leftWidth;
+                rightHeight = parseFloat(parts[3]) || leftHeight;
+            }
+
+            // Calculate container size for proper scaling
+            const container = document.getElementById('splitRightViewer');
+            const containerWidth = container ? container.clientWidth : 514;
+            const containerHeight = container ? container.clientHeight : 406;
+
+            // Calculate scale to fit
+            const scale = Math.min(containerWidth / rightWidth, containerHeight / rightHeight);
+
+            // Apply size to cloned SVG BEFORE insertion
+            clonedSvg.style.width = `${rightWidth * scale}px`;
+            clonedSvg.style.height = `${rightHeight * scale}px`;
+            console.log('[SYNC DEBUG] Pre-sized SVG:', clonedSvg.style.width, 'x', clonedSvg.style.height);
+
+            // Hide container initially
+            splitSvg.style.opacity = '0';
+            splitSvg.style.transition = 'none';
+            console.log('[SYNC DEBUG] Set split SVG opacity to 0');
+
+            // Now insert the pre-sized SVG
+            splitSvg.innerHTML = '';
+            splitSvg.appendChild(clonedSvg);
+            console.log('[SYNC DEBUG] Inserted pre-sized SVG into DOM');
+
+            // Now do proper sizing and show both panels together
+            requestAnimationFrame(() => {
+                console.log('[SYNC DEBUG] RequestAnimationFrame fired');
+                this.equalizeImageSizes();
+
+                // Show both panels together after everything is ready
+                requestAnimationFrame(() => {
+                    console.log('[SYNC DEBUG] Showing both panels with fade-in');
+                    const leftPanel = document.querySelector('.split-panel.left-panel');
+                    const rightPanel = document.querySelector('.split-panel.right-panel');
+
+                    // Enable transitions and show panels
+                    if (leftPanel) {
+                        leftPanel.style.transition = 'opacity 0.3s ease';
+                        leftPanel.style.opacity = '1';
+                    }
+                    if (rightPanel) {
+                        rightPanel.style.transition = 'opacity 0.3s ease';
+                        rightPanel.style.opacity = '1';
+                    }
+
+                    // Also ensure the SVG container is visible
+                    splitSvg.style.transition = 'opacity 0.3s ease';
+                    splitSvg.style.opacity = '1';
+                });
+            });
         }
     }
 
     equalizeImageSizes() {
+        console.log('[SIZE DEBUG] Starting equalizeImageSizes()');
+
         const leftImg = document.getElementById('splitOriginalImage');
         const rightSvg = document.querySelector('#splitSvgContainer svg');
 
-        if (!leftImg || !rightSvg) return;
+        if (!leftImg || !rightSvg) {
+            console.log('[SIZE DEBUG] Missing elements:', {
+                leftImg: !!leftImg,
+                rightSvg: !!rightSvg
+            });
+            return;
+        }
+
+        // Log current SVG state before sizing
+        console.log('[SIZE DEBUG] SVG state before sizing:', {
+            width: rightSvg.getAttribute('width'),
+            height: rightSvg.getAttribute('height'),
+            styleWidth: rightSvg.style.width,
+            styleHeight: rightSvg.style.height,
+            computedWidth: getComputedStyle(rightSvg).width,
+            computedHeight: getComputedStyle(rightSvg).height,
+            offsetWidth: rightSvg.offsetWidth,
+            offsetHeight: rightSvg.offsetHeight
+        });
 
         // Get natural dimensions
         const leftWidth = leftImg.naturalWidth;
         const leftHeight = leftImg.naturalHeight;
+        console.log('[SIZE DEBUG] Left image natural dimensions:', leftWidth, 'x', leftHeight);
 
         // Get SVG viewBox dimensions
         const viewBox = rightSvg.getAttribute('viewBox');
@@ -1023,32 +1131,60 @@ class SplitViewController {
             rightWidth = parseFloat(parts[2]) || 100;
             rightHeight = parseFloat(parts[3]) || 100;
         }
+        console.log('[SIZE DEBUG] SVG viewBox dimensions:', rightWidth, 'x', rightHeight);
 
         // Get container dimensions
         const leftContainer = document.getElementById('splitLeftViewer');
         const rightContainer = document.getElementById('splitRightViewer');
 
-        if (!leftContainer || !rightContainer) return;
+        if (!leftContainer || !rightContainer) {
+            console.log('[SIZE DEBUG] Missing containers');
+            return;
+        }
 
         const containerWidth = Math.min(leftContainer.clientWidth, rightContainer.clientWidth) - 40;
         const containerHeight = Math.min(leftContainer.clientHeight, rightContainer.clientHeight) - 40;
+        console.log('[SIZE DEBUG] Container dimensions:', containerWidth, 'x', containerHeight);
 
         // Calculate scale to fit both images at same size
         const leftScale = Math.min(containerWidth / leftWidth, containerHeight / leftHeight);
         const rightScale = Math.min(containerWidth / rightWidth, containerHeight / rightHeight);
+        console.log('[SIZE DEBUG] Calculated scales:', {
+            leftScale: leftScale.toFixed(3),
+            rightScale: rightScale.toFixed(3)
+        });
 
         // Use the smaller scale for both to ensure equal visual size
         const scale = Math.min(leftScale, rightScale);
+        console.log('[SIZE DEBUG] Using scale:', scale.toFixed(3));
 
         // Apply consistent sizing
-        leftImg.style.width = `${leftWidth * scale}px`;
-        leftImg.style.height = `${leftHeight * scale}px`;
+        const newLeftWidth = leftWidth * scale;
+        const newLeftHeight = leftHeight * scale;
+        const newRightWidth = rightWidth * scale;
+        const newRightHeight = rightHeight * scale;
+
+        leftImg.style.width = `${newLeftWidth}px`;
+        leftImg.style.height = `${newLeftHeight}px`;
         leftImg.style.objectFit = 'contain';
 
-        rightSvg.style.width = `${rightWidth * scale}px`;
-        rightSvg.style.height = `${rightHeight * scale}px`;
+        rightSvg.style.width = `${newRightWidth}px`;
+        rightSvg.style.height = `${newRightHeight}px`;
 
-        console.log(`[Sync] Equalized sizes - Scale: ${scale.toFixed(3)}, Left: ${leftWidth}x${leftHeight}, Right: ${rightWidth}x${rightHeight}`);
+        console.log('[SIZE DEBUG] Applied dimensions:', {
+            left: `${newLeftWidth.toFixed(0)}x${newLeftHeight.toFixed(0)}`,
+            right: `${newRightWidth.toFixed(0)}x${newRightHeight.toFixed(0)}`
+        });
+
+        // Log final SVG state after sizing
+        setTimeout(() => {
+            console.log('[SIZE DEBUG] SVG state after sizing (delayed check):', {
+                computedWidth: getComputedStyle(rightSvg).width,
+                computedHeight: getComputedStyle(rightSvg).height,
+                offsetWidth: rightSvg.offsetWidth,
+                offsetHeight: rightSvg.offsetHeight
+            });
+        }, 100);
     }
 
     // Drag functionality
@@ -1174,8 +1310,7 @@ class SplitViewController {
         });
 
         this.updateZoomDisplay();
-        // Maintain equal sizes during zoom
-        this.equalizeImageSizes();
+        // Don't re-equalize during zoom - keeps the zoom transform
     }
 
     resetZoom() {
@@ -1279,10 +1414,10 @@ class SplitViewController {
 
     // Public method for integration
     updateConversion() {
+        console.log('[UPDATE DEBUG] Starting updateConversion()');
         // Always sync images since split view is the only interface
         this.syncImages();
-        // Ensure sizes are equalized after conversion
-        setTimeout(() => this.equalizeImageSizes(), 200);
+        // No need for extra equalizeImageSizes call - syncImages handles it now
     }
 
 }
@@ -1313,18 +1448,9 @@ class ImageSynchronizer {
 // Initialize Split View Controller
 let splitViewController;
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('[INIT] Script version 7 loaded - hide both panels until ready');
     // Initialize immediately for auto-convert support
     splitViewController = new SplitViewController();
 });
 
-// Integration hook - add to existing convert button handler
-const originalConvertBtn = document.getElementById('convertBtn');
-if (originalConvertBtn) {
-    originalConvertBtn.addEventListener('click', function() {
-        setTimeout(() => {
-            if (splitViewController) {
-                splitViewController.updateConversion();
-            }
-        }, 1000);
-    });
-}
+// Removed duplicate convert button handler - updateConversion is already called in handleConvert()
