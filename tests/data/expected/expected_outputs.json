@@ -1,0 +1,464 @@
+{
+  "simple_logo_0.png": {
+    "logo_type": "simple",
+    "confidence_range": [
+      0.8,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.1,
+        0.4
+      ],
+      "unique_colors": [
+        2,
+        8
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.2,
+        0.5
+      ]
+    },
+    "quality_range": [
+      0.7,
+      1.0
+    ]
+  },
+  "simple_logo_1.png": {
+    "logo_type": "simple",
+    "confidence_range": [
+      0.8,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.1,
+        0.4
+      ],
+      "unique_colors": [
+        2,
+        8
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.2,
+        0.5
+      ]
+    },
+    "quality_range": [
+      0.7,
+      1.0
+    ]
+  },
+  "simple_logo_2.png": {
+    "logo_type": "simple",
+    "confidence_range": [
+      0.8,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.1,
+        0.4
+      ],
+      "unique_colors": [
+        2,
+        8
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.2,
+        0.5
+      ]
+    },
+    "quality_range": [
+      0.7,
+      1.0
+    ]
+  },
+  "simple_logo_0_256x256.png": {
+    "logo_type": "simple",
+    "confidence_range": [
+      0.8,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.1,
+        0.4
+      ],
+      "unique_colors": [
+        2,
+        8
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.2,
+        0.5
+      ]
+    },
+    "quality_range": [
+      0.7,
+      1.0
+    ]
+  },
+  "simple_logo_0_1024x1024.png": {
+    "logo_type": "simple",
+    "confidence_range": [
+      0.8,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.1,
+        0.4
+      ],
+      "unique_colors": [
+        2,
+        8
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.2,
+        0.5
+      ]
+    },
+    "quality_range": [
+      0.7,
+      1.0
+    ]
+  },
+  "text_logo_0.png": {
+    "logo_type": "text",
+    "confidence_range": [
+      0.7,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.3,
+        0.7
+      ],
+      "unique_colors": [
+        2,
+        10
+      ],
+      "edge_density": [
+        0.2,
+        0.5
+      ],
+      "aspect_ratio": [
+        1.2,
+        3.0
+      ],
+      "fill_ratio": [
+        0.1,
+        0.4
+      ]
+    },
+    "quality_range": [
+      0.8,
+      1.0
+    ]
+  },
+  "text_logo_1.png": {
+    "logo_type": "text",
+    "confidence_range": [
+      0.7,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.3,
+        0.7
+      ],
+      "unique_colors": [
+        2,
+        10
+      ],
+      "edge_density": [
+        0.2,
+        0.5
+      ],
+      "aspect_ratio": [
+        1.2,
+        3.0
+      ],
+      "fill_ratio": [
+        0.1,
+        0.4
+      ]
+    },
+    "quality_range": [
+      0.8,
+      1.0
+    ]
+  },
+  "text_logo_2.png": {
+    "logo_type": "text",
+    "confidence_range": [
+      0.7,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.3,
+        0.7
+      ],
+      "unique_colors": [
+        2,
+        10
+      ],
+      "edge_density": [
+        0.2,
+        0.5
+      ],
+      "aspect_ratio": [
+        1.2,
+        3.0
+      ],
+      "fill_ratio": [
+        0.1,
+        0.4
+      ]
+    },
+    "quality_range": [
+      0.8,
+      1.0
+    ]
+  },
+  "gradient_logo_0.png": {
+    "logo_type": "gradient",
+    "confidence_range": [
+      0.6,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.4,
+        0.8
+      ],
+      "unique_colors": [
+        20,
+        100
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.5,
+        0.9
+      ]
+    },
+    "quality_range": [
+      0.6,
+      0.9
+    ]
+  },
+  "gradient_logo_1.png": {
+    "logo_type": "gradient",
+    "confidence_range": [
+      0.6,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.4,
+        0.8
+      ],
+      "unique_colors": [
+        20,
+        100
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.5,
+        0.9
+      ]
+    },
+    "quality_range": [
+      0.6,
+      0.9
+    ]
+  },
+  "gradient_logo_2.png": {
+    "logo_type": "gradient",
+    "confidence_range": [
+      0.6,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.4,
+        0.8
+      ],
+      "unique_colors": [
+        20,
+        100
+      ],
+      "edge_density": [
+        0.05,
+        0.2
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.5,
+        0.9
+      ]
+    },
+    "quality_range": [
+      0.6,
+      0.9
+    ]
+  },
+  "complex_logo_0.png": {
+    "logo_type": "complex",
+    "confidence_range": [
+      0.5,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.6,
+        1.0
+      ],
+      "unique_colors": [
+        10,
+        50
+      ],
+      "edge_density": [
+        0.2,
+        0.5
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.4,
+        0.8
+      ]
+    },
+    "quality_range": [
+      0.5,
+      0.9
+    ]
+  },
+  "complex_logo_1.png": {
+    "logo_type": "complex",
+    "confidence_range": [
+      0.5,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.6,
+        1.0
+      ],
+      "unique_colors": [
+        10,
+        50
+      ],
+      "edge_density": [
+        0.2,
+        0.5
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.4,
+        0.8
+      ]
+    },
+    "quality_range": [
+      0.5,
+      0.9
+    ]
+  },
+  "complex_logo_2.png": {
+    "logo_type": "complex",
+    "confidence_range": [
+      0.5,
+      1.0
+    ],
+    "feature_ranges": {
+      "complexity_score": [
+        0.6,
+        1.0
+      ],
+      "unique_colors": [
+        10,
+        50
+      ],
+      "edge_density": [
+        0.2,
+        0.5
+      ],
+      "aspect_ratio": [
+        0.8,
+        1.2
+      ],
+      "fill_ratio": [
+        0.4,
+        0.8
+      ]
+    },
+    "quality_range": [
+      0.5,
+      0.9
+    ]
+  }
+}

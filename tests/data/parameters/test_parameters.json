@@ -1,0 +1,90 @@
+{
+  "simple": [
+    {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "path_precision": 8,
+      "layer_difference": 4,
+      "splice_threshold": 45,
+      "filter_speckle": 2,
+      "segment_length": 8,
+      "max_iterations": 6
+    },
+    {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "path_precision": 10,
+      "layer_difference": 5,
+      "splice_threshold": 50,
+      "filter_speckle": 3,
+      "segment_length": 10,
+      "max_iterations": 8
+    }
+  ],
+  "text": [
+    {
+      "color_precision": 2,
+      "corner_threshold": 20,
+      "path_precision": 6,
+      "layer_difference": 3,
+      "splice_threshold": 35,
+      "filter_speckle": 2,
+      "segment_length": 6,
+      "max_iterations": 6
+    },
+    {
+      "color_precision": 3,
+      "corner_threshold": 25,
+      "path_precision": 8,
+      "layer_difference": 4,
+      "splice_threshold": 40,
+      "filter_speckle": 3,
+      "segment_length": 8,
+      "max_iterations": 8
+    }
+  ],
+  "gradient": [
+    {
+      "color_precision": 8,
+      "corner_threshold": 60,
+      "path_precision": 15,
+      "layer_difference": 8,
+      "splice_threshold": 70,
+      "filter_speckle": 6,
+      "segment_length": 12,
+      "max_iterations": 12
+    },
+    {
+      "color_precision": 10,
+      "corner_threshold": 70,
+      "path_precision": 20,
+      "layer_difference": 10,
+      "splice_threshold": 80,
+      "filter_speckle": 8,
+      "segment_length": 15,
+      "max_iterations": 15
+    }
+  ],
+  "complex": [
+    {
+      "color_precision": 6,
+      "corner_threshold": 50,
+      "path_precision": 12,
+      "layer_difference": 6,
+      "splice_threshold": 60,
+      "filter_speckle": 5,
+      "segment_length": 12,
+      "max_iterations": 15
+    },
+    {
+      "color_precision": 8,
+      "corner_threshold": 65,
+      "path_precision": 18,
+      "layer_difference": 8,
+      "splice_threshold": 75,
+      "filter_speckle": 7,
+      "segment_length": 15,
+      "max_iterations": 20
+    }
+  ]
+}

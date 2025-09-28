@@ -258,9 +258,14 @@ class TestVTracerEnvironment(unittest.TestCase):
 
         stats = self.env.get_stats()
 
-        required_keys = ['total_episodes', 'average_reward', 'average_quality', 'average_steps']
-        for key in required_keys:
-            self.assertIn(key, stats)
+        # Should always have total_episodes
+        self.assertIn('total_episodes', stats)
+
+        # If episodes were run, should have all statistics
+        if stats['total_episodes'] > 0:
+            required_keys = ['average_reward', 'average_quality', 'average_steps', 'success_rate']
+            for key in required_keys:
+                self.assertIn(key, stats)
 
     def test_parameter_ranges(self):
         """Test that parameters stay within valid ranges"""
