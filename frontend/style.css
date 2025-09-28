@@ -214,6 +214,25 @@ h3 {
     outline: 2px solid #4a90e2;
 }
 
+.routing-info {
+    background: #e8f5e8;
+    border: 1px solid #c3e6c3;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.routing-info h3 {
+    color: #2d5016;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.routing-info p {
+    margin-bottom: 8px;
+    color: #2d5016;
+}
+
 .metrics {
     margin-top: 20px;
     padding-top: 20px;

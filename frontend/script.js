@@ -57,6 +57,10 @@ function showConverterParams(converter) {
 
     // Show the selected converter's parameters
     switch(converter) {
+        case 'smart_auto':
+            // Smart Auto doesn't need parameter configuration - it's automatic
+            // No parameter panel to show
+            break;
         case 'smart':
             // Smart Potrace uses same parameters as regular Potrace
             potraceParams.classList.remove('hidden');
@@ -262,7 +266,9 @@ document.getElementById('alphaPreset').addEventListener('change', (e) => {
 
 // Apply default Quality preset on load
 setTimeout(() => {
-    if (converterSelect.value === 'smart' || converterSelect.value === 'potrace') {
+    if (converterSelect.value === 'smart_auto') {
+        // Smart Auto doesn't need preset configuration
+    } else if (converterSelect.value === 'smart' || converterSelect.value === 'potrace') {
         applyPotracePreset('quality');
     } else if (converterSelect.value === 'vtracer') {
         applyVTracerPreset('quality');
@@ -566,6 +572,10 @@ async function handleConvert() {
     // Add converter-specific parameters
     console.log('[Frontend] Selected converter:', converter);
     switch(converter) {
+        case 'smart_auto':
+            // Smart Auto automatically selects optimal parameters - no additional params needed
+            console.log('[Frontend] Smart Auto - using automatic parameter selection');
+            break;
         case 'smart':
             // Smart Potrace uses same parameters as regular Potrace
             const smartParams = collectPotraceParams();
@@ -623,6 +633,15 @@ async function handleConvert() {
         document.getElementById('pathCount').textContent = result.path_count || '-';
         document.getElementById('avgPathLength').textContent = result.avg_path_length || '-';
 
+        // Show routing information if using smart_auto
+        if (converter === 'smart_auto' && result.routing_info) {
+            console.log('[Frontend] Displaying routing info:', result.routing_info);
+            displayRoutingInfo(result.routing_info);
+        } else {
+            // Hide routing info for other converters
+            document.getElementById('routingInfo').classList.add('hidden');
+        }
+
         // Always show metrics div after first conversion (it contains both buttons now)
         metricsDiv.classList.remove('hidden');
 
@@ -664,6 +683,24 @@ function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function displayRoutingInfo(routingInfo) {
+    // Update routing information display
+    document.getElementById('routedTo').textContent = routingInfo.routed_to || '-';
+    document.getElementById('imageType').textContent = routingInfo.is_colored ? 'Colored' : 'Grayscale/B&W';
+    document.getElementById('routingConfidence').textContent = (routingInfo.routing_confidence * 100).toFixed(1) + '%';
+    document.getElementById('uniqueColors').textContent = routingInfo.unique_colors || '-';
+
+    // Show routing info section
+    document.getElementById('routingInfo').classList.remove('hidden');
+
+    console.log('[Frontend] Routing info displayed:', {
+        routed_to: routingInfo.routed_to,
+        is_colored: routingInfo.is_colored,
+        confidence: routingInfo.routing_confidence,
+        unique_colors: routingInfo.unique_colors
+    });
 }
 
 // Flowbite-style Tooltip System

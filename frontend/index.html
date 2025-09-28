@@ -69,8 +69,9 @@
                 <div class="control-group">
                     <label for="converter">Converter:</label>
                     <select id="converter">
-                        <option value="smart">Smart Potrace (Auto-detect)</option>
-                        <option value="vtracer">VTracer (Color)</option>
+                        <option value="smart_auto">Smart Auto (Recommended)</option>
+                        <option value="smart">Smart Potrace (B&W/Grayscale)</option>
+                        <option value="vtracer">VTracer (Color/Complex)</option>
                     </select>
                 </div>
 
@@ -212,6 +213,14 @@
                             <option value="custom">Custom</option>
                         </select>
                     </div>
+                </div>
+
+                <div id="routingInfo" class="routing-info hidden">
+                    <h3>Smart Auto Routing</h3>
+                    <p>Selected: <span id="routedTo">-</span></p>
+                    <p>Image Type: <span id="imageType">-</span></p>
+                    <p>Confidence: <span id="routingConfidence">-</span></p>
+                    <p>Unique Colors: <span id="uniqueColors">-</span></p>
                 </div>
 
                 <div id="metrics" class="metrics hidden">

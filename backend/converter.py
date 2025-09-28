@@ -8,6 +8,7 @@ from converters.alpha_converter import AlphaConverter
 from converters.vtracer_converter import VTracerConverter
 from converters.potrace_converter import PotraceConverter
 from converters.smart_potrace_converter import SmartPotraceConverter
+from converters.smart_auto_converter import SmartAutoConverter
 from utils.quality_metrics import QualityMetrics
 
 # Create instance
@@ -20,7 +21,7 @@ def convert_image(input_path, converter_type="alpha", **params):
 
     Args:
         input_path: Path to input image
-        converter_type: Type of converter to use ('alpha', 'vtracer', 'potrace')
+        converter_type: Type of converter to use ('alpha', 'vtracer', 'potrace', 'smart', 'smart_auto')
         **params: Additional parameters for the converter
 
     Returns:
@@ -32,6 +33,7 @@ def convert_image(input_path, converter_type="alpha", **params):
         "smart": SmartPotraceConverter(),
         "vtracer": VTracerConverter(),
         "potrace": PotraceConverter(),
+        "smart_auto": SmartAutoConverter(),
     }
 
     # Get converter
@@ -48,7 +50,24 @@ def convert_image(input_path, converter_type="alpha", **params):
     try:
         # Call convert with parameters
         print(f"[Converter] Using {converter_type} with threshold={params.get('threshold', 128)}")
-        svg_content = converter.convert(input_path, **params)
+
+        # Handle smart_auto converter which returns additional metadata
+        if converter_type == "smart_auto":
+            result = converter.convert_with_analysis(input_path, **params)
+            svg_content = result['svg']
+            routing_info = {
+                "routed_to": str(result['routed_to']),
+                "routing_confidence": float(result['routing_analysis']['confidence']),
+                "is_colored": bool(result['routing_analysis']['is_colored']),
+                "unique_colors": int(result['routing_analysis']['unique_colors']),
+                "analysis_details": {
+                    k: float(v) if isinstance(v, (int, float)) else str(v) if v is not None else v
+                    for k, v in result['routing_analysis'].get('analysis_details', {}).items()
+                }
+            }
+        else:
+            svg_content = converter.convert(input_path, **params)
+            routing_info = None
 
         # Calculate SSIM (in converter.py)
         # Save SVG temporarily for SSIM calculation
@@ -63,8 +82,8 @@ def convert_image(input_path, converter_type="alpha", **params):
         path_count = svg_content.count('<path')
         avg_path_length = len(svg_content) / max(path_count, 1) if path_count > 0 else 0
 
-        # Return success with enhanced metrics
-        return {
+        # Build result dictionary
+        result = {
             "success": True,
             "svg": svg_content,
             "size": len(svg_content),
@@ -78,6 +97,12 @@ def convert_image(input_path, converter_type="alpha", **params):
                 "turnpolicy": params.get("turnpolicy")
             } if converter_type in ["smart", "potrace"] else None
         }
+
+        # Add routing information for smart_auto converter
+        if routing_info:
+            result["routing_info"] = routing_info
+
+        return result
     except Exception as e:
         # Handle exception
         return {"success": False, "error": str(e)}
