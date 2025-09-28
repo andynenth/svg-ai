@@ -879,6 +879,19 @@ h3 {
     max-height: 100%;
     object-fit: contain;
     display: block;
+    transition: transform 0.1s ease-out;
+}
+
+/* Image drag cursors */
+.split-panel .image-viewer.draggable img,
+.split-panel .image-viewer.draggable #splitSvgContainer {
+    cursor: grab;
+}
+
+.split-panel .image-viewer.dragging img,
+.split-panel .image-viewer.dragging #splitSvgContainer {
+    cursor: grabbing;
+    user-select: none;
 }
 
 

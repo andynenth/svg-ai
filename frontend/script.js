@@ -964,9 +964,19 @@ class SplitViewController {
         this.isDragging = false;
         this.imageSynchronizer = null;
 
-        // Drag state
+        // Split divider drag state
         this.minPercentage = 20;
         this.maxPercentage = 80;
+
+        // Image drag state
+        this.imageDragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0,
+            initialTranslateX: 0,
+            initialTranslateY: 0,
+            currentElements: [] // Array to hold both synchronized images
+        };
 
         this.init();
     }
@@ -980,6 +990,7 @@ class SplitViewController {
         this.setupDragHandlers();
         this.setupZoomControls();
         this.setupKeyboardHandlers();
+        this.setupImageDragHandlers();
 
         // Initialize immediately since it's the only view
         this.loadSavedSplit();
@@ -1311,12 +1322,22 @@ class SplitViewController {
             const currentTransform = element.style.transform || 'scale(1)';
             const currentScale = parseFloat(currentTransform.match(/scale\(([\d.]+)\)/)?.[1] || '1');
             const newScale = Math.max(0.1, Math.min(5, currentScale * factor));
-            element.style.transform = `scale(${newScale})`;
+
+            // Preserve existing translate values
+            const translateMatch = currentTransform.match(/translate\(([^)]+)\)/);
+            const translatePart = translateMatch ? ` translate(${translateMatch[1]})` : '';
+
+            element.style.transform = `scale(${newScale})${translatePart}`;
             element.style.transformOrigin = 'center center';
             console.log(`[Zoom] Applied scale ${newScale} to element`);
         });
 
         this.updateZoomDisplay();
+
+        // Update draggable state for both viewers after zoom
+        this.updateDraggableState(document.getElementById('splitLeftViewer'));
+        this.updateDraggableState(document.getElementById('splitRightViewer'));
+
         // Don't re-equalize during zoom - keeps the zoom transform
     }
 
@@ -1328,11 +1349,22 @@ class SplitViewController {
 
         const elements = [leftImg, rightSvg].filter(el => el);
         elements.forEach(element => {
+            // Reset both scale and any translate transforms
             element.style.transform = 'scale(1)';
             element.style.transformOrigin = 'center center';
         });
 
         this.updateZoomDisplay();
+
+        // Update draggable state and remove draggable classes when zoom is reset
+        const leftViewer = document.getElementById('splitLeftViewer');
+        const rightViewer = document.getElementById('splitRightViewer');
+        [leftViewer, rightViewer].forEach(viewer => {
+            if (viewer) {
+                this.updateDraggableState(viewer);
+                viewer.classList.remove('draggable', 'dragging');
+            }
+        });
     }
 
     updateZoomDisplay() {
@@ -1354,6 +1386,170 @@ class SplitViewController {
         console.log(`[Zoom] Updated zoom display to ${percentage}%`);
     }
 
+    // Image drag functionality
+    setupImageDragHandlers() {
+        console.log('[ImageDrag] Setting up image drag handlers');
+
+        const leftViewer = document.getElementById('splitLeftViewer');
+        const rightViewer = document.getElementById('splitRightViewer');
+
+        [leftViewer, rightViewer].forEach(viewer => {
+            if (viewer) {
+                this.addImageDragListeners(viewer);
+            }
+        });
+    }
+
+    addImageDragListeners(viewer) {
+        // Mouse events
+        viewer.addEventListener('mousedown', (e) => this.handleImageDragStart(e, viewer));
+        viewer.addEventListener('mousemove', (e) => this.handleImageDragMove(e));
+        viewer.addEventListener('mouseup', (e) => this.handleImageDragEnd(e));
+        viewer.addEventListener('mouseleave', (e) => this.handleImageDragEnd(e));
+
+        // Touch events for mobile
+        viewer.addEventListener('touchstart', (e) => this.handleImageDragStart(e, viewer), {passive: false});
+        viewer.addEventListener('touchmove', (e) => this.handleImageDragMove(e), {passive: false});
+        viewer.addEventListener('touchend', (e) => this.handleImageDragEnd(e));
+        viewer.addEventListener('touchcancel', (e) => this.handleImageDragEnd(e));
+
+        // Update draggable state when zoom changes
+        viewer.addEventListener('transitionend', () => this.updateDraggableState(viewer));
+    }
+
+    handleImageDragStart(e, viewer) {
+        // Only allow drag if image is larger than container (zoomed)
+        if (!this.isImageDraggable(viewer)) {
+            return;
+        }
+
+        // Prevent text selection and default behavior
+        e.preventDefault();
+
+        const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+        this.imageDragState.isDragging = true;
+        this.imageDragState.startX = clientX;
+        this.imageDragState.startY = clientY;
+
+        // Get both image elements for synchronized dragging
+        const leftImg = document.getElementById('splitOriginalImage');
+        const rightSvg = document.querySelector('#splitSvgContainer svg');
+        this.imageDragState.currentElements = [leftImg, rightSvg].filter(el => el);
+
+        // Get current translate values from the first element (they should be synchronized)
+        const primaryElement = this.imageDragState.currentElements[0];
+        const currentTransform = primaryElement ? primaryElement.style.transform || '' : '';
+        const translateMatch = currentTransform.match(/translate\(([^)]+)\)/);
+
+        if (translateMatch) {
+            const [translateX, translateY] = translateMatch[1].split(',').map(v => parseFloat(v) || 0);
+            this.imageDragState.initialTranslateX = translateX;
+            this.imageDragState.initialTranslateY = translateY;
+        } else {
+            this.imageDragState.initialTranslateX = 0;
+            this.imageDragState.initialTranslateY = 0;
+        }
+
+        // Add dragging class to both viewers for visual feedback
+        document.querySelectorAll('.image-viewer').forEach(v => v.classList.add('dragging'));
+        console.log(`[ImageDrag] Synchronized drag started on ${this.imageDragState.currentElements.length} elements`);
+    }
+
+    handleImageDragMove(e) {
+        if (!this.imageDragState.isDragging || this.imageDragState.currentElements.length === 0) {
+            return;
+        }
+
+        e.preventDefault();
+
+        const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+        const deltaX = clientX - this.imageDragState.startX;
+        const deltaY = clientY - this.imageDragState.startY;
+
+        const newTranslateX = this.imageDragState.initialTranslateX + deltaX;
+        const newTranslateY = this.imageDragState.initialTranslateY + deltaY;
+
+        // Apply bounds checking using the primary element
+        const primaryElement = this.imageDragState.currentElements[0];
+        const [boundedX, boundedY] = this.applyDragBounds(newTranslateX, newTranslateY, primaryElement);
+
+        // Apply transform to all synchronized elements
+        this.imageDragState.currentElements.forEach(element => {
+            if (element) {
+                this.applyImageTransform(element, boundedX, boundedY);
+            }
+        });
+    }
+
+    handleImageDragEnd(e) {
+        if (!this.imageDragState.isDragging) {
+            return;
+        }
+
+        this.imageDragState.isDragging = false;
+        this.imageDragState.currentElements = [];
+
+        // Remove dragging class from all viewers
+        document.querySelectorAll('.image-viewer').forEach(viewer => {
+            viewer.classList.remove('dragging');
+        });
+
+        console.log('[ImageDrag] Drag ended');
+    }
+
+    isImageDraggable(viewer) {
+        const imageElement = this.getImageElement(viewer);
+        if (!imageElement) return false;
+
+        // Check if image is scaled beyond 100%
+        const currentTransform = imageElement.style.transform || '';
+        const scaleMatch = currentTransform.match(/scale\(([^)]+)\)/);
+        const currentScale = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
+
+        return currentScale > 1;
+    }
+
+    getImageElement(viewer) {
+        const img = viewer.querySelector('img');
+        const svg = viewer.querySelector('svg');
+        return img || svg;
+    }
+
+    updateDraggableState(viewer) {
+        const isDraggable = this.isImageDraggable(viewer);
+        viewer.classList.toggle('draggable', isDraggable);
+    }
+
+    applyDragBounds(translateX, translateY, element) {
+        // Get element dimensions and container dimensions
+        const elementRect = element.getBoundingClientRect();
+        const containerRect = element.parentElement.getBoundingClientRect();
+
+        // Calculate max allowed translation to keep image within reasonable bounds
+        const maxTranslateX = Math.max(0, (elementRect.width - containerRect.width) / 2);
+        const maxTranslateY = Math.max(0, (elementRect.height - containerRect.height) / 2);
+
+        // Bound the translation
+        const boundedX = Math.max(-maxTranslateX, Math.min(maxTranslateX, translateX));
+        const boundedY = Math.max(-maxTranslateY, Math.min(maxTranslateY, translateY));
+
+        return [boundedX, boundedY];
+    }
+
+    applyImageTransform(element, translateX, translateY) {
+        // Get existing scale transform
+        const currentTransform = element.style.transform || '';
+        const scaleMatch = currentTransform.match(/scale\(([^)]+)\)/);
+        const scaleTransform = scaleMatch ? `scale(${scaleMatch[1]})` : 'scale(1)';
+
+        // Combine scale and translate
+        element.style.transform = `${scaleTransform} translate(${translateX}px, ${translateY}px)`;
+    }
+
     initializeImageSync() {
         if (!this.imageSynchronizer) {
             this.imageSynchronizer = new ImageSynchronizer(
@@ -1366,6 +1562,10 @@ class SplitViewController {
         const rightContainer = document.getElementById('splitSvgContainer');
         this.imageSynchronizer.synchronizeImages(leftImg, rightContainer);
         this.updateZoomDisplay();
+
+        // Update draggable state for both viewers when images are synchronized
+        this.updateDraggableState(document.getElementById('splitLeftViewer'));
+        this.updateDraggableState(document.getElementById('splitRightViewer'));
     }
 
     // Keyboard shortcuts
@@ -1386,10 +1586,8 @@ class SplitViewController {
                 this.adjustSplit(step);
             }
 
-            if (e.code === 'KeyR' && (e.ctrlKey || e.metaKey)) {
-                e.preventDefault();
-                this.updateSplit(50);
-            }
+            // Removed Cmd+R handler that was blocking browser refresh
+            // Users can reset split view using the mouse/touch instead
         });
     }
 
@@ -1455,7 +1653,7 @@ class ImageSynchronizer {
 // Initialize Split View Controller
 let splitViewController;
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('[INIT] Script version 10 loaded - Updated divider handle to ⫶ symbol');
+    console.log('[INIT] Script version 13 loaded - Added synchronized image dragging');
     // Initialize immediately for auto-convert support
     splitViewController = new SplitViewController();
 });
