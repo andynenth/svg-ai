@@ -159,6 +159,12 @@ document.getElementById('potraceOpttolerance').addEventListener('input', (e) => 
     triggerAutoConvert();
 });
 
+document.getElementById('potraceTurdsize').addEventListener('input', (e) => {
+    document.getElementById('potraceTurdsizeValue').textContent = e.target.value;
+    document.getElementById('potracePreset').value = 'custom';
+    triggerAutoConvert();
+});
+
 // VTracer slider value displays
 document.getElementById('vtracerColorPrecision').addEventListener('input', (e) => {
     document.getElementById('vtracerColorPrecisionValue').textContent = e.target.value;
@@ -418,6 +424,7 @@ function updatePotraceDisplayValues() {
     document.getElementById('potraceThresholdValue').textContent = document.getElementById('potraceThreshold').value;
     document.getElementById('potraceAlphamaxValue').textContent = (parseFloat(document.getElementById('potraceAlphamax').value) / 100).toFixed(2);
     document.getElementById('potraceOpttoleranceValue').textContent = (parseFloat(document.getElementById('potraceOpttolerance').value) / 100).toFixed(2);
+    document.getElementById('potraceTurdsizeValue').textContent = document.getElementById('potraceTurdsize').value;
 }
 
 function updateVTracerDisplayValues() {
@@ -1448,7 +1455,7 @@ class ImageSynchronizer {
 // Initialize Split View Controller
 let splitViewController;
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('[INIT] Script version 8 loaded - loading card without overlay');
+    console.log('[INIT] Script version 9 loaded - Remove Noise as range slider');
     // Initialize immediately for auto-convert support
     splitViewController = new SplitViewController();
 });

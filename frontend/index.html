@@ -96,8 +96,8 @@
                     </div>
 
                     <div class="control-group">
-                        <label for="potraceTurdsize">Remove Noise:<span class="info-icon" data-tooltip="Removes spots smaller than this many pixels">i</span></label>
-                        <input type="number" id="potraceTurdsize" min="0" max="100" value="2">
+                        <label for="potraceTurdsize">Remove Noise: <span id="potraceTurdsizeValue">2</span><span class="info-icon" data-tooltip="Removes spots smaller than this many pixels">i</span></label>
+                        <input type="range" id="potraceTurdsize" min="0" max="100" step="1" value="2">
                     </div>
 
                     <div class="control-group">
@@ -236,6 +236,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=9"></script>
 </body>
 </html>
