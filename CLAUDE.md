@@ -34,6 +34,30 @@ pip install vtracer
 
 # Install all dependencies
 pip install -r requirements.txt
+
+# Phase 1 AI Dependencies (OPTIONAL - for AI-enhanced conversion)
+# Install AI packages for intelligent parameter optimization
+./scripts/install_ai_dependencies.sh
+
+# Verify AI setup
+python3 scripts/verify_ai_setup.py
+```
+
+### AI-Enhanced Capabilities (Phase 1)
+```bash
+# AI dependency status check
+python3 scripts/verify_ai_setup.py
+
+# AI requirements file for manual installation
+pip install -r requirements_ai_phase1.txt
+
+# AI packages included:
+# - PyTorch CPU (2.1.0+cpu) - Deep learning framework
+# - scikit-learn (1.3.2) - Machine learning algorithms
+# - stable-baselines3 (2.0.0) - Reinforcement learning
+# - gymnasium (0.29.1) - RL environments
+# - deap (1.4.1) - Genetic algorithms
+# - transformers (4.36.0) - NLP utilities
 ```
 
 ### Core Conversion Commands
