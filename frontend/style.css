@@ -892,6 +892,7 @@ h3 {
 .split-panel .image-viewer.dragging #splitSvgContainer {
     cursor: grabbing;
     user-select: none;
+    transition: none !important; /* Disable transitions during drag for instant response */
 }
 
 

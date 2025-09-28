@@ -975,7 +975,8 @@ class SplitViewController {
             startY: 0,
             initialTranslateX: 0,
             initialTranslateY: 0,
-            currentElements: [] // Array to hold both synchronized images
+            currentElements: [], // Array to hold both synchronized images
+            animationFrame: null // For smooth updates
         };
 
         this.init();
@@ -1329,6 +1330,10 @@ class SplitViewController {
 
             element.style.transform = `scale(${newScale})${translatePart}`;
             element.style.transformOrigin = 'center center';
+
+            // Update cached scale for fast drag operations
+            element._cachedScale = newScale.toString();
+
             console.log(`[Zoom] Applied scale ${newScale} to element`);
         });
 
@@ -1352,6 +1357,9 @@ class SplitViewController {
             // Reset both scale and any translate transforms
             element.style.transform = 'scale(1)';
             element.style.transformOrigin = 'center center';
+
+            // Reset cached scale for fast drag operations
+            element._cachedScale = '1';
         });
 
         this.updateZoomDisplay();
@@ -1467,21 +1475,29 @@ class SplitViewController {
         const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
         const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
 
-        const deltaX = clientX - this.imageDragState.startX;
-        const deltaY = clientY - this.imageDragState.startY;
+        // Cancel any pending animation frame
+        if (this.imageDragState.animationFrame) {
+            cancelAnimationFrame(this.imageDragState.animationFrame);
+        }
 
-        const newTranslateX = this.imageDragState.initialTranslateX + deltaX;
-        const newTranslateY = this.imageDragState.initialTranslateY + deltaY;
+        // Use requestAnimationFrame for smooth updates
+        this.imageDragState.animationFrame = requestAnimationFrame(() => {
+            const deltaX = clientX - this.imageDragState.startX;
+            const deltaY = clientY - this.imageDragState.startY;
 
-        // Apply bounds checking using the primary element
-        const primaryElement = this.imageDragState.currentElements[0];
-        const [boundedX, boundedY] = this.applyDragBounds(newTranslateX, newTranslateY, primaryElement);
+            const newTranslateX = this.imageDragState.initialTranslateX + deltaX;
+            const newTranslateY = this.imageDragState.initialTranslateY + deltaY;
 
-        // Apply transform to all synchronized elements
-        this.imageDragState.currentElements.forEach(element => {
-            if (element) {
-                this.applyImageTransform(element, boundedX, boundedY);
-            }
+            // Apply bounds checking using the primary element
+            const primaryElement = this.imageDragState.currentElements[0];
+            const [boundedX, boundedY] = this.applyDragBounds(newTranslateX, newTranslateY, primaryElement);
+
+            // Apply transform to all synchronized elements instantly
+            this.imageDragState.currentElements.forEach(element => {
+                if (element) {
+                    this.applyImageTransformFast(element, boundedX, boundedY);
+                }
+            });
         });
     }
 
@@ -1491,9 +1507,16 @@ class SplitViewController {
         }
 
         this.imageDragState.isDragging = false;
+
+        // Cancel any pending animation frame
+        if (this.imageDragState.animationFrame) {
+            cancelAnimationFrame(this.imageDragState.animationFrame);
+            this.imageDragState.animationFrame = null;
+        }
+
         this.imageDragState.currentElements = [];
 
-        // Remove dragging class from all viewers
+        // Remove dragging class from all viewers (re-enables transitions)
         document.querySelectorAll('.image-viewer').forEach(viewer => {
             viewer.classList.remove('dragging');
         });
@@ -1548,6 +1571,19 @@ class SplitViewController {
 
         // Combine scale and translate
         element.style.transform = `${scaleTransform} translate(${translateX}px, ${translateY}px)`;
+    }
+
+    applyImageTransformFast(element, translateX, translateY) {
+        // Optimized version for drag operations - avoids regex parsing
+        // Cache the current scale from the element if we haven't already
+        if (!element._cachedScale) {
+            const currentTransform = element.style.transform || '';
+            const scaleMatch = currentTransform.match(/scale\(([^)]+)\)/);
+            element._cachedScale = scaleMatch ? scaleMatch[1] : '1';
+        }
+
+        // Apply transform directly without string parsing
+        element.style.transform = `scale(${element._cachedScale}) translate(${translateX}px, ${translateY}px)`;
     }
 
     initializeImageSync() {
@@ -1653,7 +1689,7 @@ class ImageSynchronizer {
 // Initialize Split View Controller
 let splitViewController;
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('[INIT] Script version 13 loaded - Added synchronized image dragging');
+    console.log('[INIT] Script version 14 loaded - Optimized synchronized dragging performance');
     // Initialize immediately for auto-convert support
     splitViewController = new SplitViewController();
 });
