@@ -382,6 +382,19 @@ async function handleFile(file) {
 
         mainContent.classList.remove('hidden');
 
+        // Auto-convert to SVG after successful upload
+        console.log('[Auto-convert] File uploaded, starting automatic conversion');
+
+        // First sync the original image to split view
+        if (splitViewController) {
+            splitViewController.syncImages();
+        }
+
+        // Then auto-convert
+        setTimeout(() => {
+            handleConvert();
+        }, 500); // Small delay to ensure UI is ready
+
     } catch (error) {
         hideImagePlaceholder();
         alert('Upload failed: ' + error.message);
@@ -471,6 +484,12 @@ async function handleConvert() {
         document.getElementById('avgPathLength').textContent = result.avg_path_length || '-';
 
         metricsDiv.classList.remove('hidden');
+
+        // Update split view after conversion
+        if (splitViewController) {
+            console.log('[Auto-convert] Updating split view with conversion results');
+            splitViewController.updateConversion();
+        }
 
     } catch (error) {
         alert('Conversion failed: ' + error.message);
@@ -1105,9 +1124,8 @@ class ImageSynchronizer {
 // Initialize Split View Controller
 let splitViewController;
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(() => {
-        splitViewController = new SplitViewController();
-    }, 100);
+    // Initialize immediately for auto-convert support
+    splitViewController = new SplitViewController();
 });
 
 // Integration hook - add to existing convert button handler
