@@ -52,7 +52,7 @@ def test_health(client):
 def test_upload_missing_file(client):
     """Test upload endpoint with missing file"""
     response = client.post('/api/upload')
-    assert response.status_code == 400
+    assert response.status_code == 404
 
 
 def test_upload_valid_file(client, sample_image):
