@@ -18,6 +18,7 @@ from PIL import Image
 from backend.converters.base import BaseConverter
 from backend.utils.image_utils import ImageUtils
 from backend.utils.svg_validator import SVGValidator
+from backend.utils.validation import validate_file_path, validate_threshold
 
 
 class AlphaConverter(BaseConverter):
@@ -43,6 +44,8 @@ class AlphaConverter(BaseConverter):
                 continue
         return None
 
+    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
+    @validate_threshold(min_val=0, max_val=255, param_name="threshold")
     def convert(self, image_path: str, **kwargs) -> str:
         """
         Convert alpha-based image to SVG.

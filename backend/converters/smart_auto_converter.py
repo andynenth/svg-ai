@@ -16,6 +16,7 @@ from backend.converters.base import BaseConverter
 from backend.converters.smart_potrace_converter import SmartPotraceConverter
 from backend.converters.vtracer_converter import VTracerConverter
 from backend.utils.color_detector import ColorDetector
+from backend.utils.validation import validate_file_path
 
 logger = logging.getLogger(__name__)
 
@@ -91,6 +92,7 @@ class SmartAutoConverter(BaseConverter):
         """
         return "Smart Auto"
 
+    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
     def convert(self, image_path: str, **kwargs) -> str:
         """Convert image using automatic routing based on color analysis.
 

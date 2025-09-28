@@ -5,7 +5,9 @@ from typing import Optional, Dict, Any
 import vtracer
 
 from backend.converters.base import BaseConverter
+from backend.utils.image_utils import ImageUtils
 from backend.utils.svg_validator import SVGValidator
+from backend.utils.validation import validate_file_path, validate_threshold, validate_numeric_range
 
 
 class VTracerConverter(BaseConverter):
@@ -45,6 +47,8 @@ class VTracerConverter(BaseConverter):
         self.max_iterations = max_iterations
         self.splice_threshold = splice_threshold
 
+    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
+    @validate_threshold(min_val=0, max_val=255, param_name="threshold")
     def convert(self, image_path: str, **kwargs) -> str:
         """
         Convert PNG to SVG using VTracer.
@@ -56,8 +60,7 @@ class VTracerConverter(BaseConverter):
         Returns:
             str: Complete SVG content as string with optimizations applied.
         """
-        if not os.path.exists(image_path):
-            raise FileNotFoundError(f"Image not found: {image_path}")
+        # File path validation handled by decorator
 
         # Handle threshold parameter for UI compatibility
         threshold = kwargs.get('threshold', None)
@@ -126,6 +129,7 @@ class VTracerConverter(BaseConverter):
         """Get converter name."""
         return f"VTracer(color_precision={self.color_precision}, layer_diff={self.layer_difference})"
 
+    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
     def convert_with_params(self, image_path: str, output_path: str, **params) -> Dict[str, Any]:
         """
         Convert with specific parameters.
@@ -172,6 +176,7 @@ class VTracerConverter(BaseConverter):
                 'error': str(e)
             }
 
+    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
     def optimize_for_logos(self, image_path: str) -> str:
         """
         Convert with settings optimized for logo conversion.

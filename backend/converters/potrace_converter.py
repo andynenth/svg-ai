@@ -12,6 +12,7 @@ from pathlib import Path
 from PIL import Image
 
 from backend.converters.base import BaseConverter
+from backend.utils.validation import validate_file_path, validate_threshold
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +51,8 @@ class PotraceConverter(BaseConverter):
 
         return None
 
+    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
+    @validate_threshold(min_val=0, max_val=255, param_name="threshold")
     def convert(self, image_path: str, **kwargs) -> str:
         """Convert PNG to SVG using Potrace."""
         if not self.potrace_cmd:
@@ -203,6 +206,8 @@ class AutoTraceConverter(BaseConverter):
     def __init__(self):
         super().__init__(name="AutoTrace")
 
+    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
+    @validate_threshold(min_val=0, max_val=255, param_name="threshold")
     def convert(self, image_path: str, **kwargs) -> str:
         """Convert using autotrace."""
         try:
