@@ -986,7 +986,10 @@ class SplitViewController {
 
         if (originalImg && originalImg.src && splitOriginalImg) {
             splitOriginalImg.onerror = () => this.showImageError('left');
-            splitOriginalImg.onload = () => this.initializeImageSync();
+            splitOriginalImg.onload = () => {
+                this.initializeImageSync();
+                this.equalizeImageSizes();
+            };
             splitOriginalImg.src = originalImg.src;
             splitOriginalImg.style.display = 'block';
         }
@@ -997,7 +1000,55 @@ class SplitViewController {
 
         if (originalSvg && splitSvg) {
             splitSvg.innerHTML = originalSvg.innerHTML;
+            // Equalize sizes after SVG is loaded
+            setTimeout(() => this.equalizeImageSizes(), 100);
         }
+    }
+
+    equalizeImageSizes() {
+        const leftImg = document.getElementById('splitOriginalImage');
+        const rightSvg = document.querySelector('#splitSvgContainer svg');
+
+        if (!leftImg || !rightSvg) return;
+
+        // Get natural dimensions
+        const leftWidth = leftImg.naturalWidth;
+        const leftHeight = leftImg.naturalHeight;
+
+        // Get SVG viewBox dimensions
+        const viewBox = rightSvg.getAttribute('viewBox');
+        let rightWidth = 100, rightHeight = 100;
+        if (viewBox) {
+            const parts = viewBox.split(' ');
+            rightWidth = parseFloat(parts[2]) || 100;
+            rightHeight = parseFloat(parts[3]) || 100;
+        }
+
+        // Get container dimensions
+        const leftContainer = document.getElementById('splitLeftViewer');
+        const rightContainer = document.getElementById('splitRightViewer');
+
+        if (!leftContainer || !rightContainer) return;
+
+        const containerWidth = Math.min(leftContainer.clientWidth, rightContainer.clientWidth) - 40;
+        const containerHeight = Math.min(leftContainer.clientHeight, rightContainer.clientHeight) - 40;
+
+        // Calculate scale to fit both images at same size
+        const leftScale = Math.min(containerWidth / leftWidth, containerHeight / leftHeight);
+        const rightScale = Math.min(containerWidth / rightWidth, containerHeight / rightHeight);
+
+        // Use the smaller scale for both to ensure equal visual size
+        const scale = Math.min(leftScale, rightScale);
+
+        // Apply consistent sizing
+        leftImg.style.width = `${leftWidth * scale}px`;
+        leftImg.style.height = `${leftHeight * scale}px`;
+        leftImg.style.objectFit = 'contain';
+
+        rightSvg.style.width = `${rightWidth * scale}px`;
+        rightSvg.style.height = `${rightHeight * scale}px`;
+
+        console.log(`[Sync] Equalized sizes - Scale: ${scale.toFixed(3)}, Left: ${leftWidth}x${leftHeight}, Right: ${rightWidth}x${rightHeight}`);
     }
 
     // Drag functionality
@@ -1123,6 +1174,8 @@ class SplitViewController {
         });
 
         this.updateZoomDisplay();
+        // Maintain equal sizes during zoom
+        this.equalizeImageSizes();
     }
 
     resetZoom() {
@@ -1228,6 +1281,8 @@ class SplitViewController {
     updateConversion() {
         // Always sync images since split view is the only interface
         this.syncImages();
+        // Ensure sizes are equalized after conversion
+        setTimeout(() => this.equalizeImageSizes(), 200);
     }
 
 }
