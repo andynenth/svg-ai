@@ -468,10 +468,49 @@ class ConverterModule {
     }
 
     displayRoutingInfo(routingInfo) {
+        console.log('[Frontend] displayRoutingInfo called with:', routingInfo);
+
         const routingDiv = document.getElementById('routingInfo');
+        if (!routingDiv) {
+            console.error('[Frontend] routingInfo div not found!');
+            return;
+        }
         routingDiv.classList.remove('hidden');
-        // Implementation would depend on the routing info structure
+
+        // Map routing info to UI elements
+        const routedTo = routingInfo.routed_to === 'smart' ? 'Smart Potrace' :
+                        routingInfo.routed_to === 'vtracer' ? 'VTracer' :
+                        routingInfo.routed_to || 'Unknown';
+
+        const imageType = routingInfo.is_colored ? 'Colored' : 'Grayscale/B&W';
+
+        const confidence = routingInfo.routing_confidence ?
+                          (routingInfo.routing_confidence * 100).toFixed(1) + '%' : '-';
+
+        const uniqueColors = routingInfo.unique_colors || '-';
+
+        console.log(`[Frontend] Mapped values: routedTo=${routedTo}, imageType=${imageType}, confidence=${confidence}, uniqueColors=${uniqueColors}`);
+
+        // Update UI elements with error checking
+        const elements = {
+            'routedTo': routedTo,
+            'imageType': imageType,
+            'routingConfidence': confidence,
+            'uniqueColors': uniqueColors
+        };
+
+        for (const [elementId, value] of Object.entries(elements)) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = value;
+                console.log(`[Frontend] Updated ${elementId} = ${value}`);
+            } else {
+                console.error(`[Frontend] Element ${elementId} not found!`);
+            }
+        }
+
         console.log('Routing info:', routingInfo);
+        console.log(`[Frontend] Routing display update complete`);
     }
 
     formatFileSize(bytes) {

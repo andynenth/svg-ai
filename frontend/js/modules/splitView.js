@@ -484,7 +484,23 @@ class SplitViewController {
         // Get both image elements for synchronized dragging
         const leftImg = document.getElementById('splitOriginalImage');
         const rightSvg = document.querySelector('#splitSvgContainer svg');
-        this.imageDragState.currentElements = [leftImg, rightSvg].filter(el => el);
+
+        // Filter elements and validate they have proper container structure
+        this.imageDragState.currentElements = [leftImg, rightSvg].filter(el => {
+            if (!el) return false;
+            if (!el.closest('.image-viewer')) {
+                console.warn('[ImageDrag] Element missing .image-viewer container:', el);
+                return false;
+            }
+            return true;
+        });
+
+        // Abort drag if no valid elements found
+        if (this.imageDragState.currentElements.length === 0) {
+            console.warn('[ImageDrag] No valid draggable elements found, aborting drag');
+            this.imageDragState.isDragging = false;
+            return;
+        }
 
         // Get initial translate values from the primary element
         if (this.imageDragState.currentElements.length > 0) {
@@ -531,12 +547,21 @@ class SplitViewController {
 
         // Use requestAnimationFrame for smooth updates
         this.imageDragState.animationFrame = requestAnimationFrame(() => {
+            // Validate we still have elements to drag
+            if (!this.imageDragState.currentElements || this.imageDragState.currentElements.length === 0) {
+                console.warn('[ImageDrag] No valid elements during drag move, ending drag');
+                this.imageDragState.isDragging = false;
+                return;
+            }
+
             // Apply bounds checking using the primary element
             const boundedTranslate = this.applyDragBounds(newTranslateX, newTranslateY, this.imageDragState.currentElements[0]);
 
             // Apply transform to all synchronized elements instantly
             this.imageDragState.currentElements.forEach(element => {
-                this.applyImageTransform(element, boundedTranslate.x, boundedTranslate.y);
+                if (element && element.style) {
+                    this.applyImageTransform(element, boundedTranslate.x, boundedTranslate.y);
+                }
             });
 
             this.imageDragState.animationFrame = null;
@@ -570,7 +595,14 @@ class SplitViewController {
 
         // Get element dimensions and container dimensions
         const elementRect = element.getBoundingClientRect();
-        const container = element.closest('.split-viewer');
+        const container = element.closest('.image-viewer');
+
+        // If no container found, return original translation without bounds
+        if (!container) {
+            console.warn('[ImageDrag] No .image-viewer container found for element, skipping bounds check');
+            return { x: translateX, y: translateY };
+        }
+
         const containerRect = container.getBoundingClientRect();
 
         // Calculate max allowed translation to keep image within reasonable bounds

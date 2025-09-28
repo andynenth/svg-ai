@@ -252,35 +252,32 @@ class ColorDetector:
 
         Note:
             Classification criteria (in order of evaluation):
-            1. Grayscale similarity > 0.95 → grayscale
-            2. Channel correlation > 0.98 → grayscale
-            3. Unique colors ≤ 5 → simple B&W
-            4. Low variance (<10) + few colors (<50) → monochrome with antialiasing
-            5. Otherwise → colored
+            1. High channel correlation (>0.98) + grayscale similarity (>0.99) → grayscale
+            2. Unique colors ≤ 2 → simple B&W
+            3. Low variance (<5) + few colors (<10) → monochrome with minimal color
+            4. Otherwise → colored (prefer VTracer for ambiguous cases)
         """
         # Multiple criteria for determining if image is colored
 
-        # 1. High grayscale similarity suggests grayscale image
-        if analysis['grayscale_similarity'] > 0.95:
-            logger.info(f"Image detected as grayscale (similarity: {analysis['grayscale_similarity']:.3f})")
+        # 1. Only consider grayscale if BOTH high correlation AND very high similarity
+        # This prevents false positives from flawed similarity calculations
+        if (analysis['channel_correlation'] > 0.98 and
+            analysis['grayscale_similarity'] > 0.99 and
+            analysis['unique_colors'] <= 10):
+            logger.info(f"Image detected as grayscale (similarity: {analysis['grayscale_similarity']:.3f}, correlation: {analysis['channel_correlation']:.3f})")
             return False
 
-        # 2. High channel correlation suggests grayscale
-        if analysis['channel_correlation'] > 0.98:
-            logger.info(f"Image detected as grayscale (channel correlation: {analysis['channel_correlation']:.3f})")
+        # 2. Very few unique colors (pure B&W only)
+        if analysis['unique_colors'] <= 2:
+            logger.info(f"Image detected as pure B&W ({analysis['unique_colors']} unique colors)")
             return False
 
-        # 3. Very few unique colors might indicate simple B&W
-        if analysis['unique_colors'] <= 5:
-            logger.info(f"Image detected as simple B&W ({analysis['unique_colors']} unique colors)")
+        # 3. Very low color variance with very few colors might be monochrome
+        if analysis['color_variance'] < 5 and analysis['unique_colors'] < 10:
+            logger.info(f"Image detected as monochrome (variance: {analysis['color_variance']:.1f}, colors: {analysis['unique_colors']})")
             return False
 
-        # 4. Low color variance with moderate colors might be monochrome with antialiasing
-        if analysis['color_variance'] < 10 and analysis['unique_colors'] < 50:
-            logger.info(f"Image detected as monochrome with antialiasing (variance: {analysis['color_variance']:.1f}, colors: {analysis['unique_colors']})")
-            return False
-
-        # Otherwise, consider it colored
+        # Otherwise, consider it colored (prefer VTracer for ambiguous cases)
         logger.info(f"Image detected as colored (variance: {analysis['color_variance']:.1f}, colors: {analysis['unique_colors']}, correlation: {analysis['channel_correlation']:.3f})")
         return True
 
@@ -306,8 +303,8 @@ class ColorDetector:
     def _calculate_grayscale_similarity(self, rgb_pixels: np.ndarray) -> float:
         """Calculate similarity between original image and its grayscale version.
 
-        Converts the RGB image to grayscale using ImageUtils and compares it
-        with the original using Mean Squared Error (MSE). High similarity
+        Converts RGB pixels to grayscale using standard luminance formula and
+        compares with the original using Mean Squared Error (MSE). High similarity
         indicates the image is already effectively grayscale.
 
         Args:
@@ -315,35 +312,25 @@ class ColorDetector:
 
         Returns:
             float: Similarity score between 0.0 (very colored) and 1.0 (pure grayscale).
-                Values > 0.95 typically indicate grayscale images.
+                Values > 0.99 typically indicate true grayscale images.
 
         Note:
-            Uses temporary image reconstruction for grayscale conversion consistency
-            with ImageUtils. Handles non-square pixel arrays by reshaping appropriately.
+            Uses direct luminance calculation to avoid image reshaping artifacts.
+            Formula: Y = 0.299*R + 0.587*G + 0.114*B (ITU-R BT.601)
         """
-        # Convert to grayscale using ImageUtils for consistency
-        # For pixel array analysis, we'll create a temporary image and convert it
-        temp_img_data = rgb_pixels.reshape(-1, 3).astype(np.uint8)
-        height = int(np.sqrt(len(temp_img_data)))
-        width = len(temp_img_data) // height if height > 0 else 1
+        # Convert RGB to grayscale using standard luminance formula
+        # This is more accurate than reshaping pixels into arbitrary image dimensions
+        r, g, b = rgb_pixels[:, 0], rgb_pixels[:, 1], rgb_pixels[:, 2]
+        grayscale_values = 0.299 * r + 0.587 * g + 0.114 * b
 
-        if height * width != len(temp_img_data):
-            # Handle non-square images by using actual dimensions
-            height = len(temp_img_data)
-            width = 1
+        # Create grayscale RGB version by replicating luminance across channels
+        grayscale_rgb = np.column_stack([grayscale_values, grayscale_values, grayscale_values])
 
-        temp_img = Image.fromarray(temp_img_data.reshape(height, width, 3), 'RGB')
-        grayscale_img = ImageUtils.convert_to_grayscale(temp_img)
-        grayscale = np.array(grayscale_img).flatten()
-
-        # Create grayscale RGB version
-        grayscale_rgb = np.column_stack([grayscale, grayscale, grayscale])
-
-        # Calculate similarity (inverse of mean squared difference)
-        mse = np.mean((rgb_pixels - grayscale_rgb) ** 2)
+        # Calculate mean squared error between original and grayscale
+        mse = np.mean((rgb_pixels.astype(float) - grayscale_rgb) ** 2)
 
         # Convert to similarity score (0-1, where 1 is identical to grayscale)
-        max_mse = 255 ** 2  # Maximum possible MSE
+        max_mse = 255 ** 2  # Maximum possible MSE for 8-bit values
         similarity = 1 - (mse / max_mse)
 
         return max(0, min(1, similarity))
