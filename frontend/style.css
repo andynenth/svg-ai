@@ -794,10 +794,13 @@ h3 {
 
 .divider-handle {
     color: #64748b;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
-    transform: rotate(90deg);
     pointer-events: none;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .split-panel .panel-header {
@@ -904,7 +907,7 @@ h3 {
     }
 
     .divider-handle {
-        transform: rotate(0deg);
+        /* No rotation needed for ⫶ symbol */
     }
 }
 

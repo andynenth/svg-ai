@@ -1455,7 +1455,7 @@ class ImageSynchronizer {
 // Initialize Split View Controller
 let splitViewController;
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('[INIT] Script version 9 loaded - Remove Noise as range slider');
+    console.log('[INIT] Script version 10 loaded - Updated divider handle to ⫶ symbol');
     // Initialize immediately for auto-convert support
     splitViewController = new SplitViewController();
 });
