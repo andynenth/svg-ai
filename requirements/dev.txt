@@ -23,5 +23,5 @@ matplotlib==3.9.4
 seaborn==0.13.2
 rich==13.7.0
 
-# Additional development packages that may be needed
-# for debugging and development workflow
+# Explicitly exclude vulnerable AI/ML packages
+# to prevent them from being installed as optional dependencies
