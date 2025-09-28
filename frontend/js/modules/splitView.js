@@ -55,6 +55,12 @@ class SplitViewController {
         document.addEventListener('uploadComplete', () => {
             setTimeout(() => this.syncImages(), 500);
         });
+
+        // Listen for zoom reset requests from converter controls
+        document.addEventListener('resetZoomBeforeConversion', () => {
+            console.log('[Zoom] Resetting zoom due to converter control change');
+            this.resetZoom();
+        });
     }
 
     syncImages() {

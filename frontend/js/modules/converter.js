@@ -209,6 +209,9 @@ class ConverterModule {
             clearTimeout(this.autoConvertTimer);
         }
 
+        // Reset zoom immediately when control changes - ensures both sides reset to 100%
+        document.dispatchEvent(new CustomEvent('resetZoomBeforeConversion'));
+
         // Only auto-convert if we have a file loaded
         if (!appState.currentFileId) return;
 
