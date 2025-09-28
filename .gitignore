@@ -50,11 +50,22 @@ htmlcov/
 # Jupyter
 *.ipynb_checkpoints
 
-# Model weights (large files)
-models/weights/
+# AI-specific files
+backend/ai_modules/models/pretrained/
+backend/ai_modules/models/trained/
+backend/ai_modules/models/cache/
+data/training/
+data/validation/
 *.pth
-*.onnx
 *.pkl
+*.h5
+*.onnx
+
+# AI training artifacts
+experiments/
+runs/
+checkpoints/
+wandb/
 
 # Test/temporary scripts
 convert_test.py
