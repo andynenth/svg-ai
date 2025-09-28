@@ -113,61 +113,186 @@ function collectAlphaParams() {
 // Update converter change handler
 converterSelect.addEventListener('change', (e) => {
     showConverterParams(e.target.value);
+    triggerAutoConvert();
 });
 
 // Set initial parameter display
 showConverterParams(converterSelect.value);
 
+// Auto-conversion debounce timer
+let autoConvertTimer = null;
+
+function triggerAutoConvert() {
+    // Clear any pending conversion
+    if (autoConvertTimer) {
+        clearTimeout(autoConvertTimer);
+    }
+
+    // Only auto-convert if we have a file loaded
+    if (!currentFileId) return;
+
+    // Debounce: wait 500ms after user stops changing settings
+    autoConvertTimer = setTimeout(() => {
+        console.log('[Auto-convert] Settings changed, updating preview');
+        handleConvert();
+    }, 500);
+}
+
 // Real-time value displays for sliders
 document.getElementById('potraceThreshold').addEventListener('input', (e) => {
     document.getElementById('potraceThresholdValue').textContent = e.target.value;
+    document.getElementById('potracePreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 document.getElementById('potraceAlphamax').addEventListener('input', (e) => {
     const value = (parseFloat(e.target.value) / 100).toFixed(2); // Convert 0-134 to 0.00-1.34
     document.getElementById('potraceAlphamaxValue').textContent = value;
+    document.getElementById('potracePreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 document.getElementById('potraceOpttolerance').addEventListener('input', (e) => {
     const value = (parseFloat(e.target.value) / 100).toFixed(2); // Convert 0-100 to 0.00-1.00
     document.getElementById('potraceOpttoleranceValue').textContent = value;
+    document.getElementById('potracePreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 // VTracer slider value displays
 document.getElementById('vtracerColorPrecision').addEventListener('input', (e) => {
     document.getElementById('vtracerColorPrecisionValue').textContent = e.target.value;
+    document.getElementById('vtracerPreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 document.getElementById('vtracerLayerDifference').addEventListener('input', (e) => {
     document.getElementById('vtracerLayerDifferenceValue').textContent = e.target.value;
+    document.getElementById('vtracerPreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 document.getElementById('vtracerPathPrecision').addEventListener('input', (e) => {
     document.getElementById('vtracerPathPrecisionValue').textContent = e.target.value;
+    document.getElementById('vtracerPreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 document.getElementById('vtracerCornerThreshold').addEventListener('input', (e) => {
     document.getElementById('vtracerCornerThresholdValue').textContent = e.target.value;
+    document.getElementById('vtracerPreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 document.getElementById('vtracerMaxIterations').addEventListener('input', (e) => {
     document.getElementById('vtracerMaxIterationsValue').textContent = e.target.value;
+    document.getElementById('vtracerPreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 document.getElementById('vtracerSpliceThreshold').addEventListener('input', (e) => {
     document.getElementById('vtracerSpliceThresholdValue').textContent = e.target.value;
+    document.getElementById('vtracerPreset').value = 'custom';
+    triggerAutoConvert();
 });
 
 // Alpha slider value display
 document.getElementById('alphaThreshold').addEventListener('input', (e) => {
     document.getElementById('alphaThresholdValue').textContent = e.target.value;
+    document.getElementById('alphaPreset').value = 'custom';
+    triggerAutoConvert();
 });
+
+// Add event listeners for other input types
+document.getElementById('potraceTurnpolicy').addEventListener('change', () => {
+    document.getElementById('potracePreset').value = 'custom';
+    triggerAutoConvert();
+});
+document.getElementById('potraceTurdsize').addEventListener('change', () => {
+    document.getElementById('potracePreset').value = 'custom';
+    triggerAutoConvert();
+});
+
+// VTracer radio buttons and number inputs
+document.querySelectorAll('input[name="vtracerColormode"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        document.getElementById('vtracerPreset').value = 'custom';
+        triggerAutoConvert();
+    });
+});
+document.getElementById('vtracerLengthThreshold').addEventListener('change', () => {
+    document.getElementById('vtracerPreset').value = 'custom';
+    triggerAutoConvert();
+});
+
+// Alpha checkboxes
+document.getElementById('alphaUsePotrace').addEventListener('change', () => {
+    document.getElementById('alphaPreset').value = 'custom';
+    triggerAutoConvert();
+});
+document.getElementById('alphaPreserveAntialiasing').addEventListener('change', () => {
+    document.getElementById('alphaPreset').value = 'custom';
+    triggerAutoConvert();
+});
+
+// Setup preset dropdowns
+document.getElementById('potracePreset').addEventListener('change', (e) => {
+    if (e.target.value !== 'custom') {
+        applyPotracePreset(e.target.value);
+    }
+});
+
+document.getElementById('vtracerPreset').addEventListener('change', (e) => {
+    if (e.target.value !== 'custom') {
+        applyVTracerPreset(e.target.value);
+    }
+});
+
+document.getElementById('alphaPreset').addEventListener('change', (e) => {
+    if (e.target.value !== 'custom') {
+        applyAlphaPreset(e.target.value);
+    }
+});
+
+// Apply default Quality preset on load
+setTimeout(() => {
+    if (converterSelect.value === 'smart' || converterSelect.value === 'potrace') {
+        applyPotracePreset('quality');
+    } else if (converterSelect.value === 'vtracer') {
+        applyVTracerPreset('quality');
+    } else if (converterSelect.value === 'alpha') {
+        applyAlphaPreset('quality');
+    }
+}, 100);
 
 // Setup Convert Button
 convertBtn.addEventListener('click', handleConvert);
 
 // Setup Download Button
 downloadBtn.addEventListener('click', handleDownload);
+
+// Setup New File Button
+const newFileBtn = document.getElementById('newFileBtn');
+newFileBtn.addEventListener('click', () => {
+    // Show drop zone again and reset state
+    document.querySelector('.upload-section').style.display = 'block';
+    mainContent.classList.add('hidden');
+
+    // Reset current file
+    currentFileId = null;
+    currentSvgContent = null;
+
+    // Clear split view images
+    const splitOriginalImg = document.getElementById('splitOriginalImage');
+    const splitSvgContainer = document.getElementById('splitSvgContainer');
+    if (splitOriginalImg) splitOriginalImg.style.display = 'none';
+    if (splitSvgContainer) splitSvgContainer.innerHTML = '';
+
+    // Hide metrics
+    document.getElementById('metrics').classList.add('hidden');
+
+    console.log('[New File] Reset to upload state');
+});
 
 // Parameter Preset Functions
 function applyPotracePreset(preset) {
@@ -206,6 +331,7 @@ function applyPotracePreset(preset) {
             break;
     }
     updatePotraceDisplayValues();
+    triggerAutoConvert();
 }
 
 function applyVTracerPreset(preset) {
@@ -234,6 +360,7 @@ function applyVTracerPreset(preset) {
             break;
     }
     updateVTracerDisplayValues();
+    triggerAutoConvert();
 }
 
 function applyAlphaPreset(preset) {
@@ -252,6 +379,7 @@ function applyAlphaPreset(preset) {
             break;
     }
     updateAlphaDisplayValues();
+    triggerAutoConvert();
 }
 
 function resetPotraceDefaults() {
@@ -261,6 +389,7 @@ function resetPotraceDefaults() {
     document.getElementById('potraceAlphamax').value = 100; // 1.0
     document.getElementById('potraceOpttolerance').value = 20; // 0.2
     updatePotraceDisplayValues();
+    triggerAutoConvert();
 }
 
 function resetVTracerDefaults() {
@@ -273,6 +402,7 @@ function resetVTracerDefaults() {
     document.getElementById('vtracerMaxIterations').value = 10;
     document.getElementById('vtracerSpliceThreshold').value = 45;
     updateVTracerDisplayValues();
+    triggerAutoConvert();
 }
 
 function resetAlphaDefaults() {
@@ -280,6 +410,7 @@ function resetAlphaDefaults() {
     document.getElementById('alphaUsePotrace').checked = true;
     document.getElementById('alphaPreserveAntialiasing').checked = false;
     updateAlphaDisplayValues();
+    triggerAutoConvert();
 }
 
 // Helper functions to update display values
@@ -380,6 +511,8 @@ async function handleFile(file) {
             }
         }, 5000); // 5 second timeout
 
+        // Hide drop zone and show main content
+        document.querySelector('.upload-section').style.display = 'none';
         mainContent.classList.remove('hidden');
 
         // Auto-convert to SVG after successful upload
@@ -483,6 +616,7 @@ async function handleConvert() {
         document.getElementById('pathCount').textContent = result.path_count || '-';
         document.getElementById('avgPathLength').textContent = result.avg_path_length || '-';
 
+        // Always show metrics div after first conversion (it contains both buttons now)
         metricsDiv.classList.remove('hidden');
 
         // Update split view after conversion

@@ -187,6 +187,8 @@ h3 {
     padding: 20px;
     border-radius: 8px;
     margin-top: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .control-group {
@@ -220,6 +222,12 @@ h3 {
 
 .metrics p {
     margin-bottom: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .optimization-info {

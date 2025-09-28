@@ -70,8 +70,6 @@
                     <label for="converter">Converter:</label>
                     <select id="converter">
                         <option value="smart">Smart Potrace (Auto-detect)</option>
-                        <option value="alpha">Alpha-aware (Best for icons)</option>
-                        <option value="potrace">Potrace (Black & White)</option>
                         <option value="vtracer">VTracer (Color)</option>
                     </select>
                 </div>
@@ -112,12 +110,15 @@
                         <input type="range" id="potraceOpttolerance" min="0" max="100" step="1" value="20">
                     </div>
 
-                    <div class="preset-buttons">
-                        <button type="button" class="btn-preset" onclick="applyPotracePreset('ultra-precise')" title="Maximum accuracy, larger files">Ultra Precise</button>
-                        <button type="button" class="btn-preset" onclick="applyPotracePreset('quality')">Quality</button>
-                        <button type="button" class="btn-preset" onclick="applyPotracePreset('fast')">Fast</button>
-                        <button type="button" class="btn-preset" onclick="applyPotracePreset('ultra-fast')" title="Aggressive optimization, much smaller files">Ultra Fast</button>
-                        <button type="button" class="btn-preset" onclick="resetPotraceDefaults()">Reset</button>
+                    <div class="control-group">
+                        <label for="potracePreset">Preset:</label>
+                        <select id="potracePreset">
+                            <option value="ultra-precise">Ultra Precise</option>
+                            <option value="quality" selected>Quality</option>
+                            <option value="fast">Fast</option>
+                            <option value="ultra-fast">Ultra Fast</option>
+                            <option value="custom">Custom</option>
+                        </select>
                     </div>
                 </div>
 
@@ -173,10 +174,13 @@
                         <small class="tooltip">Angle for connecting paths. Higher = more connected</small>
                     </div>
 
-                    <div class="preset-buttons">
-                        <button type="button" class="btn-preset" onclick="applyVTracerPreset('quality')">Quality</button>
-                        <button type="button" class="btn-preset" onclick="applyVTracerPreset('fast')">Fast</button>
-                        <button type="button" class="btn-preset" onclick="resetVTracerDefaults()">Reset</button>
+                    <div class="control-group">
+                        <label for="vtracerPreset">Preset:</label>
+                        <select id="vtracerPreset">
+                            <option value="quality" selected>Quality</option>
+                            <option value="fast">Fast</option>
+                            <option value="custom">Custom</option>
+                        </select>
                     </div>
                 </div>
 
@@ -200,21 +204,26 @@
                         </label>
                     </div>
 
-                    <div class="preset-buttons">
-                        <button type="button" class="btn-preset" onclick="applyAlphaPreset('quality')">Quality</button>
-                        <button type="button" class="btn-preset" onclick="applyAlphaPreset('fast')">Fast</button>
-                        <button type="button" class="btn-preset" onclick="resetAlphaDefaults()">Reset</button>
+                    <div class="control-group">
+                        <label for="alphaPreset">Preset:</label>
+                        <select id="alphaPreset">
+                            <option value="quality" selected>Quality</option>
+                            <option value="fast">Fast</option>
+                            <option value="custom">Custom</option>
+                        </select>
                     </div>
                 </div>
-
-                <button id="convertBtn" class="btn-primary">Convert to SVG</button>
 
                 <div id="metrics" class="metrics hidden">
                     <p>Quality Score (SSIM): <span id="ssimScore">-</span></p>
                     <p>File Size: <span id="fileSize">-</span></p>
                     <p>SVG Paths: <span id="pathCount">-</span></p>
                     <p>Avg Path Length: <span id="avgPathLength">-</span> chars</p>
-                    <button id="downloadBtn" class="btn-secondary">Download SVG</button>
+                    <div class="button-group">
+                        <button id="convertBtn" class="btn-primary">Convert to SVG</button>
+                        <button id="downloadBtn" class="btn-secondary">Download SVG</button>
+                        <button id="newFileBtn" class="btn-secondary">Convert New File</button>
+                    </div>
                 </div>
             </div>
         </div>
