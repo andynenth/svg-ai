@@ -2,14 +2,14 @@
 """Adaptive parameter optimization using multiple strategies"""
 
 import numpy as np
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any
 import logging
-import time
 from .base_optimizer import BaseOptimizer
 from .feature_mapping import FeatureMappingOptimizer
 from backend.ai_modules.config import GA_CONFIG
 
 logger = logging.getLogger(__name__)
+
 
 class AdaptiveOptimizer(BaseOptimizer):
     """Adaptive optimizer that combines multiple optimization strategies"""
@@ -18,10 +18,10 @@ class AdaptiveOptimizer(BaseOptimizer):
         super().__init__("Adaptive")
         self.feature_mapper = FeatureMappingOptimizer()
         self.strategy_performance = {
-            'feature_mapping': {'total_uses': 0, 'avg_quality': 0.0},
-            'genetic_algorithm': {'total_uses': 0, 'avg_quality': 0.0},
-            'grid_search': {'total_uses': 0, 'avg_quality': 0.0},
-            'random_search': {'total_uses': 0, 'avg_quality': 0.0}
+            "feature_mapping": {"total_uses": 0, "avg_quality": 0.0},
+            "genetic_algorithm": {"total_uses": 0, "avg_quality": 0.0},
+            "grid_search": {"total_uses": 0, "avg_quality": 0.0},
+            "random_search": {"total_uses": 0, "avg_quality": 0.0},
         }
         self.optimization_history = []
 
@@ -34,17 +34,17 @@ class AdaptiveOptimizer(BaseOptimizer):
             strategy = self._select_optimization_strategy(features, logo_type)
 
             # Run selected strategy
-            if strategy == 'feature_mapping':
+            if strategy == "feature_mapping":
                 result = self._run_feature_mapping(features, logo_type)
-            elif strategy == 'genetic_algorithm':
+            elif strategy == "genetic_algorithm":
                 result = self._run_genetic_algorithm(features, logo_type)
-            elif strategy == 'grid_search':
+            elif strategy == "grid_search":
                 result = self._run_grid_search(features, logo_type)
             else:  # random_search
                 result = self._run_random_search(features, logo_type)
 
             # Record strategy use
-            self.strategy_performance[strategy]['total_uses'] += 1
+            self.strategy_performance[strategy]["total_uses"] += 1
 
             logger.debug(f"Adaptive optimization used {strategy}: {result}")
             return result
@@ -55,24 +55,24 @@ class AdaptiveOptimizer(BaseOptimizer):
 
     def _select_optimization_strategy(self, features: Dict[str, float], logo_type: str) -> str:
         """Select the best optimization strategy based on context and performance"""
-        complexity = features.get('complexity_score', 0.5)
-        unique_colors = features.get('unique_colors', 16)
+        complexity = features.get("complexity_score", 0.5)
+        unique_colors = features.get("unique_colors", 16)
 
         # Strategy selection logic
         if complexity < 0.3 and unique_colors <= 8:
             # Simple images: use feature mapping (fast and effective)
-            return 'feature_mapping'
+            return "feature_mapping"
         elif complexity > 0.7 or unique_colors > 30:
             # Complex images: use genetic algorithm (thorough search)
-            return 'genetic_algorithm'
-        elif self.strategy_performance['feature_mapping']['total_uses'] < 5:
+            return "genetic_algorithm"
+        elif self.strategy_performance["feature_mapping"]["total_uses"] < 5:
             # Not enough data: try feature mapping first
-            return 'feature_mapping'
+            return "feature_mapping"
         else:
             # Choose based on historical performance
             best_strategy = max(
                 self.strategy_performance.keys(),
-                key=lambda s: self.strategy_performance[s]['avg_quality']
+                key=lambda s: self.strategy_performance[s]["avg_quality"],
             )
             return best_strategy
 
@@ -87,9 +87,9 @@ class AdaptiveOptimizer(BaseOptimizer):
             import random
 
             # Create fitness and individual classes (avoid duplicate creation)
-            if not hasattr(creator, 'FitnessMax'):
+            if not hasattr(creator, "FitnessMax"):
                 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-            if not hasattr(creator, 'Individual'):
+            if not hasattr(creator, "Individual"):
                 creator.create("Individual", list, fitness=creator.FitnessMax)
 
             # Setup GA toolbox
@@ -98,27 +98,27 @@ class AdaptiveOptimizer(BaseOptimizer):
             # Individual creation
             def create_individual():
                 return [
-                    random.uniform(*self.param_ranges['color_precision']),
-                    random.uniform(*self.param_ranges['corner_threshold']),
-                    random.uniform(*self.param_ranges['path_precision']),
-                    random.uniform(*self.param_ranges['layer_difference']),
-                    random.uniform(*self.param_ranges['splice_threshold']),
-                    random.uniform(*self.param_ranges['filter_speckle']),
-                    random.uniform(*self.param_ranges['segment_length']),
-                    random.uniform(*self.param_ranges['max_iterations'])
+                    random.uniform(*self.param_ranges["color_precision"]),
+                    random.uniform(*self.param_ranges["corner_threshold"]),
+                    random.uniform(*self.param_ranges["path_precision"]),
+                    random.uniform(*self.param_ranges["layer_difference"]),
+                    random.uniform(*self.param_ranges["splice_threshold"]),
+                    random.uniform(*self.param_ranges["filter_speckle"]),
+                    random.uniform(*self.param_ranges["segment_length"]),
+                    random.uniform(*self.param_ranges["max_iterations"]),
                 ]
 
             def evaluate_individual(individual):
                 """Fitness function based on feature compatibility"""
                 params = {
-                    'color_precision': individual[0],
-                    'corner_threshold': individual[1],
-                    'path_precision': individual[2],
-                    'layer_difference': individual[3],
-                    'splice_threshold': individual[4],
-                    'filter_speckle': individual[5],
-                    'segment_length': individual[6],
-                    'max_iterations': individual[7]
+                    "color_precision": individual[0],
+                    "corner_threshold": individual[1],
+                    "path_precision": individual[2],
+                    "layer_difference": individual[3],
+                    "splice_threshold": individual[4],
+                    "filter_speckle": individual[5],
+                    "segment_length": individual[6],
+                    "max_iterations": individual[7],
                 }
 
                 # Simple fitness based on parameter appropriateness
@@ -134,7 +134,7 @@ class AdaptiveOptimizer(BaseOptimizer):
             toolbox.register("select", tools.selTournament, tournsize=3)
 
             # Run GA
-            population = toolbox.population(n=GA_CONFIG['population_size'])
+            population = toolbox.population(n=GA_CONFIG["population_size"])
 
             # Evaluate initial population
             fitnesses = list(map(toolbox.evaluate, population))
@@ -142,20 +142,20 @@ class AdaptiveOptimizer(BaseOptimizer):
                 ind.fitness.values = fit
 
             # Evolution
-            for generation in range(min(10, GA_CONFIG['generations'])):  # Limited for Phase 1
+            for generation in range(min(10, GA_CONFIG["generations"])):  # Limited for Phase 1
                 # Select parents
                 offspring = toolbox.select(population, len(population))
                 offspring = list(map(toolbox.clone, offspring))
 
                 # Crossover and mutation
                 for child1, child2 in zip(offspring[::2], offspring[1::2]):
-                    if random.random() < GA_CONFIG['crossover_prob']:
+                    if random.random() < GA_CONFIG["crossover_prob"]:
                         toolbox.mate(child1, child2)
                         del child1.fitness.values
                         del child2.fitness.values
 
                 for mutant in offspring:
-                    if random.random() < GA_CONFIG['mutation_prob']:
+                    if random.random() < GA_CONFIG["mutation_prob"]:
                         toolbox.mutate(mutant)
                         del mutant.fitness.values
 
@@ -172,9 +172,16 @@ class AdaptiveOptimizer(BaseOptimizer):
             best_individual = tools.selBest(population, k=1)[0]
 
             # Convert to parameter dictionary
-            param_names = ['color_precision', 'corner_threshold', 'path_precision',
-                          'layer_difference', 'splice_threshold', 'filter_speckle',
-                          'segment_length', 'max_iterations']
+            param_names = [
+                "color_precision",
+                "corner_threshold",
+                "path_precision",
+                "layer_difference",
+                "splice_threshold",
+                "filter_speckle",
+                "segment_length",
+                "max_iterations",
+            ]
 
             best_params = dict(zip(param_names, best_individual))
             return self._validate_parameters(best_params)
@@ -192,7 +199,7 @@ class AdaptiveOptimizer(BaseOptimizer):
             best_fitness = self._evaluate_parameter_fitness(best_params, features, logo_type)
 
             # Test variations of key parameters
-            key_params = ['color_precision', 'corner_threshold', 'path_precision']
+            key_params = ["color_precision", "corner_threshold", "path_precision"]
 
             for param_name in key_params:
                 if param_name in self.param_ranges:
@@ -202,7 +209,7 @@ class AdaptiveOptimizer(BaseOptimizer):
                     test_values = [
                         min_val + 0.2 * (max_val - min_val),
                         min_val + 0.5 * (max_val - min_val),
-                        min_val + 0.8 * (max_val - min_val)
+                        min_val + 0.8 * (max_val - min_val),
                     ]
 
                     for test_val in test_values:
@@ -250,32 +257,33 @@ class AdaptiveOptimizer(BaseOptimizer):
             logger.error(f"Random search optimization failed: {e}")
             return self._get_default_parameters(logo_type)
 
-    def _evaluate_parameter_fitness(self, params: Dict[str, Any],
-                                   features: Dict[str, float], logo_type: str) -> float:
+    def _evaluate_parameter_fitness(
+        self, params: Dict[str, Any], features: Dict[str, float], logo_type: str
+    ) -> float:
         """Evaluate fitness of parameter set (heuristic for Phase 1)"""
         try:
             fitness = 0.7  # Base fitness
 
-            complexity = features.get('complexity_score', 0.5)
-            unique_colors = features.get('unique_colors', 16)
-            edge_density = features.get('edge_density', 0.1)
+            complexity = features.get("complexity_score", 0.5)
+            unique_colors = features.get("unique_colors", 16)
+            edge_density = features.get("edge_density", 0.1)
 
             # Color precision fitness
-            color_prec = params.get('color_precision', 5)
+            color_prec = params.get("color_precision", 5)
             if unique_colors <= 8 and color_prec <= 4:
                 fitness += 0.1  # Good for simple images
             elif unique_colors > 20 and color_prec >= 6:
                 fitness += 0.1  # Good for complex images
 
             # Corner threshold fitness
-            corner_thresh = params.get('corner_threshold', 50)
+            corner_thresh = params.get("corner_threshold", 50)
             if edge_density > 0.3 and corner_thresh <= 30:
                 fitness += 0.1  # Good for high edge density
             elif edge_density < 0.1 and corner_thresh >= 60:
                 fitness += 0.1  # Good for low edge density
 
             # Path precision fitness
-            path_prec = params.get('path_precision', 15)
+            path_prec = params.get("path_precision", 15)
             if complexity > 0.7 and path_prec >= 20:
                 fitness += 0.1  # Good for complex images
             elif complexity < 0.3 and path_prec <= 10:
@@ -293,22 +301,26 @@ class AdaptiveOptimizer(BaseOptimizer):
     def update_strategy_performance(self, strategy: str, quality: float):
         """Update performance tracking for a strategy"""
         if strategy in self.strategy_performance:
-            current_avg = self.strategy_performance[strategy]['avg_quality']
-            total_uses = self.strategy_performance[strategy]['total_uses']
+            current_avg = self.strategy_performance[strategy]["avg_quality"]
+            total_uses = self.strategy_performance[strategy]["total_uses"]
 
             # Update running average
             new_avg = (current_avg * total_uses + quality) / (total_uses + 1)
-            self.strategy_performance[strategy]['avg_quality'] = new_avg
+            self.strategy_performance[strategy]["avg_quality"] = new_avg
 
     def get_adaptive_stats(self) -> Dict[str, Any]:
         """Get statistics about adaptive optimization"""
         return {
-            'strategy_performance': self.strategy_performance,
-            'total_optimizations': sum(
-                stats['total_uses'] for stats in self.strategy_performance.values()
+            "strategy_performance": self.strategy_performance,
+            "total_optimizations": sum(
+                stats["total_uses"] for stats in self.strategy_performance.values()
             ),
-            'best_strategy': max(
-                self.strategy_performance.keys(),
-                key=lambda s: self.strategy_performance[s]['avg_quality']
-            ) if any(s['total_uses'] > 0 for s in self.strategy_performance.values()) else None
+            "best_strategy": (
+                max(
+                    self.strategy_performance.keys(),
+                    key=lambda s: self.strategy_performance[s]["avg_quality"],
+                )
+                if any(s["total_uses"] > 0 for s in self.strategy_performance.values())
+                else None
+            ),
         }

@@ -1,7 +1,6 @@
 # backend/ai_modules/utils/performance_monitor.py
 """Performance monitoring for AI components"""
 
-import time
 import functools
 import psutil
 import logging
@@ -17,6 +16,7 @@ class PerformanceMonitor:
 
     def time_operation(self, operation_name: str):
         """Decorator to time operations"""
+
         def decorator(func):
             @functools.wraps(func)
             def wrapper(*args, **kwargs):
@@ -37,21 +37,25 @@ class PerformanceMonitor:
                     memory_after = psutil.Process().memory_info().rss / 1024 / 1024  # MB
 
                     metrics = {
-                        'duration': end_time - start_time,
-                        'memory_before': memory_before,
-                        'memory_after': memory_after,
-                        'memory_delta': memory_after - memory_before,
-                        'success': success,
-                        'error': error,
-                        'timestamp': time.time()
+                        "duration": end_time - start_time,
+                        "memory_before": memory_before,
+                        "memory_after": memory_after,
+                        "memory_delta": memory_after - memory_before,
+                        "success": success,
+                        "error": error,
+                        "timestamp": time.time(),
                     }
 
                     self.record_metrics(operation_name, metrics)
-                    logger.info(f"{operation_name}: {metrics['duration']:.3f}s, "
-                              f"memory: +{metrics['memory_delta']:.1f}MB")
+                    logger.info(
+                        f"{operation_name}: {metrics['duration']:.3f}s, "
+                        f"memory: +{metrics['memory_delta']:.1f}MB"
+                    )
 
                 return result
+
             return wrapper
+
         return decorator
 
     def record_metrics(self, operation: str, metrics: Dict[str, Any]):
@@ -74,16 +78,16 @@ class PerformanceMonitor:
         if not data:
             return {}
 
-        durations = [m['duration'] for m in data if m['success']]
-        memory_deltas = [m['memory_delta'] for m in data if m['success']]
+        durations = [m["duration"] for m in data if m["success"]]
+        memory_deltas = [m["memory_delta"] for m in data if m["success"]]
 
         return {
-            'total_operations': len(data),
-            'successful_operations': len(durations),
-            'average_duration': sum(durations) / len(durations) if durations else 0,
-            'max_duration': max(durations) if durations else 0,
-            'average_memory_delta': sum(memory_deltas) / len(memory_deltas) if memory_deltas else 0,
-            'max_memory_delta': max(memory_deltas) if memory_deltas else 0
+            "total_operations": len(data),
+            "successful_operations": len(durations),
+            "average_duration": sum(durations) / len(durations) if durations else 0,
+            "max_duration": max(durations) if durations else 0,
+            "average_memory_delta": sum(memory_deltas) / len(memory_deltas) if memory_deltas else 0,
+            "max_memory_delta": max(memory_deltas) if memory_deltas else 0,
         }
 
     def get_detailed_metrics(self, operation: str = None) -> Dict[str, List[Dict[str, Any]]]:
@@ -122,14 +126,14 @@ class PerformanceMonitor:
             memory_after = psutil.Process().memory_info().rss / 1024 / 1024
 
             metrics = {
-                'iteration': i + 1,
-                'duration': end_time - start_time,
-                'memory_before': memory_before,
-                'memory_after': memory_after,
-                'memory_delta': memory_after - memory_before,
-                'success': success,
-                'error': error,
-                'timestamp': time.time()
+                "iteration": i + 1,
+                "duration": end_time - start_time,
+                "memory_before": memory_before,
+                "memory_after": memory_after,
+                "memory_delta": memory_after - memory_before,
+                "success": success,
+                "error": error,
+                "timestamp": time.time(),
             }
 
             results.append(metrics)
@@ -175,10 +179,10 @@ class PerformanceMonitor:
                 continue
 
             meets_target = True
-            if 'max_duration' in target:
-                meets_target &= summary['average_duration'] <= target['max_duration']
-            if 'max_memory' in target:
-                meets_target &= summary['average_memory_delta'] <= target['max_memory']
+            if "max_duration" in target:
+                meets_target &= summary["average_duration"] <= target["max_duration"]
+            if "max_memory" in target:
+                meets_target &= summary["average_memory_delta"] <= target["max_memory"]
 
             results[operation] = meets_target
 

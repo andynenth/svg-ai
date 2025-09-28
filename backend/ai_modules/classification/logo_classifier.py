@@ -11,6 +11,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class LogoClassifier:
     """Deep learning-based logo classifier"""
 
@@ -18,18 +19,19 @@ class LogoClassifier:
         self.model_path = model_path
         self.model = None
         self.transform = None
-        self.class_names = ['simple', 'text', 'gradient', 'complex']
-        self.device = torch.device('cpu')  # CPU-only for Phase 1
+        self.class_names = ["simple", "text", "gradient", "complex"]
+        self.device = torch.device("cpu")  # CPU-only for Phase 1
         self._setup_transforms()
 
     def _setup_transforms(self):
         """Setup image preprocessing transforms"""
-        self.transform = transforms.Compose([
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                               std=[0.229, 0.224, 0.225])
-        ])
+        self.transform = transforms.Compose(
+            [
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            ]
+        )
 
     def _create_model(self) -> nn.Module:
         """Create a simple classification model"""
@@ -49,7 +51,7 @@ class LogoClassifier:
             nn.ReLU(),
             nn.Dropout(0.5),
             nn.Linear(64, len(self.class_names)),
-            nn.Softmax(dim=1)
+            nn.Softmax(dim=1),
         )
         return model
 
@@ -90,7 +92,7 @@ class LogoClassifier:
                 self.load_model()
 
             # Load and preprocess image
-            image = Image.open(image_path).convert('RGB')
+            image = Image.open(image_path).convert("RGB")
             input_tensor = self.transform(image).unsqueeze(0).to(self.device)
 
             # Run inference
@@ -116,7 +118,7 @@ class LogoClassifier:
         """Provide fallback classification when model fails"""
         try:
             # Simple rule-based fallback
-            image = Image.open(image_path).convert('RGB')
+            image = Image.open(image_path).convert("RGB")
             img_array = np.array(image)
 
             # Calculate simple features
@@ -126,53 +128,53 @@ class LogoClassifier:
 
             # Simple classification rules
             if unique_colors <= 5 and 0.8 <= aspect_ratio <= 1.2:
-                return 'simple', 0.6
+                return "simple", 0.6
             elif unique_colors <= 10 and (aspect_ratio > 2.0 or aspect_ratio < 0.5):
-                return 'text', 0.6
+                return "text", 0.6
             elif unique_colors > 30:
-                return 'gradient', 0.6
+                return "gradient", 0.6
             else:
-                return 'complex', 0.6
+                return "complex", 0.6
 
         except Exception as e:
             logger.error(f"Fallback classification failed: {e}")
-            return 'simple', 0.5  # Ultimate fallback
+            return "simple", 0.5  # Ultimate fallback
 
     def classify_from_features(self, features: Dict[str, float]) -> Tuple[str, float]:
         """Classify based on pre-extracted features"""
         try:
-            complexity = features.get('complexity_score', 0.5)
-            unique_colors = features.get('unique_colors', 16)
-            edge_density = features.get('edge_density', 0.1)
-            aspect_ratio = features.get('aspect_ratio', 1.0)
-            fill_ratio = features.get('fill_ratio', 0.3)
+            complexity = features.get("complexity_score", 0.5)
+            unique_colors = features.get("unique_colors", 16)
+            edge_density = features.get("edge_density", 0.1)
+            aspect_ratio = features.get("aspect_ratio", 1.0)
+            fill_ratio = features.get("fill_ratio", 0.3)
 
             # Feature-based classification rules
             confidence = 0.7  # Base confidence for rule-based classification
 
             # Simple logos: low complexity, few colors, regular shape
             if complexity < 0.3 and unique_colors <= 8 and 0.7 <= aspect_ratio <= 1.3:
-                return 'simple', confidence
+                return "simple", confidence
 
             # Text logos: high edge density, horizontal aspect ratio
             elif edge_density > 0.2 and (aspect_ratio > 2.0 or aspect_ratio < 0.5):
-                return 'text', confidence
+                return "text", confidence
 
             # Gradient logos: many colors, low edge density
             elif unique_colors > 25 and edge_density < 0.15:
-                return 'gradient', confidence
+                return "gradient", confidence
 
             # Complex logos: high complexity or many features
             elif complexity > 0.6 or (unique_colors > 15 and edge_density > 0.15):
-                return 'complex', confidence
+                return "complex", confidence
 
             # Default to simple for ambiguous cases
             else:
-                return 'simple', 0.5
+                return "simple", 0.5
 
         except Exception as e:
             logger.error(f"Feature-based classification failed: {e}")
-            return 'simple', 0.5
+            return "simple", 0.5
 
     def get_class_probabilities(self, image_path: str) -> Dict[str, float]:
         """Get probabilities for all classes"""
@@ -180,7 +182,7 @@ class LogoClassifier:
             if self.model is None:
                 self.load_model()
 
-            image = Image.open(image_path).convert('RGB')
+            image = Image.open(image_path).convert("RGB")
             input_tensor = self.transform(image).unsqueeze(0).to(self.device)
 
             with torch.no_grad():
@@ -188,8 +190,7 @@ class LogoClassifier:
                 probabilities = outputs[0]
 
             return {
-                class_name: prob.item()
-                for class_name, prob in zip(self.class_names, probabilities)
+                class_name: prob.item() for class_name, prob in zip(self.class_names, probabilities)
             }
 
         except Exception as e:

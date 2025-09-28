@@ -6,14 +6,16 @@ __author__ = "SVG-AI Team"
 
 # Import checks for dependencies
 try:
-    import torch
-    import sklearn
-    import cv2
-    import numpy as np
+    import torch  # noqa: F401
+    import sklearn  # noqa: F401
+    import cv2  # noqa: F401
+    import numpy as np  # noqa: F401
+
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     DEPENDENCIES_AVAILABLE = False
     MISSING_DEPENDENCY = str(e)
+
 
 def check_dependencies():
     """Check if all AI dependencies are available"""

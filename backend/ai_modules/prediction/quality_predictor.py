@@ -4,7 +4,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any
 import logging
 from .base_predictor import BasePredictor
 from backend.ai_modules.config import MODEL_CONFIG
@@ -16,11 +16,11 @@ class QualityPredictor(BasePredictor):
 
     def __init__(self, model_path: str = None):
         super().__init__("QualityPredictor")
-        self.model_path = model_path or MODEL_CONFIG['quality_predictor']['path']
+        self.model_path = model_path or MODEL_CONFIG["quality_predictor"]["path"]
         self.model = None
         self.feature_scaler = None
         self.param_scaler = None
-        self.device = torch.device('cpu')  # CPU-only for Phase 1
+        self.device = torch.device("cpu")  # CPU-only for Phase 1
 
     def _load_model(self):
         """Load or create the quality prediction model"""
@@ -29,12 +29,12 @@ class QualityPredictor(BasePredictor):
                 # Try to load pre-trained model
                 checkpoint = torch.load(self.model_path, map_location=self.device)
                 self.model = self._create_model()
-                self.model.load_state_dict(checkpoint['model_state_dict'])
+                self.model.load_state_dict(checkpoint["model_state_dict"])
 
-                if 'feature_scaler' in checkpoint:
-                    self.feature_scaler = checkpoint['feature_scaler']
-                if 'param_scaler' in checkpoint:
-                    self.param_scaler = checkpoint['param_scaler']
+                if "feature_scaler" in checkpoint:
+                    self.feature_scaler = checkpoint["feature_scaler"]
+                if "param_scaler" in checkpoint:
+                    self.param_scaler = checkpoint["param_scaler"]
 
                 logger.info(f"Loaded quality predictor from {self.model_path}")
             else:
@@ -55,9 +55,9 @@ class QualityPredictor(BasePredictor):
     def _create_model(self) -> nn.Module:
         """Create quality prediction neural network"""
         # Input dimensions from config
-        config = MODEL_CONFIG['quality_predictor']
-        input_dim = config['input_dim']  # 2048 image features + 8 VTracer params
-        hidden_dims = config['hidden_dims']  # [512, 256, 128]
+        config = MODEL_CONFIG["quality_predictor"]
+        input_dim = config["input_dim"]  # 2048 image features + 8 VTracer params
+        hidden_dims = config["hidden_dims"]  # [512, 256, 128]
 
         layers = []
 
@@ -94,27 +94,40 @@ class QualityPredictor(BasePredictor):
             logger.error(f"Neural network prediction failed: {e}")
             return self._get_fallback_prediction(features, parameters)
 
-    def _prepare_input(self, features: Dict[str, float], parameters: Dict[str, Any]) -> torch.Tensor:
+    def _prepare_input(
+        self, features: Dict[str, float], parameters: Dict[str, Any]
+    ) -> torch.Tensor:
         """Prepare input tensor from features and parameters"""
         # Extract and normalize features (8 features)
-        feature_values = np.array([
-            features.get('complexity_score', 0.5),
-            features.get('unique_colors', 16) / 100.0,  # Normalize
-            features.get('edge_density', 0.1),
-            features.get('aspect_ratio', 1.0),
-            features.get('fill_ratio', 0.3),
-            features.get('entropy', 6.0) / 10.0,  # Normalize
-            features.get('corner_density', 0.01) * 100.0,  # Scale up
-            features.get('gradient_strength', 25.0) / 100.0  # Normalize
-        ], dtype=np.float32)
+        feature_values = np.array(
+            [
+                features.get("complexity_score", 0.5),
+                features.get("unique_colors", 16) / 100.0,  # Normalize
+                features.get("edge_density", 0.1),
+                features.get("aspect_ratio", 1.0),
+                features.get("fill_ratio", 0.3),
+                features.get("entropy", 6.0) / 10.0,  # Normalize
+                features.get("corner_density", 0.01) * 100.0,  # Scale up
+                features.get("gradient_strength", 25.0) / 100.0,  # Normalize
+            ],
+            dtype=np.float32,
+        )
 
         # Extract and normalize parameters (8 parameters)
         from backend.ai_modules.config import VTRACER_PARAM_RANGES
+
         param_values = []
 
-        for param_name in ['color_precision', 'corner_threshold', 'path_precision',
-                          'layer_difference', 'splice_threshold', 'filter_speckle',
-                          'segment_length', 'max_iterations']:
+        for param_name in [
+            "color_precision",
+            "corner_threshold",
+            "path_precision",
+            "layer_difference",
+            "splice_threshold",
+            "filter_speckle",
+            "segment_length",
+            "max_iterations",
+        ]:
             value = parameters.get(param_name, 0)
             if param_name in VTRACER_PARAM_RANGES:
                 min_val, max_val = VTRACER_PARAM_RANGES[param_name]
@@ -138,9 +151,9 @@ class QualityPredictor(BasePredictor):
     def train_model(self, training_data: Dict[str, list], epochs: int = 100) -> bool:
         """Train the quality prediction model"""
         try:
-            features_list = training_data.get('features', [])
-            parameters_list = training_data.get('parameters', [])
-            qualities_list = training_data.get('qualities', [])
+            features_list = training_data.get("features", [])
+            parameters_list = training_data.get("parameters", [])
+            qualities_list = training_data.get("qualities", [])
 
             if len(features_list) < 10:
                 logger.warning("Insufficient training data for quality predictor")
@@ -192,9 +205,9 @@ class QualityPredictor(BasePredictor):
         try:
             if self.model is not None:
                 checkpoint = {
-                    'model_state_dict': self.model.state_dict(),
-                    'feature_scaler': self.feature_scaler,
-                    'param_scaler': self.param_scaler
+                    "model_state_dict": self.model.state_dict(),
+                    "feature_scaler": self.feature_scaler,
+                    "param_scaler": self.param_scaler,
                 }
                 torch.save(checkpoint, save_path)
                 logger.info(f"Saved quality predictor to {save_path}")
@@ -206,12 +219,12 @@ class QualityPredictor(BasePredictor):
     def evaluate_model(self, test_data: Dict[str, list]) -> Dict[str, float]:
         """Evaluate model performance"""
         try:
-            features_list = test_data.get('features', [])
-            parameters_list = test_data.get('parameters', [])
-            true_qualities = test_data.get('qualities', [])
+            features_list = test_data.get("features", [])
+            parameters_list = test_data.get("parameters", [])
+            true_qualities = test_data.get("qualities", [])
 
             if len(features_list) == 0:
-                return {'mse': float('inf'), 'mae': float('inf')}
+                return {"mse": float("inf"), "mae": float("inf")}
 
             predictions = []
             for features, params in zip(features_list, parameters_list):
@@ -231,22 +244,22 @@ class QualityPredictor(BasePredictor):
             r2 = 1 - (ss_res / ss_tot) if ss_tot > 0 else 0
 
             return {
-                'mse': float(mse),
-                'mae': float(mae),
-                'r2': float(r2),
-                'samples': len(predictions)
+                "mse": float(mse),
+                "mae": float(mae),
+                "r2": float(r2),
+                "samples": len(predictions),
             }
 
         except Exception as e:
             logger.error(f"Model evaluation failed: {e}")
-            return {'mse': float('inf'), 'mae': float('inf'), 'r2': 0.0}
+            return {"mse": float("inf"), "mae": float("inf"), "r2": 0.0}
 
     def get_model_info(self) -> Dict[str, Any]:
         """Get information about the model"""
         info = {
-            'model_loaded': self.model is not None,
-            'model_path': str(self.model_path),
-            'device': str(self.device)
+            "model_loaded": self.model is not None,
+            "model_path": str(self.model_path),
+            "device": str(self.device),
         }
 
         if self.model is not None:
@@ -254,10 +267,12 @@ class QualityPredictor(BasePredictor):
             total_params = sum(p.numel() for p in self.model.parameters())
             trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
 
-            info.update({
-                'total_parameters': total_params,
-                'trainable_parameters': trainable_params,
-                'model_architecture': str(self.model)
-            })
+            info.update(
+                {
+                    "total_parameters": total_params,
+                    "trainable_parameters": trainable_params,
+                    "model_architecture": str(self.model),
+                }
+            )
 
         return info

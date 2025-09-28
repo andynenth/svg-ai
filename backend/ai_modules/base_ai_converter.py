@@ -1,13 +1,14 @@
 # backend/ai_modules/base_ai_converter.py
 """Base class for AI-enhanced converters"""
 
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from typing import Dict, Any, Tuple
 import time
 import logging
 from backend.converters.base import BaseConverter
 
 logger = logging.getLogger(__name__)
+
 
 class BaseAIConverter(BaseConverter):
     """Base class for AI-enhanced SVG converters"""
@@ -58,24 +59,16 @@ class BaseAIConverter(BaseConverter):
 
             # Collect metadata
             metadata = {
-                'features': features,
-                'logo_type': logo_type,
-                'confidence': confidence,
-                'parameters': parameters,
-                'predicted_quality': predicted_quality,
-                'processing_time': time.time() - start_time
+                "features": features,
+                "logo_type": logo_type,
+                "confidence": confidence,
+                "parameters": parameters,
+                "predicted_quality": predicted_quality,
+                "processing_time": time.time() - start_time,
             }
 
-            return {
-                'svg': svg_content,
-                'metadata': metadata,
-                'success': True
-            }
+            return {"svg": svg_content, "metadata": metadata, "success": True}
 
         except Exception as e:
             logger.error(f"AI conversion failed: {e}")
-            return {
-                'svg': None,
-                'metadata': {'error': str(e)},
-                'success': False
-            }
+            return {"svg": None, "metadata": {"error": str(e)}, "success": False}

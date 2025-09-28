@@ -8,17 +8,14 @@ import time
 
 logger = logging.getLogger(__name__)
 
+
 class BaseFeatureExtractor(ABC):
     """Base class for image feature extraction"""
 
     def __init__(self, cache_enabled: bool = True):
         self.cache_enabled = cache_enabled
         self.feature_cache = {}
-        self.extraction_stats = {
-            'total_extractions': 0,
-            'cache_hits': 0,
-            'average_time': 0.0
-        }
+        self.extraction_stats = {"total_extractions": 0, "cache_hits": 0, "average_time": 0.0}
 
     @abstractmethod
     def _extract_features_impl(self, image_path: str) -> Dict[str, float]:
@@ -31,7 +28,7 @@ class BaseFeatureExtractor(ABC):
 
         # Check cache first
         if self.cache_enabled and image_path in self.feature_cache:
-            self.extraction_stats['cache_hits'] += 1
+            self.extraction_stats["cache_hits"] += 1
             logger.debug(f"Cache hit for {image_path}")
             return self.feature_cache[image_path]
 
@@ -45,11 +42,12 @@ class BaseFeatureExtractor(ABC):
 
             # Update stats
             extraction_time = time.time() - start_time
-            self.extraction_stats['total_extractions'] += 1
-            self.extraction_stats['average_time'] = (
-                (self.extraction_stats['average_time'] * (self.extraction_stats['total_extractions'] - 1) + extraction_time)
-                / self.extraction_stats['total_extractions']
-            )
+            self.extraction_stats["total_extractions"] += 1
+            self.extraction_stats["average_time"] = (
+                self.extraction_stats["average_time"]
+                * (self.extraction_stats["total_extractions"] - 1)
+                + extraction_time
+            ) / self.extraction_stats["total_extractions"]
 
             logger.debug(f"Features extracted for {image_path} in {extraction_time:.3f}s")
             return features
@@ -62,12 +60,12 @@ class BaseFeatureExtractor(ABC):
     def _get_default_features(self) -> Dict[str, float]:
         """Return default features when extraction fails"""
         return {
-            'edge_density': 0.1,
-            'unique_colors': 16,
-            'entropy': 6.0,
-            'corner_density': 0.01,
-            'gradient_strength': 25.0,
-            'complexity_score': 0.5
+            "edge_density": 0.1,
+            "unique_colors": 16,
+            "entropy": 6.0,
+            "corner_density": 0.01,
+            "gradient_strength": 25.0,
+            "complexity_score": 0.5,
         }
 
     def clear_cache(self):
@@ -77,11 +75,11 @@ class BaseFeatureExtractor(ABC):
 
     def get_stats(self) -> Dict[str, Any]:
         """Get extraction statistics"""
-        cache_hit_rate = (
-            self.extraction_stats['cache_hits'] / max(1, self.extraction_stats['total_extractions'])
+        cache_hit_rate = self.extraction_stats["cache_hits"] / max(
+            1, self.extraction_stats["total_extractions"]
         )
         return {
             **self.extraction_stats,
-            'cache_hit_rate': cache_hit_rate,
-            'cache_size': len(self.feature_cache)
+            "cache_hit_rate": cache_hit_rate,
+            "cache_size": len(self.feature_cache),
         }

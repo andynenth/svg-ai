@@ -9,6 +9,7 @@ from .base_feature_extractor import BaseFeatureExtractor
 
 logger = logging.getLogger(__name__)
 
+
 class ImageFeatureExtractor(BaseFeatureExtractor):
     """Extract features from images for AI processing"""
 
@@ -33,14 +34,14 @@ class ImageFeatureExtractor(BaseFeatureExtractor):
 
         # Extract features
         features = {
-            'edge_density': self._calculate_edge_density(image),
-            'unique_colors': self._count_unique_colors(image),
-            'entropy': self._calculate_entropy(image),
-            'corner_density': self._calculate_corner_density(image),
-            'gradient_strength': self._calculate_gradient_strength(image),
-            'complexity_score': self._calculate_complexity_score(image),
-            'aspect_ratio': self._calculate_aspect_ratio(image),
-            'fill_ratio': self._calculate_fill_ratio(image)
+            "edge_density": self._calculate_edge_density(image),
+            "unique_colors": self._count_unique_colors(image),
+            "entropy": self._calculate_entropy(image),
+            "corner_density": self._calculate_corner_density(image),
+            "gradient_strength": self._calculate_gradient_strength(image),
+            "complexity_score": self._calculate_complexity_score(image),
+            "aspect_ratio": self._calculate_aspect_ratio(image),
+            "fill_ratio": self._calculate_fill_ratio(image),
         }
 
         return features
@@ -67,7 +68,11 @@ class ImageFeatureExtractor(BaseFeatureExtractor):
             reduced_pixels = (pixels // 16) * 16
 
             # Count unique colors
-            unique_colors = len(np.unique(reduced_pixels.view(np.dtype((np.void, reduced_pixels.dtype.itemsize * 3)))))
+            unique_colors = len(
+                np.unique(
+                    reduced_pixels.view(np.dtype((np.void, reduced_pixels.dtype.itemsize * 3)))
+                )
+            )
 
             return min(unique_colors, 256)  # Cap at reasonable maximum
         except Exception as e:

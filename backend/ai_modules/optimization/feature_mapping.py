@@ -10,6 +10,7 @@ from .base_optimizer import BaseOptimizer
 
 logger = logging.getLogger(__name__)
 
+
 class FeatureMappingOptimizer(BaseOptimizer):
     """Optimize VTracer parameters using feature mapping"""
 
@@ -17,7 +18,7 @@ class FeatureMappingOptimizer(BaseOptimizer):
         super().__init__("FeatureMapping")
         self.feature_scaler = StandardScaler()
         self.parameter_models = {}
-        self.training_data = {'features': [], 'parameters': [], 'qualities': []}
+        self.training_data = {"features": [], "parameters": [], "qualities": []}
         self.is_trained = False
 
     def _optimize_impl(self, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
@@ -42,54 +43,55 @@ class FeatureMappingOptimizer(BaseOptimizer):
         params = self._get_default_parameters(logo_type).copy()
 
         # Adjust based on features
-        complexity = features.get('complexity_score', 0.5)
-        unique_colors = features.get('unique_colors', 16)
-        edge_density = features.get('edge_density', 0.1)
-        aspect_ratio = features.get('aspect_ratio', 1.0)
+        complexity = features.get("complexity_score", 0.5)
+        unique_colors = features.get("unique_colors", 16)
+        edge_density = features.get("edge_density", 0.1)
+        aspect_ratio = features.get("aspect_ratio", 1.0)
 
         # Color precision adjustment
         if unique_colors <= 4:
-            params['color_precision'] = max(1, params['color_precision'] - 1)
+            params["color_precision"] = max(1, params["color_precision"] - 1)
         elif unique_colors >= 30:
-            params['color_precision'] = min(10, params['color_precision'] + 2)
+            params["color_precision"] = min(10, params["color_precision"] + 2)
 
         # Corner threshold adjustment based on edge density
         if edge_density > 0.3:
-            params['corner_threshold'] = max(10, params['corner_threshold'] - 15)
+            params["corner_threshold"] = max(10, params["corner_threshold"] - 15)
         elif edge_density < 0.1:
-            params['corner_threshold'] = min(100, params['corner_threshold'] + 10)
+            params["corner_threshold"] = min(100, params["corner_threshold"] + 10)
 
         # Path precision adjustment based on complexity
         if complexity > 0.7:
-            params['path_precision'] = min(50, params['path_precision'] + 10)
+            params["path_precision"] = min(50, params["path_precision"] + 10)
         elif complexity < 0.3:
-            params['path_precision'] = max(5, params['path_precision'] - 5)
+            params["path_precision"] = max(5, params["path_precision"] - 5)
 
         # Layer difference adjustment
         if unique_colors > 20:
-            params['layer_difference'] = min(10, params['layer_difference'] + 2)
+            params["layer_difference"] = min(10, params["layer_difference"] + 2)
 
         # Splice threshold based on complexity and edges
         complexity_factor = complexity * 20
         edge_factor = edge_density * 30
-        params['splice_threshold'] = int(max(20, min(100,
-            params['splice_threshold'] + complexity_factor + edge_factor)))
+        params["splice_threshold"] = int(
+            max(20, min(100, params["splice_threshold"] + complexity_factor + edge_factor))
+        )
 
         # Filter speckle based on complexity
         if complexity < 0.3:
-            params['filter_speckle'] = max(1, params['filter_speckle'] - 2)
+            params["filter_speckle"] = max(1, params["filter_speckle"] - 2)
         elif complexity > 0.7:
-            params['filter_speckle'] = min(50, params['filter_speckle'] + 3)
+            params["filter_speckle"] = min(50, params["filter_speckle"] + 3)
 
         # Segment length adjustment
         if aspect_ratio > 2.0 or aspect_ratio < 0.5:  # Very elongated
-            params['segment_length'] = max(5, params['segment_length'] - 2)
+            params["segment_length"] = max(5, params["segment_length"] - 2)
 
         # Max iterations based on complexity
         if complexity > 0.8:
-            params['max_iterations'] = min(30, params['max_iterations'] + 5)
+            params["max_iterations"] = min(30, params["max_iterations"] + 5)
         elif complexity < 0.2:
-            params['max_iterations'] = max(5, params['max_iterations'] - 2)
+            params["max_iterations"] = max(5, params["max_iterations"] - 2)
 
         logger.debug(f"Rule-based mapping result: {params}")
         return params
@@ -123,9 +125,9 @@ class FeatureMappingOptimizer(BaseOptimizer):
     def train_from_data(self, training_data: Dict[str, list]):
         """Train models from collected data"""
         try:
-            features_list = training_data.get('features', [])
-            parameters_list = training_data.get('parameters', [])
-            qualities_list = training_data.get('qualities', [])
+            features_list = training_data.get("features", [])
+            parameters_list = training_data.get("parameters", [])
+            qualities_list = training_data.get("qualities", [])
 
             if len(features_list) < 10:  # Need minimum data
                 logger.warning("Insufficient training data for feature mapping")
@@ -160,22 +162,28 @@ class FeatureMappingOptimizer(BaseOptimizer):
         """Convert feature dictionary to numpy array"""
         # Define consistent feature order
         feature_names = [
-            'complexity_score', 'unique_colors', 'edge_density',
-            'aspect_ratio', 'fill_ratio', 'entropy',
-            'corner_density', 'gradient_strength'
+            "complexity_score",
+            "unique_colors",
+            "edge_density",
+            "aspect_ratio",
+            "fill_ratio",
+            "entropy",
+            "corner_density",
+            "gradient_strength",
         ]
 
         return np.array([features.get(name, 0.0) for name in feature_names])
 
-    def add_training_example(self, features: Dict[str, float],
-                           parameters: Dict[str, Any], quality: float):
+    def add_training_example(
+        self, features: Dict[str, float], parameters: Dict[str, Any], quality: float
+    ):
         """Add a training example"""
-        self.training_data['features'].append(features)
-        self.training_data['parameters'].append(parameters)
-        self.training_data['qualities'].append(quality)
+        self.training_data["features"].append(features)
+        self.training_data["parameters"].append(parameters)
+        self.training_data["qualities"].append(quality)
 
         # Retrain if we have enough data
-        if len(self.training_data['features']) % 20 == 0:  # Retrain every 20 examples
+        if len(self.training_data["features"]) % 20 == 0:  # Retrain every 20 examples
             self.train_from_data(self.training_data)
 
     def get_feature_importance(self) -> Dict[str, float]:
@@ -184,9 +192,14 @@ class FeatureMappingOptimizer(BaseOptimizer):
             return {}
 
         feature_names = [
-            'complexity_score', 'unique_colors', 'edge_density',
-            'aspect_ratio', 'fill_ratio', 'entropy',
-            'corner_density', 'gradient_strength'
+            "complexity_score",
+            "unique_colors",
+            "edge_density",
+            "aspect_ratio",
+            "fill_ratio",
+            "entropy",
+            "corner_density",
+            "gradient_strength",
         ]
 
         # Average importance across all parameter models
@@ -194,7 +207,7 @@ class FeatureMappingOptimizer(BaseOptimizer):
         model_count = 0
 
         for model in self.parameter_models.values():
-            if hasattr(model, 'feature_importances_'):
+            if hasattr(model, "feature_importances_"):
                 importance_sum += model.feature_importances_
                 model_count += 1
 
@@ -207,19 +220,19 @@ class FeatureMappingOptimizer(BaseOptimizer):
     def get_optimization_insights(self) -> Dict[str, Any]:
         """Get insights about the optimization process"""
         insights = {
-            'training_examples': len(self.training_data['features']),
-            'is_trained': self.is_trained,
-            'trained_parameters': list(self.parameter_models.keys()),
-            'feature_importance': self.get_feature_importance()
+            "training_examples": len(self.training_data["features"]),
+            "is_trained": self.is_trained,
+            "trained_parameters": list(self.parameter_models.keys()),
+            "feature_importance": self.get_feature_importance(),
         }
 
-        if self.training_data['qualities']:
-            qualities = self.training_data['qualities']
-            insights['quality_stats'] = {
-                'mean': np.mean(qualities),
-                'std': np.std(qualities),
-                'min': min(qualities),
-                'max': max(qualities)
+        if self.training_data["qualities"]:
+            qualities = self.training_data["qualities"]
+            insights["quality_stats"] = {
+                "mean": np.mean(qualities),
+                "std": np.std(qualities),
+                "min": min(qualities),
+                "max": max(qualities),
             }
 
         return insights

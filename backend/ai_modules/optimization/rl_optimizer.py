@@ -6,11 +6,13 @@ import gymnasium as gym
 from gymnasium import spaces
 from typing import Dict, Any, Tuple
 import logging
+import os
 from stable_baselines3 import PPO
 from .base_optimizer import BaseOptimizer
 from .vtracer_environment import VTracerEnvironment
 
 logger = logging.getLogger(__name__)
+
 
 class RLOptimizer(BaseOptimizer):
     """Optimize VTracer parameters using reinforcement learning"""
@@ -56,7 +58,7 @@ class RLOptimizer(BaseOptimizer):
             else:
                 logger.info("Creating new RL agent")
                 self.agent = PPO(
-                    'MlpPolicy',
+                    "MlpPolicy",
                     self.environment,
                     learning_rate=3e-4,
                     n_steps=2048,
@@ -65,14 +67,16 @@ class RLOptimizer(BaseOptimizer):
                     gamma=0.99,
                     gae_lambda=0.95,
                     clip_range=0.2,
-                    verbose=0
+                    verbose=0,
                 )
 
         except Exception as e:
             logger.error(f"Agent initialization failed: {e}")
             raise
 
-    def _run_optimization_episode(self, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
+    def _run_optimization_episode(
+        self, features: Dict[str, float], logo_type: str
+    ) -> Dict[str, Any]:
         """Run a single optimization episode"""
         try:
             # Reset environment with current features
@@ -97,7 +101,7 @@ class RLOptimizer(BaseOptimizer):
             final_params = self.environment.get_current_parameters()
 
             # Update tracking
-            self.total_reward += info.get('total_reward', 0)
+            self.total_reward += info.get("total_reward", 0)
 
             logger.debug(f"RL episode completed in {step_count} steps")
             return final_params
@@ -109,14 +113,14 @@ class RLOptimizer(BaseOptimizer):
     def train_agent(self, training_data: Dict[str, list], total_timesteps: int = 10000):
         """Train the RL agent"""
         try:
-            if not training_data.get('features'):
+            if not training_data.get("features"):
                 logger.warning("No training data provided for RL training")
                 return False
 
             logger.info(f"Training RL agent for {total_timesteps} timesteps")
 
             # Initialize with first example
-            first_features = training_data['features'][0]
+            first_features = training_data["features"][0]
             if self.agent is None:
                 self._initialize_agent(first_features)
 
@@ -143,7 +147,7 @@ class RLOptimizer(BaseOptimizer):
         """Evaluate agent performance"""
         if self.agent is None:
             logger.warning("No trained agent available for evaluation")
-            return {'average_reward': 0.0, 'success_rate': 0.0}
+            return {"average_reward": 0.0, "success_rate": 0.0}
 
         total_rewards = []
         successful_episodes = 0
@@ -179,23 +183,23 @@ class RLOptimizer(BaseOptimizer):
                 total_rewards.append(0.0)
 
         return {
-            'average_reward': np.mean(total_rewards),
-            'reward_std': np.std(total_rewards),
-            'success_rate': successful_episodes / num_episodes,
-            'total_episodes': num_episodes
+            "average_reward": np.mean(total_rewards),
+            "reward_std": np.std(total_rewards),
+            "success_rate": successful_episodes / num_episodes,
+            "total_episodes": num_episodes,
         }
 
     def get_rl_stats(self) -> Dict[str, Any]:
         """Get RL optimization statistics"""
         stats = {
-            'training_episodes': self.training_episodes,
-            'total_reward': self.total_reward,
-            'agent_initialized': self.agent is not None,
-            'environment_initialized': self.environment is not None
+            "training_episodes": self.training_episodes,
+            "total_reward": self.total_reward,
+            "agent_initialized": self.agent is not None,
+            "environment_initialized": self.environment is not None,
         }
 
         if self.environment:
-            stats['environment_stats'] = self.environment.get_stats()
+            stats["environment_stats"] = self.environment.get_stats()
 
         return stats
 
@@ -212,7 +216,7 @@ class RLOptimizer(BaseOptimizer):
         try:
             if self.environment is None:
                 # Create dummy environment for loading
-                dummy_features = {'complexity_score': 0.5, 'unique_colors': 16}
+                dummy_features = {"complexity_score": 0.5, "unique_colors": 16}
                 self.environment = VTracerEnvironment(dummy_features)
 
             self.agent = PPO.load(path, env=self.environment)

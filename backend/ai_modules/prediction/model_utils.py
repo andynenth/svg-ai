@@ -11,6 +11,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class ModelUtils:
     """Utility class for AI model operations"""
 
@@ -23,16 +24,16 @@ class ModelUtils:
 
             # Save model and metadata
             checkpoint = {
-                'model_state_dict': model.state_dict(),
-                'metadata': metadata,
-                'pytorch_version': torch.__version__
+                "model_state_dict": model.state_dict(),
+                "metadata": metadata,
+                "pytorch_version": torch.__version__,
             }
 
             torch.save(checkpoint, path)
 
             # Save metadata separately as JSON for easy reading
-            metadata_path = path.with_suffix('.json')
-            with open(metadata_path, 'w') as f:
+            metadata_path = path.with_suffix(".json")
+            with open(metadata_path, "w") as f:
                 json.dump(metadata, f, indent=2)
 
             logger.info(f"Saved model and metadata to {path}")
@@ -46,13 +47,13 @@ class ModelUtils:
     def load_model_with_metadata(model_class, path: str) -> tuple:
         """Load PyTorch model with metadata"""
         try:
-            checkpoint = torch.load(path, map_location='cpu')
+            checkpoint = torch.load(path, map_location="cpu")
 
             # Create model instance
             model = model_class()
-            model.load_state_dict(checkpoint['model_state_dict'])
+            model.load_state_dict(checkpoint["model_state_dict"])
 
-            metadata = checkpoint.get('metadata', {})
+            metadata = checkpoint.get("metadata", {})
 
             logger.info(f"Loaded model from {path}")
             return model, metadata
@@ -67,9 +68,14 @@ class ModelUtils:
         try:
             # Check features
             required_features = [
-                'complexity_score', 'unique_colors', 'edge_density',
-                'aspect_ratio', 'fill_ratio', 'entropy',
-                'corner_density', 'gradient_strength'
+                "complexity_score",
+                "unique_colors",
+                "edge_density",
+                "aspect_ratio",
+                "fill_ratio",
+                "entropy",
+                "corner_density",
+                "gradient_strength",
             ]
 
             for feature in required_features:
@@ -84,9 +90,14 @@ class ModelUtils:
 
             # Check parameters
             required_params = [
-                'color_precision', 'corner_threshold', 'path_precision',
-                'layer_difference', 'splice_threshold', 'filter_speckle',
-                'segment_length', 'max_iterations'
+                "color_precision",
+                "corner_threshold",
+                "path_precision",
+                "layer_difference",
+                "splice_threshold",
+                "filter_speckle",
+                "segment_length",
+                "max_iterations",
             ]
 
             for param in required_params:
@@ -111,27 +122,34 @@ class ModelUtils:
         try:
             # Define normalization parameters (could be learned from data)
             normalization_config = {
-                'complexity_score': {'min': 0.0, 'max': 1.0},
-                'unique_colors': {'min': 1, 'max': 100},
-                'edge_density': {'min': 0.0, 'max': 1.0},
-                'aspect_ratio': {'min': 0.1, 'max': 10.0},
-                'fill_ratio': {'min': 0.0, 'max': 1.0},
-                'entropy': {'min': 0.0, 'max': 10.0},
-                'corner_density': {'min': 0.0, 'max': 0.1},
-                'gradient_strength': {'min': 0.0, 'max': 100.0}
+                "complexity_score": {"min": 0.0, "max": 1.0},
+                "unique_colors": {"min": 1, "max": 100},
+                "edge_density": {"min": 0.0, "max": 1.0},
+                "aspect_ratio": {"min": 0.1, "max": 10.0},
+                "fill_ratio": {"min": 0.0, "max": 1.0},
+                "entropy": {"min": 0.0, "max": 10.0},
+                "corner_density": {"min": 0.0, "max": 0.1},
+                "gradient_strength": {"min": 0.0, "max": 100.0},
             }
 
             normalized_features = []
-            for feature_name in ['complexity_score', 'unique_colors', 'edge_density',
-                               'aspect_ratio', 'fill_ratio', 'entropy',
-                               'corner_density', 'gradient_strength']:
+            for feature_name in [
+                "complexity_score",
+                "unique_colors",
+                "edge_density",
+                "aspect_ratio",
+                "fill_ratio",
+                "entropy",
+                "corner_density",
+                "gradient_strength",
+            ]:
 
                 value = features.get(feature_name, 0.0)
-                norm_config = normalization_config.get(feature_name, {'min': 0, 'max': 1})
+                norm_config = normalization_config.get(feature_name, {"min": 0, "max": 1})
 
                 # Min-max normalization
-                min_val = norm_config['min']
-                max_val = norm_config['max']
+                min_val = norm_config["min"]
+                max_val = norm_config["max"]
                 normalized_value = (value - min_val) / (max_val - min_val)
                 normalized_value = np.clip(normalized_value, 0.0, 1.0)
 
@@ -150,9 +168,16 @@ class ModelUtils:
             from backend.ai_modules.config import VTRACER_PARAM_RANGES
 
             normalized_params = []
-            param_names = ['color_precision', 'corner_threshold', 'path_precision',
-                          'layer_difference', 'splice_threshold', 'filter_speckle',
-                          'segment_length', 'max_iterations']
+            param_names = [
+                "color_precision",
+                "corner_threshold",
+                "path_precision",
+                "layer_difference",
+                "splice_threshold",
+                "filter_speckle",
+                "segment_length",
+                "max_iterations",
+            ]
 
             for param_name in param_names:
                 value = parameters.get(param_name, 0)
@@ -177,39 +202,42 @@ class ModelUtils:
         """Create a summary of model architecture and parameters"""
         try:
             summary = {
-                'model_type': type(model).__name__,
-                'total_parameters': sum(p.numel() for p in model.parameters()),
-                'trainable_parameters': sum(p.numel() for p in model.parameters() if p.requires_grad),
-                'layers': []
+                "model_type": type(model).__name__,
+                "total_parameters": sum(p.numel() for p in model.parameters()),
+                "trainable_parameters": sum(
+                    p.numel() for p in model.parameters() if p.requires_grad
+                ),
+                "layers": [],
             }
 
             # Add layer information
             for name, module in model.named_modules():
                 if len(list(module.children())) == 0:  # Leaf modules only
                     layer_info = {
-                        'name': name,
-                        'type': type(module).__name__,
-                        'parameters': sum(p.numel() for p in module.parameters())
+                        "name": name,
+                        "type": type(module).__name__,
+                        "parameters": sum(p.numel() for p in module.parameters()),
                     }
 
                     # Add specific information for common layer types
-                    if hasattr(module, 'in_features') and hasattr(module, 'out_features'):
-                        layer_info['input_size'] = module.in_features
-                        layer_info['output_size'] = module.out_features
-                    elif hasattr(module, 'num_features'):
-                        layer_info['num_features'] = module.num_features
+                    if hasattr(module, "in_features") and hasattr(module, "out_features"):
+                        layer_info["input_size"] = module.in_features
+                        layer_info["output_size"] = module.out_features
+                    elif hasattr(module, "num_features"):
+                        layer_info["num_features"] = module.num_features
 
-                    summary['layers'].append(layer_info)
+                    summary["layers"].append(layer_info)
 
             return summary
 
         except Exception as e:
             logger.error(f"Model summary creation failed: {e}")
-            return {'error': str(e)}
+            return {"error": str(e)}
 
     @staticmethod
-    def validate_training_data(features_list: List[Dict], parameters_list: List[Dict],
-                             qualities_list: List[float]) -> bool:
+    def validate_training_data(
+        features_list: List[Dict], parameters_list: List[Dict], qualities_list: List[float]
+    ) -> bool:
         """Validate training data consistency"""
         try:
             # Check lengths match
@@ -222,7 +250,9 @@ class ModelUtils:
                 return False
 
             # Check data quality
-            for i, (features, params, quality) in enumerate(zip(features_list, parameters_list, qualities_list)):
+            for i, (features, params, quality) in enumerate(
+                zip(features_list, parameters_list, qualities_list)
+            ):
                 # Validate features
                 if not ModelUtils.validate_model_input(features, params):
                     logger.error(f"Invalid training sample at index {i}")
@@ -268,23 +298,24 @@ class ModelUtils:
             accuracy_05 = np.mean(np.abs(predictions - targets) <= 0.05)  # Within 5%
 
             return {
-                'mse': float(mse),
-                'mae': float(mae),
-                'rmse': float(rmse),
-                'r2': float(r2),
-                'correlation': float(correlation),
-                'accuracy_10pct': float(accuracy_01),
-                'accuracy_5pct': float(accuracy_05),
-                'samples': len(predictions)
+                "mse": float(mse),
+                "mae": float(mae),
+                "rmse": float(rmse),
+                "r2": float(r2),
+                "correlation": float(correlation),
+                "accuracy_10pct": float(accuracy_01),
+                "accuracy_5pct": float(accuracy_05),
+                "samples": len(predictions),
             }
 
         except Exception as e:
             logger.error(f"Metrics calculation failed: {e}")
-            return {'error': str(e)}
+            return {"error": str(e)}
 
     @staticmethod
-    def export_model_for_inference(model: torch.nn.Module, example_input: torch.Tensor,
-                                  output_path: str) -> bool:
+    def export_model_for_inference(
+        model: torch.nn.Module, example_input: torch.Tensor, output_path: str
+    ) -> bool:
         """Export model for optimized inference"""
         try:
             model.eval()
@@ -311,18 +342,18 @@ class ModelUtils:
         try:
             data_path = Path(data_path)
 
-            if data_path.suffix == '.json':
-                with open(data_path, 'r') as f:
+            if data_path.suffix == ".json":
+                with open(data_path, "r") as f:
                     data = json.load(f)
-            elif data_path.suffix in ['.pkl', '.pickle']:
-                with open(data_path, 'rb') as f:
+            elif data_path.suffix in [".pkl", ".pickle"]:
+                with open(data_path, "rb") as f:
                     data = pickle.load(f)
             else:
                 logger.error(f"Unsupported file format: {data_path.suffix}")
                 return None
 
             # Validate data structure
-            required_keys = ['features', 'parameters', 'qualities']
+            required_keys = ["features", "parameters", "qualities"]
             for key in required_keys:
                 if key not in data:
                     logger.error(f"Missing required key in training data: {key}")
@@ -342,17 +373,19 @@ class ModelUtils:
             output_path = Path(output_path)
             output_path.parent.mkdir(parents=True, exist_ok=True)
 
-            if output_path.suffix == '.json':
-                with open(output_path, 'w') as f:
+            if output_path.suffix == ".json":
+                with open(output_path, "w") as f:
                     json.dump(data, f, indent=2)
-            elif output_path.suffix in ['.pkl', '.pickle']:
-                with open(output_path, 'wb') as f:
+            elif output_path.suffix in [".pkl", ".pickle"]:
+                with open(output_path, "wb") as f:
                     pickle.dump(data, f)
             else:
                 logger.error(f"Unsupported file format: {output_path.suffix}")
                 return False
 
-            logger.info(f"Saved training data to {output_path}: {len(data.get('features', []))} samples")
+            logger.info(
+                f"Saved training data to {output_path}: {len(data.get('features', []))} samples"
+            )
             return True
 
         except Exception as e:
