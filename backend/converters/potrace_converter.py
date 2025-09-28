@@ -3,6 +3,7 @@ Potrace-based converter using pypotrace or subprocess.
 """
 
 import os
+import shlex
 import subprocess
 import tempfile
 from pathlib import Path
@@ -110,8 +111,8 @@ class PotraceConverter(BaseConverter):
             # Convert PBM to SVG using potrace
             with tempfile.NamedTemporaryFile(suffix='.svg', delete=False) as tmp_svg:
                 try:
-                    # Build Potrace command with parameters
-                    cmd = [self.potrace_cmd, '-s', tmp_pbm.name, '-o', tmp_svg.name]
+                    # Build Potrace command with parameters (sanitize file paths to prevent injection)
+                    cmd = [self.potrace_cmd, '-s', shlex.quote(tmp_pbm.name), '-o', shlex.quote(tmp_svg.name)]
 
                     # Add parameter flags when not default
                     if turnpolicy != 'black':

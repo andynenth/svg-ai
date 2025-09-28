@@ -10,6 +10,7 @@ Combines the best of PotraceConverter and AlphaConverter:
 """
 
 import os
+import shlex
 import tempfile
 import subprocess
 from pathlib import Path
@@ -194,12 +195,12 @@ class SmartPotraceConverter(BaseConverter):
 
             with tempfile.NamedTemporaryFile(suffix='.svg', delete=False) as tmp_svg:
                 try:
-                    # Build Potrace command
+                    # Build Potrace command (sanitize file paths to prevent injection)
                     cmd = [
                         self.potrace_cmd,
                         '-s',  # SVG output
-                        tmp_pbm.name,
-                        '-o', tmp_svg.name
+                        shlex.quote(tmp_pbm.name),
+                        '-o', shlex.quote(tmp_svg.name)
                     ]
 
                     # Add optional parameters

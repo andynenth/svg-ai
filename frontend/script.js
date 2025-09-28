@@ -513,7 +513,11 @@ async function handleFile(file) {
             console.error('[Progressive] Image failed to load');
             hideImagePlaceholder();
             const container = document.getElementById('originalImageContainer');
-            container.innerHTML = '<p class="error">Failed to load image</p>';
+            if (container) {
+                container.innerHTML = '<p class="error">Failed to load image</p>';
+            } else {
+                console.warn('[Progressive] originalImageContainer not found, skipping error display');
+            }
         };
 
         // Fallback timeout to hide placeholder if something goes wrong
@@ -922,12 +926,13 @@ function showImagePlaceholder(file) {
     // Display file information (only if element exists)
     if (imageInfo) {
         const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
-        imageInfo.innerHTML = `
+        // Sanitize user-provided filename and type to prevent XSS
+        imageInfo.innerHTML = DOMPurify.sanitize(`
             <strong>${file.name}</strong><br>
             Size: ${fileSizeMB} MB<br>
             Type: ${file.type}<br>
             <em>Loading preview...</em>
-        `;
+        `);
     }
 
     console.log('[Progressive] Showing placeholder for:', file.name);
@@ -956,7 +961,8 @@ function displayOptimizedSVG(svgContent) {
     // Create wrapper for zoom functionality
     const svgWrapper = document.createElement('div');
     svgWrapper.className = 'svg-wrapper';
-    svgWrapper.innerHTML = svgContent;
+    // Sanitize SVG content to prevent XSS attacks
+    svgWrapper.innerHTML = DOMPurify.sanitize(svgContent);
 
     // Get SVG element
     const svgElement = svgWrapper.querySelector('svg');

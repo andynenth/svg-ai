@@ -6,6 +6,7 @@ Provides REST endpoints for PNG to SVG conversion
 
 import os
 import json
+import re
 import tempfile
 import traceback
 import hashlib
@@ -47,6 +48,88 @@ if not os.path.exists(UPLOAD_FOLDER):
 metrics = QualityMetrics()
 
 
+def validate_file_content(content: bytes, filename: str) -> tuple[bool, str]:
+    """
+    Validate file content to ensure it matches the expected format.
+
+    Args:
+        content: File content bytes
+        filename: Original filename
+
+    Returns:
+        Tuple of (is_valid, error_message)
+    """
+    if not content:
+        return False, "Empty file"
+
+    # File size limit (10MB)
+    max_size = 10 * 1024 * 1024
+    if len(content) > max_size:
+        return False, f"File too large (max {max_size // (1024*1024)}MB)"
+
+    # Check magic bytes for file type detection
+    magic_bytes = content[:8]
+
+    # PNG magic bytes: 89 50 4E 47 0D 0A 1A 0A
+    png_magic = b'\x89\x50\x4E\x47\x0D\x0A\x1A\x0A'
+
+    # JPEG magic bytes: FF D8 FF
+    jpeg_magic = b'\xFF\xD8\xFF'
+
+    if magic_bytes.startswith(png_magic):
+        if not filename.lower().endswith('.png'):
+            return False, "File content is PNG but extension is not .png"
+        return True, ""
+    elif magic_bytes.startswith(jpeg_magic):
+        if not filename.lower().endswith(('.jpg', '.jpeg')):
+            return False, "File content is JPEG but extension is not .jpg/.jpeg"
+        return True, ""
+    else:
+        return False, "File content is not a valid PNG or JPEG image"
+
+
+def validate_file_id(file_id: str) -> bool:
+    """
+    Validate file_id to prevent path traversal attacks.
+
+    Args:
+        file_id: File identifier to validate
+
+    Returns:
+        True if file_id is safe, False otherwise
+    """
+    if not file_id:
+        return False
+
+    # Length check (MD5 hashes are 32 characters)
+    if len(file_id) > 64:  # Allow some flexibility
+        return False
+
+    # Only allow alphanumeric characters (MD5 hashes are hexadecimal)
+    if not re.match(r'^[a-fA-F0-9]+$', file_id):
+        return False
+
+    return True
+
+
+@app.after_request
+def add_security_headers(response):
+    """Add security headers to prevent XSS and other attacks"""
+    # Content Security Policy to prevent inline scripts while allowing necessary functionality
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' https://cdn.jsdelivr.net; "
+        "style-src 'self' 'unsafe-inline'; "
+        "img-src 'self' data: blob:; "
+        "connect-src 'self' https://cdn.jsdelivr.net"
+    )
+    # Additional security headers
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    return response
+
+
 @app.route("/")
 def serve_frontend():
     """Serve the frontend index.html"""
@@ -77,14 +160,14 @@ def upload_file():
         if file.filename == "":
             return jsonify({"error": "No file selected"}), 400
 
-        # Validate file extension
-        if not file.filename.lower().endswith(".png"):
-            # Check for JPEG support
-            if not file.filename.lower().endswith((".png", ".jpg", ".jpeg")):
-                return jsonify({"error": "Only PNG files"}), 400
-
-        # Read file content
+        # Read file content first for validation
         content = file.read()
+
+        # Validate file content (checks both extension and magic bytes)
+        is_valid, error_msg = validate_file_content(content, file.filename)
+        if not is_valid:
+            app.logger.warning(f"Invalid file upload attempt: {file.filename} - {error_msg}")
+            return jsonify({"error": error_msg}), 400
 
         # Generate MD5
         file_hash = hashlib.md5(content).hexdigest()
@@ -219,8 +302,16 @@ def convert():
     if not file_id:
         return jsonify({"error": "No file_id"}), 400
 
-    # Build path
-    filepath = os.path.join(UPLOAD_FOLDER, f"{file_id}.png")
+    # Validate file_id to prevent path traversal attacks
+    if not validate_file_id(file_id):
+        app.logger.warning(f"Invalid file_id attempted: {file_id}")
+        return jsonify({"error": "Invalid file identifier"}), 400
+
+    # Sanitize file_id using basename to strip any directory components
+    safe_file_id = os.path.basename(file_id)
+
+    # Build path with sanitized file_id
+    filepath = os.path.join(UPLOAD_FOLDER, f"{safe_file_id}.png")
 
     # Check exists
     if not os.path.exists(filepath):
