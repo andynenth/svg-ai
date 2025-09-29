@@ -1,0 +1,77 @@
+{
+  "report_info": {
+    "timestamp": "2025-09-28T18:23:32.065458",
+    "report_type": "Week 2 Performance Summary",
+    "python_version": "3.9.22 (main, Apr  8 2025, 15:21:55) \n[Clang 16.0.0 (clang-1600.0.26.6)]",
+    "platform": "darwin"
+  },
+  "basic_conversion": {
+    "total_tests": 3,
+    "successful_tests": 3,
+    "results": [
+      {
+        "test_case": "small",
+        "image_size": [
+          100,
+          100
+        ],
+        "avg_time": 0.0030939579010009766,
+        "min_time": 0.0025959014892578125,
+        "max_time": 0.003913164138793945,
+        "success": true
+      },
+      {
+        "test_case": "medium",
+        "image_size": [
+          500,
+          500
+        ],
+        "avg_time": 0.051383018493652344,
+        "min_time": 0.04624795913696289,
+        "max_time": 0.06141304969787598,
+        "success": true
+      },
+      {
+        "test_case": "large",
+        "image_size": [
+          1000,
+          1000
+        ],
+        "avg_time": 0.18399333953857422,
+        "min_time": 0.17524313926696777,
+        "max_time": 0.18906688690185547,
+        "success": true
+      }
+    ],
+    "overall_avg_time": 0.07949010531107585
+  },
+  "ai_system": {
+    "ai_modules_available": false,
+    "feature_extraction_working": false,
+    "classification_working": false,
+    "ai_converter_available": true
+  },
+  "cache_system": {
+    "cache_modules_available": false,
+    "basic_cache_working": false,
+    "advanced_cache_available": false
+  },
+  "web_api": {
+    "flask_app_available": true,
+    "health_endpoint_working": false,
+    "import_errors": [
+      "No module named 'converter'"
+    ]
+  },
+  "overall_assessment": {
+    "production_ready": false,
+    "core_functionality": "excellent",
+    "ai_enhancement": "not_available",
+    "caching": "not_available",
+    "web_interface": "partially_working",
+    "recommendations": [
+      "Install AI dependencies to enable intelligent parameter optimization",
+      "Configure caching system for improved performance"
+    ]
+  }
+}

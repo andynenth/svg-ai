@@ -1,0 +1,77 @@
+{
+  "report_info": {
+    "timestamp": "2025-09-28T18:18:24.416099",
+    "report_type": "Week 2 Performance Summary",
+    "python_version": "3.9.22 (main, Apr  8 2025, 15:21:55) \n[Clang 16.0.0 (clang-1600.0.26.6)]",
+    "platform": "darwin"
+  },
+  "basic_conversion": {
+    "total_tests": 3,
+    "successful_tests": 3,
+    "results": [
+      {
+        "test_case": "small",
+        "image_size": [
+          100,
+          100
+        ],
+        "avg_time": 0.002995649973551432,
+        "min_time": 0.0023009777069091797,
+        "max_time": 0.004261970520019531,
+        "success": true
+      },
+      {
+        "test_case": "medium",
+        "image_size": [
+          500,
+          500
+        ],
+        "avg_time": 0.04837346076965332,
+        "min_time": 0.04461216926574707,
+        "max_time": 0.05387306213378906,
+        "success": true
+      },
+      {
+        "test_case": "large",
+        "image_size": [
+          1000,
+          1000
+        ],
+        "avg_time": 0.18293491999308267,
+        "min_time": 0.17720699310302734,
+        "max_time": 0.18820476531982422,
+        "success": true
+      }
+    ],
+    "overall_avg_time": 0.07810134357876247
+  },
+  "ai_system": {
+    "ai_modules_available": false,
+    "feature_extraction_working": false,
+    "classification_working": false,
+    "ai_converter_available": true
+  },
+  "cache_system": {
+    "cache_modules_available": false,
+    "basic_cache_working": false,
+    "advanced_cache_available": false
+  },
+  "web_api": {
+    "flask_app_available": true,
+    "health_endpoint_working": false,
+    "import_errors": [
+      "No module named 'converter'"
+    ]
+  },
+  "overall_assessment": {
+    "production_ready": false,
+    "core_functionality": "excellent",
+    "ai_enhancement": "not_available",
+    "caching": "not_available",
+    "web_interface": "partially_working",
+    "recommendations": [
+      "Install AI dependencies to enable intelligent parameter optimization",
+      "Configure caching system for improved performance"
+    ]
+  }
+}
