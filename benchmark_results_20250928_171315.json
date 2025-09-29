@@ -1,0 +1,109 @@
+{
+  "edge_density": {
+    "method": "edge_density",
+    "avg_time": 0.002279447846153876,
+    "min_time": 0.00036893399999993193,
+    "max_time": 0.016480174999999875,
+    "std_time": 0.0042936655230813945,
+    "avg_memory": 677415.3846153846,
+    "max_memory": "7827456",
+    "success_rate": 1.0,
+    "sample_results": [
+      0.0196,
+      0.3745,
+      0.370697021484375,
+      0.3679542541503906,
+      0.3678750991821289
+    ],
+    "target_met": "True"
+  },
+  "complete_extraction": {
+    "method": "complete_extraction",
+    "avg_time": 0.3867387897692308,
+    "min_time": 0.0627893180000001,
+    "max_time": 1.9772728769999999,
+    "std_time": 0.4719325163871914,
+    "avg_memory": -83180.30769230769,
+    "max_memory": "32808960",
+    "success_rate": 1.0,
+    "sample_results": [
+      {
+        "edge_density": 0.0196,
+        "unique_colors": 0.125,
+        "entropy": 0.08551184136986742,
+        "corner_density": 0.04,
+        "gradient_strength": 0.13976256100534257,
+        "complexity_score": 0.10138802960803783
+      },
+      {
+        "edge_density": 0.3745,
+        "unique_colors": 1.0,
+        "entropy": 0.8375243493773641,
+        "corner_density": 1.0,
+        "gradient_strength": 0.4931536922995116,
+        "complexity_score": 0.6855051761582331
+      },
+      {
+        "edge_density": 0.370697021484375,
+        "unique_colors": 1.0,
+        "entropy": 0.8374543485308448,
+        "corner_density": 1.0,
+        "gradient_strength": 0.4744442473234227,
+        "complexity_score": 0.6818420520466651
+      }
+    ],
+    "target_met": "True"
+  },
+  "memory_usage": {
+    "method": "memory_usage",
+    "stats": [
+      {
+        "image_path": "simple_100x100.png",
+        "image_size_bytes": 30000,
+        "memory_increase_bytes": -3637248,
+        "memory_increase_mb": -3.46875,
+        "memory_per_pixel": -363.7248
+      },
+      {
+        "image_path": "complex_100x100.png",
+        "image_size_bytes": 30000,
+        "memory_increase_bytes": 4096,
+        "memory_increase_mb": 0.00390625,
+        "memory_per_pixel": 0.4096
+      },
+      {
+        "image_path": "medium_256x256.png",
+        "image_size_bytes": 196608,
+        "memory_increase_bytes": 4055040,
+        "memory_increase_mb": 3.8671875,
+        "memory_per_pixel": 61.875
+      },
+      {
+        "image_path": "large_512x512.png",
+        "image_size_bytes": 786432,
+        "memory_increase_bytes": 6381568,
+        "memory_increase_mb": 6.0859375,
+        "memory_per_pixel": 24.34375
+      },
+      {
+        "image_path": "xlarge_1024x1024.png",
+        "image_size_bytes": 3145728,
+        "memory_increase_bytes": 34562048,
+        "memory_increase_mb": 32.9609375,
+        "memory_per_pixel": 32.9609375
+      }
+    ],
+    "avg_memory_increase_mb": 7.88984375,
+    "max_memory_increase_mb": 32.9609375,
+    "target_met": "True"
+  },
+  "summary": {
+    "timestamp": "2025-09-28 17:13:15",
+    "total_tests": 3,
+    "passed_tests": 3,
+    "performance_score": 1.0,
+    "recommendations": [
+      "Complete extraction pipeline could be optimized"
+    ]
+  }
+}
