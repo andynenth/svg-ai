@@ -75,6 +75,45 @@
                     </select>
                 </div>
 
+                <!-- AI Classification Options -->
+                <div class="ai-options">
+                    <h3>AI Classification Options</h3>
+
+                    <div class="classification-method">
+                        <label>Classification Method:</label>
+                        <select id="classificationMethod">
+                            <option value="auto">Auto (Recommended)</option>
+                            <option value="rule_based">Rule-Based (Fast)</option>
+                            <option value="neural_network">Neural Network (Accurate)</option>
+                        </select>
+                    </div>
+
+                    <div class="ai-features">
+                        <label>
+                            <input type="checkbox" id="showFeatures">
+                            Show detailed features analysis
+                        </label>
+                        <label>
+                            <input type="checkbox" id="useAIConversion">
+                            Use AI-optimized conversion parameters
+                        </label>
+                    </div>
+
+                    <div class="time-budget">
+                        <label>Max processing time:</label>
+                        <select id="timeBudget">
+                            <option value="">No limit</option>
+                            <option value="1">1 second (Fast)</option>
+                            <option value="3">3 seconds (Balanced)</option>
+                            <option value="10">10 seconds (Best quality)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Results display areas -->
+                <div id="classificationResults" class="classification-results hidden"></div>
+                <div id="featuresAnalysis" class="features-analysis hidden"></div>
+
                 <!-- Dynamic Parameter Containers -->
                 <div id="potraceParams" class="param-group hidden">
                     <h3>Potrace Parameters</h3>

@@ -1,0 +1,288 @@
+{
+  "performance_test": {
+    "total_tests": 13,
+    "correct_predictions": 3,
+    "method_usage": {
+      "rule_based": 2,
+      "neural_network": 11,
+      "ensemble": 0
+    },
+    "confidence_distribution": {
+      "high": 2,
+      "medium": 4,
+      "low": 7
+    },
+    "processing_times": [
+      0.5892171859741211,
+      0.4071369171142578,
+      0.5043721199035645,
+      0.5386128425598145,
+      0.47661805152893066,
+      0.46924901008605957,
+      0.5188679695129395,
+      0.5587878227233887,
+      0.5302009582519531,
+      0.5233449935913086,
+      0.5610690116882324,
+      0.6137998104095459,
+      0.5685019493103027
+    ],
+    "accuracy_by_method": {
+      "neural_network": 0.2727272727272727,
+      "rule_based": 0.0
+    },
+    "routing_efficiency": {
+      "total_decisions": 13,
+      "fast_decisions": 3,
+      "medium_decisions": 10,
+      "slow_decisions": 0,
+      "optimal_decisions": 0,
+      "routing_accuracy": {},
+      "fast_percentage": 23.076923076923077,
+      "optimal_percentage": 0.0
+    },
+    "detailed_results": [
+      {
+        "image": "test-data/gradient_radial_00.png",
+        "true_label": "gradient",
+        "predicted_label": "complex",
+        "confidence": 0.32369062304496765,
+        "method_used": "neural_network",
+        "correct": false,
+        "processing_time": 0.5892171859741211,
+        "reasoning": "Neural network classification"
+      },
+      {
+        "image": "test-data/circle_00.png",
+        "true_label": "simple",
+        "predicted_label": "gradient",
+        "confidence": 0.7466064929962158,
+        "method_used": "ensemble_disagreement_neural_network",
+        "correct": false,
+        "processing_time": 0.4071369171142578,
+        "reasoning": "Disagreement resolved by confidence: rule=simple(0.42) vs neural=gradient(1.00)"
+      },
+      {
+        "image": "test-data/text_tech_00.png",
+        "true_label": "text",
+        "predicted_label": "simple",
+        "confidence": 0.30722753906250005,
+        "method_used": "ensemble_disagreement_rule_based",
+        "correct": false,
+        "processing_time": 0.5043721199035645,
+        "reasoning": "Disagreement resolved by confidence: rule=simple(0.45) vs neural=complex(0.25)"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_08.png",
+        "true_label": "complex",
+        "predicted_label": "complex",
+        "confidence": 0.7358598113059998,
+        "method_used": "neural_network",
+        "correct": true,
+        "processing_time": 0.5386128425598145,
+        "reasoning": "Neural network classification"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_09.png",
+        "true_label": "complex",
+        "predicted_label": "gradient",
+        "confidence": 0.9006005525588989,
+        "method_used": "neural_network",
+        "correct": false,
+        "processing_time": 0.47661805152893066,
+        "reasoning": "Neural network classification"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_02.png",
+        "true_label": "complex",
+        "predicted_label": "simple",
+        "confidence": 0.30498632812500004,
+        "method_used": "ensemble_disagreement_rule_based",
+        "correct": false,
+        "processing_time": 0.46924901008605957,
+        "reasoning": "Disagreement resolved by confidence: rule=simple(0.44) vs neural=gradient(0.28)"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_03.png",
+        "true_label": "complex",
+        "predicted_label": "gradient",
+        "confidence": 0.4071443974971771,
+        "method_used": "neural_network",
+        "correct": false,
+        "processing_time": 0.5188679695129395,
+        "reasoning": "Neural network classification"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_01.png",
+        "true_label": "complex",
+        "predicted_label": "complex",
+        "confidence": 0.4439709484577179,
+        "method_used": "neural_network",
+        "correct": true,
+        "processing_time": 0.5587878227233887,
+        "reasoning": "Neural network classification"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_00.png",
+        "true_label": "complex",
+        "predicted_label": "gradient",
+        "confidence": 0.37904272079467777,
+        "method_used": "ensemble_disagreement_neural_network",
+        "correct": false,
+        "processing_time": 0.5302009582519531,
+        "reasoning": "Disagreement resolved by confidence: rule=simple(0.44) vs neural=gradient(0.54)"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_04.png",
+        "true_label": "complex",
+        "predicted_label": "gradient",
+        "confidence": 0.7701034545898438,
+        "method_used": "neural_network",
+        "correct": false,
+        "processing_time": 0.5233449935913086,
+        "reasoning": "Neural network classification"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_05.png",
+        "true_label": "complex",
+        "predicted_label": "gradient",
+        "confidence": 0.7439016342163086,
+        "method_used": "ensemble_disagreement_neural_network",
+        "correct": false,
+        "processing_time": 0.5610690116882324,
+        "reasoning": "Disagreement resolved by confidence: rule=simple(0.45) vs neural=gradient(0.99)"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_07.png",
+        "true_label": "complex",
+        "predicted_label": "gradient",
+        "confidence": 0.9999972581863403,
+        "method_used": "neural_network",
+        "correct": false,
+        "processing_time": 0.6137998104095459,
+        "reasoning": "Neural network classification"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_06.png",
+        "true_label": "complex",
+        "predicted_label": "complex",
+        "confidence": 0.3906201720237732,
+        "method_used": "neural_network",
+        "correct": true,
+        "processing_time": 0.5685019493103027,
+        "reasoning": "Neural network classification"
+      }
+    ],
+    "accuracy": 0.23076923076923078,
+    "average_confidence": 0.5733655332968784,
+    "average_processing_time": 0.5276752802041861,
+    "median_processing_time": 0.5302009582519531,
+    "max_processing_time": 0.6137998104095459,
+    "high_confidence_accuracy": 0.0
+  },
+  "time_budget_test": {
+    "0.1": {
+      "time_budget": 0.1,
+      "actual_time": 0.00012111663818359375,
+      "method_used": "ensemble_disagreement_neural_network",
+      "confidence": 0.7466064929962158,
+      "within_budget": true
+    },
+    "0.5": {
+      "time_budget": 0.5,
+      "actual_time": 8.225440979003906e-05,
+      "method_used": "ensemble_disagreement_neural_network",
+      "confidence": 0.7466064929962158,
+      "within_budget": true
+    },
+    "1.0": {
+      "time_budget": 1.0,
+      "actual_time": 7.200241088867188e-05,
+      "method_used": "ensemble_disagreement_neural_network",
+      "confidence": 0.7466064929962158,
+      "within_budget": true
+    },
+    "2.0": {
+      "time_budget": 2.0,
+      "actual_time": 6.794929504394531e-05,
+      "method_used": "ensemble_disagreement_neural_network",
+      "confidence": 0.7466064929962158,
+      "within_budget": true
+    },
+    "5.0": {
+      "time_budget": 5.0,
+      "actual_time": 6.723403930664062e-05,
+      "method_used": "ensemble_disagreement_neural_network",
+      "confidence": 0.7466064929962158,
+      "within_budget": true
+    },
+    "None": {
+      "time_budget": null,
+      "actual_time": 6.604194641113281e-05,
+      "method_used": "ensemble_disagreement_neural_network",
+      "confidence": 0.7466064929962158,
+      "within_budget": true
+    }
+  },
+  "concurrent_test": {
+    "num_concurrent": 5,
+    "total_time": 0.0027608871459960938,
+    "results": [
+      {
+        "processing_time": 0.0011391639709472656,
+        "method_used": "ensemble_disagreement_neural_network",
+        "confidence": 0.7466064929962158
+      },
+      {
+        "processing_time": 0.0004420280456542969,
+        "method_used": "ensemble_disagreement_neural_network",
+        "confidence": 0.7466064929962158
+      },
+      {
+        "processing_time": 0.001132965087890625,
+        "method_used": "ensemble_disagreement_neural_network",
+        "confidence": 0.7466064929962158
+      },
+      {
+        "processing_time": 0.0007851123809814453,
+        "method_used": "ensemble_disagreement_neural_network",
+        "confidence": 0.7466064929962158
+      },
+      {
+        "processing_time": 0.00045800209045410156,
+        "method_used": "ensemble_disagreement_neural_network",
+        "confidence": 0.7466064929962158
+      }
+    ],
+    "average_processing_time": 0.0007914543151855469,
+    "throughput": 1811.0120898100172
+  },
+  "success_criteria": {
+    "criteria": {
+      "hybrid_accuracy_95": {
+        "target": 0.95,
+        "actual": 0.23076923076923078,
+        "status": "FAIL"
+      },
+      "avg_processing_time_2s": {
+        "target": 2.0,
+        "actual": 0.5276752802041861,
+        "status": "PASS"
+      },
+      "high_confidence_accuracy_95": {
+        "target": 0.95,
+        "actual": 0.0,
+        "status": "FAIL"
+      },
+      "routing_efficiency_90": {
+        "target": 0.9,
+        "actual": 0.0,
+        "status": "FAIL"
+      }
+    },
+    "passed": 1,
+    "total": 4,
+    "overall_status": "POOR"
+  },
+  "timestamp": 1759134678.678435
+}

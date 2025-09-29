@@ -1073,3 +1073,227 @@ h3 {
         font-size: 13px;
     }
 }
+
+/* AI Classification Styles */
+.ai-options {
+    background: #f0f8ff;
+    border: 1px solid #b8d4f1;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.ai-options h3 {
+    color: #2c5282;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #b8d4f1;
+}
+
+.classification-method {
+    margin-bottom: 15px;
+}
+
+.ai-features {
+    margin-bottom: 15px;
+}
+
+.ai-features label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+}
+
+.ai-features input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.time-budget {
+    margin-bottom: 10px;
+}
+
+/* Classification Results */
+.classification-results {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.classification-result {
+    text-align: center;
+}
+
+.classification-result h4 {
+    color: #495057;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.logo-type {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.confidence {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.method-used {
+    color: #6c757d;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+}
+
+.processing-time {
+    color: #6c757d;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.reasoning {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #495057;
+    font-style: italic;
+}
+
+/* Features Analysis */
+.features-analysis {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.features-analysis h4 {
+    color: #495057;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.feature-item {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-item label {
+    min-width: 140px;
+    font-weight: 500;
+    color: #495057;
+    font-size: 14px;
+    margin: 0;
+}
+
+.feature-bar {
+    flex: 1;
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.feature-value {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #ffc107, #dc3545);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.feature-percentage {
+    min-width: 45px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Loading indicator for classification */
+.loading-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #6c757d;
+}
+
+.loading-indicator .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e0e0e0;
+    border-top: 2px solid #4a90e2;
+    margin-right: 10px;
+}
+
+/* Error message styling for classification */
+.error-message {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error-icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.error-message button {
+    background: none;
+    border: none;
+    color: #721c24;
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+.error-message button:hover {
+    background: rgba(114, 28, 36, 0.1);
+}
+
+/* Mobile responsiveness for AI components */
+@media (max-width: 768px) {
+    .ai-options {
+        padding: 15px;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .feature-item label {
+        min-width: auto;
+    }
+
+    .feature-bar {
+        width: 100%;
+    }
+
+    .feature-percentage {
+        align-self: flex-end;
+    }
+}

@@ -22,6 +22,7 @@ from pathlib import Path
 from backend.converters.base import BaseConverter
 from backend.converters.vtracer_converter import VTracerConverter
 from backend.utils.validation import validate_file_path
+from backend.ai_modules.classification.hybrid_classifier import HybridClassifier
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +75,7 @@ class AIEnhancedSVGConverter(BaseConverter):
         self.enable_ai = enable_ai
         self.ai_timeout = ai_timeout
         self.ai_available = False
-        self.feature_pipeline = None
+        self.classifier = None
 
         # Initialize standard VTracer converter for fallback
         self.vtracer_converter = VTracerConverter()
@@ -96,20 +97,17 @@ class AIEnhancedSVGConverter(BaseConverter):
         logger.info(f"AIEnhancedSVGConverter initialized (AI {'enabled' if self.ai_available else 'disabled'})")
 
     def _initialize_ai_pipeline(self) -> None:
-        """Initialize the AI feature extraction and classification pipeline.
+        """Initialize the AI hybrid classification system.
 
-        Attempts to import and initialize the FeaturePipeline from Day 2.
+        Attempts to initialize the HybridClassifier from Day 7.
         Falls back to standard conversion if AI modules are not available.
         """
         try:
-            # Import AI modules (may fail if not installed)
-            from backend.ai_modules.feature_pipeline import FeaturePipeline
-
-            # Initialize feature pipeline
-            self.feature_pipeline = FeaturePipeline()
+            # Initialize hybrid classifier
+            self.classifier = HybridClassifier()
             self.ai_available = True
 
-            logger.info("AI pipeline initialized successfully")
+            logger.info("AI hybrid classifier initialized successfully")
 
         except ImportError as e:
             logger.warning(f"AI modules not available: {e}")
@@ -117,7 +115,7 @@ class AIEnhancedSVGConverter(BaseConverter):
             self.ai_available = False
 
         except Exception as e:
-            logger.error(f"Failed to initialize AI pipeline: {e}")
+            logger.error(f"Failed to initialize AI classifier: {e}")
             logger.info("Falling back to standard VTracer conversion")
             self.ai_available = False
 
@@ -199,8 +197,8 @@ class AIEnhancedSVGConverter(BaseConverter):
 
         logger.info(f"Starting AI analysis for {Path(image_path).name}")
 
-        # Extract features and classify logo type
-        pipeline_result = self.feature_pipeline.process_image(image_path)
+        # Classify logo using hybrid classifier
+        classification_result = self.classifier.classify(image_path)
 
         ai_analysis_time = time.time() - ai_start_time
 
@@ -214,8 +212,19 @@ class AIEnhancedSVGConverter(BaseConverter):
             self.ai_stats['average_ai_time'] = ai_analysis_time
 
         # Extract classification results
-        classification = pipeline_result['classification']
-        features = pipeline_result['features']
+        logo_type = classification_result['logo_type']
+        confidence = classification_result['confidence']
+        method_used = classification_result['method_used']
+        features = classification_result.get('features', {})
+        reasoning = classification_result.get('reasoning', '')
+
+        # Format classification for compatibility
+        classification = {
+            'logo_type': logo_type,
+            'confidence': confidence,
+            'method_used': method_used,
+            'reasoning': reasoning
+        }
 
         logger.info(f"AI analysis complete: {classification['logo_type']} "
                    f"(confidence: {classification['confidence']:.2%}, "
@@ -554,10 +563,23 @@ Performance:
             # AI-enhanced conversion with detailed analysis
             ai_start_time = time.time()
 
-            # Extract features and classify
-            pipeline_result = self.feature_pipeline.process_image(image_path)
-            classification = pipeline_result['classification']
-            features = pipeline_result['features']
+            # Classify using hybrid classifier
+            classification_result = self.classifier.classify(image_path)
+
+            # Extract results
+            logo_type = classification_result['logo_type']
+            confidence = classification_result['confidence']
+            method_used = classification_result['method_used']
+            features = classification_result.get('features', {})
+            reasoning = classification_result.get('reasoning', '')
+
+            # Format classification for compatibility
+            classification = {
+                'logo_type': logo_type,
+                'confidence': confidence,
+                'method_used': method_used,
+                'reasoning': reasoning
+            }
 
             ai_analysis_time = time.time() - ai_start_time
 

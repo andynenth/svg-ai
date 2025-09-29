@@ -26,6 +26,10 @@ from converter import convert_image
 from utils.quality_metrics import QualityMetrics
 from utils.error_messages import ErrorMessageFactory, create_api_error_response, log_error_with_context
 
+# Import classification modules
+from backend.ai_modules.classification.hybrid_classifier import HybridClassifier
+from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+
 # Initialize Flask app
 app = Flask(__name__)
 
@@ -47,6 +51,15 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 # Initialize components
 metrics = QualityMetrics()
+
+# Initialize classifier (singleton pattern)
+classifier = None
+
+def get_classifier():
+    global classifier
+    if classifier is None:
+        classifier = HybridClassifier()
+    return classifier
 
 
 def validate_file_content(content: bytes, filename: str) -> tuple[bool, str]:
@@ -221,6 +234,209 @@ def upload_file():
         return jsonify(create_api_error_response(error)), 500
 
 
+@app.route('/api/classify-logo', methods=['POST'])
+def classify_logo():
+    """Classify uploaded logo image"""
+    try:
+        # Validate request
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
+
+        file = request.files['image']
+        if file.filename == '':
+            return jsonify({'error': 'No file selected'}), 400
+
+        # Get parameters
+        method = request.form.get('method', 'auto')  # auto, rule_based, neural_network
+        time_budget = request.form.get('time_budget', type=float)
+        include_features = request.form.get('include_features', 'false').lower() == 'true'
+
+        # Save uploaded file temporarily
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.png') as temp_file:
+            file.save(temp_file.name)
+            temp_path = temp_file.name
+
+        try:
+            # Classify logo
+            classifier = get_classifier()
+
+            if method == 'auto':
+                result = classifier.classify(temp_path, time_budget=time_budget)
+            elif method == 'rule_based':
+                features = classifier.feature_extractor.extract_features(temp_path)
+                rule_result = classifier.rule_classifier.classify(features)
+                result = {
+                    'logo_type': rule_result['logo_type'],
+                    'confidence': rule_result['confidence'],
+                    'method_used': 'rule_based',
+                    'processing_time': 0.1,
+                    'features': features if include_features else None
+                }
+            elif method == 'neural_network':
+                neural_type, neural_confidence = classifier.neural_classifier.classify(temp_path)
+                result = {
+                    'logo_type': neural_type,
+                    'confidence': neural_confidence,
+                    'method_used': 'neural_network',
+                    'processing_time': 2.0  # Approximate
+                }
+            else:
+                return jsonify({'error': f'Invalid method: {method}'}), 400
+
+            # Format response
+            response = {
+                'success': True,
+                'logo_type': result['logo_type'],
+                'confidence': result['confidence'],
+                'method_used': result['method_used'],
+                'processing_time': result['processing_time']
+            }
+
+            if include_features and 'features' in result:
+                response['features'] = result['features']
+
+            if 'reasoning' in result:
+                response['reasoning'] = result['reasoning']
+
+            return jsonify(response)
+
+        finally:
+            # Clean up temp file
+            os.unlink(temp_path)
+
+    except Exception as e:
+        app.logger.error(f"Classification error: {str(e)}")
+        return jsonify({'error': f'Classification failed: {str(e)}'}), 500
+
+
+@app.route('/api/analyze-logo-features', methods=['POST'])
+def analyze_logo_features():
+    """Extract and return image features without classification"""
+    try:
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
+
+        file = request.files['image']
+        if file.filename == '':
+            return jsonify({'error': 'No file selected'}), 400
+
+        # Save uploaded file temporarily
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.png') as temp_file:
+            file.save(temp_file.name)
+            temp_path = temp_file.name
+
+        try:
+            # Extract features
+            classifier = get_classifier()
+            features = classifier.feature_extractor.extract_features(temp_path)
+
+            return jsonify({
+                'success': True,
+                'features': features,
+                'feature_descriptions': {
+                    'edge_density': 'Measure of edge content (0-1)',
+                    'unique_colors': 'Color complexity measure (0-1)',
+                    'entropy': 'Information content measure (0-1)',
+                    'corner_density': 'Sharp corner content (0-1)',
+                    'gradient_strength': 'Gradient transition strength (0-1)',
+                    'complexity_score': 'Overall complexity (0-1)'
+                }
+            })
+
+        finally:
+            os.unlink(temp_path)
+
+    except Exception as e:
+        app.logger.error(f"Feature analysis error: {str(e)}")
+        return jsonify({'error': f'Feature analysis failed: {str(e)}'}), 500
+
+
+@app.route('/api/classification-status', methods=['GET'])
+def classification_status():
+    """Get classification system status and health"""
+    try:
+        classifier = get_classifier()
+
+        # Test classification on a simple test image
+        test_result = classifier.classify('data/test/simple.png')
+
+        return jsonify({
+            'status': 'healthy',
+            'methods_available': {
+                'rule_based': True,
+                'neural_network': classifier.neural_classifier is not None,
+                'hybrid': True
+            },
+            'performance_stats': classifier.performance_stats,
+            'test_classification_time': test_result['processing_time']
+        })
+
+    except Exception as e:
+        return jsonify({
+            'status': 'unhealthy',
+            'error': str(e)
+        }), 500
+
+
+@app.route('/api/classify-batch', methods=['POST'])
+def classify_batch():
+    """Classify multiple images in a single request"""
+    try:
+        # Validate request has files
+        if 'images' not in request.files:
+            return jsonify({'error': 'No image files provided'}), 400
+
+        files = request.files.getlist('images')
+        if not files or all(f.filename == '' for f in files):
+            return jsonify({'error': 'No files selected'}), 400
+
+        # Parameters
+        method = request.form.get('method', 'auto')
+        time_budget = request.form.get('time_budget_per_image', type=float)
+
+        # Save all files temporarily
+        temp_paths = []
+        try:
+            for file in files:
+                temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.png')
+                file.save(temp_file.name)
+                temp_paths.append(temp_file.name)
+                temp_file.close()
+
+            # Batch classification
+            classifier = get_classifier()
+            results = classifier.classify_batch(temp_paths)
+
+            # Format response
+            response = {
+                'success': True,
+                'total_images': len(files),
+                'results': []
+            }
+
+            for i, (file, result) in enumerate(zip(files, results)):
+                response['results'].append({
+                    'filename': file.filename,
+                    'index': i,
+                    'logo_type': result['logo_type'],
+                    'confidence': result['confidence'],
+                    'method_used': result['method_used'],
+                    'processing_time': result['processing_time']
+                })
+
+            return jsonify(response)
+
+        finally:
+            # Clean up all temp files
+            for path in temp_paths:
+                if os.path.exists(path):
+                    os.unlink(path)
+
+    except Exception as e:
+        app.logger.error(f"Batch classification error: {str(e)}")
+        return jsonify({'error': f'Batch classification failed: {str(e)}'}), 500
+
+
 @app.route("/api/convert", methods=["POST"])
 def convert():
     """Convert uploaded PNG to SVG"""
@@ -263,6 +479,10 @@ def convert():
     # Get Alpha-aware-specific parameters
     use_potrace = data.get("use_potrace", True)
     preserve_antialiasing = data.get("preserve_antialiasing", False)
+
+    # AI enhancement parameters
+    use_ai = data.get("use_ai", False)
+    ai_method = data.get("ai_method", "auto")
 
     # Debug log the parameters
     app.logger.info(f"[API] Convert request - file_id: {file_id}, converter: {converter_type}, threshold: {threshold}")
@@ -372,7 +592,33 @@ def convert():
         })
         app.logger.info(f"[API] Added Alpha parameters to params")
 
-    # Call function with all parameters
+    # Check if AI enhancement is requested
+    if use_ai:
+        # Use AI-enhanced converter
+        try:
+            ai_converter = AIEnhancedSVGConverter()
+            ai_result = ai_converter.convert_with_ai_analysis(filepath, **params)
+
+            response = {
+                'success': ai_result['success'],
+                'svg_content': ai_result['svg'],
+                'ai_analysis': ai_result.get('classification', {}),
+                'processing_time': ai_result['total_time'],
+                'quality_score': ai_result.get('quality_score'),
+                'parameters_used': ai_result['parameters_used'],
+                'ai_enhanced': True,
+                'features': ai_result.get('features', {}),
+                'method_used': ai_result.get('classification', {}).get('method_used', 'hybrid')
+            }
+
+            return jsonify(response)
+
+        except Exception as e:
+            app.logger.error(f"AI-enhanced conversion failed: {str(e)}")
+            # Fall back to standard conversion
+            app.logger.info("Falling back to standard conversion")
+
+    # Use standard converter
     app.logger.info(f"[API] Calling convert_image with {len(params)} parameters: {params}")
     result = convert_image(filepath, converter_type, **params)
 
@@ -382,6 +628,7 @@ def convert():
 
     # Ensure includes: svg, ssim, size, success
     # These are already in result from converter.py
+    result['ai_enhanced'] = False
 
     # Return result
     return jsonify(result)

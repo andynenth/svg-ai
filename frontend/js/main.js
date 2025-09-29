@@ -11,6 +11,7 @@ import UIModule from './modules/ui.js';
 import { SplitViewController } from './modules/splitView.js';
 import appState from './modules/appState.js';
 import errorHandler from './modules/errorHandler.js';
+import './modules/logoClassifier.js';
 
 class MainApplication {
     constructor() {
