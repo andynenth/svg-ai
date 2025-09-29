@@ -1,0 +1,12 @@
+{
+  "timestamp": "<function default_collate at 0x1080ffaf0>",
+  "validation_samples": 10,
+  "neural_network": {
+    "accuracy": 20.0,
+    "model_path": "backend/ai_modules/models/trained/efficientnet_logo_classifier.pth"
+  },
+  "rule_based": {
+    "accuracy": 0,
+    "valid_samples": 0
+  }
+}

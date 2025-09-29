@@ -1,0 +1,64 @@
+{
+  "original_model": {
+    "size_mb": 16.70313262939453,
+    "parameter_count": 4336512,
+    "model_path": "backend/ai_modules/models/trained/checkpoint_best.pth"
+  },
+  "quantized_model": {
+    "size_mb": 15.448234558105469,
+    "parameter_count": 4007548,
+    "compression_ratio": 1.0812324584125785,
+    "size_reduction_percent": 7.512950409557706
+  },
+  "optimized_model": {
+    "size_mb": 0.3276205062866211,
+    "type": "TorchScript JIT",
+    "optimizations": [
+      "inference_optimization",
+      "graph_optimization"
+    ]
+  },
+  "performance_comparison": {
+    "original": {
+      "avg_inference_time": 0.054246015548706054,
+      "std_inference_time": 0.018614754678770145,
+      "min_inference_time": 0.036875009536743164,
+      "max_inference_time": 0.1499030590057373,
+      "avg_memory_mb": 0.00014723777770996092,
+      "throughput_samples_per_second": 18.434533668230923
+    },
+    "quantized": {
+      "avg_inference_time": 0.05185698986053467,
+      "std_inference_time": 0.011650642286253825,
+      "min_inference_time": 0.039483070373535156,
+      "max_inference_time": 0.1027829647064209,
+      "avg_memory_mb": 0.00011566162109375,
+      "throughput_samples_per_second": 19.28380345040123,
+      "speedup_vs_original": 1.0460695018086565
+    },
+    "optimized": {
+      "avg_inference_time": 0.04717544794082642,
+      "std_inference_time": 0.012553689546799635,
+      "min_inference_time": 0.035990238189697266,
+      "max_inference_time": 0.0953521728515625,
+      "avg_memory_mb": 0.00011566162109375,
+      "throughput_samples_per_second": 21.19746698016159,
+      "speedup_vs_original": 1.1498781233990287
+    }
+  },
+  "deployment_metrics": {
+    "model_comparison": {
+      "size_reduction": "7.5%",
+      "compression_ratio": "1.08x",
+      "original_size_mb": 16.70313262939453,
+      "quantized_size_mb": 15.448234558105469
+    },
+    "deployment_recommendations": [
+      "Use quantized model for production deployment",
+      "Implement model caching for faster loading",
+      "Consider batch processing for multiple images",
+      "Monitor inference time and memory usage in production"
+    ],
+    "performance_targets": {
+      "inference_time_ms": 51.85698986053467,
+      "inference_target_met": 

@@ -1,0 +1,58 @@
+{
+  "learning_rate": {
+    "initial": 0.0005,
+    "scheduler": "ReduceLROnPlateau",
+    "scheduler_patience": 5,
+    "scheduler_factor": 0.5,
+    "min_lr": 1e-06
+  },
+  "training": {
+    "batch_size": 4,
+    "max_epochs": 100,
+    "early_stopping_patience": 15,
+    "min_delta": 0.001
+  },
+  "regularization": {
+    "dropout_rate": 0.4,
+    "additional_dropout": 0.3,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0
+  },
+  "augmentation": {
+    "intensity": 0.4,
+    "rotation_degrees": 10,
+    "color_jitter": {
+      "brightness": 0.3,
+      "contrast": 0.3,
+      "saturation": 0.2
+    },
+    "horizontal_flip_prob": 0.3,
+    "grayscale_prob": 0.15
+  },
+  "class_balancing": {
+    "use_class_weights": true,
+    "focal_loss_alpha": 0.25,
+    "focal_loss_gamma": 2.0
+  },
+  "model": {
+    "use_enhanced_classifier": true
+  },
+  "metadata": {
+    "version": "5.1.2",
+    "description": "Optimized hyperparameters based on Day 4 analysis",
+    "main_changes": [
+      "Reduced learning rate for stability",
+      "Increased dropout for overfitting",
+      "Enhanced data augmentation",
+      "Added class weights for balance",
+      "Implemented gradient clipping",
+      "Enhanced classifier architecture"
+    ],
+    "target_improvements": [
+      "Reduce overfitting gap to <20%",
+      "Improve validation accuracy to >60%",
+      "Achieve balanced per-class predictions",
+      "Stable training convergence"
+    ]
+  }
+}

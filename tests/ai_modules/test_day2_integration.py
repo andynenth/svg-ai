@@ -234,7 +234,9 @@ class TestDay2Integration(unittest.TestCase):
             self.assertLessEqual(features[feature], 1.0)
 
         # Test classification integration
-        logo_type, confidence = self.classifier.classify(features)
+        classification_result = self.classifier.classify(features)
+        logo_type = classification_result['logo_type']
+        confidence = classification_result['confidence']
 
         self.assertIsInstance(logo_type, str)
         self.assertIn(logo_type, ['simple', 'text', 'gradient', 'complex'])

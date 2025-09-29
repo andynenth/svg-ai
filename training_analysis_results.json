@@ -1,0 +1,50 @@
+{
+  "final_train_accuracy": 71.42857142857143,
+  "final_val_accuracy": 20.0,
+  "overfitting_detected": true,
+  "convergence_epoch": 1,
+  "per_class_accuracy": {
+    "simple": 100.0,
+    "text": 0.0,
+    "gradient": 0.0,
+    "complex": 0.0
+  },
+  "recommendations": [
+    "Reduce model complexity",
+    "Learning rate appears reasonable",
+    "Large train-val gap suggests overfitting - increase regularization",
+    "Increase dropout rate",
+    "Add more data augmentation",
+    "Validation accuracy below target - need significant improvements",
+    "Implement early stopping"
+  ],
+  "learning_rate_analysis": {
+    "initial_learning_rate": 0.001,
+    "avg_train_loss_improvement": 0.07023867832289803,
+    "avg_val_loss_improvement": 0.0026717583338419595,
+    "train_loss_plateaued": false,
+    "val_loss_plateaued": true,
+    "recommendations": [
+      "Learning rate appears reasonable"
+    ]
+  },
+  "pattern_analysis": {
+    "overfitting_detected": true,
+    "underfitting_detected": false,
+    "accuracy_gap": 51.42857142857143,
+    "train_loss_trend": -0.08322114306868923,
+    "val_loss_trend": -0.002489329468120194,
+    "convergence_epoch": 1,
+    "final_train_accuracy": 71.42857142857143,
+    "final_val_accuracy": 20.0,
+    "reasons": [
+      "Large gap between training and validation accuracy"
+    ],
+    "recommendations": [
+      "Increase dropout rate",
+      "Add more data augmentation",
+      "Reduce model complexity",
+      "Implement early stopping"
+    ]
+  }
+}

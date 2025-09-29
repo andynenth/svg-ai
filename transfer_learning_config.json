@@ -1,0 +1,96 @@
+{
+  "strategy": "progressive_unfreezing",
+  "base_learning_rate": 0.0005,
+  "backbone_lr_factor": 0.1,
+  "unfreezing_schedule": [
+    {
+      "stage": 0,
+      "description": "Classifier only",
+      "frozen_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "unfrozen_layers": [],
+      "epochs": 10
+    },
+    {
+      "stage": 1,
+      "description": "Last 2 backbone layers + classifier",
+      "frozen_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "unfrozen_layers": [
+        8,
+        9
+      ],
+      "epochs": 15
+    },
+    {
+      "stage": 2,
+      "description": "Last 4 backbone layers + classifier",
+      "frozen_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "unfrozen_layers": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "epochs": 20
+    },
+    {
+      "stage": 3,
+      "description": "All layers unfrozen",
+      "frozen_layers": [],
+      "unfrozen_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "epochs": 25
+    }
+  ],
+  "total_stages": 4,
+  "description": "Progressive unfreezing strategy for EfficientNet-B0 fine-tuning",
+  "benefits": [
+    "Prevents catastrophic forgetting of pre-trained features",
+    "Allows gradual adaptation to logo classification task",
+    "Reduces overfitting on small dataset",
+    "Enables differential learning rates for different layers"
+  ],
+  "usage_instructions": [
+    "Start with Stage 0 (classifier only)",
+    "Train for recommended epochs per stage",
+    "Monitor validation accuracy before advancing",
+    "Use early stopping within each stage",
+    "Advance to next stage when convergence reached"
+  ]
+}

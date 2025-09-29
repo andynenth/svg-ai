@@ -1,0 +1,35 @@
+{
+  "pipeline_info": {
+    "version": "5.6.2",
+    "model_path": "backend/ai_modules/models/trained/checkpoint_best.pth",
+    "use_quantized": true,
+    "batch_size": 4,
+    "device": "cpu",
+    "class_names": [
+      "simple",
+      "text",
+      "gradient",
+      "complex"
+    ]
+  },
+  "performance_stats": {
+    "total_inferences": 1,
+    "total_time": 0.06250786781311035,
+    "batch_inferences": 5,
+    "batch_time": 1.791111946105957,
+    "avg_single_inference_time": 0.06250786781311035,
+    "avg_batch_time": 0.35822238922119143
+  },
+  "deployment_settings": {
+    "recommended_batch_size": 4,
+    "enable_caching": true,
+    "warmup_runs": 5
+  },
+  "usage_instructions": [
+    "Initialize classifier with OptimizedEfficientNetClassifier()",
+    "Use classify_single() for individual images",
+    "Use classify_batch() for multiple images",
+    "Monitor performance with get_performance_stats()",
+    "Benchmark with benchmark_performance() for optimal settings"
+  ]
+}

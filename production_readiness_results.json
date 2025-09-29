@@ -1,0 +1,146 @@
+{
+  "overall_status": "NOT_READY",
+  "test_results": {
+    "unit_tests": {
+      "status": "FAIL",
+      "total": 15,
+      "passed": 11,
+      "failures": 4,
+      "errors": 0,
+      "details": {
+        "failure_details": [
+          "(<tests.test_rule_based_classifier.TestRuleBasedClassifier testMethod=test_confidence_score_calculation>, 'Traceback (most recent call last):\\n  File \"/Users/nrw/python/svg-ai/scripts/../tests/test_rule_based_classifier.py\", line 238, in test_confidence_score_calculation\\n    self.assertGreater(result[\\'confidence\\'], 0.85)\\nAssertionError: 0.7363520272697325 not greater than 0.85\\n')",
+          "(<tests.test_rule_based_classifier.TestRuleBasedClassifier testMethod=test_error_handling_invalid_inputs>, 'Traceback (most recent call last):\\n  File \"/Users/nrw/python/svg-ai/scripts/../tests/test_rule_based_classifier.py\", line 198, in test_error_handling_invalid_inputs\\n    self.assertIn(\\'error\\', result[\\'reasoning\\'].lower())\\nAssertionError: \\'error\\' not found in \\'invalid input: empty features dictionary\\'\\n')",
+          "(<tests.test_rule_based_classifier.TestRuleBasedClassifier testMethod=test_hierarchical_classification_method>, 'Traceback (most recent call last):\\n  File \"/Users/nrw/python/svg-ai/scripts/../tests/test_rule_based_classifier.py\", line 271, in test_hierarchical_classification_method\\n    self.assertGreater(result[\\'confidence\\'], 0.80)\\nAssertionError: 0.5334248928007425 not greater than 0.8\\n')",
+          "(<tests.test_rule_based_classifier.TestRuleBasedClassifier testMethod=test_simple_logo_classification>, 'Traceback (most recent call last):\\n  File \"/Users/nrw/python/svg-ai/scripts/../tests/test_rule_based_classifier.py\", line 53, in test_simple_logo_classification\\n    self.assertGreater(result[\\'confidence\\'], 0.8)  # Should have high confidence for optimized thresholds\\nAssertionError: 0.7002179152243132 not greater than 0.8\\n')"
+        ],
+        "error_details": []
+      }
+    },
+    "integration_tests": {
+      "status": "FAIL",
+      "total": 5,
+      "passed": 0,
+      "pass_rate": 0.0
+    },
+    "performance_tests": {
+      "status": "PASS",
+      "avg_processing_time": 0.2488512463000001,
+      "max_processing_time": 0.28974426,
+      "performance_met": "True",
+      "target": "< 0.5s",
+      "total": 10,
+      "passed": 10
+    },
+    "edge_case_tests": {
+      "status": "PASS",
+      "total": 5,
+      "passed": 5,
+      "graceful_handling_rate": 1.0,
+      "target": ">= 95% graceful handling"
+    },
+    "summary": {
+      "all_tests_passed": false,
+      "overall_pass_rate": 0.7428571428571429,
+      "total_tests": 35,
+      "passed_tests": 26
+    }
+  },
+  "accuracy_validation": {
+    "overall_accuracy": 0.0,
+    "overall_target_met": false,
+    "per_category_accuracy": {},
+    "category_targets_met": true,
+    "status": "FAIL",
+    "sample_size": 20
+  },
+  "performance_validation": {},
+  "error_handling_validation": {
+    "total_scenarios": 3,
+    "passed_scenarios": 2,
+    "pass_rate": 0.6666666666666666,
+    "status": "FAIL",
+    "scenario_results": [
+      {
+        "name": "non_existent_file",
+        "passed": false,
+        "result": "unexpected_result"
+      },
+      {
+        "name": "invalid_features",
+        "passed": true,
+        "result": "graceful_handling"
+      },
+      {
+        "name": "corrupted_features",
+        "passed": true,
+        "result": "graceful_handling"
+      }
+    ]
+  },
+  "stability_validation": {
+    "success_rate": 1.0,
+    "time_stability_cv": 0.10921561551907609,
+    "memory_increase_mb": 0.16015625,
+    "memory_stable": true,
+    "total_classifications": 20,
+    "status": "PASS"
+  },
+  "quality_gates": {
+    "gate_results": {
+      "unit_tests": {
+        "target": "100% passing",
+        "passed": false,
+        "score": 0.0,
+        "weight": 0.2
+      },
+      "integration_tests": {
+        "target": ">95% passing",
+        "passed": false,
+        "score": 0.0,
+        "weight": 0.15
+      },
+      "overall_accuracy": {
+        "target": ">90%",
+        "passed": false,
+        "score": 0.0,
+        "weight": 0.25
+      },
+      "per_category_accuracy": {
+        "target": ">85% for all types",
+        "passed": true,
+        "score": 1.0,
+        "weight": 0.15
+      },
+      "processing_time": {
+        "target": "<0.5s average",
+        "passed": "True",
+        "score": 1.0,
+        "weight": 0.1
+      },
+      "edge_case_handling": {
+        "target": "100% graceful handling",
+        "passed": false,
+        "score": 0.6666666666666666,
+        "weight": 0.1
+      },
+      "code_coverage": {
+        "target": ">95%",
+        "passed": true,
+        "score": 1.0,
+        "weight": 0.05
+      }
+    },
+    "overall_score": 0.36666666666666664,
+    "all_critical_passed": false,
+    "production_ready": false
+  },
+  "recommendations": [
+    "Address failing tests before production deployment",
+    "Improve overall accuracy from 0.0% to >90% through threshold tuning",
+    "Improve error handling for edge cases",
+    "System not ready for production - address quality gate failures"
+  ],
+  "deployment_status": "BLOCKED",
+  "validation_time": 14.111973604
+}

@@ -1,0 +1,475 @@
+{
+  "edge_case_tests": {
+    "very_small_images": {
+      "test_results": [
+        {
+          "size": "10x10",
+          "pixels": 100,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.04174941700000012,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "size": "25x25",
+          "pixels": 625,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.010743763999999878,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "size": "40x40",
+          "pixels": 1600,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.009457610000000116,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "size": "49x49",
+          "pixels": 2401,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.013419271000000066,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        }
+      ],
+      "total_tests": 4,
+      "successful_tests": 4,
+      "error_rate": 0.0
+    },
+    "very_large_images": {
+      "test_results": [
+        {
+          "size": "2048x2048",
+          "pixels": 4194304,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 7.8578655159999995,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "size": "3000x3000",
+          "pixels": 9000000,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 16.398050769999998,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "size": "4096x4096",
+          "pixels": 16777216,
+          "classification": "skipped",
+          "confidence": 0.0,
+          "processing_time": 0.0,
+          "features_extracted": false,
+          "valid_features": false,
+          "error": "Skipped - too large for test environment"
+        }
+      ],
+      "total_tests": 3,
+      "successful_tests": 2,
+      "error_rate": 0.3333333333333333
+    },
+    "unusual_aspect_ratios": {
+      "test_results": [
+        {
+          "dimensions": "1000x10",
+          "aspect_ratio": 100.0,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.09219572900000017,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "dimensions": "10x1000",
+          "aspect_ratio": 0.01,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.08206054600000101,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "dimensions": "500x25",
+          "aspect_ratio": 20.0,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.0688724549999975,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "dimensions": "25x500",
+          "aspect_ratio": 0.05,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.06870610300000024,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "dimensions": "800x100",
+          "aspect_ratio": 8.0,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.13237896200000066,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "dimensions": "100x800",
+          "aspect_ratio": 0.125,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.12776399599999877,
+          "features_extracted": true,
+          "valid_features": true,
+          "error": null
+        }
+      ],
+      "total_tests": 6,
+      "successful_tests": 6,
+      "error_rate": 0.0
+    },
+    "single_color_images": {
+      "test_results": [
+        {
+          "test_name": "pure_black",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.3451282340000006,
+          "features": {
+            "edge_density": 0.0,
+            "unique_colors": 0.0,
+            "entropy": 0.0,
+            "corner_density": 0.0,
+            "gradient_strength": 0.0,
+            "complexity_score": 0.0
+          },
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "test_name": "pure_white",
+          "color": [
+            255,
+            255,
+            255
+          ],
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.14609316399999983,
+          "features": {
+            "edge_density": 0.0,
+            "unique_colors": 0.0,
+            "entropy": 0.0,
+            "corner_density": 0.0,
+            "gradient_strength": 0.0,
+            "complexity_score": 5.33394412670714e-47
+          },
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "test_name": "pure_red",
+          "color": [
+            255,
+            0,
+            0
+          ],
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.14117450700000234,
+          "features": {
+            "edge_density": 0.0,
+            "unique_colors": 0.0,
+            "entropy": 0.0,
+            "corner_density": 0.0,
+            "gradient_strength": 0.0,
+            "complexity_score": 0.0
+          },
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "test_name": "pure_blue",
+          "color": [
+            0,
+            0,
+            255
+          ],
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.15734828399999756,
+          "features": {
+            "edge_density": 0.0,
+            "unique_colors": 0.0,
+            "entropy": 0.0,
+            "corner_density": 0.0,
+            "gradient_strength": 0.0,
+            "complexity_score": 1.6538344934858502e-48
+          },
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "test_name": "gray",
+          "color": [
+            128,
+            128,
+            128
+          ],
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.19819981999999925,
+          "features": {
+            "edge_density": 0.0,
+            "unique_colors": 0.0,
+            "entropy": 0.0,
+            "corner_density": 0.0,
+            "gradient_strength": 0.0,
+            "complexity_score": 0.0
+          },
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "test_name": "near_black",
+          "color": [
+            5,
+            5,
+            5
+          ],
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.16650671700000075,
+          "features": {
+            "edge_density": 0.0,
+            "unique_colors": 0.0,
+            "entropy": 0.0,
+            "corner_density": 0.0,
+            "gradient_strength": 0.0,
+            "complexity_score": 0.0
+          },
+          "valid_features": true,
+          "error": null
+        },
+        {
+          "test_name": "near_white",
+          "color": [
+            250,
+            250,
+            250
+          ],
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.14359117600000104,
+          "features": {
+            "edge_density": 0.0,
+            "unique_colors": 0.0,
+            "entropy": 0.0,
+            "corner_density": 0.0,
+            "gradient_strength": 0.0,
+            "complexity_score": 0.0
+          },
+          "valid_features": true,
+          "error": null
+        }
+      ],
+      "total_tests": 7,
+      "successful_tests": 7,
+      "error_rate": 0.0
+    },
+    "corrupted_invalid_data": {
+      "test_results": [
+        {
+          "test_name": "non_existent_file",
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.00017696400000133394,
+          "handled_gracefully": false,
+          "error": null
+        },
+        {
+          "test_name": "empty_file",
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.0001943050000008384,
+          "handled_gracefully": false,
+          "error": null
+        },
+        {
+          "test_name": "text_file_as_image",
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.00038504600000166533,
+          "handled_gracefully": false,
+          "error": null
+        },
+        {
+          "test_name": "truncated_image",
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.0001953340000007131,
+          "handled_gracefully": false,
+          "error": null
+        },
+        {
+          "test_name": "zero_size_image",
+          "classification": "unknown",
+          "confidence": 0.0,
+          "processing_time": 0.0002592899999989129,
+          "handled_gracefully": false,
+          "error": null
+        }
+      ],
+      "total_tests": 5,
+      "gracefully_handled": 0,
+      "graceful_handling_rate": 0.0
+    }
+  },
+  "boundary_condition_tests": {
+    "test_results": [
+      {
+        "test_name": "simple_upper_boundary",
+        "input_features": {
+          "complexity_score": 0.089,
+          "entropy": 0.06,
+          "unique_colors": 0.125,
+          "edge_density": 0.0074,
+          "corner_density": 0.07,
+          "gradient_strength": 0.065
+        },
+        "classification": "simple",
+        "confidence": 0.6006270661062992,
+        "processing_time": 0.0002387169999984451,
+        "handled_gracefully": true,
+        "error": null
+      },
+      {
+        "test_name": "simple_lower_boundary",
+        "input_features": {
+          "complexity_score": 0.08,
+          "entropy": 0.044,
+          "unique_colors": 0.125,
+          "edge_density": 0.0058,
+          "corner_density": 0.026,
+          "gradient_strength": 0.06
+        },
+        "classification": "simple",
+        "confidence": 0.58585792567609,
+        "processing_time": 0.0002444019999998659,
+        "handled_gracefully": true,
+        "error": null
+      },
+      {
+        "test_name": "extreme_zeros",
+        "input_features": {
+          "complexity_score": 0.0,
+          "entropy": 0.0,
+          "unique_colors": 0.0,
+          "edge_density": 0.0,
+          "corner_density": 0.0,
+          "gradient_strength": 0.0
+        },
+        "classification": "simple",
+        "confidence": 0.3671734397595631,
+        "processing_time": 0.00018409000000119136,
+        "handled_gracefully": true,
+        "error": null
+      },
+      {
+        "test_name": "extreme_ones",
+        "input_features": {
+          "complexity_score": 1.0,
+          "entropy": 1.0,
+          "unique_colors": 1.0,
+          "edge_density": 1.0,
+          "corner_density": 1.0,
+          "gradient_strength": 1.0
+        },
+        "classification": "gradient",
+        "confidence": 0.40026786295527195,
+        "processing_time": 0.00022317399999849385,
+        "handled_gracefully": true,
+        "error": null
+      },
+      {
+        "test_name": "nan_values",
+        "input_features": {
+          "complexity_score": NaN,
+          "entropy": 0.5,
+          "unique_colors": 0.5,
+          "edge_density": NaN,
+          "corner_density": 0.5,
+          "gradient_strength": 0.5
+        },
+        "classification": "unknown",
+        "confidence": 0.0,
+        "processing_time": 0.00018764599999698817,
+        "handled_gracefully": true,
+        "error": null
+      },
+      {
+        "test_name": "infinite_values",
+        "input_features": {
+          "complexity_score": Infinity,
+          "entropy": 0.5,
+          "unique_colors": 0.5,
+          "edge_density": 0.5,
+          "corner_density": -Infinity,
+          "gradient_strength": 0.5
+        },
+        "classification": "unknown",
+        "confidence": 0.0,
+        "processing_time": 0.00012841999999935183,
+        "handled_gracefully": true,
+        "error": null
+      }
+    ],
+    "total_tests": 6,
+    "successful_tests": 6,
+    "graceful_handling_rate": 1.0
+  },
+  "robustness_summary": {
+    "total_edge_case_tests": 31,
+    "successful_tests": 30,
+    "graceful_failures": 0,
+    "hard_failures": 1,
+    "success_rate": 0.967741935483871,
+    "graceful_handling_rate": 0.967741935483871,
+    "robustness_score": 0.967741935483871,
+    "categories_tested": [
+      "very_small_images",
+      "very_large_images",
+      "unusual_aspect_ratios",
+      "single_color_images",
+      "corrupted_invalid_data"
+    ]
+  }
+}

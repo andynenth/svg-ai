@@ -1,0 +1,31 @@
+{
+  "focal_loss": {
+    "enabled": true,
+    "alpha": 0.25,
+    "gamma": 2.0,
+    "description": "Focuses on hard examples and handles class imbalance"
+  },
+  "class_weighting": {
+    "enabled": true,
+    "method": "inverse_frequency",
+    "description": "Weights classes inversely proportional to their frequency"
+  },
+  "gradient_clipping": {
+    "enabled": true,
+    "max_norm": 1.0,
+    "norm_type": 2.0,
+    "description": "Clips gradients to prevent exploding gradients"
+  },
+  "enhanced_checkpointing": {
+    "enabled": true,
+    "save_best": true,
+    "save_latest": true,
+    "save_epoch_specific": true,
+    "include_metrics": true,
+    "description": "Comprehensive checkpoint saving with metrics"
+  },
+  "model_ensemble": {
+    "enabled": false,
+    "description": "Ensemble multiple models for better predictions"
+  }
+}

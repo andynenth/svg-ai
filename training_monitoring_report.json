@@ -1,0 +1,380 @@
+{
+  "monitoring_timestamp": "2025-09-28T23:35:35.681998",
+  "monitoring_summary": {
+    "total_instabilities": 1,
+    "high_severity_issues": 1,
+    "total_recommendations": 6,
+    "training_completed": true
+  },
+  "detailed_analysis": {
+    "system_resources": {
+      "timestamp": "2025-09-28T23:35:22.556241",
+      "cpu": {
+        "usage_percent": 80.3,
+        "core_count": 8,
+        "temperature_c": null
+      },
+      "memory": {
+        "used_mb": 4977.7890625,
+        "usage_percent": 74.3,
+        "available_mb": 2103.4609375
+      },
+      "disk": {
+        "used_gb": 10.48586654663086,
+        "usage_percent": 4.491328814773075,
+        "free_gb": 120.42021942138672
+      }
+    },
+    "training_analysis": {
+      "total_epochs": 28,
+      "best_validation_accuracy": 50.0,
+      "best_epoch": 9,
+      "final_validation_accuracy": 30.0,
+      "overfitting_detected": true,
+      "stage_transitions": [
+        8,
+        17,
+        24
+      ],
+      "training_metrics": {
+        "epochs": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        "train_loss": [
+          0.20455185483608926,
+          0.19469081362088522,
+          0.23234412405225965,
+          0.22479117082224953,
+          0.19712119218375948,
+          0.1964731216430664,
+          0.19389955865012276,
+          0.18970685286654365,
+          0.18971918523311615,
+          0.16566193434927198,
+          0.21730825222200817,
+          0.1955585645304786,
+          0.2028561251031028,
+          0.18192250612709257,
+          0.1965969850619634,
+          0.21763142363892662,
+          0.1714048973388142,
+          0.19960728784402212,
+          0.20176486670970917,
+          0.1892464260260264,
+          0.21062067482206556,
+          0.15956180956628588,
+          0.18501504096719953,
+          0.19017186843686634,
+          0.2012906794746717,
+          0.17778478811184564,
+          0.17521727085113525,
+          0.24119960102770063
+        ],
+        "train_acc": [
+          24.642857142857142,
+          45.714285714285715,
+          20.0,
+          17.142857142857142,
+          25.714285714285715,
+          34.285714285714285,
+          22.857142857142858,
+          31.428571428571427,
+          31.428571428571427,
+          40.0,
+          34.285714285714285,
+          34.285714285714285,
+          31.428571428571427,
+          34.285714285714285,
+          48.57142857142857,
+          34.285714285714285,
+          54.285714285714285,
+          31.428571428571427,
+          25.714285714285715,
+          31.428571428571427,
+          34.285714285714285,
+          54.285714285714285,
+          48.57142857142857,
+          40.0,
+          37.142857142857146,
+          60.0,
+          45.714285714285715,
+          42.857142857142854
+        ],
+        "val_loss": [
+          0.6564405037090182,
+          0.18586061398188272,
+          0.18982783953348795,
+          0.19176603853702545,
+          0.19378399352232614,
+          0.19563214977582297,
+          0.20025244851907095,
+          0.21715393662452698,
+          0.5283413007855415,
+          2.1059318905075393,
+          2.9198348795374236,
+          2.6733055164416633,
+          2.6960973044236503,
+          1.8877491379777591,
+          1.8167866716782253,
+          1.6596191972494125,
+          0.9529478053251902,
+          3.350878198941549,
+          1.5971436301867168,
+          1.139839229484399,
+          1.2696042507886887,
+          2.646504690249761,
+          4.556095480918884,
+          2.979893445968628,
+          2.773799185951551,
+          3.484689844151338,
+          3.6669208109378815,
+          2.175960994015137
+        ],
+        "val_acc": [
+          25.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          10.0,
+          30.0,
+          50.0,
+          40.0,
+          30.0,
+          30.0,
+          40.0,
+          30.0,
+          30.0,
+          40.0,
+          30.0,
+          30.0,
+          30.0,
+          40.0,
+          50.0,
+          50.0,
+          50.0,
+          40.0,
+          40.0,
+          40.0,
+          30.0
+        ],
+        "per_class_acc": [
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 100.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 100.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 100.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 100.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 100.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 100.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 100.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 100.0,
+            "complex": 0.0
+          },
+          {
+            "simple": 50.0,
+            "text": 50.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 50.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 100.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 50.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 50.0,
+            "text": 0.0,
+            "gradient": 0.0,
+            "complex": 75.0
+          },
+          {
+            "simple": 0.0,
+            "text": 0.0,
+            "gradient": 100.0,
+            "complex": 25.0
+          }
+        ],
+        "stages": []
+      }
+    },
+    "instabilities": [
+      {
+        "type": "class_prediction_bias",
+        "severity": "high",
+        "description": "Model only predicting 2/4 classes",
+        "recommendation": "Increase class weights for underrepresented classes"
+      }
+    ],
+    "recommendations": [
+      "Performance degraded from best - implement early stopping",
+      "Address 1 high-severity training issues immediately",
+      "Continue with progressive unfreezing strategy for better transfer learning",
+      "Monitor per-class accuracy to ensure balanced predictions across all logo types",
+      "Consider ensemble methods if single model accuracy plateaus below target",
+      "Implement model quantization for deployment optimization"
+    ]
+  }
+}

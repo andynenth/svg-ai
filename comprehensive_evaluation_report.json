@@ -1,0 +1,1207 @@
+{
+  "model_info": {
+    "checkpoint_epoch": 0,
+    "training_accuracy": 24.642857142857142,
+    "validation_accuracy": 25.0,
+    "total_parameters": 4336512,
+    "trainable_parameters": 328964
+  },
+  "dataset_info": {
+    "test_data_dir": "data/training/classification/test",
+    "total_samples": 80,
+    "classes": [
+      "simple",
+      "text",
+      "gradient",
+      "complex"
+    ],
+    "class_distribution": {
+      "simple": 20,
+      "text": 20,
+      "gradient": 20,
+      "complex": 20
+    }
+  },
+  "overall_metrics": {
+    "accuracy": 25.0,
+    "precision": 6.25,
+    "recall": 25.0,
+    "f1_score": 10.0,
+    "total_samples": 80
+  },
+  "per_class_metrics": {
+    "accuracy": {
+      "simple": 0.0,
+      "text": 0.0,
+      "gradient": 0.0,
+      "complex": 100.0
+    },
+    "precision": {
+      "simple": 0.0,
+      "text": 0.0,
+      "gradient": 0.0,
+      "complex": 25.0
+    },
+    "recall": {
+      "simple": 0.0,
+      "text": 0.0,
+      "gradient": 0.0,
+      "complex": 100.0
+    },
+    "f1_score": {
+      "simple": 0.0,
+      "text": 0.0,
+      "gradient": 0.0,
+      "complex": 40.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      20
+    ],
+    [
+      0,
+      0,
+      0,
+      20
+    ],
+    [
+      0,
+      0,
+      0,
+      20
+    ],
+    [
+      0,
+      0,
+      0,
+      20
+    ]
+  ],
+  "predictions": [
+    {
+      "sample_id": 0,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 1,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 2,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.27858632802963257,
+      "probabilities": {
+        "simple": 0.23404517769813538,
+        "text": 0.26896771788597107,
+        "gradient": 0.21840085089206696,
+        "complex": 0.27858632802963257
+      }
+    },
+    {
+      "sample_id": 3,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.3106103837490082,
+      "probabilities": {
+        "simple": 0.20324492454528809,
+        "text": 0.24093805253505707,
+        "gradient": 0.24520662426948547,
+        "complex": 0.3106103837490082
+      }
+    },
+    {
+      "sample_id": 4,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28076353669166565,
+      "probabilities": {
+        "simple": 0.23282159864902496,
+        "text": 0.25499704480171204,
+        "gradient": 0.23141776025295258,
+        "complex": 0.28076353669166565
+      }
+    },
+    {
+      "sample_id": 5,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.6225946545600891,
+      "probabilities": {
+        "simple": 0.0511765331029892,
+        "text": 0.10865499824285507,
+        "gradient": 0.21757382154464722,
+        "complex": 0.6225946545600891
+      }
+    },
+    {
+      "sample_id": 6,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 7,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.33445975184440613,
+      "probabilities": {
+        "simple": 0.19274719059467316,
+        "text": 0.2292294204235077,
+        "gradient": 0.24356365203857422,
+        "complex": 0.33445975184440613
+      }
+    },
+    {
+      "sample_id": 8,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.27252140641212463,
+      "probabilities": {
+        "simple": 0.23681315779685974,
+        "text": 0.26302552223205566,
+        "gradient": 0.22763998806476593,
+        "complex": 0.27252140641212463
+      }
+    },
+    {
+      "sample_id": 9,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 10,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2832797169685364,
+      "probabilities": {
+        "simple": 0.22933512926101685,
+        "text": 0.2635180652141571,
+        "gradient": 0.2238670438528061,
+        "complex": 0.2832797169685364
+      }
+    },
+    {
+      "sample_id": 11,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28325942158699036,
+      "probabilities": {
+        "simple": 0.23251816630363464,
+        "text": 0.2629690170288086,
+        "gradient": 0.2212534099817276,
+        "complex": 0.28325942158699036
+      }
+    },
+    {
+      "sample_id": 12,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 13,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.49386534094810486,
+      "probabilities": {
+        "simple": 0.0859440416097641,
+        "text": 0.15936283767223358,
+        "gradient": 0.26082780957221985,
+        "complex": 0.49386534094810486
+      }
+    },
+    {
+      "sample_id": 14,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 15,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.48870500922203064,
+      "probabilities": {
+        "simple": 0.09444423764944077,
+        "text": 0.17026683688163757,
+        "gradient": 0.24658390879631042,
+        "complex": 0.48870500922203064
+      }
+    },
+    {
+      "sample_id": 16,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2889851927757263,
+      "probabilities": {
+        "simple": 0.21303516626358032,
+        "text": 0.2568206489086151,
+        "gradient": 0.24115896224975586,
+        "complex": 0.2889851927757263
+      }
+    },
+    {
+      "sample_id": 17,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 18,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 19,
+      "true_label": 0,
+      "true_class": "simple",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28482571244239807,
+      "probabilities": {
+        "simple": 0.2327098697423935,
+        "text": 0.252808541059494,
+        "gradient": 0.22965586185455322,
+        "complex": 0.28482571244239807
+      }
+    },
+    {
+      "sample_id": 20,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.9994794726371765,
+      "probabilities": {
+        "simple": 7.459378253971138e-11,
+        "text": 3.934996584575856e-06,
+        "gradient": 0.0005165776237845421,
+        "complex": 0.9994794726371765
+      }
+    },
+    {
+      "sample_id": 21,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 22,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 23,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 24,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.30474287271499634,
+      "probabilities": {
+        "simple": 0.2163870930671692,
+        "text": 0.23825369775295258,
+        "gradient": 0.24061639606952667,
+        "complex": 0.30474287271499634
+      }
+    },
+    {
+      "sample_id": 25,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2823166847229004,
+      "probabilities": {
+        "simple": 0.23629488050937653,
+        "text": 0.26133379340171814,
+        "gradient": 0.22005468606948853,
+        "complex": 0.2823166847229004
+      }
+    },
+    {
+      "sample_id": 26,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 27,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28038927912712097,
+      "probabilities": {
+        "simple": 0.23983849585056305,
+        "text": 0.25954943895339966,
+        "gradient": 0.2202228307723999,
+        "complex": 0.28038927912712097
+      }
+    },
+    {
+      "sample_id": 28,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 29,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 30,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 31,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 1.0,
+      "probabilities": {
+        "simple": 6.996024290966061e-17,
+        "text": 5.192127616737707e-09,
+        "gradient": 2.885234806626613e-08,
+        "complex": 1.0
+      }
+    },
+    {
+      "sample_id": 32,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 33,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 34,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 35,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 36,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 37,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2834704518318176,
+      "probabilities": {
+        "simple": 0.22846324741840363,
+        "text": 0.26378461718559265,
+        "gradient": 0.2242816984653473,
+        "complex": 0.2834704518318176
+      }
+    },
+    {
+      "sample_id": 38,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 39,
+      "true_label": 1,
+      "true_class": "text",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 40,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2826666235923767,
+      "probabilities": {
+        "simple": 0.2332245111465454,
+        "text": 0.264442503452301,
+        "gradient": 0.21966639161109924,
+        "complex": 0.2826666235923767
+      }
+    },
+    {
+      "sample_id": 41,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.713411271572113,
+      "probabilities": {
+        "simple": 0.024889927357435226,
+        "text": 0.09104893356561661,
+        "gradient": 0.17064981162548065,
+        "complex": 0.713411271572113
+      }
+    },
+    {
+      "sample_id": 42,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 1.0,
+      "probabilities": {
+        "simple": 5.633632348764647e-33,
+        "text": 2.0753456988781807e-18,
+        "gradient": 1.020500683956982e-09,
+        "complex": 1.0
+      }
+    },
+    {
+      "sample_id": 43,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 44,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 45,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28353941440582275,
+      "probabilities": {
+        "simple": 0.22789102792739868,
+        "text": 0.2638501524925232,
+        "gradient": 0.22471939027309418,
+        "complex": 0.28353941440582275
+      }
+    },
+    {
+      "sample_id": 46,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 47,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 48,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.29625359177589417,
+      "probabilities": {
+        "simple": 0.220100998878479,
+        "text": 0.2433338165283203,
+        "gradient": 0.24031156301498413,
+        "complex": 0.29625359177589417
+      }
+    },
+    {
+      "sample_id": 49,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 50,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 51,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 52,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 53,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2864138185977936,
+      "probabilities": {
+        "simple": 0.23086996376514435,
+        "text": 0.2613511085510254,
+        "gradient": 0.2213650345802307,
+        "complex": 0.2864138185977936
+      }
+    },
+    {
+      "sample_id": 54,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 55,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 56,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 57,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 58,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 59,
+      "true_label": 2,
+      "true_class": "gradient",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.31108877062797546,
+      "probabilities": {
+        "simple": 0.20025551319122314,
+        "text": 0.24586577713489532,
+        "gradient": 0.24278989434242249,
+        "complex": 0.31108877062797546
+      }
+    },
+    {
+      "sample_id": 60,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 61,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 62,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 63,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 64,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 65,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 66,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2766685485839844,
+      "probabilities": {
+        "simple": 0.23955045640468597,
+        "text": 0.26413682103157043,
+        "gradient": 0.2196442186832428,
+        "complex": 0.2766685485839844
+      }
+    },
+    {
+      "sample_id": 67,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 68,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.6229916214942932,
+      "probabilities": {
+        "simple": 0.04138433560729027,
+        "text": 0.13670718669891357,
+        "gradient": 0.19891685247421265,
+        "complex": 0.6229916214942932
+      }
+    },
+    {
+      "sample_id": 69,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 70,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 71,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 72,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.2783416211605072,
+      "probabilities": {
+        "simple": 0.23841647803783417,
+        "text": 0.2645620107650757,
+        "gradient": 0.21867990493774414,
+        "complex": 0.2783416211605072
+      }
+    },
+    {
+      "sample_id": 73,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 74,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.46228229999542236,
+      "probabilities": {
+        "simple": 0.10832513868808746,
+        "text": 0.18829123675823212,
+        "gradient": 0.24110126495361328,
+        "complex": 0.46228229999542236
+      }
+    },
+    {
+      "sample_id": 75,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 76,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.278116375207901,
+      "probabilities": {
+        "simple": 0.22702425718307495,
+        "text": 0.25914937257766724,
+        "gradient": 0.23570998013019562,
+        "complex": 0.278116375207901
+      }
+    },
+    {
+      "sample_id": 77,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    },
+    {
+      "sample_id": 78,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28188642859458923,
+      "probabilities": {
+        "simple": 0.23311366140842438,
+        "text": 0.26597124338150024,
+        "gradient": 0.21902869641780853,
+        "complex": 0.28188642859458923
+      }
+    },
+    {
+      "sample_id": 79,
+      "true_label": 3,
+      "true_class": "complex",
+      "predicted_label": 3,
+      "predicted_class": "complex",
+      "confidence": 0.28079989552497864,
+      "probabilities": {
+        "simple": 0.22730481624603271,
+        "text": 0.2633468806743622,
+        "gradient": 0.22854840755462646,
+        "complex": 0.28079989552497864
+      }
+    }
+  ],
+  "confidence_analysis": {
+    "average_confidence": 

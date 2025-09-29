@@ -18,6 +18,7 @@ venv39/
 # Project specific
 data/output/
 data/logos/
+data/raw_logos/
 cache/
 # *.svg
 temp/

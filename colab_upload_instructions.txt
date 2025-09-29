@@ -1,0 +1,53 @@
+
+🚀 COLAB DATASET UPLOAD INSTRUCTIONS
+=====================================
+
+Follow these steps to upload your logo dataset to Google Colab:
+
+STEP 1: PREPARE LOCAL DATASET
+-----------------------------
+1. Navigate to your svg-ai project directory:
+   cd /Users/nrw/python/svg-ai
+
+2. Create a compressed dataset from your raw logos:
+   python scripts/colab_dataset_uploader.py --create-zip
+
+3. This will create: colab_logo_dataset.zip (~50-100MB)
+
+STEP 2: UPLOAD TO COLAB
+-----------------------
+1. Open the Enhanced_Logo_Classification_Colab.ipynb notebook
+2. In the "Dataset Upload & Organization" section, run:
+   from google.colab import files
+   uploaded = files.upload()
+
+3. Select and upload the colab_logo_dataset.zip file
+4. The notebook will automatically extract and organize the data
+
+STEP 3: VERIFY UPLOAD
+---------------------
+After upload, you should see:
+✅ Found 800+ raw logo images
+✅ Intelligent organization: 200 images per class
+✅ Train/Val/Test splits created: 70%/20%/10%
+
+ALTERNATIVE: GOOGLE DRIVE METHOD
+--------------------------------
+1. Upload colab_logo_dataset.zip to your Google Drive
+2. In Colab, mount Google Drive and copy:
+   !cp "/content/drive/MyDrive/colab_logo_dataset.zip" .
+   !unzip colab_logo_dataset.zip
+
+TROUBLESHOOTING
+---------------
+- Upload timeout: Use Google Drive method for large files
+- Extraction errors: Ensure zip file is not corrupted
+- Missing images: Verify data/raw_logos contains PNG files
+- Permission errors: Check Colab file access permissions
+
+Dataset Statistics After Upload:
+- Total images: 800 (organized from 2,069 raw images)
+- Classes: Simple (200), Text (200), Gradient (200), Complex (200)
+- Train: 560 images (70%)
+- Validation: 112 images (20%)
+- Test: 80 images (10%)

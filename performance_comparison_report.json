@@ -1,0 +1,447 @@
+{
+  "dataset_info": {
+    "test_data_dir": "data/training/classification/val",
+    "total_samples": 10,
+    "class_distribution": {
+      "simple": 2,
+      "text": 2,
+      "gradient": 2,
+      "complex": 4
+    }
+  },
+  "neural_network_results": {
+    "overall_accuracy": 50.0,
+    "per_class_accuracy": {
+      "simple": 50.0,
+      "text": 50.0,
+      "gradient": 0.0,
+      "complex": 75.0
+    },
+    "precision": 50.0,
+    "recall": 50.0,
+    "f1_score": 47.33333333333333,
+    "average_confidence": 0.6174077302217483,
+    "evaluation_time": 0.48993420600891113,
+    "predictions": [
+      {
+        "sample_id": 0,
+        "image_path": "data/training/classification/val/simple/simple_geometric_cross_08.png",
+        "true_label": 0,
+        "true_class": "simple",
+        "predicted_label": 0,
+        "predicted_class": "simple",
+        "confidence": 0.356658399105072
+      },
+      {
+        "sample_id": 1,
+        "image_path": "data/training/classification/val/simple/simple_geometric_circle_00.png",
+        "true_label": 0,
+        "true_class": "simple",
+        "predicted_label": 3,
+        "predicted_class": "complex",
+        "confidence": 0.999763548374176
+      },
+      {
+        "sample_id": 2,
+        "image_path": "data/training/classification/val/text/text_based_text_app_06.png",
+        "true_label": 1,
+        "true_class": "text",
+        "predicted_label": 1,
+        "predicted_class": "text",
+        "confidence": 0.2895424962043762
+      },
+      {
+        "sample_id": 3,
+        "image_path": "data/training/classification/val/text/text_based_text_web_05.png",
+        "true_label": 1,
+        "true_class": "text",
+        "predicted_label": 2,
+        "predicted_class": "gradient",
+        "confidence": 0.3087692856788635
+      },
+      {
+        "sample_id": 4,
+        "image_path": "data/training/classification/val/gradient/gradients_gradient_radial_04.png",
+        "true_label": 2,
+        "true_class": "gradient",
+        "predicted_label": 3,
+        "predicted_class": "complex",
+        "confidence": 0.9988037347793579
+      },
+      {
+        "sample_id": 5,
+        "image_path": "data/training/classification/val/gradient/gradients_gradient_radial_03.png",
+        "true_label": 2,
+        "true_class": "gradient",
+        "predicted_label": 3,
+        "predicted_class": "complex",
+        "confidence": 0.9601455330848694
+      },
+      {
+        "sample_id": 6,
+        "image_path": "data/training/classification/val/complex/complex_complex_multi_00.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": 3,
+        "predicted_class": "complex",
+        "confidence": 0.45470529794692993
+      },
+      {
+        "sample_id": 7,
+        "image_path": "data/training/classification/val/complex/abstract_abstract_2_02.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": 3,
+        "predicted_class": "complex",
+        "confidence": 0.642504096031189
+      },
+      {
+        "sample_id": 8,
+        "image_path": "data/training/classification/val/complex/complex_complex_multi_01.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": 0,
+        "predicted_class": "simple",
+        "confidence": 0.3669945299625397
+      },
+      {
+        "sample_id": 9,
+        "image_path": "data/training/classification/val/complex/abstract_abstract_3_08.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": 3,
+        "predicted_class": "complex",
+        "confidence": 0.7961903810501099
+      }
+    ],
+    "confusion_matrix": [
+      [
+        1,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        1,
+        0,
+        0,
+        3
+      ]
+    ]
+  },
+  "rule_based_results": {
+    "overall_accuracy": 0.0,
+    "per_class_accuracy": {
+      "simple": 0.0,
+      "text": 0.0,
+      "gradient": 0.0,
+      "complex": 0.0
+    },
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0,
+    "average_confidence": 0.0,
+    "evaluation_time": 0.25148701667785645,
+    "average_classification_time": 0.02514514923095703,
+    "predictions": [
+      {
+        "sample_id": 0,
+        "image_path": "data/training/classification/val/simple/simple_geometric_cross_08.png",
+        "true_label": 0,
+        "true_class": "simple",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 2', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 5.104701339976683']"
+        }
+      },
+      {
+        "sample_id": 1,
+        "image_path": "data/training/classification/val/simple/simple_geometric_circle_00.png",
+        "true_label": 0,
+        "true_class": "simple",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 2', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 5.308226956617895']"
+        }
+      },
+      {
+        "sample_id": 2,
+        "image_path": "data/training/classification/val/text/text_based_text_app_06.png",
+        "true_label": 1,
+        "true_class": "text",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 2', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 31.926408255114374']"
+        }
+      },
+      {
+        "sample_id": 3,
+        "image_path": "data/training/classification/val/text/text_based_text_web_05.png",
+        "true_label": 1,
+        "true_class": "text",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 2', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 18.418182430864285']"
+        }
+      },
+      {
+        "sample_id": 4,
+        "image_path": "data/training/classification/val/gradient/gradients_gradient_radial_04.png",
+        "true_label": 2,
+        "true_class": "gradient",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 11', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 14.665933280459102']"
+        }
+      },
+      {
+        "sample_id": 5,
+        "image_path": "data/training/classification/val/gradient/gradients_gradient_radial_03.png",
+        "true_label": 2,
+        "true_class": "gradient",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 11', 'entropy: Non-numeric value', 'corner_density: Out of range [0,1]: 1.52587890625', 'gradient_strength: Out of range [0,1]: 9.400133891970144']"
+        }
+      },
+      {
+        "sample_id": 6,
+        "image_path": "data/training/classification/val/complex/complex_complex_multi_00.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 4', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 6.212395088646367']"
+        }
+      },
+      {
+        "sample_id": 7,
+        "image_path": "data/training/classification/val/complex/abstract_abstract_2_02.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 18', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 37.634377582429074']"
+        }
+      },
+      {
+        "sample_id": 8,
+        "image_path": "data/training/classification/val/complex/complex_complex_multi_01.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 6', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 7.452983704930675']"
+        }
+      },
+      {
+        "sample_id": 9,
+        "image_path": "data/training/classification/val/complex/abstract_abstract_3_08.png",
+        "true_label": 3,
+        "true_class": "complex",
+        "predicted_label": -1,
+        "predicted_class": "unknown",
+        "confidence": 0.0,
+        "details": {
+          "logo_type": "unknown",
+          "confidence": 0.0,
+          "reasoning": "Invalid input: Invalid values: ['unique_colors: Out of range [0,1]: 11', 'entropy: Non-numeric value', 'gradient_strength: Out of range [0,1]: 29.831971427228826']"
+        }
+      }
+    ],
+    "confusion_matrix": [
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ]
+  },
+  "comparison_analysis": {
+    "performance_comparison": {
+      "overall_accuracy": {
+        "neural_network": 50.0,
+        "rule_based": 0.0,
+        "difference": 50.0,
+        "winner": "neural_network"
+      },
+      "precision": {
+        "neural_network": 50.0,
+        "rule_based": 0.0,
+        "difference": 50.0,
+        "winner": "neural_network"
+      },
+      "recall": {
+        "neural_network": 50.0,
+        "rule_based": 0.0,
+        "difference": 50.0,
+        "winner": "neural_network"
+      },
+      "f1_score": {
+        "neural_network": 47.33333333333333,
+        "rule_based": 0.0,
+        "difference": 47.33333333333333,
+        "winner": "neural_network"
+      }
+    },
+    "per_class_comparison": {
+      "simple": {
+        "neural_network": 50.0,
+        "rule_based": 0.0,
+        "difference": 50.0,
+        "winner": "neural_network"
+      },
+      "text": {
+        "neural_network": 50.0,
+        "rule_based": 0.0,
+        "difference": 50.0,
+        "winner": "neural_network"
+      },
+      "gradient": {
+        "neural_network": 0.0,
+        "rule_based": 0.0,
+        "difference": 0.0,
+        "winner": "rule_based"
+      },
+      "complex": {
+        "neural_network": 75.0,
+        "rule_based": 0.0,
+        "difference": 75.0,
+        "winner": "neural_network"
+      }
+    },
+    "speed_comparison": {
+      "evaluation_time": {
+        "neural_network": 0.48993420600891113,
+        "rule_based": 0.25148701667785645,
+        "faster": "rule_based"
+      },
+      "time_per_sample": {
+        "neural_network": 0.04899342060089111,
+        "rule_based": 0.02514514923095703
+      }
+    },
+    "confidence_comparison": {
+      "neural_network": 0.6174077302217483,
+      "rule_based": 0.0,
+      "difference": 0.6174077302217483
+    }
+  },
+  "complementary_analysis": {
+    "neural_network": {
+      "strengths": [
+        "Higher overall accuracy",
+        "Better performance on: simple, text, complex",
+        "Learns from data, adaptable"
+      ],
+      "weaknesses": [
+        "Slower overall evaluation",
+        "Requires training data",
+        "Black box decisions"
+      ]
+    },
+    "rule_based": {
+      "strengths": [
+        "Better performance on: gradient",
+        "Faster overall evaluation",
+        "Interpretable decisions",
+        "No training required",
+        "Consistent behavior"
+      ],
+      "weaknesses": [
+        "Lower overall accuracy",
+        "Manual rule creation",
+        "Limited adaptability"
+      ]
+    },
+    "hybrid_recommendations": [
+      "Use rule-based for simple geometric logos (high accuracy)",
+      "Use neural network for complex patterns (when properly trained)",
+      "Implement confidence-based routing between methods",
+      "Consider ensemble approach combining both methods"
+    ]
+  },
+  "recommendations": [
+    "Implement hybrid system with confidence-based routing",
+    "Use rule-based for interpretable decisions in critical applications",
+    "Reserve neural network for complex cases where rules fail",
+    "Create ensemble method combining strengths of both approaches",
+    "Optimize neural network architecture for small dataset",
+    "Implement few-shot learning techniques",
+    "Add more diverse training data",
+    "Consider transfer learning from larger logo datasets"
+  ],
+  "metadata": {
+    "timestamp": "2025-09-28T21:54:05.404460",
+    "comparison_version": "5.5.2",
+    "neural_network_model": "EfficientNet-B0 with enhanced classifier",
+    "rule_based_model": "SVG feature-based classifier"
+  }
+}
