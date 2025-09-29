@@ -1,0 +1,107 @@
+{
+  "edge_density": {
+    "method": "edge_density",
+    "avg_time": 0.004258990000000091,
+    "min_time": 0.00045472499999998917,
+    "max_time": 0.027177387000000053,
+    "std_time": 0.007941537065911363,
+    "avg_memory": 596125.5384615385,
+    "max_memory": "7892992",
+    "success_rate": 1.0,
+    "sample_results": [
+      0.0196,
+      0.3689,
+      0.368804931640625,
+      0.3683204650878906,
+      0.3680286407470703
+    ],
+    "target_met": "True"
+  },
+  "complete_extraction": {
+    "method": "complete_extraction",
+    "avg_time": 0.004350329384615352,
+    "min_time": 0.0006521780000001698,
+    "max_time": 0.033857020000000126,
+    "std_time": 0.008716716166542344,
+    "avg_memory": 34973.53846153846,
+    "max_memory": "6795264",
+    "success_rate": 1.0,
+    "sample_results": [
+      {
+        "edge_density": 0.0196,
+        "unique_colors": 0.0,
+        "entropy": 0.0,
+        "corner_density": 0.0,
+        "gradient_strength": 0.0,
+        "complexity_score": 0.0
+      },
+      {
+        "edge_density": 0.3689,
+        "unique_colors": 0.0,
+        "entropy": 0.0,
+        "corner_density": 0.0,
+        "gradient_strength": 0.0,
+        "complexity_score": 0.0
+      },
+      {
+        "edge_density": 0.368804931640625,
+        "unique_colors": 0.0,
+        "entropy": 0.0,
+        "corner_density": 0.0,
+        "gradient_strength": 0.0,
+        "complexity_score": 0.0
+      }
+    ],
+    "target_met": "True"
+  },
+  "memory_usage": {
+    "method": "memory_usage",
+    "stats": [
+      {
+        "image_path": "simple_100x100.png",
+        "image_size_bytes": 30000,
+        "memory_increase_bytes": 0,
+        "memory_increase_mb": 0.0,
+        "memory_per_pixel": 0.0
+      },
+      {
+        "image_path": "complex_100x100.png",
+        "image_size_bytes": 30000,
+        "memory_increase_bytes": 0,
+        "memory_increase_mb": 0.0,
+        "memory_per_pixel": 0.0
+      },
+      {
+        "image_path": "medium_256x256.png",
+        "image_size_bytes": 196608,
+        "memory_increase_bytes": 0,
+        "memory_increase_mb": 0.0,
+        "memory_per_pixel": 0.0
+      },
+      {
+        "image_path": "large_512x512.png",
+        "image_size_bytes": 786432,
+        "memory_increase_bytes": -4689920,
+        "memory_increase_mb": -4.47265625,
+        "memory_per_pixel": -17.890625
+      },
+      {
+        "image_path": "xlarge_1024x1024.png",
+        "image_size_bytes": 3145728,
+        "memory_increase_bytes": 9031680,
+        "memory_increase_mb": 8.61328125,
+        "memory_per_pixel": 8.61328125
+      }
+    ],
+    "avg_memory_increase_mb": 0.828125,
+    "max_memory_increase_mb": 8.61328125,
+    "target_met": "True"
+  },
+  "summary": {
+    "timestamp": "2025-09-28 16:24:37",
+    "total_tests": 3,
+    "passed_tests": 3,
+    "performance_score": 1.0,
+    "recommendations": []
+  }
+}
