@@ -1,0 +1,1284 @@
+# Enterprise Production Kubernetes Deployment for 4-Tier SVG-AI System
+# Includes security hardening, high availability, monitoring, and compliance features
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: svg-ai-enterprise-prod
+  labels:
+    name: svg-ai-enterprise-prod
+    environment: production
+    system: 4tier-enterprise
+    tier: production
+    security.openshift.io/scc.podSecurityLabelSync: false
+  annotations:
+    openshift.io/display-name: "SVG-AI Enterprise Production"
+    openshift.io/description: "Production environment for enterprise 4-tier SVG-AI system"
+
+---
+# ============================================================================
+# Security: Pod Security Policy / Pod Security Standards
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: security-policies
+  namespace: svg-ai-enterprise-prod
+data:
+  pod-security-policy.yaml: |
+    apiVersion: policy/v1beta1
+    kind: PodSecurityPolicy
+    metadata:
+      name: svg-ai-psp
+    spec:
+      privileged: false
+      allowPrivilegeEscalation: false
+      requiredDropCapabilities:
+        - ALL
+      volumes:
+        - 'configMap'
+        - 'emptyDir'
+        - 'projected'
+        - 'secret'
+        - 'downwardAPI'
+        - 'persistentVolumeClaim'
+      runAsUser:
+        rule: 'MustRunAsNonRoot'
+      runAsGroup:
+        rule: 'MustRunAs'
+        ranges:
+          - min: 1000
+            max: 65535
+      seLinux:
+        rule: 'RunAsAny'
+      fsGroup:
+        rule: 'RunAsAny'
+      readOnlyRootFilesystem: true
+
+---
+# ============================================================================
+# RBAC: Service Accounts and Role Bindings
+# ============================================================================
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: svg-ai-api-sa
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+automountServiceAccountToken: false
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: svg-ai-worker-sa
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: worker
+automountServiceAccountToken: false
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: svg-ai-api-role
+  namespace: svg-ai-enterprise-prod
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: svg-ai-api-binding
+  namespace: svg-ai-enterprise-prod
+subjects:
+- kind: ServiceAccount
+  name: svg-ai-api-sa
+  namespace: svg-ai-enterprise-prod
+roleRef:
+  kind: Role
+  name: svg-ai-api-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ============================================================================
+# Enhanced ConfigMaps with Security and Monitoring
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: svg-ai-enterprise-config
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    config-version: v2.0.0
+data:
+  # Application Configuration
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"
+  LOG_FORMAT: "json"
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  API_WORKERS: "6"
+  WORKER_CONCURRENCY: "4"
+  WORKER_PREFETCH: "8"
+  MAX_REQUEST_SIZE: "104857600"
+  REQUEST_TIMEOUT: "300"
+  TIER_SYSTEM_VERSION: "4tier-enterprise-v2.0"
+  
+  # Security Configuration
+  SECURITY_HEADERS_ENABLED: "true"
+  CORS_ENABLED: "true"
+  CORS_ORIGINS: "https://svg-ai.company.com,https://api.svg-ai.company.com"
+  RATE_LIMITING_ENABLED: "true"
+  RATE_LIMIT_REQUESTS: "1000"
+  RATE_LIMIT_WINDOW: "3600"
+  
+  # High Availability Configuration
+  HA_ENABLED: "true"
+  CIRCUIT_BREAKER_ENABLED: "true"
+  CIRCUIT_BREAKER_FAILURE_THRESHOLD: "5"
+  CIRCUIT_BREAKER_RECOVERY_TIMEOUT: "30"
+  LOAD_BALANCER_STRATEGY: "round_robin"
+  
+  # Monitoring Configuration
+  METRICS_ENABLED: "true"
+  METRICS_PATH: "/metrics"
+  METRICS_PORT: "8080"
+  HEALTH_CHECK_PATH: "/health"
+  READINESS_CHECK_PATH: "/ready"
+  LIVENESS_CHECK_PATH: "/live"
+  
+  # Performance Configuration
+  CACHE_TTL: "3600"
+  CACHE_MAX_SIZE: "15000"
+  CONNECTION_POOL_SIZE: "20"
+  CONNECTION_POOL_MAX_OVERFLOW: "30"
+  
+  # Compliance Configuration
+  AUDIT_LOGGING_ENABLED: "true"
+  DATA_RETENTION_DAYS: "365"
+  COMPLIANCE_MODE: "SOC2"
+  ENCRYPTION_AT_REST_ENABLED: "true"
+  ENCRYPTION_IN_TRANSIT_ENABLED: "true"
+
+---
+# ============================================================================
+# Enhanced Secrets with Rotation Support
+# ============================================================================
+apiVersion: v1
+kind: Secret
+metadata:
+  name: svg-ai-enterprise-secrets
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    secret-version: v2.0.0
+  annotations:
+    secret-rotation: "30d"
+    last-rotated: "2024-01-01T00:00:00Z"
+type: Opaque
+data:
+  # Database Credentials (Base64 encoded)
+  DB_PASSWORD: cGFzc3dvcmQxMjM=  # Auto-rotated password
+  DB_ENCRYPTION_KEY: ZW5jcnlwdGlvbi1rZXktYWJjZGVmZ2hpams=
+  
+  # Cache Credentials
+  REDIS_PASSWORD: cmVkaXNwYXNzd29yZA==
+  REDIS_AUTH_TOKEN: cmVkaXMtYXV0aC10b2tlbi1hYmNkZWZnaA==
+  
+  # API Keys with Rotation
+  PRODUCTION_API_KEY: dGllcjQtcHJvZC1rZXktdjItYWJjZGVmZ2g=
+  ADMIN_API_KEY: dGllcjQtYWRtaW4ta2V5LXYyLWFiY2RlZmdo=
+  MONITORING_API_KEY: dGllcjQtbW9uaXRvci1rZXktdjItYWJjZGVmZ2g=
+  
+  # Security Tokens
+  JWT_SECRET_KEY: and0LXNlY3JldC1rZXktYWJjZGVmZ2hpams=
+  ENCRYPTION_SECRET: ZW5jcnlwdGlvbi1zZWNyZXQta2V5LWFiY2RlZmdo=
+  
+  # External Service Credentials
+  FLOWER_PASSWORD: Zmxvd2VyYWRtaW4tdjI=
+  GRAFANA_ADMIN_PASSWORD: Z3JhZmFuYWFkbWluLXYy=
+  
+  # Certificate and TLS
+  TLS_CERT: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0t
+  TLS_KEY: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0t
+  CA_CERT: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0t
+
+---
+# ============================================================================
+# High-Availability PostgreSQL with Primary/Replica Setup
+# ============================================================================
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-ha-primary
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: database
+    role: primary
+    tier: data
+spec:
+  serviceName: postgres-ha-primary-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: svg-ai
+      component: database
+      role: primary
+  template:
+    metadata:
+      labels:
+        app: svg-ai
+        component: database
+        role: primary
+        tier: data
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9187"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: svg-ai-api-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      initContainers:
+      - name: postgres-init
+        image: postgres:15-alpine
+        command: ['/bin/sh']
+        args:
+        - -c
+        - |
+          mkdir -p /var/lib/postgresql/data/pgdata
+          chown -R 999:999 /var/lib/postgresql/data
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        env:
+        - name: POSTGRES_DB
+          value: svgai_prod
+        - name: POSTGRES_USER
+          value: svgai
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: svg-ai-enterprise-secrets
+              key: DB_PASSWORD
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        - name: POSTGRES_INITDB_ARGS
+          value: "--auth-host=md5 --auth-local=md5"
+        ports:
+        - containerPort: 5432
+          name: postgres
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1000m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+            - ALL
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - svgai
+            - -d
+            - svgai_prod
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - svgai
+            - -d
+            - svgai_prod
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+        - name: postgres-config
+          mountPath: /etc/postgresql
+          readOnly: true
+      - name: postgres-exporter
+        image: prometheuscommunity/postgres-exporter:latest
+        env:
+        - name: DATA_SOURCE_NAME
+          value: "postgresql://svgai:$(POSTGRES_PASSWORD)@localhost:5432/svgai_prod?sslmode=disable"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: svg-ai-enterprise-secrets
+              key: DB_PASSWORD
+        ports:
+        - containerPort: 9187
+          name: metrics
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: postgres-config
+        configMap:
+          name: postgres-ha-config
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "fast-ssd-ha"
+      resources:
+        requests:
+          storage: 100Gi
+
+---
+# ============================================================================
+# High-Availability Redis Cluster
+# ============================================================================
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-ha-cluster
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: cache
+    tier: data
+spec:
+  serviceName: redis-ha-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: svg-ai
+      component: cache
+  template:
+    metadata:
+      labels:
+        app: svg-ai
+        component: cache
+        tier: data
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9121"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: svg-ai-api-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        command: ["redis-server"]
+        args:
+        - "/etc/redis/redis.conf"
+        - "--appendonly"
+        - "yes"
+        - "--requirepass"
+        - "$(REDIS_PASSWORD)"
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: svg-ai-enterprise-secrets
+              key: REDIS_PASSWORD
+        ports:
+        - containerPort: 6379
+          name: redis
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+            - ALL
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - --no-auth-warning
+            - -a
+            - "$(REDIS_PASSWORD)"
+            - ping
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - --no-auth-warning
+            - -a
+            - "$(REDIS_PASSWORD)"
+            - ping
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        - name: redis-config
+          mountPath: /etc/redis
+          readOnly: true
+      - name: redis-exporter
+        image: oliver006/redis_exporter:latest
+        env:
+        - name: REDIS_ADDR
+          value: "redis://localhost:6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: svg-ai-enterprise-secrets
+              key: REDIS_PASSWORD
+        ports:
+        - containerPort: 9121
+          name: metrics
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: redis-config
+        configMap:
+          name: redis-ha-config
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "fast-ssd-ha"
+      resources:
+        requests:
+          storage: 20Gi
+
+---
+# ============================================================================
+# Enterprise 4-Tier API Deployment with Security Hardening
+# ============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svg-ai-enterprise-api
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+    tier: application
+    version: v2.0.0
+spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: svg-ai
+      component: api
+  template:
+    metadata:
+      labels:
+        app: svg-ai
+        component: api
+        tier: application
+        version: v2.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "svg-ai-api"
+    spec:
+      serviceAccountName: svg-ai-api-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: component
+                  operator: In
+                  values: ["api"]
+              topologyKey: kubernetes.io/hostname
+      tolerations:
+      - key: "high-performance"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      initContainers:
+      - name: migration
+        image: svg-ai/enterprise-api:v2.0.0
+        command: ["python", "-m", "alembic", "upgrade", "head"]
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://svgai:$(DB_PASSWORD)@postgres-ha-primary-service:5432/svgai_prod"
+        envFrom:
+        - configMapRef:
+            name: svg-ai-enterprise-config
+        - secretRef:
+            name: svg-ai-enterprise-secrets
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+      containers:
+      - name: api
+        image: svg-ai/enterprise-api:v2.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        - containerPort: 8080
+          name: metrics
+          protocol: TCP
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://svgai:$(DB_PASSWORD)@postgres-ha-primary-service:5432/svgai_prod"
+        - name: REDIS_URL
+          value: "redis://:$(REDIS_PASSWORD)@redis-ha-service:6379/0"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        envFrom:
+        - configMapRef:
+            name: svg-ai-enterprise-config
+        - secretRef:
+            name: svg-ai-enterprise-secrets
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1500m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "4Gi"
+            cpu: "3000m"
+            ephemeral-storage: "2Gi"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          timeoutSeconds: 15
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        startupProbe:
+          httpGet:
+            path: /health/startup
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 30
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: var-tmp
+          mountPath: /var/tmp
+        - name: api-cache
+          mountPath: /app/cache
+        - name: api-logs
+          mountPath: /app/logs
+        - name: api-models
+          mountPath: /app/models
+          readOnly: true
+      volumes:
+      - name: tmp-volume
+        emptyDir:
+          sizeLimit: 1Gi
+      - name: var-tmp
+        emptyDir:
+          sizeLimit: 1Gi
+      - name: api-cache
+        persistentVolumeClaim:
+          claimName: api-cache-pvc
+      - name: api-logs
+        persistentVolumeClaim:
+          claimName: api-logs-pvc
+      - name: api-models
+        persistentVolumeClaim:
+          claimName: api-models-pvc
+
+---
+# ============================================================================
+# Enterprise 4-Tier Worker Deployment with Enhanced Security
+# ============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svg-ai-enterprise-worker
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: worker
+    tier: worker
+    version: v2.0.0
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: svg-ai
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: svg-ai
+        component: worker
+        tier: worker
+        version: v2.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: svg-ai-worker-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: component
+                  operator: In
+                  values: ["worker"]
+              topologyKey: kubernetes.io/hostname
+      tolerations:
+      - key: "compute-intensive"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      containers:
+      - name: worker
+        image: svg-ai/enterprise-worker:v2.0.0
+        imagePullPolicy: Always
+        command: ["python", "-m", "celery"]
+        args: ["worker", "-A", "backend.ai_modules.optimization.tasks", "-l", "info", "-E", "--autoscale=8,2"]
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://svgai:$(DB_PASSWORD)@postgres-ha-primary-service:5432/svgai_prod"
+        - name: REDIS_URL
+          value: "redis://:$(REDIS_PASSWORD)@redis-ha-service:6379/0"
+        - name: WORKER_TYPE
+          value: "enterprise-optimization"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        envFrom:
+        - configMapRef:
+            name: svg-ai-enterprise-config
+        - secretRef:
+            name: svg-ai-enterprise-secrets
+        ports:
+        - containerPort: 8080
+          name: metrics
+        resources:
+          requests:
+            memory: "3Gi"
+            cpu: "2000m"
+            ephemeral-storage: "2Gi"
+          limits:
+            memory: "6Gi"
+            cpu: "4000m"
+            ephemeral-storage: "4Gi"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import backend.ai_modules.optimization as opt; print('Worker healthy')"
+          initialDelaySeconds: 180
+          periodSeconds: 60
+          timeoutSeconds: 20
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import redis; r = redis.Redis.from_url('$(REDIS_URL)'); r.ping(); print('Ready')"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 15
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: var-tmp
+          mountPath: /var/tmp
+        - name: worker-cache
+          mountPath: /app/cache
+        - name: worker-logs
+          mountPath: /app/logs
+        - name: worker-models
+          mountPath: /app/models
+          readOnly: true
+      volumes:
+      - name: tmp-volume
+        emptyDir:
+          sizeLimit: 2Gi
+      - name: var-tmp
+        emptyDir:
+          sizeLimit: 2Gi
+      - name: worker-cache
+        persistentVolumeClaim:
+          claimName: worker-cache-pvc
+      - name: worker-logs
+        persistentVolumeClaim:
+          claimName: worker-logs-pvc
+      - name: worker-models
+        persistentVolumeClaim:
+          claimName: worker-models-pvc
+
+---
+# ============================================================================
+# Enterprise Services with Load Balancing
+# ============================================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-ha-primary-service
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: database
+    role: primary
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+    name: postgres
+  selector:
+    app: svg-ai
+    component: database
+    role: primary
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-ha-service
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: cache
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: redis
+  selector:
+    app: svg-ai
+    component: cache
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svg-ai-enterprise-api-service
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  type: LoadBalancer
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600
+  ports:
+  - port: 80
+    targetPort: 8000
+    name: http
+    protocol: TCP
+  - port: 443
+    targetPort: 8000
+    name: https
+    protocol: TCP
+  selector:
+    app: svg-ai
+    component: api
+
+---
+# ============================================================================
+# Enhanced Horizontal Pod Autoscalers with Predictive Scaling
+# ============================================================================
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: svg-ai-enterprise-api-hpa
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: svg-ai-enterprise-api
+  minReplicas: 3
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 65
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 75
+  - type: Pods
+    pods:
+      metric:
+        name: request_rate_per_second
+      target:
+        type: AverageValue
+        averageValue: "100"
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 30
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+      - type: Pods
+        value: 2
+        periodSeconds: 15
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      selectPolicy: Min
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: svg-ai-enterprise-worker-hpa
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: worker
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: svg-ai-enterprise-worker
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Pods
+    pods:
+      metric:
+        name: queue_length
+      target:
+        type: AverageValue
+        averageValue: "10"
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 30
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 600
+      policies:
+      - type: Percent
+        value: 25
+        periodSeconds: 120
+      selectPolicy: Min
+
+---
+# ============================================================================
+# Enhanced Persistent Volume Claims with High Performance Storage
+# ============================================================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-cache-pvc
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+    storage-tier: cache
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "fast-ssd-ha"
+  resources:
+    requests:
+      storage: 50Gi
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-logs-pvc
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+    storage-tier: logs
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "standard-ha"
+  resources:
+    requests:
+      storage: 20Gi
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-models-pvc
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+    storage-tier: models
+spec:
+  accessModes:
+    - ReadOnlyMany
+  storageClassName: "standard-ha"
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: worker-cache-pvc
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: worker
+    storage-tier: cache
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "fast-ssd-ha"
+  resources:
+    requests:
+      storage: 50Gi
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: worker-logs-pvc
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: worker
+    storage-tier: logs
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "standard-ha"
+  resources:
+    requests:
+      storage: 20Gi
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: worker-models-pvc
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: worker
+    storage-tier: models
+spec:
+  accessModes:
+    - ReadOnlyMany
+  storageClassName: "standard-ha"
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+
+---
+# ============================================================================
+# Network Policies with Zero Trust Security
+# ============================================================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: svg-ai-enterprise-network-policy
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    security-tier: zero-trust
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  # Allow ingress from same namespace
+  - from:
+    - podSelector:
+        matchLabels:
+          app: svg-ai
+    ports:
+    - protocol: TCP
+      port: 8000
+    - protocol: TCP
+      port: 5432
+    - protocol: TCP
+      port: 6379
+    - protocol: TCP
+      port: 8080
+  # Allow ingress from monitoring namespace
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 8080
+  # Allow external load balancer
+  - from: []
+    ports:
+    - protocol: TCP
+      port: 8000
+  egress:
+  # Allow egress to same namespace
+  - to:
+    - podSelector:
+        matchLabels:
+          app: svg-ai
+    ports:
+    - protocol: TCP
+      port: 8000
+    - protocol: TCP
+      port: 5432
+    - protocol: TCP
+      port: 6379
+  # Allow DNS resolution
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+  # Allow HTTPS to external services
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 443
+
+---
+# ============================================================================
+# Pod Disruption Budgets for High Availability
+# ============================================================================
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: svg-ai-api-pdb
+  namespace: svg-ai-enterprise-prod
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels:
+      app: svg-ai
+      component: api
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: svg-ai-worker-pdb
+  namespace: svg-ai-enterprise-prod
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: svg-ai
+      component: worker
+
+---
+# ============================================================================
+# Priority Classes for Critical Workloads
+# ============================================================================
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: svg-ai-high-priority
+value: 1000
+globalDefault: false
+description: "High priority class for SVG-AI critical components"
+
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: svg-ai-medium-priority
+value: 500
+globalDefault: false
+description: "Medium priority class for SVG-AI standard components"

@@ -1,0 +1,614 @@
+# Enterprise CI/CD Pipeline for Production Deployments
+# Automated testing, security scanning, and deployment pipeline
+
+# ============================================================================
+# GitHub Actions Workflow for Enterprise CI/CD
+# ============================================================================
+# File: .github/workflows/enterprise-production-deploy.yml
+
+name: Enterprise Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+    tags:
+      - v*
+  pull_request:
+    branches:
+      - main
+      - release/*
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: svg-ai/enterprise
+  KUBERNETES_NAMESPACE: svg-ai-enterprise-prod
+  HELM_CHART_VERSION: 2.0.0
+
+jobs:
+  # ============================================================================
+  # Security and Quality Gates
+  # ============================================================================
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+    
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    
+    - name: SAST with Semgrep
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: >-
+          p/security-audit
+          p/secrets
+          p/owasp-top-ten
+        generateSarif: "1"
+    
+    - name: Upload Semgrep results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: semgrep.sarif
+  
+  # ============================================================================
+  # Code Quality and Testing
+  # ============================================================================
+  quality-tests:
+    name: Quality Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10, 3.11]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements_test.txt
+        pip install pytest-cov black isort flake8 mypy
+    
+    - name: Code formatting check
+      run: |
+        black --check .
+        isort --check-only .
+    
+    - name: Linting
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Type checking
+      run: mypy .
+    
+    - name: Run unit tests
+      run: |
+        pytest tests/unit/ \
+          --cov=backend \
+          --cov-report=xml \
+          --cov-report=html \
+          --cov-fail-under=80 \
+          --junitxml=test-results.xml
+    
+    - name: Run integration tests
+      run: |
+        pytest tests/integration/ \
+          --junitxml=integration-test-results.xml
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results-${{ matrix.python-version }}
+        path: |
+          test-results.xml
+          integration-test-results.xml
+          htmlcov/
+  
+  # ============================================================================
+  # Performance and Load Testing
+  # ============================================================================
+  performance-tests:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: [security-scan, quality-tests]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install locust pytest-benchmark
+    
+    - name: Run benchmark tests
+      run: |
+        pytest tests/performance/ \
+          --benchmark-only \
+          --benchmark-json=benchmark-results.json
+    
+    - name: Run load tests
+      run: |
+        locust -f tests/load/locustfile.py \
+          --headless \
+          --users 100 \
+          --spawn-rate 10 \
+          --run-time 300s \
+          --host http://localhost:8000 \
+          --html load-test-report.html
+    
+    - name: Upload performance results
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-results
+        path: |
+          benchmark-results.json
+          load-test-report.html
+  
+  # ============================================================================
+  # Container Build and Registry Push
+  # ============================================================================
+  build-and-push:
+    name: Build and Push Container Images
+    runs-on: ubuntu-latest
+    needs: [security-scan, quality-tests]
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+      image-digest: ${{ steps.build.outputs.digest }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+    
+    - name: Build and push API image
+      id: build
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./deployment/docker/Dockerfile.enterprise-api
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64,linux/arm64
+        build-args: |
+          VERSION=${{ steps.meta.outputs.version }}
+          BUILD_DATE=${{ github.run_id }}
+          VCS_REF=${{ github.sha }}
+    
+    - name: Build and push Worker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./deployment/docker/Dockerfile.enterprise-worker
+        push: true
+        tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-worker:${{ steps.meta.outputs.version }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64,linux/arm64
+    
+    - name: Run Trivy vulnerability scanner on image
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+        format: 'sarif'
+        output: 'trivy-image-results.sarif'
+    
+    - name: Upload Trivy image scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-image-results.sarif'
+    
+    - name: Generate SBOM
+      uses: anchore/sbom-action@v0
+      with:
+        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+        output-file: sbom.spdx.json
+        format: spdx-json
+    
+    - name: Upload SBOM
+      uses: actions/upload-artifact@v3
+      with:
+        name: sbom
+        path: sbom.spdx.json
+  
+  # ============================================================================
+  # Infrastructure as Code Validation
+  # ============================================================================
+  iac-validation:
+    name: Infrastructure Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.0
+    
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ./infrastructure/terraform
+    
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: ./infrastructure/terraform
+    
+    - name: Terraform Plan
+      run: terraform plan -no-color
+      working-directory: ./infrastructure/terraform
+      env:
+        TF_VAR_environment: staging
+    
+    - name: Setup Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: '3.12.0'
+    
+    - name: Helm Lint
+      run: |
+        helm lint deployment/helm/svg-ai-enterprise/
+    
+    - name: Kubernetes Manifest Validation
+      run: |
+        kubectl --dry-run=client apply -f deployment/kubernetes/
+    
+    - name: Kustomize Build
+      run: |
+        kubectl kustomize deployment/kubernetes/overlays/production
+    
+    - name: Policy Validation with OPA
+      uses: open-policy-agent/opa-action@v2
+      with:
+        tests: policies/
+        format: json
+  
+  # ============================================================================
+  # Staging Deployment
+  # ============================================================================
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build-and-push, iac-validation, performance-tests]
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: staging
+      url: https://staging.svg-ai.company.com
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Configure kubectl
+      uses: azure/k8s-set-context@v3
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.STAGING_KUBECONFIG }}
+        context: staging-cluster
+    
+    - name: Setup Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: '3.12.0'
+    
+    - name: Deploy to Staging
+      run: |
+        helm upgrade --install svg-ai-staging \
+          deployment/helm/svg-ai-enterprise/ \
+          --namespace svg-ai-staging \
+          --create-namespace \
+          --values deployment/helm/values/staging.yaml \
+          --set image.tag=${{ needs.build-and-push.outputs.image-tag }} \
+          --set deployment.environment=staging \
+          --wait --timeout=10m
+    
+    - name: Run smoke tests
+      run: |
+        kubectl wait --for=condition=ready pod \
+          -l app=svg-ai,tier=application \
+          -n svg-ai-staging --timeout=300s
+        
+        # Health check
+        kubectl exec -n svg-ai-staging \
+          deployment/svg-ai-staging-api -- \
+          curl -f http://localhost:8000/health
+        
+        # Functional test
+        python tests/e2e/staging_smoke_tests.py
+    
+    - name: Run E2E tests
+      run: |
+        pytest tests/e2e/ \
+          --env=staging \
+          --junitxml=e2e-test-results.xml
+    
+    - name: Upload E2E test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: e2e-test-results
+        path: e2e-test-results.xml
+  
+  # ============================================================================
+  # Production Deployment
+  # ============================================================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [deploy-staging]
+    if: startsWith(github.ref, 'refs/tags/v')
+    environment:
+      name: production
+      url: https://api.svg-ai.company.com
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Configure kubectl
+      uses: azure/k8s-set-context@v3
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.PRODUCTION_KUBECONFIG }}
+        context: production-cluster
+    
+    - name: Setup Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: '3.12.0'
+    
+    - name: Pre-deployment checks
+      run: |
+        # Check cluster health
+        kubectl get nodes
+        kubectl get pods -n svg-ai-enterprise-prod
+        
+        # Check monitoring stack
+        kubectl get pods -n monitoring
+        
+        # Verify backups
+        kubectl get cronjobs -n svg-ai-enterprise-prod
+    
+    - name: Create deployment backup
+      run: |
+        # Backup current state
+        kubectl get all -n svg-ai-enterprise-prod -o yaml > pre-deployment-backup.yaml
+        
+        # Database backup
+        kubectl exec -n svg-ai-enterprise-prod \
+          deployment/postgres-ha-primary -- \
+          pg_dump -U svgai svgai_prod > pre-deployment-db-backup.sql
+    
+    - name: Blue-Green Deployment
+      run: |
+        # Deploy to green environment
+        helm upgrade --install svg-ai-green \
+          deployment/helm/svg-ai-enterprise/ \
+          --namespace svg-ai-enterprise-prod \
+          --values deployment/helm/values/production.yaml \
+          --set image.tag=${{ needs.build-and-push.outputs.image-tag }} \
+          --set deployment.environment=production \
+          --set deployment.variant=green \
+          --wait --timeout=15m
+    
+    - name: Health checks and validation
+      run: |
+        # Wait for green deployment to be ready
+        kubectl wait --for=condition=ready pod \
+          -l app=svg-ai,tier=application,variant=green \
+          -n svg-ai-enterprise-prod --timeout=600s
+        
+        # Run health checks
+        kubectl exec -n svg-ai-enterprise-prod \
+          deployment/svg-ai-green-api -- \
+          curl -f http://localhost:8000/health
+        
+        # Run production validation tests
+        python tests/production/production_validation.py
+        
+        # Performance validation
+        python tests/load/production_load_test.py --duration=300
+    
+    - name: Traffic switch
+      run: |
+        # Switch traffic to green deployment
+        kubectl patch service svg-ai-enterprise-api-service \
+          -n svg-ai-enterprise-prod \
+          -p '{"spec":{"selector":{"variant":"green"}}}'
+        
+        # Wait for traffic switch
+        sleep 30
+        
+        # Verify traffic is flowing to green
+        kubectl logs -n svg-ai-enterprise-prod \
+          deployment/svg-ai-green-api --tail=100
+    
+    - name: Cleanup blue deployment
+      run: |
+        # Wait 10 minutes before cleanup
+        sleep 600
+        
+        # Remove blue deployment
+        helm uninstall svg-ai-blue -n svg-ai-enterprise-prod || true
+        
+        # Clean up old pods
+        kubectl delete pods -l app=svg-ai,variant=blue \
+          -n svg-ai-enterprise-prod --grace-period=60
+    
+    - name: Post-deployment monitoring
+      run: |
+        # Set up monitoring alerts for the new deployment
+        kubectl apply -f monitoring/alerts/production-deployment-alerts.yaml
+        
+        # Trigger monitoring dashboard refresh
+        curl -X POST "https://grafana.svg-ai.company.com/api/admin/provisioning/dashboards/reload" \
+          -H "Authorization: Bearer ${{ secrets.GRAFANA_API_TOKEN }}"
+    
+    - name: Slack notification
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#deployments'
+        text: |
+          Production deployment completed successfully!
+          Version: ${{ github.ref }}
+          Environment: Production
+          Commit: ${{ github.sha }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  
+  # ============================================================================
+  # Rollback Job (Manual Trigger)
+  # ============================================================================
+  rollback-production:
+    name: Rollback Production
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: production-rollback
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Configure kubectl
+      uses: azure/k8s-set-context@v3
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.PRODUCTION_KUBECONFIG }}
+        context: production-cluster
+    
+    - name: Setup Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: '3.12.0'
+    
+    - name: Rollback deployment
+      run: |
+        # Rollback to previous release
+        helm rollback svg-ai-green -n svg-ai-enterprise-prod
+        
+        # Wait for rollback to complete
+        kubectl rollout status deployment/svg-ai-green-api \
+          -n svg-ai-enterprise-prod --timeout=600s
+    
+    - name: Verify rollback
+      run: |
+        # Health check after rollback
+        kubectl exec -n svg-ai-enterprise-prod \
+          deployment/svg-ai-green-api -- \
+          curl -f http://localhost:8000/health
+        
+        # Run basic functional tests
+        python tests/e2e/rollback_verification.py
+    
+    - name: Incident notification
+      uses: 8398a7/action-slack@v3
+      with:
+        status: custom
+        custom_payload: |
+          {
+            "text": "🚨 Production Rollback Completed",
+            "attachments": [
+              {
+                "color": "warning",
+                "fields": [
+                  {
+                    "title": "Environment",
+                    "value": "Production",
+                    "short": true
+                  },
+                  {
+                    "title": "Action",
+                    "value": "Rollback",
+                    "short": true
+                  },
+                  {
+                    "title": "Triggered by",
+                    "value": "${{ github.actor }}",
+                    "short": true
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

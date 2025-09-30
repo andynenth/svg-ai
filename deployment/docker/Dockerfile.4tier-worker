@@ -1,0 +1,125 @@
+# Multi-stage Dockerfile for 4-Tier SVG-AI Worker Production Deployment
+FROM python:3.9-slim as base
+
+# System dependencies for worker processes
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    pkg-config \
+    libpq-dev \
+    curl \
+    git \
+    libopencv-dev \
+    python3-opencv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app user
+RUN groupadd -r svgai && useradd -r -g svgai svgai
+
+# Environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# ============================================================================
+# Production Worker Build Stage
+# ============================================================================
+FROM base as production
+
+WORKDIR /app
+
+# Copy requirements
+COPY requirements.txt requirements_ai_phase1.txt ./
+
+# Install dependencies with optimization for worker processes
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements_ai_phase1.txt
+
+# Install additional worker-specific dependencies
+RUN pip install --no-cache-dir \
+    celery[redis]==5.3.4 \
+    flower==2.0.1 \
+    psutil==5.9.6 \
+    memory-profiler==0.61.0
+
+# Install VTracer
+ENV TMPDIR=/tmp
+RUN pip install --no-cache-dir vtracer
+
+# Copy application code
+COPY backend/ ./backend/
+COPY converters/ ./converters/
+COPY utils/ ./utils/
+COPY deployment/production/ ./deployment/production/
+
+# Copy worker-specific files
+COPY deployment/docker/docker-entrypoint-4tier.sh ./
+COPY deployment/docker/worker-config.py ./
+RUN chmod +x docker-entrypoint-4tier.sh
+
+# Create directories with appropriate permissions
+RUN mkdir -p \
+    /app/logs/worker \
+    /app/cache/worker \
+    /app/models/exported \
+    /app/models/training \
+    /app/config/worker \
+    /tmp/claude/processing \
+    /tmp/claude/uploads
+
+# Set ownership
+RUN chown -R svgai:svgai /app /tmp/claude
+
+# Switch to non-root user
+USER svgai
+
+# Health check for worker
+HEALTHCHECK --interval=60s --timeout=15s --start-period=120s --retries=3 \
+    CMD python -c "import backend.ai_modules.optimization as opt; print('Worker healthy')" || exit 1
+
+# Entry point
+ENTRYPOINT ["./docker-entrypoint-4tier.sh"]
+CMD ["worker"]
+
+# ============================================================================
+# Development Worker Build Stage
+# ============================================================================
+FROM base as development
+
+WORKDIR /app
+
+# Install all dependencies including development tools
+COPY requirements.txt requirements_ai_phase1.txt requirements-dev.txt ./
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements_ai_phase1.txt && \
+    pip install --no-cache-dir -r requirements-dev.txt
+
+# Install worker dependencies
+RUN pip install --no-cache-dir \
+    celery[redis]==5.3.4 \
+    flower==2.0.1 \
+    psutil==5.9.6 \
+    memory-profiler==0.61.0
+
+# Install VTracer
+ENV TMPDIR=/tmp
+RUN pip install --no-cache-dir vtracer
+
+# Copy application code
+COPY . .
+
+# Create directories
+RUN mkdir -p \
+    /app/logs/worker \
+    /app/cache/worker \
+    /app/models \
+    /app/config \
+    /tmp/claude
+
+# Set ownership
+RUN chown -R svgai:svgai /app /tmp/claude
+
+USER svgai
+
+# Development worker command
+CMD ["python", "-m", "celery", "worker", "-A", "backend.worker.tasks", "--loglevel=info", "--concurrency=2"]

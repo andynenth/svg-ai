@@ -1,0 +1,71 @@
+{
+  "export_timestamp": 1759223543.355262,
+  "export_config": {
+    "export_dir": "test_exports_multi",
+    "model_name": "svg_quality_predictor",
+    "export_torchscript": true,
+    "export_onnx": true,
+    "export_coreml": false,
+    "optimize_for_mobile": false,
+    "quantize_model": false,
+    "max_model_size_mb": 100.0,
+    "target_inference_time_ms": 50.0,
+    "onnx_opset_version": 11,
+    "onnx_optimize": true,
+    "coreml_minimum_deployment_target": "13.0",
+    "coreml_compute_units": "ALL"
+  },
+  "system_info": {
+    "platform": "Darwin",
+    "architecture": "x86_64",
+    "python_version": "3.9.22",
+    "pytorch_version": "2.1.0"
+  },
+  "export_results": {
+    "torchscript_traced": {
+      "format": "TorchScript_Traced",
+      "file_path": "test_exports_multi/svg_quality_predictor_traced.pt",
+      "file_size_mb": 10.597841262817383,
+      "export_time_ms": 240.858793258667,
+      "success": true,
+      "error_message": null,
+      "validation_passed": false,
+      "inference_time_ms": 0.4625082015991211
+    },
+    "torchscript_scripted": {
+      "format": "TorchScript_Scripted",
+      "file_path": "test_exports_multi/svg_quality_predictor_scripted.pt",
+      "file_size_mb": 10.599283218383789,
+      "export_time_ms": 193.82095336914062,
+      "success": true,
+      "error_message": null,
+      "validation_passed": false,
+      "inference_time_ms": 0.8769035339355469
+    },
+    "onnx": {
+      "format": "ONNX",
+      "file_path": "test_exports_multi/svg_quality_predictor.onnx",
+      "file_size_mb": 0.0,
+      "export_time_ms": 237.66303062438965,
+      "success": false,
+      "error_message": "Module onnx is not installed!",
+      "validation_passed": false,
+      "inference_time_ms": null
+    }
+  },
+  "performance_summary": {
+    "successful_exports": 2,
+    "failed_exports": 1,
+    "total_size_mb": 21.197124481201172,
+    "fastest_inference_ms": 0.4625082015991211,
+    "slowest_inference_ms": 0.8769035339355469,
+    "average_inference_ms": 0.669705867767334
+  },
+  "target_analysis": {
+    "size_target_met": true,
+    "inference_target_met": true,
+    "size_violations": [],
+    "inference_violations": [],
+    "recommended_actions": []
+  }
+}

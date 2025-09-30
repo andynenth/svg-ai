@@ -1,0 +1,114 @@
+{
+  "optimization_timestamp": 1759223587.769013,
+  "system_info": {
+    "platform": "Darwin",
+    "cpu_count": 8,
+    "mps_available": false
+  },
+  "config": {
+    "target_inference_time_ms": 50.0,
+    "target_throughput_samples_per_sec": 20.0,
+    "max_memory_usage_mb": 500.0,
+    "test_samples": 30,
+    "warmup_iterations": 20,
+    "timing_iterations": 100,
+    "batch_sizes": [
+      1,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "test_single_thread": true,
+    "test_multi_thread": true,
+    "max_threads": 8,
+    "test_cpu": true,
+    "test_mps": true,
+    "cpu_optimization": true,
+    "mps_optimization": true,
+    "enable_memory_profiling": true,
+    "test_memory_pressure": true
+  },
+  "results": {
+    "torchscript_traced": {
+      "cpu": {
+        "device": "cpu",
+        "model_format": "TorchScript_Traced",
+        "test_type": "optimized",
+        "inference_time_ms": 0.7079792022705078,
+        "throughput_samples_per_sec": 1412.4708703207295,
+        "memory_usage_mb": 164.83203125,
+        "memory_peak_mb": 164.83203125,
+        "batch_performance": {
+          "1": 0.45120716094970703,
+          "4": 0.54168701171875,
+          "8": 0.9233951568603516,
+          "16": 0.975799560546875,
+          "32": 2.4801015853881836,
+          "64": 3.7642955780029297
+        },
+        "thread_performance": {
+          "1": 0.612795352935791,
+          "2": 0.41829347610473633,
+          "3": 0.5637526512145996,
+          "4": 0.4092574119567871,
+          "5": 0.34934282302856445,
+          "6": 0.29500722885131836,
+          "7": 0.3733038902282715,
+          "8": 1.03379487991333
+        },
+        "optimization_applied": true,
+        "optimization_speedup": 1.0,
+        "passed": true,
+        "error_message": null
+      }
+    },
+    "torchscript_scripted": {
+      "cpu": {
+        "device": "cpu",
+        "model_format": "TorchScript_Scripted",
+        "test_type": "optimized",
+        "inference_time_ms": 0.6127095222473145,
+        "throughput_samples_per_sec": 1632.0947589196426,
+        "memory_usage_mb": 151.17578125,
+        "memory_peak_mb": 151.17578125,
+        "batch_performance": {
+          "1": 0.4100799560546875,
+          "4": 0.7196903228759766,
+          "8": 1.0389089584350586,
+          "16": 3.1726837158203125,
+          "32": 5.468893051147461,
+          "64": 6.930828094482422
+        },
+        "thread_performance": {
+          "1": 0.7639884948730469,
+          "2": 0.47501325607299805,
+          "3": 1.480543613433838,
+          "4": 0.37795305252075195,
+          "5": 0.31839609146118164,
+          "6": 1.5535950660705566,
+          "7": 1.2482404708862305,
+          "8": 0.2843499183654785
+        },
+        "optimization_applied": true,
+        "optimization_speedup": 1.0,
+        "passed": true,
+        "error_message": null
+      }
+    }
+  },
+  "summary": {
+    "models_tested": 2,
+    "cpu_tests_passed": 2,
+    "mps_tests_passed": 0,
+    "deployment_ready": [
+      "torchscript_traced/cpu",
+      "torchscript_scripted/cpu"
+    ]
+  },
+  "recommendations": [
+    "Excellent inference performance achieved. Ready for production deployment.",
+    "Consider CPU threading optimization and TorchScript compilation for best performance."
+  ]
+}

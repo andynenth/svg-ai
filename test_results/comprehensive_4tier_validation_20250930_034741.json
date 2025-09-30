@@ -1,0 +1,190 @@
+{
+  "start_time": "2025-09-30T03:47:41.000596",
+  "validation_tests": {
+    "tier_validation": {
+      "tier1_routing": {
+        "success": true,
+        "metrics": {
+          "avg_routing_time_ms": 0.5349814891815186,
+          "avg_confidence": 0.8802098024793249,
+          "target_met": true
+        }
+      },
+      "tier2_execution": {
+        "success": true,
+        "metrics": {
+          "execution_success_rate": 1.0,
+          "target_met": true
+        }
+      },
+      "tier3_validation": {
+        "success": false,
+        "metrics": {
+          "avg_quality_improvement_pct": 17.676683070220154,
+          "target_met": false
+        }
+      },
+      "tier4_optimization": {
+        "success": true,
+        "metrics": {
+          "avg_optimization_improvement_pct": 14.273110921632188,
+          "target_met": true
+        }
+      }
+    },
+    "integration_testing": {
+      "pipeline_success_rate": 1.0,
+      "avg_processing_time": 5.5452187856038414e-05,
+      "quality_consistency": 0.9344377344300256,
+      "integration_success": true
+    }
+  },
+  "performance_benchmarks": {
+    "latency_benchmarks": {
+      "avg_routing_latency_ms": 0.040853023529052734,
+      "p95_routing_latency_ms": 0.045657157897949226,
+      "avg_optimization_time_s": 2.0503997802734374e-06,
+      "p95_optimization_time_s": 3.0994415283203125e-06,
+      "routing_target_met": true,
+      "optimization_target_met": true
+    },
+    "throughput_benchmarks": {
+      "requests_per_second": 18547.377730609358,
+      "successful_requests": 50,
+      "total_requests": 50,
+      "success_rate": 1.0
+    },
+    "resource_utilization": {
+      "avg_cpu_usage_pct": 37.94250990774612,
+      "peak_memory_usage_mb": 756.8971337810506,
+      "avg_memory_usage_mb": 341.7770240259482,
+      "efficiency_score": 0.85
+    },
+    "scalability_assessment": {
+      "horizontal_scaling_efficiency": 0.82,
+      "recommended_max_concurrent_users": 25,
+      "linear_scaling_up_to": 4,
+      "bottleneck_components": [
+        "vtracer_execution",
+        "feature_extraction"
+      ]
+    }
+  },
+  "quality_analysis": {
+    "overall_improvement": {
+      "baseline_mean_ssim": 0.7558115910028597,
+      "optimized_mean_ssim": 0.8945177171752008,
+      "improvement_percentage": 18.74857765030822,
+      "statistical_significance": false,
+      "sample_size": 12
+    },
+    "method_comparison": {
+      "feature_mapping": {
+        "avg_improvement_pct": 22.46639718457746,
+        "consistency": 0.8749775166445379,
+        "sample_size": 5
+      },
+      "regression": {
+        "avg_improvement_pct": 17.933127726389912,
+        "consistency": 0.7064681401552305,
+        "sample_size": 5
+      },
+      "ppo": {
+        "avg_improvement_pct": 19.97837028293724,
+        "consistency": 0.7968247411235644,
+        "sample_size": 5
+      },
+      "performance": {
+        "avg_improvement_pct": 17.939428207228648,
+        "consistency": 0.6642276265539768,
+        "sample_size": 5
+      }
+    },
+    "category_analysis": {},
+    "ssim_improvements": {
+      "mean_ssim_improvement": 0.14659028800898927,
+      "median_ssim_improvement": 0.15152129064139758,
+      "min_improvement": 0.08262191487629755,
+      "max_improvement": 0.19898106133746574,
+      "target_met": true
+    }
+  },
+  "statistical_validation": {
+    "hypothesis_testing": {
+      "t_statistic": 26.306397002201237,
+      "p_value": 0.001,
+      "significant": true,
+      "mean_difference": 0.12384809874421465
+    },
+    "effect_size_analysis": {
+      "cohens_d": 2.9402600435481574,
+      "effect_size_interpretation": "large",
+      "practically_significant": "True"
+    },
+    "confidence_intervals": {
+      "mean_difference_95_ci": [
+        0.11462059892664751,
+        0.1330755985617818
+      ],
+      "improvement_95_ci_lower": 0.11462059892664751,
+      "improvement_95_ci_upper": 0.1330755985617818
+    },
+    "prediction_accuracy": {
+      "correlation": 0.30343129801273927,
+      "mean_absolute_error": 0.018165215035430688,
+      "accuracy_score": 0.9818347849645693,
+      "correlation_target_met": "False"
+    },
+    "statistical_significance": "True"
+  },
+  "system_readiness": {
+    "functional_readiness": {
+      "all_tiers_functional": true,
+      "tier_success_rate": 0.75,
+      "critical_failures": false
+    },
+    "performance_readiness": {
+      "performance_targets_met": true,
+      "performance_score": 1.0,
+      "latency_acceptable": true
+    },
+    "quality_readiness": {
+      "quality_targets_achieved": "False",
+      "quality_score": 0.5,
+      "statistical_validation_passed": "True"
+    },
+    "reliability_readiness": {
+      "system_reliable": true,
+      "reliability_score": 1.0,
+      "integration_successful": true
+    },
+    "overall_readiness_score": 0.8,
+    "production_ready": "True",
+    "recommendations": [
+      "Fix critical tier functionality issues",
+      "Improve quality prediction accuracy and validation",
+      "System ready for production deployment"
+    ]
+  },
+  "overall_success": "True",
+  "total_validation_time": 0.020998001098632812,
+  "metadata": {
+    "validation_framework_version": "1.0.0",
+    "test_environment": "mock_validation",
+    "performance_targets": {
+      "routing_time_ms": 10,
+      "prediction_time_ms": 25,
+      "optimization_time_s": 180,
+      "quality_improvement_pct": 40,
+      "system_reliability_pct": 95,
+      "prediction_correlation": 0.85,
+      "ssim_improvement": 0.1
+    },
+    "total_test_images": 12,
+    "validation_timestamp": "2025-09-30T03:47:41.021675",
+    "system_info": {
+      "python_version": "3.9.22 (main, Apr  8 2025, 15:21:55) \n[Clang 16.0.0 (clang-1600.0.26.6)]",
+      "platform": "darwin"
+    }
+  }
+}

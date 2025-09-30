@@ -1,0 +1,956 @@
+# Operational Runbooks and Incident Response Procedures
+# Comprehensive operational documentation for production support
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: operational-runbooks
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: operations
+    documentation-tier: runbooks
+data:
+  # ============================================================================
+  # Main Operational Runbook
+  # ============================================================================
+  main-runbook.md: |
+    # SVG-AI Enterprise Operational Runbook
+    
+    ## Table of Contents
+    1. [System Overview](#system-overview)
+    2. [Monitoring and Alerting](#monitoring-and-alerting)
+    3. [Common Operations](#common-operations)
+    4. [Troubleshooting Guide](#troubleshooting-guide)
+    5. [Incident Response](#incident-response)
+    6. [Maintenance Procedures](#maintenance-procedures)
+    7. [Emergency Contacts](#emergency-contacts)
+    
+    ## System Overview
+    
+    ### Architecture
+    - **4-Tier Enterprise System** with quality prediction enhancement
+    - **High Availability**: 3 API replicas, 2 worker replicas
+    - **Database**: PostgreSQL with primary/replica setup
+    - **Cache**: Redis cluster (3 nodes)
+    - **Monitoring**: Prometheus, Grafana, AlertManager, Jaeger
+    
+    ### Key Metrics
+    - **Availability Target**: 99.9% (43.2 minutes downtime/month)
+    - **Performance Target**: P95 latency < 15 seconds
+    - **Quality Target**: >40% improvement over baseline
+    - **Capacity**: 10,000 concurrent conversions
+    
+    ### Infrastructure
+    - **Kubernetes Cluster**: 5 nodes (3 master, 2 worker)
+    - **Load Balancer**: AWS ALB with health checks
+    - **Storage**: 1TB SSD for data, 500GB for backups
+    - **Network**: VPC with private subnets, security groups
+    
+    ## Monitoring and Alerting
+    
+    ### Dashboards
+    - **Primary Dashboard**: https://grafana.svg-ai.company.com/d/main
+    - **System Health**: https://grafana.svg-ai.company.com/d/health
+    - **Performance**: https://grafana.svg-ai.company.com/d/performance
+    - **Business Metrics**: https://grafana.svg-ai.company.com/d/business
+    
+    ### Key Alerts
+    
+    #### Critical Alerts (Page immediately)
+    - API service down (>5 minutes)
+    - Database connection lost
+    - High error rate (>5% for >10 minutes)
+    - Memory usage >90%
+    - Disk space >95%
+    
+    #### Warning Alerts (Slack notification)
+    - High response time (P95 >10s for >10 minutes)
+    - Queue backup (>100 items for >15 minutes)
+    - Cache hit rate <80%
+    - Quality degradation (SSIM <0.8)
+    
+    ### Alert Channels
+    - **Critical**: PagerDuty + Slack #critical-alerts
+    - **Warning**: Slack #alerts
+    - **Info**: Slack #monitoring
+    
+    ## Common Operations
+    
+    ### Deployment
+    
+    #### Standard Deployment
+    ```bash
+    # Deploy via Helm
+    helm upgrade --install svg-ai-enterprise \
+      deployment/helm/svg-ai-enterprise/ \
+      --namespace svg-ai-enterprise-prod \
+      --values deployment/helm/values/production.yaml \
+      --set image.tag=v2.1.0 \
+      --wait --timeout=10m
+    
+    # Verify deployment
+    kubectl rollout status deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod
+    kubectl get pods -n svg-ai-enterprise-prod
+    
+    # Health check
+    curl -f https://api.svg-ai.company.com/health
+    ```
+    
+    #### Blue-Green Deployment
+    ```bash
+    # Deploy green version
+    helm install svg-ai-green \
+      deployment/helm/svg-ai-enterprise/ \
+      --namespace svg-ai-enterprise-prod \
+      --values deployment/helm/values/production.yaml \
+      --set image.tag=v2.1.0 \
+      --set deployment.variant=green \
+      --wait --timeout=10m
+    
+    # Test green deployment
+    kubectl port-forward svc/svg-ai-green-api-service 8001:80 -n svg-ai-enterprise-prod &
+    curl -f http://localhost:8001/health
+    
+    # Switch traffic
+    kubectl patch service svg-ai-enterprise-api-service \
+      -n svg-ai-enterprise-prod \
+      -p '{"spec":{"selector":{"variant":"green"}}}'
+    
+    # Cleanup blue after validation
+    helm uninstall svg-ai-blue -n svg-ai-enterprise-prod
+    ```
+    
+    #### Rollback
+    ```bash
+    # Quick rollback
+    helm rollback svg-ai-enterprise -n svg-ai-enterprise-prod
+    
+    # Verify rollback
+    kubectl rollout status deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod
+    curl -f https://api.svg-ai.company.com/health
+    ```
+    
+    ### Scaling Operations
+    
+    #### Manual Scaling
+    ```bash
+    # Scale API pods
+    kubectl scale deployment svg-ai-enterprise-api --replicas=8 -n svg-ai-enterprise-prod
+    
+    # Scale worker pods
+    kubectl scale deployment svg-ai-enterprise-worker --replicas=5 -n svg-ai-enterprise-prod
+    
+    # Verify scaling
+    kubectl get pods -n svg-ai-enterprise-prod -l app=svg-ai
+    ```
+    
+    #### HPA Configuration
+    ```bash
+    # Check current HPA status
+    kubectl get hpa -n svg-ai-enterprise-prod
+    
+    # Modify HPA
+    kubectl patch hpa svg-ai-enterprise-api-hpa -n svg-ai-enterprise-prod \
+      -p '{"spec":{"maxReplicas":15}}'
+    ```
+    
+    ### Database Operations
+    
+    #### Connection and Status
+    ```bash
+    # Connect to primary database
+    kubectl exec -it deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod
+    
+    # Check database status
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "SELECT version();"
+    
+    # Check connections
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "SELECT count(*) FROM pg_stat_activity;"
+    ```
+    
+    #### Performance Tuning
+    ```bash
+    # Check slow queries
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "
+        SELECT query, mean_exec_time, calls 
+        FROM pg_stat_statements 
+        ORDER BY mean_exec_time DESC 
+        LIMIT 10;"
+    
+    # Check table sizes
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "
+        SELECT schemaname, tablename, 
+               pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as size 
+        FROM pg_tables 
+        WHERE schemaname = 'public' 
+        ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;"
+    ```
+    
+    ### Cache Operations
+    
+    #### Redis Cluster Management
+    ```bash
+    # Check cluster status
+    kubectl exec deployment/redis-ha-cluster-0 -n svg-ai-enterprise-prod -- \
+      redis-cli -a "$REDIS_PASSWORD" cluster info
+    
+    # Check memory usage
+    kubectl exec deployment/redis-ha-cluster-0 -n svg-ai-enterprise-prod -- \
+      redis-cli -a "$REDIS_PASSWORD" info memory
+    
+    # Flush cache (emergency only)
+    kubectl exec deployment/redis-ha-cluster-0 -n svg-ai-enterprise-prod -- \
+      redis-cli -a "$REDIS_PASSWORD" flushall
+    ```
+    
+    ### Log Management
+    
+    #### Application Logs
+    ```bash
+    # API logs
+    kubectl logs deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod --tail=100
+    
+    # Worker logs
+    kubectl logs deployment/svg-ai-enterprise-worker -n svg-ai-enterprise-prod --tail=100
+    
+    # Database logs
+    kubectl logs deployment/postgres-ha-primary -n svg-ai-enterprise-prod --tail=100
+    
+    # Follow logs in real-time
+    kubectl logs -f deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod
+    ```
+    
+    #### Log Aggregation
+    ```bash
+    # Search logs with grep
+    kubectl logs deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod | grep "ERROR"
+    
+    # Export logs for analysis
+    kubectl logs deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod \
+      --since=1h > api-logs-$(date +%Y%m%d-%H%M).log
+    ```
+    
+    ## Troubleshooting Guide
+    
+    ### High Response Time
+    
+    #### Symptoms
+    - P95 latency >15 seconds
+    - User complaints about slow conversions
+    - Timeout errors in logs
+    
+    #### Investigation Steps
+    1. **Check system resources**
+       ```bash
+       kubectl top pods -n svg-ai-enterprise-prod
+       kubectl top nodes
+       ```
+    
+    2. **Check database performance**
+       ```bash
+       # Active queries
+       kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+         psql -U svgai -d svgai_prod -c "SELECT * FROM pg_stat_activity WHERE state = 'active';"
+       
+       # Lock conflicts
+       kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+         psql -U svgai -d svgai_prod -c "SELECT * FROM pg_locks WHERE NOT granted;"
+       ```
+    
+    3. **Check cache performance**
+       ```bash
+       kubectl exec deployment/redis-ha-cluster-0 -n svg-ai-enterprise-prod -- \
+         redis-cli -a "$REDIS_PASSWORD" info stats | grep keyspace
+       ```
+    
+    #### Resolution Steps
+    1. **Scale horizontally**
+       ```bash
+       kubectl scale deployment svg-ai-enterprise-api --replicas=10 -n svg-ai-enterprise-prod
+       ```
+    
+    2. **Optimize database**
+       ```bash
+       # Analyze and vacuum
+       kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+         psql -U svgai -d svgai_prod -c "ANALYZE; VACUUM;"
+       ```
+    
+    3. **Clear cache if necessary**
+       ```bash
+       kubectl exec deployment/redis-ha-cluster-0 -n svg-ai-enterprise-prod -- \
+         redis-cli -a "$REDIS_PASSWORD" flushdb
+       ```
+    
+    ### High Error Rate
+    
+    #### Symptoms
+    - 5xx error rate >5%
+    - Failed conversion requests
+    - Exception traces in logs
+    
+    #### Investigation Steps
+    1. **Check error patterns**
+       ```bash
+       kubectl logs deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod | \
+         grep -E "ERROR|CRITICAL|Exception" | tail -50
+       ```
+    
+    2. **Check service dependencies**
+       ```bash
+       # Database connectivity
+       kubectl exec deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod -- \
+         python -c "import psycopg2; conn = psycopg2.connect('$DATABASE_URL'); print('DB OK')"
+       
+       # Redis connectivity
+       kubectl exec deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod -- \
+         python -c "import redis; r = redis.Redis.from_url('$REDIS_URL'); r.ping(); print('Redis OK')"
+       ```
+    
+    3. **Check resource constraints**
+       ```bash
+       kubectl describe pods -n svg-ai-enterprise-prod -l app=svg-ai | grep -E "Limit|Request"
+       ```
+    
+    #### Resolution Steps
+    1. **Restart affected services**
+       ```bash
+       kubectl rollout restart deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod
+       ```
+    
+    2. **Check and fix configuration**
+       ```bash
+       kubectl get configmap svg-ai-enterprise-config -n svg-ai-enterprise-prod -o yaml
+       ```
+    
+    3. **Scale if resource constrained**
+       ```bash
+       kubectl patch deployment svg-ai-enterprise-api -n svg-ai-enterprise-prod \
+         -p '{"spec":{"template":{"spec":{"containers":[{"name":"api","resources":{"limits":{"memory":"4Gi","cpu":"3000m"}}}]}}}}'
+       ```
+    
+    ### Database Issues
+    
+    #### Connection Pool Exhaustion
+    ```bash
+    # Check active connections
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "
+        SELECT count(*), state 
+        FROM pg_stat_activity 
+        GROUP BY state;"
+    
+    # Kill long-running queries
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "
+        SELECT pg_terminate_backend(pid) 
+        FROM pg_stat_activity 
+        WHERE state = 'idle in transaction' 
+        AND query_start < now() - interval '5 minutes';"
+    ```
+    
+    #### Lock Conflicts
+    ```bash
+    # Identify blocking queries
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "
+        SELECT blocked_locks.pid AS blocked_pid,
+               blocked_activity.usename AS blocked_user,
+               blocking_locks.pid AS blocking_pid,
+               blocking_activity.usename AS blocking_user,
+               blocked_activity.query AS blocked_statement,
+               blocking_activity.query AS current_statement_in_blocking_process
+        FROM pg_catalog.pg_locks blocked_locks
+        JOIN pg_catalog.pg_stat_activity blocked_activity ON blocked_activity.pid = blocked_locks.pid
+        JOIN pg_catalog.pg_locks blocking_locks ON blocking_locks.locktype = blocked_locks.locktype
+        JOIN pg_catalog.pg_stat_activity blocking_activity ON blocking_activity.pid = blocking_locks.pid
+        WHERE NOT blocked_locks.granted;"
+    ```
+    
+    ### Memory Leaks
+    
+    #### Detection
+    ```bash
+    # Monitor memory usage over time
+    kubectl exec deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod -- \
+      python -c "import psutil; print(f'Memory: {psutil.virtual_memory().percent}%')"
+    
+    # Check for memory-intensive processes
+    kubectl exec deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod -- \
+      ps aux --sort=-%mem | head -10
+    ```
+    
+    #### Resolution
+    ```bash
+    # Restart affected pods
+    kubectl delete pod -l app=svg-ai,component=api -n svg-ai-enterprise-prod
+    
+    # Increase memory limits if needed
+    kubectl patch deployment svg-ai-enterprise-api -n svg-ai-enterprise-prod \
+      -p '{"spec":{"template":{"spec":{"containers":[{"name":"api","resources":{"limits":{"memory":"6Gi"}}}]}}}}'
+    ```
+    
+    ## Incident Response
+    
+    ### Incident Severity Levels
+    
+    #### SEV-1 (Critical)
+    - Complete service outage
+    - Data loss or corruption
+    - Security breach
+    - **Response Time**: 15 minutes
+    - **Escalation**: Immediate page to on-call engineer
+    
+    #### SEV-2 (High)
+    - Significant performance degradation
+    - Partial service outage
+    - High error rates
+    - **Response Time**: 1 hour
+    - **Escalation**: Slack notification + email
+    
+    #### SEV-3 (Medium)
+    - Minor performance issues
+    - Non-critical feature failures
+    - **Response Time**: 4 hours
+    - **Escalation**: Slack notification
+    
+    #### SEV-4 (Low)
+    - Cosmetic issues
+    - Documentation updates
+    - **Response Time**: Next business day
+    - **Escalation**: Ticket assignment
+    
+    ### Incident Response Process
+    
+    #### Step 1: Acknowledge (within 5 minutes)
+    1. **Acknowledge the alert** in PagerDuty/Slack
+    2. **Join the incident channel**: #incident-YYYY-MM-DD-NNN
+    3. **Start war room** if SEV-1 or SEV-2
+    4. **Assign incident commander** (senior engineer on-call)
+    
+    #### Step 2: Assess (within 10 minutes)
+    1. **Determine severity** based on impact and urgency
+    2. **Identify affected systems** and user impact
+    3. **Check monitoring dashboards** for symptoms
+    4. **Review recent changes** (deployments, config changes)
+    
+    #### Step 3: Mitigate (within 30 minutes)
+    1. **Implement immediate workarounds** if available
+    2. **Rollback recent changes** if suspected cause
+    3. **Scale resources** if capacity-related
+    4. **Engage subject matter experts** if needed
+    
+    #### Step 4: Resolve
+    1. **Apply permanent fix** once identified
+    2. **Verify resolution** through monitoring and testing
+    3. **Update stakeholders** on resolution
+    4. **Document timeline** and actions taken
+    
+    #### Step 5: Post-Incident
+    1. **Schedule post-mortem** within 24 hours for SEV-1/SEV-2
+    2. **Write incident report** with timeline and lessons learned
+    3. **Identify action items** for prevention
+    4. **Update runbooks** based on learnings
+    
+    ### Communication Templates
+    
+    #### Initial Notification
+    ```
+    🚨 INCIDENT ALERT - SEV-1
+    
+    Issue: API service completely down
+    Impact: All users unable to convert images
+    Started: 2024-01-15 14:30 UTC
+    Investigating: @oncall-engineer
+    
+    Status updates every 15 minutes in #incident-2024-01-15-001
+    ```
+    
+    #### Status Update
+    ```
+    📊 INCIDENT UPDATE - SEV-1
+    
+    Issue: API service completely down
+    
+    Investigation findings:
+    - Database connection pool exhausted
+    - Root cause: Recent deployment increased connection usage
+    
+    Actions taken:
+    - Increased connection pool size
+    - Restarted API pods
+    - Database connections stabilizing
+    
+    Next steps:
+    - Monitor service recovery
+    - Validate with test requests
+    
+    ETA to resolution: 10 minutes
+    ```
+    
+    #### Resolution Notice
+    ```
+    ✅ INCIDENT RESOLVED - SEV-1
+    
+    Issue: API service completely down
+    Duration: 45 minutes (14:30 - 15:15 UTC)
+    
+    Resolution:
+    - Increased database connection pool from 20 to 50
+    - Restarted all API pods
+    - Service fully operational
+    
+    Post-mortem scheduled for tomorrow 10:00 AM
+    Meeting link: [Zoom URL]
+    
+    Thank you for your patience.
+    ```
+  
+  incident-response-procedures.md: |
+    # Incident Response Procedures
+    
+    ## Quick Reference
+    
+    ### Emergency Contacts
+    - **Primary On-Call**: +1-555-0001 (John Doe)
+    - **Secondary On-Call**: +1-555-0002 (Jane Smith)
+    - **Engineering Manager**: +1-555-0003 (Bob Johnson)
+    - **CTO**: +1-555-0004 (Alice Wilson)
+    
+    ### Key URLs
+    - **Main Dashboard**: https://grafana.svg-ai.company.com/d/main
+    - **PagerDuty**: https://svg-ai.pagerduty.com
+    - **Status Page**: https://status.svg-ai.company.com
+    - **Incident Channel**: #incidents
+    
+    ### Quick Commands
+    
+    #### Service Status
+    ```bash
+    # Check all services
+    kubectl get pods -n svg-ai-enterprise-prod
+    
+    # Check specific service
+    kubectl get deployment svg-ai-enterprise-api -n svg-ai-enterprise-prod
+    
+    # Health check
+    curl -f https://api.svg-ai.company.com/health
+    ```
+    
+    #### Emergency Rollback
+    ```bash
+    helm rollback svg-ai-enterprise -n svg-ai-enterprise-prod
+    ```
+    
+    #### Emergency Scale Down
+    ```bash
+    kubectl scale deployment svg-ai-enterprise-api --replicas=0 -n svg-ai-enterprise-prod
+    ```
+    
+    #### Database Emergency Stop
+    ```bash
+    kubectl scale statefulset postgres-ha-primary --replicas=0 -n svg-ai-enterprise-prod
+    ```
+    
+    ## Incident Classification
+    
+    ### Customer Impact Assessment
+    
+    | Impact Level | Description | Examples |
+    |--------------|-------------|-----------|
+    | **Critical** | Service completely unavailable | API returns 500s, database down |
+    | **High** | Major functionality broken | Conversion failures >50% |
+    | **Medium** | Some features degraded | Slow response times, partial failures |
+    | **Low** | Minor issues, workarounds exist | Cosmetic bugs, monitoring alerts |
+    
+    ### Urgency Assessment
+    
+    | Urgency Level | Response Time | Description |
+    |---------------|---------------|-------------|
+    | **Urgent** | 15 minutes | Business-critical systems affected |
+    | **High** | 1 hour | Important systems affected |
+    | **Medium** | 4 hours | Standard systems affected |
+    | **Low** | Next business day | Minor systems affected |
+    
+    ### Severity Matrix
+    
+    |         | Critical Impact | High Impact | Medium Impact | Low Impact |
+    |---------|----------------|-------------|---------------|------------|
+    | **Urgent** | SEV-1 | SEV-1 | SEV-2 | SEV-3 |
+    | **High** | SEV-1 | SEV-2 | SEV-2 | SEV-3 |
+    | **Medium** | SEV-2 | SEV-2 | SEV-3 | SEV-4 |
+    | **Low** | SEV-3 | SEV-3 | SEV-4 | SEV-4 |
+    
+    ## Incident Management Roles
+    
+    ### Incident Commander (IC)
+    - **Primary responsibility**: Overall incident coordination
+    - **Duties**:
+      - Make decisions about response strategy
+      - Coordinate between teams
+      - Manage communications
+      - Ensure proper documentation
+    
+    ### Technical Lead
+    - **Primary responsibility**: Technical investigation and resolution
+    - **Duties**:
+      - Lead technical troubleshooting
+      - Coordinate with engineering teams
+      - Make technical decisions
+      - Implement fixes
+    
+    ### Communications Lead
+    - **Primary responsibility**: Stakeholder communication
+    - **Duties**:
+      - Update status page
+      - Communicate with customers
+      - Send internal updates
+      - Manage escalations
+    
+    ## Communication Plan
+    
+    ### Internal Communication
+    
+    #### SEV-1 Incidents
+    - **Immediate**: Page on-call engineer
+    - **5 minutes**: Slack notification to #incidents
+    - **15 minutes**: Update every 15 minutes
+    - **Resolution**: Final summary
+    
+    #### SEV-2 Incidents
+    - **Immediate**: Slack notification to #incidents
+    - **30 minutes**: Update every 30 minutes
+    - **Resolution**: Final summary
+    
+    ### External Communication
+    
+    #### Customer Communication
+    - **SEV-1**: Status page update within 30 minutes
+    - **SEV-2**: Status page update within 2 hours
+    - **SEV-3/4**: No external communication unless requested
+    
+    #### Stakeholder Updates
+    - **Executive Team**: SEV-1 within 1 hour
+    - **Customer Success**: All incidents within 4 hours
+    - **Sales Team**: Customer-facing issues within 2 hours
+    
+    ## Post-Incident Process
+    
+    ### Post-Mortem Requirements
+    
+    #### Required for:
+    - All SEV-1 incidents
+    - SEV-2 incidents lasting >2 hours
+    - Any incident with customer impact
+    - Incidents with data loss
+    - Security incidents
+    
+    #### Timeline
+    - **Schedule**: Within 24 hours of resolution
+    - **Draft report**: Within 48 hours
+    - **Final report**: Within 1 week
+    - **Action items**: Assigned within 2 weeks
+    
+    ### Post-Mortem Template
+    
+    ```markdown
+    # Post-Mortem: [Incident Title]
+    
+    ## Summary
+    - **Date**: YYYY-MM-DD
+    - **Duration**: X hours Y minutes
+    - **Severity**: SEV-X
+    - **Impact**: Brief description
+    
+    ## Timeline
+    | Time (UTC) | Event |
+    |------------|-------|
+    | 14:30 | First alert received |
+    | 14:35 | Incident declared |
+    | 15:15 | Service restored |
+    
+    ## Root Cause
+    Detailed explanation of what caused the incident.
+    
+    ## Impact
+    - Customer impact
+    - Business impact
+    - Internal impact
+    
+    ## What Went Well
+    - Quick detection
+    - Effective communication
+    - Successful rollback
+    
+    ## What Could Be Improved
+    - Earlier detection
+    - Better monitoring
+    - Faster response
+    
+    ## Action Items
+    | Item | Owner | Due Date | Status |
+    |------|-------|----------|--------|
+    | Improve monitoring | @engineer | 2024-02-01 | Open |
+    | Update runbooks | @team-lead | 2024-01-30 | In Progress |
+    
+    ## Lessons Learned
+    Key takeaways for future incidents.
+    ```
+  
+  maintenance-procedures.md: |
+    # Maintenance Procedures
+    
+    ## Scheduled Maintenance
+    
+    ### Maintenance Windows
+    - **Primary**: Sundays 02:00-06:00 UTC
+    - **Secondary**: Wednesdays 02:00-04:00 UTC
+    - **Emergency**: Any time with 2-hour notice
+    
+    ### Pre-Maintenance Checklist
+    
+    #### 7 Days Before
+    - [ ] Schedule maintenance window
+    - [ ] Notify stakeholders
+    - [ ] Update status page
+    - [ ] Prepare rollback plan
+    
+    #### 24 Hours Before
+    - [ ] Verify backup completeness
+    - [ ] Test rollback procedures
+    - [ ] Confirm maintenance team availability
+    - [ ] Send reminder notifications
+    
+    #### 1 Hour Before
+    - [ ] Set monitoring to maintenance mode
+    - [ ] Prepare deployment artifacts
+    - [ ] Brief maintenance team
+    - [ ] Update status page to "Maintenance Starting"
+    
+    ### During Maintenance
+    
+    #### Start of Maintenance
+    1. **Update status page** to "Maintenance in Progress"
+    2. **Enable maintenance mode** in application
+    3. **Scale down non-essential services**
+    4. **Create checkpoint backup**
+    
+    #### Maintenance Execution
+    1. **Follow maintenance runbook** step by step
+    2. **Document all changes** in real-time
+    3. **Test each change** before proceeding
+    4. **Monitor system health** continuously
+    
+    #### End of Maintenance
+    1. **Verify all systems operational**
+    2. **Run smoke tests**
+    3. **Re-enable monitoring alerts**
+    4. **Update status page** to "Operational"
+    5. **Send completion notification**
+    
+    ### Post-Maintenance
+    
+    #### Immediate (within 1 hour)
+    - [ ] Monitor for issues
+    - [ ] Verify KPIs return to baseline
+    - [ ] Document any issues
+    - [ ] Update stakeholders
+    
+    #### Follow-up (within 24 hours)
+    - [ ] Review maintenance logs
+    - [ ] Update procedures based on learnings
+    - [ ] Schedule any follow-up work
+    - [ ] Generate maintenance report
+    
+    ## Routine Maintenance Tasks
+    
+    ### Daily Tasks
+    
+    #### Morning Health Check
+    ```bash
+    #!/bin/bash
+    # Daily health check script
+    
+    echo "=== Daily Health Check $(date) ==="
+    
+    # Check all pods
+    kubectl get pods -n svg-ai-enterprise-prod | grep -v Running
+    
+    # Check resource usage
+    kubectl top nodes
+    kubectl top pods -n svg-ai-enterprise-prod
+    
+    # Check disk space
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      df -h | grep -E '(9[0-9]%|100%)'
+    
+    # Check database connections
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "SELECT count(*) as connections FROM pg_stat_activity;"
+    
+    # Check cache memory
+    kubectl exec deployment/redis-ha-cluster-0 -n svg-ai-enterprise-prod -- \
+      redis-cli -a "$REDIS_PASSWORD" info memory | grep used_memory_human
+    
+    # Health endpoints
+    curl -s https://api.svg-ai.company.com/health | jq '.status'
+    curl -s https://grafana.svg-ai.company.com/api/health | jq '.database'
+    
+    echo "=== Health Check Complete ==="
+    ```
+    
+    #### Log Cleanup
+    ```bash
+    # Clean up old logs (keep 7 days)
+    find /var/log -name "*.log" -mtime +7 -delete
+    
+    # Rotate application logs
+    kubectl exec deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod -- \
+      logrotate /etc/logrotate.conf
+    ```
+    
+    ### Weekly Tasks
+    
+    #### Database Maintenance
+    ```bash
+    # Analyze database statistics
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "ANALYZE;"
+    
+    # Check for bloated tables
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "
+        SELECT schemaname, tablename, 
+               pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as size,
+               pg_size_pretty(pg_relation_size(schemaname||'.'||tablename)) as table_size,
+               pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename) - pg_relation_size(schemaname||'.'||tablename)) as index_size
+        FROM pg_tables 
+        WHERE schemaname = 'public' 
+        ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC 
+        LIMIT 10;"
+    
+    # Vacuum if needed
+    kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+      psql -U svgai -d svgai_prod -c "VACUUM ANALYZE;"
+    ```
+    
+    #### Security Updates
+    ```bash
+    # Check for security updates
+    kubectl get pods -n svg-ai-enterprise-prod -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[0].image}{"\n"}{end}'
+    
+    # Scan images for vulnerabilities
+    trivy image svg-ai/enterprise-api:latest
+    trivy image svg-ai/enterprise-worker:latest
+    ```
+    
+    ### Monthly Tasks
+    
+    #### Capacity Planning
+    ```bash
+    # Generate capacity report
+    kubectl top nodes --sort-by=cpu
+    kubectl top pods -n svg-ai-enterprise-prod --sort-by=cpu
+    
+    # Check growth trends
+    curl -s "https://prometheus.svg-ai.company.com/api/v1/query_range?query=rate(http_requests_total[5m])&start=$(date -d '30 days ago' +%s)&end=$(date +%s)&step=3600"
+    ```
+    
+    #### Backup Validation
+    ```bash
+    # Test backup restoration
+    kubectl create job --from=job/disaster-recovery-restore backup-test-$(date +%Y%m) -n svg-ai-enterprise-prod
+    
+    # Verify backup completeness
+    aws s3 ls s3://svg-ai-backups/database/ --recursive | tail -30
+    ```
+    
+    ## Emergency Procedures
+    
+    ### Service Recovery
+    
+    #### Complete System Failure
+    ```bash
+    # 1. Assess damage
+    kubectl get nodes
+    kubectl get pods --all-namespaces
+    
+    # 2. Restore from backup
+    kubectl apply -f backups/latest/
+    
+    # 3. Verify services
+    kubectl wait --for=condition=ready pod -l app=svg-ai -n svg-ai-enterprise-prod --timeout=600s
+    
+    # 4. Test functionality
+    curl -f https://api.svg-ai.company.com/health
+    python tests/smoke_tests.py
+    ```
+    
+    #### Database Corruption
+    ```bash
+    # 1. Stop all applications
+    kubectl scale deployment --all --replicas=0 -n svg-ai-enterprise-prod
+    
+    # 2. Restore database
+    kubectl create job --from=job/disaster-recovery-restore emergency-restore-$(date +%s) -n svg-ai-enterprise-prod
+    
+    # 3. Wait for restoration
+    kubectl wait --for=condition=complete job/emergency-restore-$(date +%s) -n svg-ai-enterprise-prod --timeout=1800s
+    
+    # 4. Restart applications
+    kubectl scale deployment svg-ai-enterprise-api --replicas=5 -n svg-ai-enterprise-prod
+    kubectl scale deployment svg-ai-enterprise-worker --replicas=3 -n svg-ai-enterprise-prod
+    ```
+    
+    ### Security Incident Response
+    
+    #### Suspected Breach
+    ```bash
+    # 1. Isolate affected systems
+    kubectl patch networkpolicy svg-ai-enterprise-network-policy -n svg-ai-enterprise-prod \
+      -p '{"spec":{"policyTypes":["Ingress","Egress"],"ingress":[],"egress":[]}}'
+    
+    # 2. Preserve evidence
+    kubectl logs deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod > security-logs-$(date +%s).log
+    
+    # 3. Rotate all secrets
+    kubectl delete secret svg-ai-enterprise-secrets -n svg-ai-enterprise-prod
+    kubectl create secret generic svg-ai-enterprise-secrets --from-file=backup-secrets/
+    
+    # 4. Force pod restart
+    kubectl rollout restart deployment --all -n svg-ai-enterprise-prod
+    ```
+    
+    ## Monitoring and Alerting Maintenance
+    
+    ### Prometheus Maintenance
+    ```bash
+    # Reload configuration
+    curl -X POST http://prometheus.monitoring.svc.cluster.local:9090/-/reload
+    
+    # Check configuration
+    curl http://prometheus.monitoring.svc.cluster.local:9090/api/v1/status/config
+    
+    # Compact data
+    curl -X POST http://prometheus.monitoring.svc.cluster.local:9090/api/v1/admin/tsdb/delete_series?match[]={__name__=~".+"}
+    ```
+    
+    ### Grafana Maintenance
+    ```bash
+    # Backup dashboards
+    kubectl exec deployment/grafana -n monitoring -- \
+      grafana-cli admin export-dashboard
+    
+    # Update plugins
+    kubectl exec deployment/grafana -n monitoring -- \
+      grafana-cli plugins update-all
+    
+    # Restart service
+    kubectl rollout restart deployment/grafana -n monitoring
+    ```

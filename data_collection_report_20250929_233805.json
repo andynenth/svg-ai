@@ -1,0 +1,38 @@
+{
+  "collection_summary": {
+    "total_examples": 22,
+    "collection_timestamp": "2025-09-29 23:38:05.929228",
+    "files_processed": 25,
+    "errors": 3
+  },
+  "data_quality": {
+    "ssim_stats": {
+      "min": 0.0,
+      "max": 0.9972909988610907,
+      "mean": 0.09001036959185682,
+      "median": 0.0
+    },
+    "quality_distribution": {
+      "high_quality": 2,
+      "medium_quality": 0,
+      "low_quality": 20
+    }
+  },
+  "distributions": {
+    "logo_types": {
+      "simple": 7,
+      "text": 5,
+      "gradient": 5,
+      "complex": 5
+    },
+    "optimization_methods": {
+      "benchmark": 20,
+      "parameter_cache": 2
+    }
+  },
+  "readiness_assessment": {
+    "ready_for_training": false,
+    "data_quality_good": false,
+    "sufficient_diversity": true
+  }
+}

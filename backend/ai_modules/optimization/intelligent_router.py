@@ -29,9 +29,9 @@ from sklearn.calibration import CalibratedClassifierCV
 # Local imports
 from .base_optimizer import BaseOptimizer
 from .feature_mapping import FeatureMappingOptimizer
-from .regression_optimizer import RegressionOptimizer
-from .ppo_optimizer import PPOOptimizer
-from .performance_optimizer import PerformanceOptimizer
+from .regression_optimizer import RegressionBasedOptimizer
+from .ppo_optimizer import PPOVTracerOptimizer as PPOOptimizer
+from .performance_optimizer import Method1PerformanceOptimizer as PerformanceOptimizer
 from .error_handler import OptimizationErrorHandler
 from ..feature_extraction import ImageFeatureExtractor
 from .resource_monitor import ResourceMonitor
@@ -85,7 +85,7 @@ class IntelligentRouter:
         # Method registry and performance tracking
         self.available_methods = {
             'feature_mapping': FeatureMappingOptimizer(),
-            'regression': RegressionOptimizer(),
+            'regression': RegressionBasedOptimizer(),
             'ppo': PPOOptimizer(),
             'performance': PerformanceOptimizer()
         }

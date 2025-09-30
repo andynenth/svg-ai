@@ -1,12 +1,126 @@
 {
-  "timestamp": "<function default_collate at 0x1080ffaf0>",
-  "validation_samples": 10,
-  "neural_network": {
-    "accuracy": 20.0,
-    "model_path": "backend/ai_modules/models/trained/efficientnet_logo_classifier.pth"
+  "validation_timestamp": 1759223567.938821,
+  "system_info": {
+    "platform": "Darwin",
+    "architecture": "x86_64",
+    "processor": "i386",
+    "python_version": "3.9.22",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "memory_total_gb": 8.0,
+    "pytorch_version": "2.1.0",
+    "cuda_available": false,
+    "mps_available": false
   },
-  "rule_based": {
-    "accuracy": 0,
-    "valid_samples": 0
-  }
+  "validation_config": {
+    "accuracy_tolerance": 0.001,
+    "test_samples": 30,
+    "correlation_threshold": 0.99,
+    "max_inference_time_ms": 50.0,
+    "min_throughput_samples_per_sec": 20.0,
+    "warmup_iterations": 10,
+    "timing_iterations": 50,
+    "max_memory_usage_mb": 500.0,
+    "test_batch_sizes": [
+      1,
+      4,
+      8,
+      16,
+      32
+    ],
+    "test_cpu": true,
+    "test_mps": true,
+    "test_gpu": false
+  },
+  "results": {
+    "torchscript_traced": {
+      "export_info": {
+        "format": "TorchScript_Traced",
+        "file_path": "test_exports_complete/svg_quality_predictor_traced.pt",
+        "file_size_mb": 10.597719192504883,
+        "export_time_ms": 286.5610122680664,
+        "success": true,
+        "error_message": null,
+        "validation_passed": false,
+        "inference_time_ms": 0.3244161605834961
+      },
+      "accuracy_validation": {
+        "accuracy_preserved": true,
+        "max_prediction_diff": 0.0,
+        "correlation_with_original": 1.0,
+        "mean_absolute_error": 0.0,
+        "success": true
+      },
+      "performance_validation": {
+        "cpu": {
+          "format": "TorchScript_Traced",
+          "platform": "Darwin",
+          "device": "cpu",
+          "accuracy_preserved": true,
+          "max_prediction_diff": 0.0,
+          "correlation_with_original": 1.0,
+          "inference_time_ms": 0.3635549545288086,
+          "throughput_samples_per_sec": 2750.615794236848,
+          "memory_usage_mb": 181.93359375,
+          "passed": true,
+          "error_message": null,
+          "batch_performance": {
+            "1": 0.4269123077392578,
+            "4": 1.4451265335083008,
+            "8": 3.4978628158569336,
+            "16": 3.719496726989746,
+            "32": 3.5594940185546875
+          }
+        }
+      }
+    },
+    "torchscript_scripted": {
+      "export_info": {
+        "format": "TorchScript_Scripted",
+        "file_path": "test_exports_complete/svg_quality_predictor_scripted.pt",
+        "file_size_mb": 10.599283218383789,
+        "export_time_ms": 191.4198398590088,
+        "success": true,
+        "error_message": null,
+        "validation_passed": false,
+        "inference_time_ms": 0.48630237579345703
+      },
+      "accuracy_validation": {
+        "accuracy_preserved": true,
+        "max_prediction_diff": 0.0,
+        "correlation_with_original": 1.0,
+        "mean_absolute_error": 0.0,
+        "success": true
+      },
+      "performance_validation": {
+        "cpu": {
+          "format": "TorchScript_Scripted",
+          "platform": "Darwin",
+          "device": "cpu",
+          "accuracy_preserved": true,
+          "max_prediction_diff": 0.0,
+          "correlation_with_original": 1.0,
+          "inference_time_ms": 0.5235385894775391,
+          "throughput_samples_per_sec": 1910.078874984061,
+          "memory_usage_mb": 143.4296875,
+          "passed": true,
+          "error_message": null,
+          "batch_performance": {
+            "1": 0.4392862319946289,
+            "4": 2.397012710571289,
+            "8": 1.1439800262451172,
+            "16": 2.7508020401000977,
+            "32": 3.2276391983032227
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_models_tested": 2,
+    "accuracy_passed": 2,
+    "performance_passed": 2,
+    "deployment_ready": 2
+  },
+  "recommendations": []
 }

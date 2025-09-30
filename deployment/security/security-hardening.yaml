@@ -1,0 +1,677 @@
+# Security Hardening and Compliance Configuration
+# Implements enterprise-grade security controls and compliance requirements
+
+# ============================================================================
+# Pod Security Standards (PSS) - Restricted Profile
+# ============================================================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: svg-ai-enterprise-prod
+  labels:
+    # Pod Security Standards
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+    # Security Context Constraints
+    security.openshift.io/scc.podSecurityLabelSync: false
+    # Compliance Labels
+    compliance.company.com/framework: SOC2
+    compliance.company.com/data-classification: restricted
+    compliance.company.com/audit: enabled
+
+---
+# ============================================================================
+# RBAC - Role-Based Access Control with Least Privilege
+# ============================================================================
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: svg-ai-security-admin
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+# Security-related permissions
+- apiGroups: ["security.openshift.io"]
+  resources: ["securitycontextconstraints"]
+  verbs: ["get", "list"]
+- apiGroups: ["policy"]
+  resources: ["podsecuritypolicies"]
+  verbs: ["get", "list"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["networkpolicies"]
+  verbs: ["get", "list", "create", "update", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: svg-ai-security-role
+  namespace: svg-ai-enterprise-prod
+rules:
+# Minimal permissions for application pods
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "list"]
+  resourceNames: ["svg-ai-enterprise-config"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+  resourceNames: ["svg-ai-enterprise-secrets"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: svg-ai-security-binding
+  namespace: svg-ai-enterprise-prod
+subjects:
+- kind: ServiceAccount
+  name: svg-ai-api-sa
+  namespace: svg-ai-enterprise-prod
+- kind: ServiceAccount
+  name: svg-ai-worker-sa
+  namespace: svg-ai-enterprise-prod
+roleRef:
+  kind: Role
+  name: svg-ai-security-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ============================================================================
+# Network Security Policies - Zero Trust Architecture
+# ============================================================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-default
+  namespace: svg-ai-enterprise-prod
+  labels:
+    security-tier: zero-trust
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  # Default deny all - explicit allow rules required
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-database
+  namespace: svg-ai-enterprise-prod
+  labels:
+    security-tier: database-access
+spec:
+  podSelector:
+    matchLabels:
+      component: database
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          component: api
+    - podSelector:
+        matchLabels:
+          component: worker
+    ports:
+    - protocol: TCP
+      port: 5432
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-cache
+  namespace: svg-ai-enterprise-prod
+  labels:
+    security-tier: cache-access
+spec:
+  podSelector:
+    matchLabels:
+      component: cache
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          component: api
+    - podSelector:
+        matchLabels:
+          component: worker
+    ports:
+    - protocol: TCP
+      port: 6379
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-external-to-api
+  namespace: svg-ai-enterprise-prod
+  labels:
+    security-tier: external-access
+spec:
+  podSelector:
+    matchLabels:
+      component: api
+  policyTypes:
+  - Ingress
+  ingress:
+  - from: []
+    ports:
+    - protocol: TCP
+      port: 8000
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-monitoring-access
+  namespace: svg-ai-enterprise-prod
+  labels:
+    security-tier: monitoring
+spec:
+  podSelector:
+    matchLabels:
+      app: svg-ai
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    - namespaceSelector:
+        matchLabels:
+          name: prometheus
+    ports:
+    - protocol: TCP
+      port: 8080  # Metrics port
+    - protocol: TCP
+      port: 9187  # Postgres exporter
+    - protocol: TCP
+      port: 9121  # Redis exporter
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-egress
+  namespace: svg-ai-enterprise-prod
+  labels:
+    security-tier: dns
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+
+---
+# ============================================================================
+# Pod Security Policies (For clusters that support PSP)
+# ============================================================================
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: svg-ai-restricted-psp
+  labels:
+    security-tier: restricted
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+    - ALL
+  volumes:
+    - 'configMap'
+    - 'emptyDir'
+    - 'projected'
+    - 'secret'
+    - 'downwardAPI'
+    - 'persistentVolumeClaim'
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: 'MustRunAsNonRoot'
+  runAsGroup:
+    rule: 'MustRunAs'
+    ranges:
+      - min: 1000
+        max: 65535
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'MustRunAs'
+    ranges:
+      - min: 1000
+        max: 65535
+  fsGroup:
+    rule: 'MustRunAs'
+    ranges:
+      - min: 1000
+        max: 65535
+  readOnlyRootFilesystem: true
+
+---
+# ============================================================================
+# Security Context Constraints (For OpenShift)
+# ============================================================================
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
+metadata:
+  name: svg-ai-restricted-scc
+  labels:
+    security-tier: restricted
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegeEscalation: false
+allowPrivilegedContainer: false
+allowedCapabilities: null
+defaultAddCapabilities: null
+fsGroup:
+  type: MustRunAs
+  ranges:
+    - min: 1000
+      max: 65535
+groups: []
+readOnlyRootFilesystem: true
+requiredDropCapabilities:
+- ALL
+runAsUser:
+  type: MustRunAsNonRoot
+seLinuxContext:
+  type: MustRunAs
+supplementalGroups:
+  type: MustRunAs
+  ranges:
+    - min: 1000
+      max: 65535
+users:
+- system:serviceaccount:svg-ai-enterprise-prod:svg-ai-api-sa
+- system:serviceaccount:svg-ai-enterprise-prod:svg-ai-worker-sa
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- persistentVolumeClaim
+- projected
+- secret
+
+---
+# ============================================================================
+# Resource Quotas and Limits
+# ============================================================================
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: svg-ai-enterprise-quota
+  namespace: svg-ai-enterprise-prod
+  labels:
+    quota-tier: enterprise
+spec:
+  hard:
+    # Compute Resources
+    requests.cpu: "50"
+    requests.memory: 100Gi
+    limits.cpu: "100"
+    limits.memory: 200Gi
+    requests.ephemeral-storage: 50Gi
+    limits.ephemeral-storage: 100Gi
+    
+    # Storage Resources
+    persistentvolumeclaims: "20"
+    requests.storage: 1Ti
+    
+    # Object Counts
+    pods: "50"
+    services: "20"
+    secrets: "20"
+    configmaps: "20"
+    deployments.apps: "10"
+    statefulsets.apps: "5"
+    
+    # Security Objects
+    networkpolicies.networking.k8s.io: "20"
+
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: svg-ai-enterprise-limits
+  namespace: svg-ai-enterprise-prod
+  labels:
+    limits-tier: enterprise
+spec:
+  limits:
+  - type: Container
+    default:
+      cpu: "1"
+      memory: 1Gi
+      ephemeral-storage: 1Gi
+    defaultRequest:
+      cpu: 100m
+      memory: 128Mi
+      ephemeral-storage: 100Mi
+    max:
+      cpu: "8"
+      memory: 8Gi
+      ephemeral-storage: 4Gi
+    min:
+      cpu: 50m
+      memory: 64Mi
+      ephemeral-storage: 50Mi
+  - type: Pod
+    max:
+      cpu: "16"
+      memory: 16Gi
+      ephemeral-storage: 8Gi
+  - type: PersistentVolumeClaim
+    max:
+      storage: 200Gi
+    min:
+      storage: 1Gi
+
+---
+# ============================================================================
+# Admission Controllers Configuration
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: admission-control-config
+  namespace: svg-ai-enterprise-prod
+  labels:
+    admission-tier: security
+data:
+  admission-control.yaml: |
+    apiVersion: apiserver.config.k8s.io/v1
+    kind: AdmissionConfiguration
+    plugins:
+    - name: ImagePolicyWebhook
+      configuration:
+        imagePolicy:
+          kubeConfigFile: /etc/kubernetes/admission-controllers/image-policy-webhook.kubeconfig
+          allowTTL: 30
+          denyTTL: 30
+          retryBackoff: 500
+          defaultAllow: false
+    - name: ValidatingAdmissionWebhook
+      configuration:
+        apiVersion: apiserver.config.k8s.io/v1
+        kind: WebhookAdmission
+        kubeConfigFile: /etc/kubernetes/admission-controllers/validating-webhook.kubeconfig
+    - name: MutatingAdmissionWebhook
+      configuration:
+        apiVersion: apiserver.config.k8s.io/v1
+        kind: WebhookAdmission
+        kubeConfigFile: /etc/kubernetes/admission-controllers/mutating-webhook.kubeconfig
+
+---
+# ============================================================================
+# OPA Gatekeeper Policies (if using OPA Gatekeeper)
+# ============================================================================
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredsecuritycontext
+  labels:
+    security-tier: opa-gatekeeper
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredSecurityContext
+      validation:
+        type: object
+        properties:
+          runAsNonRoot:
+            type: boolean
+          readOnlyRootFilesystem:
+            type: boolean
+          allowPrivilegeEscalation:
+            type: boolean
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srequiredsecuritycontext
+        
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          not container.securityContext.runAsNonRoot
+          msg := "Container must run as non-root user"
+        }
+        
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          not container.securityContext.readOnlyRootFilesystem
+          msg := "Container must have read-only root filesystem"
+        }
+        
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          container.securityContext.allowPrivilegeEscalation
+          msg := "Container must not allow privilege escalation"
+        }
+
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredSecurityContext
+metadata:
+  name: must-have-security-context
+  namespace: svg-ai-enterprise-prod
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
+    namespaces: ["svg-ai-enterprise-prod"]
+  parameters:
+    runAsNonRoot: true
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+
+---
+# ============================================================================
+# Falco Security Monitoring Rules
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: falco-security-rules
+  namespace: svg-ai-enterprise-prod
+  labels:
+    security-tier: runtime-monitoring
+data:
+  svg-ai-security-rules.yaml: |
+    - rule: Unexpected outbound connection
+      desc: Detect unexpected outbound network connections from SVG-AI pods
+      condition: >
+        outbound
+        and container.name startswith "svg-ai"
+        and not fd.sip in (postgres_servers, redis_servers, monitoring_servers)
+      output: >
+        Unexpected outbound connection from SVG-AI pod
+        (command=%proc.cmdline connection=%fd.name container=%container.name)
+      priority: WARNING
+      tags: [network, svg-ai]
+    
+    - rule: Privileged container launched
+      desc: Detect privileged containers in SVG-AI namespace
+      condition: >
+        spawned_process
+        and container
+        and k8s.ns.name="svg-ai-enterprise-prod"
+        and container.privileged=true
+      output: >
+        Privileged container launched in SVG-AI namespace
+        (user=%user.name command=%proc.cmdline container=%container.name)
+      priority: CRITICAL
+      tags: [container, privilege-escalation, svg-ai]
+    
+    - rule: Sensitive file read
+      desc: Detect reads of sensitive files in SVG-AI containers
+      condition: >
+        open_read
+        and container.name startswith "svg-ai"
+        and (fd.name startswith "/etc/shadow" or
+             fd.name startswith "/etc/passwd" or
+             fd.name startswith "/root/.ssh" or
+             fd.name startswith "/etc/kubernetes")
+      output: >
+        Sensitive file read in SVG-AI container
+        (user=%user.name file=%fd.name container=%container.name)
+      priority: HIGH
+      tags: [filesystem, secrets, svg-ai]
+
+---
+# ============================================================================
+# Certificate Management with cert-manager
+# ============================================================================
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: svg-ai-enterprise-issuer
+  namespace: svg-ai-enterprise-prod
+  labels:
+    cert-tier: enterprise
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: security@company.com
+    privateKeySecretRef:
+      name: svg-ai-enterprise-issuer-key
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: svg-ai-enterprise-tls
+  namespace: svg-ai-enterprise-prod
+  labels:
+    cert-tier: enterprise
+spec:
+  secretName: svg-ai-enterprise-tls
+  issuerRef:
+    name: svg-ai-enterprise-issuer
+    kind: Issuer
+  dnsNames:
+  - api.svg-ai.company.com
+  - svg-ai.company.com
+  - "*.svg-ai.company.com"
+  duration: 2160h  # 90 days
+  renewBefore: 360h  # 15 days
+
+---
+# ============================================================================
+# Compliance and Audit Configuration
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: compliance-config
+  namespace: svg-ai-enterprise-prod
+  labels:
+    compliance-tier: SOC2
+data:
+  audit-policy.yaml: |
+    apiVersion: audit.k8s.io/v1
+    kind: Policy
+    rules:
+    # Log security-relevant events
+    - level: Metadata
+      namespaces: ["svg-ai-enterprise-prod"]
+      resources:
+      - group: ""
+        resources: ["secrets", "configmaps"]
+      - group: "apps"
+        resources: ["deployments", "statefulsets"]
+      - group: "rbac.authorization.k8s.io"
+        resources: ["roles", "rolebindings"]
+    
+    # Log all authentication events
+    - level: Metadata
+      omitStages:
+        - RequestReceived
+      resources:
+      - group: ""
+        resources: ["serviceaccounts"]
+    
+    # Log network policy changes
+    - level: Request
+      namespaces: ["svg-ai-enterprise-prod"]
+      resources:
+      - group: "networking.k8s.io"
+        resources: ["networkpolicies"]
+    
+    # Log admission controller denials
+    - level: Request
+      namespaces: ["svg-ai-enterprise-prod"]
+      omitStages:
+        - RequestReceived
+      resources:
+      - group: "policy"
+        resources: ["podsecuritypolicies"]
+  
+  data-classification.yaml: |
+    classification:
+      namespace: "svg-ai-enterprise-prod"
+      data_types:
+        - type: "restricted"
+          description: "SVG conversion data and algorithms"
+          retention: "365d"
+          encryption: "required"
+        - type: "confidential"
+          description: "User uploaded images"
+          retention: "90d"
+          encryption: "required"
+        - type: "public"
+          description: "System logs and metrics"
+          retention: "30d"
+          encryption: "optional"
+  
+  soc2-controls.yaml: |
+    controls:
+      CC6.1:
+        description: "Logical access security measures"
+        implementation: "RBAC, ServiceAccounts, NetworkPolicies"
+        evidence: "kubectl logs, audit logs"
+      CC6.2:
+        description: "Multi-factor authentication"
+        implementation: "OIDC integration, certificate-based auth"
+        evidence: "Authentication logs"
+      CC6.3:
+        description: "Authorization procedures"
+        implementation: "Role-based access control"
+        evidence: "RBAC configurations, access reviews"
+      CC7.1:
+        description: "Data security measures"
+        implementation: "Encryption at rest and in transit"
+        evidence: "TLS certificates, encrypted volumes"
+      CC8.1:
+        description: "Change management"
+        implementation: "GitOps, automated deployments"
+        evidence: "Git commits, deployment logs"

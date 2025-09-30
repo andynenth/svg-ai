@@ -1,0 +1,853 @@
+# Performance Optimization and Capacity Planning
+# Advanced performance tuning and capacity management for enterprise production
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: performance-config
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: performance
+    optimization-tier: enterprise
+data:
+  # ============================================================================
+  # Performance Optimization Configuration
+  # ============================================================================
+  performance-tuning.yaml: |
+    # Performance Optimization Configuration
+    
+    api_optimization:
+      # Connection pooling
+      database_pool_size: 20
+      database_pool_max_overflow: 30
+      database_pool_timeout: 30
+      database_pool_recycle: 3600
+      
+      # Redis connection pooling
+      redis_pool_size: 50
+      redis_pool_max_connections: 100
+      redis_connection_timeout: 5
+      
+      # HTTP settings
+      keep_alive_timeout: 65
+      keep_alive_requests: 1000
+      client_timeout: 300
+      client_max_size: 104857600  # 100MB
+      
+      # Worker configuration
+      worker_processes: 4
+      worker_connections: 1000
+      worker_max_requests: 1000
+      worker_max_requests_jitter: 100
+      
+      # Caching
+      response_cache_ttl: 3600
+      static_cache_ttl: 86400
+      api_cache_size: 15000
+      
+      # Performance monitoring
+      slow_query_threshold: 1.0
+      slow_request_threshold: 5.0
+      memory_threshold: 0.8
+      cpu_threshold: 0.7
+    
+    worker_optimization:
+      # Celery configuration
+      worker_concurrency: 4
+      worker_prefetch_multiplier: 4
+      task_soft_time_limit: 300
+      task_time_limit: 600
+      task_acks_late: true
+      worker_disable_rate_limits: false
+      
+      # Queue configuration
+      task_routes:
+        high_priority: "high_priority_queue"
+        normal_priority: "normal_queue"
+        low_priority: "low_priority_queue"
+      
+      # Resource limits
+      max_memory_per_child: 200000  # KB
+      max_tasks_per_child: 1000
+      
+      # Optimization settings
+      optimization_timeout: 300
+      quality_target: 0.9
+      max_iterations: 20
+      early_stopping_patience: 5
+    
+    database_optimization:
+      # Connection settings
+      max_connections: 100
+      shared_buffers: "256MB"
+      effective_cache_size: "1GB"
+      maintenance_work_mem: "64MB"
+      checkpoint_completion_target: 0.9
+      wal_buffers: "16MB"
+      default_statistics_target: 100
+      random_page_cost: 1.1
+      effective_io_concurrency: 200
+      
+      # Query optimization
+      work_mem: "8MB"
+      max_worker_processes: 8
+      max_parallel_workers_per_gather: 2
+      max_parallel_workers: 8
+      max_parallel_maintenance_workers: 2
+      
+      # Logging and monitoring
+      log_min_duration_statement: 1000
+      log_checkpoints: "on"
+      log_connections: "on"
+      log_disconnections: "on"
+      log_lock_waits: "on"
+      
+      # Autovacuum
+      autovacuum: "on"
+      autovacuum_max_workers: 3
+      autovacuum_naptime: "1min"
+      autovacuum_vacuum_threshold: 50
+      autovacuum_analyze_threshold: 50
+    
+    redis_optimization:
+      # Memory management
+      maxmemory: "1gb"
+      maxmemory_policy: "allkeys-lru"
+      
+      # Persistence
+      save_points:
+        - "900 1"    # 900 sec if at least 1 key changed
+        - "300 10"   # 300 sec if at least 10 keys changed
+        - "60 10000" # 60 sec if at least 10000 keys changed
+      
+      # Network
+      tcp_keepalive: 300
+      timeout: 0
+      tcp_backlog: 511
+      
+      # Performance
+      hash_max_ziplist_entries: 512
+      hash_max_ziplist_value: 64
+      list_max_ziplist_size: -2
+      list_compress_depth: 0
+      set_max_intset_entries: 512
+      zset_max_ziplist_entries: 128
+      zset_max_ziplist_value: 64
+  
+  capacity-planning.yaml: |
+    # Capacity Planning Configuration
+    
+    scaling_policies:
+      api_pods:
+        min_replicas: 3
+        max_replicas: 20
+        target_cpu_utilization: 65
+        target_memory_utilization: 75
+        scale_up_stabilization: 30
+        scale_down_stabilization: 300
+        
+        # Custom metrics scaling
+        custom_metrics:
+          - name: "request_rate_per_second"
+            target: 100
+            type: "AverageValue"
+          - name: "queue_length"
+            target: 10
+            type: "AverageValue"
+      
+      worker_pods:
+        min_replicas: 2
+        max_replicas: 10
+        target_cpu_utilization: 75
+        target_memory_utilization: 80
+        scale_up_stabilization: 60
+        scale_down_stabilization: 600
+        
+        # Queue-based scaling
+        queue_metrics:
+          - name: "celery_queue_length"
+            target: 5
+            type: "AverageValue"
+    
+    resource_planning:
+      # Node capacity
+      node_specs:
+        cpu_cores: 4
+        memory_gb: 16
+        disk_gb: 100
+        network_gbps: 10
+      
+      # Pod resource requests/limits
+      api_pod_resources:
+        requests:
+          cpu: "1500m"
+          memory: "2Gi"
+          ephemeral_storage: "1Gi"
+        limits:
+          cpu: "3000m"
+          memory: "4Gi"
+          ephemeral_storage: "2Gi"
+      
+      worker_pod_resources:
+        requests:
+          cpu: "2000m"
+          memory: "3Gi"
+          ephemeral_storage: "2Gi"
+        limits:
+          cpu: "4000m"
+          memory: "6Gi"
+          ephemeral_storage: "4Gi"
+      
+      # Storage planning
+      storage_requirements:
+        database:
+          current_size: "50GB"
+          growth_rate: "2GB/month"
+          retention: "1 year"
+          backup_multiplier: 3
+        
+        cache:
+          current_size: "10GB"
+          growth_rate: "500MB/month"
+          retention: "7 days"
+        
+        logs:
+          daily_volume: "5GB"
+          retention: "30 days"
+          compression_ratio: 0.3
+    
+    traffic_patterns:
+      # Business hours traffic
+      peak_hours:
+        start: "09:00"
+        end: "17:00"
+        timezone: "UTC"
+        multiplier: 3.0
+      
+      # Seasonal patterns
+      high_season:
+        months: [11, 12, 1, 2]  # Nov-Feb
+        multiplier: 2.0
+      
+      # Growth projections
+      growth_forecast:
+        monthly_growth_rate: 0.15  # 15% monthly growth
+        user_growth_rate: 0.20     # 20% user growth
+        conversion_growth_rate: 0.10  # 10% conversion volume growth
+    
+    performance_targets:
+      sla_targets:
+        availability: 0.999      # 99.9%
+        p95_latency: 15.0       # 15 seconds
+        p99_latency: 30.0       # 30 seconds
+        error_rate: 0.01        # 1%
+      
+      quality_targets:
+        min_ssim: 0.85
+        target_ssim: 0.9
+        quality_improvement: 0.4  # 40% over baseline
+      
+      throughput_targets:
+        api_requests_per_second: 1000
+        concurrent_conversions: 100
+        queue_processing_rate: 50
+  
+  monitoring-queries.yaml: |
+    # Performance Monitoring Queries
+    
+    prometheus_queries:
+      # Capacity metrics
+      cpu_utilization: |
+        100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+      
+      memory_utilization: |
+        (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100
+      
+      disk_utilization: |
+        (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100
+      
+      # Application metrics
+      request_rate: |
+        rate(http_requests_total[5m])
+      
+      response_time_p95: |
+        histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
+      
+      response_time_p99: |
+        histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))
+      
+      error_rate: |
+        rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m])
+      
+      # Queue metrics
+      queue_length: |
+        celery_queue_length
+      
+      queue_processing_rate: |
+        rate(celery_tasks_total{state="SUCCESS"}[5m])
+      
+      # Database metrics
+      db_connections: |
+        pg_stat_database_numbackends
+      
+      db_query_time: |
+        pg_stat_database_blk_read_time + pg_stat_database_blk_write_time
+      
+      # Cache metrics
+      cache_hit_rate: |
+        redis_keyspace_hits_total / (redis_keyspace_hits_total + redis_keyspace_misses_total)
+      
+      cache_memory_usage: |
+        redis_memory_used_bytes / redis_memory_max_bytes
+    
+    alerting_rules:
+      # Capacity alerts
+      high_cpu_usage:
+        query: "cpu_utilization > 80"
+        duration: "5m"
+        severity: "warning"
+        description: "High CPU usage detected"
+      
+      high_memory_usage:
+        query: "memory_utilization > 85"
+        duration: "5m"
+        severity: "warning"
+        description: "High memory usage detected"
+      
+      disk_space_low:
+        query: "disk_utilization > 90"
+        duration: "1m"
+        severity: "critical"
+        description: "Low disk space detected"
+      
+      # Performance alerts
+      high_response_time:
+        query: "response_time_p95 > 15"
+        duration: "10m"
+        severity: "warning"
+        description: "High response time detected"
+      
+      high_error_rate:
+        query: "error_rate > 0.05"
+        duration: "5m"
+        severity: "critical"
+        description: "High error rate detected"
+      
+      queue_backup:
+        query: "queue_length > 100"
+        duration: "15m"
+        severity: "warning"
+        description: "Queue backup detected"
+  
+  optimization-scripts.sh: |
+    #!/bin/bash
+    # Performance Optimization Scripts
+    
+    set -e
+    
+    # Database optimization
+    optimize_database() {
+      echo "Optimizing database performance..."
+      
+      # Update statistics
+      kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+        psql -U svgai -d svgai_prod -c "ANALYZE;"
+      
+      # Vacuum if needed
+      BLOAT=$(kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+        psql -U svgai -d svgai_prod -t -c "
+          SELECT count(*) FROM pg_stat_user_tables 
+          WHERE n_dead_tup > (n_live_tup * 0.1);")
+      
+      if [ "$BLOAT" -gt 0 ]; then
+        echo "Running VACUUM..."
+        kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+          psql -U svgai -d svgai_prod -c "VACUUM ANALYZE;"
+      fi
+      
+      # Check for missing indexes
+      kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+        psql -U svgai -d svgai_prod -c "
+          SELECT schemaname, tablename, seq_scan, seq_tup_read, 
+                 idx_scan, idx_tup_fetch,
+                 seq_tup_read / seq_scan as avg_seq_read
+          FROM pg_stat_user_tables 
+          WHERE seq_scan > 0 
+          ORDER BY seq_tup_read DESC 
+          LIMIT 10;"
+    }
+    
+    # Cache optimization
+    optimize_cache() {
+      echo "Optimizing cache performance..."
+      
+      # Check memory usage
+      for i in 0 1 2; do
+        echo "Redis instance $i:"
+        kubectl exec deployment/redis-ha-cluster-$i -n svg-ai-enterprise-prod -- \
+          redis-cli -a "$REDIS_PASSWORD" info memory | grep used_memory_human
+        
+        # Optimize memory if usage is high
+        MEMORY_USAGE=$(kubectl exec deployment/redis-ha-cluster-$i -n svg-ai-enterprise-prod -- \
+          redis-cli -a "$REDIS_PASSWORD" info memory | grep used_memory_rss | cut -d: -f2 | tr -d '\r')
+        
+        if [ "$MEMORY_USAGE" -gt 800000000 ]; then  # 800MB
+          echo "High memory usage, running optimization..."
+          kubectl exec deployment/redis-ha-cluster-$i -n svg-ai-enterprise-prod -- \
+            redis-cli -a "$REDIS_PASSWORD" MEMORY PURGE
+        fi
+      done
+    }
+    
+    # Application optimization
+    optimize_application() {
+      echo "Optimizing application performance..."
+      
+      # Check for memory leaks
+      kubectl exec deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod -- \
+        python -c "
+        import psutil
+        import os
+        process = psutil.Process(os.getpid())
+        memory_percent = process.memory_percent()
+        print(f'Memory usage: {memory_percent:.2f}%')
+        if memory_percent > 80:
+          print('HIGH MEMORY USAGE DETECTED')
+        "
+      
+      # Check connection pools
+      kubectl logs deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod --tail=1000 | \
+        grep -E "pool|connection" | tail -20
+      
+      # Restart if memory usage is too high
+      RESTART_NEEDED=$(kubectl exec deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod -- \
+        python -c "
+        import psutil
+        print('true' if psutil.virtual_memory().percent > 85 else 'false')
+        ")
+      
+      if [ "$RESTART_NEEDED" = "true" ]; then
+        echo "High memory usage, restarting API pods..."
+        kubectl rollout restart deployment/svg-ai-enterprise-api -n svg-ai-enterprise-prod
+      fi
+    }
+    
+    # Capacity planning
+    capacity_report() {
+      echo "Generating capacity report..."
+      
+      # Current resource usage
+      echo "=== Current Resource Usage ==="
+      kubectl top nodes
+      kubectl top pods -n svg-ai-enterprise-prod
+      
+      # Growth trends (last 24 hours)
+      echo "=== Growth Trends ==="
+      curl -s "https://prometheus.svg-ai.company.com/api/v1/query?query=rate(http_requests_total[24h])" | \
+        jq -r '.data.result[0].value[1]'
+      
+      # Scaling recommendations
+      echo "=== Scaling Recommendations ==="
+      
+      # Check if scaling is needed
+      AVG_CPU=$(kubectl top pods -n svg-ai-enterprise-prod --no-headers | \
+        awk '{sum += $3} END {print sum/NR}' | sed 's/m//')
+      
+      if [ "$AVG_CPU" -gt 2000 ]; then
+        echo "RECOMMENDATION: Scale up API pods (current avg CPU: ${AVG_CPU}m)"
+        echo "kubectl scale deployment svg-ai-enterprise-api --replicas=8 -n svg-ai-enterprise-prod"
+      fi
+      
+      # Storage growth
+      echo "=== Storage Growth ==="
+      kubectl exec deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- \
+        psql -U svgai -d svgai_prod -c "
+          SELECT pg_size_pretty(pg_database_size('svgai_prod')) as current_size;"
+    }
+    
+    # Performance testing
+    performance_test() {
+      echo "Running performance test..."
+      
+      # Load test
+      kubectl run load-test --rm -i --tty --restart=Never \
+        --image=loadimpact/k6:latest \
+        --command -- k6 run - <<EOF
+    import http from 'k6/http';
+    import { check, sleep } from 'k6';
+    
+    export let options = {
+      stages: [
+        { duration: '2m', target: 100 },
+        { duration: '5m', target: 100 },
+        { duration: '2m', target: 200 },
+        { duration: '5m', target: 200 },
+        { duration: '2m', target: 0 },
+      ],
+    };
+    
+    export default function() {
+      let response = http.get('https://api.svg-ai.company.com/health');
+      check(response, {
+        'status is 200': (r) => r.status === 200,
+        'response time < 500ms': (r) => r.timings.duration < 500,
+      });
+      sleep(1);
+    }
+    EOF
+    }
+    
+    # Main function
+    main() {
+      case "$1" in
+        "database")
+          optimize_database
+          ;;
+        "cache")
+          optimize_cache
+          ;;
+        "application")
+          optimize_application
+          ;;
+        "capacity")
+          capacity_report
+          ;;
+        "test")
+          performance_test
+          ;;
+        "all")
+          optimize_database
+          optimize_cache
+          optimize_application
+          capacity_report
+          ;;
+        *)
+          echo "Usage: $0 {database|cache|application|capacity|test|all}"
+          exit 1
+          ;;
+      esac
+    }
+    
+    main "$@"
+
+---
+# ============================================================================
+# Performance Monitoring CronJob
+# ============================================================================
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: performance-optimization
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: performance
+    optimization-tier: automated
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  timeZone: "UTC"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: svg-ai
+            component: performance
+            optimization-tier: automated
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          containers:
+          - name: performance-optimizer
+            image: svg-ai/performance-optimizer:latest
+            command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              echo "Starting performance optimization at $(date)"
+              
+              # Load optimization scripts
+              source /scripts/optimization-scripts.sh
+              
+              # Run all optimizations
+              echo "=== Database Optimization ==="
+              optimize_database
+              
+              echo "=== Cache Optimization ==="
+              optimize_cache
+              
+              echo "=== Application Optimization ==="
+              optimize_application
+              
+              echo "=== Capacity Report ==="
+              capacity_report
+              
+              # Generate performance report
+              cat > /reports/performance-report-$(date +%Y%m%d).json << EOF
+              {
+                "timestamp": "$(date -Iseconds)",
+                "optimization_type": "automated",
+                "database_optimized": true,
+                "cache_optimized": true,
+                "application_optimized": true,
+                "recommendations": [
+                  "Monitor CPU usage trends",
+                  "Consider scaling if queue length increases",
+                  "Review database query performance weekly"
+                ],
+                "next_optimization": "$(date -d '+1 day' -Iseconds)"
+              }
+              EOF
+              
+              # Upload report to S3
+              if [ -n "$AWS_ACCESS_KEY_ID" ]; then
+                aws s3 cp "/reports/performance-report-$(date +%Y%m%d).json" \
+                  "s3://svg-ai-reports/performance/$(date +%Y/%m/%d)/"
+              fi
+              
+              echo "Performance optimization completed at $(date)"
+            env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: svg-ai-enterprise-secrets
+                  key: REDIS_PASSWORD
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+            resources:
+              requests:
+                memory: "512Mi"
+                cpu: "500m"
+              limits:
+                memory: "1Gi"
+                cpu: "1000m"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                - ALL
+            volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+              readOnly: true
+            - name: reports
+              mountPath: /reports
+            - name: tmp
+              mountPath: /tmp
+          volumes:
+          - name: scripts
+            configMap:
+              name: performance-config
+              defaultMode: 0755
+          - name: reports
+            emptyDir:
+              sizeLimit: 1Gi
+          - name: tmp
+            emptyDir:
+              sizeLimit: 1Gi
+
+---
+# ============================================================================
+# Vertical Pod Autoscaler for Smart Resource Management
+# ============================================================================
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: svg-ai-api-vpa
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: api
+    optimization-tier: vpa
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: svg-ai-enterprise-api
+  updatePolicy:
+    updateMode: "Auto"
+    minReplicas: 3
+  resourcePolicy:
+    containerPolicies:
+    - containerName: api
+      maxAllowed:
+        cpu: "4000m"
+        memory: "8Gi"
+      minAllowed:
+        cpu: "1000m"
+        memory: "1Gi"
+      controlledResources: ["cpu", "memory"]
+      controlledValues: RequestsAndLimits
+
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: svg-ai-worker-vpa
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: worker
+    optimization-tier: vpa
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: svg-ai-enterprise-worker
+  updatePolicy:
+    updateMode: "Auto"
+    minReplicas: 2
+  resourcePolicy:
+    containerPolicies:
+    - containerName: worker
+      maxAllowed:
+        cpu: "6000m"
+        memory: "8Gi"
+      minAllowed:
+        cpu: "1500m"
+        memory: "2Gi"
+      controlledResources: ["cpu", "memory"]
+      controlledValues: RequestsAndLimits
+
+---
+# ============================================================================
+# Performance Alerting Rules
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: performance-alerts
+  namespace: monitoring
+  labels:
+    app: prometheus
+    component: rules
+    alert-tier: performance
+data:
+  performance-rules.yml: |
+    groups:
+    - name: svg-ai-performance
+      rules:
+      # Capacity alerts
+      - alert: HighCPUUsage
+        expr: (100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 80
+        for: 10m
+        labels:
+          severity: warning
+          component: infrastructure
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+      
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 10m
+        labels:
+          severity: warning
+          component: infrastructure
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+      
+      # Application performance alerts
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="svg-ai-enterprise-api"}[5m])) > 15
+        for: 10m
+        labels:
+          severity: warning
+          component: api
+        annotations:
+          summary: "High API response time"
+          description: "95th percentile response time is {{ $value }}s"
+      
+      - alert: LowThroughput
+        expr: rate(http_requests_total{job="svg-ai-enterprise-api"}[5m]) < 10
+        for: 15m
+        labels:
+          severity: warning
+          component: api
+        annotations:
+          summary: "Low API throughput"
+          description: "Request rate is {{ $value }} requests/second"
+      
+      # Database performance alerts
+      - alert: SlowDatabaseQueries
+        expr: pg_stat_database_blk_read_time + pg_stat_database_blk_write_time > 1000
+        for: 5m
+        labels:
+          severity: warning
+          component: database
+        annotations:
+          summary: "Slow database queries detected"
+          description: "Database query time is {{ $value }}ms"
+      
+      - alert: HighDatabaseConnections
+        expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          component: database
+        annotations:
+          summary: "High database connection usage"
+          description: "Database connections at {{ $value | humanizePercentage }}"
+      
+      # Cache performance alerts
+      - alert: LowCacheHitRate
+        expr: redis_keyspace_hits_total / (redis_keyspace_hits_total + redis_keyspace_misses_total) < 0.8
+        for: 10m
+        labels:
+          severity: warning
+          component: cache
+        annotations:
+          summary: "Low cache hit rate"
+          description: "Cache hit rate is {{ $value | humanizePercentage }}"
+      
+      - alert: HighCacheMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          component: cache
+        annotations:
+          summary: "High cache memory usage"
+          description: "Cache memory usage is {{ $value | humanizePercentage }}"
+      
+      # Queue performance alerts
+      - alert: HighQueueLength
+        expr: celery_queue_length > 100
+        for: 15m
+        labels:
+          severity: warning
+          component: worker
+        annotations:
+          summary: "High queue length"
+          description: "Queue length is {{ $value }} items"
+      
+      - alert: LowQueueProcessingRate
+        expr: rate(celery_tasks_total{state="SUCCESS"}[5m]) < 5
+        for: 10m
+        labels:
+          severity: warning
+          component: worker
+        annotations:
+          summary: "Low queue processing rate"
+          description: "Processing rate is {{ $value }} tasks/second"

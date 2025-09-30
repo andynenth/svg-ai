@@ -1,0 +1,859 @@
+# Backup and Disaster Recovery Configuration
+# Comprehensive backup, restore, and disaster recovery procedures
+
+# ============================================================================
+# Database Backup CronJob
+# ============================================================================
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: backup
+    backup-type: database
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  timeZone: "UTC"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: svg-ai
+            component: backup
+            backup-type: database
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          containers:
+          - name: postgres-backup
+            image: postgres:15-alpine
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "Starting PostgreSQL backup at $(date)"
+              
+              # Create backup directory
+              BACKUP_DIR="/backups/$(date +%Y/%m/%d)"
+              mkdir -p "$BACKUP_DIR"
+              
+              # Generate backup filename
+              BACKUP_FILE="$BACKUP_DIR/svg-ai-prod-$(date +%Y%m%d-%H%M%S).sql"
+              
+              # Create full database backup
+              pg_dump -h postgres-ha-primary-service \
+                      -U svgai \
+                      -d svgai_prod \
+                      --verbose \
+                      --no-password \
+                      --format=custom \
+                      --compress=9 \
+                      --file="$BACKUP_FILE"
+              
+              # Create schema-only backup
+              SCHEMA_FILE="$BACKUP_DIR/svg-ai-schema-$(date +%Y%m%d-%H%M%S).sql"
+              pg_dump -h postgres-ha-primary-service \
+                      -U svgai \
+                      -d svgai_prod \
+                      --schema-only \
+                      --verbose \
+                      --no-password \
+                      --file="$SCHEMA_FILE"
+              
+              # Compress backups
+              gzip "$SCHEMA_FILE"
+              
+              # Create backup metadata
+              cat > "$BACKUP_DIR/backup-metadata.json" << EOF
+              {
+                "timestamp": "$(date -Iseconds)",
+                "database": "svgai_prod",
+                "backup_type": "full",
+                "backup_file": "$(basename $BACKUP_FILE)",
+                "schema_file": "$(basename $SCHEMA_FILE).gz",
+                "backup_size": "$(stat -c%s $BACKUP_FILE)",
+                "postgres_version": "$(psql -h postgres-ha-primary-service -U svgai -d svgai_prod -t -c 'SELECT version();' | xargs)",
+                "backup_method": "pg_dump",
+                "compression": "gzip",
+                "retention_days": 30
+              }
+              EOF
+              
+              # Upload to cloud storage (AWS S3)
+              if [ -n "$AWS_ACCESS_KEY_ID" ]; then
+                aws s3 cp "$BACKUP_FILE" \
+                  "s3://svg-ai-backups/database/$(date +%Y/%m/%d)/" \
+                  --storage-class STANDARD_IA
+                
+                aws s3 cp "$BACKUP_DIR/backup-metadata.json" \
+                  "s3://svg-ai-backups/database/$(date +%Y/%m/%d)/"
+                
+                echo "Backup uploaded to S3"
+              fi
+              
+              # Cleanup old backups (keep 30 days)
+              find /backups -type f -mtime +30 -delete
+              find /backups -type d -empty -delete
+              
+              echo "Backup completed successfully at $(date)"
+            env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: svg-ai-enterprise-secrets
+                  key: DB_PASSWORD
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+            resources:
+              requests:
+                memory: "512Mi"
+                cpu: "500m"
+              limits:
+                memory: "1Gi"
+                cpu: "1000m"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                - ALL
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /backups
+            - name: tmp
+              mountPath: /tmp
+          volumes:
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: backup-storage-pvc
+          - name: tmp
+            emptyDir:
+              sizeLimit: 2Gi
+
+---
+# ============================================================================
+# Redis Backup CronJob
+# ============================================================================
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: redis-backup
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: backup
+    backup-type: cache
+spec:
+  schedule: "0 3 * * *"  # Daily at 3 AM
+  timeZone: "UTC"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: svg-ai
+            component: backup
+            backup-type: cache
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          containers:
+          - name: redis-backup
+            image: redis:7-alpine
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "Starting Redis backup at $(date)"
+              
+              # Create backup directory
+              BACKUP_DIR="/backups/redis/$(date +%Y/%m/%d)"
+              mkdir -p "$BACKUP_DIR"
+              
+              # Connect to each Redis instance and create backup
+              for i in 0 1 2; do
+                echo "Backing up Redis instance $i"
+                
+                # Create RDB backup
+                redis-cli -h redis-ha-cluster-$i.redis-ha-service \
+                         -a "$REDIS_PASSWORD" \
+                         --rdb "$BACKUP_DIR/redis-$i-$(date +%Y%m%d-%H%M%S).rdb"
+                
+                # Create AOF backup if available
+                redis-cli -h redis-ha-cluster-$i.redis-ha-service \
+                         -a "$REDIS_PASSWORD" \
+                         BGREWRITEAOF || true
+                
+                sleep 5
+                
+                # Get Redis info
+                redis-cli -h redis-ha-cluster-$i.redis-ha-service \
+                         -a "$REDIS_PASSWORD" \
+                         INFO > "$BACKUP_DIR/redis-$i-info-$(date +%Y%m%d-%H%M%S).txt"
+              done
+              
+              # Compress backups
+              cd "$BACKUP_DIR"
+              tar -czf "redis-cluster-backup-$(date +%Y%m%d-%H%M%S).tar.gz" *.rdb *.txt
+              rm -f *.rdb *.txt
+              
+              # Upload to cloud storage
+              if [ -n "$AWS_ACCESS_KEY_ID" ]; then
+                aws s3 cp "redis-cluster-backup-$(date +%Y%m%d-%H%M%S).tar.gz" \
+                  "s3://svg-ai-backups/redis/$(date +%Y/%m/%d)/" \
+                  --storage-class STANDARD_IA
+                
+                echo "Redis backup uploaded to S3"
+              fi
+              
+              # Cleanup old backups
+              find /backups/redis -type f -mtime +7 -delete
+              find /backups/redis -type d -empty -delete
+              
+              echo "Redis backup completed at $(date)"
+            env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: svg-ai-enterprise-secrets
+                  key: REDIS_PASSWORD
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+            resources:
+              requests:
+                memory: "256Mi"
+                cpu: "250m"
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                - ALL
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /backups
+            - name: tmp
+              mountPath: /tmp
+          volumes:
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: backup-storage-pvc
+          - name: tmp
+            emptyDir:
+              sizeLimit: 1Gi
+
+---
+# ============================================================================
+# Application Data Backup
+# ============================================================================
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: application-backup
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: backup
+    backup-type: application
+spec:
+  schedule: "0 4 * * *"  # Daily at 4 AM
+  timeZone: "UTC"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: svg-ai
+            component: backup
+            backup-type: application
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          containers:
+          - name: app-backup
+            image: alpine:3.18
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "Starting application data backup at $(date)"
+              
+              # Install required tools
+              apk add --no-cache tar gzip aws-cli
+              
+              # Create backup directory
+              BACKUP_DIR="/backups/application/$(date +%Y/%m/%d)"
+              mkdir -p "$BACKUP_DIR"
+              
+              # Backup application configurations
+              echo "Backing up configurations..."
+              kubectl get configmaps -n svg-ai-enterprise-prod -o yaml > "$BACKUP_DIR/configmaps.yaml"
+              kubectl get secrets -n svg-ai-enterprise-prod -o yaml > "$BACKUP_DIR/secrets.yaml"
+              
+              # Backup persistent volumes
+              echo "Backing up persistent data..."
+              tar -czf "$BACKUP_DIR/api-cache-$(date +%Y%m%d).tar.gz" -C /mnt/api-cache .
+              tar -czf "$BACKUP_DIR/worker-cache-$(date +%Y%m%d).tar.gz" -C /mnt/worker-cache .
+              tar -czf "$BACKUP_DIR/models-$(date +%Y%m%d).tar.gz" -C /mnt/models .
+              
+              # Backup logs (last 7 days)
+              echo "Backing up recent logs..."
+              find /mnt/logs -name "*.log" -mtime -7 | \
+                tar -czf "$BACKUP_DIR/logs-$(date +%Y%m%d).tar.gz" -T -
+              
+              # Create backup manifest
+              cat > "$BACKUP_DIR/backup-manifest.json" << EOF
+              {
+                "timestamp": "$(date -Iseconds)",
+                "backup_type": "application",
+                "components": [
+                  "configmaps",
+                  "secrets",
+                  "api-cache",
+                  "worker-cache",
+                  "models",
+                  "logs"
+                ],
+                "retention_days": 14,
+                "total_size": "$(du -sh $BACKUP_DIR | cut -f1)",
+                "kubernetes_version": "$(kubectl version --short --client)",
+                "backup_location": "s3://svg-ai-backups/application/$(date +%Y/%m/%d)/"
+              }
+              EOF
+              
+              # Upload to cloud storage
+              if [ -n "$AWS_ACCESS_KEY_ID" ]; then
+                aws s3 sync "$BACKUP_DIR" \
+                  "s3://svg-ai-backups/application/$(date +%Y/%m/%d)/" \
+                  --storage-class STANDARD_IA
+                
+                echo "Application backup uploaded to S3"
+              fi
+              
+              # Cleanup old backups
+              find /backups/application -type f -mtime +14 -delete
+              find /backups/application -type d -empty -delete
+              
+              echo "Application backup completed at $(date)"
+            env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+            resources:
+              requests:
+                memory: "1Gi"
+                cpu: "500m"
+              limits:
+                memory: "2Gi"
+                cpu: "1000m"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                - ALL
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /backups
+            - name: api-cache
+              mountPath: /mnt/api-cache
+              readOnly: true
+            - name: worker-cache
+              mountPath: /mnt/worker-cache
+              readOnly: true
+            - name: models
+              mountPath: /mnt/models
+              readOnly: true
+            - name: logs
+              mountPath: /mnt/logs
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+          volumes:
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: backup-storage-pvc
+          - name: api-cache
+            persistentVolumeClaim:
+              claimName: api-cache-pvc
+          - name: worker-cache
+            persistentVolumeClaim:
+              claimName: worker-cache-pvc
+          - name: models
+            persistentVolumeClaim:
+              claimName: api-models-pvc
+          - name: logs
+            persistentVolumeClaim:
+              claimName: api-logs-pvc
+          - name: tmp
+            emptyDir:
+              sizeLimit: 2Gi
+
+---
+# ============================================================================
+# Disaster Recovery Job Template
+# ============================================================================
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: disaster-recovery-restore
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: disaster-recovery
+    restore-type: full
+spec:
+  ttlSecondsAfterFinished: 86400  # Keep for 24 hours
+  template:
+    metadata:
+      labels:
+        app: svg-ai
+        component: disaster-recovery
+        restore-type: full
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: disaster-recovery
+        image: postgres:15-alpine
+        command:
+        - /bin/sh
+        - -c
+        - |
+          set -e
+          echo "Starting disaster recovery at $(date)"
+          
+          # Install required tools
+          apk add --no-cache aws-cli curl jq
+          
+          # Check if this is a drill or actual recovery
+          RECOVERY_MODE="${RECOVERY_MODE:-drill}"
+          BACKUP_DATE="${BACKUP_DATE:-$(date -d '1 day ago' +%Y/%m/%d)}"
+          
+          echo "Recovery mode: $RECOVERY_MODE"
+          echo "Backup date: $BACKUP_DATE"
+          
+          # Download latest backup from S3
+          echo "Downloading backup from S3..."
+          aws s3 sync "s3://svg-ai-backups/database/$BACKUP_DATE/" /tmp/restore/
+          
+          # Find the latest backup file
+          BACKUP_FILE=$(ls -t /tmp/restore/*.sql | head -n1)
+          echo "Using backup file: $BACKUP_FILE"
+          
+          if [ "$RECOVERY_MODE" = "production" ]; then
+            echo "PRODUCTION RECOVERY MODE - Restoring to production database"
+            
+            # Stop all applications
+            kubectl scale deployment svg-ai-enterprise-api --replicas=0 -n svg-ai-enterprise-prod
+            kubectl scale deployment svg-ai-enterprise-worker --replicas=0 -n svg-ai-enterprise-prod
+            
+            # Wait for graceful shutdown
+            sleep 60
+            
+            # Drop and recreate database
+            psql -h postgres-ha-primary-service -U svgai -d postgres -c "DROP DATABASE IF EXISTS svgai_prod;"
+            psql -h postgres-ha-primary-service -U svgai -d postgres -c "CREATE DATABASE svgai_prod;"
+            
+            # Restore database
+            pg_restore -h postgres-ha-primary-service \
+                      -U svgai \
+                      -d svgai_prod \
+                      --verbose \
+                      --no-owner \
+                      --no-privileges \
+                      "$BACKUP_FILE"
+            
+            # Restart applications
+            kubectl scale deployment svg-ai-enterprise-api --replicas=5 -n svg-ai-enterprise-prod
+            kubectl scale deployment svg-ai-enterprise-worker --replicas=3 -n svg-ai-enterprise-prod
+            
+            # Wait for applications to be ready
+            kubectl wait --for=condition=ready pod \
+              -l app=svg-ai,component=api \
+              -n svg-ai-enterprise-prod --timeout=600s
+            
+            echo "Production recovery completed"
+            
+          else
+            echo "DRILL MODE - Testing restore procedure"
+            
+            # Create temporary database for testing
+            psql -h postgres-ha-primary-service -U svgai -d postgres -c "DROP DATABASE IF EXISTS svgai_test_restore;"
+            psql -h postgres-ha-primary-service -U svgai -d postgres -c "CREATE DATABASE svgai_test_restore;"
+            
+            # Restore to test database
+            pg_restore -h postgres-ha-primary-service \
+                      -U svgai \
+                      -d svgai_test_restore \
+                      --verbose \
+                      --no-owner \
+                      --no-privileges \
+                      "$BACKUP_FILE"
+            
+            # Verify restore
+            TABLE_COUNT=$(psql -h postgres-ha-primary-service -U svgai -d svgai_test_restore -t -c "SELECT count(*) FROM information_schema.tables WHERE table_schema = 'public';")
+            echo "Restored database has $TABLE_COUNT tables"
+            
+            # Cleanup test database
+            psql -h postgres-ha-primary-service -U svgai -d postgres -c "DROP DATABASE svgai_test_restore;"
+            
+            echo "Drill completed successfully"
+          fi
+          
+          # Create recovery report
+          cat > /tmp/recovery-report.json << EOF
+          {
+            "timestamp": "$(date -Iseconds)",
+            "recovery_mode": "$RECOVERY_MODE",
+            "backup_file": "$(basename $BACKUP_FILE)",
+            "backup_date": "$BACKUP_DATE",
+            "recovery_status": "success",
+            "duration_seconds": "$(($SECONDS))",
+            "restored_tables": "$TABLE_COUNT"
+          }
+          EOF
+          
+          # Upload recovery report
+          aws s3 cp /tmp/recovery-report.json \
+            "s3://svg-ai-backups/recovery-reports/$(date +%Y/%m/%d)/recovery-$(date +%Y%m%d-%H%M%S).json"
+          
+          echo "Disaster recovery completed at $(date)"
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: svg-ai-enterprise-secrets
+              key: DB_PASSWORD
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: backup-secrets
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backup-secrets
+              key: AWS_SECRET_ACCESS_KEY
+        - name: AWS_DEFAULT_REGION
+          value: "us-east-1"
+        - name: RECOVERY_MODE
+          value: "drill"  # Change to 'production' for actual recovery
+        - name: BACKUP_DATE
+          value: ""  # Specify date or leave empty for latest
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1000m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 5Gi
+
+---
+# ============================================================================
+# Backup Storage PVC
+# ============================================================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backup-storage-pvc
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: backup
+    storage-tier: backup
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "standard-ha"
+  resources:
+    requests:
+      storage: 500Gi
+  volumeMode: Filesystem
+
+---
+# ============================================================================
+# Backup Secrets
+# ============================================================================
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backup-secrets
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: backup
+type: Opaque
+data:
+  # AWS credentials for S3 backup storage (Base64 encoded)
+  AWS_ACCESS_KEY_ID: QUtJQUFBQUFBQUFBQUFBQUFBQQ==
+  AWS_SECRET_ACCESS_KEY: c2VjcmV0LWtleS1hYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg==
+  # Backup encryption key
+  BACKUP_ENCRYPTION_KEY: YmFja3VwLWVuY3J5cHRpb24ta2V5LWFiY2RlZmdoaWprbA==
+  # Notification webhook URLs
+  SLACK_WEBHOOK_URL: aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDAwMDAwMDAwL0IwMDAwMDAwMC9YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFg=
+
+---
+# ============================================================================
+# Disaster Recovery Runbook ConfigMap
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: disaster-recovery-runbook
+  namespace: svg-ai-enterprise-prod
+  labels:
+    app: svg-ai
+    component: disaster-recovery
+data:
+  runbook.md: |
+    # SVG-AI Enterprise Disaster Recovery Runbook
+    
+    ## Overview
+    This runbook provides step-by-step procedures for disaster recovery scenarios.
+    
+    ## Recovery Scenarios
+    
+    ### 1. Database Corruption/Loss
+    
+    #### Immediate Actions (RTO: 30 minutes)
+    1. **Assess the situation**
+       ```bash
+       kubectl logs deployment/postgres-ha-primary -n svg-ai-enterprise-prod
+       kubectl exec -it deployment/postgres-ha-primary -n svg-ai-enterprise-prod -- psql -U svgai -d svgai_prod -c "SELECT version();"
+       ```
+    
+    2. **Stop all applications**
+       ```bash
+       kubectl scale deployment svg-ai-enterprise-api --replicas=0 -n svg-ai-enterprise-prod
+       kubectl scale deployment svg-ai-enterprise-worker --replicas=0 -n svg-ai-enterprise-prod
+       ```
+    
+    3. **Restore from backup**
+       ```bash
+       # Set recovery mode to production
+       kubectl set env job/disaster-recovery-restore RECOVERY_MODE=production -n svg-ai-enterprise-prod
+       kubectl create job --from=job/disaster-recovery-restore disaster-recovery-$(date +%s) -n svg-ai-enterprise-prod
+       ```
+    
+    4. **Verify restoration**
+       ```bash
+       kubectl logs job/disaster-recovery-$(date +%s) -n svg-ai-enterprise-prod
+       ```
+    
+    5. **Restart applications**
+       ```bash
+       kubectl scale deployment svg-ai-enterprise-api --replicas=5 -n svg-ai-enterprise-prod
+       kubectl scale deployment svg-ai-enterprise-worker --replicas=3 -n svg-ai-enterprise-prod
+       ```
+    
+    ### 2. Complete Cluster Failure
+    
+    #### Immediate Actions (RTO: 2 hours)
+    1. **Provision new cluster**
+       - Use Infrastructure as Code (Terraform)
+       - Deploy monitoring stack first
+    
+    2. **Restore application**
+       ```bash
+       # Deploy from backup configurations
+       kubectl apply -f backups/latest/configmaps.yaml
+       kubectl apply -f backups/latest/secrets.yaml
+       kubectl apply -f deployment/kubernetes/enterprise-production-deployment.yaml
+       ```
+    
+    3. **Restore data**
+       - Run disaster recovery job
+       - Restore persistent volumes from snapshots
+    
+    ### 3. Application Corruption
+    
+    #### Immediate Actions (RTO: 15 minutes)
+    1. **Rollback deployment**
+       ```bash
+       helm rollback svg-ai-green -n svg-ai-enterprise-prod
+       ```
+    
+    2. **Verify rollback**
+       ```bash
+       kubectl get pods -n svg-ai-enterprise-prod
+       curl -f https://api.svg-ai.company.com/health
+       ```
+    
+    ## Testing Procedures
+    
+    ### Monthly Disaster Recovery Drill
+    1. **Schedule drill**
+       ```bash
+       kubectl create job --from=job/disaster-recovery-restore dr-drill-$(date +%Y%m) -n svg-ai-enterprise-prod
+       ```
+    
+    2. **Monitor drill**
+       ```bash
+       kubectl logs job/dr-drill-$(date +%Y%m) -n svg-ai-enterprise-prod -f
+       ```
+    
+    3. **Validate results**
+       - Check recovery report in S3
+       - Verify all tables restored
+       - Confirm RTO/RPO targets met
+    
+    ## Contact Information
+    
+    ### Emergency Contacts
+    - **Primary On-Call**: +1-555-0001
+    - **Secondary On-Call**: +1-555-0002
+    - **Engineering Manager**: +1-555-0003
+    - **CTO**: +1-555-0004
+    
+    ### Escalation Matrix
+    1. **Level 1** (0-15 min): Primary On-Call Engineer
+    2. **Level 2** (15-30 min): Secondary On-Call + Engineering Manager
+    3. **Level 3** (30+ min): CTO + Executive Team
+    
+    ## Service Level Objectives
+    
+    - **RTO (Recovery Time Objective)**: 30 minutes
+    - **RPO (Recovery Point Objective)**: 24 hours
+    - **Availability Target**: 99.9%
+    - **Data Retention**: 30 days (database), 7 days (cache)
+  
+  backup-verification.sh: |
+    #!/bin/bash
+    # Backup Verification Script
+    
+    set -e
+    
+    echo "Starting backup verification..."
+    
+    # Check if backups exist for the last 7 days
+    for i in {0..6}; do
+      DATE=$(date -d "$i days ago" +%Y/%m/%d)
+      echo "Checking backups for $DATE"
+      
+      # Check database backup
+      if aws s3 ls "s3://svg-ai-backups/database/$DATE/" | grep -q ".sql"; then
+        echo "✓ Database backup found for $DATE"
+      else
+        echo "✗ Database backup missing for $DATE"
+        exit 1
+      fi
+      
+      # Check Redis backup
+      if aws s3 ls "s3://svg-ai-backups/redis/$DATE/" | grep -q ".tar.gz"; then
+        echo "✓ Redis backup found for $DATE"
+      else
+        echo "✗ Redis backup missing for $DATE"
+      fi
+      
+      # Check application backup
+      if aws s3 ls "s3://svg-ai-backups/application/$DATE/" | grep -q "backup-manifest.json"; then
+        echo "✓ Application backup found for $DATE"
+      else
+        echo "✗ Application backup missing for $DATE"
+      fi
+    done
+    
+    echo "Backup verification completed successfully"
+  
+  recovery-test.sh: |
+    #!/bin/bash
+    # Recovery Test Script
+    
+    set -e
+    
+    echo "Starting recovery test..."
+    
+    # Create test job
+    RECOVERY_JOB="recovery-test-$(date +%s)"
+    
+    kubectl create job --from=job/disaster-recovery-restore "$RECOVERY_JOB" -n svg-ai-enterprise-prod
+    
+    # Wait for completion
+    kubectl wait --for=condition=complete job/"$RECOVERY_JOB" -n svg-ai-enterprise-prod --timeout=1800s
+    
+    # Check results
+    if kubectl logs job/"$RECOVERY_JOB" -n svg-ai-enterprise-prod | grep -q "Drill completed successfully"; then
+      echo "✓ Recovery test passed"
+      exit 0
+    else
+      echo "✗ Recovery test failed"
+      kubectl logs job/"$RECOVERY_JOB" -n svg-ai-enterprise-prod
+      exit 1
+    fi
