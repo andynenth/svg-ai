@@ -11,6 +11,7 @@ import tempfile
 import traceback
 import hashlib
 import logging
+import time
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional, Tuple
@@ -28,15 +29,24 @@ from utils.error_messages import ErrorMessageFactory, create_api_error_response,
 
 # Import classification modules
 from backend.ai_modules.classification.hybrid_classifier import HybridClassifier
-from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+from backend.converters.ai_enhanced_converter import AIEnhancedConverter
+
+# Import AI endpoints
+from backend.api.ai_endpoints import ai_bp
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Store start time for uptime calculation
+app.config['START_TIME'] = time.time()
 
 # Enable CORS for frontend communication
 CORS(app, origins=['http://localhost:3000', 'http://localhost:8080', 'http://localhost:8000'],
      methods=['GET', 'POST', 'OPTIONS'],
      allow_headers=['Content-Type'])
+
+# Register AI blueprint
+app.register_blueprint(ai_bp)
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -60,6 +70,31 @@ def get_classifier():
     if classifier is None:
         classifier = HybridClassifier()
     return classifier
+
+# Global AI initialization (lazy loading)
+def initialize_ai_components():
+    """Initialize AI components on application startup"""
+    with app.app_context():
+        try:
+            from backend.api.ai_endpoints import get_ai_components
+            components = get_ai_components()
+            if components.get('initialized'):
+                logging.info("✅ AI components ready for requests")
+            else:
+                logging.warning("⚠️ AI components not available, basic mode only")
+        except Exception as e:
+            logging.error(f"❌ AI initialization error: {e}")
+
+# Enhanced error handling for AI endpoints
+@app.errorhandler(503)
+def ai_service_unavailable(error):
+    """Handle AI service unavailable errors"""
+    return jsonify({
+        'success': False,
+        'error': 'AI services temporarily unavailable',
+        'fallback_suggestion': 'Use /api/convert for basic conversion',
+        'retry_after': 30
+    }), 503
 
 
 def validate_file_content(content: bytes, filename: str) -> tuple[bool, str]:
@@ -156,8 +191,33 @@ def serve_static(path):
 
 @app.route("/health")
 def health_check():
-    """Health check endpoint"""
-    return {"status": "ok"}
+    """Enhanced health check including AI status"""
+    import time
+
+    basic_health = {
+        'status': 'ok',
+        'timestamp': datetime.now().isoformat(),
+        'uptime': time.time() - app.config.get('START_TIME', time.time())
+    }
+
+    # Add AI health if available
+    try:
+        from backend.api.ai_endpoints import get_ai_components
+        ai_components = get_ai_components()
+        basic_health['ai_available'] = ai_components.get('initialized', False)
+
+        if ai_components.get('initialized'):
+            # Quick AI health check
+            basic_health['ai_models_loaded'] = len([
+                name for name, model in ai_components['model_manager'].models.items()
+                if model is not None
+            ])
+
+    except Exception as e:
+        basic_health['ai_available'] = False
+        basic_health['ai_error'] = str(e)
+
+    return jsonify(basic_health)
 
 
 @app.route("/api/upload", methods=["POST"])
@@ -655,5 +715,7 @@ def internal_error(error):
 
 
 if __name__ == "__main__":
+    # Initialize AI components on startup
+    initialize_ai_components()
     # Development server
     app.run(debug=True, port=8001)

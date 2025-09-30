@@ -97,6 +97,173 @@ class AIEnhancedConverter(BaseConverter):
             # Use error handler for graceful failure handling
             return self._handle_conversion_error(e, image_path, **kwargs)
 
+    def convert_with_ai_tier(self, image_path: str, tier: int = 1, include_metadata: bool = True, **kwargs) -> Dict[str, Any]:
+        """Convert image using specified AI tier with comprehensive metadata"""
+        try:
+            start_time = time.time()
+
+            # Validate input
+            if not Path(image_path).exists():
+                raise FileNotFoundError(f"Image file not found: {image_path}")
+
+            # Extract features
+            features = self._get_features_with_cache(image_path)
+
+            # Get tier-specific optimization
+            optimization_result = self._get_tier_optimization(features, image_path, tier)
+
+            # Perform conversion
+            svg_content = self._convert_with_optimized_params(
+                image_path,
+                optimization_result['parameters'],
+                **kwargs
+            )
+
+            # Calculate quality metrics if requested
+            predicted_quality = None
+            actual_quality = None
+
+            if include_metadata:
+                try:
+                    # Try to predict quality using the quality predictor
+                    if hasattr(self, 'quality_predictor'):
+                        predicted_quality = self.quality_predictor.predict_quality(
+                            image_path, optimization_result['parameters']
+                        )
+
+                    # Calculate actual quality using metrics
+                    quality_result = self.quality_metrics.calculate_comprehensive_metrics(
+                        image_path, svg_content
+                    )
+                    actual_quality = quality_result.get('ssim', 0.0)
+
+                except Exception as e:
+                    self.logger.warning(f"Quality calculation failed: {e}")
+
+            conversion_time = time.time() - start_time
+
+            # Build comprehensive result
+            result = {
+                'success': True,
+                'svg': svg_content,
+                'tier_used': tier,
+                'processing_time': conversion_time,
+                'predicted_quality': predicted_quality,
+                'actual_quality': actual_quality
+            }
+
+            if include_metadata:
+                result['metadata'] = {
+                    'features': features,
+                    'optimization': optimization_result,
+                    'parameters_used': optimization_result['parameters'],
+                    'tier': tier,
+                    'method': f"AI-Enhanced Tier {tier}",
+                    'confidence': optimization_result.get('confidence', 0.0)
+                }
+
+            # Track results
+            self._track_conversion_result(
+                image_path, features, optimization_result,
+                conversion_time, svg_content, **kwargs
+            )
+
+            self.logger.info(f"AI Tier {tier} conversion completed in {conversion_time:.3f}s")
+            return result
+
+        except Exception as e:
+            self.logger.error(f"AI Tier {tier} conversion failed: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'tier_used': tier,
+                'processing_time': time.time() - start_time,
+                'svg': None
+            }
+
+    def _get_tier_optimization(self, features: Dict[str, float], image_path: str, tier: int) -> Dict[str, Any]:
+        """Get optimization result for specific tier"""
+        try:
+            if tier == 1:
+                # Fast optimization using Method 1
+                return self._get_optimization_with_cache(features, image_path)
+            elif tier == 2:
+                # Enhanced optimization with quality prediction
+                base_result = self._get_optimization_with_cache(features, image_path)
+                return self._enhance_with_quality_prediction(base_result, features, image_path)
+            elif tier == 3:
+                # Full optimization with all methods
+                return self._get_full_optimization(features, image_path)
+            else:
+                # Default to tier 1
+                return self._get_optimization_with_cache(features, image_path)
+
+        except Exception as e:
+            self.logger.warning(f"Tier {tier} optimization failed: {e}, using default")
+            return {"parameters": self._get_default_vtracer_params(), "confidence": 0.0, "method": "fallback"}
+
+    def _enhance_with_quality_prediction(self, base_result: Dict[str, Any], features: Dict[str, float], image_path: str) -> Dict[str, Any]:
+        """Enhance Method 1 result with quality prediction guidance"""
+        try:
+            # Start with base parameters
+            enhanced_params = base_result['parameters'].copy()
+
+            # Adjust parameters based on complexity
+            complexity = features.get('complexity_score', 0.5)
+
+            if complexity > 0.6:
+                # High complexity - increase quality-focused parameters
+                enhanced_params['max_iterations'] = min(enhanced_params.get('max_iterations', 10) + 5, 30)
+                enhanced_params['path_precision'] = min(enhanced_params.get('path_precision', 3) + 1, 8)
+            elif complexity < 0.4:
+                # Low complexity - optimize for speed
+                enhanced_params['max_iterations'] = max(enhanced_params.get('max_iterations', 10) - 3, 5)
+
+            return {
+                'parameters': enhanced_params,
+                'confidence': min(base_result.get('confidence', 0.0) + 0.1, 1.0),
+                'method': 'Method 1 + Quality Prediction'
+            }
+
+        except Exception as e:
+            self.logger.warning(f"Quality prediction enhancement failed: {e}")
+            return base_result
+
+    def _get_full_optimization(self, features: Dict[str, float], image_path: str) -> Dict[str, Any]:
+        """Get full optimization using all available methods"""
+        try:
+            # Start with enhanced Method 1+2
+            base_result = self._get_optimization_with_cache(features, image_path)
+            enhanced_result = self._enhance_with_quality_prediction(base_result, features, image_path)
+
+            # Apply Method 3 enhancements
+            full_params = enhanced_result['parameters'].copy()
+
+            complexity = features.get('complexity_score', 0.5)
+            edge_density = features.get('edge_density', 0.3)
+
+            # Full optimization adjustments
+            full_params.update({
+                'max_iterations': min(full_params.get('max_iterations', 10) + 10, 50),
+                'path_precision': min(full_params.get('path_precision', 3) + 2, 10),
+                'corner_threshold': max(full_params.get('corner_threshold', 60) - 5, 10),
+                'length_threshold': full_params.get('length_threshold', 5.0) * 0.8
+            })
+
+            # Edge-specific adjustments
+            if edge_density > 0.5:
+                full_params['splice_threshold'] = min(full_params.get('splice_threshold', 45) + 10, 90)
+
+            return {
+                'parameters': full_params,
+                'confidence': min(enhanced_result.get('confidence', 0.0) + 0.2, 1.0),
+                'method': 'Full Optimization (Method 1+2+3)'
+            }
+
+        except Exception as e:
+            self.logger.warning(f"Full optimization failed: {e}")
+            return self._get_optimization_with_cache(features, image_path)
+
     def _get_features_with_cache(self, image_path: str) -> Dict[str, float]:
         """Extract features with caching support"""
         # Generate cache key based on file path and modification time
