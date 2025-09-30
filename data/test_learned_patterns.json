@@ -1,0 +1,11 @@
+{
+  "patterns": [],
+  "rules": [],
+  "analysis_metadata": {
+    "min_success_quality": 0.9,
+    "min_pattern_size": 5,
+    "total_patterns": 0,
+    "total_rules": 0,
+    "export_timestamp": "2025-09-30T13:25:04.429901"
+  }
+}

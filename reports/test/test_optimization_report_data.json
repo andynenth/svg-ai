@@ -1,0 +1,186 @@
+{
+  "generation_timestamp": "2025-09-30T13:34:28.887467",
+  "analysis_period_days": 7,
+  "quality_records": [
+    {
+      "image_id": "test_image_2.png",
+      "timestamp": "2025-09-30T13:14:42.739403",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "processing_time": 0.45
+    },
+    {
+      "image_id": "test_image_1.png",
+      "timestamp": "2025-09-30T13:14:42.737808",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "processing_time": 0.45
+    },
+    {
+      "image_id": "test_image_0.png",
+      "timestamp": "2025-09-30T13:14:42.734805",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "processing_time": 0.45
+    },
+    {
+      "image_id": "test_circle.png",
+      "timestamp": "2025-09-30T13:14:27.446460",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "processing_time": 0.45
+    }
+  ],
+  "quality_trends": {
+    "total_conversions": 4,
+    "avg_composite_score": 0.88,
+    "median_composite_score": 0.88,
+    "std_composite_score": 0.0,
+    "avg_processing_time": 0.45,
+    "median_processing_time": 0.45,
+    "trend": "stable",
+    "daily_averages": [
+      0.88
+    ],
+    "quality_distribution": {
+      "excellent": 0,
+      "good": 4,
+      "fair": 0,
+      "poor": 0
+    }
+  },
+  "patterns": {
+    "simple_logos": {
+      "optimal_parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8
+      },
+      "success_rate": 0.8,
+      "average_quality": 0.85,
+      "sample_size": 0,
+      "confidence_score": 0.3,
+      "improvement_over_baseline": 0.0
+    },
+    "text_based": {
+      "optimal_parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "path_precision": 10
+      },
+      "success_rate": 0.75,
+      "average_quality": 0.82,
+      "sample_size": 0,
+      "confidence_score": 0.3,
+      "improvement_over_baseline": 0.0
+    },
+    "gradients": {
+      "optimal_parameters": {
+        "color_precision": 8,
+        "corner_threshold": 25,
+        "path_precision": 12
+      },
+      "success_rate": 0.7,
+      "average_quality": 0.78,
+      "sample_size": 0,
+      "confidence_score": 0.3,
+      "improvement_over_baseline": 0.0
+    },
+    "complex": {
+      "optimal_parameters": {
+        "color_precision": 6,
+        "corner_threshold": 15,
+        "path_precision": 15
+      },
+      "success_rate": 0.65,
+      "average_quality": 0.75,
+      "sample_size": 0,
+      "confidence_score": 0.3,
+      "improvement_over_baseline": 0.0
+    }
+  },
+  "pattern_summary": {
+    "status": "no_analysis_performed",
+    "patterns": 0,
+    "rules": 0
+  },
+  "feedback_stats": {
+    "total_feedback": 9,
+    "recent_feedback_7d": 9,
+    "feedback_by_type": {
+      "download": {
+        "count": 1,
+        "avg_value": 0.8
+      },
+      "explicit_rating": {
+        "count": 5,
+        "avg_value": 0.5
+      },
+      "reconversion": {
+        "count": 1,
+        "avg_value": 0.2
+      },
+      "share": {
+        "count": 1,
+        "avg_value": 0.9
+      },
+      "time_spent": {
+        "count": 1,
+        "avg_value": 0.6
+      }
+    },
+    "current_weights": {
+      "ssim": 0.3,
+      "mse": 0.2,
+      "psnr": 0.15,
+      "edge_preservation": 0.15,
+      "color_accuracy": 0.1,
+      "file_size_ratio": 0.05,
+      "path_complexity": 0.05
+    },
+    "last_integration": "2025-09-30T13:34:28.878942"
+  },
+  "database_stats": {
+    "total_records": 4,
+    "recent_records_24h": 4,
+    "unique_images": 4,
+    "database_size_mb": 0.02,
+    "database_path": "data/test_quality_tracking.db"
+  }
+}

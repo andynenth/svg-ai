@@ -1,0 +1,162 @@
+{
+  "export_timestamp": "2025-09-30T13:30:55.306745",
+  "days_back": 30,
+  "total_records": 9,
+  "feedback_data": [
+    {
+      "feedback_type": "time_spent",
+      "rating": null,
+      "value": 0.6,
+      "timestamp": "2025-09-30T13:30:55.302198",
+      "parameters_used": {},
+      "metrics_achieved": {},
+      "confidence": 0.6,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "share",
+      "rating": null,
+      "value": 0.9,
+      "timestamp": "2025-09-30T13:30:55.300621",
+      "parameters_used": {},
+      "metrics_achieved": {},
+      "confidence": 0.9,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "reconversion",
+      "rating": null,
+      "value": 0.2,
+      "timestamp": "2025-09-30T13:30:55.299058",
+      "parameters_used": {},
+      "metrics_achieved": {},
+      "confidence": 0.9,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "download",
+      "rating": null,
+      "value": 0.8,
+      "timestamp": "2025-09-30T13:30:55.297368",
+      "parameters_used": {},
+      "metrics_achieved": {},
+      "confidence": 0.9,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "explicit_rating",
+      "rating": 5,
+      "value": 1.0,
+      "timestamp": "2025-09-30T13:30:55.295587",
+      "parameters_used": {
+        "color_precision": 4
+      },
+      "metrics_achieved": {
+        "composite_score": 1.0
+      },
+      "confidence": 1.0,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "explicit_rating",
+      "rating": 4,
+      "value": 0.75,
+      "timestamp": "2025-09-30T13:30:55.293583",
+      "parameters_used": {
+        "color_precision": 4
+      },
+      "metrics_achieved": {
+        "composite_score": 0.9199999999999999
+      },
+      "confidence": 1.0,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "explicit_rating",
+      "rating": 3,
+      "value": 0.5,
+      "timestamp": "2025-09-30T13:30:55.291011",
+      "parameters_used": {
+        "color_precision": 4
+      },
+      "metrics_achieved": {
+        "composite_score": 0.84
+      },
+      "confidence": 0.8,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "explicit_rating",
+      "rating": 2,
+      "value": 0.25,
+      "timestamp": "2025-09-30T13:30:55.288728",
+      "parameters_used": {
+        "color_precision": 4
+      },
+      "metrics_achieved": {
+        "composite_score": 0.76
+      },
+      "confidence": 1.0,
+      "recency_weight": 1.0
+    },
+    {
+      "feedback_type": "explicit_rating",
+      "rating": 1,
+      "value": 0.0,
+      "timestamp": "2025-09-30T13:30:55.286776",
+      "parameters_used": {
+        "color_precision": 4
+      },
+      "metrics_achieved": {
+        "composite_score": 0.6799999999999999
+      },
+      "confidence": 1.0,
+      "recency_weight": 1.0
+    }
+  ],
+  "current_weights": {
+    "ssim": 0.3,
+    "mse": 0.2,
+    "psnr": 0.15,
+    "edge_preservation": 0.15,
+    "color_accuracy": 0.1,
+    "file_size_ratio": 0.05,
+    "path_complexity": 0.05
+  },
+  "statistics": {
+    "total_feedback": 9,
+    "recent_feedback_7d": 9,
+    "feedback_by_type": {
+      "download": {
+        "count": 1,
+        "avg_value": 0.8
+      },
+      "explicit_rating": {
+        "count": 5,
+        "avg_value": 0.5
+      },
+      "reconversion": {
+        "count": 1,
+        "avg_value": 0.2
+      },
+      "share": {
+        "count": 1,
+        "avg_value": 0.9
+      },
+      "time_spent": {
+        "count": 1,
+        "avg_value": 0.6
+      }
+    },
+    "current_weights": {
+      "ssim": 0.3,
+      "mse": 0.2,
+      "psnr": 0.15,
+      "edge_preservation": 0.15,
+      "color_accuracy": 0.1,
+      "file_size_ratio": 0.05,
+      "path_complexity": 0.05
+    },
+    "last_integration": "2025-09-30T13:30:55.286499"
+  }
+}

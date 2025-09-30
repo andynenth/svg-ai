@@ -1,0 +1,14 @@
+{
+  "current_version": "v1.0.0",
+  "versions": [],
+  "performance_history": [],
+  "model_info": {
+    "current_version": "v1.0.0",
+    "total_versions": 0,
+    "buffer_size": 25,
+    "update_frequency": 10,
+    "scaler_fitted": true,
+    "last_update": null
+  },
+  "export_timestamp": "2025-09-30T13:26:48.478097"
+}
