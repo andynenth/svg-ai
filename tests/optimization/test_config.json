@@ -1,0 +1,26 @@
+{
+    "timeout": 30,
+    "max_parallel": 4,
+    "quality_threshold": 0.85,
+    "enable_caching": true,
+    "benchmark_iterations": 3,
+    "test_categories": ["simple", "text", "gradient", "complex"],
+    "vtracer_settings": {
+        "enable_timeout": true,
+        "max_timeout_seconds": 30,
+        "retry_on_failure": false,
+        "log_level": "INFO"
+    },
+    "quality_metrics": {
+        "enable_ssim": true,
+        "enable_mse": true,
+        "enable_psnr": true,
+        "render_resolution": 512
+    },
+    "performance_tracking": {
+        "track_memory": true,
+        "track_cpu": true,
+        "track_time": true,
+        "save_benchmarks": true
+    }
+}

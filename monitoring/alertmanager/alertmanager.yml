@@ -1,0 +1,212 @@
+# Alertmanager configuration for SVG-AI production alerts
+
+global:
+  # SMTP configuration for email alerts
+  smtp_smarthost: 'localhost:587'
+  smtp_from: 'alerts@svg-ai.com'
+  smtp_auth_username: '${SMTP_USERNAME}'
+  smtp_auth_password: '${SMTP_PASSWORD}'
+  smtp_require_tls: true
+
+  # Slack configuration
+  slack_api_url: '${SLACK_WEBHOOK_URL}'
+
+  # PagerDuty configuration
+  pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'
+
+# Routing configuration
+route:
+  group_by: ['alertname', 'service']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 12h
+  receiver: 'default-receiver'
+
+  routes:
+    # Critical alerts - immediate notification
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      group_wait: 10s
+      group_interval: 2m
+      repeat_interval: 1h
+
+    # API service alerts
+    - match:
+        service: api
+      receiver: 'api-team'
+      group_interval: 3m
+
+    # Worker service alerts
+    - match:
+        service: worker
+      receiver: 'ops-team'
+      group_interval: 3m
+
+    # Database alerts
+    - match:
+        service: database
+      receiver: 'database-team'
+      group_interval: 2m
+
+    # Infrastructure alerts
+    - match:
+        service: infrastructure
+      receiver: 'infrastructure-team'
+      group_interval: 5m
+
+    # Quality alerts
+    - match:
+        service: quality
+      receiver: 'quality-team'
+      group_interval: 10m
+
+# Receiver configurations
+receivers:
+  # Default receiver
+  - name: 'default-receiver'
+    email_configs:
+      - to: 'ops@svg-ai.com'
+        subject: '[SVG-AI] {{ .GroupLabels.alertname }}'
+        body: |
+          Alert: {{ .GroupLabels.alertname }}
+          Severity: {{ .CommonLabels.severity }}
+          Service: {{ .CommonLabels.service }}
+
+          {{ range .Alerts }}
+          Summary: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Labels: {{ range .Labels.SortedPairs }}{{ .Name }}={{ .Value }} {{ end }}
+          {{ end }}
+
+  # Critical alerts - multiple channels
+  - name: 'critical-alerts'
+    email_configs:
+      - to: 'critical@svg-ai.com'
+        subject: '🚨 [CRITICAL] SVG-AI Alert: {{ .GroupLabels.alertname }}'
+        body: |
+          CRITICAL ALERT
+
+          Alert: {{ .GroupLabels.alertname }}
+          Service: {{ .CommonLabels.service }}
+
+          {{ range .Alerts }}
+          Summary: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Severity: {{ .Labels.severity }}
+          Instance: {{ .Labels.instance }}
+          Started: {{ .StartsAt }}
+          {{ end }}
+
+          Please investigate immediately.
+
+    slack_configs:
+      - channel: '#alerts-critical'
+        color: 'danger'
+        title: '🚨 Critical Alert: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          *Summary:* {{ .Annotations.summary }}
+          *Description:* {{ .Annotations.description }}
+          *Service:* {{ .Labels.service }}
+          *Instance:* {{ .Labels.instance }}
+          {{ end }}
+
+    pagerduty_configs:
+      - routing_key: '${PAGERDUTY_INTEGRATION_KEY}'
+        description: 'SVG-AI Critical Alert: {{ .GroupLabels.alertname }}'
+        severity: 'critical'
+        details:
+          summary: '{{ .CommonAnnotations.summary }}'
+          description: '{{ .CommonAnnotations.description }}'
+          service: '{{ .CommonLabels.service }}'
+
+  # API team alerts
+  - name: 'api-team'
+    email_configs:
+      - to: 'api-team@svg-ai.com'
+        subject: '[API] {{ .GroupLabels.alertname }}'
+        body: |
+          API Service Alert
+
+          {{ range .Alerts }}
+          Summary: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Severity: {{ .Labels.severity }}
+          {{ end }}
+
+    slack_configs:
+      - channel: '#api-alerts'
+        title: 'API Alert: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          {{ .Annotations.summary }}
+          {{ end }}
+
+  # Operations team alerts
+  - name: 'ops-team'
+    email_configs:
+      - to: 'ops-team@svg-ai.com'
+        subject: '[OPS] {{ .GroupLabels.alertname }}'
+
+    slack_configs:
+      - channel: '#ops-alerts'
+        title: 'Operations Alert: {{ .GroupLabels.alertname }}'
+
+  # Database team alerts
+  - name: 'database-team'
+    email_configs:
+      - to: 'database-team@svg-ai.com'
+        subject: '[DATABASE] {{ .GroupLabels.alertname }}'
+
+    slack_configs:
+      - channel: '#database-alerts'
+        title: 'Database Alert: {{ .GroupLabels.alertname }}'
+        color: 'warning'
+
+  # Infrastructure team alerts
+  - name: 'infrastructure-team'
+    email_configs:
+      - to: 'infrastructure-team@svg-ai.com'
+        subject: '[INFRA] {{ .GroupLabels.alertname }}'
+
+    slack_configs:
+      - channel: '#infrastructure-alerts'
+        title: 'Infrastructure Alert: {{ .GroupLabels.alertname }}'
+
+  # Quality team alerts
+  - name: 'quality-team'
+    email_configs:
+      - to: 'quality-team@svg-ai.com'
+        subject: '[QUALITY] {{ .GroupLabels.alertname }}'
+
+    slack_configs:
+      - channel: '#quality-alerts'
+        title: 'Quality Alert: {{ .GroupLabels.alertname }}'
+        color: 'warning'
+
+# Inhibition rules (suppress certain alerts when others are firing)
+inhibit_rules:
+  # Suppress node alerts when the entire cluster is down
+  - source_match:
+      alertname: 'SVGAIAPIDown'
+    target_match:
+      alertname: 'SVGAINodeHighCPU'
+    equal: ['instance']
+
+  # Suppress worker queue alerts when workers are down
+  - source_match:
+      alertname: 'SVGAIWorkerDown'
+    target_match:
+      alertname: 'SVGAIWorkerQueueBackup'
+
+  # Suppress database connection alerts when database is down
+  - source_match:
+      alertname: 'SVGAIDatabaseDown'
+    target_match:
+      alertname: 'SVGAIDatabaseHighConnections'
+
+# Grouping configuration
+grouping:
+  enabled: true
+  by_alert_name: true

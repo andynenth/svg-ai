@@ -1,749 +1,598 @@
 #!/usr/bin/env python3
 """
-AI-Enhanced SVG Converter using Feature Extraction and Classification
-
-This converter combines the Day 1-2 AI pipeline (feature extraction + classification)
-with VTracer conversion to automatically optimize parameters based on logo type.
-
-Features:
-- Automatic logo type detection (simple, text, gradient, complex)
-- AI-driven VTracer parameter optimization
-- Intelligent fallback to standard conversion
-- Comprehensive AI metadata collection
-- Full backward compatibility with existing BaseConverter interface
+AI-Enhanced Converter - Method 1 Integration with BaseConverter
+Integrates Method 1 parameter optimization with existing converter system
 """
 
-import logging
 import time
-import traceback
-from typing import Dict, Any, Optional, Tuple
+import tempfile
+import hashlib
+import json
+import logging
+from typing import Dict, Any, Optional, Tuple, List
 from pathlib import Path
+import vtracer
 
-from backend.converters.base import BaseConverter
-from backend.converters.vtracer_converter import VTracerConverter
-from backend.utils.validation import validate_file_path
-from backend.ai_modules.classification.hybrid_classifier import HybridClassifier
+from .base import BaseConverter
+from ..ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
+from ..ai_modules.feature_extraction import ImageFeatureExtractor
+from ..ai_modules.optimization.error_handler import OptimizationErrorHandler
+from ..utils.quality_metrics import ComprehensiveMetrics
+from ..ai_modules.optimization.performance_optimizer import Method1PerformanceOptimizer
 
-logger = logging.getLogger(__name__)
 
+class AIEnhancedConverter(BaseConverter):
+    """AI-enhanced converter using Method 1 parameter optimization"""
 
-class AIEnhancedSVGConverter(BaseConverter):
-    """AI-enhanced SVG converter using feature extraction and logo classification.
+    def __init__(self):
+        super().__init__("AI-Enhanced Converter (Method 1)")
 
-    Automatically analyzes logos using the Day 1-2 AI pipeline to extract features
-    and classify logo types, then optimizes VTracer parameters accordingly.
+        # Core AI components
+        self.optimizer = FeatureMappingOptimizer()
+        self.feature_extractor = ImageFeatureExtractor()
+        self.error_handler = OptimizationErrorHandler()
 
-    Features:
-        - 6-feature extraction pipeline (edge density, colors, entropy, corners, gradients, complexity)
-        - 4-class logo classification (simple, text, gradient, complex)
-        - Confidence-based parameter optimization
-        - Intelligent fallback mechanisms for reliability
-        - Comprehensive AI metadata collection
-        - Full BaseConverter interface compliance
+        # Metrics and performance monitoring
+        self.quality_metrics = ComprehensiveMetrics()
+        self.performance_optimizer = Method1PerformanceOptimizer()
 
-    Architecture:
-        - Extends BaseConverter for interface compliance
-        - Integrates FeaturePipeline for AI analysis
-        - Wraps VTracerConverter for actual conversion
-        - Provides graceful degradation on AI failures
+        # Caching system
+        self.optimization_cache = {}
+        self.feature_cache = {}
+        self.cache_hits = 0
+        self.cache_misses = 0
 
-    Example:
-        Basic AI-enhanced conversion:
-
-        converter = AIEnhancedSVGConverter()
-        svg = converter.convert("logo.png")
-
-        With detailed AI analysis:
-
-        result = converter.convert_with_ai_analysis("logo.png")
-        print(f"Logo type: {result['classification']['logo_type']}")
-        print(f"Confidence: {result['classification']['confidence']:.2%}")
-    """
-
-    def __init__(self, enable_ai: bool = True, ai_timeout: float = 5.0):
-        """Initialize AI-enhanced converter.
-
-        Args:
-            enable_ai (bool): Whether to enable AI features. If False, falls back to standard VTracer.
-            ai_timeout (float): Maximum time allowed for AI analysis in seconds.
-
-        Raises:
-            ImportError: If AI dependencies are not available (falls back to standard mode).
-        """
-        super().__init__(name="AI-Enhanced SVG Converter")
-
-        self.enable_ai = enable_ai
-        self.ai_timeout = ai_timeout
-        self.ai_available = False
-        self.classifier = None
-
-        # Initialize standard VTracer converter for fallback
-        self.vtracer_converter = VTracerConverter()
-
-        # Track AI usage statistics
-        self.ai_stats = {
-            'total_conversions': 0,
-            'ai_enhanced_conversions': 0,
-            'fallback_conversions': 0,
-            'ai_failures': 0,
-            'average_ai_time': 0.0,
-            'classification_history': []
+        # Configuration
+        self.config = {
+            "enable_ai_optimization": True,
+            "enable_caching": True,
+            "cache_max_size": 1000,
+            "similarity_threshold": 0.95,
+            "quality_target": 0.85,
+            "speed_priority": "balanced"  # fast, balanced, quality
         }
 
-        # Initialize AI pipeline if enabled
-        if self.enable_ai:
-            self._initialize_ai_pipeline()
+        # Conversion tracking
+        self.conversion_metadata = []
+        self.optimization_history = []
 
-        logger.info(f"AIEnhancedSVGConverter initialized (AI {'enabled' if self.ai_available else 'disabled'})")
+        # Logger
+        self.logger = logging.getLogger(__name__)
+        self.logger.info("AI-Enhanced Converter initialized with Method 1 optimization")
 
-    def _initialize_ai_pipeline(self) -> None:
-        """Initialize the AI hybrid classification system.
-
-        Attempts to initialize the HybridClassifier from Day 7.
-        Falls back to standard conversion if AI modules are not available.
-        """
-        try:
-            # Initialize hybrid classifier
-            self.classifier = HybridClassifier()
-            self.ai_available = True
-
-            logger.info("AI hybrid classifier initialized successfully")
-
-        except ImportError as e:
-            logger.warning(f"AI modules not available: {e}")
-            logger.info("Falling back to standard VTracer conversion")
-            self.ai_available = False
-
-        except Exception as e:
-            logger.error(f"Failed to initialize AI classifier: {e}")
-            logger.info("Falling back to standard VTracer conversion")
-            self.ai_available = False
-
-    def get_name(self) -> str:
-        """Get the human-readable name of this converter.
-
-        Returns:
-            str: Converter name with AI status indicator.
-        """
-        ai_status = "AI-Enhanced" if self.ai_available else "Standard"
-        return f"{ai_status} SVG Converter"
-
-    @validate_file_path(param_name="image_path", allowed_extensions=['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'])
     def convert(self, image_path: str, **kwargs) -> str:
-        """Convert image to SVG using AI-enhanced parameter optimization.
-
-        Analyzes the input image using the AI pipeline to extract features and
-        classify logo type, then optimizes VTracer parameters accordingly.
-        Falls back to standard VTracer conversion on AI failures.
-
-        Args:
-            image_path (str): Path to image file to convert.
-            **kwargs: VTracer parameters. User-provided parameters override AI recommendations.
-                Common parameters:
-                - colormode (str): 'color' or 'binary'
-                - color_precision (int): Color reduction level (1-10)
-                - layer_difference (int): Layer separation threshold (1-32)
-                - path_precision (int): Path coordinate precision (0-10)
-                - corner_threshold (int): Corner detection threshold (0-180)
-                - ai_disable (bool): Disable AI analysis for this conversion
-
-        Returns:
-            str: SVG content with optional AI metadata embedded as comments.
-
-        Raises:
-            FileNotFoundError: If input image file doesn't exist.
-            ValueError: If image format is not supported.
-            RuntimeError: If both AI and fallback conversion fail.
-        """
-        start_time = time.time()
-        self.ai_stats['total_conversions'] += 1
-
-        # Check if AI is disabled for this conversion
-        if kwargs.pop('ai_disable', False):
-            logger.info(f"AI disabled by parameter, using standard conversion")
-            result = self._fallback_conversion(image_path, **kwargs)
-            self.ai_stats['fallback_conversions'] += 1
-            return result
-
-        # Use AI enhancement if available
-        if self.ai_available:
-            try:
-                return self._ai_enhanced_conversion(image_path, **kwargs)
-            except Exception as e:
-                logger.warning(f"AI conversion failed: {e}")
-                self.ai_stats['ai_failures'] += 1
-                # Fall back to standard conversion
-                logger.info("Falling back to standard VTracer conversion")
-
-        # Fallback to standard conversion
-        result = self._fallback_conversion(image_path, **kwargs)
-        self.ai_stats['fallback_conversions'] += 1
-        return result
-
-    def _ai_enhanced_conversion(self, image_path: str, **kwargs) -> str:
-        """Perform AI-enhanced conversion with feature analysis and parameter optimization.
-
-        Args:
-            image_path (str): Path to input image.
-            **kwargs: User-provided VTracer parameters (override AI recommendations).
-
-        Returns:
-            str: SVG content with AI metadata.
-
-        Raises:
-            Exception: If AI analysis or conversion fails.
-        """
-        ai_start_time = time.time()
-
-        logger.info(f"Starting AI analysis for {Path(image_path).name}")
-
-        # Classify logo using hybrid classifier
-        classification_result = self.classifier.classify(image_path)
-
-        ai_analysis_time = time.time() - ai_start_time
-
-        # Update AI timing statistics
-        if self.ai_stats['ai_enhanced_conversions'] > 0:
-            # Running average
-            old_avg = self.ai_stats['average_ai_time']
-            n = self.ai_stats['ai_enhanced_conversions']
-            self.ai_stats['average_ai_time'] = (old_avg * n + ai_analysis_time) / (n + 1)
-        else:
-            self.ai_stats['average_ai_time'] = ai_analysis_time
-
-        # Extract classification results
-        logo_type = classification_result['logo_type']
-        confidence = classification_result['confidence']
-        method_used = classification_result['method_used']
-        features = classification_result.get('features', {})
-        reasoning = classification_result.get('reasoning', '')
-
-        # Format classification for compatibility
-        classification = {
-            'logo_type': logo_type,
-            'confidence': confidence,
-            'method_used': method_used,
-            'reasoning': reasoning
-        }
-
-        logger.info(f"AI analysis complete: {classification['logo_type']} "
-                   f"(confidence: {classification['confidence']:.2%}, "
-                   f"time: {ai_analysis_time*1000:.1f}ms)")
-
-        # Optimize VTracer parameters based on classification
-        optimized_params = self._optimize_parameters(classification, features)
-
-        # User parameters override AI recommendations
-        final_params = {**optimized_params, **kwargs}
-
-        logger.info(f"Using optimized parameters: {optimized_params}")
-        if kwargs:
-            logger.info(f"User overrides: {kwargs}")
-
-        # Convert using optimized parameters
-        conversion_start = time.time()
-        svg_content = self.vtracer_converter.convert(image_path, **final_params)
-        conversion_time = time.time() - conversion_start
-
-        # Add AI metadata to SVG
-        svg_content = self._add_ai_metadata(
-            svg_content, classification, features, optimized_params,
-            ai_analysis_time, conversion_time
-        )
-
-        # Track successful AI conversion
-        self.ai_stats['ai_enhanced_conversions'] += 1
-        self.ai_stats['classification_history'].append({
-            'image': Path(image_path).name,
-            'logo_type': classification['logo_type'],
-            'confidence': classification['confidence'],
-            'ai_time': ai_analysis_time,
-            'conversion_time': conversion_time
-        })
-
-        total_time = time.time() - (ai_start_time - ai_analysis_time)  # Include conversion time
-        logger.info(f"AI-enhanced conversion complete (total: {total_time*1000:.1f}ms)")
-
-        return svg_content
-
-    def _optimize_parameters(self, classification: Dict[str, Any], features: Dict[str, float]) -> Dict[str, Any]:
-        """Optimize VTracer parameters based on AI classification and features.
-
-        Maps the 4 logo types to optimal VTracer parameter sets, with confidence-based
-        adjustments and feature-driven fine-tuning.
-
-        Args:
-            classification (Dict[str, Any]): Logo classification results with type and confidence.
-            features (Dict[str, float]): Extracted features for fine-tuning.
-
-        Returns:
-            Dict[str, Any]: Optimized VTracer parameters.
-        """
-        logo_type = classification['logo_type']
-        confidence = classification['confidence']
-
-        # Get base parameters for logo type
-        base_params = self._get_base_parameters_for_type(logo_type)
-
-        # Apply confidence-based adjustments
-        adjusted_params = self._apply_confidence_adjustments(base_params, confidence)
-
-        # Apply feature-based fine-tuning
-        final_params = self._apply_feature_adjustments(adjusted_params, features)
-
-        return final_params
-
-    def _get_base_parameters_for_type(self, logo_type: str) -> Dict[str, Any]:
-        """Get base VTracer parameters optimized for specific logo type.
-
-        Parameter sets are based on Day 1-2 analysis and VTracer documentation:
-        - Simple geometric: Clean parameters for sharp edges
-        - Text-based: High precision for readable text
-        - Gradient: Maximum precision for smooth transitions
-        - Complex: Balanced parameters for detail preservation
-
-        Args:
-            logo_type (str): One of 'simple', 'text', 'gradient', 'complex'.
-
-        Returns:
-            Dict[str, Any]: Base VTracer parameters for the logo type.
-        """
-        parameter_sets = {
-            'simple': {
-                'colormode': 'color',
-                'color_precision': 3,          # Fewer colors for clean output
-                'layer_difference': 32,        # High separation for distinct regions
-                'path_precision': 6,           # High precision for sharp edges
-                'corner_threshold': 30,        # Lower threshold for sharp corners
-                'length_threshold': 3.0,       # Keep small details
-                'max_iterations': 10,
-                'splice_threshold': 45
-            },
-            'text': {
-                'colormode': 'color',
-                'color_precision': 2,          # Minimal colors for text clarity
-                'layer_difference': 24,        # Good separation for legibility
-                'path_precision': 8,           # Maximum precision for text quality
-                'corner_threshold': 20,        # Sharp corners for letter forms
-                'length_threshold': 2.0,       # Preserve text details
-                'max_iterations': 12,
-                'splice_threshold': 40
-            },
-            'gradient': {
-                'colormode': 'color',
-                'color_precision': 8,          # High precision for smooth gradients
-                'layer_difference': 8,         # Fine layers for smooth transitions
-                'path_precision': 6,           # Good precision for curves
-                'corner_threshold': 60,        # Higher threshold for smooth curves
-                'length_threshold': 4.0,       # Balance detail vs smoothness
-                'max_iterations': 15,
-                'splice_threshold': 60
-            },
-            'complex': {
-                'colormode': 'color',
-                'color_precision': 6,          # Balanced color handling
-                'layer_difference': 16,        # Medium separation
-                'path_precision': 5,           # Standard precision
-                'corner_threshold': 45,        # Balanced corner detection
-                'length_threshold': 5.0,       # Standard detail level
-                'max_iterations': 20,          # More iterations for complexity
-                'splice_threshold': 50
-            }
-        }
-
-        return parameter_sets.get(logo_type, parameter_sets['complex'])
-
-    def _apply_confidence_adjustments(self, params: Dict[str, Any], confidence: float) -> Dict[str, Any]:
-        """Apply confidence-based parameter adjustments.
-
-        Lower confidence indicates uncertain classification, so use more conservative
-        parameters that work well across logo types.
-
-        Args:
-            params (Dict[str, Any]): Base parameters to adjust.
-            confidence (float): Classification confidence (0.0 to 1.0).
-
-        Returns:
-            Dict[str, Any]: Confidence-adjusted parameters.
-        """
-        adjusted_params = params.copy()
-
-        if confidence < 0.6:
-            # Low confidence - use more conservative parameters
-            logger.info(f"Low confidence ({confidence:.2%}), applying conservative adjustments")
-
-            # More conservative color precision
-            adjusted_params['color_precision'] = min(6, max(4, params['color_precision']))
-
-            # Standard layer difference
-            adjusted_params['layer_difference'] = 16
-
-            # Standard corner threshold
-            adjusted_params['corner_threshold'] = 50
-
-        elif confidence < 0.8:
-            # Medium confidence - slight adjustments toward middle ground
-            logger.info(f"Medium confidence ({confidence:.2%}), applying moderate adjustments")
-
-            # Moderate adjustments
-            if params['color_precision'] <= 3:
-                adjusted_params['color_precision'] = 4
-            elif params['color_precision'] >= 7:
-                adjusted_params['color_precision'] = 6
-
-        # High confidence (>=0.8) - use parameters as-is
-        return adjusted_params
-
-    def _apply_feature_adjustments(self, params: Dict[str, Any], features: Dict[str, float]) -> Dict[str, Any]:
-        """Apply feature-based fine-tuning to parameters.
-
-        Uses individual feature values to fine-tune parameters beyond just logo type:
-        - High edge density: Adjust corner threshold
-        - High color count: Adjust color precision
-        - High entropy: Adjust complexity handling
-
-        Args:
-            params (Dict[str, Any]): Base parameters to fine-tune.
-            features (Dict[str, float]): Extracted features (all in [0,1] range).
-
-        Returns:
-            Dict[str, Any]: Feature-tuned parameters.
-        """
-        tuned_params = params.copy()
-
-        # Edge density adjustments
-        edge_density = features.get('edge_density', 0.5)
-        if edge_density > 0.3:  # High edge density
-            # Lower corner threshold for better edge detection
-            tuned_params['corner_threshold'] = max(20, tuned_params['corner_threshold'] - 10)
-        elif edge_density < 0.1:  # Very low edge density
-            # Higher corner threshold for smoother curves
-            tuned_params['corner_threshold'] = min(80, tuned_params['corner_threshold'] + 15)
-
-        # Color complexity adjustments
-        unique_colors = features.get('unique_colors', 0.5)
-        if unique_colors > 0.7:  # Many colors
-            # Increase color precision to preserve detail
-            tuned_params['color_precision'] = min(8, tuned_params['color_precision'] + 1)
-        elif unique_colors < 0.2:  # Few colors
-            # Decrease color precision for cleaner output
-            tuned_params['color_precision'] = max(2, tuned_params['color_precision'] - 1)
-
-        # Complexity adjustments
-        complexity_score = features.get('complexity_score', 0.5)
-        if complexity_score > 0.7:  # High complexity
-            # More iterations and finer layer difference
-            tuned_params['max_iterations'] = min(25, tuned_params['max_iterations'] + 5)
-            tuned_params['layer_difference'] = max(8, tuned_params['layer_difference'] - 4)
-
-        # Gradient strength adjustments
-        gradient_strength = features.get('gradient_strength', 0.5)
-        if gradient_strength > 0.6:  # Strong gradients detected
-            # Optimize for smooth gradients
-            tuned_params['color_precision'] = min(8, max(6, tuned_params['color_precision']))
-            tuned_params['layer_difference'] = min(12, tuned_params['layer_difference'])
-
-        return tuned_params
-
-    def _fallback_conversion(self, image_path: str, **kwargs) -> str:
-        """Perform standard VTracer conversion without AI enhancement.
-
-        Args:
-            image_path (str): Path to input image.
-            **kwargs: VTracer parameters.
-
-        Returns:
-            str: SVG content from standard VTracer conversion.
-        """
-        logger.info(f"Using standard VTracer conversion for {Path(image_path).name}")
-        return self.vtracer_converter.convert(image_path, **kwargs)
-
-    def _add_ai_metadata(self, svg_content: str, classification: Dict[str, Any],
-                        features: Dict[str, float], params: Dict[str, Any],
-                        ai_time: float, conversion_time: float) -> str:
-        """Add AI analysis metadata to SVG content as comments.
-
-        Args:
-            svg_content (str): Original SVG content.
-            classification (Dict[str, Any]): Logo classification results.
-            features (Dict[str, float]): Extracted features.
-            params (Dict[str, Any]): VTracer parameters used.
-            ai_time (float): AI analysis time in seconds.
-            conversion_time (float): Conversion time in seconds.
-
-        Returns:
-            str: SVG content with AI metadata embedded.
-        """
-        # Create comprehensive metadata comment
-        metadata = f"""
-<!-- AI-Enhanced SVG Converter Metadata
-Logo Classification:
-  Type: {classification['logo_type']}
-  Confidence: {classification['confidence']:.3f}
-
-Extracted Features:
-  Edge Density: {features.get('edge_density', 0):.3f}
-  Unique Colors: {features.get('unique_colors', 0):.3f}
-  Entropy: {features.get('entropy', 0):.3f}
-  Corner Density: {features.get('corner_density', 0):.3f}
-  Gradient Strength: {features.get('gradient_strength', 0):.3f}
-  Complexity Score: {features.get('complexity_score', 0):.3f}
-
-Optimized VTracer Parameters:
-  Color Mode: {params.get('colormode', 'color')}
-  Color Precision: {params.get('color_precision', 6)}
-  Layer Difference: {params.get('layer_difference', 16)}
-  Path Precision: {params.get('path_precision', 5)}
-  Corner Threshold: {params.get('corner_threshold', 60)}
-
-Performance:
-  AI Analysis Time: {ai_time*1000:.1f}ms
-  Conversion Time: {conversion_time*1000:.1f}ms
-  Total Enhancement Time: {(ai_time + conversion_time)*1000:.1f}ms
--->"""
-
-        # Insert metadata after the first line (XML declaration or SVG tag)
-        lines = svg_content.split('\n')
-        if len(lines) > 1:
-            return lines[0] + '\n' + metadata + '\n' + '\n'.join(lines[1:])
-        else:
-            return metadata + '\n' + svg_content
-
-    def convert_with_ai_analysis(self, image_path: str, **kwargs) -> Dict[str, Any]:
-        """Convert image and return detailed AI analysis results.
-
-        Provides comprehensive conversion results including SVG content, AI analysis,
-        classification details, and performance metrics for evaluation and debugging.
-
-        Args:
-            image_path (str): Path to image file to convert.
-            **kwargs: VTracer parameters (override AI recommendations).
-
-        Returns:
-            Dict[str, Any]: Comprehensive conversion results:
-                - svg (str): SVG content with AI metadata.
-                - features (Dict[str, float]): Extracted features.
-                - classification (Dict[str, Any]): Logo classification results.
-                - parameters_used (Dict[str, Any]): Final VTracer parameters.
-                - ai_analysis_time (float): AI analysis time in seconds.
-                - conversion_time (float): SVG conversion time in seconds.
-                - total_time (float): Total processing time in seconds.
-                - ai_enhanced (bool): Whether AI enhancement was used.
-                - success (bool): Whether conversion succeeded.
-
-        Example:
-            Detailed AI-enhanced conversion:
-
-            result = converter.convert_with_ai_analysis("logo.png")
-            print(f"Logo type: {result['classification']['logo_type']}")
-            print(f"AI confidence: {result['classification']['confidence']:.2%}")
-            print(f"Processing time: {result['total_time']*1000:.1f}ms")
-        """
-        start_time = time.time()
-
+        """Convert image using AI-optimized parameters"""
         try:
-            # Check if AI enhancement is available and enabled
-            if not self.ai_available or kwargs.get('ai_disable', False):
-                # Standard conversion without AI
-                svg_content = self._fallback_conversion(image_path, **kwargs)
-                total_time = time.time() - start_time
+            # Start timing
+            start_time = time.time()
 
-                return {
-                    'svg': svg_content,
-                    'features': {},
-                    'classification': {'logo_type': 'unknown', 'confidence': 0.0},
-                    'parameters_used': kwargs,
-                    'ai_analysis_time': 0.0,
-                    'conversion_time': total_time,
-                    'total_time': total_time,
-                    'ai_enhanced': False,
-                    'success': True
-                }
+            # Validate input
+            if not Path(image_path).exists():
+                raise FileNotFoundError(f"Image file not found: {image_path}")
 
-            # AI-enhanced conversion with detailed analysis
-            ai_start_time = time.time()
+            # Extract or retrieve cached features
+            features = self._get_features_with_cache(image_path)
 
-            # Classify using hybrid classifier
-            classification_result = self.classifier.classify(image_path)
+            # Get optimization result with caching
+            optimization_result = self._get_optimization_with_cache(features, image_path)
 
-            # Extract results
-            logo_type = classification_result['logo_type']
-            confidence = classification_result['confidence']
-            method_used = classification_result['method_used']
-            features = classification_result.get('features', {})
-            reasoning = classification_result.get('reasoning', '')
-
-            # Format classification for compatibility
-            classification = {
-                'logo_type': logo_type,
-                'confidence': confidence,
-                'method_used': method_used,
-                'reasoning': reasoning
-            }
-
-            ai_analysis_time = time.time() - ai_start_time
-
-            # Optimize parameters
-            optimized_params = self._optimize_parameters(classification, features)
-            final_params = {**optimized_params, **kwargs}
-
-            # Convert
-            conversion_start = time.time()
-            svg_content = self.vtracer_converter.convert(image_path, **final_params)
-            conversion_time = time.time() - conversion_start
-
-            # Add metadata
-            svg_content = self._add_ai_metadata(
-                svg_content, classification, features, final_params,
-                ai_analysis_time, conversion_time
+            # Apply optimized parameters for conversion
+            svg_content = self._convert_with_optimized_params(
+                image_path,
+                optimization_result['parameters'],
+                **kwargs
             )
 
-            total_time = time.time() - start_time
+            # Track conversion results
+            conversion_time = time.time() - start_time
+            self._track_conversion_result(
+                image_path, features, optimization_result,
+                conversion_time, svg_content, **kwargs
+            )
 
-            return {
-                'svg': svg_content,
-                'features': features,
-                'classification': classification,
-                'parameters_used': final_params,
-                'ai_analysis_time': ai_analysis_time,
-                'conversion_time': conversion_time,
-                'total_time': total_time,
-                'ai_enhanced': True,
-                'success': True
-            }
+            self.logger.info(f"AI-enhanced conversion completed in {conversion_time:.3f}s")
+            return svg_content
 
         except Exception as e:
-            # Fallback on any error
-            logger.error(f"AI analysis failed: {e}")
-            svg_content = self._fallback_conversion(image_path, **kwargs)
-            total_time = time.time() - start_time
+            # Use error handler for graceful failure handling
+            return self._handle_conversion_error(e, image_path, **kwargs)
 
-            return {
-                'svg': svg_content,
-                'features': {},
-                'classification': {'logo_type': 'error', 'confidence': 0.0, 'error': str(e)},
-                'parameters_used': kwargs,
-                'ai_analysis_time': 0.0,
-                'conversion_time': total_time,
-                'total_time': total_time,
-                'ai_enhanced': False,
-                'success': True,
-                'error': str(e)
-            }
+    def _get_features_with_cache(self, image_path: str) -> Dict[str, float]:
+        """Extract features with caching support"""
+        # Generate cache key based on file path and modification time
+        path_obj = Path(image_path)
+        cache_key = self._generate_cache_key(
+            image_path,
+            str(path_obj.stat().st_mtime)
+        )
 
-    def get_ai_stats(self) -> Dict[str, Any]:
-        """Get comprehensive AI usage statistics and performance metrics.
+        # Check feature cache
+        if self.config["enable_caching"] and cache_key in self.feature_cache:
+            self.cache_hits += 1
+            self.logger.debug(f"Feature cache hit for {image_path}")
+            return self.feature_cache[cache_key]
 
-        Returns:
-            Dict[str, Any]: AI usage statistics:
-                - total_conversions (int): Total conversions processed.
-                - ai_enhanced_conversions (int): Conversions using AI enhancement.
-                - fallback_conversions (int): Conversions using standard VTracer.
-                - ai_failures (int): Number of AI analysis failures.
-                - ai_success_rate (float): Percentage of successful AI enhancements.
-                - average_ai_time (float): Average AI analysis time in seconds.
-                - classification_breakdown (Dict): Count of each logo type classified.
-        """
-        stats = self.ai_stats.copy()
-
-        # Calculate derived statistics
-        if stats['total_conversions'] > 0:
-            stats['ai_success_rate'] = (stats['ai_enhanced_conversions'] / stats['total_conversions']) * 100
-            stats['fallback_rate'] = (stats['fallback_conversions'] / stats['total_conversions']) * 100
-        else:
-            stats['ai_success_rate'] = 0.0
-            stats['fallback_rate'] = 0.0
-
-        # Classification breakdown
-        classification_counts = {}
-        for entry in stats['classification_history']:
-            logo_type = entry['logo_type']
-            classification_counts[logo_type] = classification_counts.get(logo_type, 0) + 1
-
-        stats['classification_breakdown'] = classification_counts
-
-        return stats
-
-
-def test_ai_enhanced_converter():
-    """Test the AI-enhanced converter on sample images."""
-    import os
-    from pathlib import Path
-
-    print("\n" + "="*70)
-    print("Testing AI-Enhanced SVG Converter")
-    print("="*70)
-
-    converter = AIEnhancedSVGConverter()
-
-    # Test directory
-    test_dir = Path("data/logos")
-    if not test_dir.exists():
-        print("Test directory not found. Please run from project root.")
-        return
-
-    # Test different logo types
-    test_images = []
-    for category in ['simple_geometric', 'text_based', 'gradients', 'complex']:
-        category_dir = test_dir / category
-        if category_dir.exists():
-            images = list(category_dir.glob("*.png"))[:2]  # First 2 from each category
-            test_images.extend([(str(img), category) for img in images])
-
-    if not test_images:
-        print("No test images found.")
-        return
-
-    results = []
-
-    for image_path, category in test_images[:6]:  # Test first 6 images
-        print(f"\n[{Path(image_path).name}] ({category})")
-        print("-" * 50)
-
+        # Extract features
         try:
-            result = converter.convert_with_ai_analysis(image_path)
+            features = self.feature_extractor.extract_features(image_path)
 
-            if result['ai_enhanced']:
-                print(f"✅ AI-Enhanced Conversion")
-                print(f"   Logo Type: {result['classification']['logo_type']}")
-                print(f"   Confidence: {result['classification']['confidence']:.2%}")
-                print(f"   Key Features:")
-                for feature, value in list(result['features'].items())[:3]:
-                    print(f"     {feature}: {value:.3f}")
-                print(f"   Parameters Used:")
-                params = result['parameters_used']
-                print(f"     color_precision: {params.get('color_precision', 'default')}")
-                print(f"     layer_difference: {params.get('layer_difference', 'default')}")
-                print(f"   AI Analysis: {result['ai_analysis_time']*1000:.1f}ms")
-                print(f"   Conversion: {result['conversion_time']*1000:.1f}ms")
-            else:
-                print(f"⚠️  Standard Conversion (AI not available)")
+            # Cache features if enabled
+            if self.config["enable_caching"]:
+                self._manage_feature_cache(cache_key, features)
+                self.cache_misses += 1
 
-            print(f"   SVG Size: {len(result['svg'])} bytes")
-            print(f"   Total Time: {result['total_time']*1000:.1f}ms")
-
-            results.append(result)
+            return features
 
         except Exception as e:
-            print(f"❌ Error: {e}")
+            error = self.error_handler.detect_error(e, {"operation": "feature_extraction", "image_path": image_path})
+            recovery_result = self.error_handler.attempt_recovery(error)
 
-    # Print AI statistics
-    print("\n" + "="*70)
-    print("AI Enhancement Statistics")
-    print("="*70)
+            if recovery_result.get("success"):
+                # Use default/fallback features
+                return self._get_default_features()
+            else:
+                raise
 
-    stats = converter.get_ai_stats()
-    print(f"Total Conversions: {stats['total_conversions']}")
-    print(f"AI Enhanced: {stats['ai_enhanced_conversions']} ({stats['ai_success_rate']:.1f}%)")
-    print(f"Standard Fallback: {stats['fallback_conversions']} ({stats['fallback_rate']:.1f}%)")
-    print(f"AI Failures: {stats['ai_failures']}")
-    print(f"Average AI Time: {stats['average_ai_time']*1000:.1f}ms")
+    def _get_optimization_with_cache(self, features: Dict[str, float], image_path: str) -> Dict[str, Any]:
+        """Get optimization result with similarity-based caching"""
+        if not self.config["enable_ai_optimization"]:
+            return {"parameters": self._get_default_vtracer_params(), "confidence": 0.0, "method": "default"}
 
-    if stats['classification_breakdown']:
-        print("\nLogo Type Classification:")
-        for logo_type, count in stats['classification_breakdown'].items():
-            print(f"  {logo_type}: {count}")
+        # Check for similar cached optimizations
+        if self.config["enable_caching"]:
+            cached_result = self._find_similar_optimization(features)
+            if cached_result:
+                self.cache_hits += 1
+                self.logger.debug("Similar optimization found in cache")
+                return cached_result
 
+        # Perform optimization
+        try:
+            # Infer logo type from features
+            logo_type = self._infer_logo_type(features)
 
-if __name__ == "__main__":
-    test_ai_enhanced_converter()
+            # Optimize parameters
+            optimization_result = self.optimizer.optimize(features, logo_type)
+
+            # Validate and enhance result
+            if not optimization_result.get('parameters'):
+                optimization_result = {"parameters": self._get_default_vtracer_params(), "confidence": 0.0}
+
+            # Add metadata
+            optimization_result.update({
+                "logo_type": logo_type,
+                "method": "method_1_correlation",
+                "timestamp": time.time()
+            })
+
+            # Cache optimization result
+            if self.config["enable_caching"]:
+                self._cache_optimization_result(features, optimization_result)
+                self.cache_misses += 1
+
+            return optimization_result
+
+        except Exception as e:
+            error = self.error_handler.detect_error(e, {"operation": "parameter_optimization", "image_path": image_path})
+            recovery_result = self.error_handler.attempt_recovery(error)
+
+            if recovery_result.get("success") and "fallback_parameters" in recovery_result:
+                return {
+                    "parameters": recovery_result["fallback_parameters"],
+                    "confidence": 0.5,
+                    "method": "error_recovery",
+                    "recovery_message": recovery_result.get("message")
+                }
+            else:
+                # Final fallback
+                return {
+                    "parameters": self._get_default_vtracer_params(),
+                    "confidence": 0.0,
+                    "method": "final_fallback"
+                }
+
+    def _convert_with_optimized_params(self, image_path: str, parameters: Dict[str, Any], **kwargs) -> str:
+        """Apply optimized parameters for VTracer conversion"""
+        try:
+            # Validate parameters
+            validated_params = self._validate_vtracer_parameters(parameters)
+
+            # Override any user-provided parameters
+            final_params = {**validated_params, **kwargs}
+
+            # Log optimization decision
+            self.logger.info(f"Using optimized parameters: {validated_params}")
+
+            # Convert with VTracer using temporary file (required by VTracer 0.6.11+)
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.svg', delete=False) as tmp:
+                try:
+                    vtracer.convert_image_to_svg_py(
+                        image_path,
+                        tmp.name,
+                        **final_params
+                    )
+
+                    # Read SVG content
+                    with open(tmp.name, 'r') as f:
+                        svg_content = f.read()
+
+                    # Validate SVG content
+                    if not svg_content or not svg_content.strip():
+                        raise ValueError("VTracer produced empty SVG content")
+
+                    return svg_content
+
+                finally:
+                    # Cleanup temporary file
+                    try:
+                        Path(tmp.name).unlink()
+                    except:
+                        pass
+
+        except Exception as e:
+            error = self.error_handler.detect_error(e, {"operation": "vtracer_conversion", "image_path": image_path, "parameters": parameters})
+            recovery_result = self.error_handler.attempt_recovery(error)
+
+            if recovery_result.get("success") and "fallback_parameters" in recovery_result:
+                # Retry with fallback parameters
+                return self._convert_with_optimized_params(image_path, recovery_result["fallback_parameters"], **kwargs)
+            else:
+                raise RuntimeError(f"VTracer conversion failed: {e}")
+
+    def _handle_conversion_error(self, exception: Exception, image_path: str, **kwargs) -> str:
+        """Handle conversion errors gracefully"""
+        try:
+            error = self.error_handler.detect_error(exception, {"operation": "conversion", "image_path": image_path})
+            recovery_result = self.error_handler.attempt_recovery(error)
+
+            if recovery_result.get("success"):
+                if "fallback_parameters" in recovery_result:
+                    # Retry with fallback parameters
+                    return self._convert_with_optimized_params(image_path, recovery_result["fallback_parameters"], **kwargs)
+                elif recovery_result.get("message"):
+                    self.logger.warning(f"Conversion recovery: {recovery_result['message']}")
+
+            # Final fallback - try with absolute minimal parameters
+            try:
+                minimal_params = {
+                    "colormode": "color",
+                    "color_precision": 4,
+                    "corner_threshold": 60,
+                    "length_threshold": 5.0,
+                    "max_iterations": 10,
+                    "splice_threshold": 45,
+                    "path_precision": 5,
+                    "layer_difference": 16
+                }
+
+                return self._convert_with_optimized_params(image_path, minimal_params, **kwargs)
+
+            except Exception as final_error:
+                # Absolute final fallback
+                self.logger.error(f"All conversion attempts failed for {image_path}: {final_error}")
+                raise RuntimeError(f"AI-enhanced conversion failed: {exception}")
+
+        except Exception as handler_error:
+            self.logger.error(f"Error handler failed: {handler_error}")
+            raise RuntimeError(f"Conversion and error handling failed: {exception}")
+
+    def _track_conversion_result(self, image_path: str, features: Dict[str, float],
+                               optimization_result: Dict[str, Any], conversion_time: float,
+                               svg_content: str, **kwargs):
+        """Track conversion results and optimization effectiveness"""
+        try:
+            # Calculate quality metrics if requested
+            quality_metrics = {}
+            if kwargs.get("calculate_quality", False):
+                # Save SVG temporarily for quality calculation
+                with tempfile.NamedTemporaryFile(mode='w', suffix='.svg', delete=False) as tmp:
+                    tmp.write(svg_content)
+                    tmp.flush()
+
+                    try:
+                        quality_metrics = self.quality_metrics.compare_images(image_path, tmp.name)
+                    except Exception as e:
+                        self.logger.warning(f"Quality metrics calculation failed: {e}")
+                        quality_metrics = {"error": str(e)}
+                    finally:
+                        Path(tmp.name).unlink()
+
+            # Create conversion metadata
+            metadata = {
+                "timestamp": time.time(),
+                "image_path": image_path,
+                "features": features,
+                "optimization_result": optimization_result,
+                "conversion_time": conversion_time,
+                "svg_size": len(svg_content),
+                "quality_metrics": quality_metrics,
+                "cache_stats": {
+                    "cache_hits": self.cache_hits,
+                    "cache_misses": self.cache_misses,
+                    "hit_rate": self.cache_hits / max(1, self.cache_hits + self.cache_misses)
+                }
+            }
+
+            # Store metadata
+            self.conversion_metadata.append(metadata)
+
+            # Limit metadata history size
+            if len(self.conversion_metadata) > 1000:
+                self.conversion_metadata = self.conversion_metadata[-500:]
+
+            # Log optimization effectiveness
+            confidence = optimization_result.get("confidence", 0)
+            method = optimization_result.get("method", "unknown")
+            self.logger.info(f"Conversion tracked: method={method}, confidence={confidence:.3f}, time={conversion_time:.3f}s")
+
+        except Exception as e:
+            self.logger.warning(f"Failed to track conversion result: {e}")
+
+    def _find_similar_optimization(self, features: Dict[str, float]) -> Optional[Dict[str, Any]]:
+        """Find cached optimization for similar features"""
+        threshold = self.config["similarity_threshold"]
+
+        for cached_features, cached_result in self.optimization_cache.items():
+            similarity = self._calculate_feature_similarity(features, cached_features)
+            if similarity >= threshold:
+                return cached_result.copy()
+
+        return None
+
+    def _calculate_feature_similarity(self, features1: Dict[str, float], features2: Dict[str, float]) -> float:
+        """Calculate similarity between two feature sets"""
+        try:
+            # Ensure same keys
+            common_keys = set(features1.keys()) & set(features2.keys())
+            if not common_keys:
+                return 0.0
+
+            # Calculate Euclidean distance in normalized space
+            differences = []
+            for key in common_keys:
+                diff = abs(features1[key] - features2[key])
+                differences.append(diff)
+
+            # Convert distance to similarity (0-1)
+            avg_difference = sum(differences) / len(differences)
+            similarity = max(0.0, 1.0 - avg_difference)
+
+            return similarity
+
+        except Exception:
+            return 0.0
+
+    def _cache_optimization_result(self, features: Dict[str, float], result: Dict[str, Any]):
+        """Cache optimization result with feature similarity"""
+        # Convert features to hashable key
+        feature_key = tuple(sorted(features.items()))
+
+        # Manage cache size
+        if len(self.optimization_cache) >= self.config["cache_max_size"]:
+            # Remove oldest entries (simple FIFO)
+            oldest_keys = list(self.optimization_cache.keys())[:100]
+            for key in oldest_keys:
+                del self.optimization_cache[key]
+
+        # Cache result
+        self.optimization_cache[feature_key] = result.copy()
+
+    def _manage_feature_cache(self, cache_key: str, features: Dict[str, float]):
+        """Manage feature cache size and storage"""
+        # Manage cache size
+        if len(self.feature_cache) >= self.config["cache_max_size"]:
+            # Remove oldest entries (simple FIFO)
+            oldest_keys = list(self.feature_cache.keys())[:100]
+            for key in oldest_keys:
+                del self.feature_cache[key]
+
+        # Cache features
+        self.feature_cache[cache_key] = features.copy()
+
+    def _generate_cache_key(self, *components) -> str:
+        """Generate cache key from components"""
+        key_string = "|".join(str(c) for c in components)
+        return hashlib.md5(key_string.encode()).hexdigest()
+
+    def _infer_logo_type(self, features: Dict[str, float]) -> str:
+        """Infer logo type from features"""
+        edge_density = features.get("edge_density", 0.5)
+        unique_colors = features.get("unique_colors", 0.5)
+        entropy = features.get("entropy", 0.5)
+        complexity = features.get("complexity_score", 0.5)
+
+        # Simple heuristic classification
+        if complexity < 0.3 and edge_density < 0.2:
+            return "simple"
+        elif entropy > 0.8 and unique_colors < 0.2:
+            return "text"
+        elif unique_colors > 0.6 or features.get("gradient_strength", 0) > 0.5:
+            return "gradient"
+        else:
+            return "complex"
+
+    def _validate_vtracer_parameters(self, parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Validate and sanitize VTracer parameters"""
+        # Default safe parameters
+        safe_params = {
+            "colormode": "color",
+            "color_precision": 6,
+            "layer_difference": 16,
+            "path_precision": 5,
+            "corner_threshold": 60,
+            "length_threshold": 5.0,
+            "max_iterations": 10,
+            "splice_threshold": 45
+        }
+
+        # Parameter bounds
+        bounds = {
+            "color_precision": (1, 10),
+            "layer_difference": (1, 30),
+            "path_precision": (1, 20),
+            "corner_threshold": (10, 110),
+            "length_threshold": (1.0, 20.0),
+            "max_iterations": (5, 30),
+            "splice_threshold": (10, 100)
+        }
+
+        # Validate and clamp parameters
+        for param, value in parameters.items():
+            if param in bounds:
+                min_val, max_val = bounds[param]
+                if isinstance(value, (int, float)):
+                    safe_params[param] = max(min_val, min(max_val, value))
+                else:
+                    self.logger.warning(f"Invalid parameter type for {param}: {type(value)}")
+            elif param == "colormode" and value in ["color", "binary"]:
+                safe_params[param] = value
+
+        return safe_params
+
+    def _get_default_vtracer_params(self) -> Dict[str, Any]:
+        """Get default VTracer parameters"""
+        return {
+            "colormode": "color",
+            "color_precision": 6,
+            "layer_difference": 16,
+            "path_precision": 5,
+            "corner_threshold": 60,
+            "length_threshold": 5.0,
+            "max_iterations": 10,
+            "splice_threshold": 45
+        }
+
+    def _get_default_features(self) -> Dict[str, float]:
+        """Get default feature values for fallback"""
+        return {
+            "edge_density": 0.3,
+            "unique_colors": 0.4,
+            "entropy": 0.6,
+            "corner_density": 0.2,
+            "gradient_strength": 0.3,
+            "complexity_score": 0.5
+        }
+
+    def get_name(self) -> str:
+        """Get the human-readable name of this converter"""
+        return self.name
+
+    def get_optimization_stats(self) -> Dict[str, Any]:
+        """Get optimization and caching statistics"""
+        total_conversions = self.cache_hits + self.cache_misses
+
+        return {
+            "total_conversions": total_conversions,
+            "cache_hits": self.cache_hits,
+            "cache_misses": self.cache_misses,
+            "cache_hit_rate": self.cache_hits / max(1, total_conversions),
+            "optimization_cache_size": len(self.optimization_cache),
+            "feature_cache_size": len(self.feature_cache),
+            "config": self.config.copy(),
+            "recent_conversions": len(self.conversion_metadata)
+        }
+
+    def configure(self, **config_updates):
+        """Update converter configuration"""
+        for key, value in config_updates.items():
+            if key in self.config:
+                self.config[key] = value
+                self.logger.info(f"Configuration updated: {key} = {value}")
+            else:
+                self.logger.warning(f"Unknown configuration key: {key}")
+
+    def clear_cache(self):
+        """Clear all caches"""
+        self.optimization_cache.clear()
+        self.feature_cache.clear()
+        self.cache_hits = 0
+        self.cache_misses = 0
+        self.logger.info("All caches cleared")
+
+    def export_conversion_history(self) -> List[Dict[str, Any]]:
+        """Export conversion history for analysis"""
+        return self.conversion_metadata.copy()
+
+    # Batch processing support
+    def batch_convert(self, image_paths: List[str], **kwargs) -> List[Dict[str, Any]]:
+        """Convert multiple images with batch optimization"""
+        results = []
+
+        # Extract features for all images in parallel if possible
+        all_features = []
+        for image_path in image_paths:
+            try:
+                features = self._get_features_with_cache(image_path)
+                all_features.append(features)
+            except Exception as e:
+                all_features.append(self._get_default_features())
+                self.logger.warning(f"Feature extraction failed for {image_path}: {e}")
+
+        # Batch optimize parameters
+        batch_optimizations = []
+        for features, image_path in zip(all_features, image_paths):
+            try:
+                optimization = self._get_optimization_with_cache(features, image_path)
+                batch_optimizations.append(optimization)
+            except Exception as e:
+                batch_optimizations.append({
+                    "parameters": self._get_default_vtracer_params(),
+                    "confidence": 0.0,
+                    "method": "batch_fallback"
+                })
+                self.logger.warning(f"Optimization failed for {image_path}: {e}")
+
+        # Convert images with optimized parameters
+        for image_path, optimization in zip(image_paths, batch_optimizations):
+            try:
+                start_time = time.time()
+                svg_content = self._convert_with_optimized_params(
+                    image_path, optimization["parameters"], **kwargs
+                )
+                conversion_time = time.time() - start_time
+
+                results.append({
+                    "image_path": image_path,
+                    "svg_content": svg_content,
+                    "optimization": optimization,
+                    "conversion_time": conversion_time,
+                    "success": True
+                })
+
+            except Exception as e:
+                results.append({
+                    "image_path": image_path,
+                    "svg_content": None,
+                    "optimization": optimization,
+                    "conversion_time": 0.0,
+                    "success": False,
+                    "error": str(e)
+                })
+
+        return results
+
+    def convert_with_quality_validation(self, image_path: str, **kwargs) -> Dict[str, Any]:
+        """Convert with automatic quality validation"""
+        # Perform conversion
+        svg_content = self.convert(image_path, **kwargs)
+
+        # Calculate quality metrics
+        quality_metrics = {}
+        try:
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.svg', delete=False) as tmp:
+                tmp.write(svg_content)
+                tmp.flush()
+                quality_metrics = self.quality_metrics.compare_images(image_path, tmp.name)
+                Path(tmp.name).unlink()
+        except Exception as e:
+            quality_metrics = {"error": str(e)}
+
+        # Get the last conversion metadata
+        last_conversion = self.conversion_metadata[-1] if self.conversion_metadata else {}
+
+        return {
+            "svg_content": svg_content,
+            "quality_metrics": quality_metrics,
+            "optimization_metadata": last_conversion,
+            "meets_quality_target": quality_metrics.get("ssim", 0) >= self.config["quality_target"]
+        }

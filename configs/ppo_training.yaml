@@ -1,0 +1,184 @@
+# PPO Training Configuration for VTracer Parameter Optimization
+# This configuration file defines all parameters for training the PPO agent
+
+# Training Configuration
+training:
+  # Training images organized by logo type/difficulty
+  training_images:
+    simple:
+      - "data/logos/simple_geometric/circle_00.png"
+      - "data/logos/simple_geometric/circle_01.png"
+      - "data/logos/simple_geometric/circle_02.png"
+      - "data/logos/simple_geometric/rectangle_00.png"
+      - "data/logos/simple_geometric/rectangle_01.png"
+    text:
+      - "data/logos/text_based/text_00.png"
+      - "data/logos/text_based/text_01.png"
+      - "data/logos/text_based/text_02.png"
+    gradient:
+      - "data/logos/gradient/gradient_00.png"
+      - "data/logos/gradient/gradient_01.png"
+      - "data/logos/gradient/gradient_02.png"
+    complex:
+      - "data/logos/complex/complex_00.png"
+      - "data/logos/complex/complex_01.png"
+
+  # PPO Model Configuration
+  model_config:
+    learning_rate: 3e-4          # Learning rate for PPO optimizer
+    n_steps: 2048                # Number of steps to run for each environment per update
+    batch_size: 64               # Minibatch size
+    n_epochs: 10                 # Number of epochs when optimizing the surrogate loss
+    gamma: 0.99                  # Discount factor
+    gae_lambda: 0.95            # Factor for trade-off of bias vs variance for GAE
+    clip_range: 0.2             # Clipping parameter for PPO
+    ent_coef: 0.01              # Entropy coefficient for exploration
+    vf_coef: 0.5                # Value function coefficient for loss calculation
+    max_grad_norm: 0.5          # Maximum norm for gradient clipping
+    policy_kwargs:
+      net_arch:
+        pi: [128, 128]          # Policy network architecture
+        vf: [128, 128]          # Value function network architecture
+      activation_fn: "tanh"     # Activation function
+    verbose: 1                  # Verbosity level
+    device: "auto"              # Device for training (auto, cpu, cuda)
+
+  # Curriculum Training Configuration
+  curriculum_config:
+    # Stage 1: Simple warmup
+    stage_0:
+      target_quality: 0.75
+      max_episodes: 5000
+      success_threshold: 0.80
+    # Stage 2: Text introduction
+    stage_1:
+      target_quality: 0.80
+      max_episodes: 8000
+      success_threshold: 0.75
+    # Stage 3: Gradient challenge
+    stage_2:
+      target_quality: 0.85
+      max_episodes: 10000
+      success_threshold: 0.70
+    # Stage 4: Complex mastery
+    stage_3:
+      target_quality: 0.90
+      max_episodes: 15000
+      success_threshold: 0.65
+
+  # Training Output Configuration
+  save_dir: "models/ppo_training"           # Directory to save trained models
+  checkpoint_dir: "models/ppo_training/checkpoints"  # Directory for checkpoints
+  best_model_dir: "models/ppo_training/best_model"   # Directory for best model
+
+# Environment Configuration
+environment:
+  # Python Environment
+  python_path:
+    - "backend"
+    - "backend/ai_modules"
+    - "backend/ai_modules/optimization"
+
+  # Resource Allocation
+  num_threads: 4                # Number of CPU threads for training
+  memory_limit_gb: 8            # Memory limit in GB
+  cuda_visible_devices: "0"     # GPU devices to use (set to empty string for CPU only)
+
+  # Training Environment Settings
+  parallel_envs: 4              # Number of parallel training environments
+  max_steps_per_episode: 50     # Maximum steps per training episode
+  target_quality_threshold: 0.85  # Target quality threshold for episodes
+
+# Monitoring Configuration
+monitoring:
+  enable_real_time_monitoring: true     # Enable real-time training monitoring
+  log_dir: "logs/ppo_training"          # Directory for monitoring logs
+  checkpoint_frequency: 1000            # Save checkpoint every N episodes
+  validation_frequency: 5000            # Run validation every N episodes
+  monitoring_frequency: 100             # Log metrics every N episodes
+
+  # WebSocket Configuration for Real-time Monitoring
+  websocket_port: 8765                  # Port for WebSocket monitoring server
+  enable_websocket: true                # Enable WebSocket monitoring
+
+  # Performance Monitoring
+  track_gpu_usage: true                 # Track GPU memory and utilization
+  track_cpu_usage: true                 # Track CPU utilization
+  track_memory_usage: true              # Track system memory usage
+
+# Logging Configuration
+logging:
+  level: "INFO"                         # Logging level (DEBUG, INFO, WARNING, ERROR)
+  log_dir: "logs/ppo_training"          # Directory for log files
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"  # Log format
+
+  # File Logging
+  enable_file_logging: true             # Enable logging to files
+  max_log_size_mb: 100                  # Maximum log file size in MB
+  backup_count: 5                       # Number of backup log files to keep
+
+  # Console Logging
+  enable_console_logging: true          # Enable console logging
+  console_level: "INFO"                 # Console logging level
+
+# Validation Configuration
+validation:
+  validation_split: 0.2                 # Fraction of data to use for validation
+  validation_episodes_per_image: 3      # Number of episodes per validation image
+  validation_metrics:
+    - "quality"                         # SSIM quality metric
+    - "success_rate"                    # Success rate metric
+    - "convergence_time"                # Time to convergence metric
+
+  # Validation Thresholds
+  quality_threshold: 0.80               # Minimum quality for successful validation
+  success_rate_threshold: 0.70          # Minimum success rate for validation pass
+
+# Hyperparameter Search Configuration (Optional)
+hyperparameter_search:
+  enabled: false                        # Enable hyperparameter search
+  search_method: "grid"                 # Search method (grid, random, bayesian)
+  max_trials: 10                        # Maximum number of trials
+
+  # Search Space
+  search_space:
+    learning_rate: [1e-4, 3e-4, 1e-3]
+    batch_size: [32, 64, 128]
+    n_steps: [1024, 2048, 4096]
+    ent_coef: [0.001, 0.01, 0.1]
+    clip_range: [0.1, 0.2, 0.3]
+
+# Advanced Training Configuration
+advanced:
+  # Early Stopping
+  enable_early_stopping: true           # Enable early stopping
+  early_stopping_patience: 10000        # Episodes to wait for improvement
+  early_stopping_threshold: 0.001       # Minimum improvement threshold
+
+  # Model Checkpointing
+  save_best_model: true                 # Save best performing model
+  save_periodic_checkpoints: true       # Save periodic checkpoints
+  checkpoint_metric: "quality"          # Metric to use for best model selection
+
+  # Training Resumption
+  resume_from_checkpoint: false         # Resume training from checkpoint
+  checkpoint_path: ""                   # Path to checkpoint for resumption
+
+  # Distributed Training
+  enable_distributed: false             # Enable distributed training
+  world_size: 1                         # Number of processes for distributed training
+
+  # Mixed Precision Training
+  enable_mixed_precision: false         # Enable mixed precision training for faster training
+
+# Experiment Configuration
+experiment:
+  name: "ppo_vtracer_optimization"      # Experiment name
+  description: "PPO-based optimization of VTracer parameters for logo conversion"
+  version: "1.0.0"                      # Configuration version
+  author: "Claude Code Assistant"       # Experiment author
+  tags:                                 # Experiment tags
+    - "ppo"
+    - "vtracer"
+    - "logo_optimization"
+    - "reinforcement_learning"

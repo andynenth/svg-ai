@@ -1,0 +1,137 @@
+# APM Server configuration for SVG-AI application performance monitoring
+
+apm-server:
+  # Server configuration
+  host: "0.0.0.0:8200"
+  max_header_size: 1048576
+  idle_timeout: 45s
+  read_timeout: 30s
+  write_timeout: 30s
+  shutdown_timeout: 5s
+
+  # SSL configuration
+  ssl:
+    enabled: true
+    certificate: "/etc/apm-server/certs/apm-server.crt"
+    key: "/etc/apm-server/certs/apm-server.key"
+
+  # Authentication
+  auth:
+    anonymous:
+      enabled: false
+    api_key:
+      enabled: true
+      limit: 100
+
+  # Rate limiting
+  concurrent_requests: 40
+  max_event_size: 307200  # 300KB
+
+  # Data streams
+  data_streams:
+    enabled: true
+
+  # Agent configuration
+  agent:
+    config:
+      cache:
+        expiration: 30s
+
+  # Sampling configuration
+  sampling:
+    keep_unsampled: false
+
+  # Rum configuration (for frontend monitoring)
+  rum:
+    enabled: true
+    event_rate:
+      limit: 300
+      lru_size: 1000
+    allow_origins: ["*"]
+    allow_headers: ["*"]
+    source_mapping:
+      enabled: true
+      cache:
+        expiration: 5m
+    library_pattern: "node_modules|bower_components|~"
+    exclude_from_grouping: "^/webpack"
+
+# Output configuration
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+  protocol: "https"
+
+  # Index settings
+  index: "apm-%{[observer.version]}-%{[processor.event]}-%{+yyyy.MM.dd}"
+
+  # Pipeline settings
+  pipeline: "apm"
+
+  # Template settings
+  template.enabled: true
+  template.pattern: "apm-*"
+  template.settings:
+    index:
+      number_of_shards: 1
+      number_of_replicas: 1
+      refresh_interval: "5s"
+      mapping.total_fields.limit: 2000
+
+# Logging configuration
+logging:
+  level: info
+  to_files: true
+  files:
+    path: /var/log/apm-server
+    name: apm-server
+    keepfiles: 7
+    permissions: 0644
+    rotateeverybytes: 10485760 # 10MB
+
+# Monitoring configuration
+monitoring:
+  enabled: true
+  elasticsearch:
+    hosts: ["elasticsearch:9200"]
+    username: "${ELASTICSEARCH_USERNAME}"
+    password: "${ELASTICSEARCH_PASSWORD}"
+
+# Instrumentation configuration
+instrumentation:
+  enabled: true
+  environment: production
+  hosts: ["apm-server:8200"]
+
+# Processors
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
+# Setup configuration
+setup:
+  ilm:
+    enabled: true
+    rollover_alias: "apm"
+    pattern: "{now/d}-000001"
+    policy: "apm-policy"
+
+  template:
+    enabled: true
+    pattern: "apm-*"
+    settings:
+      index:
+        number_of_shards: 1
+        codec: best_compression
+        mapping:
+          total_fields:
+            limit: 2000
+        refresh_interval: 5s
+
+# Service map configuration
+xpack:
+  monitoring:
+    enabled: true

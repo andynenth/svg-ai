@@ -1,0 +1,398 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "SVG-AI System Health Dashboard",
+    "tags": ["svg-ai", "health", "production"],
+    "timezone": "browser",
+    "refresh": "30s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "System Overview",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 24, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "up{job=\"svg-ai-api\"}",
+            "refId": "A",
+            "legendFormat": "API Uptime"
+          },
+          {
+            "expr": "up{job=\"svg-ai-worker\"}",
+            "refId": "B",
+            "legendFormat": "Worker Uptime"
+          },
+          {
+            "expr": "up{job=\"postgresql\"}",
+            "refId": "C",
+            "legendFormat": "Database Uptime"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": 0},
+                {"color": "yellow", "value": 90},
+                {"color": "green", "value": 99}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "API Response Time",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job=\"svg-ai-api\"}[5m]))",
+            "refId": "A",
+            "legendFormat": "95th Percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket{job=\"svg-ai-api\"}[5m]))",
+            "refId": "B",
+            "legendFormat": "50th Percentile"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "custom": {
+              "drawStyle": "line",
+              "lineInterpolation": "linear"
+            }
+          }
+        },
+        "alert": {
+          "conditions": [
+            {
+              "query": {"queryType": "", "refId": "A"},
+              "reducer": {"type": "last", "params": []},
+              "evaluator": {"type": "gt", "params": [0.2]}
+            }
+          ],
+          "executionErrorState": "alerting",
+          "frequency": "10s",
+          "handler": 1,
+          "name": "High API Response Time",
+          "noDataState": "no_data"
+        }
+      },
+      {
+        "id": 3,
+        "title": "Request Rate",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job=\"svg-ai-api\"}[5m])",
+            "refId": "A",
+            "legendFormat": "{{method}} {{endpoint}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps",
+            "custom": {
+              "drawStyle": "line",
+              "lineInterpolation": "linear"
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "Error Rate",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 12},
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job=\"svg-ai-api\",status=~\"5..\"}[5m]) / rate(http_requests_total{job=\"svg-ai-api\"}[5m]) * 100",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": 0},
+                {"color": "yellow", "value": 1},
+                {"color": "red", "value": 5}
+              ]
+            }
+          }
+        },
+        "alert": {
+          "conditions": [
+            {
+              "query": {"queryType": "", "refId": "A"},
+              "reducer": {"type": "last", "params": []},
+              "evaluator": {"type": "gt", "params": [5]}
+            }
+          ],
+          "executionErrorState": "alerting",
+          "frequency": "10s",
+          "handler": 1,
+          "name": "High Error Rate",
+          "noDataState": "no_data"
+        }
+      },
+      {
+        "id": 5,
+        "title": "Database Connections",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 12},
+        "targets": [
+          {
+            "expr": "pg_stat_database_numbackends{datname=\"svgai_prod\"}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": 0},
+                {"color": "yellow", "value": 80},
+                {"color": "red", "value": 95}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "CPU Usage",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 12},
+        "targets": [
+          {
+            "expr": "100 - (avg(rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": 0},
+                {"color": "yellow", "value": 70},
+                {"color": "red", "value": 90}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "Memory Usage",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 12},
+        "targets": [
+          {
+            "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": 0},
+                {"color": "yellow", "value": 80},
+                {"color": "red", "value": 95}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "AI Optimization Performance",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+        "targets": [
+          {
+            "expr": "rate(optimization_requests_total[5m])",
+            "refId": "A",
+            "legendFormat": "{{method}} Optimizations/sec"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(optimization_duration_seconds_bucket[5m]))",
+            "refId": "B",
+            "legendFormat": "95th Percentile Duration"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "drawStyle": "line"
+            }
+          }
+        }
+      },
+      {
+        "id": 9,
+        "title": "Queue Length",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16},
+        "targets": [
+          {
+            "expr": "queue_length{job=\"svg-ai-worker\"}",
+            "refId": "A",
+            "legendFormat": "{{queue_name}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "custom": {
+              "drawStyle": "line"
+            }
+          }
+        },
+        "alert": {
+          "conditions": [
+            {
+              "query": {"queryType": "", "refId": "A"},
+              "reducer": {"type": "last", "params": []},
+              "evaluator": {"type": "gt", "params": [100]}
+            }
+          ],
+          "executionErrorState": "alerting",
+          "frequency": "10s",
+          "handler": 1,
+          "name": "High Queue Length",
+          "noDataState": "no_data"
+        }
+      },
+      {
+        "id": 10,
+        "title": "Disk I/O",
+        "type": "timeseries",
+        "gridPos": {"h": 6, "w": 12, "x": 0, "y": 24},
+        "targets": [
+          {
+            "expr": "rate(node_disk_read_bytes_total[5m])",
+            "refId": "A",
+            "legendFormat": "Read {{device}}"
+          },
+          {
+            "expr": "rate(node_disk_written_bytes_total[5m])",
+            "refId": "B",
+            "legendFormat": "Write {{device}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps"
+          }
+        }
+      },
+      {
+        "id": 11,
+        "title": "Network I/O",
+        "type": "timeseries",
+        "gridPos": {"h": 6, "w": 12, "x": 12, "y": 24},
+        "targets": [
+          {
+            "expr": "rate(node_network_receive_bytes_total[5m])",
+            "refId": "A",
+            "legendFormat": "Receive {{device}}"
+          },
+          {
+            "expr": "rate(node_network_transmit_bytes_total[5m])",
+            "refId": "B",
+            "legendFormat": "Transmit {{device}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps"
+          }
+        }
+      },
+      {
+        "id": 12,
+        "title": "Service Health Status",
+        "type": "table",
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 30},
+        "targets": [
+          {
+            "expr": "up",
+            "refId": "A",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "displayMode": "color-background"
+            }
+          }
+        },
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {"Time": true},
+              "indexByName": {},
+              "renameByName": {
+                "instance": "Instance",
+                "job": "Service",
+                "Value": "Status"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "environment",
+          "type": "query",
+          "query": "label_values(up, environment)",
+          "current": {"text": "production", "value": "production"},
+          "options": [],
+          "refresh": 1
+        },
+        {
+          "name": "instance",
+          "type": "query",
+          "query": "label_values(up{environment=\"$environment\"}, instance)",
+          "current": {"text": "All", "value": "$__all"},
+          "options": [],
+          "refresh": 1,
+          "multi": true
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "name": "Deployments",
+          "datasource": "prometheus",
+          "expr": "deployment_created",
+          "textFormat": "Deployment: {{version}}",
+          "iconColor": "blue"
+        }
+      ]
+    }
+  }
+}

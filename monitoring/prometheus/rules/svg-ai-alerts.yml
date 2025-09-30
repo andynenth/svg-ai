@@ -1,0 +1,243 @@
+# Prometheus alerting rules for SVG-AI system
+
+groups:
+  - name: svg-ai-api
+    rules:
+      # API service health
+      - alert: SVGAIAPIDown
+        expr: up{job="svg-ai-api"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: api
+        annotations:
+          summary: "SVG-AI API service is down"
+          description: "SVG-AI API service has been down for more than 5 minutes. Instance: {{ $labels.instance }}"
+
+      # High API response time
+      - alert: SVGAIAPIHighLatency
+        expr: histogram_quantile(0.95, http_request_duration_seconds_bucket{job="svg-ai-api"}) > 1.0
+        for: 10m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High API response time"
+          description: "95th percentile API response time is {{ $value }}s for more than 10 minutes"
+
+      # High API error rate
+      - alert: SVGAIAPIHighErrorRate
+        expr: rate(http_requests_total{job="svg-ai-api",status=~"5.."}[5m]) / rate(http_requests_total{job="svg-ai-api"}[5m]) > 0.05
+        for: 10m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High API error rate"
+          description: "API error rate is {{ $value | humanizePercentage }} for more than 10 minutes"
+
+      # API concurrent users
+      - alert: SVGAIAPIHighConcurrency
+        expr: svg_ai_active_users > 1000
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High number of concurrent users"
+          description: "Number of active users is {{ $value }}, exceeding normal capacity"
+
+  - name: svg-ai-workers
+    rules:
+      # Worker service health
+      - alert: SVGAIWorkerDown
+        expr: up{job="svg-ai-workers"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: worker
+        annotations:
+          summary: "SVG-AI worker is down"
+          description: "SVG-AI optimization worker has been down for more than 5 minutes. Instance: {{ $labels.instance }}"
+
+      # Worker queue backup
+      - alert: SVGAIWorkerQueueBackup
+        expr: svg_ai_optimization_queue_size > 100
+        for: 15m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "Worker queue backup"
+          description: "Optimization queue size is {{ $value }}, indicating potential processing delays"
+
+      # Worker processing time
+      - alert: SVGAIWorkerSlowProcessing
+        expr: histogram_quantile(0.95, svg_ai_optimization_duration_seconds_bucket) > 300
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "Slow optimization processing"
+          description: "95th percentile optimization time is {{ $value }}s, exceeding 5-minute target"
+
+      # Worker memory usage
+      - alert: SVGAIWorkerHighMemory
+        expr: container_memory_usage_bytes{pod=~"svg-ai-worker.*"} / container_spec_memory_limit_bytes > 0.9
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: "High worker memory usage"
+          description: "Worker memory usage is {{ $value | humanizePercentage }} of limit for pod {{ $labels.pod }}"
+
+  - name: svg-ai-database
+    rules:
+      # Database connection issues
+      - alert: SVGAIDatabaseDown
+        expr: up{job="postgres-exporter"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "Database is unreachable"
+          description: "PostgreSQL database has been unreachable for more than 5 minutes"
+
+      # High database connections
+      - alert: SVGAIDatabaseHighConnections
+        expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+        for: 10m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High database connection usage"
+          description: "Database connection usage is {{ $value | humanizePercentage }} of maximum"
+
+      # Slow database queries
+      - alert: SVGAIDatabaseSlowQueries
+        expr: rate(pg_stat_user_tables_seq_scan[5m]) > 100
+        for: 10m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High number of sequential scans"
+          description: "Database performing {{ $value }} sequential scans per second, indicating missing indexes"
+
+      # Database storage usage
+      - alert: SVGAIDatabaseHighStorage
+        expr: (pg_database_size_bytes / 1024 / 1024 / 1024) > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High database storage usage"
+          description: "Database size is {{ $value }}GB, approaching storage limits"
+
+  - name: svg-ai-cache
+    rules:
+      # Redis service health
+      - alert: SVGAIRedisDown
+        expr: up{job="redis-exporter"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: cache
+        annotations:
+          summary: "Redis cache is down"
+          description: "Redis cache service has been down for more than 5 minutes"
+
+      # High Redis memory usage
+      - alert: SVGAIRedisHighMemory
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 10m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "High Redis memory usage"
+          description: "Redis memory usage is {{ $value | humanizePercentage }} of maximum"
+
+      # High Redis CPU usage
+      - alert: SVGAIRedisHighCPU
+        expr: rate(redis_cpu_sys_seconds_total[5m]) + rate(redis_cpu_user_seconds_total[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "High Redis CPU usage"
+          description: "Redis CPU usage is {{ $value | humanizePercentage }}"
+
+  - name: svg-ai-infrastructure
+    rules:
+      # Node resource usage
+      - alert: SVGAINodeHighCPU
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 10m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "High node CPU usage"
+          description: "Node {{ $labels.instance }} CPU usage is {{ $value }}%"
+
+      - alert: SVGAINodeHighMemory
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+        for: 10m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "High node memory usage"
+          description: "Node {{ $labels.instance }} memory usage is {{ $value }}%"
+
+      - alert: SVGAINodeLowDiskSpace
+        expr: (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "Low disk space"
+          description: "Node {{ $labels.instance }} disk usage is {{ $value }}% on {{ $labels.mountpoint }}"
+
+      # Pod restart rate
+      - alert: SVGAIPodRestartRate
+        expr: rate(kube_pod_container_status_restarts_total[5m]) * 300 > 5
+        for: 10m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "High pod restart rate"
+          description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is restarting frequently"
+
+  - name: svg-ai-quality
+    rules:
+      # Quality metrics degradation
+      - alert: SVGAIQualityDegradation
+        expr: avg_over_time(svg_ai_average_ssim[30m]) < 0.8
+        for: 15m
+        labels:
+          severity: warning
+          service: quality
+        annotations:
+          summary: "Quality metrics degradation"
+          description: "Average SSIM score has dropped to {{ $value }}, below acceptable threshold"
+
+      # Optimization success rate
+      - alert: SVGAIOptimizationFailureRate
+        expr: rate(svg_ai_optimization_failures_total[5m]) / rate(svg_ai_optimizations_total[5m]) > 0.1
+        for: 10m
+        labels:
+          severity: warning
+          service: quality
+        annotations:
+          summary: "High optimization failure rate"
+          description: "Optimization failure rate is {{ $value | humanizePercentage }}"

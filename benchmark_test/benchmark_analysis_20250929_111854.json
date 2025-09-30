@@ -1,0 +1,107 @@
+{
+  "overview": {
+    "total_images": 20,
+    "successful": 20,
+    "failed": 0,
+    "success_rate": 1.0,
+    "benchmark_duration": 8.295085668563843
+  },
+  "quality_improvements": {
+    "ssim": {
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "percentile_95": 0.0
+    },
+    "file_size": {
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0
+    }
+  },
+  "performance": {
+    "total_time": {
+      "mean": 0.4122570753097534,
+      "median": 0.3875260353088379,
+      "percentile_95": 0.5172734022140504
+    },
+    "optimization_time": {
+      "mean": 0.0002034902572631836,
+      "median": 0.00014293193817138672,
+      "percentile_95": 0.00036389827728271505
+    },
+    "memory_usage": {
+      "mean": 322.0466796875,
+      "max": 323.27734375
+    }
+  },
+  "by_category": {
+    "simple": {
+      "total": 5,
+      "successful": 5,
+      "success_rate": 1.0,
+      "ssim_improvement": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "processing_time": {
+        "mean": 0.40699119567871095,
+        "median": 0.3737599849700928
+      }
+    },
+    "text": {
+      "total": 5,
+      "successful": 5,
+      "success_rate": 1.0,
+      "ssim_improvement": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "processing_time": {
+        "mean": 0.38457813262939455,
+        "median": 0.3719611167907715
+      }
+    },
+    "gradient": {
+      "total": 5,
+      "successful": 5,
+      "success_rate": 1.0,
+      "ssim_improvement": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "processing_time": {
+        "mean": 0.43859496116638186,
+        "median": 0.4388909339904785
+      }
+    },
+    "complex": {
+      "total": 5,
+      "successful": 5,
+      "success_rate": 1.0,
+      "ssim_improvement": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "processing_time": {
+        "mean": 0.41886401176452637,
+        "median": 0.41126227378845215
+      }
+    }
+  },
+  "scores": {
+    "overall_performance": 100,
+    "quality_score": 0,
+    "speed_score": 99.79650974273682
+  }
+}

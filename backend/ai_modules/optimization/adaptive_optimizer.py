@@ -1,326 +1,594 @@
 # backend/ai_modules/optimization/adaptive_optimizer.py
-"""Adaptive parameter optimization using multiple strategies"""
+"""
+Method 3: Adaptive Spatial Optimization System
+
+Implements intelligent method selection and adaptive optimization using spatial analysis.
+Routes images to optimal optimization methods based on complexity analysis.
+"""
 
 import numpy as np
-from typing import Dict, Any
+import time
 import logging
-from .base_optimizer import BaseOptimizer
+import os
+import hashlib
+from typing import Dict, Any, Optional, List
+from pathlib import Path
+
+from .regional_optimizer import RegionalParameterOptimizer
 from .feature_mapping import FeatureMappingOptimizer
-from backend.ai_modules.config import GA_CONFIG
+from ..feature_extraction import ImageFeatureExtractor
 
-logger = logging.getLogger(__name__)
+try:
+    from .ppo_optimizer import PPOVTracerOptimizer
+    PPO_AVAILABLE = True
+except ImportError:
+    PPO_AVAILABLE = False
+    logging.getLogger(__name__).warning("PPO optimizer not available - falling back to Method 1")
+
+try:
+    from ..classification.hybrid_classifier import HybridClassifier
+    CLASSIFIER_AVAILABLE = True
+except ImportError:
+    CLASSIFIER_AVAILABLE = False
+    logging.getLogger(__name__).warning("Hybrid classifier not available - using basic classification")
 
 
-class AdaptiveOptimizer(BaseOptimizer):
-    """Adaptive optimizer that combines multiple optimization strategies"""
+class AdaptiveOptimizer:
+    """Method 3: Adaptive spatial optimization system"""
 
     def __init__(self):
-        super().__init__("Adaptive")
-        self.feature_mapper = FeatureMappingOptimizer()
-        self.strategy_performance = {
-            "feature_mapping": {"total_uses": 0, "avg_quality": 0.0},
-            "genetic_algorithm": {"total_uses": 0, "avg_quality": 0.0},
-            "grid_search": {"total_uses": 0, "avg_quality": 0.0},
-            "random_search": {"total_uses": 0, "avg_quality": 0.0},
-        }
-        self.optimization_history = []
+        """Initialize adaptive optimization components"""
 
-    def _optimize_impl(self, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
-        """Implement adaptive optimization by selecting best strategy"""
-        logger.debug(f"Running adaptive optimization for {logo_type}")
+        # Setup logging
+        self.logger = logging.getLogger(__name__)
+        self.logger.info("Initializing AdaptiveOptimizer")
+
+        # Initialize optimization components
+        try:
+            self.regional_optimizer = RegionalParameterOptimizer()
+            self.logger.info("RegionalParameterOptimizer initialized")
+        except Exception as e:
+            self.logger.error(f"Failed to initialize RegionalParameterOptimizer: {e}")
+            raise
 
         try:
-            # Select optimization strategy based on performance and context
-            strategy = self._select_optimization_strategy(features, logo_type)
+            self.method1_optimizer = FeatureMappingOptimizer()
+            self.logger.info("Method 1 (FeatureMappingOptimizer) initialized")
+        except Exception as e:
+            self.logger.error(f"Failed to initialize FeatureMappingOptimizer: {e}")
+            raise
 
-            # Run selected strategy
-            if strategy == "feature_mapping":
-                result = self._run_feature_mapping(features, logo_type)
-            elif strategy == "genetic_algorithm":
-                result = self._run_genetic_algorithm(features, logo_type)
-            elif strategy == "grid_search":
-                result = self._run_grid_search(features, logo_type)
-            else:  # random_search
-                result = self._run_random_search(features, logo_type)
+        # Initialize Method 2 (PPO) if available
+        self.method2_optimizer = None
+        if PPO_AVAILABLE:
+            try:
+                self.method2_optimizer = PPOVTracerOptimizer()
+                self.logger.info("Method 2 (PPOVTracerOptimizer) initialized")
+            except Exception as e:
+                self.logger.warning(f"PPO optimizer initialization failed: {e}")
+                self.method2_optimizer = None
 
-            # Record strategy use
-            self.strategy_performance[strategy]["total_uses"] += 1
+        # Analysis components
+        try:
+            self.feature_extractor = ImageFeatureExtractor()
+            self.logger.info("ImageFeatureExtractor initialized")
+        except Exception as e:
+            self.logger.error(f"Failed to initialize ImageFeatureExtractor: {e}")
+            raise
 
-            logger.debug(f"Adaptive optimization used {strategy}: {result}")
+        # Initialize classifier if available
+        self.classifier = None
+        if CLASSIFIER_AVAILABLE:
+            try:
+                self.classifier = HybridClassifier()
+                self.logger.info("HybridClassifier initialized")
+            except Exception as e:
+                self.logger.warning(f"HybridClassifier initialization failed: {e}")
+                self.classifier = None
+
+        # Performance tracking
+        self.optimization_history = []
+        self.performance_stats = {
+            'total_optimizations': 0,
+            'successful_optimizations': 0,
+            'adaptive_optimizations': 0,
+            'method1_optimizations': 0,
+            'method2_optimizations': 0,
+            'average_improvement': 0.0,
+            'average_processing_time': 0.0,
+            'quality_improvements': []
+        }
+
+        # Caching system for optimization results
+        self.optimization_cache = {}
+        self.cache_max_size = 100
+
+        self.logger.info("AdaptiveOptimizer initialization complete")
+
+    def optimize(self, image_path: str, **kwargs) -> Dict[str, Any]:
+        """
+        Adaptive optimization using spatial analysis
+
+        Args:
+            image_path: Path to the image to optimize
+            **kwargs: Additional optimization parameters
+
+        Returns:
+            Dict containing optimization results with success status, method used,
+            quality improvement, processing time, and optimization details
+        """
+
+        start_time = time.time()
+        self.logger.info(f"Starting adaptive optimization for {image_path}")
+
+        try:
+            # Check cache first
+            cache_key = self._generate_cache_key(image_path, kwargs)
+            if cache_key in self.optimization_cache:
+                self.logger.debug(f"Cache hit for {image_path}")
+                cached_result = self.optimization_cache[cache_key].copy()
+                cached_result['cache_hit'] = True
+                return cached_result
+
+            # Extract global features and classify
+            self.logger.debug("Extracting features and classifying image")
+            features = self.feature_extractor.extract_features(image_path)
+
+            # Classify logo type
+            if self.classifier:
+                classification_result = self.classifier.classify(image_path)
+                # Handle classifier returning dict or string
+                if isinstance(classification_result, dict):
+                    logo_type = classification_result.get('logo_type', 'unknown')
+                else:
+                    logo_type = classification_result
+            else:
+                # Basic classification fallback
+                logo_type = self._basic_classify(features)
+
+            self.logger.info(f"Image classified as: {logo_type}, complexity: {features.get('complexity_score', 0.5):.3f}")
+
+            # Determine if adaptive optimization is beneficial
+            if self._should_use_adaptive_optimization(features, logo_type):
+                self.logger.info("Using adaptive regional optimization")
+                result = self._adaptive_regional_optimization(image_path, features)
+                result['method_used'] = 'adaptive_regional'
+            else:
+                # Fall back to Method 1 or 2
+                self.logger.info("Using fallback optimization")
+                result = self._fallback_optimization(image_path, features, logo_type)
+
+            # Track performance
+            processing_time = time.time() - start_time
+            result['processing_time'] = processing_time
+            self._update_performance_stats(result, processing_time)
+
+            # Cache result if successful
+            if result.get('success', False):
+                self._cache_result(cache_key, result)
+
+            # Add metadata
+            result['features'] = features
+            result['logo_type'] = logo_type
+            result['optimization_timestamp'] = time.time()
+
+            self.logger.info(f"Adaptive optimization completed: {result.get('method_used', 'unknown')} "
+                           f"in {processing_time:.2f}s, improvement: {result.get('quality_improvement', 0):.1%}")
+
             return result
 
         except Exception as e:
-            logger.error(f"Adaptive optimization failed: {e}")
-            return self._get_default_parameters(logo_type)
+            self.logger.error(f"Adaptive optimization failed: {e}")
+            processing_time = time.time() - start_time
+            return self._emergency_fallback(image_path, processing_time, str(e))
 
-    def _select_optimization_strategy(self, features: Dict[str, float], logo_type: str) -> str:
-        """Select the best optimization strategy based on context and performance"""
-        complexity = features.get("complexity_score", 0.5)
-        unique_colors = features.get("unique_colors", 16)
+    def _should_use_adaptive_optimization(self, features: Dict[str, float], logo_type: str) -> bool:
+        """
+        Determine if adaptive optimization is beneficial based on image complexity
 
-        # Strategy selection logic
-        if complexity < 0.3 and unique_colors <= 8:
-            # Simple images: use feature mapping (fast and effective)
-            return "feature_mapping"
-        elif complexity > 0.7 or unique_colors > 30:
-            # Complex images: use genetic algorithm (thorough search)
-            return "genetic_algorithm"
-        elif self.strategy_performance["feature_mapping"]["total_uses"] < 5:
-            # Not enough data: try feature mapping first
-            return "feature_mapping"
-        else:
-            # Choose based on historical performance
-            best_strategy = max(
-                self.strategy_performance.keys(),
-                key=lambda s: self.strategy_performance[s]["avg_quality"],
-            )
-            return best_strategy
+        Complex images (>0.7 complexity) → Adaptive regional optimization
+        Medium complexity (0.4-0.7) → Method 2 (RL) if available
+        Simple images (<0.4) → Method 1 (correlation mapping)
+        """
 
-    def _run_feature_mapping(self, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
-        """Run feature mapping optimization"""
-        return self.feature_mapper._optimize_impl(features, logo_type)
-
-    def _run_genetic_algorithm(self, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
-        """Run genetic algorithm optimization"""
         try:
-            from deap import base, creator, tools, algorithms
-            import random
+            complexity = features.get('complexity_score', 0.5)
+            edge_density = features.get('edge_density', 0.1)
+            unique_colors = features.get('unique_colors', 8)
 
-            # Create fitness and individual classes (avoid duplicate creation)
-            if not hasattr(creator, "FitnessMax"):
-                creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-            if not hasattr(creator, "Individual"):
-                creator.create("Individual", list, fitness=creator.FitnessMax)
+            # High complexity images benefit from adaptive regional optimization
+            if complexity > 0.7:
+                self.logger.debug(f"High complexity ({complexity:.3f}) - using adaptive optimization")
+                return True
 
-            # Setup GA toolbox
-            toolbox = base.Toolbox()
+            # Images with high edge density and many colors also benefit
+            if edge_density > 0.3 and unique_colors > 15:
+                self.logger.debug(f"High edge density ({edge_density:.3f}) and colors ({unique_colors}) - using adaptive optimization")
+                return True
 
-            # Individual creation
-            def create_individual():
-                return [
-                    random.uniform(*self.param_ranges["color_precision"]),
-                    random.uniform(*self.param_ranges["corner_threshold"]),
-                    random.uniform(*self.param_ranges["path_precision"]),
-                    random.uniform(*self.param_ranges["layer_difference"]),
-                    random.uniform(*self.param_ranges["splice_threshold"]),
-                    random.uniform(*self.param_ranges["filter_speckle"]),
-                    random.uniform(*self.param_ranges["segment_length"]),
-                    random.uniform(*self.param_ranges["max_iterations"]),
-                ]
+            # Complex logo types that typically have spatial variations
+            if logo_type in ['complex', 'mixed', 'detailed']:
+                self.logger.debug(f"Complex logo type ({logo_type}) - using adaptive optimization")
+                return True
 
-            def evaluate_individual(individual):
-                """Fitness function based on feature compatibility"""
-                params = {
-                    "color_precision": individual[0],
-                    "corner_threshold": individual[1],
-                    "path_precision": individual[2],
-                    "layer_difference": individual[3],
-                    "splice_threshold": individual[4],
-                    "filter_speckle": individual[5],
-                    "segment_length": individual[6],
-                    "max_iterations": individual[7],
+            # Images larger than a certain size may benefit from regional optimization
+            image_area = features.get('width', 100) * features.get('height', 100)
+            if image_area > 250000:  # Large images (>500x500)
+                self.logger.debug(f"Large image ({image_area} pixels) - using adaptive optimization")
+                return True
+
+            self.logger.debug(f"Standard optimization suitable (complexity: {complexity:.3f})")
+            return False
+
+        except Exception as e:
+            self.logger.warning(f"Error in adaptive decision logic: {e}")
+            return False
+
+    def _adaptive_regional_optimization(self, image_path: str, features: Dict[str, float]) -> Dict[str, Any]:
+        """Core adaptive regional optimization method"""
+
+        try:
+            self.logger.debug("Starting adaptive regional optimization")
+
+            # Use RegionalParameterOptimizer for spatial analysis and optimization
+            regional_result = self.regional_optimizer.optimize_regional_parameters(
+                image_path, features
+            )
+
+            # Extract key results
+            regional_parameters = regional_result.get('regional_parameters', {})
+            parameter_maps = regional_result.get('parameter_maps', {})
+            regions = regional_result.get('regions', [])
+            complexity_analysis = regional_result.get('complexity_analysis', {})
+            metadata = regional_result.get('optimization_metadata', {})
+
+            # Calculate quality improvement estimate
+            quality_improvement = self._estimate_quality_improvement(
+                complexity_analysis, metadata, len(regions)
+            )
+
+            # Validate results
+            success = (
+                len(regional_parameters) > 0 and
+                len(parameter_maps) > 0 and
+                len(regions) > 0 and
+                metadata.get('optimization_success', False)
+            )
+
+            if success:
+                self.logger.info(f"Adaptive optimization successful: {len(regions)} regions, "
+                               f"estimated improvement: {quality_improvement:.1%}")
+            else:
+                self.logger.warning("Adaptive optimization failed validation checks")
+
+            return {
+                'success': success,
+                'quality_improvement': quality_improvement,
+                'optimized_parameters': self._extract_best_parameters(regional_parameters),
+                'regional_parameters': regional_parameters,
+                'parameter_maps': parameter_maps,
+                'regions': regions,
+                'complexity_analysis': complexity_analysis,
+                'metadata': metadata,
+                'confidence': metadata.get('overall_confidence', 0.5)
+            }
+
+        except Exception as e:
+            self.logger.error(f"Adaptive regional optimization failed: {e}")
+            return {
+                'success': False,
+                'quality_improvement': 0.0,
+                'error': str(e)
+            }
+
+    def _fallback_optimization(self, image_path: str, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
+        """Fallback to Method 1 or 2 based on complexity and availability"""
+
+        try:
+            complexity = features.get('complexity_score', 0.5)
+
+            # Medium complexity (0.4-0.7) → Method 2 (RL) if available
+            if 0.4 <= complexity <= 0.7 and self.method2_optimizer is not None:
+                self.logger.info("Using Method 2 (PPO) for medium complexity image")
+                try:
+                    # Use PPO optimizer
+                    ppo_result = self.method2_optimizer.optimize(image_path, **{'logo_type': logo_type})
+                    if ppo_result.get('success', False):
+                        ppo_result['method_used'] = 'method2_ppo'
+                        return ppo_result
+                    else:
+                        self.logger.warning("Method 2 failed, falling back to Method 1")
+                except Exception as e:
+                    self.logger.warning(f"Method 2 error: {e}, falling back to Method 1")
+
+            # Simple images (<0.4) or fallback → Method 1 (correlation mapping)
+            self.logger.info("Using Method 1 (correlation mapping)")
+            method1_result = self.method1_optimizer._optimize_impl(features, logo_type)
+
+            # Convert Method 1 result to expected format
+            if isinstance(method1_result, dict):
+                # Extract optimization parameters
+                optimized_params = {k: v for k, v in method1_result.items()
+                                  if k in ['color_precision', 'corner_threshold', 'path_precision',
+                                          'layer_difference', 'max_iterations', 'splice_threshold', 'length_threshold']}
+
+                # Estimate quality improvement based on logo type and complexity
+                quality_improvement = self._estimate_method1_improvement(complexity, logo_type)
+
+                return {
+                    'success': True,
+                    'method_used': 'method1_correlation',
+                    'quality_improvement': quality_improvement,
+                    'optimized_parameters': optimized_params,
+                    'confidence': 0.8 if complexity < 0.4 else 0.6
+                }
+            else:
+                self.logger.error("Method 1 returned invalid result format")
+                return {
+                    'success': False,
+                    'method_used': 'method1_correlation',
+                    'quality_improvement': 0.0,
+                    'error': 'Invalid result format from Method 1'
                 }
 
-                # Simple fitness based on parameter appropriateness
-                fitness = self._evaluate_parameter_fitness(params, features, logo_type)
-                return (fitness,)
-
-            # Register functions
-            toolbox.register("individual", tools.initIterate, creator.Individual, create_individual)
-            toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-            toolbox.register("evaluate", evaluate_individual)
-            toolbox.register("mate", tools.cxBlend, alpha=0.5)
-            toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.2)
-            toolbox.register("select", tools.selTournament, tournsize=3)
-
-            # Run GA
-            population = toolbox.population(n=GA_CONFIG["population_size"])
-
-            # Evaluate initial population
-            fitnesses = list(map(toolbox.evaluate, population))
-            for ind, fit in zip(population, fitnesses):
-                ind.fitness.values = fit
-
-            # Evolution
-            for generation in range(min(10, GA_CONFIG["generations"])):  # Limited for Phase 1
-                # Select parents
-                offspring = toolbox.select(population, len(population))
-                offspring = list(map(toolbox.clone, offspring))
-
-                # Crossover and mutation
-                for child1, child2 in zip(offspring[::2], offspring[1::2]):
-                    if random.random() < GA_CONFIG["crossover_prob"]:
-                        toolbox.mate(child1, child2)
-                        del child1.fitness.values
-                        del child2.fitness.values
-
-                for mutant in offspring:
-                    if random.random() < GA_CONFIG["mutation_prob"]:
-                        toolbox.mutate(mutant)
-                        del mutant.fitness.values
-
-                # Evaluate invalid individuals
-                invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-                fitnesses = map(toolbox.evaluate, invalid_ind)
-                for ind, fit in zip(invalid_ind, fitnesses):
-                    ind.fitness.values = fit
-
-                # Replace population
-                population[:] = offspring
-
-            # Get best solution
-            best_individual = tools.selBest(population, k=1)[0]
-
-            # Convert to parameter dictionary
-            param_names = [
-                "color_precision",
-                "corner_threshold",
-                "path_precision",
-                "layer_difference",
-                "splice_threshold",
-                "filter_speckle",
-                "segment_length",
-                "max_iterations",
-            ]
-
-            best_params = dict(zip(param_names, best_individual))
-            return self._validate_parameters(best_params)
-
         except Exception as e:
-            logger.error(f"Genetic algorithm optimization failed: {e}")
-            return self._get_default_parameters(logo_type)
+            self.logger.error(f"Fallback optimization failed: {e}")
+            return {
+                'success': False,
+                'quality_improvement': 0.0,
+                'error': str(e)
+            }
 
-    def _run_grid_search(self, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
-        """Run grid search optimization (simplified for Phase 1)"""
-        try:
-            # Start with defaults
-            base_params = self._get_default_parameters(logo_type)
-            best_params = base_params.copy()
-            best_fitness = self._evaluate_parameter_fitness(best_params, features, logo_type)
+    def _emergency_fallback(self, image_path: str, processing_time: float = 0.0, error_msg: str = "") -> Dict[str, Any]:
+        """Emergency fallback with default parameters"""
 
-            # Test variations of key parameters
-            key_params = ["color_precision", "corner_threshold", "path_precision"]
+        self.logger.warning(f"Emergency fallback activated for {image_path}")
 
-            for param_name in key_params:
-                if param_name in self.param_ranges:
-                    min_val, max_val = self.param_ranges[param_name]
+        # Use basic default parameters
+        default_params = {
+            'color_precision': 6,
+            'corner_threshold': 60,
+            'path_precision': 8,
+            'layer_difference': 10,
+            'max_iterations': 10,
+            'splice_threshold': 45,
+            'length_threshold': 3.5
+        }
 
-                    # Test 3 values: low, medium, high
-                    test_values = [
-                        min_val + 0.2 * (max_val - min_val),
-                        min_val + 0.5 * (max_val - min_val),
-                        min_val + 0.8 * (max_val - min_val),
-                    ]
-
-                    for test_val in test_values:
-                        test_params = best_params.copy()
-                        test_params[param_name] = test_val
-
-                        fitness = self._evaluate_parameter_fitness(test_params, features, logo_type)
-
-                        if fitness > best_fitness:
-                            best_fitness = fitness
-                            best_params[param_name] = test_val
-
-            return best_params
-
-        except Exception as e:
-            logger.error(f"Grid search optimization failed: {e}")
-            return self._get_default_parameters(logo_type)
-
-    def _run_random_search(self, features: Dict[str, float], logo_type: str) -> Dict[str, Any]:
-        """Run random search optimization"""
-        try:
-            import random
-
-            base_params = self._get_default_parameters(logo_type)
-            best_params = base_params.copy()
-            best_fitness = self._evaluate_parameter_fitness(best_params, features, logo_type)
-
-            # Try random variations
-            for _ in range(20):  # Limited iterations for Phase 1
-                test_params = {}
-
-                for param_name, (min_val, max_val) in self.param_ranges.items():
-                    if param_name in base_params:
-                        test_params[param_name] = random.uniform(min_val, max_val)
-
-                fitness = self._evaluate_parameter_fitness(test_params, features, logo_type)
-
-                if fitness > best_fitness:
-                    best_fitness = fitness
-                    best_params = test_params.copy()
-
-            return best_params
-
-        except Exception as e:
-            logger.error(f"Random search optimization failed: {e}")
-            return self._get_default_parameters(logo_type)
-
-    def _evaluate_parameter_fitness(
-        self, params: Dict[str, Any], features: Dict[str, float], logo_type: str
-    ) -> float:
-        """Evaluate fitness of parameter set (heuristic for Phase 1)"""
-        try:
-            fitness = 0.7  # Base fitness
-
-            complexity = features.get("complexity_score", 0.5)
-            unique_colors = features.get("unique_colors", 16)
-            edge_density = features.get("edge_density", 0.1)
-
-            # Color precision fitness
-            color_prec = params.get("color_precision", 5)
-            if unique_colors <= 8 and color_prec <= 4:
-                fitness += 0.1  # Good for simple images
-            elif unique_colors > 20 and color_prec >= 6:
-                fitness += 0.1  # Good for complex images
-
-            # Corner threshold fitness
-            corner_thresh = params.get("corner_threshold", 50)
-            if edge_density > 0.3 and corner_thresh <= 30:
-                fitness += 0.1  # Good for high edge density
-            elif edge_density < 0.1 and corner_thresh >= 60:
-                fitness += 0.1  # Good for low edge density
-
-            # Path precision fitness
-            path_prec = params.get("path_precision", 15)
-            if complexity > 0.7 and path_prec >= 20:
-                fitness += 0.1  # Good for complex images
-            elif complexity < 0.3 and path_prec <= 10:
-                fitness += 0.1  # Good for simple images
-
-            # Add some randomness to avoid local optima
-            fitness += np.random.normal(0, 0.05)
-
-            return max(0.0, min(1.0, fitness))
-
-        except Exception as e:
-            logger.warning(f"Fitness evaluation failed: {e}")
-            return 0.5
-
-    def update_strategy_performance(self, strategy: str, quality: float):
-        """Update performance tracking for a strategy"""
-        if strategy in self.strategy_performance:
-            current_avg = self.strategy_performance[strategy]["avg_quality"]
-            total_uses = self.strategy_performance[strategy]["total_uses"]
-
-            # Update running average
-            new_avg = (current_avg * total_uses + quality) / (total_uses + 1)
-            self.strategy_performance[strategy]["avg_quality"] = new_avg
-
-    def get_adaptive_stats(self) -> Dict[str, Any]:
-        """Get statistics about adaptive optimization"""
         return {
-            "strategy_performance": self.strategy_performance,
-            "total_optimizations": sum(
-                stats["total_uses"] for stats in self.strategy_performance.values()
-            ),
-            "best_strategy": (
-                max(
-                    self.strategy_performance.keys(),
-                    key=lambda s: self.strategy_performance[s]["avg_quality"],
-                )
-                if any(s["total_uses"] > 0 for s in self.strategy_performance.values())
-                else None
-            ),
+            'success': False,
+            'method_used': 'emergency_fallback',
+            'quality_improvement': 0.0,
+            'processing_time': processing_time,
+            'optimized_parameters': default_params,
+            'confidence': 0.1,
+            'error': error_msg,
+            'emergency_fallback': True
+        }
+
+    def _update_performance_stats(self, result: Dict[str, Any], processing_time: float):
+        """Update performance tracking statistics"""
+
+        try:
+            self.performance_stats['total_optimizations'] += 1
+
+            if result.get('success', False):
+                self.performance_stats['successful_optimizations'] += 1
+
+                # Track method usage
+                method = result.get('method_used', 'unknown')
+                if method == 'adaptive_regional':
+                    self.performance_stats['adaptive_optimizations'] += 1
+                elif method == 'method1_correlation':
+                    self.performance_stats['method1_optimizations'] += 1
+                elif method == 'method2_ppo':
+                    self.performance_stats['method2_optimizations'] += 1
+
+                # Track quality improvements
+                quality_improvement = result.get('quality_improvement', 0.0)
+                self.performance_stats['quality_improvements'].append(quality_improvement)
+
+                # Update average improvement
+                improvements = self.performance_stats['quality_improvements']
+                if improvements:
+                    self.performance_stats['average_improvement'] = np.mean(improvements)
+
+            # Update average processing time
+            self.optimization_history.append(processing_time)
+            if self.optimization_history:
+                self.performance_stats['average_processing_time'] = np.mean(self.optimization_history[-100:])  # Last 100
+
+            # Add to optimization history
+            history_entry = {
+                'timestamp': time.time(),
+                'method': result.get('method_used', 'unknown'),
+                'success': result.get('success', False),
+                'processing_time': processing_time,
+                'quality_improvement': result.get('quality_improvement', 0.0)
+            }
+            self.optimization_history.append(history_entry)
+
+            # Limit history size
+            if len(self.optimization_history) > 1000:
+                self.optimization_history = self.optimization_history[-1000:]
+
+        except Exception as e:
+            self.logger.warning(f"Error updating performance stats: {e}")
+
+    # Helper methods
+
+    def _basic_classify(self, features: Dict[str, float]) -> str:
+        """Basic logo classification fallback when HybridClassifier is not available"""
+
+        try:
+            complexity = features.get('complexity_score', 0.5)
+            unique_colors = features.get('unique_colors', 8)
+            edge_density = features.get('edge_density', 0.1)
+
+            if complexity > 0.7 or (edge_density > 0.3 and unique_colors > 15):
+                return 'complex'
+            elif complexity < 0.3 and unique_colors <= 5:
+                return 'simple'
+            elif edge_density < 0.1 and unique_colors > 10:
+                return 'gradient'
+            else:
+                return 'text'
+
+        except Exception as e:
+            self.logger.warning(f"Error in basic classification: {e}")
+            return 'unknown'
+
+    def _generate_cache_key(self, image_path: str, kwargs: Dict[str, Any]) -> str:
+        """Generate cache key for optimization results"""
+
+        try:
+            # Use file path and modification time for cache key
+            file_path = Path(image_path)
+            if file_path.exists():
+                mtime = file_path.stat().st_mtime
+                key_data = f"{image_path}_{mtime}_{sorted(kwargs.items())}"
+            else:
+                key_data = f"{image_path}_{sorted(kwargs.items())}"
+
+            return hashlib.md5(key_data.encode()).hexdigest()
+
+        except Exception as e:
+            self.logger.warning(f"Error generating cache key: {e}")
+            return f"cache_error_{time.time()}"
+
+    def _cache_result(self, cache_key: str, result: Dict[str, Any]):
+        """Cache optimization result"""
+
+        try:
+            # Manage cache size
+            if len(self.optimization_cache) >= self.cache_max_size:
+                # Remove oldest entries
+                oldest_keys = list(self.optimization_cache.keys())[:10]
+                for key in oldest_keys:
+                    del self.optimization_cache[key]
+
+            # Cache result (without heavy data like parameter maps)
+            cached_result = result.copy()
+            if 'parameter_maps' in cached_result:
+                # Store only metadata about parameter maps, not the full arrays
+                cached_result['parameter_maps_info'] = {
+                    'shape': str(list(cached_result['parameter_maps'].values())[0].shape) if cached_result['parameter_maps'] else 'none',
+                    'parameters': list(cached_result['parameter_maps'].keys())
+                }
+                del cached_result['parameter_maps']
+
+            self.optimization_cache[cache_key] = cached_result
+
+        except Exception as e:
+            self.logger.warning(f"Error caching result: {e}")
+
+    def _estimate_quality_improvement(self, complexity_analysis: Dict[str, Any],
+                                    metadata: Dict[str, Any], num_regions: int) -> float:
+        """Estimate quality improvement for adaptive optimization"""
+
+        try:
+            base_improvement = 0.35  # Target 35% improvement
+
+            # Adjust based on complexity
+            overall_complexity = complexity_analysis.get('overall_complexity', 0.5)
+            if overall_complexity > 0.7:
+                improvement_factor = 1.2  # 20% bonus for high complexity
+            elif overall_complexity < 0.3:
+                improvement_factor = 0.8  # 20% reduction for low complexity
+            else:
+                improvement_factor = 1.0
+
+            # Adjust based on confidence
+            confidence = metadata.get('overall_confidence', 0.5)
+            confidence_factor = 0.5 + confidence  # 0.5-1.5 range
+
+            # Adjust based on number of regions (more regions = better optimization potential)
+            region_factor = min(1.3, 1.0 + (num_regions - 1) * 0.1)  # Up to 30% bonus
+
+            estimated_improvement = base_improvement * improvement_factor * confidence_factor * region_factor
+
+            # Clamp to reasonable range
+            return max(0.1, min(0.8, estimated_improvement))
+
+        except Exception as e:
+            self.logger.warning(f"Error estimating quality improvement: {e}")
+            return 0.35
+
+    def _estimate_method1_improvement(self, complexity: float, logo_type: str) -> float:
+        """Estimate quality improvement for Method 1 optimization"""
+
+        try:
+            base_improvement = 0.25  # Base 25% improvement for Method 1
+
+            # Adjust based on logo type suitability
+            if logo_type in ['simple', 'geometric']:
+                type_factor = 1.2  # Method 1 works well for simple logos
+            elif logo_type in ['text']:
+                type_factor = 1.1  # Good for text
+            elif logo_type in ['gradient']:
+                type_factor = 0.9  # Less optimal for gradients
+            else:
+                type_factor = 0.8  # Not ideal for complex logos
+
+            # Adjust based on complexity
+            if complexity < 0.3:
+                complexity_factor = 1.2  # Works well for simple images
+            elif complexity > 0.6:
+                complexity_factor = 0.7  # Limited effectiveness for complex images
+            else:
+                complexity_factor = 1.0
+
+            estimated_improvement = base_improvement * type_factor * complexity_factor
+
+            # Clamp to reasonable range
+            return max(0.05, min(0.6, estimated_improvement))
+
+        except Exception as e:
+            self.logger.warning(f"Error estimating Method 1 improvement: {e}")
+            return 0.25
+
+    def _extract_best_parameters(self, regional_parameters: Dict[int, Dict[str, Any]]) -> Dict[str, Any]:
+        """Extract the best parameters from regional optimization results"""
+
+        try:
+            if not regional_parameters:
+                return {}
+
+            # Find region with highest confidence
+            best_region_id = None
+            best_confidence = 0.0
+
+            for region_id, params in regional_parameters.items():
+                confidence = params.get('confidence', 0.0)
+                if confidence > best_confidence:
+                    best_confidence = confidence
+                    best_region_id = region_id
+
+            if best_region_id is not None:
+                best_params = regional_parameters[best_region_id].copy()
+                # Remove confidence from parameters
+                if 'confidence' in best_params:
+                    del best_params['confidence']
+                return best_params
+            else:
+                return {}
+
+        except Exception as e:
+            self.logger.warning(f"Error extracting best parameters: {e}")
+            return {}
+
+    def get_performance_summary(self) -> Dict[str, Any]:
+        """Get summary of adaptive optimizer performance"""
+
+        return {
+            'total_optimizations': self.performance_stats['total_optimizations'],
+            'success_rate': self.performance_stats['successful_optimizations'] / max(1, self.performance_stats['total_optimizations']),
+            'average_improvement': self.performance_stats['average_improvement'],
+            'average_processing_time': self.performance_stats['average_processing_time'],
+            'method_distribution': {
+                'adaptive': self.performance_stats['adaptive_optimizations'],
+                'method1': self.performance_stats['method1_optimizations'],
+                'method2': self.performance_stats['method2_optimizations']
+            },
+            'cache_size': len(self.optimization_cache)
         }

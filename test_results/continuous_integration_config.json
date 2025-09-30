@@ -1,0 +1,34 @@
+{
+  "automated_triggers": {
+    "code_changes": "run_component_tests",
+    "new_test_images": "run_validation_suite",
+    "performance_regression": "run_performance_tests",
+    "quality_degradation": "run_quality_validation"
+  },
+  "test_schedules": {
+    "smoke_tests": "*/15 * * * *",
+    "component_tests": "0 */4 * * *",
+    "full_validation": "0 2 * * *",
+    "benchmark_tests": "0 2 * * 0"
+  },
+  "notification_settings": {
+    "test_failures": "immediate",
+    "performance_regression": "immediate",
+    "quality_degradation": "immediate",
+    "successful_runs": "daily_summary"
+  },
+  "test_environments": {
+    "development": {
+      "test_subset": "representative_sample",
+      "performance_monitoring": "basic"
+    },
+    "staging": {
+      "test_subset": "complete_test_suite",
+      "performance_monitoring": "comprehensive"
+    },
+    "production": {
+      "test_subset": "critical_path_only",
+      "performance_monitoring": "production_safe"
+    }
+  }
+}

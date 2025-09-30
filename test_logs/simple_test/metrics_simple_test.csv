@@ -1,0 +1,7 @@
+episode,timestamp,reward,length,quality_improvement,quality_final,quality_initial,termination_reason,success,policy_loss,value_loss,entropy,kl_divergence,learning_rate,gradient_norm,episode_time,memory_usage,logo_type,difficulty
+1,2025-09-29T16:37:12.469764,2.0,21,0.15000000000000002,0.75,0.6,max_steps,True,0.5,0.3,1.2,,,,,308.30078125,,
+2,2025-09-29T16:37:12.470917,4.0,22,0.2,0.7999999999999999,0.6,max_steps,True,0.5,0.3,1.2,,,,,308.30859375,,
+3,2025-09-29T16:37:12.471623,6.0,23,0.25,0.85,0.6,max_steps,True,0.5,0.3,1.2,,,,,308.30859375,,
+1,2025-09-29T16:39:23.310307,2.0,21,0.15000000000000002,0.75,0.6,max_steps,True,0.5,0.3,1.2,,,,,308.56640625,,
+2,2025-09-29T16:39:23.311739,4.0,22,0.2,0.7999999999999999,0.6,max_steps,True,0.5,0.3,1.2,,,,,308.578125,,
+3,2025-09-29T16:39:23.312446,6.0,23,0.25,0.85,0.6,max_steps,True,0.5,0.3,1.2,,,,,308.58203125,,

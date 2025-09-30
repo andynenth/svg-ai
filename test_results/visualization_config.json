@@ -1,0 +1,43 @@
+{
+  "comparison_visualizations": [
+    "before_after_grid",
+    "quality_improvement_heatmap",
+    "processing_time_distribution",
+    "category_performance_comparison",
+    "parameter_map_visualization",
+    "region_segmentation_overlay"
+  ],
+  "statistical_plots": [
+    "quality_improvement_histogram",
+    "processing_time_boxplot",
+    "method_comparison_scatter",
+    "performance_regression_analysis",
+    "quality_vs_complexity_correlation"
+  ],
+  "monitoring_dashboards": [
+    "real_time_performance_dashboard",
+    "validation_progress_tracker",
+    "quality_metrics_timeline",
+    "system_health_monitor"
+  ],
+  "export_formats": [
+    "png",
+    "svg",
+    "pdf",
+    "html"
+  ],
+  "resolution_settings": {
+    "screen": [
+      1200,
+      800
+    ],
+    "print": [
+      3000,
+      2000
+    ],
+    "web": [
+      800,
+      600
+    ]
+  }
+}

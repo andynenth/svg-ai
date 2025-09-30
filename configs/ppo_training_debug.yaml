@@ -1,0 +1,56 @@
+# PPO Training Configuration - Debug Version
+# Minimal configuration for quick testing and debugging
+
+training:
+  training_images:
+    simple:
+      - "data/logos/simple_geometric/circle_00.png"
+
+  model_config:
+    learning_rate: 1e-3
+    n_steps: 128               # Very small for quick testing
+    batch_size: 16
+    n_epochs: 2
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_range: 0.2
+    ent_coef: 0.01
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+    policy_kwargs:
+      net_arch:
+        pi: [32, 32]           # Minimal network
+        vf: [32, 32]
+      activation_fn: "tanh"
+    verbose: 2                 # High verbosity for debugging
+    device: "auto"
+
+  curriculum_config:
+    stage_0:
+      target_quality: 0.60     # Very low target for quick success
+      max_episodes: 100        # Minimal episodes
+      success_threshold: 0.50
+
+  save_dir: "models/ppo_training_debug"
+
+environment:
+  num_threads: 2
+  memory_limit_gb: 2
+  parallel_envs: 1             # Single environment for debugging
+
+monitoring:
+  enable_real_time_monitoring: true
+  log_dir: "logs/ppo_training_debug"
+  checkpoint_frequency: 50     # Frequent checkpoints for debugging
+  validation_frequency: 100
+  monitoring_frequency: 10     # Very frequent monitoring
+
+logging:
+  level: "DEBUG"               # Debug level logging
+  log_dir: "logs/ppo_training_debug"
+  enable_console_logging: true
+  console_level: "DEBUG"
+
+experiment:
+  name: "ppo_vtracer_debug"
+  description: "Debug configuration for PPO training development and testing"

@@ -1,0 +1,402 @@
+{
+  "timestamp": 1759173932.862686,
+  "test_name": "rl_environment_integration",
+  "results": {
+    "initialization": {
+      "success": true,
+      "environments_tested": 3,
+      "initialization_times": [
+        0.001522064208984375,
+        0.0014531612396240234,
+        0.0009448528289794922
+      ],
+      "details": [
+        {
+          "image_path": "test-data/circle_00.png",
+          "initialization_time": 0.001522064208984375,
+          "action_space_shape": [
+            7
+          ],
+          "observation_space_shape": [
+            15
+          ],
+          "status": "success"
+        },
+        {
+          "image_path": "test-data/text_tech_00.png",
+          "initialization_time": 0.0014531612396240234,
+          "action_space_shape": [
+            7
+          ],
+          "observation_space_shape": [
+            15
+          ],
+          "status": "success"
+        },
+        {
+          "image_path": "test-data/gradient_radial_00.png",
+          "initialization_time": 0.0009448528289794922,
+          "action_space_shape": [
+            7
+          ],
+          "observation_space_shape": [
+            15
+          ],
+          "status": "success"
+        }
+      ],
+      "average_initialization_time": 0.0013066927591959636
+    },
+    "episode_execution": {
+      "success": true,
+      "episodes_completed": 3,
+      "total_steps": 30,
+      "total_rewards": [
+        -50.0,
+        -50.0,
+        -50.0
+      ],
+      "episode_details": [
+        {
+          "episode": 0,
+          "episode_length": 10,
+          "total_reward": -50.0,
+          "step_rewards": [
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0
+          ],
+          "terminated_early": true,
+          "final_info": {
+            "step": 10,
+            "parameters": {
+              "color_precision": 4,
+              "layer_difference": 16,
+              "corner_threshold": 60.0,
+              "length_threshold": 4.0,
+              "max_iterations": 10,
+              "splice_threshold": 45,
+              "path_precision": 8,
+              "mode": "spline"
+            },
+            "quality": 0.0,
+            "best_quality": 0.0,
+            "processing_time": 1.0,
+            "file_size": 0.0,
+            "success": false,
+            "quality_improvement": -0.5,
+            "target_reached": false
+          }
+        },
+        {
+          "episode": 1,
+          "episode_length": 10,
+          "total_reward": -50.0,
+          "step_rewards": [
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0
+          ],
+          "terminated_early": true,
+          "final_info": {
+            "step": 10,
+            "parameters": {
+              "color_precision": 4,
+              "layer_difference": 16,
+              "corner_threshold": 60.0,
+              "length_threshold": 4.0,
+              "max_iterations": 10,
+              "splice_threshold": 45,
+              "path_precision": 8,
+              "mode": "spline"
+            },
+            "quality": 0.0,
+            "best_quality": 0.0,
+            "processing_time": 1.0,
+            "file_size": 0.0,
+            "success": false,
+            "quality_improvement": -0.5,
+            "target_reached": false
+          }
+        },
+        {
+          "episode": 2,
+          "episode_length": 10,
+          "total_reward": -50.0,
+          "step_rewards": [
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0,
+            -5.0
+          ],
+          "terminated_early": true,
+          "final_info": {
+            "step": 10,
+            "parameters": {
+              "color_precision": 4,
+              "layer_difference": 16,
+              "corner_threshold": 60.0,
+              "length_threshold": 4.0,
+              "max_iterations": 10,
+              "splice_threshold": 45,
+              "path_precision": 8,
+              "mode": "spline"
+            },
+            "quality": 0.0,
+            "best_quality": 0.0,
+            "processing_time": 1.0,
+            "file_size": 0.0,
+            "success": false,
+            "quality_improvement": -0.5,
+            "target_reached": false
+          }
+        }
+      ],
+      "average_episode_length": 10.0,
+      "average_total_reward": -50.0
+    },
+    "reset_consistency": {
+      "success": true,
+      "reset_tests": 5,
+      "consistency_checks": [
+        {
+          "reset_test": 1,
+          "obs_shape_consistent": true,
+          "obs_length": 15,
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ]
+        },
+        {
+          "reset_test": 2,
+          "obs_shape_consistent": true,
+          "obs_length": 15,
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ]
+        },
+        {
+          "reset_test": 3,
+          "obs_shape_consistent": true,
+          "obs_length": 15,
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ]
+        },
+        {
+          "reset_test": 4,
+          "obs_shape_consistent": true,
+          "obs_length": 15,
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "reset_test": 0,
+          "observation_shape": [
+            15
+          ],
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ],
+          "status": "success"
+        },
+        {
+          "reset_test": 1,
+          "observation_shape": [
+            15
+          ],
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ],
+          "status": "success"
+        },
+        {
+          "reset_test": 2,
+          "observation_shape": [
+            15
+          ],
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ],
+          "status": "success"
+        },
+        {
+          "reset_test": 3,
+          "observation_shape": [
+            15
+          ],
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ],
+          "status": "success"
+        },
+        {
+          "reset_test": 4,
+          "observation_shape": [
+            15
+          ],
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ],
+          "status": "success"
+        }
+      ]
+    },
+    "reward_calculation": {
+      "success": false,
+      "reward_tests": 3,
+      "reward_ranges": [
+        550.0,
+        82.2088235294113,
+        -5.0
+      ],
+      "reward_components": [
+        {
+          "quality_reward": 2.2500000000000004,
+          "speed_reward": 0.20000000000000004,
+          "size_reward": 0.2,
+          "target_bonus": 68.0,
+          "convergence_reward": 0.0,
+          "failure_penalty": 0.0,
+          "step_penalty": -0.2
+        },
+        {
+          "quality_reward": -0.2500000000000002,
+          "speed_reward": 0.20000000000000004,
+          "size_reward": 0.2,
+          "target_bonus": 1.7647058823529327,
+          "convergence_reward": 0.0,
+          "failure_penalty": 0.0,
+          "step_penalty": -0.2
+        },
+        {
+          "quality_reward": 0.0,
+          "speed_reward": 0.0,
+          "size_reward": 0.0,
+          "target_bonus": 0.0,
+          "convergence_reward": 0.0,
+          "failure_penalty": -10.0,
+          "step_penalty": 0.0
+        }
+      ],
+      "details": [
+        {
+          "scenario": "quality_improvement",
+          "reward": 550.0,
+          "components": {
+            "quality_reward": 2.2500000000000004,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 68.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -0.2
+          },
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "status": "success"
+        },
+        {
+          "scenario": "quality_degradation",
+          "reward": 82.2088235294113,
+          "components": {
+            "quality_reward": -0.2500000000000002,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 1.7647058823529327,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -0.2
+          },
+          "expected_positive": false,
+          "actual_positive": true,
+          "expectation_met": false,
+          "status": "success"
+        },
+        {
+          "scenario": "conversion_failure",
+          "reward": -5.0,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": -10.0,
+            "step_penalty": 0.0
+          },
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "status": "success"
+        }
+      ],
+      "reward_min": -5.0,
+      "reward_max": 550.0,
+      "reward_mean": 209.0696078431371
+    },
+    "action_mapping": {
+      "success": false,
+      "mapping_tests": 0,
+      "parameter_ranges": {},
+      "details": [
+        {
+          "status": "failed",
+          "error": "'VTracerParameterBounds' object has no attribute 'get_bounds'"
+        }
+      ]
+    }
+  },
+  "overall_success": false
+}

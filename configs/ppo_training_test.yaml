@@ -1,0 +1,38 @@
+environment:
+  cuda_visible_devices: '0'
+  memory_limit_gb: 8
+  num_threads: 4
+logging:
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  level: INFO
+  log_dir: logs/ppo_training
+monitoring:
+  checkpoint_frequency: 1000
+  enable_real_time_monitoring: true
+  log_dir: logs/ppo_training
+  validation_frequency: 5000
+training:
+  checkpoint_dir: models/ppo_training/checkpoints
+  curriculum_config: null
+  model_config:
+    batch_size: 64
+    clip_range: 0.2
+    ent_coef: 0.01
+    gae_lambda: 0.95
+    gamma: 0.99
+    learning_rate: 0.0003
+    max_grad_norm: 0.5
+    n_epochs: 10
+    n_steps: 2048
+    verbose: 1
+    vf_coef: 0.5
+  save_dir: models/ppo_training
+  training_images:
+    complex:
+    - data/logos/complex/complex_00.png
+    gradient:
+    - data/logos/gradient/gradient_00.png
+    simple:
+    - data/logos/simple/circle_00.png
+    text:
+    - data/logos/text/text_00.png

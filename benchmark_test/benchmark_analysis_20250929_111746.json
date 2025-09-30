@@ -1,0 +1,46 @@
+{
+  "overview": {
+    "total_images": 20,
+    "successful": 0,
+    "failed": 20,
+    "success_rate": 0.0,
+    "benchmark_duration": 0.02606821060180664
+  },
+  "quality_improvements": {
+    "ssim": {
+      "mean": 0,
+      "median": 0,
+      "std": 0,
+      "min": 0,
+      "max": 0,
+      "percentile_95": 0
+    },
+    "file_size": {
+      "mean": 0,
+      "median": 0,
+      "std": 0
+    }
+  },
+  "performance": {
+    "total_time": {
+      "mean": 0,
+      "median": 0,
+      "percentile_95": 0
+    },
+    "optimization_time": {
+      "mean": 0,
+      "median": 0,
+      "percentile_95": 0
+    },
+    "memory_usage": {
+      "mean": 0,
+      "max": 0
+    }
+  },
+  "by_category": {},
+  "scores": {
+    "overall_performance": 0,
+    "quality_score": 0,
+    "speed_score": 100
+  }
+}

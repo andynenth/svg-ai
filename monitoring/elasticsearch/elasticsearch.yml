@@ -1,0 +1,63 @@
+# Elasticsearch configuration for SVG-AI logging
+
+cluster.name: svg-ai-logging
+node.name: ${HOSTNAME}
+
+# Network settings
+network.host: 0.0.0.0
+http.port: 9200
+transport.port: 9300
+
+# Discovery settings for cluster
+discovery.type: single-node
+cluster.initial_master_nodes: [${HOSTNAME}]
+
+# Path settings
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+# Memory settings
+bootstrap.memory_lock: true
+
+# Security settings
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.client_authentication: required
+
+# Monitoring
+xpack.monitoring.enabled: true
+xpack.monitoring.collection.enabled: true
+
+# Index lifecycle management
+xpack.ilm.enabled: true
+
+# Index templates for SVG-AI logs
+index.lifecycle.name: svg-ai-policy
+index.lifecycle.rollover_alias: svg-ai-logs
+
+# Performance settings
+indices.memory.index_buffer_size: 20%
+indices.memory.min_index_buffer_size: 96mb
+
+# Logging configuration
+logger.org.elasticsearch.discovery: WARN
+logger.org.elasticsearch.cluster.service: WARN
+
+# HTTP CORS (for development only)
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-methods: "OPTIONS, HEAD, GET, POST, PUT, DELETE"
+http.cors.allow-headers: "X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization"
+
+# Circuit breaker settings
+indices.breaker.total.limit: 70%
+indices.breaker.request.limit: 40%
+indices.breaker.fielddata.limit: 40%
+
+# Search settings
+search.max_buckets: 65536
+
+# Thread pool settings
+thread_pool.write.queue_size: 1000
+thread_pool.search.queue_size: 1000

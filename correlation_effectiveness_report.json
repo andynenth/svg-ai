@@ -1,0 +1,296 @@
+{
+  "timestamp": "2025-09-29T11:33:32.719980",
+  "dataset_info": {
+    "total_records": 50,
+    "successful_records": 50
+  },
+  "effectiveness_scores": {
+    "edge_to_corner_threshold": 0.7573699916083465,
+    "colors_to_precision": 0.814163309065222,
+    "entropy_to_path_precision": 0.8308639509231797,
+    "corners_to_length_threshold": 0.7533768228422799,
+    "gradient_to_splice_threshold": 0.8200558503839165,
+    "complexity_to_iterations": 0.8550641184448822
+  },
+  "correlation_metrics": {
+    "edge_to_corner_threshold": {
+      "feature_quality_correlation": -0.5956166526805776,
+      "formula_r2": 1.0,
+      "effectiveness_score": 0.7573699916083465,
+      "sample_size": 50,
+      "feature_range": {
+        "min": 0.06043704674049393,
+        "max": 0.5771546861951318
+      },
+      "param_range": {
+        "min": 10,
+        "max": 61
+      }
+    },
+    "colors_to_precision": {
+      "feature_quality_correlation": -0.69027218177537,
+      "formula_r2": 1.0,
+      "effectiveness_score": 0.814163309065222,
+      "sample_size": 50,
+      "feature_range": {
+        "min": 3.023866418677738,
+        "max": 197.75364617247635
+      },
+      "param_range": {
+        "min": 3,
+        "max": 9
+      }
+    },
+    "entropy_to_path_precision": {
+      "feature_quality_correlation": -0.718106584871966,
+      "formula_r2": 1.0,
+      "effectiveness_score": 0.8308639509231797,
+      "sample_size": 50,
+      "feature_range": {
+        "min": 0.21688253936438728,
+        "max": 0.9331750607677617
+      },
+      "param_range": {
+        "min": 1,
+        "max": 15
+      }
+    },
+    "corners_to_length_threshold": {
+      "feature_quality_correlation": -0.5889613714037998,
+      "formula_r2": 1.0,
+      "effectiveness_score": 0.7533768228422799,
+      "sample_size": 50,
+      "feature_range": {
+        "min": 0.025664562798737408,
+        "max": 0.49406000395239835
+      },
+      "param_range": {
+        "min": 3.5664562798737407,
+        "max": 20.0
+      }
+    },
+    "gradient_to_splice_threshold": {
+      "feature_quality_correlation": -0.7000930839731941,
+      "formula_r2": 1.0,
+      "effectiveness_score": 0.8200558503839165,
+      "sample_size": 50,
+      "feature_range": {
+        "min": 0.10889257958875886,
+        "max": 0.8764116373709379
+      },
+      "param_range": {
+        "min": 19,
+        "max": 88
+      }
+    },
+    "complexity_to_iterations": {
+      "feature_quality_correlation": -0.758440197408137,
+      "formula_r2": 1.0,
+      "effectiveness_score": 0.8550641184448822,
+      "sample_size": 50,
+      "feature_range": {
+        "min": 0.10108621194153078,
+        "max": 0.9147568422538819
+      },
+      "param_range": {
+        "min": 6,
+        "max": 18
+      }
+    }
+  },
+  "logo_type_analysis": {
+    "simple": {
+      "success_rate": 100.0,
+      "sample_size": 13,
+      "avg_quality_improvement": 22.37229097913067,
+      "median_quality_improvement": 21.867360667480174,
+      "std_quality_improvement": 2.98965952625107,
+      "min_quality_improvement": 18.355991864303846,
+      "max_quality_improvement": 27.84575599078041
+    },
+    "text": {
+      "success_rate": 100.0,
+      "sample_size": 13,
+      "avg_quality_improvement": 19.11887429836259,
+      "median_quality_improvement": 18.859634045555122,
+      "std_quality_improvement": 2.556763646286888,
+      "min_quality_improvement": 15.216261683735283,
+      "max_quality_improvement": 24.195408853758387
+    },
+    "gradient": {
+      "success_rate": 100.0,
+      "sample_size": 12,
+      "avg_quality_improvement": 15.079484697611301,
+      "median_quality_improvement": 15.042968219796862,
+      "std_quality_improvement": 2.227473965554544,
+      "min_quality_improvement": 12.193962921412435,
+      "max_quality_improvement": 19.45725435178349
+    },
+    "complex": {
+      "success_rate": 100.0,
+      "sample_size": 12,
+      "avg_quality_improvement": 12.66832640121492,
+      "median_quality_improvement": 12.900768068457175,
+      "std_quality_improvement": 1.627872637877625,
+      "min_quality_improvement": 9.459371779440588,
+      "max_quality_improvement": 15.05428004687102
+    }
+  },
+  "underperforming_formulas": [],
+  "statistical_significance": {
+    "edge_to_corner_threshold": {
+      "pearson_correlation": -0.5956166526805775,
+      "pearson_p_value": 5.0443117561943034e-06,
+      "pearson_significant": "True",
+      "spearman_correlation": -0.5968113714944295,
+      "spearman_p_value": 4.775045561449209e-06,
+      "spearman_significant": "True",
+      "sample_size": 50
+    },
+    "colors_to_precision": {
+      "pearson_correlation": -0.6902721817753698,
+      "pearson_p_value": 2.9203475873446177e-08,
+      "pearson_significant": "True",
+      "spearman_correlation": -0.6983288513253938,
+      "spearman_p_value": 1.7203806820861602e-08,
+      "spearman_significant": "True",
+      "sample_size": 50
+    },
+    "entropy_to_path_precision": {
+      "pearson_correlation": -0.7181065848719663,
+      "pearson_p_value": 4.347997900293844e-09,
+      "pearson_significant": "True",
+      "spearman_correlation": -0.7318478678447945,
+      "spearman_p_value": 1.5587585213980696e-09,
+      "spearman_significant": "True",
+      "sample_size": 50
+    },
+    "corners_to_length_threshold": {
+      "pearson_correlation": -0.5889613714038,
+      "pearson_p_value": 6.8200007139713565e-06,
+      "pearson_significant": "True",
+      "spearman_correlation": -0.5968113714944295,
+      "spearman_p_value": 4.775045561449209e-06,
+      "spearman_significant": "True",
+      "sample_size": 50
+    },
+    "gradient_to_splice_threshold": {
+      "pearson_correlation": -0.7000930839731938,
+      "pearson_p_value": 1.528612354179092e-08,
+      "pearson_significant": "True",
+      "spearman_correlation": -0.6838263542066846,
+      "spearman_p_value": 4.4061837640243034e-08,
+      "spearman_significant": "True",
+      "sample_size": 50
+    },
+    "complexity_to_iterations": {
+      "pearson_correlation": -0.758440197408137,
+      "pearson_p_value": 1.7725107786280708e-10,
+      "pearson_significant": "True",
+      "spearman_correlation": -0.7711294660007684,
+      "spearman_p_value": 5.680092709263754e-11,
+      "spearman_significant": "True",
+      "sample_size": 50
+    }
+  },
+  "r_squared_values": {
+    "edge_to_corner_threshold": 1.0,
+    "colors_to_precision": 1.0,
+    "entropy_to_path_precision": 1.0,
+    "corners_to_length_threshold": 1.0,
+    "gradient_to_splice_threshold": 1.0,
+    "complexity_to_iterations": 1.0
+  },
+  "optimal_parameter_ranges": {
+    "simple": {
+      "corner_threshold": [
+        12.72550922649549,
+        46.19756769658143
+      ],
+      "color_precision": [
+        3.6566075680663266,
+        4
+      ],
+      "path_precision": [
+        10.637958524441585,
+        14.285118398635339
+      ],
+      "length_threshold": [
+        4.113060905909988,
+        8.547988549309782
+      ],
+      "splice_threshold": [
+        22.22009575480879,
+        33.31836578365275
+      ],
+      "max_iterations": [
+        6.720139869462626,
+        8.818321668998912
+      ]
+    },
+    "text": {
+      "corner_threshold": [
+        10.0,
+        10.0
+      ],
+      "color_precision": [
+        3.1288803599740955,
+        4
+      ],
+      "path_precision": [
+        9.242351289132369,
+        12.296110249329171
+      ],
+      "length_threshold": [
+        15.078914325016173,
+        20.0
+      ],
+      "splice_threshold": [
+        26.771107220947943,
+        39.38273893289822
+      ],
+      "max_iterations": [
+        8,
+        10.109400392450459
+      ]
+    },
+    "gradient": {
+      "corner_threshold": [
+        10.0,
+        10.0
+      ],
+      "color_precision": [
+        7.0,
+        7.0
+      ],
+      "path_precision": [
+        3.1759546816668074,
+        6
+      ],
+      "length_threshold": [
+        9.373919748923687,
+        15.317295425114635
+      ],
+      "splice_threshold": [
+        72.09167308680402,
+        82.90832691319598
+      ],
+      "max_iterations": [
+        11.115562689513654,
+        13.884437310486346
+      ]
+    },
+    "complex": {}
+  },
+  "generated_plots": [
+    "correlation_analysis/edge_to_corner_threshold_analysis.png",
+    "correlation_analysis/colors_to_precision_analysis.png",
+    "correlation_analysis/entropy_to_path_precision_analysis.png",
+    "correlation_analysis/corners_to_length_threshold_analysis.png",
+    "correlation_analysis/gradient_to_splice_threshold_analysis.png",
+    "correlation_analysis/complexity_to_iterations_analysis.png"
+  ],
+  "recommendations": [
+    "Use complexity_to_iterations as reference (highest effectiveness: 0.855)"
+  ]
+}

@@ -1,0 +1,1349 @@
+{
+  "component_tests": {
+    "success": false,
+    "quality_reward_tests": {
+      "success": true,
+      "tests_passed": 6,
+      "tests_total": 6,
+      "details": [
+        {
+          "scenario": "significant_improvement",
+          "current_quality": 0.95,
+          "baseline_quality": 0.75,
+          "quality_reward": 2.999999999999999,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "improvement": 0.19999999999999996
+        },
+        {
+          "scenario": "moderate_improvement",
+          "current_quality": 0.85,
+          "baseline_quality": 0.75,
+          "quality_reward": 0.9999999999999998,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "improvement": 0.09999999999999998
+        },
+        {
+          "scenario": "small_improvement",
+          "current_quality": 0.78,
+          "baseline_quality": 0.75,
+          "quality_reward": 0.30000000000000027,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "improvement": 0.030000000000000027
+        },
+        {
+          "scenario": "no_change",
+          "current_quality": 0.75,
+          "baseline_quality": 0.75,
+          "quality_reward": 0.0,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "improvement": 0.0
+        },
+        {
+          "scenario": "quality_degradation",
+          "current_quality": 0.7,
+          "baseline_quality": 0.75,
+          "quality_reward": -0.2500000000000002,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "improvement": -0.050000000000000044
+        },
+        {
+          "scenario": "severe_degradation",
+          "current_quality": 0.5,
+          "baseline_quality": 0.75,
+          "quality_reward": -1.25,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "improvement": -0.25
+        }
+      ]
+    },
+    "speed_reward_tests": {
+      "success": true,
+      "tests_passed": 5,
+      "tests_total": 5,
+      "details": [
+        {
+          "scenario": "faster_conversion",
+          "current_time": 0.05,
+          "baseline_time": 0.1,
+          "speed_reward": 0.5,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "time_improvement_ratio": 0.5
+        },
+        {
+          "scenario": "much_faster_conversion",
+          "current_time": 0.02,
+          "baseline_time": 0.1,
+          "speed_reward": 0.7999999999999999,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "time_improvement_ratio": 0.7999999999999999
+        },
+        {
+          "scenario": "same_speed",
+          "current_time": 0.1,
+          "baseline_time": 0.1,
+          "speed_reward": 0.0,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "time_improvement_ratio": 0.0
+        },
+        {
+          "scenario": "slower_conversion",
+          "current_time": 0.15,
+          "baseline_time": 0.1,
+          "speed_reward": 0.0,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "time_improvement_ratio": -0.4999999999999999
+        },
+        {
+          "scenario": "much_slower_conversion",
+          "current_time": 0.25,
+          "baseline_time": 0.1,
+          "speed_reward": -0.5,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "time_improvement_ratio": -1.4999999999999998
+        }
+      ]
+    },
+    "size_reward_tests": {
+      "success": true,
+      "tests_passed": 5,
+      "tests_total": 5,
+      "details": [
+        {
+          "scenario": "significant_compression",
+          "current_size": 8.0,
+          "baseline_size": 15.0,
+          "size_reward": 0.6066666666666667,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "size_reduction_ratio": 0.4666666666666667,
+          "quality_change": 0.04999999999999993
+        },
+        {
+          "scenario": "moderate_compression",
+          "current_size": 12.0,
+          "baseline_size": 15.0,
+          "size_reward": 0.2,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "size_reduction_ratio": 0.2,
+          "quality_change": 0.019999999999999907
+        },
+        {
+          "scenario": "same_size",
+          "current_size": 15.0,
+          "baseline_size": 15.0,
+          "size_reward": 0.0,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "size_reduction_ratio": 0.0,
+          "quality_change": 0.0
+        },
+        {
+          "scenario": "size_increase",
+          "current_size": 18.0,
+          "baseline_size": 15.0,
+          "size_reward": 0.0,
+          "expected_positive": false,
+          "actual_positive": false,
+          "expectation_met": true,
+          "size_reduction_ratio": -0.2,
+          "quality_change": 0.0
+        },
+        {
+          "scenario": "compression_with_quality_loss",
+          "current_size": 8.0,
+          "baseline_size": 15.0,
+          "size_reward": 0.4666666666666667,
+          "expected_positive": true,
+          "actual_positive": true,
+          "expectation_met": true,
+          "size_reduction_ratio": 0.4666666666666667,
+          "quality_change": -0.10000000000000009
+        }
+      ]
+    },
+    "target_bonus_tests": {
+      "success": false,
+      "tests_passed": 5,
+      "tests_total": 6,
+      "details": [
+        {
+          "scenario": "target_achieved_early",
+          "quality": 0.9,
+          "target_quality": 0.85,
+          "step": 10,
+          "max_steps": 50,
+          "target_bonus": 66.0,
+          "expected_bonus": true,
+          "actual_bonus": true,
+          "expectation_met": true,
+          "efficiency_ratio": 0.8
+        },
+        {
+          "scenario": "target_achieved_late",
+          "quality": 0.87,
+          "target_quality": 0.85,
+          "step": 45,
+          "max_steps": 50,
+          "target_bonus": 52.0,
+          "expected_bonus": true,
+          "actual_bonus": true,
+          "expectation_met": true,
+          "efficiency_ratio": 0.1
+        },
+        {
+          "scenario": "target_just_reached",
+          "quality": 0.85,
+          "target_quality": 0.85,
+          "step": 25,
+          "max_steps": 50,
+          "target_bonus": 60.0,
+          "expected_bonus": true,
+          "actual_bonus": true,
+          "expectation_met": true,
+          "efficiency_ratio": 0.5
+        },
+        {
+          "scenario": "approaching_target",
+          "quality": 0.82,
+          "target_quality": 0.85,
+          "step": 20,
+          "max_steps": 50,
+          "target_bonus": 0.0,
+          "expected_bonus": true,
+          "actual_bonus": false,
+          "expectation_met": false,
+          "efficiency_ratio": 0.6
+        },
+        {
+          "scenario": "below_target_threshold",
+          "quality": 0.65,
+          "target_quality": 0.85,
+          "step": 20,
+          "max_steps": 50,
+          "target_bonus": 0.0,
+          "expected_bonus": false,
+          "actual_bonus": false,
+          "expectation_met": true,
+          "efficiency_ratio": 0.6
+        },
+        {
+          "scenario": "far_from_target",
+          "quality": 0.4,
+          "target_quality": 0.85,
+          "step": 30,
+          "max_steps": 50,
+          "target_bonus": 0.0,
+          "expected_bonus": false,
+          "actual_bonus": false,
+          "expectation_met": true,
+          "efficiency_ratio": 0.4
+        }
+      ]
+    },
+    "convergence_reward_tests": {
+      "success": false,
+      "tests_passed": 3,
+      "tests_total": 5,
+      "details": [
+        {
+          "scenario": "consistent_improvement",
+          "quality_sequence": [
+            0.7,
+            0.75,
+            0.8,
+            0.83,
+            0.85
+          ],
+          "convergence_rewards": [
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ],
+          "final_convergence_reward": 2.0,
+          "expected_reward_type": "positive",
+          "expectation_met": true,
+          "quality_trend": "improving"
+        },
+        {
+          "scenario": "consistent_degradation",
+          "quality_sequence": [
+            0.85,
+            0.82,
+            0.78,
+            0.75,
+            0.7
+          ],
+          "convergence_rewards": [
+            0.0,
+            0.0,
+            -1.0,
+            -1.0,
+            -1.0
+          ],
+          "final_convergence_reward": -1.0,
+          "expected_reward_type": "negative",
+          "expectation_met": true,
+          "quality_trend": "degrading"
+        },
+        {
+          "scenario": "oscillating_quality",
+          "quality_sequence": [
+            0.75,
+            0.85,
+            0.7,
+            0.88,
+            0.72
+          ],
+          "convergence_rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "final_convergence_reward": 0.0,
+          "expected_reward_type": "negative",
+          "expectation_met": false,
+          "quality_trend": "degrading"
+        },
+        {
+          "scenario": "stable_quality",
+          "quality_sequence": [
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8
+          ],
+          "convergence_rewards": [
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ],
+          "final_convergence_reward": 2.0,
+          "expected_reward_type": "zero_or_small",
+          "expectation_met": false,
+          "quality_trend": "degrading"
+        },
+        {
+          "scenario": "gradual_improvement",
+          "quality_sequence": [
+            0.75,
+            0.76,
+            0.77,
+            0.78,
+            0.79
+          ],
+          "convergence_rewards": [
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ],
+          "final_convergence_reward": 2.0,
+          "expected_reward_type": "positive",
+          "expectation_met": true,
+          "quality_trend": "improving"
+        }
+      ]
+    }
+  },
+  "edge_case_tests": {
+    "success": true,
+    "zero_negative_tests": {
+      "success": true,
+      "tests_passed": 4,
+      "tests_total": 4,
+      "details": [
+        {
+          "scenario": "zero_quality_improvement",
+          "total_reward": -75.0,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "expected_sign": "zero_or_negative",
+          "expectation_met": true,
+          "quality_change": 0.0,
+          "time_change": 0.0,
+          "size_change": 0.0
+        },
+        {
+          "scenario": "negative_quality_improvement",
+          "total_reward": -86.25000000000001,
+          "components": {
+            "quality_reward": -0.2500000000000002,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "expected_sign": "negative",
+          "expectation_met": true,
+          "quality_change": -0.050000000000000044,
+          "time_change": 0.0,
+          "size_change": 0.0
+        },
+        {
+          "scenario": "mixed_zero_negative",
+          "total_reward": -75.0,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "expected_sign": "negative",
+          "expectation_met": true,
+          "quality_change": 0.0,
+          "time_change": 0.04999999999999999,
+          "size_change": 2.0
+        },
+        {
+          "scenario": "extreme_negative",
+          "total_reward": -198.75,
+          "components": {
+            "quality_reward": -2.5,
+            "speed_reward": -0.5,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "expected_sign": "very_negative",
+          "expectation_met": true,
+          "quality_change": -0.5,
+          "time_change": 0.4,
+          "size_change": 40.0
+        }
+      ]
+    },
+    "conversion_failure_tests": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "scenario": "complete_failure",
+          "conversion_success": false,
+          "total_reward": -5.0,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": -10.0,
+            "step_penalty": 0.0
+          },
+          "has_failure_penalty": true,
+          "expected_penalty": true,
+          "expectation_met": true
+        },
+        {
+          "scenario": "partial_failure_low_quality",
+          "conversion_success": true,
+          "total_reward": -198.0,
+          "components": {
+            "quality_reward": -3.25,
+            "speed_reward": 0.0,
+            "size_reward": 0.5,
+            "target_bonus": 0.0,
+            "convergence_reward": -1.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -0.4
+          },
+          "has_failure_penalty": false,
+          "expected_penalty": false,
+          "expectation_met": true
+        },
+        {
+          "scenario": "timeout_failure",
+          "conversion_success": false,
+          "total_reward": -5.0,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": -10.0,
+            "step_penalty": 0.0
+          },
+          "has_failure_penalty": true,
+          "expected_penalty": true,
+          "expectation_met": true
+        }
+      ]
+    },
+    "extreme_value_tests": {
+      "success": true,
+      "tests_passed": 6,
+      "tests_total": 6,
+      "details": [
+        {
+          "scenario": "extreme_high_quality",
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 14.97,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 60.0,
+            "convergence_reward": -0.010542816,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "is_finite": "True",
+          "is_reasonable": true,
+          "expectation_met": true,
+          "extreme_values": {
+            "quality": 0.999,
+            "time": 0.1,
+            "size": 10.0
+          }
+        },
+        {
+          "scenario": "extreme_low_quality",
+          "total_reward": -188.379003,
+          "components": {
+            "quality_reward": -2.495,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": -0.014720039999999998,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "is_finite": "True",
+          "is_reasonable": true,
+          "expectation_met": true,
+          "extreme_values": {
+            "quality": 0.001,
+            "time": 0.1,
+            "size": 10.0
+          }
+        },
+        {
+          "scenario": "extreme_speed_improvement",
+          "total_reward": -53.606252999999995,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.9999,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": -0.014720039999999998,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "is_finite": "True",
+          "is_reasonable": true,
+          "expectation_met": true,
+          "extreme_values": {
+            "quality": 0.75,
+            "time": 0.001,
+            "size": 10.0
+          }
+        },
+        {
+          "scenario": "extreme_speed_degradation",
+          "total_reward": 63.750000000000014,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": -0.5,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 2.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "is_finite": "True",
+          "is_reasonable": true,
+          "expectation_met": true,
+          "extreme_values": {
+            "quality": 0.75,
+            "time": 100.0,
+            "size": 10.0
+          }
+        },
+        {
+          "scenario": "extreme_size_compression",
+          "total_reward": 82.50000000000001,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.0,
+            "size_reward": 1.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 2.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "is_finite": "True",
+          "is_reasonable": true,
+          "expectation_met": true,
+          "extreme_values": {
+            "quality": 0.75,
+            "time": 0.1,
+            "size": 0.1
+          }
+        },
+        {
+          "scenario": "extreme_size_expansion",
+          "total_reward": 75.0,
+          "components": {
+            "quality_reward": 0.0,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 2.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "is_finite": "True",
+          "is_reasonable": true,
+          "expectation_met": true,
+          "extreme_values": {
+            "quality": 0.75,
+            "time": 0.1,
+            "size": 1000.0
+          }
+        }
+      ]
+    }
+  },
+  "scaling_tests": {
+    "success": false,
+    "normalization_tests": {
+      "success": true,
+      "tests_passed": 4,
+      "tests_total": 4,
+      "details": [
+        {
+          "scenario": "normal_case",
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 0.9999999999999998,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 60.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "step": 25,
+          "max_steps": 50,
+          "is_finite": "True",
+          "is_clipped": true,
+          "components_finite": true,
+          "expectation_met": true,
+          "progress_ratio": 0.5
+        },
+        {
+          "scenario": "early_step",
+          "total_reward": 550.0,
+          "components": {
+            "quality_reward": 2.2500000000000004,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 68.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -0.2
+          },
+          "step": 5,
+          "max_steps": 50,
+          "is_finite": "True",
+          "is_clipped": true,
+          "components_finite": true,
+          "expectation_met": true,
+          "progress_ratio": 0.1
+        },
+        {
+          "scenario": "late_step",
+          "total_reward": 950.0,
+          "components": {
+            "quality_reward": 1.7999999999999998,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 52.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.8
+          },
+          "step": 45,
+          "max_steps": 50,
+          "is_finite": "True",
+          "is_clipped": true,
+          "components_finite": true,
+          "expectation_met": true,
+          "progress_ratio": 0.9
+        },
+        {
+          "scenario": "high_improvement",
+          "total_reward": 650.0,
+          "components": {
+            "quality_reward": 10.5,
+            "speed_reward": 0.6666666666666666,
+            "size_reward": 0.9750000000000001,
+            "target_bonus": 64.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -0.6
+          },
+          "step": 15,
+          "max_steps": 50,
+          "is_finite": "True",
+          "is_clipped": true,
+          "components_finite": true,
+          "expectation_met": true,
+          "progress_ratio": 0.3
+        }
+      ]
+    },
+    "gradient_tests": {
+      "success": false,
+      "tests_passed": 2,
+      "tests_total": 3,
+      "details": [
+        {
+          "test_case": "quality_gradient",
+          "parameter": "quality",
+          "values": [
+            0.7,
+            0.75,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "rewards": [
+            -86.25000000000001,
+            -75.0,
+            97.50000000000003,
+            750.0,
+            750.0
+          ],
+          "gradient_values": [
+            11.250000000000014,
+            172.50000000000003,
+            652.5,
+            0.0
+          ],
+          "expected_trend": "increasing",
+          "trend_correct": "True",
+          "gradient_magnitude": 209.0625,
+          "reasonable_magnitude": "True",
+          "expectation_met": "True"
+        },
+        {
+          "test_case": "speed_gradient",
+          "parameter": "time",
+          "values": [
+            0.05,
+            0.08,
+            0.1,
+            0.12,
+            0.15
+          ],
+          "rewards": [
+            -63.75,
+            -145.5,
+            75.0,
+            75.0,
+            75.0
+          ],
+          "gradient_values": [
+            -81.75,
+            220.5,
+            0.0,
+            0.0
+          ],
+          "expected_trend": "decreasing",
+          "trend_correct": "False",
+          "gradient_magnitude": 75.5625,
+          "reasonable_magnitude": "True",
+          "expectation_met": "False"
+        },
+        {
+          "test_case": "size_gradient",
+          "parameter": "size",
+          "values": [
+            5.0,
+            8.0,
+            10.0,
+            12.0,
+            15.0
+          ],
+          "rewards": [
+            79.875,
+            76.5,
+            75.0,
+            75.0,
+            75.0
+          ],
+          "gradient_values": [
+            -3.375,
+            -1.5,
+            0.0,
+            0.0
+          ],
+          "expected_trend": "decreasing",
+          "trend_correct": "True",
+          "gradient_magnitude": 1.21875,
+          "reasonable_magnitude": "True",
+          "expectation_met": "True"
+        }
+      ]
+    },
+    "stability_tests": {
+      "success": true,
+      "tests_passed": 2,
+      "tests_total": 2,
+      "details": [
+        {
+          "scenario": "identical_inputs",
+          "repetitions": 10,
+          "rewards": [
+            750.0,
+            750.0,
+            750.0,
+            750.0,
+            750.0,
+            750.0,
+            750.0,
+            750.0,
+            750.0,
+            750.0
+          ],
+          "reward_variance": 0.0,
+          "reward_std": 0.0,
+          "reward_range": 0.0,
+          "is_stable": "True",
+          "expectation_met": "True",
+          "mean_reward": 750.0
+        },
+        {
+          "scenario": "similar_inputs",
+          "repetitions": 5,
+          "rewards": [
+            750.0,
+            750.0,
+            750.0,
+            750.0,
+            750.0
+          ],
+          "reward_variance": 0.0,
+          "reward_std": 0.0,
+          "reward_range": 0.0,
+          "is_stable": "True",
+          "expectation_met": "True",
+          "mean_reward": 750.0
+        }
+      ]
+    }
+  },
+  "balancing_tests": {
+    "success": true,
+    "weight_combination_tests": {
+      "success": true,
+      "tests_passed": 4,
+      "tests_total": 4,
+      "details": [
+        {
+          "config": "quality_focused",
+          "weights": {
+            "quality": 0.8,
+            "speed": 0.15,
+            "size": 0.05
+          },
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 0.9999999999999998,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 60.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "weighted_components": {
+            "quality": 0.7999999999999998,
+            "speed": 0.030000000000000006,
+            "size": 0.010000000000000002
+          },
+          "weights_applied_correctly": true
+        },
+        {
+          "config": "speed_focused",
+          "weights": {
+            "quality": 0.4,
+            "speed": 0.5,
+            "size": 0.1
+          },
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 0.9999999999999998,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 60.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "weighted_components": {
+            "quality": 0.3999999999999999,
+            "speed": 0.10000000000000002,
+            "size": 0.020000000000000004
+          },
+          "weights_applied_correctly": true
+        },
+        {
+          "config": "size_focused",
+          "weights": {
+            "quality": 0.5,
+            "speed": 0.2,
+            "size": 0.3
+          },
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 0.9999999999999998,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 60.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "weighted_components": {
+            "quality": 0.4999999999999999,
+            "speed": 0.04000000000000001,
+            "size": 0.06
+          },
+          "weights_applied_correctly": true
+        },
+        {
+          "config": "balanced",
+          "weights": {
+            "quality": 0.6,
+            "speed": 0.3,
+            "size": 0.1
+          },
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 0.9999999999999998,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 60.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "weighted_components": {
+            "quality": 0.5999999999999999,
+            "speed": 0.06000000000000001,
+            "size": 0.020000000000000004
+          },
+          "weights_applied_correctly": true
+        }
+      ]
+    },
+    "adaptive_weight_tests": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "scenario": "early_episode_good_quality",
+          "episode_progress": 0.2,
+          "quality_progress": 0.8,
+          "performance_metrics": {
+            "avg_processing_time": 0.08,
+            "baseline_time": 0.1
+          },
+          "original_weights": {
+            "quality": 0.6,
+            "speed": 0.3,
+            "size": 0.1
+          },
+          "new_weights": {
+            "quality": 0.7619047619047619,
+            "speed": 0.19047619047619047,
+            "size": 0.047619047619047616
+          },
+          "weights_changed": true,
+          "weights_sum_to_one": true,
+          "expectation_met": true
+        },
+        {
+          "scenario": "mid_episode_slow_progress",
+          "episode_progress": 0.5,
+          "quality_progress": 0.3,
+          "performance_metrics": {
+            "avg_processing_time": 0.15,
+            "baseline_time": 0.1
+          },
+          "original_weights": {
+            "quality": 0.6000000000000001,
+            "speed": 0.30000000000000004,
+            "size": 0.10000000000000002
+          },
+          "new_weights": {
+            "quality": 0.6,
+            "speed": 0.3,
+            "size": 0.09999999999999999
+          },
+          "weights_changed": true,
+          "weights_sum_to_one": true,
+          "expectation_met": true
+        },
+        {
+          "scenario": "late_episode_speed_issue",
+          "episode_progress": 0.8,
+          "quality_progress": 0.6,
+          "performance_metrics": {
+            "avg_processing_time": 0.25,
+            "baseline_time": 0.1
+          },
+          "original_weights": {
+            "quality": 0.6000000000000001,
+            "speed": 0.30000000000000004,
+            "size": 0.10000000000000002
+          },
+          "new_weights": {
+            "quality": 0.6190476190476191,
+            "speed": 0.33333333333333337,
+            "size": 0.04761904761904763
+          },
+          "weights_changed": true,
+          "weights_sum_to_one": true,
+          "expectation_met": true
+        }
+      ]
+    },
+    "trade_off_tests": {
+      "success": true,
+      "tests_passed": 5,
+      "tests_total": 5,
+      "details": [
+        {
+          "scenario": "quality_vs_speed",
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 2.2500000000000004,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 60.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "changes": {
+            "quality": 0.15000000000000002,
+            "speed": -0.1,
+            "size": 0.0
+          },
+          "expected_outcome": "quality_dominates",
+          "expectation_met": true
+        },
+        {
+          "scenario": "speed_vs_quality",
+          "total_reward": -75.00000000000003,
+          "components": {
+            "quality_reward": -0.2500000000000002,
+            "speed_reward": 0.5,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "changes": {
+            "quality": -0.050000000000000044,
+            "speed": 0.05,
+            "size": 0.0
+          },
+          "expected_outcome": "depends_on_weights",
+          "expectation_met": true
+        },
+        {
+          "scenario": "size_vs_quality",
+          "total_reward": -157.5,
+          "components": {
+            "quality_reward": -0.2500000000000002,
+            "speed_reward": 0.0,
+            "size_reward": 0.5,
+            "target_bonus": 0.0,
+            "convergence_reward": -1.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "changes": {
+            "quality": -0.050000000000000044,
+            "speed": 0.0,
+            "size": 5.0
+          },
+          "expected_outcome": "depends_on_weights",
+          "expectation_met": true
+        },
+        {
+          "scenario": "all_improvements",
+          "total_reward": 750.0,
+          "components": {
+            "quality_reward": 0.9999999999999998,
+            "speed_reward": 0.20000000000000004,
+            "size_reward": 0.2,
+            "target_bonus": 60.0,
+            "convergence_reward": 2.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "changes": {
+            "quality": 0.09999999999999998,
+            "speed": 0.020000000000000004,
+            "size": 2.0
+          },
+          "expected_outcome": "positive_reward",
+          "expectation_met": true
+        },
+        {
+          "scenario": "all_degradations",
+          "total_reward": -97.49999999999997,
+          "components": {
+            "quality_reward": -0.4999999999999999,
+            "speed_reward": 0.0,
+            "size_reward": 0.0,
+            "target_bonus": 0.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -1.0
+          },
+          "changes": {
+            "quality": -0.09999999999999998,
+            "speed": -0.04999999999999999,
+            "size": -5.0
+          },
+          "expected_outcome": "negative_reward",
+          "expectation_met": true
+        }
+      ]
+    }
+  },
+  "visualization_tests": {
+    "success": true,
+    "visualizations_created": [
+      "reward_landscape_quality_speed.png",
+      "reward_landscape_quality_size.png",
+      "reward_component_contributions.png",
+      "reward_weight_sensitivity_heatmap.png"
+    ],
+    "plots_saved": [
+      "test_results/reward_function_visualizations/reward_landscape_quality_size.png",
+      "test_results/reward_function_visualizations/reward_weight_sensitivity_heatmap.png",
+      "test_results/reward_function_visualizations/reward_component_contributions.png",
+      "test_results/reward_function_visualizations/reward_landscape_quality_speed.png"
+    ]
+  },
+  "unit_tests": {
+    "success": false,
+    "individual_component_tests": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "component": "quality_reward",
+          "success": true,
+          "value": 0.9999999999999998,
+          "test": "positive_for_improvement"
+        },
+        {
+          "component": "speed_reward",
+          "success": true,
+          "value": 0.20000000000000004,
+          "test": "positive_for_improvement"
+        },
+        {
+          "component": "size_reward",
+          "success": true,
+          "value": 0.2,
+          "test": "positive_for_improvement"
+        }
+      ]
+    },
+    "calculation_accuracy_tests": {
+      "success": false,
+      "tests_passed": 0,
+      "tests_total": 1,
+      "details": [
+        {
+          "test": "quality_reward_accuracy",
+          "expected": 1.0000000000000009,
+          "actual": 1.5000000000000013,
+          "difference": 0.5000000000000004,
+          "tolerance": 0.1,
+          "is_accurate": false
+        }
+      ]
+    },
+    "configuration_tests": {
+      "success": true,
+      "tests_passed": 2,
+      "tests_total": 2,
+      "details": [
+        {
+          "test": "factory_function",
+          "config": "quality_focused",
+          "quality_weight": 0.8,
+          "speed_weight": 0.15,
+          "size_weight": 0.05,
+          "success": true
+        },
+        {
+          "test": "dynamic_configuration",
+          "original_quality_weight": 0.6,
+          "new_quality_weight": 0.8,
+          "configuration_applied": true,
+          "success": true
+        }
+      ]
+    }
+  },
+  "real_data_tests": {
+    "success": false,
+    "tests_conducted": 4,
+    "realistic_scenarios": [
+      {
+        "scenario": "simple_geometric_optimization",
+        "baseline_quality": 0.78,
+        "optimized_quality": 0.94,
+        "total_reward": 800.0,
+        "components": {
+          "quality_reward": 2.3999999999999986,
+          "speed_reward": 0.3333333333333333,
+          "size_reward": 0.3432000000000001,
+          "target_bonus": 58.0,
+          "convergence_reward": 0.0,
+          "failure_penalty": 0.0,
+          "step_penalty": -1.2
+        },
+        "expected_improvement": true,
+        "expectation_met": true,
+        "quality_delta": 0.15999999999999992,
+        "speed_delta": 0.039999999999999994,
+        "size_delta": 3.3000000000000007
+      },
+      {
+        "scenario": "text_logo_optimization",
+        "baseline_quality": 0.85,
+        "optimized_quality": 0.96,
+        "total_reward": 800.0,
+        "components": {
+          "quality_reward": 1.65,
+          "speed_reward": 0.26666666666666666,
+          "size_reward": 0.19672131147540992,
+          "target_bonus": 58.0,
+          "convergence_reward": 0.0,
+          "failure_penalty": 0.0,
+          "step_penalty": -1.2
+        },
+        "expected_improvement": true,
+        "expectation_met": true,
+        "quality_delta": 0.10999999999999999,
+        "speed_delta": 0.039999999999999994,
+        "size_delta": 3.6000000000000014
+      },
+      {
+        "scenario": "complex_gradient_optimization",
+        "baseline_quality": 0.72,
+        "optimized_quality": 0.84,
+        "total_reward": -0.7302793296089405,
+        "components": {
+          "quality_reward": 1.7999999999999998,
+          "speed_reward": 0.28,
+          "size_reward": 0.26871508379888265,
+          "target_bonus": 0.0,
+          "convergence_reward": 0.0,
+          "failure_penalty": 0.0,
+          "step_penalty": -1.2
+        },
+        "expected_improvement": true,
+        "expectation_met": false,
+        "quality_delta": 0.12,
+        "speed_delta": 0.07,
+        "size_delta": 7.399999999999999
+      },
+      {
+        "scenario": "failed_optimization_attempt",
+        "baseline_quality": 0.75,
+        "optimized_quality": 0.0,
+        "total_reward": -5.0,
+        "components": {
+          "quality_reward": 0.0,
+          "speed_reward": 0.0,
+          "size_reward": 0.0,
+          "target_bonus": 0.0,
+          "convergence_reward": 0.0,
+          "failure_penalty": -10.0,
+          "step_penalty": 0.0
+        },
+        "expected_improvement": false,
+        "expectation_met": true,
+        "quality_delta": -0.75,
+        "speed_delta": 0.1,
+        "size_delta": 15.0
+      }
+    ]
+  },
+  "validation_report": {
+    "report_timestamp": "2025-09-29T16:23:35.420510",
+    "report_type": "reward_function_validation",
+    "overall_validation": false,
+    "test_summary": {
+      "tests_passed": 3,
+      "tests_total": 6,
+      "pass_rate": 50.0,
+      "critical_failures": [
+        "component_tests"
+      ]
+    },
+    "detailed_results": 

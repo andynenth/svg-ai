@@ -1,0 +1,1 @@
+episode,timestamp,reward,length,quality_improvement,quality_final,quality_initial,termination_reason,success,policy_loss,value_loss,entropy,kl_divergence,learning_rate,gradient_norm,episode_time,memory_usage,logo_type,difficulty

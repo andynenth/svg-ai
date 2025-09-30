@@ -1,0 +1,59 @@
+{
+  "report_date": "2025-09-29",
+  "generation_time": "2025-09-29T18:36:45.515089",
+  "system_performance": {
+    "avg_api_response_time": 0.0,
+    "max_api_response_time": 0.0,
+    "api_requests_total": 0.0,
+    "avg_error_rate": 0.0,
+    "peak_queue_length": "0",
+    "avg_processing_time": 1.9228957006051774,
+    "total_successful_conversions": "26",
+    "total_failed_conversions": "4",
+    "success_rate": 0.8666666666666667
+  },
+  "quality_statistics": {
+    "avg_quality_improvement": 0.08375373561703794,
+    "max_quality_improvement": 0.17653816226128893,
+    "quality_improvement_std": 0.05294349764762271,
+    "method_quality_ranking": {
+      "method1": 0.07985390777521671,
+      "method2": 0.08263650721294587,
+      "method3": 0.08897202037778607
+    },
+    "logo_type_quality_stats": {
+      "mean": {
+        "complex": 0.08386925005658102,
+        "gradient": 0.12462575731822192,
+        "simple": 0.08520638842193846,
+        "text": 0.06418163126150161
+      },
+      "count": {
+        "complex": 9,
+        "gradient": 4,
+        "simple": 8,
+        "text": 9
+      }
+    }
+  },
+  "resource_utilization": {
+    "avg_cpu_percent": 33.5,
+    "max_cpu_percent": 33.5,
+    "avg_memory_percent": 73.9,
+    "max_memory_percent": 73.9,
+    "avg_gpu_utilization": 0.0,
+    "max_gpu_utilization": 0.0,
+    "avg_disk_usage": 7.9,
+    "resource_efficiency_score": 0.48417132216014896
+  },
+  "api_performance": {
+    "response_time_p95": 0.0,
+    "response_time_p99": 0.0,
+    "peak_requests_per_second": 0.0,
+    "avg_active_connections": 0.0,
+    "error_rate_trend": "stable"
+  },
+  "recommendations": [
+    "\ud83d\udfe1 Lower than expected quality improvements - review optimization methods"
+  ]
+}

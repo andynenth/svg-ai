@@ -1,0 +1,50 @@
+{
+    "simple": {
+        "default": {
+            "color_precision": 3,
+            "layer_difference": 5,
+            "corner_threshold": 30,
+            "length_threshold": 8.0,
+            "max_iterations": 8,
+            "splice_threshold": 30,
+            "path_precision": 10,
+            "mode": "spline"
+        }
+    },
+    "text": {
+        "default": {
+            "color_precision": 2,
+            "layer_difference": 8,
+            "corner_threshold": 20,
+            "length_threshold": 10.0,
+            "max_iterations": 10,
+            "splice_threshold": 40,
+            "path_precision": 10,
+            "mode": "spline"
+        }
+    },
+    "gradient": {
+        "default": {
+            "color_precision": 8,
+            "layer_difference": 8,
+            "corner_threshold": 60,
+            "length_threshold": 5.0,
+            "max_iterations": 12,
+            "splice_threshold": 60,
+            "path_precision": 6,
+            "mode": "spline"
+        }
+    },
+    "complex": {
+        "default": {
+            "color_precision": 6,
+            "layer_difference": 10,
+            "corner_threshold": 50,
+            "length_threshold": 4.0,
+            "max_iterations": 20,
+            "splice_threshold": 70,
+            "path_precision": 8,
+            "mode": "spline"
+        }
+    }
+}

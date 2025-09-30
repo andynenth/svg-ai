@@ -1,0 +1,43 @@
+# Optimization Worker Container - CPU/GPU intensive tasks
+FROM python:3.9-slim
+
+# Create non-root user
+RUN groupadd -g 1001 worker && \
+    useradd -r -u 1001 -g worker worker
+
+# Install build dependencies for optimization libraries
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy requirements and install all AI dependencies
+COPY requirements.txt requirements_ai_phase1.txt ./
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements_ai_phase1.txt
+
+# Copy worker-specific code
+COPY backend/ai_modules/ ./backend/ai_modules/
+COPY backend/converters/ ./backend/converters/
+COPY backend/utils/ ./backend/utils/
+
+# Create cache and model directories
+RUN mkdir -p /app/models /app/cache /app/logs && \
+    chown -R worker:worker /app
+
+USER worker
+
+# Health check for worker service
+HEALTHCHECK --interval=30s --timeout=15s --start-period=30s --retries=3 \
+    CMD python -c "import backend.ai_modules.optimization as opt; print('Worker healthy')" || exit 1
+
+# Environment for optimization work
+ENV PYTHONUNBUFFERED=1 \
+    CUDA_VISIBLE_DEVICES="" \
+    OMP_NUM_THREADS=4 \
+    WORKER_CONCURRENCY=2
+
+# No exposed port for worker service
+CMD ["python", "-m", "backend.ai_modules.optimization.training_orchestrator"]

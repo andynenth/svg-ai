@@ -1,0 +1,103 @@
+{
+  "monitoring": {
+    "data_directory": "monitoring_data",
+    "reports_directory": "reports",
+    "update_interval_seconds": 10,
+    "retention_days": 30,
+    "enable_real_time": true,
+    "enable_predictive_analytics": true
+  },
+  "thresholds": {
+    "api_response_time_warning": 0.1,
+    "api_response_time_critical": 0.2,
+    "cpu_utilization_warning": 70,
+    "cpu_utilization_critical": 85,
+    "memory_utilization_warning": 80,
+    "memory_utilization_critical": 90,
+    "queue_length_warning": 10,
+    "queue_length_critical": 20,
+    "success_rate_warning": 0.95,
+    "success_rate_critical": 0.90,
+    "quality_improvement_threshold": 0.05
+  },
+  "alerts": {
+    "enabled": true,
+    "channels": ["email", "webhook"],
+    "email": {
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 587,
+      "use_tls": true,
+      "from_email": "monitoring@svg-ai.com",
+      "to_emails": ["admin@svg-ai.com", "devops@svg-ai.com"],
+      "username": "",
+      "password": ""
+    },
+    "webhook": {
+      "url": "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
+      "enabled": false
+    }
+  },
+  "reports": {
+    "daily": {
+      "enabled": true,
+      "time": "09:00",
+      "email": true,
+      "include_visualizations": true
+    },
+    "weekly": {
+      "enabled": true,
+      "day": "monday",
+      "time": "08:00",
+      "email": true,
+      "include_trend_analysis": true
+    },
+    "custom": {
+      "enabled": true,
+      "default_hours": 24
+    }
+  },
+  "predictive_analytics": {
+    "capacity_planning": {
+      "forecast_days": 30,
+      "enable_auto_scaling_recommendations": true
+    },
+    "maintenance_scheduling": {
+      "enable_predictive_maintenance": true,
+      "check_interval_hours": 24
+    },
+    "cost_optimization": {
+      "enable_cost_analysis": true,
+      "currency": "USD",
+      "compute_cost_per_hour": 0.5,
+      "storage_cost_per_gb_month": 0.1
+    }
+  },
+  "grafana": {
+    "enabled": true,
+    "dashboard_url": "http://localhost:3000/d/svg-ai-monitoring",
+    "api_key": "",
+    "refresh_interval": "10s"
+  },
+  "database": {
+    "type": "sqlite",
+    "path": "monitoring_data/monitoring.db",
+    "backup_enabled": true,
+    "backup_interval_hours": 24
+  },
+  "api": {
+    "enabled": true,
+    "host": "0.0.0.0",
+    "port": 8080,
+    "enable_cors": true,
+    "rate_limiting": {
+      "enabled": true,
+      "requests_per_minute": 100
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "monitoring.log",
+    "max_file_size_mb": 100,
+    "backup_count": 5
+  }
+}

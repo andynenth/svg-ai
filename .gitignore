@@ -19,6 +19,10 @@ venv39/
 data/output/
 data/logos/
 data/raw_logos/
+data/cache/
+data/optimization_test/
+data/test/
+data/images/
 cache/
 # *.svg
 temp/

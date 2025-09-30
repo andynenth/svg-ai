@@ -1,0 +1,68 @@
+{
+  "created_at": "2025-09-29 17:42:42",
+  "dataset_path": "/Users/nrw/python/svg-ai/data/optimization_test",
+  "categories": {
+    "simple": {
+      "count": 5,
+      "images": [
+        "/Users/nrw/python/svg-ai/data/optimization_test/simple/1001419.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/simple/10075523.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/simple/1005141.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/simple/10075504.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/simple/10072999.png"
+      ],
+      "expected_complexity": [
+        0.1,
+        0.4
+      ],
+      "optimization_priority": "low"
+    },
+    "text": {
+      "count": 5,
+      "images": [
+        "/Users/nrw/python/svg-ai/data/optimization_test/text/10104391.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/text/1015322.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/text/10075525.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/text/101351.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/text/10078227.png"
+      ],
+      "expected_complexity": [
+        0.3,
+        0.5
+      ],
+      "optimization_priority": "medium"
+    },
+    "gradient": {
+      "count": 5,
+      "images": [
+        "/Users/nrw/python/svg-ai/data/optimization_test/gradient/10227591.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/gradient/1021220.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/gradient/10164584.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/gradient/10164583.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/gradient/1021202.png"
+      ],
+      "expected_complexity": [
+        0.5,
+        0.7
+      ],
+      "optimization_priority": "high"
+    },
+    "complex": {
+      "count": 5,
+      "images": [
+        "/Users/nrw/python/svg-ai/data/optimization_test/complex/10229090.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/complex/10238941.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/complex/10229180.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/complex/10235946.png",
+        "/Users/nrw/python/svg-ai/data/optimization_test/complex/10238722.png"
+      ],
+      "expected_complexity": [
+        0.7,
+        0.9
+      ],
+      "optimization_priority": "critical"
+    }
+  },
+  "total_images": 20,
+  "validation_ready": true
+}

@@ -1,0 +1,2617 @@
+{
+  "image_metadata": {
+    "data/logos/abstract/abstract_1_06.png": {
+      "file_path": "data/logos/abstract/abstract_1_06.png",
+      "category": "complex",
+      "file_size": 3656,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.552419702815384,
+      "complexity_score": 0.4924112875152926,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "5a3a88115bca6582",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_3_03.png": {
+      "file_path": "data/logos/abstract/abstract_3_03.png",
+      "category": "complex",
+      "file_size": 2821,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5566038557894443,
+      "complexity_score": 0.3397478826529537,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "4dbf444a41595a85",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_4_09.png": {
+      "file_path": "data/logos/abstract/abstract_4_09.png",
+      "category": "complex",
+      "file_size": 3165,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5439684983238197,
+      "complexity_score": 0.23891387198257136,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "e2c350129a9765a6",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_1_01.png": {
+      "file_path": "data/logos/abstract/abstract_1_01.png",
+      "category": "complex",
+      "file_size": 3656,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.552419702815384,
+      "complexity_score": 0.4924112875152926,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "5a3a88115bca6582",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_0_05.png": {
+      "file_path": "data/logos/abstract/abstract_0_05.png",
+      "category": "complex",
+      "file_size": 2416,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5500542835913755,
+      "complexity_score": 0.19580547182092894,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "61af585d75df4a9f",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_2_02.png": {
+      "file_path": "data/logos/abstract/abstract_2_02.png",
+      "category": "complex",
+      "file_size": 3703,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5731600680806027,
+      "complexity_score": 0.39159541475155696,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "5600fd4aaac593d6",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_2_07.png": {
+      "file_path": "data/logos/abstract/abstract_2_07.png",
+      "category": "complex",
+      "file_size": 3648,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.584989841731364,
+      "complexity_score": 0.3969685609113921,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "fdf7576a922923c2",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_0_00.png": {
+      "file_path": "data/logos/abstract/abstract_0_00.png",
+      "category": "complex",
+      "file_size": 2416,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5500542835913755,
+      "complexity_score": 0.19580547182092894,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "61af585d75df4a9f",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_3_08.png": {
+      "file_path": "data/logos/abstract/abstract_3_08.png",
+      "category": "complex",
+      "file_size": 3067,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5446945290383108,
+      "complexity_score": 0.2960448509167882,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "9b86bf2ca04ac8a8",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/abstract/abstract_4_04.png": {
+      "file_path": "data/logos/abstract/abstract_4_04.png",
+      "category": "complex",
+      "file_size": 2827,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5525001422758412,
+      "complexity_score": 0.20999479887621517,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "2ecaf73de1f677f3",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_web_05.png": {
+      "file_path": "data/logos/text_based/text_web_05.png",
+      "category": "text",
+      "file_size": 2649,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5560268750016888,
+      "complexity_score": 0.16122108573173752,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "df62e4309251e1a7",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_data_02.png": {
+      "file_path": "data/logos/text_based/text_data_02.png",
+      "category": "text",
+      "file_size": 2427,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5532649218918642,
+      "complexity_score": 0.15072570291565027,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "12b97c0fa0293cd7",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_net_07.png": {
+      "file_path": "data/logos/text_based/text_net_07.png",
+      "category": "text",
+      "file_size": 1452,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.25950430594010493,
+      "complexity_score": 0.08114600282342493,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "185a7b80323888e7",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_tech_00.png": {
+      "file_path": "data/logos/text_based/text_tech_00.png",
+      "category": "text",
+      "file_size": 3469,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.3945945215669348,
+      "complexity_score": 0.18951892737893422,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "947a68d40ac88b79",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_soft_08.png": {
+      "file_path": "data/logos/text_based/text_soft_08.png",
+      "category": "text",
+      "file_size": 3068,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.282270451029746,
+      "complexity_score": 0.10115626833726213,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "655c69de41346908",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_ai_04.png": {
+      "file_path": "data/logos/text_based/text_ai_04.png",
+      "category": "text",
+      "file_size": 1715,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.33563960169246465,
+      "complexity_score": 0.05631579985418608,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "8db54cbd787b5289",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_app_06.png": {
+      "file_path": "data/logos/text_based/text_app_06.png",
+      "category": "text",
+      "file_size": 3605,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5595330269566693,
+      "complexity_score": 0.2464016248513387,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "93025c7e45f2bceb",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_code_09.png": {
+      "file_path": "data/logos/text_based/text_code_09.png",
+      "category": "text",
+      "file_size": 4764,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5277440823873489,
+      "complexity_score": 0.22268202020408415,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "811705778832b3b5",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_cloud_03.png": {
+      "file_path": "data/logos/text_based/text_cloud_03.png",
+      "category": "text",
+      "file_size": 4874,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.2966297456177915,
+      "complexity_score": 0.1888745604559052,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "903cdd4e36eb2517",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/text_based/text_corp_01.png": {
+      "file_path": "data/logos/text_based/text_corp_01.png",
+      "category": "text",
+      "file_size": 3507,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5547614512396225,
+      "complexity_score": 0.17355535279499998,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "ad976b1d20cc42e5",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_08.png": {
+      "file_path": "data/logos/complex/complex_multi_08.png",
+      "category": "complex",
+      "file_size": 1745,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5230210922665077,
+      "complexity_score": 0.18635470112595132,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "6b3e76da629ee69d",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_09.png": {
+      "file_path": "data/logos/complex/complex_multi_09.png",
+      "category": "complex",
+      "file_size": 1399,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5224421913585289,
+      "complexity_score": 0.21775810045717886,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "75f0035f794ebaa8",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_02.png": {
+      "file_path": "data/logos/complex/complex_multi_02.png",
+      "category": "complex",
+      "file_size": 1495,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.4590447078761186,
+      "complexity_score": 0.12933887675483613,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "c326e72fefddf016",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_03.png": {
+      "file_path": "data/logos/complex/complex_multi_03.png",
+      "category": "complex",
+      "file_size": 1597,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.40431831734185303,
+      "complexity_score": 0.17347212930764683,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "d3ac54c82d069991",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_01.png": {
+      "file_path": "data/logos/complex/complex_multi_01.png",
+      "category": "complex",
+      "file_size": 1620,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.2994164343978635,
+      "complexity_score": 0.11356288495544273,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "86576687b50e941e",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_00.png": {
+      "file_path": "data/logos/complex/complex_multi_00.png",
+      "category": "complex",
+      "file_size": 919,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.2380612701696997,
+      "complexity_score": 0.11900953539750844,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "39abe693e4a04d61",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_04.png": {
+      "file_path": "data/logos/complex/complex_multi_04.png",
+      "category": "complex",
+      "file_size": 1242,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.5367031960862642,
+      "complexity_score": 0.21656101314228188,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "c96ab3c853476a65",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_05.png": {
+      "file_path": "data/logos/complex/complex_multi_05.png",
+      "category": "complex",
+      "file_size": 1121,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.6164342622230778,
+      "complexity_score": 0.1941912660330618,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "efee2794ab07cef4",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_07.png": {
+      "file_path": "data/logos/complex/complex_multi_07.png",
+      "category": "complex",
+      "file_size": 1534,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.22763930172586366,
+      "complexity_score": 0.12197984494764758,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "7e7b3c428b1a72e0",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/complex/complex_multi_06.png": {
+      "file_path": "data/logos/complex/complex_multi_06.png",
+      "category": "complex",
+      "file_size": 1738,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.6049024173380819,
+      "complexity_score": 0.20940178830271503,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "ac115af71b2bcbc5",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/cross_08.png": {
+      "file_path": "data/logos/simple_geometric/cross_08.png",
+      "category": "simple",
+      "file_size": 903,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.154385243077243,
+      "complexity_score": 0.09437609927283352,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "a2e0c7fbf3682395",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/square_01.png": {
+      "file_path": "data/logos/simple_geometric/square_01.png",
+      "category": "simple",
+      "file_size": 883,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.14224007350173434,
+      "complexity_score": 0.09897604133211074,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "4fac88141204f453",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/oval_07.png": {
+      "file_path": "data/logos/simple_geometric/oval_07.png",
+      "category": "simple",
+      "file_size": 1310,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.10749993152830929,
+      "complexity_score": 0.048417131733495725,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "7f599034b35c6c66",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/hexagon_04.png": {
+      "file_path": "data/logos/simple_geometric/hexagon_04.png",
+      "category": "simple",
+      "file_size": 1267,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.44829361154832265,
+      "complexity_score": 0.14869793213090282,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "a1210c159261507e",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/circle_00.png": {
+      "file_path": "data/logos/simple_geometric/circle_00.png",
+      "category": "simple",
+      "file_size": 1358,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.2547965605810124,
+      "complexity_score": 0.1137661415241873,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "20add7b239f45a25",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/star_05.png": {
+      "file_path": "data/logos/simple_geometric/star_05.png",
+      "category": "simple",
+      "file_size": 1391,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.1690079900932542,
+      "complexity_score": 0.07946004712154503,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "24d2dc246cd10fc1",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/pentagon_03.png": {
+      "file_path": "data/logos/simple_geometric/pentagon_03.png",
+      "category": "simple",
+      "file_size": 1317,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.4435957711885255,
+      "complexity_score": 0.14498208602082804,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "e60c403db4c8a53a",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/arrow_09.png": {
+      "file_path": "data/logos/simple_geometric/arrow_09.png",
+      "category": "simple",
+      "file_size": 1083,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.1714479642619129,
+      "complexity_score": 0.04110422085937952,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "913a53051f42f878",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/diamond_06.png": {
+      "file_path": "data/logos/simple_geometric/diamond_06.png",
+      "category": "simple",
+      "file_size": 1637,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.16419413251266018,
+      "complexity_score": 0.0841351277234888,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "77b5282251e1911f",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/simple_geometric/triangle_02.png": {
+      "file_path": "data/logos/simple_geometric/triangle_02.png",
+      "category": "simple",
+      "file_size": 1268,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.1631925341089256,
+      "complexity_score": 0.08037732202740433,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "506d277945a20da3",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_06.png": {
+      "file_path": "data/logos/gradients/gradient_radial_06.png",
+      "category": "gradient",
+      "file_size": 3974,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.7412636783681946,
+      "complexity_score": 0.2682839790133521,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "0eefa718997c33ee",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_07.png": {
+      "file_path": "data/logos/gradients/gradient_radial_07.png",
+      "category": "gradient",
+      "file_size": 4117,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.33991096358301015,
+      "complexity_score": 0.19240232433981047,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "113898feb5368184",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_05.png": {
+      "file_path": "data/logos/gradients/gradient_radial_05.png",
+      "category": "gradient",
+      "file_size": 3840,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.3219066255395893,
+      "complexity_score": 0.18902901574554176,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "206eeb896afa8fd6",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_04.png": {
+      "file_path": "data/logos/gradients/gradient_radial_04.png",
+      "category": "gradient",
+      "file_size": 3848,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.6284856576652563,
+      "complexity_score": 0.23359135389955613,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "a5d2f312ecdcb168",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_00.png": {
+      "file_path": "data/logos/gradients/gradient_radial_00.png",
+      "category": "gradient",
+      "file_size": 3809,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.7163484882123013,
+      "complexity_score": 0.25251804925402294,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "89af32b443a8ef88",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_01.png": {
+      "file_path": "data/logos/gradients/gradient_radial_01.png",
+      "category": "gradient",
+      "file_size": 3809,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.4204959263062095,
+      "complexity_score": 0.2058831907470368,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "a4072f3fa5314a98",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_03.png": {
+      "file_path": "data/logos/gradients/gradient_radial_03.png",
+      "category": "gradient",
+      "file_size": 3837,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.22498109042263728,
+      "complexity_score": 0.16511038098964387,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "70655416af6b42d1",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_02.png": {
+      "file_path": "data/logos/gradients/gradient_radial_02.png",
+      "category": "gradient",
+      "file_size": 3805,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.7665569814029233,
+      "complexity_score": 0.2841518910963334,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "998476bd36ad6e63",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_09.png": {
+      "file_path": "data/logos/gradients/gradient_radial_09.png",
+      "category": "gradient",
+      "file_size": 3963,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.7822929819594572,
+      "complexity_score": 0.2939963342575531,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "bcb77a9dd699ef67",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    },
+    "data/logos/gradients/gradient_radial_08.png": {
+      "file_path": "data/logos/gradients/gradient_radial_08.png",
+      "category": "gradient",
+      "file_size": 3965,
+      "dimensions": [
+        256,
+        256
+      ],
+      "color_channels": 4,
+      "bit_depth": 8,
+      "quality_score": 0.7173999904905042,
+      "complexity_score": 0.253165978185495,
+      "has_transparency": true,
+      "dominant_colors": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "file_hash": "8b226b200d007937",
+      "validation_status": "valid",
+      "validation_messages": [
+        "Image passed all validations"
+      ]
+    }
+  },
+  "category_images": {
+    "simple": [
+      "data/logos/simple_geometric/hexagon_04.png",
+      "data/logos/simple_geometric/pentagon_03.png",
+      "data/logos/simple_geometric/circle_00.png",
+      "data/logos/simple_geometric/arrow_09.png",
+      "data/logos/simple_geometric/star_05.png",
+      "data/logos/simple_geometric/diamond_06.png",
+      "data/logos/simple_geometric/triangle_02.png",
+      "data/logos/simple_geometric/cross_08.png",
+      "data/logos/simple_geometric/square_01.png",
+      "data/logos/simple_geometric/oval_07.png"
+    ],
+    "text": [
+      "data/logos/text_based/text_app_06.png",
+      "data/logos/text_based/text_web_05.png",
+      "data/logos/text_based/text_corp_01.png",
+      "data/logos/text_based/text_data_02.png",
+      "data/logos/text_based/text_code_09.png",
+      "data/logos/text_based/text_tech_00.png",
+      "data/logos/text_based/text_ai_04.png",
+      "data/logos/text_based/text_cloud_03.png",
+      "data/logos/text_based/text_soft_08.png",
+      "data/logos/text_based/text_net_07.png"
+    ],
+    "gradient": [
+      "data/logos/gradients/gradient_radial_09.png",
+      "data/logos/gradients/gradient_radial_02.png",
+      "data/logos/gradients/gradient_radial_06.png",
+      "data/logos/gradients/gradient_radial_08.png",
+      "data/logos/gradients/gradient_radial_00.png",
+      "data/logos/gradients/gradient_radial_04.png",
+      "data/logos/gradients/gradient_radial_01.png",
+      "data/logos/gradients/gradient_radial_07.png",
+      "data/logos/gradients/gradient_radial_05.png",
+      "data/logos/gradients/gradient_radial_03.png"
+    ],
+    "complex": [
+      "data/logos/complex/complex_multi_05.png",
+      "data/logos/complex/complex_multi_06.png",
+      "data/logos/abstract/abstract_2_07.png",
+      "data/logos/abstract/abstract_2_02.png",
+      "data/logos/abstract/abstract_3_03.png",
+      "data/logos/abstract/abstract_4_04.png",
+      "data/logos/abstract/abstract_1_06.png",
+      "data/logos/abstract/abstract_1_01.png",
+      "data/logos/abstract/abstract_0_05.png",
+      "data/logos/abstract/abstract_0_00.png",
+      "data/logos/abstract/abstract_3_08.png",
+      "data/logos/abstract/abstract_4_09.png",
+      "data/logos/complex/complex_multi_04.png",
+      "data/logos/complex/complex_multi_08.png",
+      "data/logos/complex/complex_multi_09.png",
+      "data/logos/complex/complex_multi_02.png",
+      "data/logos/complex/complex_multi_03.png",
+      "data/logos/complex/complex_multi_01.png",
+      "data/logos/complex/complex_multi_00.png",
+      "data/logos/complex/complex_multi_07.png"
+    ]
+  },
+  "dataset_splits": {},
+  "cache_version": "1.0",
+  "created_at": 1759189849.4758
+}

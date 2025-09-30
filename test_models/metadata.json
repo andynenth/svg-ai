@@ -1,0 +1,89 @@
+{
+  "trained": true,
+  "target_parameters": [
+    "corner_threshold",
+    "color_precision",
+    "path_precision",
+    "length_threshold",
+    "splice_threshold",
+    "max_iterations"
+  ],
+  "input_features": [
+    "edge_density",
+    "unique_colors",
+    "entropy",
+    "corner_density",
+    "gradient_strength",
+    "complexity_score"
+  ],
+  "model_performance": {
+    "corner_threshold": {
+      "algorithm": "gradient_boost",
+      "r2_score": 0.9950221524493689,
+      "mse": 0.5865273322719833,
+      "cv_score": 0.9822245392254692,
+      "training_samples": 80
+    },
+    "color_precision": {
+      "algorithm": "gradient_boost",
+      "r2_score": 0.988955563003041,
+      "mse": 0.050003688503731956,
+      "cv_score": 0.9972389342418545,
+      "training_samples": 80
+    },
+    "path_precision": {
+      "algorithm": "linear",
+      "r2_score": 0.9917235083013386,
+      "mse": 0.12985815475199802,
+      "cv_score": 0.9965856619777297,
+      "training_samples": 80
+    },
+    "length_threshold": {
+      "algorithm": "random_forest",
+      "r2_score": 0.9976402216456202,
+      "mse": 0.06427808597116273,
+      "cv_score": 0.9949574246727482,
+      "training_samples": 80
+    },
+    "splice_threshold": {
+      "algorithm": "linear",
+      "r2_score": 0.9998539518489411,
+      "mse": 0.09171641326307015,
+      "cv_score": 0.9997988747972789,
+      "training_samples": 80
+    },
+    "max_iterations": {
+      "algorithm": "linear",
+      "r2_score": 0.9912693469525599,
+      "mse": 0.09802340709013455,
+      "cv_score": 0.9937947651580435,
+      "training_samples": 80
+    }
+  },
+  "feature_importance": {
+    "corner_threshold": {
+      "edge_density": 0.9951511027615111,
+      "unique_colors": 0.0002938701011269769,
+      "entropy": 0.0013332365960924222,
+      "corner_density": 0.0006554829815959191,
+      "gradient_strength": 0.0020136660683509333,
+      "complexity_score": 0.0005526414913226067
+    },
+    "color_precision": {
+      "edge_density": 9.967334844395645e-17,
+      "unique_colors": 0.37857684724804597,
+      "entropy": 0.3523717097174993,
+      "corner_density": 5.4169590375185686e-17,
+      "gradient_strength": 0.2690514430344542,
+      "complexity_score": 2.2626221210558325e-16
+    },
+    "length_threshold": {
+      "edge_density": 0.0017530076785596308,
+      "unique_colors": 0.0008139141057847954,
+      "entropy": 0.0008342819791740417,
+      "corner_density": 0.9940632331088145,
+      "gradient_strength": 0.0013011192039852854,
+      "complexity_score": 0.0012344439236818261
+    }
+  }
+}

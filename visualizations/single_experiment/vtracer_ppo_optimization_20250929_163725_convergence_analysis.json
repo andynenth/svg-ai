@@ -1,0 +1,9 @@
+{
+  "reward_convergence": {
+    "convergence_rate": -3.0307521499130835e-05,
+    "stability_index": 0.9955565820850092,
+    "final_trend": 0.0011980198019801971,
+    "r_squared": 0.26794897604363
+  },
+  "estimated_convergence_episode": null
+}

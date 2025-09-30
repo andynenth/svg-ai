@@ -1,0 +1,1252 @@
+{
+  "gymnasium_compliance": {
+    "success": true,
+    "required_methods": [
+      {
+        "method": "reset",
+        "present": true,
+        "callable": true
+      },
+      {
+        "method": "step",
+        "present": true,
+        "callable": true
+      },
+      {
+        "method": "close",
+        "present": true,
+        "callable": true
+      },
+      {
+        "method": "render",
+        "present": true,
+        "callable": true
+      },
+      {
+        "method": "__init__",
+        "present": true,
+        "callable": true
+      },
+      {
+        "method": "action_space",
+        "present": true,
+        "callable": false
+      },
+      {
+        "method": "observation_space",
+        "present": true,
+        "callable": false
+      }
+    ],
+    "optional_methods": [
+      {
+        "method": "seed",
+        "present": false,
+        "callable": false
+      },
+      {
+        "method": "__str__",
+        "present": true,
+        "callable": true
+      },
+      {
+        "method": "__repr__",
+        "present": true,
+        "callable": true
+      }
+    ],
+    "interface_violations": [],
+    "details": {
+      "action_space": {
+        "valid": true,
+        "type": "<class 'gymnasium.spaces.box.Box'>",
+        "shape": [
+          7
+        ],
+        "dtype": "float32",
+        "bounds": {
+          "low": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "high": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bounded": true
+        },
+        "sampling": {
+          "can_sample": true,
+          "sample_shape": [
+            7
+          ],
+          "sample_dtype": "float32",
+          "in_bounds": true
+        }
+      },
+      "observation_space": {
+        "valid": true,
+        "type": "<class 'gymnasium.spaces.box.Box'>",
+        "shape": [
+          15
+        ],
+        "dtype": "float32",
+        "bounds": {
+          "low": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "high": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bounded": true
+        },
+        "sampling": {
+          "can_sample": true,
+          "sample_shape": [
+            15
+          ],
+          "sample_dtype": "float32",
+          "in_bounds": true
+        }
+      },
+      "registration": {
+        "can_register": true,
+        "registration_attempted": true,
+        "error": null
+      }
+    }
+  },
+  "lifecycle_tests": {
+    "success": true,
+    "initialization": {
+      "success": true,
+      "tests_passed": 4,
+      "tests_total": 4,
+      "details": [
+        {
+          "test": "default_parameters",
+          "success": true,
+          "init_time": 0.0026459693908691406,
+          "image_path": "test-data/circle_00.png",
+          "kwargs": {}
+        },
+        {
+          "test": "custom_target_quality",
+          "success": true,
+          "init_time": 0.006494998931884766,
+          "image_path": "test-data/circle_00.png",
+          "kwargs": {
+            "target_quality": 0.9
+          }
+        },
+        {
+          "test": "custom_max_steps",
+          "success": true,
+          "init_time": 0.0026040077209472656,
+          "image_path": "test-data/circle_00.png",
+          "kwargs": {
+            "max_steps": 25
+          }
+        },
+        {
+          "test": "different_image",
+          "success": true,
+          "init_time": 0.002615690231323242,
+          "image_path": "test-data/text_tech_00.png",
+          "kwargs": {}
+        }
+      ]
+    },
+    "reset_functionality": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "test": "basic_reset",
+          "success": true,
+          "obs_shape": [
+            15
+          ],
+          "info_keys": [
+            "episode",
+            "step",
+            "baseline_quality",
+            "current_params"
+          ]
+        },
+        {
+          "test": "reset_with_seed",
+          "success": true,
+          "deterministic": false
+        },
+        {
+          "test": "consecutive_resets",
+          "success": true,
+          "reset_count": 3
+        }
+      ]
+    },
+    "step_functionality": {
+      "success": true,
+      "tests_passed": 5,
+      "tests_total": 5,
+      "details": [
+        {
+          "test": "valid_action",
+          "success": true,
+          "action_shape": [
+            7
+          ],
+          "reward": -38.15047351560194,
+          "done": false,
+          "truncated": false,
+          "obs_shape": [
+            15
+          ]
+        },
+        {
+          "test": "boundary_action_0",
+          "success": true,
+          "action": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reward": -38.09191194863916
+        },
+        {
+          "test": "boundary_action_1",
+          "success": true,
+          "action": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward": -41.27069673801803
+        },
+        {
+          "test": "boundary_action_2",
+          "success": true,
+          "action": [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "reward": -43.80047046118436
+        },
+        {
+          "test": "episode_completion",
+          "success": true,
+          "steps_taken": 10,
+          "terminated": false
+        }
+      ]
+    },
+    "cleanup": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "test": "normal_close",
+          "success": true
+        },
+        {
+          "test": "multiple_closes",
+          "success": true
+        },
+        {
+          "test": "context_manager",
+          "success": true
+        }
+      ]
+    },
+    "details": []
+  },
+  "space_tests": {
+    "success": true,
+    "action_space_tests": {
+      "success": true,
+      "shape_valid": true,
+      "bounds_valid": true,
+      "dtype_valid": true,
+      "details": {
+        "shape": {
+          "expected": [
+            7
+          ],
+          "actual": [
+            7
+          ],
+          "valid": true
+        },
+        "bounds": {
+          "low": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "high": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "normalized_to_01": true
+        },
+        "dtype": {
+          "expected": "<class 'numpy.float32'>",
+          "actual": "float32",
+          "valid": true
+        }
+      }
+    },
+    "observation_space_tests": {
+      "success": true,
+      "shape_valid": true,
+      "bounds_valid": true,
+      "dtype_valid": true,
+      "details": {
+        "shape": {
+          "expected": [
+            15
+          ],
+          "actual": [
+            15
+          ],
+          "valid": true,
+          "breakdown": "6 features + 7 params + 2 quality metrics = 15"
+        },
+        "bounds": {
+          "low": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "high": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "normalized_to_01": true
+        },
+        "dtype": {
+          "expected": "<class 'numpy.float32'>",
+          "actual": "float32",
+          "valid": true
+        }
+      }
+    },
+    "sampling_tests": {
+      "success": true,
+      "action_sampling": {
+        "samples_tested": 10,
+        "successful_samples": 10,
+        "details": [
+          {
+            "sample_id": 0,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.14935357868671417,
+            "max_value": 0.838297426700592
+          },
+          {
+            "sample_id": 1,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.18111290037631989,
+            "max_value": 0.9243096709251404
+          },
+          {
+            "sample_id": 2,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.25834935903549194,
+            "max_value": 0.970450222492218
+          },
+          {
+            "sample_id": 3,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.10302691161632538,
+            "max_value": 0.956498384475708
+          },
+          {
+            "sample_id": 4,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.019254518672823906,
+            "max_value": 0.9923838973045349
+          },
+          {
+            "sample_id": 5,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.16454088687896729,
+            "max_value": 0.9506229162216187
+          },
+          {
+            "sample_id": 6,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.020607419312000275,
+            "max_value": 0.9866953492164612
+          },
+          {
+            "sample_id": 7,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.005092001054435968,
+            "max_value": 0.9365992546081543
+          },
+          {
+            "sample_id": 8,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.03674647957086563,
+            "max_value": 0.9156494140625
+          },
+          {
+            "sample_id": 9,
+            "success": true,
+            "shape": [
+              7
+            ],
+            "min_value": 0.3328005075454712,
+            "max_value": 0.9882213473320007
+          }
+        ]
+      },
+      "observation_sampling": {
+        "samples_tested": 5,
+        "successful_samples": 5,
+        "details": [
+          {
+            "sample_id": 0,
+            "success": true,
+            "shape": [
+              15
+            ],
+            "min_value": 0.031248176470398903,
+            "max_value": 0.9906756281852722
+          },
+          {
+            "sample_id": 1,
+            "success": true,
+            "shape": [
+              15
+            ],
+            "min_value": 0.05905909836292267,
+            "max_value": 0.942098081111908
+          },
+          {
+            "sample_id": 2,
+            "success": true,
+            "shape": [
+              15
+            ],
+            "min_value": 0.011289394460618496,
+            "max_value": 0.9890272617340088
+          },
+          {
+            "sample_id": 3,
+            "success": true,
+            "shape": [
+              15
+            ],
+            "min_value": 0.0028174964245408773,
+            "max_value": 0.8563404679298401
+          },
+          {
+            "sample_id": 4,
+            "success": true,
+            "shape": [
+              15
+            ],
+            "min_value": 0.030632199719548225,
+            "max_value": 0.8935010433197021
+          }
+        ]
+      },
+      "contains_tests": {
+        "success": true,
+        "action_contains": [
+          {
+            "test_id": "valid_0",
+            "action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected_contains": true,
+            "actual_contains": true,
+            "success": true
+          },
+          {
+            "test_id": "valid_1",
+            "action": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "expected_contains": true,
+            "actual_contains": true,
+            "success": true
+          },
+          {
+            "test_id": "valid_2",
+            "action": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "expected_contains": true,
+            "actual_contains": true,
+            "success": true
+          },
+          {
+            "test_id": "valid_3",
+            "action": [
+              0.2894902527332306,
+              0.45589521527290344,
+              0.26434874534606934,
+              0.9574421048164368,
+              0.9622752070426941,
+              0.29061877727508545,
+              0.6558969616889954
+            ],
+            "expected_contains": true,
+            "actual_contains": true,
+            "success": true
+          },
+          {
+            "test_id": "invalid_0",
+            "action": [
+              -0.10000000149011612,
+              -0.10000000149011612,
+              -0.10000000149011612,
+              -0.10000000149011612,
+              -0.10000000149011612,
+              -0.10000000149011612,
+              -0.10000000149011612
+            ],
+            "expected_contains": false,
+            "actual_contains": false,
+            "success": true
+          },
+          {
+            "test_id": "invalid_1",
+            "action": [
+              1.100000023841858,
+              1.100000023841858,
+              1.100000023841858,
+              1.100000023841858,
+              1.100000023841858,
+              1.100000023841858,
+              1.100000023841858
+            ],
+            "expected_contains": false,
+            "actual_contains": false,
+            "success": true
+          },
+          {
+            "test_id": "invalid_2",
+            "action": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "expected_contains": false,
+            "actual_contains": false,
+            "success": true
+          }
+        ],
+        "observation_contains": [
+          {
+            "test_id": "valid_sample",
+            "expected_contains": true,
+            "actual_contains": true,
+            "success": true
+          }
+        ]
+      }
+    }
+  },
+  "determinism_tests": {
+    "success": false,
+    "seed_reproducibility": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "seed": 42,
+          "success": true,
+          "initial_obs_similar": false,
+          "trajectory_length_same": true,
+          "trajectory1_length": 3,
+          "trajectory2_length": 3,
+          "note": "Perfect determinism may not be possible due to VTracer randomness"
+        },
+        {
+          "seed": 123,
+          "success": true,
+          "initial_obs_similar": false,
+          "trajectory_length_same": true,
+          "trajectory1_length": 3,
+          "trajectory2_length": 3,
+          "note": "Perfect determinism may not be possible due to VTracer randomness"
+        },
+        {
+          "seed": 456,
+          "success": true,
+          "initial_obs_similar": false,
+          "trajectory_length_same": true,
+          "trajectory1_length": 3,
+          "trajectory2_length": 3,
+          "note": "Perfect determinism may not be possible due to VTracer randomness"
+        }
+      ]
+    },
+    "parameter_mapping_consistency": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "action_id": 0,
+          "action": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "success": true,
+          "consistent_mapping": true,
+          "sample_params": {
+            "color_precision": 2,
+            "layer_difference": 1,
+            "corner_threshold": 10,
+            "length_threshold": 1.0,
+            "max_iterations": 5,
+            "splice_threshold": 10,
+            "path_precision": 1,
+            "mode": "spline"
+          },
+          "trials": 3
+        },
+        {
+          "action_id": 1,
+          "action": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "success": true,
+          "consistent_mapping": true,
+          "sample_params": {
+            "color_precision": 10,
+            "layer_difference": 20,
+            "corner_threshold": 110,
+            "length_threshold": 20.0,
+            "max_iterations": 20,
+            "splice_threshold": 100,
+            "path_precision": 20,
+            "mode": "spline"
+          },
+          "trials": 3
+        },
+        {
+          "action_id": 2,
+          "action": [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "success": true,
+          "consistent_mapping": true,
+          "sample_params": {
+            "color_precision": 10,
+            "layer_difference": 16,
+            "corner_threshold": 45,
+            "length_threshold": 20.0,
+            "max_iterations": 20,
+            "splice_threshold": 90,
+            "path_precision": 17,
+            "mode": "spline"
+          },
+          "trials": 3
+        }
+      ]
+    },
+    "reward_calculation_consistency": {
+      "success": false,
+      "tests_passed": 2,
+      "tests_total": 2,
+      "details": [
+        {
+          "scenario": "identical_results",
+          "success": true,
+          "reward_consistent": true,
+          "components_consistent": false,
+          "rewards": [
+            550.0,
+            550.0,
+            550.0
+          ],
+          "sample_components": {
+            "quality_reward": 0.9999999999999998,
+            "speed_reward": 0.1666666666666666,
+            "size_reward": 0.16666666666666666,
+            "target_bonus": 68.0,
+            "convergence_reward": 0.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -0.2
+          }
+        },
+        {
+          "scenario": "quality_improvement",
+          "success": true,
+          "reward_consistent": true,
+          "components_consistent": true,
+          "rewards": [
+            550.0,
+            550.0,
+            550.0
+          ],
+          "sample_components": {
+            "quality_reward": 2.2500000000000004,
+            "speed_reward": 0.3333333333333333,
+            "size_reward": 0.43333333333333335,
+            "target_bonus": 68.0,
+            "convergence_reward": 2.0,
+            "failure_penalty": 0.0,
+            "step_penalty": -0.2
+          }
+        }
+      ]
+    }
+  },
+  "edge_case_tests": {
+    "success": false,
+    "invalid_actions": {
+      "success": false,
+      "tests_passed": 5,
+      "tests_total": 6,
+      "details": [
+        {
+          "test": "negative_values",
+          "success": true,
+          "handled_gracefully": true,
+          "action": [
+            -0.10000000149011612,
+            -0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "reward": -35.00763264143289,
+          "obs_shape": [
+            15
+          ]
+        },
+        {
+          "test": "values_above_one",
+          "success": true,
+          "handled_gracefully": true,
+          "action": [
+            1.100000023841858,
+            1.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "reward": -38.082314867513375,
+          "obs_shape": [
+            15
+          ]
+        },
+        {
+          "test": "wrong_shape",
+          "success": false,
+          "expected_error": true,
+          "got_error": false,
+          "action": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "test": "wrong_dtype",
+          "success": true,
+          "handled_gracefully": true,
+          "action": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "reward": 64.28372818751266,
+          "obs_shape": [
+            15
+          ]
+        },
+        {
+          "test": "nan_values",
+          "success": true,
+          "handled_gracefully": true,
+          "action": [
+            NaN,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "reward": -5.0,
+          "obs_shape": [
+            15
+          ]
+        },
+        {
+          "test": "inf_values",
+          "success": true,
+          "handled_gracefully": true,
+          "action": [
+            Infinity,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "reward": -49.56236853990173,
+          "obs_shape": [
+            15
+          ]
+        }
+      ]
+    },
+    "vtracer_failures": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "test": "all_zeros",
+          "description": "All parameters at minimum",
+          "success": true,
+          "action": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "vtracer_success": true,
+          "reward": -34.54009475627805,
+          "handled_gracefully": true,
+          "info_keys": [
+            "step",
+            "parameters",
+            "quality",
+            "best_quality",
+            "processing_time",
+            "file_size",
+            "success",
+            "quality_improvement",
+            "target_reached"
+          ]
+        },
+        {
+          "test": "all_ones",
+          "description": "All parameters at maximum",
+          "success": true,
+          "action": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vtracer_success": true,
+          "reward": -37.893901700860646,
+          "handled_gracefully": true,
+          "info_keys": [
+            "step",
+            "parameters",
+            "quality",
+            "best_quality",
+            "processing_time",
+            "file_size",
+            "success",
+            "quality_improvement",
+            "target_reached"
+          ]
+        },
+        {
+          "test": "extreme_precision",
+          "description": "High precision with low thresholds",
+          "success": true,
+          "action": [
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vtracer_success": true,
+          "reward": -94.45114145542526,
+          "handled_gracefully": true,
+          "info_keys": [
+            "step",
+            "parameters",
+            "quality",
+            "best_quality",
+            "processing_time",
+            "file_size",
+            "success",
+            "quality_improvement",
+            "target_reached"
+          ]
+        }
+      ]
+    },
+    "corrupted_images": {
+      "success": true,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "details": [
+        {
+          "test": "nonexistent_image",
+          "success": true,
+          "image_path": "/nonexistent/path/image.png",
+          "expected_init_failure": true,
+          "got_init_failure": true,
+          "error": "Image path does not exist: /nonexistent/path/image.png"
+        },
+        {
+          "test": "empty_path",
+          "success": true,
+          "image_path": "",
+          "expected_init_failure": true,
+          "got_init_failure": true,
+          "error": "Image path does not exist: "
+        },
+        {
+          "test": "invalid_extension",
+          "success": true,
+          "image_path": "test-data/circle_00.txt",
+          "expected_init_failure": true,
+          "got_init_failure": true,
+          "error": "Image path does not exist: test-data/circle_00.txt"
+        }
+      ]
+    }
+  },
+  "performance_tests": {
+    "success": true,
+    "step_timing": {
+      "success": true,
+      "step_times": [
+        0.5538747310638428,
+        0.4985790252685547,
+        0.5652370452880859,
+        0.5095920562744141,
+        0.5069530010223389,
+        0.5216190814971924,
+        0.543220043182373,
+        0.6841890811920166,
+        0.5082392692565918,
+        0.49407005310058594
+      ],
+      "reset_times": [
+        0.4959897994995117,
+        0.48907899856567383,
+        0.4932076930999756,
+        0.49856996536254883,
+        0.5465388298034668
+      ],
+      "statistics": {
+        "reset_times": {
+          "mean": 0.5046770572662354,
+          "std": 0.021166099161578758,
+          "min": 0.48907899856567383,
+          "max": 0.5465388298034668,
+          "median": 0.4959897994995117
+        },
+        "step_times": {
+          "mean": 0.5385573387145997,
+          "std": 0.053663833491014536,
+          "min": 0.49407005310058594,
+          "max": 0.6841890811920166,
+          "median": 0.5156055688858032
+        }
+      }
+    },
+    "memory_usage": {
+      "success": true,
+      "memory_measurements": [
+        {
+          "stage": "baseline",
+          "memory_mb": 231.625
+        },
+        {
+          "stage": "after_init",
+          "memory_mb": 231.62890625
+        },
+        {
+          "stage": "after_reset",
+          "memory_mb": 231.6328125
+        },
+        {
+          "stage": "step_0",
+          "memory_mb": 231.640625
+        },
+        {
+          "stage": "step_1",
+          "memory_mb": 231.640625
+        },
+        {
+          "stage": "step_2",
+          "memory_mb": 231.640625
+        },
+        {
+          "stage": "step_3",
+          "memory_mb": 231.6484375
+        },
+        {
+          "stage": "step_4",
+          "memory_mb": 231.65625
+        },
+        {
+          "stage": "after_cleanup",
+          "memory_mb": 233.69921875
+        }
+      ],
+      "statistics": {
+        "baseline_memory_mb": 231.625,
+        "peak_memory_mb": 231.65625,
+        "memory_growth_mb": 0.03125,
+        "init_overhead_mb": 0.00390625,
+        "memory_leak_mb": 2.07421875
+      }
+    },
+    "scalability": {
+      "success": true,
+      "concurrent_environments": {
+        "environments_created": 2,
+        "total_time": 2.179486036300659,
+        "success": true
+      },
+      "sequential_environments": {
+        "environments_tested": 3,
+        "times": [
+          1.4898841381072998,
+          1.6651060581207275,
+          1.9211211204528809
+        ],
+        "mean_time": 1.6920371055603027,
+        "total_time": 5.076111316680908
+      }
+    }
+  },
+  "debugging_utilities": {
+    "success": true,
+    "utilities_created": [
+      "inspect_environment",
+      "analyze_action",
+      "trace_episode",
+      "debug_parameter_mapping"
+    ],
+    "debug_functions": {
+      "inspect_environment": {
+        "function_name": "inspect_environment",
+        "description": "Inspect environment state and configuration",
+        "created": true,
+        "function": "<function EnvironmentDebuggingUtilities._create_environment_inspector.<locals>.inspect_environment at 0x13b47c9d0>"
+      },
+      "analyze_action": {
+        "function_name": "analyze_action",
+        "description": "Analyze action validity and parameter mapping",
+        "created": true,
+        "function": "<function EnvironmentDebuggingUtilities._create_action_analyzer.<locals>.analyze_action at 0x13b548160>"
+      },
+      "trace_episode": {
+        "function_name": "trace_episode",
+        "description": "Trace complete episode execution with detailed logging",
+        "created": true,
+        "function": "<function EnvironmentDebuggingUtilities._create_episode_tracer.<locals>.trace_episode at 0x13b5480d0>"
+      },
+      "debug_parameter_mapping": {
+        "function_name": "debug_parameter_mapping",
+        "description": "Debug parameter mapping from actions to VTracer parameters",
+        "created": true,
+        "function": "<function EnvironmentDebuggingUtilities._create_parameter_mapper_debugger.<locals>.debug_parameter_mapping at 0x13b5341f0>"
+      }
+    },
+    "logging_config": {
+      "level": "DEBUG",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "handlers": [
+        "console",
+        "file"
+      ],
+      "file_path": "vtracer_env_debug.log",
+      "loggers": {
+        "backend.ai_modules.optimization.vtracer_env": "DEBUG",
+        "backend.ai_modules.optimization.reward_functions": "DEBUG",
+        "backend.ai_modules.optimization.action_mapping": "DEBUG"
+      }
+    }
+  },
+  "compliance_report": {
+    "report_timestamp": "2025-09-29T16:18:47.169866",
+    "report_type": "environment_interface_compliance",
+    "overall_compliance": false,
+    "test_summary": {
+      "tests_passed": 4,
+      "tests_total": 6,
+      "pass_rate": 66.66666666666666,
+      "critical_failures": []
+    },
+    "detailed_results": 

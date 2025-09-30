@@ -1,0 +1,38 @@
+{
+    "data/optimization_test/simple/1001419.png": {
+        "category": "simple",
+        "expected_features": {
+            "edge_density": 0.1,
+            "unique_colors": 8,
+            "entropy": 0.3,
+            "complexity": "low"
+        }
+    },
+    "data/optimization_test/text/10075525.png": {
+        "category": "text",
+        "expected_features": {
+            "edge_density": 0.25,
+            "unique_colors": 4,
+            "entropy": 0.4,
+            "complexity": "medium"
+        }
+    },
+    "data/optimization_test/gradient/10164583.png": {
+        "category": "gradient",
+        "expected_features": {
+            "edge_density": 0.15,
+            "unique_colors": 64,
+            "entropy": 0.7,
+            "complexity": "medium-high"
+        }
+    },
+    "data/optimization_test/complex/10229090.png": {
+        "category": "complex",
+        "expected_features": {
+            "edge_density": 0.4,
+            "unique_colors": 128,
+            "entropy": 0.85,
+            "complexity": "high"
+        }
+    }
+}

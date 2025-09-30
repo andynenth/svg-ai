@@ -1,0 +1,62 @@
+# PPO Training Configuration - CPU Only Version
+# Optimized for CPU-only training with reduced resource requirements
+
+training:
+  training_images:
+    simple:
+      - "data/logos/simple_geometric/circle_00.png"
+      - "data/logos/simple_geometric/rectangle_00.png"
+    text:
+      - "data/logos/text_based/text_00.png"
+
+  model_config:
+    learning_rate: 3e-4
+    n_steps: 1024              # Reduced for CPU
+    batch_size: 32             # Smaller batch for CPU
+    n_epochs: 5                # Fewer epochs for faster training
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_range: 0.2
+    ent_coef: 0.01
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+    policy_kwargs:
+      net_arch:
+        pi: [64, 64]           # Smaller network for CPU
+        vf: [64, 64]
+      activation_fn: "tanh"
+    verbose: 1
+    device: "cpu"              # Force CPU usage
+
+  curriculum_config:
+    stage_0:
+      target_quality: 0.70     # Lower targets for faster convergence
+      max_episodes: 2000
+      success_threshold: 0.75
+    stage_1:
+      target_quality: 0.75
+      max_episodes: 3000
+      success_threshold: 0.70
+
+  save_dir: "models/ppo_training_cpu"
+
+environment:
+  num_threads: 8               # More CPU threads
+  memory_limit_gb: 4           # Lower memory requirement
+  cuda_visible_devices: ""     # No GPU
+  parallel_envs: 2             # Fewer parallel envs for CPU
+
+monitoring:
+  enable_real_time_monitoring: false  # Disabled for performance
+  log_dir: "logs/ppo_training_cpu"
+  checkpoint_frequency: 500
+  validation_frequency: 2000
+  track_gpu_usage: false       # No GPU tracking
+
+logging:
+  level: "INFO"
+  log_dir: "logs/ppo_training_cpu"
+
+experiment:
+  name: "ppo_vtracer_cpu_training"
+  description: "CPU-optimized PPO training for VTracer parameter optimization"
