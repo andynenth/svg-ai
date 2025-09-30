@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A/B Test Results: Correlation Methods</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .header { background-color: #f0f0f0; padding: 20px; border-radius: 5px; }
+        .winner { color: lightgreen; font-weight: bold; font-size: 1.2em; }
+        .section { margin: 20px 0; }
+        .metric { display: inline-block; margin: 10px; padding: 15px; border: 1px solid #ddd;
+                  border-radius: 5px; min-width: 150px; text-align: center; }
+        .improvement { background-color: #d4edda; }
+        .degradation { background-color: #f8d7da; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .chart { text-align: center; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>A/B Test Results: Correlation Methods</h1>
+        <p><strong>Test Date:</strong> 2025-09-30T13:49:12.728163</p>
+        <p><strong>Images Tested:</strong> 80</p>
+        <p class="winner">Winner: Learned Model (Marginal Improvement)</p>
+    </div>
+
+    <div class="section">
+        <h2>Performance Summary</h2>
+        <div class="metric improvement">
+            <h3>SSIM Improvement</h3>
+            <p>5.8%</p>
+        </div>
+        <div class="metric improvement">
+            <h3>Composite Score Improvement</h3>
+            <p>7.4%</p>
+        </div>
+        <div class="metric improvement">
+            <h3>Processing Time Improvement</h3>
+            <p>27.6%</p>
+        </div>
+        <div class="metric">
+            <h3>Parameter Stability</h3>
+            <p>0.46</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Detailed Comparison</h2>
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Formula-based</th>
+                <th>Learned Model</th>
+                <th>Improvement</th>
+            </tr>
+            <tr>
+                <td>Average SSIM</td>
+                <td>0.7703</td>
+                <td>0.8132</td>
+                <td>5.85%</td>
+            </tr>
+            <tr>
+                <td>Average Composite Score</td>
+                <td>0.7683</td>
+                <td>0.8227</td>
+                <td>7.38%</td>
+            </tr>
+            <tr>
+                <td>Average Processing Time</td>
+                <td>0.32ms</td>
+                <td>0.23ms</td>
+                <td>27.58%</td>
+            </tr>
+            <tr>
+                <td>Success Rate</td>
+                <td>100.0%</td>
+                <td>100.0%</td>
+                <td>0.0%</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Statistical Analysis</h2>
+        <p><strong>SSIM p-value:</strong> 0.0000</p>
+        <p><strong>Statistically Significant:</strong> Yes</p>
+        <p><strong>Confidence Level:</strong> 95%</p>
+    </div>
+
+    <div class="section">
+        <h2>Visual Comparison</h2>
+        <div class="chart">
+            <img src="comparison_charts.png" alt="Comparison Charts" style="max-width: 100%;">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Recommendations</h2>
+        <ul>
+
+            <li><strong>Gradual rollout recommended:</strong> Moderate improvement observed (5-15%)</li>
+            <li>Start with 10-20% of traffic using learned model</li>
+            <li>Monitor closely for edge cases</li>
+
+        </ul>
+    </div>
+</body>
+</html>

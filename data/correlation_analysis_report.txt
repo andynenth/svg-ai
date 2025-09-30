@@ -1,0 +1,94 @@
+================================================================================
+CORRELATION FORMULAS ANALYSIS REPORT
+================================================================================
+
+FORMULA DOCUMENTATION
+----------------------------------------
+
+edge_to_corner_threshold:
+  Description: Maps edge density to corner threshold parameter
+  Formula: max(10, min(110, int(110 - (edge_density * 800))))
+  Input Range: [0.0, 1.0]
+  Output Range: [10, 110]
+  Relationship: inverse - higher edge density → lower corner threshold
+
+colors_to_precision:
+  Description: Maps unique colors to color precision parameter
+  Formula: max(2, min(10, int(2 + log2(max(1, unique_colors)))))
+  Input Range: [1, ∞)
+  Output Range: [2, 10]
+  Relationship: logarithmic - more colors → higher precision
+
+entropy_to_path_precision:
+  Description: Maps entropy to path precision parameter
+  Formula: max(1, min(20, int(20 * (1 - entropy))))
+  Input Range: [0.0, 1.0]
+  Output Range: [1, 20]
+  Relationship: inverse - higher entropy → lower precision
+
+corners_to_length_threshold:
+  Description: Maps corner density to length threshold parameter
+  Formula: max(1.0, min(20.0, 1.0 + (corner_density * 100)))
+  Input Range: [0.0, 1.0]
+  Output Range: [1.0, 20.0]
+  Relationship: linear positive - more corners → higher threshold
+
+gradient_to_splice_threshold:
+  Description: Maps gradient strength to splice threshold parameter
+  Formula: max(10, min(100, int(10 + (gradient_strength * 90))))
+  Input Range: [0.0, 1.0]
+  Output Range: [10, 100]
+  Relationship: linear positive - stronger gradients → higher threshold
+
+complexity_to_iterations:
+  Description: Maps complexity score to max iterations parameter
+  Formula: max(5, min(20, int(5 + (complexity_score * 15))))
+  Input Range: [0.0, 1.0]
+  Output Range: [5, 20]
+  Relationship: linear positive - higher complexity → more iterations
+
+================================================================================
+PERFORMANCE BENCHMARKS
+----------------------------------------
+
+edge_to_corner_threshold:
+  Avg Time: 4.16 μs
+  Ops/Sec: 240166
+
+colors_to_precision:
+  Avg Time: 5.81 μs
+  Ops/Sec: 172111
+
+entropy_to_path_precision:
+  Avg Time: 4.25 μs
+  Ops/Sec: 235563
+
+corners_to_length_threshold:
+  Avg Time: 4.31 μs
+  Ops/Sec: 232091
+
+gradient_to_splice_threshold:
+  Avg Time: 4.53 μs
+  Ops/Sec: 220905
+
+complexity_to_iterations:
+  Avg Time: 4.11 μs
+  Ops/Sec: 243288
+
+Aggregate Performance:
+  Average Function Time: 4.53 μs
+  Fastest Function: 4.11 μs
+  Slowest Function: 5.81 μs
+
+================================================================================
+TEST CASES SUMMARY
+----------------------------------------
+  edge_density_sweep: 21 test cases
+  color_count_sweep: 12 test cases
+  entropy_sweep: 21 test cases
+  corner_density_sweep: 21 test cases
+  gradient_sweep: 21 test cases
+  complexity_sweep: 21 test cases
+  edge_case: 6 test cases
+
+Total Test Cases: 123

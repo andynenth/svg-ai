@@ -1,0 +1,1196 @@
+{
+  "formulas": {},
+  "test_cases": [
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.0
+      },
+      "output": 110,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.05
+      },
+      "output": 70,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.1
+      },
+      "output": 30,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.15000000000000002
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.2
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.25
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.30000000000000004
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.35000000000000003
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.4
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.45
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.5
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.55
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.6000000000000001
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.65
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.7000000000000001
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.75
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.8
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.8500000000000001
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.9
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 0.9500000000000001
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 1.0
+      },
+      "output": 10,
+      "type": "edge_density_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 1
+      },
+      "output": 2,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 2
+      },
+      "output": 3,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 4
+      },
+      "output": 4,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 8
+      },
+      "output": 5,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 16
+      },
+      "output": 6,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 32
+      },
+      "output": 7,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 64
+      },
+      "output": 8,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 128
+      },
+      "output": 9,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 256
+      },
+      "output": 10,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 512
+      },
+      "output": 10,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 1024
+      },
+      "output": 10,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 2048
+      },
+      "output": 10,
+      "type": "color_count_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.0
+      },
+      "output": 20,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.05
+      },
+      "output": 19,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.1
+      },
+      "output": 18,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.15000000000000002
+      },
+      "output": 17,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.2
+      },
+      "output": 16,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.25
+      },
+      "output": 15,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.30000000000000004
+      },
+      "output": 14,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.35000000000000003
+      },
+      "output": 12,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.4
+      },
+      "output": 12,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.45
+      },
+      "output": 11,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.5
+      },
+      "output": 10,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.55
+      },
+      "output": 9,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.6000000000000001
+      },
+      "output": 7,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.65
+      },
+      "output": 7,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.7000000000000001
+      },
+      "output": 5,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.75
+      },
+      "output": 5,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.8
+      },
+      "output": 3,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.8500000000000001
+      },
+      "output": 2,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.9
+      },
+      "output": 1,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 0.9500000000000001
+      },
+      "output": 1,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 1.0
+      },
+      "output": 1,
+      "type": "entropy_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.0
+      },
+      "output": 1.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.05
+      },
+      "output": 6.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.1
+      },
+      "output": 11.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.15000000000000002
+      },
+      "output": 16.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.2
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.25
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.30000000000000004
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.35000000000000003
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.4
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.45
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.5
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.55
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.6000000000000001
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.65
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.7000000000000001
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.75
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.8
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.8500000000000001
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.9
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 0.9500000000000001
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "corners_to_length_threshold",
+      "input": {
+        "corner_density": 1.0
+      },
+      "output": 20.0,
+      "type": "corner_density_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.0
+      },
+      "output": 10,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.05
+      },
+      "output": 14,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.1
+      },
+      "output": 19,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.15000000000000002
+      },
+      "output": 23,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.2
+      },
+      "output": 28,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.25
+      },
+      "output": 32,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.30000000000000004
+      },
+      "output": 37,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.35000000000000003
+      },
+      "output": 41,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.4
+      },
+      "output": 46,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.45
+      },
+      "output": 50,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.5
+      },
+      "output": 55,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.55
+      },
+      "output": 59,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.6000000000000001
+      },
+      "output": 64,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.65
+      },
+      "output": 68,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.7000000000000001
+      },
+      "output": 73,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.75
+      },
+      "output": 77,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.8
+      },
+      "output": 82,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.8500000000000001
+      },
+      "output": 86,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.9
+      },
+      "output": 91,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 0.9500000000000001
+      },
+      "output": 95,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "gradient_to_splice_threshold",
+      "input": {
+        "gradient_strength": 1.0
+      },
+      "output": 100,
+      "type": "gradient_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.0
+      },
+      "output": 5,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.05
+      },
+      "output": 5,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.1
+      },
+      "output": 6,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.15000000000000002
+      },
+      "output": 7,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.2
+      },
+      "output": 8,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.25
+      },
+      "output": 8,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.30000000000000004
+      },
+      "output": 9,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.35000000000000003
+      },
+      "output": 10,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.4
+      },
+      "output": 11,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.45
+      },
+      "output": 11,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.5
+      },
+      "output": 12,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.55
+      },
+      "output": 13,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.6000000000000001
+      },
+      "output": 14,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.65
+      },
+      "output": 14,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.7000000000000001
+      },
+      "output": 15,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.75
+      },
+      "output": 16,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.8
+      },
+      "output": 17,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.8500000000000001
+      },
+      "output": 17,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.9
+      },
+      "output": 18,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 0.9500000000000001
+      },
+      "output": 19,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "complexity_to_iterations",
+      "input": {
+        "complexity_score": 1.0
+      },
+      "output": 20,
+      "type": "complexity_sweep"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": -0.1
+      },
+      "expected_behavior": "clamp to 0",
+      "output": 110,
+      "type": "edge_case"
+    },
+    {
+      "function": "edge_to_corner_threshold",
+      "input": {
+        "edge_density": 1.5
+      },
+      "expected_behavior": "clamp to 1",
+      "output": 10,
+      "type": "edge_case"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": 0
+      },
+      "expected_behavior": "handle as 1",
+      "output": 2,
+      "type": "edge_case"
+    },
+    {
+      "function": "colors_to_precision",
+      "input": {
+        "unique_colors": -5
+      },
+      "expected_behavior": "handle as 1",
+      "output": 2,
+      "type": "edge_case"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": -0.1
+      },
+      "expected_behavior": "clamp to 0",
+      "output": 20,
+      "type": "edge_case"
+    },
+    {
+      "function": "entropy_to_path_precision",
+      "input": {
+        "entropy": 1.1
+      },
+      "expected_behavior": "clamp to 1",
+      "output": 1,
+      "type": "edge_case"
+    }
+  ],
+  "performance_metrics": {
+    "edge_to_corner_threshold": {
+      "iterations": 10000,
+      "total_time_seconds": 0.041637940000000206,
+      "avg_time_microseconds": 4.163794000000021,
+      "operations_per_second": 240165.5797573067
+    },
+    "colors_to_precision": {
+      "iterations": 10000,
+      "total_time_seconds": 0.05810191600000003,
+      "avg_time_microseconds": 5.810191600000003,
+      "operations_per_second": 172111.36376294363
+    },
+    "entropy_to_path_precision": {
+      "iterations": 10000,
+      "total_time_seconds": 0.04245143500000026,
+      "avg_time_microseconds": 4.245143500000026,
+      "operations_per_second": 235563.2972124485
+    },
+    "corners_to_length_threshold": {
+      "iterations": 10000,
+      "total_time_seconds": 0.043086581000000734,
+      "avg_time_microseconds": 4.308658100000073,
+      "operations_per_second": 232090.82196612048
+    },
+    "gradient_to_splice_threshold": {
+      "iterations": 10000,
+      "total_time_seconds": 0.04526830000000004,
+      "avg_time_microseconds": 4.526830000000004,
+      "operations_per_second": 220905.13670714365
+    },
+    "complexity_to_iterations": {
+      "iterations": 10000,
+      "total_time_seconds": 0.04110351599999973,
+      "avg_time_microseconds": 4.110351599999973,
+      "operations_per_second": 243288.1897499977
+    },
+    "aggregate": {
+      "avg_function_time_us": 4.527494800000016,
+      "max_function_time_us": 5.810191600000003,
+      "min_function_time_us": 4.110351599999973,
+      "total_benchmark_time": 0.271649688000001
+    }
+  },
+  "documentation": {
+    "edge_to_corner_threshold": {
+      "description": "Maps edge density to corner threshold parameter",
+      "formula": "max(10, min(110, int(110 - (edge_density * 800))))",
+      "input_range": "[0.0, 1.0]",
+      "output_range": "[10, 110]",
+      "relationship": "inverse - higher edge density \u2192 lower corner threshold",
+      "rationale": "Higher edge density requires lower corner threshold for better detail preservation",
+      "edge_cases": [
+        {
+          "input": 0.0,
+          "output": 110,
+          "description": "No edges \u2192 maximum threshold"
+        },
+        {
+          "input": 0.5,
+          "output": 10,
+          "description": "Medium edges \u2192 minimum threshold"
+        },
+        {
+          "input": 1.0,
+          "output": 10,
+          "description": "Maximum edges \u2192 minimum threshold"
+        }
+      ]
+    },
+    "colors_to_precision": {
+      "description": "Maps unique colors to color precision parameter",
+      "formula": "max(2, min(10, int(2 + log2(max(1, unique_colors)))))",
+      "input_range": "[1, \u221e)",
+      "output_range": "[2, 10]",
+      "relationship": "logarithmic - more colors \u2192 higher precision",
+      "rationale": "More colors require higher precision for accurate representation",
+      "edge_cases": [
+        {
+          "input": 1,
+          "output": 2,
+          "description": "Single color \u2192 minimum precision"
+        },
+        {
+          "input": 2,
+          "output": 3,
+          "description": "2 colors \u2192 low precision"
+        },
+        {
+          "input": 256,
+          "output": 10,
+          "description": "256 colors \u2192 maximum precision"
+        },
+        {
+          "input": 1024,
+          "output": 10,
+          "description": "1024+ colors \u2192 clamped to max"
+        }
+      ]
+    },
+    "entropy_to_path_precision": {
+      "description": "Maps entropy to path precision parameter",
+      "formula": "max(1, min(20, int(20 * (1 - entropy))))",
+      "input_range": "[0.0, 1.0]",
+      "output_range": "[1, 20]",
+      "relationship": "inverse - higher entropy \u2192 lower precision",
+      "rationale": "Higher entropy (randomness) needs less detail precision",
+      "edge_cases": [
+        {
+          "input": 0.0,
+          "output": 20,
+          "description": "No entropy \u2192 maximum precision"
+        },
+        {
+          "input": 0.5,
+          "output": 10,
+          "description": "Medium entropy \u2192 medium precision"
+        },
+        {
+          "input": 1.0,
+          "output": 1,
+          "description": "Maximum entropy \u2192 minimum precision"
+        }
+      ]
+    },
+    "corners_to_length_threshold": {
+      "description": "Maps corner density to length threshold parameter",
+      "formula": "max(1.0, min(20.0, 1.0 + (corner_density * 100)))",
+      "input_range": "[0.0, 1.0]",
+      "output_range": "[1.0, 20.0]",
+      "relationship": "linear positive - more corners \u2192 higher threshold",
+      "rationale": "More corners require longer segments to capture detail",
+      "edge_cases": [
+        {
+          "input": 0.0,
+          "output": 1.0,
+          "description": "No corners \u2192 minimum threshold"
+        },
+        {
+          "input": 0.19,
+          "output": 20.0,
+          "description": "19%+ corners \u2192 maximum threshold"
+        },
+        {
+          "input": 1.0,
+          "output": 20.0,
+          "description": "Maximum corners \u2192 maximum threshold"
+        }
+      ]
+    },
+    "gradient_to_splice_threshold": {
+      "description": "Maps gradient strength to splice threshold parameter",
+      "formula": "max(10, min(100, int(10 + (gradient_strength * 90))))",
+      "input_range": "[0.0, 1.0]",
+      "output_range": "[10, 100]",
+      "relationship": "linear positive - stronger gradients \u2192 higher threshold",
+      "rationale": "Stronger gradients need more splice points for smooth transitions",
+      "edge_cases": [
+        {
+          "input": 0.0,
+          "output": 10,
+          "description": "No gradient \u2192 minimum splice points"
+        },
+        {
+          "input": 0.5,
+          "output": 55,
+          "description": "Medium gradient \u2192 medium splice points"
+        },
+        {
+          "input": 1.0,
+          "output": 100,
+          "description": "Maximum gradient \u2192 maximum splice points"
+        }
+      ]
+    },
+    "complexity_to_iterations": {
+      "description": "Maps complexity score to max iterations parameter",
+      "formula": "max(5, min(20, int(5 + (complexity_score * 15))))",
+      "input_range": "[0.0, 1.0]",
+      "output_range": "[5, 20]",
+      "relationship": "linear positive - higher complexity \u2192 more iterations",
+      "rationale": "Higher complexity requires more iterations for convergence",
+      "edge_cases": [
+        {
+          "input": 0.0,
+          "output": 5,
+          "description": "Simple \u2192 minimum iterations"
+        },
+        {
+          "input": 0.5,
+          "output": 12,
+          "description": "Medium complexity \u2192 medium iterations"
+        },
+        {
+          "input": 1.0,
+          "output": 20,
+          "description": "Maximum complexity \u2192 maximum iterations"
+        }
+      ]
+    }
+  }
+}
