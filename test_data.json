@@ -1,0 +1,4893 @@
+{
+  "metadata": {
+    "batch_processing_type": "diverse_logo_parameter_testing",
+    "timestamp_started": "2025-09-30 12:16:57",
+    "total_logos": 50,
+    "total_parameter_combinations": 5,
+    "total_planned_conversions": 250,
+    "completed_conversions": 250,
+    "timestamp_last_update": "2025-09-30 12:17:39"
+  },
+  "logo_selection": {
+    "simple_geometric": [
+      "square_01.png",
+      "cross_08.png",
+      "circle_00.png",
+      "triangle_02.png",
+      "pentagon_03.png",
+      "star_05.png",
+      "diamond_06.png",
+      "oval_07.png",
+      "hexagon_04.png",
+      "arrow_09.png"
+    ],
+    "text_based": [
+      "text_web_05.png",
+      "text_corp_01.png",
+      "text_data_02.png",
+      "text_code_09.png",
+      "text_app_06.png",
+      "text_soft_08.png",
+      "text_cloud_03.png",
+      "text_net_07.png",
+      "text_tech_00.png",
+      "text_ai_04.png"
+    ],
+    "gradients": [
+      "gradient_radial_04.png",
+      "gradient_radial_02.png",
+      "gradient_radial_00.png",
+      "gradient_radial_03.png",
+      "gradient_radial_06.png",
+      "gradient_radial_07.png",
+      "gradient_radial_08.png",
+      "gradient_radial_09.png",
+      "gradient_radial_05.png",
+      "gradient_radial_01.png"
+    ],
+    "complex": [
+      "complex_multi_03.png",
+      "complex_multi_00.png",
+      "complex_multi_09.png",
+      "complex_multi_08.png",
+      "complex_multi_06.png",
+      "complex_multi_04.png",
+      "complex_multi_02.png",
+      "complex_multi_05.png",
+      "complex_multi_07.png",
+      "complex_multi_01.png"
+    ],
+    "random": [
+      "8579737.png",
+      "18961495.png",
+      "5968830.png",
+      "8819494.png",
+      "6895391.png",
+      "6034327.png",
+      "14379693.png",
+      "18748269.png",
+      "5960192.png",
+      "9697073.png"
+    ]
+  },
+  "results": [
+    {
+      "image_path": "data/logos/simple_geometric/square_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004445791244506836,
+      "file_size_ratio": 0.19592298980747452,
+      "ssim": 0.9131368986934774,
+      "mse": 1612.4862213134766,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/square_01.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0074269771575927734,
+      "file_size_ratio": 0.38165345413363533,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/square_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007348060607910156,
+      "file_size_ratio": 0.38165345413363533,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/square_01.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011088848114013672,
+      "file_size_ratio": 0.38165345413363533,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/square_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0031647682189941406,
+      "file_size_ratio": 0.19592298980747452,
+      "ssim": 0.9131368986934774,
+      "mse": 1612.4862213134766,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/cross_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0038177967071533203,
+      "file_size_ratio": 0.19158361018826134,
+      "ssim": 0.9118773816035598,
+      "mse": 2761.6024017333984,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/cross_08.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008239030838012695,
+      "file_size_ratio": 0.5980066445182725,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/cross_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007084846496582031,
+      "file_size_ratio": 0.5980066445182725,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/cross_08.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007083892822265625,
+      "file_size_ratio": 0.5980066445182725,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/cross_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.003336191177368164,
+      "file_size_ratio": 0.19158361018826134,
+      "ssim": 0.9118773816035598,
+      "mse": 2761.6024017333984,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/circle_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0048062801361083984,
+      "file_size_ratio": 0.3490427098674521,
+      "ssim": 0.8122069937868132,
+      "mse": 4373.547348022461,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/circle_00.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0072100162506103516,
+      "file_size_ratio": 0.4101620029455081,
+      "ssim": 0.9906232261189426,
+      "mse": 58.4600830078125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/circle_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0071659088134765625,
+      "file_size_ratio": 0.3910162002945508,
+      "ssim": 0.9914370553093628,
+      "mse": 50.96978759765625,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/circle_00.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008002042770385742,
+      "file_size_ratio": 0.4882179675994109,
+      "ssim": 0.9900638831198858,
+      "mse": 61.183675130208336,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/circle_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004410743713378906,
+      "file_size_ratio": 0.6023564064801178,
+      "ssim": 0.8096105589821583,
+      "mse": 4400.27912902832,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/triangle_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006000995635986328,
+      "file_size_ratio": 0.9376971608832808,
+      "ssim": 0.860768027364009,
+      "mse": 5592.036026000977,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/triangle_02.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007591962814331055,
+      "file_size_ratio": 1.6419558359621451,
+      "ssim": 0.9923609780128524,
+      "mse": 30.215250651041668,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/triangle_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009944915771484375,
+      "file_size_ratio": 0.8801261829652997,
+      "ssim": 0.992810710535649,
+      "mse": 28.282440185546875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/triangle_02.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0072939395904541016,
+      "file_size_ratio": 1.6419558359621451,
+      "ssim": 0.9923609780128524,
+      "mse": 30.215250651041668,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/triangle_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004684925079345703,
+      "file_size_ratio": 1.141167192429022,
+      "ssim": 0.8607625140029952,
+      "mse": 5592.123809814453,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/pentagon_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006327629089355469,
+      "file_size_ratio": 1.0227790432801822,
+      "ssim": 0.859227945694232,
+      "mse": 1710.3518320719402,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/pentagon_03.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008764028549194336,
+      "file_size_ratio": 1.9430523917995444,
+      "ssim": 0.9763758596689951,
+      "mse": 192.9209747314453,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/pentagon_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012469053268432617,
+      "file_size_ratio": 0.979498861047836,
+      "ssim": 0.9914964857375683,
+      "mse": 40.326385498046875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/pentagon_03.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008657217025756836,
+      "file_size_ratio": 3.35459377372817,
+      "ssim": 0.9755923352507021,
+      "mse": 169.39526875813803,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/pentagon_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0043828487396240234,
+      "file_size_ratio": 1.94457099468489,
+      "ssim": 0.8457859014958892,
+      "mse": 1939.679183959961,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/star_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004720926284790039,
+      "file_size_ratio": 1.3925233644859814,
+      "ssim": 0.8932521321312621,
+      "mse": 4079.393783569336,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/star_05.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008448600769042969,
+      "file_size_ratio": 2.792235801581596,
+      "ssim": 0.9888061674757215,
+      "mse": 46.176595052083336,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/star_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006897926330566406,
+      "file_size_ratio": 0.9532710280373832,
+      "ssim": 0.9867360448220643,
+      "mse": 58.3337148030599,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/star_05.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007109880447387695,
+      "file_size_ratio": 2.938173975557153,
+      "ssim": 0.9851338683947999,
+      "mse": 66.40209452311198,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/star_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004866838455200195,
+      "file_size_ratio": 1.8238677210639826,
+      "ssim": 0.894291970330632,
+      "mse": 4050.1822509765625,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/diamond_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0034711360931396484,
+      "file_size_ratio": 0.10568112400733048,
+      "ssim": 0.928418551683859,
+      "mse": 806.2915598551432,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/diamond_06.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008821964263916016,
+      "file_size_ratio": 1.550397067806964,
+      "ssim": 0.9939130392574747,
+      "mse": 7.1068674723307295,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/diamond_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00821685791015625,
+      "file_size_ratio": 1.076359193646915,
+      "ssim": 0.9939336555166786,
+      "mse": 7.0817311604817705,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/diamond_06.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007150173187255859,
+      "file_size_ratio": 1.550397067806964,
+      "ssim": 0.9939130392574747,
+      "mse": 7.1068674723307295,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/diamond_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0038042068481445312,
+      "file_size_ratio": 0.10568112400733048,
+      "ssim": 0.928418551683859,
+      "mse": 806.2915598551432,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/oval_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0039958953857421875,
+      "file_size_ratio": 0.13206106870229006,
+      "ssim": 0.929052801723051,
+      "mse": 3248.141098022461,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/oval_07.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008165121078491211,
+      "file_size_ratio": 0.3938931297709924,
+      "ssim": 0.9902870836409181,
+      "mse": 39.46461486816406,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/oval_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007379055023193359,
+      "file_size_ratio": 0.4030534351145038,
+      "ssim": 0.9937536950039972,
+      "mse": 23.700856526692707,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/oval_07.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007035017013549805,
+      "file_size_ratio": 0.5061068702290077,
+      "ssim": 0.9927015431620934,
+      "mse": 27.996632893880207,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/oval_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004643917083740234,
+      "file_size_ratio": 0.13206106870229006,
+      "ssim": 0.929052801723051,
+      "mse": 3248.141098022461,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/hexagon_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005092144012451172,
+      "file_size_ratio": 1.3054459352801895,
+      "ssim": 0.8259130318891217,
+      "mse": 2180.5663706461587,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/hexagon_04.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009492158889770508,
+      "file_size_ratio": 0.7087608524072613,
+      "ssim": 0.9697355562132574,
+      "mse": 217.58337910970053,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/hexagon_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007034778594970703,
+      "file_size_ratio": 0.5872138910812944,
+      "ssim": 0.9789924150684715,
+      "mse": 130.0277862548828,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/hexagon_04.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007995843887329102,
+      "file_size_ratio": 3.1483820047355957,
+      "ssim": 0.9711545157481921,
+      "mse": 200.02786254882812,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/hexagon_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004284858703613281,
+      "file_size_ratio": 1.7482241515390686,
+      "ssim": 0.8258073694512101,
+      "mse": 2182.992141723633,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/arrow_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0038759708404541016,
+      "file_size_ratio": 0.15974145891043398,
+      "ssim": 0.944020863301373,
+      "mse": 1407.9357147216797,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/arrow_09.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.01165914535522461,
+      "file_size_ratio": 1.4903047091412742,
+      "ssim": 0.9971149337730723,
+      "mse": 11.549168904622396,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/arrow_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006327629089355469,
+      "file_size_ratio": 0.9021237303785781,
+      "ssim": 0.9972916392479013,
+      "mse": 10.810399373372396,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/arrow_09.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011188983917236328,
+      "file_size_ratio": 1.4903047091412742,
+      "ssim": 0.9971149337730723,
+      "mse": 11.549168904622396,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/simple_geometric/arrow_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.003428936004638672,
+      "file_size_ratio": 0.15974145891043398,
+      "ssim": 0.944020863301373,
+      "mse": 1407.9357147216797,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_web_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00491786003112793,
+      "file_size_ratio": 0.7557568893922235,
+      "ssim": 0.9794373614101031,
+      "mse": 728.2689361572266,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_web_05.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006875753402709961,
+      "file_size_ratio": 1.2034730086825216,
+      "ssim": 0.9891227263237402,
+      "mse": 149.341796875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_web_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008333206176757812,
+      "file_size_ratio": 0.7444318610796526,
+      "ssim": 0.9902455764857997,
+      "mse": 141.33808390299478,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_web_05.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008872032165527344,
+      "file_size_ratio": 1.8010570026425066,
+      "ssim": 0.9860066734354094,
+      "mse": 186.16534423828125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_web_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004390239715576172,
+      "file_size_ratio": 1.2623631559078898,
+      "ssim": 0.9763941151581625,
+      "mse": 778.4410603841146,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_corp_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004091024398803711,
+      "file_size_ratio": 0.04932991160536071,
+      "ssim": 0.9143452093258814,
+      "mse": 1137.8524729410808,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_corp_01.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008188962936401367,
+      "file_size_ratio": 1.3256344453949245,
+      "ssim": 0.9844969095969012,
+      "mse": 208.69037882486978,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_corp_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009116888046264648,
+      "file_size_ratio": 0.5537496435700029,
+      "ssim": 0.9876322797585521,
+      "mse": 166.46287536621094,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_corp_01.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009640216827392578,
+      "file_size_ratio": 1.5714285714285714,
+      "ssim": 0.9837121176417942,
+      "mse": 202.00213114420572,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_corp_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.003657102584838867,
+      "file_size_ratio": 0.04932991160536071,
+      "ssim": 0.9143452093258814,
+      "mse": 1137.8524729410808,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_data_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004215240478515625,
+      "file_size_ratio": 0.07128141738772147,
+      "ssim": 0.9249171461981026,
+      "mse": 991.4606679280599,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_data_02.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009855031967163086,
+      "file_size_ratio": 1.3778327152863619,
+      "ssim": 0.985614849730784,
+      "mse": 180.65157572428384,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_data_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00688624382019043,
+      "file_size_ratio": 0.5422332097239391,
+      "ssim": 0.9872275518008946,
+      "mse": 171.54139200846353,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_data_02.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0073468685150146484,
+      "file_size_ratio": 1.930778739184178,
+      "ssim": 0.9839714845265652,
+      "mse": 197.4077402750651,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_data_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0034208297729492188,
+      "file_size_ratio": 0.07128141738772147,
+      "ssim": 0.9249171461981026,
+      "mse": 991.4606679280599,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_code_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004143238067626953,
+      "file_size_ratio": 0.03631402183039462,
+      "ssim": 0.8540148740832462,
+      "mse": 550.4733123779297,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_code_09.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.01040792465209961,
+      "file_size_ratio": 1.6855583543240975,
+      "ssim": 0.9757525405336651,
+      "mse": 131.0498046875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_code_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012450218200683594,
+      "file_size_ratio": 0.9217044500419815,
+      "ssim": 0.9790382430882414,
+      "mse": 114.58573913574219,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_code_09.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012315988540649414,
+      "file_size_ratio": 2.065281276238455,
+      "ssim": 0.9733925874629726,
+      "mse": 139.36251831054688,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_code_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0036439895629882812,
+      "file_size_ratio": 0.03631402183039462,
+      "ssim": 0.8540148740832462,
+      "mse": 550.4733123779297,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_app_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004534006118774414,
+      "file_size_ratio": 0.04798890429958391,
+      "ssim": 0.8850154570479813,
+      "mse": 1272.7251281738281,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_app_06.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008594989776611328,
+      "file_size_ratio": 1.9958391123439667,
+      "ssim": 0.9820615499386047,
+      "mse": 279.70726521809894,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_app_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008652210235595703,
+      "file_size_ratio": 0.9667128987517337,
+      "ssim": 0.9836375038654107,
+      "mse": 250.5321248372396,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_app_06.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009096145629882812,
+      "file_size_ratio": 2.8704576976421636,
+      "ssim": 0.9776151448310545,
+      "mse": 321.0790506998698,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_app_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.003549337387084961,
+      "file_size_ratio": 0.04798890429958391,
+      "ssim": 0.8850154570479813,
+      "mse": 1272.7251281738281,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_soft_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005399942398071289,
+      "file_size_ratio": 0.6926336375488917,
+      "ssim": 0.9614855889797828,
+      "mse": 863.1838226318359,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_soft_08.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007752895355224609,
+      "file_size_ratio": 1.1307040417209908,
+      "ssim": 0.9897333154659651,
+      "mse": 48.5887451171875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_soft_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007596731185913086,
+      "file_size_ratio": 0.5876792698826597,
+      "ssim": 0.991556138469196,
+      "mse": 41.05827840169271,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_soft_08.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007349967956542969,
+      "file_size_ratio": 0.9983702737940026,
+      "ssim": 0.9894140456293029,
+      "mse": 48.68292744954427,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_soft_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004715919494628906,
+      "file_size_ratio": 1.089308996088657,
+      "ssim": 0.9612616473672895,
+      "mse": 862.9357045491537,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_cloud_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009061813354492188,
+      "file_size_ratio": 1.231226918342224,
+      "ssim": 0.8979867690587242,
+      "mse": 2528.7534383138022,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_cloud_03.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009681224822998047,
+      "file_size_ratio": 1.9312679524004923,
+      "ssim": 0.9713547304816406,
+      "mse": 222.10928344726562,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_cloud_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009277820587158203,
+      "file_size_ratio": 0.9573245794009028,
+      "ssim": 0.975976632367293,
+      "mse": 187.09017944335938,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_cloud_03.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011160135269165039,
+      "file_size_ratio": 2.3323758719737384,
+      "ssim": 0.9694838241787636,
+      "mse": 231.7168986002604,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_cloud_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00795125961303711,
+      "file_size_ratio": 1.9413212966762412,
+      "ssim": 0.8971497269222719,
+      "mse": 2543.620549519857,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_net_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004199981689453125,
+      "file_size_ratio": 0.11914600550964187,
+      "ssim": 0.9430533440459431,
+      "mse": 234.67657470703125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_net_07.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0074062347412109375,
+      "file_size_ratio": 0.7334710743801653,
+      "ssim": 0.9932685650414559,
+      "mse": 36.380777994791664,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_net_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007094144821166992,
+      "file_size_ratio": 0.6473829201101928,
+      "ssim": 0.9933015043562076,
+      "mse": 36.163736979166664,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_net_07.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006727933883666992,
+      "file_size_ratio": 1.3085399449035813,
+      "ssim": 0.9935573167815405,
+      "mse": 34.287882486979164,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_net_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0036759376525878906,
+      "file_size_ratio": 0.11914600550964187,
+      "ssim": 0.9430533440459431,
+      "mse": 234.67657470703125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_tech_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005146980285644531,
+      "file_size_ratio": 0.04987027961948688,
+      "ssim": 0.8672794938533736,
+      "mse": 453.44976806640625,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_tech_00.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008935213088989258,
+      "file_size_ratio": 1.93052752954742,
+      "ssim": 0.9801521960517563,
+      "mse": 104.6542256673177,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_tech_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00760197639465332,
+      "file_size_ratio": 1.1239550302680887,
+      "ssim": 0.9812234830421325,
+      "mse": 97.5457255045573,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_tech_00.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009031295776367188,
+      "file_size_ratio": 2.524358604785241,
+      "ssim": 0.9775942292397473,
+      "mse": 113.69160970052083,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_tech_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0034911632537841797,
+      "file_size_ratio": 0.04987027961948688,
+      "ssim": 0.8672794938533736,
+      "mse": 453.44976806640625,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_ai_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004657745361328125,
+      "file_size_ratio": 0.4944606413994169,
+      "ssim": 0.9903430769108302,
+      "mse": 204.6348673502604,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_ai_04.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00629115104675293,
+      "file_size_ratio": 0.8198250728862974,
+      "ssim": 0.9945339140994667,
+      "mse": 48.31968688964844,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_ai_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006352901458740234,
+      "file_size_ratio": 0.40174927113702624,
+      "ssim": 0.9945907025600647,
+      "mse": 49.9574228922526,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_ai_04.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0067899227142333984,
+      "file_size_ratio": 1.225072886297376,
+      "ssim": 0.9936220469401884,
+      "mse": 55.199117024739586,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/text_based/text_ai_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004565000534057617,
+      "file_size_ratio": 0.7714285714285715,
+      "ssim": 0.9895218911642379,
+      "mse": 211.22704569498697,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005115985870361328,
+      "file_size_ratio": 0.12084199584199584,
+      "ssim": 0.6395704224886307,
+      "mse": 9406.480941772461,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_04.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.030970096588134766,
+      "file_size_ratio": 2.1325363825363826,
+      "ssim": 0.9484748498412301,
+      "mse": 276.8547821044922,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.010865926742553711,
+      "file_size_ratio": 0.13175675675675674,
+      "ssim": 0.8069271405202836,
+      "mse": 974.0047302246094,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_04.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.030556917190551758,
+      "file_size_ratio": 2.4667359667359667,
+      "ssim": 0.973221697911893,
+      "mse": 65.93869527180989,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004292726516723633,
+      "file_size_ratio": 0.21075883575883575,
+      "ssim": 0.6392943520598348,
+      "mse": 9396.229563395182,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00758671760559082,
+      "file_size_ratio": 0.12010512483574244,
+      "ssim": 0.5750306509253567,
+      "mse": 5523.7341868082685,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_02.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.032823801040649414,
+      "file_size_ratio": 2.156636005256242,
+      "ssim": 0.9473621372586208,
+      "mse": 549.0675354003906,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.010998010635375977,
+      "file_size_ratio": 0.13324572930354797,
+      "ssim": 0.9090120767618758,
+      "mse": 537.5983123779297,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_02.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.02856898307800293,
+      "file_size_ratio": 2.4946123521681995,
+      "ssim": 0.9759117948688966,
+      "mse": 127.63003031412761,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008033037185668945,
+      "file_size_ratio": 0.2254927726675427,
+      "ssim": 0.5719306392087059,
+      "mse": 5555.508768717448,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0066606998443603516,
+      "file_size_ratio": 0.1220792859018115,
+      "ssim": 0.61460857807058,
+      "mse": 16599.998657226562,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_00.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.031733036041259766,
+      "file_size_ratio": 2.154371226043581,
+      "ssim": 0.9473621372586208,
+      "mse": 549.0675354003906,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011195182800292969,
+      "file_size_ratio": 0.13310580204778158,
+      "ssim": 0.9090120767618758,
+      "mse": 537.5983123779297,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_00.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.030765056610107422,
+      "file_size_ratio": 2.491992648989236,
+      "ssim": 0.9759117948688966,
+      "mse": 127.63003031412761,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004578828811645508,
+      "file_size_ratio": 0.2129167760567078,
+      "ssim": 0.614419159389087,
+      "mse": 16580.97058614095,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005438089370727539,
+      "file_size_ratio": 0.12118842845973417,
+      "ssim": 0.6395704224886307,
+      "mse": 9406.480941772461,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_03.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03951406478881836,
+      "file_size_ratio": 2.138649986968986,
+      "ssim": 0.9484748498412301,
+      "mse": 276.8547821044922,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0164947509765625,
+      "file_size_ratio": 0.13213448006254885,
+      "ssim": 0.8069271405202836,
+      "mse": 974.0047302246094,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_03.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03231310844421387,
+      "file_size_ratio": 2.473807662236122,
+      "ssim": 0.973221697911893,
+      "mse": 65.93869527180989,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006551027297973633,
+      "file_size_ratio": 0.2113630440448267,
+      "ssim": 0.6392943520598348,
+      "mse": 9396.229563395182,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00642085075378418,
+      "file_size_ratio": 0.11373930548565676,
+      "ssim": 0.5043177805354355,
+      "mse": 4180.262593587239,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_06.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03214693069458008,
+      "file_size_ratio": 2.187216909914444,
+      "ssim": 0.9459900803094559,
+      "mse": 424.6604309082031,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.02073192596435547,
+      "file_size_ratio": 0.1275792652239557,
+      "ssim": 0.9082573883990678,
+      "mse": 291.0821533203125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_06.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.044934749603271484,
+      "file_size_ratio": 2.3638651233014594,
+      "ssim": 0.9725931982809088,
+      "mse": 120.73999532063802,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012181282043457031,
+      "file_size_ratio": 0.2199295420231505,
+      "ssim": 0.5046607994056267,
+      "mse": 4141.991719563802,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005221843719482422,
+      "file_size_ratio": 0.11294632013602138,
+      "ssim": 0.6381187846065434,
+      "mse": 10700.29379272461,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_07.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.05486011505126953,
+      "file_size_ratio": 1.9931989312606266,
+      "ssim": 0.9470179939567153,
+      "mse": 310.60101826985675,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012694120407104492,
+      "file_size_ratio": 0.12314792324508136,
+      "ssim": 0.8434595356606505,
+      "mse": 705.8143819173177,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_07.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03824782371520996,
+      "file_size_ratio": 2.3055623026475587,
+      "ssim": 0.9736468627548365,
+      "mse": 73.96898396809895,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00477290153503418,
+      "file_size_ratio": 0.1969880981297061,
+      "ssim": 0.6378644796108928,
+      "mse": 10686.915664672852,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007960081100463867,
+      "file_size_ratio": 0.11525851197982345,
+      "ssim": 0.5894632267511808,
+      "mse": 1449.813196818034,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_08.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.04047989845275879,
+      "file_size_ratio": 2.1921815889029004,
+      "ssim": 0.9466203305055813,
+      "mse": 635.2253570556641,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.014859914779663086,
+      "file_size_ratio": 0.12786885245901639,
+      "ssim": 0.948881243915829,
+      "mse": 196.13702392578125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_08.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.02725386619567871,
+      "file_size_ratio": 1.2562421185372006,
+      "ssim": 0.9636506883203785,
+      "mse": 180.46936543782553,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009626150131225586,
+      "file_size_ratio": 0.21639344262295082,
+      "ssim": 0.5866729157050231,
+      "mse": 1463.2736511230469,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007455110549926758,
+      "file_size_ratio": 0.11531667928337118,
+      "ssim": 0.5894632267511808,
+      "mse": 1449.813196818034,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_09.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03644919395446777,
+      "file_size_ratio": 2.193287913197073,
+      "ssim": 0.9466203305055813,
+      "mse": 635.2253570556641,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012073993682861328,
+      "file_size_ratio": 0.1279333838001514,
+      "ssim": 0.948881243915829,
+      "mse": 196.13702392578125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_09.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.02726006507873535,
+      "file_size_ratio": 1.2568761039616452,
+      "ssim": 0.9636506883203785,
+      "mse": 180.46936543782553,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00676417350769043,
+      "file_size_ratio": 0.21650264950794854,
+      "ssim": 0.5866729157050231,
+      "mse": 1463.2736511230469,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007012844085693359,
+      "file_size_ratio": 0.11901041666666666,
+      "ssim": 0.5415028915961857,
+      "mse": 10946.291127522787,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_05.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03479504585266113,
+      "file_size_ratio": 2.136979166666667,
+      "ssim": 0.9484748498412301,
+      "mse": 276.8547821044922,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011784791946411133,
+      "file_size_ratio": 0.13203125,
+      "ssim": 0.8069271405202836,
+      "mse": 974.0047302246094,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_05.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.040411949157714844,
+      "file_size_ratio": 2.471875,
+      "ssim": 0.973221697911893,
+      "mse": 65.93869527180989,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006731986999511719,
+      "file_size_ratio": 0.2234375,
+      "ssim": 0.5381148026012001,
+      "mse": 11014.838170369467,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008634805679321289,
+      "file_size_ratio": 0.11997899711210291,
+      "ssim": 0.5750306509253567,
+      "mse": 5523.7341868082685,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_01.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03408312797546387,
+      "file_size_ratio": 2.154371226043581,
+      "ssim": 0.9473621372586208,
+      "mse": 549.0675354003906,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011853218078613281,
+      "file_size_ratio": 0.13310580204778158,
+      "ssim": 0.9090120767618758,
+      "mse": 537.5983123779297,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_01.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03468894958496094,
+      "file_size_ratio": 2.491992648989236,
+      "ssim": 0.9759117948688966,
+      "mse": 127.63003031412761,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/gradients/gradient_radial_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006812095642089844,
+      "file_size_ratio": 0.22525597269624573,
+      "ssim": 0.5719306392087059,
+      "mse": 5555.508768717448,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004258871078491211,
+      "file_size_ratio": 0.10832811521603006,
+      "ssim": 0.8562371965772526,
+      "mse": 2955.9581451416016,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_03.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.01261281967163086,
+      "file_size_ratio": 5.931120851596744,
+      "ssim": 0.9786673396671368,
+      "mse": 77.08746846516927,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012794971466064453,
+      "file_size_ratio": 2.76205385097057,
+      "ssim": 0.969840762781357,
+      "mse": 141.69566853841147,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_03.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.013648748397827148,
+      "file_size_ratio": 6.053850970569818,
+      "ssim": 0.9791529074174694,
+      "mse": 75.09344482421875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_03.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00417780876159668,
+      "file_size_ratio": 0.10832811521603006,
+      "ssim": 0.8562371965772526,
+      "mse": 2955.9581451416016,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0040798187255859375,
+      "file_size_ratio": 0.1882480957562568,
+      "ssim": 0.9258024308348158,
+      "mse": 2696.1456298828125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_00.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008852005004882812,
+      "file_size_ratio": 1.0413492927094667,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009432077407836914,
+      "file_size_ratio": 1.0413492927094667,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_00.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009827852249145508,
+      "file_size_ratio": 1.0413492927094667,
+      "ssim": 1.0,
+      "mse": 0.0,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_00.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.003935098648071289,
+      "file_size_ratio": 0.1882480957562568,
+      "ssim": 0.9258024308348158,
+      "mse": 2696.1456298828125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00741887092590332,
+      "file_size_ratio": 1.035025017869907,
+      "ssim": 0.8245827382560479,
+      "mse": 4271.444366455078,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_09.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.014703989028930664,
+      "file_size_ratio": 3.047176554681916,
+      "ssim": 0.9846855989077485,
+      "mse": 73.61386108398438,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.018125057220458984,
+      "file_size_ratio": 4.853466761972838,
+      "ssim": 0.918430306037919,
+      "mse": 2239.8729298909507,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_09.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.01948070526123047,
+      "file_size_ratio": 4.0900643316654754,
+      "ssim": 0.9851257890343085,
+      "mse": 70.09167989095052,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_09.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0057222843170166016,
+      "file_size_ratio": 1.3366690493209434,
+      "ssim": 0.8247370917987565,
+      "mse": 4261.607635498047,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.007096052169799805,
+      "file_size_ratio": 0.5638968481375358,
+      "ssim": 0.8571081923788898,
+      "mse": 3933.7823791503906,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_08.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.013993024826049805,
+      "file_size_ratio": 3.484813753581662,
+      "ssim": 0.9762989198349437,
+      "mse": 103.22376505533855,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.01267099380493164,
+      "file_size_ratio": 1.8601719197707736,
+      "ssim": 0.977904854940525,
+      "mse": 93.68246459960938,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_08.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011172056198120117,
+      "file_size_ratio": 3.9553008595988537,
+      "ssim": 0.9774113292820216,
+      "mse": 101.08740234375,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_08.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008253335952758789,
+      "file_size_ratio": 0.9186246418338109,
+      "ssim": 0.8563216958293918,
+      "mse": 3943.1633097330728,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0059130191802978516,
+      "file_size_ratio": 1.0074798619102416,
+      "ssim": 0.8559139084214338,
+      "mse": 2404.1636657714844,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_06.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011202812194824219,
+      "file_size_ratio": 4.287111622554661,
+      "ssim": 0.9781263201888845,
+      "mse": 124.50885009765625,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.01116800308227539,
+      "file_size_ratio": 2.57307249712313,
+      "ssim": 0.9796941777534491,
+      "mse": 108.81324768066406,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_06.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011349201202392578,
+      "file_size_ratio": 4.979286536248561,
+      "ssim": 0.9783888737758407,
+      "mse": 119.3055419921875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_06.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.006577253341674805,
+      "file_size_ratio": 1.3665132336018413,
+      "ssim": 0.8551281496538712,
+      "mse": 2411.4429779052734,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005578041076660156,
+      "file_size_ratio": 0.5676328502415459,
+      "ssim": 0.8417789207138837,
+      "mse": 5256.37397257487,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_04.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.010775089263916016,
+      "file_size_ratio": 3.0901771336553945,
+      "ssim": 0.9895971459799211,
+      "mse": 66.80582682291667,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.012399911880493164,
+      "file_size_ratio": 2.4009661835748792,
+      "ssim": 0.9899966982186943,
+      "mse": 62.89354960123698,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_04.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011933088302612305,
+      "file_size_ratio": 3.969404186795491,
+      "ssim": 0.9889677513143952,
+      "mse": 70.48734537760417,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_04.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0046100616455078125,
+      "file_size_ratio": 0.5861513687600645,
+      "ssim": 0.8417779488381354,
+      "mse": 5256.386459350586,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004745006561279297,
+      "file_size_ratio": 0.4809364548494983,
+      "ssim": 0.9290967321706199,
+      "mse": 2005.587895711263,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_02.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008130073547363281,
+      "file_size_ratio": 1.637458193979933,
+      "ssim": 0.9892002845937592,
+      "mse": 52.11626180013021,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008953094482421875,
+      "file_size_ratio": 1.1103678929765886,
+      "ssim": 0.9923690478887289,
+      "mse": 42.611897786458336,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_02.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008075952529907227,
+      "file_size_ratio": 1.9297658862876255,
+      "ssim": 0.9895742071991009,
+      "mse": 49.726104736328125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_02.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00402522087097168,
+      "file_size_ratio": 0.6474916387959866,
+      "ssim": 0.9289604777057225,
+      "mse": 2007.4584197998047,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004687786102294922,
+      "file_size_ratio": 1.0374665477252454,
+      "ssim": 0.8976546343062493,
+      "mse": 2931.5119272867837,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_05.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0077362060546875,
+      "file_size_ratio": 1.7957181088314005,
+      "ssim": 0.9948361464426195,
+      "mse": 36.433197021484375,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.00896596908569336,
+      "file_size_ratio": 1.3550401427297056,
+      "ssim": 0.9948033318279401,
+      "mse": 36.64641825358073,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_05.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0077571868896484375,
+      "file_size_ratio": 1.7957181088314005,
+      "ssim": 0.9948361464426195,
+      "mse": 36.433197021484375,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_05.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004642963409423828,
+      "file_size_ratio": 1.2149866190900982,
+      "ssim": 0.8976527894804277,
+      "mse": 2931.5308380126953,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.005297183990478516,
+      "file_size_ratio": 0.7288135593220338,
+      "ssim": 0.8782618973523899,
+      "mse": 3221.495361328125,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_07.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.01583409309387207,
+      "file_size_ratio": 2.441981747066493,
+      "ssim": 0.9885958902159524,
+      "mse": 52.40704854329427,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0100860595703125,
+      "file_size_ratio": 1.6153846153846154,
+      "ssim": 0.9910569337345729,
+      "mse": 43.198140462239586,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_07.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.011322259902954102,
+      "file_size_ratio": 3.3565840938722293,
+      "ssim": 0.9895822267611469,
+      "mse": 48.399210611979164,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_07.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004773139953613281,
+      "file_size_ratio": 1.2235984354628422,
+      "ssim": 0.8767516385913001,
+      "mse": 3241.419179280599,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0051422119140625,
+      "file_size_ratio": 1.1339506172839506,
+      "ssim": 0.9159541634936249,
+      "mse": 1619.6205190022786,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_01.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009140253067016602,
+      "file_size_ratio": 3.169135802469136,
+      "ssim": 0.9878659418233798,
+      "mse": 41.882548014322914,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.008620977401733398,
+      "file_size_ratio": 1.7907407407407407,
+      "ssim": 0.989801675292795,
+      "mse": 37.26769002278646,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_01.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.009006023406982422,
+      "file_size_ratio": 3.5864197530864197,
+      "ssim": 0.9870932641549446,
+      "mse": 44.67108154296875,
+      "error": null
+    },
+    {
+      "image_path": "data/logos/complex/complex_multi_01.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.004616975784301758,
+      "file_size_ratio": 1.4351851851851851,
+      "ssim": 0.9153723063260671,
+      "mse": 1627.6623077392578,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8579737.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0364532470703125,
+      "file_size_ratio": 0.015544276262122722,
+      "ssim": 0.00192450173912761,
+      "mse": 56131.09308242798,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8579737.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.06740307807922363,
+      "file_size_ratio": 0.9444394090455905,
+      "ssim": 0.9237349033263988,
+      "mse": 864.8296012878418,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8579737.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.049896955490112305,
+      "file_size_ratio": 0.600833862050213,
+      "ssim": 0.9236110094318396,
+      "mse": 856.3270683288574,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8579737.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.05747699737548828,
+      "file_size_ratio": 1.0029910269192424,
+      "ssim": 0.9292317531667428,
+      "mse": 753.2310829162598,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8579737.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03412890434265137,
+      "file_size_ratio": 0.015544276262122722,
+      "ssim": 0.00192450173912761,
+      "mse": 56131.09308242798,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18961495.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.031636953353881836,
+      "file_size_ratio": 0.038388360380526024,
+      "ssim": 0.2362926884710195,
+      "mse": 46435.703105926514,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18961495.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03835415840148926,
+      "file_size_ratio": 0.6951315053161724,
+      "ssim": 0.9643545586828534,
+      "mse": 352.3641891479492,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18961495.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.04146265983581543,
+      "file_size_ratio": 0.3279238947957471,
+      "ssim": 0.9677170958311916,
+      "mse": 281.0471496582031,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18961495.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.09901595115661621,
+      "file_size_ratio": 0.8245103525461668,
+      "ssim": 0.9664926184727554,
+      "mse": 287.9602966308594,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18961495.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.032050132751464844,
+      "file_size_ratio": 0.038388360380526024,
+      "ssim": 0.2362926884710195,
+      "mse": 46435.703105926514,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5968830.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03760981559753418,
+      "file_size_ratio": 0.01965165578090982,
+      "ssim": 0.79208052990333,
+      "mse": 8280.902030944824,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5968830.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0743408203125,
+      "file_size_ratio": 1.4231121805889768,
+      "ssim": 0.9641736790407629,
+      "mse": 383.61731338500977,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5968830.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.07313394546508789,
+      "file_size_ratio": 0.7597112409762805,
+      "ssim": 0.963023147699313,
+      "mse": 385.09199142456055,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5968830.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0760188102722168,
+      "file_size_ratio": 1.6815056720522517,
+      "ssim": 0.9702421724990452,
+      "mse": 234.33544540405273,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5968830.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.055882930755615234,
+      "file_size_ratio": 0.01965165578090982,
+      "ssim": 0.79208052990333,
+      "mse": 8280.902030944824,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8819494.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.032011985778808594,
+      "file_size_ratio": 0.047083047357584076,
+      "ssim": 0.00010515630585917964,
+      "mse": 62133.92290496826,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8819494.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.031174898147583008,
+      "file_size_ratio": 2.075085792724777,
+      "ssim": 0.9778096062505292,
+      "mse": 252.30199813842773,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8819494.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03914189338684082,
+      "file_size_ratio": 0.8418668496911462,
+      "ssim": 0.9587637326935575,
+      "mse": 900.7069816589355,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8819494.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03148603439331055,
+      "file_size_ratio": 2.3479752916952643,
+      "ssim": 0.9784784732710521,
+      "mse": 241.4359016418457,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/8819494.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03174710273742676,
+      "file_size_ratio": 0.047083047357584076,
+      "ssim": 0.00010515630585917964,
+      "mse": 62133.92290496826,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6895391.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03359508514404297,
+      "file_size_ratio": 0.02660977501939488,
+      "ssim": 0.13883438038499424,
+      "mse": 49417.43525314331,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6895391.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.05073976516723633,
+      "file_size_ratio": 1.782622187742436,
+      "ssim": 0.9348225770097356,
+      "mse": 922.4895629882812,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6895391.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.04962491989135742,
+      "file_size_ratio": 0.8743987587276959,
+      "ssim": 0.9467926543939494,
+      "mse": 578.2318649291992,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6895391.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.07148885726928711,
+      "file_size_ratio": 2.177734678044996,
+      "ssim": 0.945722002464914,
+      "mse": 536.178466796875,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6895391.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03014397621154785,
+      "file_size_ratio": 0.02660977501939488,
+      "ssim": 0.13883438038499424,
+      "mse": 49417.43525314331,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6034327.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03348898887634277,
+      "file_size_ratio": 0.022093397745571657,
+      "ssim": 0.22500650811123069,
+      "mse": 43763.609283447266,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6034327.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.053099870681762695,
+      "file_size_ratio": 1.057842190016103,
+      "ssim": 0.9276639036004047,
+      "mse": 1114.5604667663574,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6034327.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.05340385437011719,
+      "file_size_ratio": 0.553365539452496,
+      "ssim": 0.9476740856574173,
+      "mse": 441.5952606201172,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6034327.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.05445098876953125,
+      "file_size_ratio": 1.24231884057971,
+      "ssim": 0.9418869902302028,
+      "mse": 510.7518424987793,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/6034327.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.04433393478393555,
+      "file_size_ratio": 0.022093397745571657,
+      "ssim": 0.22500650811123069,
+      "mse": 43763.609283447266,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/14379693.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03202390670776367,
+      "file_size_ratio": 0.018934584598399116,
+      "ssim": 0.060923562207522264,
+      "mse": 50402.563175201416,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/14379693.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.06613898277282715,
+      "file_size_ratio": 1.9711841015732818,
+      "ssim": 0.9072083901887189,
+      "mse": 1408.361873626709,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/14379693.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.05900382995605469,
+      "file_size_ratio": 0.8247860888766216,
+      "ssim": 0.9082192962230878,
+      "mse": 1412.0753479003906,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/14379693.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.07013702392578125,
+      "file_size_ratio": 2.4782224675683135,
+      "ssim": 0.9358976061934965,
+      "mse": 473.7643013000488,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/14379693.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.039417266845703125,
+      "file_size_ratio": 0.018934584598399116,
+      "ssim": 0.060923562207522264,
+      "mse": 50402.563175201416,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18748269.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.035289764404296875,
+      "file_size_ratio": 0.08387891507174305,
+      "ssim": -0.013251478710999538,
+      "mse": 53457.5223604838,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18748269.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0652308464050293,
+      "file_size_ratio": 0.8311700161963638,
+      "ssim": 0.9105190207913276,
+      "mse": 411.8523483276367,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18748269.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.06164717674255371,
+      "file_size_ratio": 0.5239181513333485,
+      "ssim": 0.9180923748643037,
+      "mse": 396.88641357421875,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18748269.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.08809614181518555,
+      "file_size_ratio": 1.4232041426192485,
+      "ssim": 0.9221281647181446,
+      "mse": 351.421688079834,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/18748269.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.04495382308959961,
+      "file_size_ratio": 0.1322170768985104,
+      "ssim": -0.013463632109368396,
+      "mse": 53454.95541763306,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5960192.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.057891130447387695,
+      "file_size_ratio": 0.7013349700782568,
+      "ssim": 0.16250764338319715,
+      "mse": 44913.547215779625,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5960192.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.1364741325378418,
+      "file_size_ratio": 2.3337425195642165,
+      "ssim": 0.9395987346271412,
+      "mse": 173.19598515828451,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5960192.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.054353952407836914,
+      "file_size_ratio": 0.23607488108025165,
+      "ssim": 0.7692556936635024,
+      "mse": 1208.2041142781575,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5960192.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.19093990325927734,
+      "file_size_ratio": 2.931686358754028,
+      "ssim": 0.9446393701609074,
+      "mse": 147.16307067871094,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/5960192.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.056478023529052734,
+      "file_size_ratio": 0.9706306582783489,
+      "ssim": 0.16383764003429546,
+      "mse": 44894.125115712486,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/9697073.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 60,
+        "max_iterations": 5,
+        "path_precision": 3,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.03548908233642578,
+      "file_size_ratio": 0.04784488771097782,
+      "ssim": 0.0003264185045817939,
+      "mse": 57410.41405105591,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/9697073.png",
+      "parameters": {
+        "color_precision": 8,
+        "corner_threshold": 40,
+        "max_iterations": 10,
+        "path_precision": 10,
+        "layer_difference": 8,
+        "length_threshold": 3.0,
+        "splice_threshold": 75,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.045033931732177734,
+      "file_size_ratio": 3.6260287348305202,
+      "ssim": 0.9360627404027384,
+      "mse": 1540.050853729248,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/9697073.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 20,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 8,
+        "length_threshold": 5.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.044732093811035156,
+      "file_size_ratio": 1.7485004882131399,
+      "ssim": 0.9356934880766473,
+      "mse": 1533.9355926513672,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/9697073.png",
+      "parameters": {
+        "color_precision": 6,
+        "corner_threshold": 80,
+        "max_iterations": 15,
+        "path_precision": 10,
+        "layer_difference": 12,
+        "length_threshold": 3.0,
+        "splice_threshold": 60,
+        "colormode": "color"
+      },
+      "conversion_success": true,
+      "processing_time": 0.05601096153259277,
+      "file_size_ratio": 4.946017575673037,
+      "ssim": 0.968649739050052,
+      "mse": 360.23877716064453,
+      "error": null
+    },
+    {
+      "image_path": "data/raw_logos/9697073.png",
+      "parameters": {
+        "color_precision": 2,
+        "corner_threshold": 80,
+        "max_iterations": 20,
+        "path_precision": 5,
+        "layer_difference": 20,
+        "length_threshold": 5.0,
+        "splice_threshold": 30,
+        "colormode": "binary"
+      },
+      "conversion_success": true,
+      "processing_time": 0.0410459041595459,
+      "file_size_ratio": 0.04784488771097782,
+      "ssim": 0.0003264185045817939,
+      "mse": 57410.41405105591,
+      "error": null
+    }
+  ],
+  "summary_statistics": {
+    "total_conversions": 250,
+    "successful_conversions": 250,
+    "failed_conversions": 0,
+    "success_rate": 1.0,
+    "quality_metrics": {
+      "ssim": {
+        "min": -0.013463632109368396,
+        "max": 1.0,
+        "avg": 0.8546616348627261,
+        "count": 250
+      },
+      "mse": {
+        "min": 0.0,
+        "max": 62133.92290496826,
+        "avg": 5088.594685195922,
+        "count": 250
+      },
+      "processing_time": {
+        "min": 0.0031647682189941406,
+        "max": 0.19093990325927734,
+        "avg": 0.019318937301635742,
+        "total": 4.8297343254089355
+      },
+      "file_size_ratio": {
+        "min": 0.015544276262122722,
+        "max": 6.053850970569818,
+        "avg": 1.1828799056916621
+      }
+    },
+    "category_statistics": {
+      "simple_geometric": {
+        "total": 50,
+        "successful": 50,
+        "failed": 0,
+        "avg_ssim": 0.949286861625219,
+        "avg_processing_time": 0.006717133522033692
+      },
+      "text_based": {
+        "total": 50,
+        "successful": 50,
+        "failed": 0,
+        "avg_ssim": 0.9593944321961113,
+        "avg_processing_time": 0.006982216835021973
+      },
+      "gradients": {
+        "total": 50,
+        "successful": 50,
+        "failed": 0,
+        "avg_ssim": 0.7957906073285329,
+        "avg_processing_time": 0.01948519706726074
+      },
+      "complex": {
+        "total": 50,
+        "successful": 50,
+        "failed": 0,
+        "avg_ssim": 0.9420607282330627,
+        "avg_processing_time": 0.008906431198120117
+      },
+      "random": {
+        "total": 50,
+        "successful": 50,
+        "failed": 0,
+        "avg_ssim": 0.6267755449307039,
+        "avg_processing_time": 0.054503707885742186
+      }
+    }
+  }
+}
