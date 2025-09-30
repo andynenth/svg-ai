@@ -70,8 +70,15 @@ class MethodPerformance:
 class IntelligentRouter:
     """ML-based intelligent routing system for optimization method selection"""
 
-    def __init__(self, model_path: Optional[str] = None, cache_size: int = 10000):
+    def __init__(self, env_kwargs: Optional[Dict] = None, model_path: Optional[str] = None, cache_size: int = 10000):
         """Initialize the intelligent routing system"""
+
+        # Default environment kwargs for PPO optimizer
+        self.env_kwargs = env_kwargs or {
+            'target_images': ['test.png'],
+            'max_episode_steps': 50,
+            'quality_target': 0.8
+        }
 
         # Core ML model and data processing
         self.model = None
@@ -86,7 +93,7 @@ class IntelligentRouter:
         self.available_methods = {
             'feature_mapping': FeatureMappingOptimizer(),
             'regression': RegressionBasedOptimizer(),
-            'ppo': PPOOptimizer(),
+            'ppo': PPOOptimizer(self.env_kwargs),
             'performance': PerformanceOptimizer()
         }
 

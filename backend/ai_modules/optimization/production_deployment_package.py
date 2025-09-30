@@ -90,8 +90,11 @@ class PackageManifest:
 class ModelPackager:
     """Package models with optimization and validation results"""
 
-    def __init__(self, deployment_config: DeploymentConfig):
-        self.config = deployment_config
+    def __init__(self, deployment_config: Optional[DeploymentConfig] = None):
+        self.config = deployment_config or DeploymentConfig(
+            package_name="ai_conversion_models",
+            version="1.0.0"
+        )
         self.package_dir = Path(self.config.package_name)
 
         print(f"📦 Model Packager initialized")

@@ -60,7 +60,7 @@ class CurriculumTrainingPipeline:
     """Curriculum-based training pipeline for PPO agent"""
 
     def __init__(self,
-                 training_images: Dict[str, List[str]],
+                 training_images: Optional[Dict[str, List[str]]] = None,
                  model_config: Optional[Dict] = None,
                  curriculum_config: Optional[Dict] = None,
                  save_dir: str = "models/curriculum_training",
@@ -75,7 +75,13 @@ class CurriculumTrainingPipeline:
             save_dir: Directory to save models and results
             enable_real_time_monitoring: Enable real-time monitoring
         """
-        self.training_images = training_images
+        # Default training images if none provided
+        self.training_images = training_images or {
+            'simple': ['test_simple.png'],
+            'text': ['test_text.png'],
+            'gradient': ['test_gradient.png'],
+            'complex': ['test_complex.png']
+        }
         self.model_config = model_config or self._default_model_config()
         self.save_dir = Path(save_dir)
         self.save_dir.mkdir(parents=True, exist_ok=True)
@@ -102,7 +108,7 @@ class CurriculumTrainingPipeline:
             )
 
         logger.info("Curriculum Training Pipeline initialized")
-        logger.info(f"Training images: {[(k, len(v)) for k, v in training_images.items()]}")
+        logger.info(f"Training images: {[(k, len(v)) for k, v in self.training_images.items()]}")
         logger.info(f"Curriculum stages: {len(self.curriculum_stages)}")
         logger.info(f"Real-time monitoring: {'enabled' if enable_real_time_monitoring else 'disabled'}")
 
