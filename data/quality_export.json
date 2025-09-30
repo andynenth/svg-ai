@@ -1,0 +1,82 @@
+{
+  "export_timestamp": "2025-09-30T13:14:42.742446",
+  "total_records": 4,
+  "records": [
+    {
+      "image_id": "test_image_2.png",
+      "timestamp": "2025-09-30 13:14:42.739403",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "model_version": "vtracer_v1.0",
+      "processing_time": 0.45,
+      "user_rating": 4,
+      "id": 4
+    },
+    {
+      "image_id": "test_image_1.png",
+      "timestamp": "2025-09-30 13:14:42.737808",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "model_version": "vtracer_v1.0",
+      "processing_time": 0.45,
+      "user_rating": 4,
+      "id": 3
+    },
+    {
+      "image_id": "test_image_0.png",
+      "timestamp": "2025-09-30 13:14:42.734805",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "model_version": "vtracer_v1.0",
+      "processing_time": 0.45,
+      "user_rating": 4,
+      "id": 2
+    },
+    {
+      "image_id": "test_circle.png",
+      "timestamp": "2025-09-30 13:14:27.446460",
+      "parameters": {
+        "color_precision": 4,
+        "corner_threshold": 30,
+        "path_precision": 8,
+        "image_type": "simple_geometric"
+      },
+      "metrics": {
+        "ssim": 0.95,
+        "mse": 0.02,
+        "composite_score": 0.88
+      },
+      "model_version": "vtracer_v1.0",
+      "processing_time": 0.45,
+      "user_rating": 4,
+      "id": 1
+    }
+  ]
+}

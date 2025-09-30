@@ -1,0 +1,5 @@
+id,image_id,timestamp,model_version,processing_time,user_rating,param_color_precision,param_corner_threshold,param_path_precision,param_image_type,metric_ssim,metric_mse,metric_composite_score
+4,test_image_2.png,2025-09-30T13:14:42.739403,vtracer_v1.0,0.45,4,4,30,8,simple_geometric,0.95,0.02,0.88
+3,test_image_1.png,2025-09-30T13:14:42.737808,vtracer_v1.0,0.45,4,4,30,8,simple_geometric,0.95,0.02,0.88
+2,test_image_0.png,2025-09-30T13:14:42.734805,vtracer_v1.0,0.45,4,4,30,8,simple_geometric,0.95,0.02,0.88
+1,test_circle.png,2025-09-30T13:14:27.446460,vtracer_v1.0,0.45,4,4,30,8,simple_geometric,0.95,0.02,0.88
