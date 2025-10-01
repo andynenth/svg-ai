@@ -9,6 +9,11 @@ import logging
 from .base_predictor import BasePredictor
 from backend.ai_modules.config import MODEL_CONFIG
 
+# Import performance monitoring
+from backend.utils.performance_monitor import (
+    monitor_model_loading, monitor_quality_metrics
+)
+
 logger = logging.getLogger(__name__)
 
 class QualityPredictor(BasePredictor):
@@ -22,6 +27,7 @@ class QualityPredictor(BasePredictor):
         self.param_scaler = None
         self.device = torch.device("cpu")  # CPU-only for Phase 1
 
+    @monitor_model_loading()
     def _load_model(self):
         """Load or create the quality prediction model"""
         try:
@@ -78,6 +84,7 @@ class QualityPredictor(BasePredictor):
 
         return nn.Sequential(*layers)
 
+    @monitor_quality_metrics()
     def _predict_impl(self, features: Dict[str, float], parameters: Dict[str, Any]) -> float:
         """Implement neural network quality prediction"""
         try:
@@ -216,6 +223,7 @@ class QualityPredictor(BasePredictor):
             logger.error(f"Failed to save model: {e}")
             return False
 
+    @monitor_quality_metrics()
     def evaluate_model(self, test_data: Dict[str, list]) -> Dict[str, float]:
         """Evaluate model performance"""
         try:

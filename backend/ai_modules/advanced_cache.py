@@ -545,7 +545,7 @@ class MultiLevelCache:
         key_parts = [cache_type, identifier]
         if params:
             params_str = json.dumps(params, sort_keys=True)
-            key_parts.append(hashlib.md5(params_str.encode()).hexdigest())
+            key_parts.append(hashlib.md5(params_str.encode(), usedforsecurity=False).hexdigest())
         return ":".join(key_parts)
 
     def get(self, cache_type: str, identifier: str, params: Optional[Dict] = None) -> Optional[Any]:
@@ -728,7 +728,7 @@ class CacheInvalidationStrategy:
         # Get file modification time
         try:
             mtime = os.path.getmtime(image_path)
-            file_hash = hashlib.md5(f"{image_path}:{mtime}".encode()).hexdigest()
+            file_hash = hashlib.md5(f"{image_path}:{mtime}".encode(), usedforsecurity=False).hexdigest()
 
             # Invalidate related entries
             cache_types = ['features', 'classification', 'svg_output', 'quality']
@@ -741,7 +741,7 @@ class CacheInvalidationStrategy:
     def invalidate_by_parameter_change(self, params: Dict):
         """Invalidate cache entries when parameters change"""
         # This would invalidate SVG outputs that depend on changed parameters
-        params_hash = hashlib.md5(json.dumps(params, sort_keys=True).encode()).hexdigest()
+        params_hash = hashlib.md5(json.dumps(params, sort_keys=True).encode(), usedforsecurity=False).hexdigest()
         self.cache.invalidate('parameters', params_hash)
 
     def cleanup_expired_entries(self):

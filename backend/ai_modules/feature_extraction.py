@@ -14,6 +14,9 @@ from pathlib import Path
 import time
 import hashlib
 
+# Import performance monitoring
+from ..utils.performance_monitor import monitor_feature_extraction
+
 
 class ImageFeatureExtractor:
     """Extract quantitative features from images for AI pipeline"""
@@ -40,6 +43,7 @@ class ImageFeatureExtractor:
 
         return logger
 
+    @monitor_feature_extraction()
     def extract_features(self, image_path: str) -> Dict[str, float]:
         """
         Extract all features needed for AI pipeline

@@ -4,6 +4,9 @@ import logging
 from pathlib import Path
 from typing import Dict, Any
 
+# Import performance monitoring
+from backend.utils.performance_monitor import monitor_model_loading
+
 class ProductionModelManager:
     def __init__(self, model_dir: str = "backend/ai_modules/models/exported"):
         self.model_dir = Path(model_dir)
@@ -11,6 +14,7 @@ class ProductionModelManager:
         self.model_metadata = {}
         self.loading_lock = threading.Lock()
 
+    @monitor_model_loading()
     def _load_all_exported_models(self) -> Dict[str, Any]:
         """Load all exported models with error handling"""
         models = {}
@@ -51,6 +55,7 @@ class ProductionModelManager:
 
         return models
 
+    @monitor_model_loading()
     def _optimize_for_production(self):
         """Optimize models for production inference"""
         for model_name, model in self.models.items():
@@ -66,6 +71,7 @@ class ProductionModelManager:
             # Track memory usage
             self._track_model_memory(model_name)
 
+    @monitor_model_loading()
     def _warmup_model(self, model_name: str, model):
         """Warmup model with dummy inference"""
         try:

@@ -7,6 +7,11 @@ from typing import Dict, List, Any
 from PIL import Image
 import torchvision.transforms as transforms
 
+# Import performance monitoring
+from backend.utils.performance_monitor import (
+    monitor_model_loading, monitor_quality_metrics, monitor_batch_processing
+)
+
 class OptimizedQualityPredictor:
     def __init__(self, model_manager):
         self.model_manager = model_manager
@@ -14,6 +19,7 @@ class OptimizedQualityPredictor:
         self.preprocessor = None
         self._initialize()
 
+    @monitor_model_loading()
     def _initialize(self):
         """Initialize predictor with error handling"""
         try:
@@ -44,6 +50,7 @@ class OptimizedQualityPredictor:
             logging.warning(f"⚠️ Quality predictor inference test failed: {e}")
             raise
 
+    @monitor_quality_metrics()
     def predict_quality(self, image_path: str, params: Dict[str, float]) -> float:
         """Predict SSIM quality for given image and parameters"""
         if self.model is None:
@@ -144,6 +151,7 @@ class OptimizedQualityPredictor:
             logging.warning(f"Heuristic quality estimation failed: {e}")
             return 0.7  # Default fallback
 
+    @monitor_batch_processing()
     def predict_batch(self, image_paths: List[str], params_list: List[Dict]) -> List[float]:
         """Batched inference for efficiency"""
         if len(image_paths) != len(params_list):

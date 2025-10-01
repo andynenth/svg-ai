@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  svg-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - WORKERS=4
+    restart: unless-stopped
+    depends_on:
+      - redis
+    networks:
+      - svg-ai-network
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - svg-ai-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - svg-ai
+    restart: unless-stopped
+    networks:
+      - svg-ai-network
+
+volumes:
+  redis_data:
+
+networks:
+  svg-ai-network:
+    driver: bridge

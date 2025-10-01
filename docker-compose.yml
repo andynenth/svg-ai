@@ -1,66 +1,35 @@
 version: '3.8'
 
 services:
-  converter:
+  svg-ai:
     build:
       context: .
       dockerfile: Dockerfile
-    image: svg-converter:latest
-    container_name: svg-converter
     ports:
-      - "8000:8000"
+      - "5000:5000"
+    volumes:
+      - .:/home/app
+      - /home/app/__pycache__
     environment:
-      - PYTHONUNBUFFERED=1
-      - MAX_WORKERS=4
-    volumes:
-      # Mount data directories
-      - ./data:/app/data
-      - ./cache:/app/cache
-      - ./results:/app/results
-      # Mount for development (optional)
-      # - ./converters:/app/converters
-      # - ./utils:/app/utils
-    restart: unless-stopped
-    networks:
-      - svg-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Optional: Nginx reverse proxy
-  nginx:
-    image: nginx:alpine
-    container_name: svg-nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
     depends_on:
-      - converter
+      - redis
     networks:
-      - svg-network
-    profiles:
-      - production
+      - svg-ai-network
 
-  # Optional: Redis for caching (production)
   redis:
-    image: redis:alpine
-    container_name: svg-redis
+    image: redis:7-alpine
     ports:
       - "6379:6379"
     volumes:
-      - redis-data:/data
+      - redis_data:/data
     networks:
-      - svg-network
-    profiles:
-      - production
-
-networks:
-  svg-network:
-    driver: bridge
+      - svg-ai-network
 
 volumes:
-  redis-data:
+  redis_data:
+
+networks:
+  svg-ai-network:
+    driver: bridge

@@ -1,62 +1,41 @@
-# Multi-stage build for optimized image size
-FROM python:3.9-slim as builder
+# Multi-stage build for production
+FROM python:3.9-slim as base
 
-# Install build dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    cargo \
-    rustc \
-    libcairo2-dev \
-    pkg-config \
-    python3-dev \
+    build-essential \
+    curl \
     && rm -rf /var/lib/apt/lists/*
-
-# Create virtual environment
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Copy requirements structure and install dependencies
-COPY requirements/ ./requirements/
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements/prod.txt
-
-# Production stage
-FROM python:3.9-slim
-
-# Install runtime dependencies
-RUN apt-get update && apt-get install -y \
-    libcairo2 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy virtual environment from builder
-COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Create app directory
-WORKDIR /app
-
-# Copy application code
-COPY converters/ ./converters/
-COPY utils/ ./utils/
-COPY templates/ ./templates/
-COPY static/ ./static/
-COPY *.py ./
-
-# Create necessary directories
-RUN mkdir -p cache temp data/logos data/output results
 
 # Create non-root user
-RUN useradd -m -u 1000 appuser && \
-    chown -R appuser:appuser /app
-USER appuser
+RUN useradd --create-home --shell /bin/bash app
+WORKDIR /home/app
 
-# Expose port
-EXPOSE 8000
+# Install Python dependencies
+FROM base as dependencies
+COPY requirements.txt requirements_ai_phase1.txt ./
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements_ai_phase1.txt
+
+# Production stage
+FROM dependencies as production
+USER app
+
+# Copy application code
+COPY --chown=app:app . .
+
+# Set environment variables
+ENV PYTHONPATH=/home/app
+ENV FLASK_ENV=production
+ENV PYTHONUNBUFFERED=1
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:8000/')" || exit 1
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:5000/health || exit 1
 
-# Default command
-CMD ["python", "web_server.py", "--host", "0.0.0.0", "--port", "8000"]
+# Expose port
+EXPOSE 5000
+
+# Start application
+CMD ["python", "-m", "backend.app"]

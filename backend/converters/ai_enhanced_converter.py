@@ -19,6 +19,10 @@ from ..ai_modules.feature_extraction import ImageFeatureExtractor
 from ..ai_modules.optimization_old.error_handler import OptimizationErrorHandler
 from ..utils.quality_metrics import ComprehensiveMetrics
 from ..ai_modules.optimization_old.performance_optimizer import Method1PerformanceOptimizer
+from ..utils.performance_monitor import (
+    monitor_conversion, monitor_optimization, monitor_feature_extraction,
+    monitor_file_operations, performance_timer
+)
 
 
 class AIEnhancedConverter(BaseConverter):
@@ -60,6 +64,7 @@ class AIEnhancedConverter(BaseConverter):
         self.logger = logging.getLogger(__name__)
         self.logger.info("AI-Enhanced Converter initialized with Method 1 optimization")
 
+    @monitor_conversion("tier1")
     def convert(self, image_path: str, **kwargs) -> str:
         """Convert image using AI-optimized parameters"""
         try:
@@ -276,6 +281,7 @@ class AIEnhancedConverter(BaseConverter):
             self.logger.warning(f"Full optimization failed: {e}")
             return self._get_optimization_with_cache(features, image_path)
 
+    @monitor_feature_extraction()
     def _get_features_with_cache(self, image_path: str) -> Dict[str, float]:
         """Extract features with caching support"""
         # Generate cache key based on file path and modification time
@@ -312,6 +318,7 @@ class AIEnhancedConverter(BaseConverter):
             else:
                 raise
 
+    @monitor_optimization()
     def _get_optimization_with_cache(self, features: Dict[str, float], image_path: str) -> Dict[str, Any]:
         """Get optimization result with similarity-based caching"""
         if not self.config["enable_ai_optimization"]:
@@ -370,6 +377,7 @@ class AIEnhancedConverter(BaseConverter):
                     "method": "final_fallback"
                 }
 
+    @monitor_file_operations()
     def _convert_with_optimized_params(self, image_path: str, parameters: Dict[str, Any], **kwargs) -> str:
         """Apply optimized parameters for VTracer conversion"""
         try:

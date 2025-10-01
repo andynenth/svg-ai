@@ -52,10 +52,10 @@ class CachedFeatureExtractor:
         try:
             mtime = os.path.getmtime(image_path)
             file_size = os.path.getsize(image_path)
-            return hashlib.md5(f"{image_path}:{mtime}:{file_size}".encode()).hexdigest()
+            return hashlib.md5(f"{image_path}:{mtime}:{file_size}".encode(), usedforsecurity=False).hexdigest()
         except OSError:
             # Fallback to path-only hash if file stats unavailable
-            return hashlib.md5(image_path.encode()).hexdigest()
+            return hashlib.md5(image_path.encode(), usedforsecurity=False).hexdigest()
 
     def extract_features(self, image_path: str) -> Dict[str, float]:
         """
@@ -134,7 +134,7 @@ class CachedClassifier:
     def _get_features_hash(self, features: Dict[str, float]) -> str:
         """Generate hash for feature set"""
         features_str = json.dumps(features, sort_keys=True)
-        return hashlib.md5(features_str.encode()).hexdigest()
+        return hashlib.md5(features_str.encode(), usedforsecurity=False).hexdigest()
 
     def classify_with_details(self, features: Dict[str, float]) -> Dict[str, Any]:
         """
@@ -214,7 +214,7 @@ class CachedParameterOptimizer:
             'user_overrides': user_overrides
         }
         key_str = json.dumps(key_data, sort_keys=True)
-        return hashlib.md5(key_str.encode()).hexdigest()
+        return hashlib.md5(key_str.encode(), usedforsecurity=False).hexdigest()
 
     def optimize_parameters(self, classification: Dict, features: Dict,
                           base_parameters: Optional[Dict] = None,
@@ -324,7 +324,7 @@ class CachedQualityValidator:
             'features': features
         }
         key_str = json.dumps(key_data, sort_keys=True)
-        return hashlib.md5(key_str.encode()).hexdigest()
+        return hashlib.md5(key_str.encode(), usedforsecurity=False).hexdigest()
 
     def validate_conversion(self, original_path: str, svg_content: str,
                           parameters_used: Optional[Dict] = None,
@@ -450,7 +450,7 @@ class CachedSVGOutput:
             'ai_enhanced': ai_enhanced
         }
         key_str = json.dumps(key_data, sort_keys=True)
-        return hashlib.md5(key_str.encode()).hexdigest()
+        return hashlib.md5(key_str.encode(), usedforsecurity=False).hexdigest()
 
     def get_cached_svg(self, image_path: str, parameters: Dict, ai_enhanced: bool = False) -> Optional[Dict]:
         """

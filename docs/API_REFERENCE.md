@@ -1,37 +1,104 @@
-# SVG-AI Converter API Reference
-
-## Overview
-
-The SVG-AI Converter provides REST API endpoints for converting PNG/JPEG images to SVG format with optional AI enhancement. This API is built with Flask and provides comprehensive conversion capabilities with intelligent parameter optimization.
+# SVG-AI API Reference
 
 ## Base URL
-
 ```
-http://localhost:8001/api
+http://your-domain/
 ```
 
 ## Authentication
+Currently, no authentication is required. Rate limiting is applied per IP address.
 
-Currently, no authentication is required for API access. The API is designed for local development and trusted environments.
+## Content Type
+All requests must use `Content-Type: application/json` for POST requests.
 
-## API Endpoints
+## Rate Limits
+- `/api/convert`: 10 requests per minute
+- `/api/batch-convert`: 2 requests per minute
+- Other endpoints: 50 requests per hour
+
+Rate limit headers are included in all responses:
+```
+X-RateLimit-Limit: 10
+X-RateLimit-Remaining: 9
+X-RateLimit-Reset: 1640995200
+```
+
+## Error Responses
+
+All errors follow a consistent format:
+
+```json
+{
+  "error": "Error description",
+  "error_type": "ErrorType",
+  "details": {
+    "field": "field_name",
+    "message": "Detailed error message"
+  },
+  "timestamp": "2023-12-01T12:00:00Z",
+  "request_id": "uuid"
+}
+```
+
+### Error Types
+- `ValidationError`: Invalid input data
+- `ProcessingError`: Conversion failed
+- `RateLimitError`: Rate limit exceeded
+- `FileSizeError`: File too large
+- `FormatError`: Unsupported format
+- `ServerError`: Internal server error
+
+### HTTP Status Codes
+- `200`: Success
+- `400`: Bad Request (validation error)
+- `413`: Payload Too Large
+- `422`: Unprocessable Entity
+- `429`: Too Many Requests
+- `500`: Internal Server Error
+
+## Endpoints
 
 ### Health Check
 
-Check if the API service is running and healthy.
-
-**Endpoint:** `GET /health`
+#### GET /health
+Check system health and status.
 
 **Response:**
 ```json
 {
-  "status": "ok"
+  "status": "healthy",
+  "timestamp": "2023-12-01T12:00:00Z",
+  "version": "1.0.0",
+  "uptime": 3600,
+  "components": {
+    "redis": "connected",
+    "converter": "ready",
+    "ai_classifier": "ready"
+  }
 }
 ```
 
-**Example:**
-```bash
-curl http://localhost:8001/health
+**Status Values:**
+- `healthy`: All systems operational
+- `degraded`: Some components unavailable
+- `unhealthy`: Critical components down
+
+#### GET /api/classification-status
+Check AI classification component status.
+
+**Response:**
+```json
+{
+  "classification_available": true,
+  "components": {
+    "traditional_classifier": "ready",
+    "neural_network": "ready"
+  },
+  "performance": {
+    "avg_classification_time": 0.12,
+    "cache_hit_rate": 0.85
+  }
+}
 ```
 
 ### File Upload

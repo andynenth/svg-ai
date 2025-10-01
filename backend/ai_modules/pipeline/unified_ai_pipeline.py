@@ -26,6 +26,12 @@ from backend.ai_modules.utils import UnifiedUtils
 # Import converter
 from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
+# Import performance monitoring
+from backend.utils.performance_monitor import (
+    monitor_batch_processing, monitor_classification, monitor_feature_extraction,
+    monitor_optimization, monitor_quality_metrics, performance_timer
+)
+
 logger = logging.getLogger(__name__)
 
 
@@ -196,6 +202,7 @@ class UnifiedAIPipeline:
             self.components_loaded['converter'] = False
             self.converter = None
 
+    @monitor_batch_processing()
     def process(self,
                 image_path: str,
                 target_quality: float = 0.9,
@@ -324,6 +331,7 @@ class UnifiedAIPipeline:
 
         return result
 
+    @monitor_feature_extraction()
     def _extract_features(self, image_path: str) -> Optional[Dict[str, float]]:
         """Extract features from image."""
         if not self.feature_extractor or not self.components_loaded['feature_extractor']:
@@ -336,6 +344,7 @@ class UnifiedAIPipeline:
             logger.error(f"Feature extraction failed: {e}")
             return None
 
+    @monitor_classification()
     def _classify_image(self, image_path: str, features: Dict[str, float]) -> Optional[Dict[str, Any]]:
         """Classify image using primary or fallback classifier."""
 
@@ -416,6 +425,7 @@ class UnifiedAIPipeline:
             'router_used': 'default'
         }
 
+    @monitor_optimization()
     def _optimize_parameters(self,
                            features: Dict[str, float],
                            classification: Dict[str, Any],
@@ -475,6 +485,7 @@ class UnifiedAIPipeline:
             'metadata': {'method': 'default_parameters'}
         }
 
+    @monitor_quality_metrics()
     def _predict_quality(self, image_path: str, parameters: Dict[str, Any]) -> Optional[Any]:
         """Predict quality using quality predictor."""
 
@@ -507,6 +518,7 @@ class UnifiedAIPipeline:
             logger.error(f"Image conversion failed: {e}")
             return None
 
+    @monitor_quality_metrics()
     def _measure_quality(self, image_path: str, svg_content: str) -> float:
         """Measure actual quality of conversion."""
 

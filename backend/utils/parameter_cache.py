@@ -88,7 +88,7 @@ class ParameterCache:
             Hash string
         """
         with open(image_path, 'rb') as f:
-            return hashlib.md5(f.read()).hexdigest()
+            return hashlib.md5(f.read(), usedforsecurity=False).hexdigest()
 
     def _extract_cache_features(self, image_features: Dict) -> np.ndarray:
         """

@@ -26,6 +26,24 @@ from PIL import Image
 from .converter import convert_image
 from .utils.quality_metrics import QualityMetrics
 from .utils.error_messages import ErrorMessageFactory, create_api_error_response, log_error_with_context
+from .utils.logging_config import StructuredLogger
+
+# Import batch processing
+from .utils.batch_processor import BatchProcessor, convert_images_batch
+
+# Import memory monitoring
+from .utils.memory_monitor import start_memory_monitoring, get_memory_status, register_cache_cleanup
+
+# Import resource management
+from .utils.resource_manager import managed_temp_files, managed_memory_context, get_resource_statistics
+
+# Import security validation
+from .utils.security import SecurityValidator
+
+# Import rate limiting
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+import redis
 
 # Import classification modules
 from .ai_modules.classification import HybridClassifier
@@ -45,10 +63,19 @@ CORS(app, origins=['http://localhost:3000', 'http://localhost:8080', 'http://loc
      methods=['GET', 'POST', 'OPTIONS'],
      allow_headers=['Content-Type'])
 
+# Initialize rate limiter
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    storage_uri="redis://localhost:6379",
+    default_limits=["200 per day", "50 per hour"]
+)
+
 # Register AI blueprint
 # app.register_blueprint(ai_bp)  # Temporarily disabled due to import issues
 
-# Setup logging
+# Setup structured logging
+structured_logger = StructuredLogger("svg-ai")
 logging.basicConfig(level=logging.INFO)
 
 # Configuration
@@ -61,6 +88,64 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 # Initialize components
 metrics = QualityMetrics()
+security_validator = SecurityValidator()
+
+# Initialize memory monitoring
+def initialize_memory_monitoring():
+    """Initialize memory monitoring with cache cleanup callbacks"""
+    try:
+        # Start memory monitoring (30-second intervals, 400MB alert threshold)
+        start_memory_monitoring(interval=30, alert_threshold_mb=400)
+
+        # Register cache cleanup callbacks for various components
+        def clear_metrics_cache():
+            """Clear quality metrics cache"""
+            try:
+                if hasattr(metrics, 'clear_cache'):
+                    metrics.clear_cache()
+                structured_logger.info("Cleared metrics cache", {"component": "metrics_cache"})
+            except Exception as e:
+                structured_logger.warning("Failed to clear metrics cache", {"component": "metrics_cache", "error": str(e)})
+
+        def clear_classifier_cache():
+            """Clear classifier cache"""
+            try:
+                global classifier
+                if classifier and hasattr(classifier, 'clear_cache'):
+                    classifier.clear_cache()
+                structured_logger.info("Cleared classifier cache", {"component": "classifier_cache"})
+            except Exception as e:
+                logging.warning(f"Failed to clear classifier cache: {e}")
+
+        def clear_app_caches():
+            """Clear various app-level caches"""
+            try:
+                # Clear any LRU caches
+                import gc
+                cleared = 0
+                for obj in gc.get_objects():
+                    if hasattr(obj, 'cache_clear'):
+                        try:
+                            obj.cache_clear()
+                            cleared += 1
+                        except Exception:
+                            pass
+                logging.info(f"✓ Cleared {cleared} LRU caches")
+            except Exception as e:
+                logging.warning(f"Failed to clear app caches: {e}")
+
+        # Register all cache cleanup callbacks
+        register_cache_cleanup(clear_metrics_cache)
+        register_cache_cleanup(clear_classifier_cache)
+        register_cache_cleanup(clear_app_caches)
+
+        structured_logger.info("Memory monitoring initialized with cache cleanup", {"component": "memory_monitor", "status": "initialized"})
+
+    except Exception as e:
+        logging.error(f"❌ Memory monitoring initialization failed: {e}")
+
+# Start memory monitoring
+initialize_memory_monitoring()
 
 # Initialize classifier (singleton pattern)
 classifier = None
@@ -225,6 +310,100 @@ def health_check():
         basic_health['ai_error'] = str(e)
 
     return jsonify(basic_health)
+
+
+@app.route("/api/memory-status")
+def memory_status():
+    """Get current memory usage status and statistics"""
+    try:
+        memory_stats = get_memory_status()
+
+        # Add simplified status for API response
+        if 'error' in memory_stats:
+            return jsonify({
+                'status': 'error',
+                'error': memory_stats['error']
+            }), 500
+
+        # Get health check from memory monitor
+        from .utils.memory_monitor import get_memory_monitor
+        monitor = get_memory_monitor()
+        health = monitor.health_check()
+
+        response = {
+            'status': health['status'],
+            'current_memory_mb': memory_stats['current']['rss_mb'],
+            'memory_percent': memory_stats['current']['percent'],
+            'available_mb': memory_stats['current']['available_mb'],
+            'thresholds': memory_stats['thresholds'],
+            'statistics': memory_stats['statistics'],
+            'alerts': memory_stats['alerts'],
+            'monitoring_active': health['monitoring_active'],
+            'trend': health.get('trend', 'unknown'),
+            'timestamp': datetime.now().isoformat()
+        }
+
+        # Add warnings/issues if present
+        if health.get('issues'):
+            response['issues'] = health['issues']
+        if health.get('warnings'):
+            response['warnings'] = health['warnings']
+
+        return jsonify(response)
+
+    except Exception as e:
+        app.logger.error(f"Memory status error: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'error': f'Failed to get memory status: {str(e)}'
+        }), 500
+
+
+@app.route("/api/resource-status")
+def resource_status():
+    """Get current resource usage status and statistics"""
+    try:
+        resource_stats = get_resource_statistics()
+
+        # Add simplified status for API response
+        response = {
+            'status': 'healthy',
+            'timestamp': datetime.now().isoformat(),
+            'resource_statistics': resource_stats,
+        }
+
+        # Check for potential issues
+        active_resources = resource_stats.get('active_resources', 0)
+        total_resources = resource_stats.get('total_resources', 0)
+
+        if active_resources > 100:  # Arbitrary threshold
+            response['status'] = 'warning'
+            response['warning'] = f'High number of active resources: {active_resources}'
+
+        # Add leak check
+        from .utils.resource_manager import check_resource_leaks
+        leaks = check_resource_leaks(300)  # Check for resources older than 5 minutes
+
+        if leaks:
+            response['status'] = 'warning'
+            response['resource_leaks'] = len(leaks)
+            response['leak_details'] = [
+                {
+                    'type': leak.resource_type,
+                    'id': leak.resource_id,
+                    'age_seconds': time.time() - leak.created_at
+                }
+                for leak in leaks[:5]  # Show first 5 leaks
+            ]
+
+        return jsonify(response)
+
+    except Exception as e:
+        app.logger.error(f"Resource status error: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'error': f'Failed to get resource status: {str(e)}'
+        }), 500
 
 
 @app.route("/api/upload", methods=["POST"])
@@ -572,8 +751,13 @@ def optimize_parameters():
 
 
 @app.route('/api/batch-convert', methods=['POST'])
+@limiter.limit("2 per minute")
 def batch_convert():
-    """Convert multiple images in a single request"""
+    """Convert multiple images in a single request with optimized batch processing"""
+    import asyncio
+    import base64
+    import tempfile
+
     try:
         # Check content-type for JSON endpoints
         if request.content_type != "application/json":
@@ -588,92 +772,172 @@ def batch_convert():
         if not images:
             return jsonify({'error': 'No image files provided'}), 400
 
-        results = []
-        for img_data in images:
-            img_name = img_data.get('name', 'unknown.png')
-            img_base64 = img_data.get('data', '')
+        # Extract parameters
+        batch_size = data.get('batch_size', 10)  # Allow client to configure batch size
+        max_workers = data.get('max_workers', 4)  # Allow client to configure workers
+        conversion_params = data.get('parameters', {})  # Allow custom conversion parameters
 
-            if not img_base64:
-                results.append({
-                    'name': img_name,
-                    'error': 'Missing image data',
-                    'success': False
-                })
-                continue
+        app.logger.info(f"Starting batch conversion of {len(images)} images (batch_size={batch_size}, workers={max_workers})")
 
-            # Process each image using similar logic to /api/convert
-            import base64
-            import tempfile
+        # Use resource management for memory and temporary files
+        with managed_memory_context(gc_threshold=300), managed_temp_files() as temp_files:
+            image_metadata = []
 
-            temp_file_path = None
-            try:
-                # Decode base64 image
-                try:
-                    image_bytes = base64.b64decode(img_base64)
-                except Exception as e:
-                    results.append({
+            # First, decode all images and create temporary files
+            for idx, img_data in enumerate(images):
+                img_name = img_data.get('name', f'image_{idx}.png')
+                img_base64 = img_data.get('data', '')
+
+                if not img_base64:
+                    image_metadata.append({
                         'name': img_name,
-                        'error': f'Invalid base64 image data: {str(e)}',
-                        'success': False
+                        'temp_path': None,
+                        'error': 'Missing image data'
                     })
                     continue
 
-                # Create temporary file for processing
-                with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as temp_file:
+                # Security validation
+                validation_result = security_validator.validate_image_upload(img_base64, img_name)
+                if not validation_result['valid']:
+                    image_metadata.append({
+                        'name': img_name,
+                        'temp_path': None,
+                        'error': f'Security validation failed: {"; ".join(validation_result["errors"])}'
+                    })
+                    continue
+
+                try:
+                    # Decode base64 image
+                    image_bytes = base64.b64decode(img_base64)
+
+                    # Create temporary file for processing
+                    temp_file = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
                     temp_file.write(image_bytes)
-                    temp_file_path = temp_file.name
+                    temp_file.close()
 
-                # Convert using alpha converter with default parameters
-                result = convert_image(temp_file_path, "alpha", threshold=128)
-
-                if result["success"]:
-                    # Create the expected result format
-                    batch_result = {
+                    temp_files.append(temp_file.name)  # Add to managed temp files
+                    image_metadata.append({
                         'name': img_name,
-                        'svg': result.get('svg', ''),
-                        'success': True,
-                        'quality': {
-                            'ssim': result.get('ssim', 0.0),
-                            'size': result.get('size', 0)
-                        },
-                        'parameters': {
-                            'converter_type': 'alpha',
-                            'threshold': 128
+                        'temp_path': temp_file.name,
+                        'error': None
+                    })
+
+                except Exception as e:
+                    image_metadata.append({
+                        'name': img_name,
+                        'temp_path': None,
+                        'error': f'Invalid base64 image data: {str(e)}'
+                    })
+
+            # Prepare valid image paths for batch processing
+            valid_paths = [meta['temp_path'] for meta in image_metadata if meta['temp_path']]
+
+            if not valid_paths:
+                return jsonify({
+                    'success': False,
+                    'error': 'No valid images to process',
+                    'total_images': len(images),
+                    'results': [{'name': meta['name'], 'error': meta['error'], 'success': False}
+                              for meta in image_metadata]
+                }), 400
+
+            # Define batch processor function for image conversion
+            def process_image(image_path: str) -> Dict[str, Any]:
+                """Process a single image with error handling"""
+                try:
+                    # Use the existing convert_image function with alpha converter
+                    result = convert_image(image_path, "alpha", threshold=128, **conversion_params)
+
+                    if result["success"]:
+                        return {
+                            'image_path': image_path,
+                            'svg_content': result.get('svg', ''),
+                            'success': True,
+                            'quality': {
+                                'ssim': result.get('ssim', 0.0),
+                                'size': result.get('size', 0)
+                            },
+                            'parameters': {
+                                'converter_type': 'alpha',
+                                'threshold': 128,
+                                **conversion_params
+                            }
                         }
+                    else:
+                        return {
+                            'image_path': image_path,
+                            'svg_content': None,
+                            'success': False,
+                            'error': result.get('error', 'Conversion failed')
+                        }
+
+                except Exception as e:
+                    app.logger.error(f"Image processing failed for {image_path}: {e}")
+                    return {
+                        'image_path': image_path,
+                        'svg_content': None,
+                        'success': False,
+                        'error': f'Processing failed: {str(e)}'
                     }
-                else:
-                    batch_result = {
-                        'name': img_name,
-                        'error': result.get('error', 'Conversion failed'),
+
+            # Run batch processing using the BatchProcessor
+            async def run_batch_processing():
+                processor = BatchProcessor(max_workers=max_workers, batch_size=batch_size)
+                return await processor.process_batch(valid_paths, process_image)
+
+            # Execute async batch processing in sync context
+            batch_result = asyncio.run(run_batch_processing())
+
+            # Map results back to original image names
+            results = []
+            result_map = {result.get('image_path'): result for result in batch_result.results if isinstance(result, dict)}
+
+            for meta in image_metadata:
+                if meta['temp_path'] is None:
+                    # Image had decoding error
+                    results.append({
+                        'name': meta['name'],
+                        'error': meta['error'],
                         'success': False
-                    }
+                    })
+                else:
+                    # Get result from batch processing
+                    path_result = result_map.get(meta['temp_path'])
+                    if path_result and path_result.get('success'):
+                        results.append({
+                            'name': meta['name'],
+                            'svg': path_result.get('svg_content', ''),
+                            'success': True,
+                            'quality': path_result.get('quality', {}),
+                            'parameters': path_result.get('parameters', {})
+                        })
+                    else:
+                        error_msg = path_result.get('error', 'Unknown processing error') if path_result else 'No result returned'
+                        results.append({
+                            'name': meta['name'],
+                            'error': error_msg,
+                            'success': False
+                        })
 
-                results.append(batch_result)
+            # Include batch processing statistics
+            response = {
+                'success': True,
+                'total_images': len(images),
+                'results': results,
+                'successful_conversions': len([r for r in results if r.get('success', False)]),
+                'failed_conversions': len([r for r in results if not r.get('success', False)]),
+                'batch_statistics': {
+                    'processing_time': batch_result.processing_time,
+                    'items_processed': batch_result.items_processed,
+                    'batch_size': batch_result.batch_size,
+                    'errors': len(batch_result.errors)
+                }
+            }
 
-            except Exception as e:
-                results.append({
-                    'name': img_name,
-                    'error': f'Processing failed: {str(e)}',
-                    'success': False
-                })
+            app.logger.info(f"Batch conversion completed: {response['successful_conversions']}/{response['total_images']} successful in {batch_result.processing_time:.2f}s")
 
-            finally:
-                # Clean up temporary file
-                if temp_file_path and os.path.exists(temp_file_path):
-                    try:
-                        os.unlink(temp_file_path)
-                    except Exception as e:
-                        app.logger.warning(f"Failed to clean up temp file {temp_file_path}: {e}")
-
-        response = {
-            'success': True,
-            'total_images': len(images),
-            'results': results,
-            'successful_conversions': len([r for r in results if r.get('success', False)]),
-            'failed_conversions': len([r for r in results if not r.get('success', False)])
-        }
-
-        return jsonify(response)
+            return jsonify(response)
+            # No explicit finally needed - managed_temp_files handles cleanup automatically
 
     except Exception as e:
         app.logger.error(f"Batch conversion error: {str(e)}")
@@ -740,6 +1004,7 @@ def classify_batch():
 
 
 @app.route("/api/convert", methods=["POST"])
+@limiter.limit("10 per minute")
 def convert():
     """Convert uploaded PNG to SVG"""
     # Check content-type for JSON endpoints
@@ -762,6 +1027,15 @@ def convert():
             image_data = data.get("image")
             if not image_data:
                 return jsonify({"error": "Missing image data"}), 400
+
+            # Security validation
+            filename = data.get("filename", "image.png")
+            validation_result = security_validator.validate_image_upload(image_data, filename)
+            if not validation_result['valid']:
+                return jsonify({
+                    "error": "Security validation failed",
+                    "details": validation_result['errors']
+                }), 400
 
             # Decode base64 image
             try:
