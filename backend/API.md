@@ -471,22 +471,69 @@ Detailed ML model status and memory usage.
 
 ---
 
-## Quality Metrics
+## Quality Metrics System (Updated Day 1)
 
-### SSIM (Structural Similarity Index)
+The Quality System provides comprehensive quality assessment with **dual API compatibility**:
+
+### API Methods Available
+
+#### `calculate_metrics()` - Integration Test Compatible
+```python
+from backend.ai_modules.quality import QualitySystem
+quality = QualitySystem()
+metrics = quality.calculate_metrics(original_path, converted_path)
+```
+
+**Parameters:**
+- `original_path` (str): Path to original image file
+- `converted_path` (str): Path to converted SVG file
+
+**Returns:** Dictionary with quality metrics
+
+#### `calculate_comprehensive_metrics()` - Full Analysis
+```python
+metrics = quality.calculate_comprehensive_metrics(original_path, svg_path)
+```
+
+**Both methods return identical structure:**
+```json
+{
+  "ssim": 0.85,
+  "mse": 100.0,
+  "psnr": 30.0,
+  "file_size_original": 12345,
+  "file_size_svg": 6789,
+  "compression_ratio": 1.82,
+  "quality_score": 0.65
+}
+```
+
+### Quality Metric Definitions
+
+#### SSIM (Structural Similarity Index)
 - **Range:** 0.0 - 1.0
 - **Target:** >0.85 for simple logos, >0.70 for complex
 - **Interpretation:** Higher values indicate better structural preservation
 
-### MSE (Mean Squared Error)
+#### MSE (Mean Squared Error)
 - **Range:** 0.0 - 1.0
 - **Target:** <0.05 for good quality
 - **Interpretation:** Lower values indicate better pixel-level accuracy
 
-### PSNR (Peak Signal-to-Noise Ratio)
+#### PSNR (Peak Signal-to-Noise Ratio)
 - **Range:** 0 - 100+ dB
 - **Target:** >30 dB for acceptable quality
 - **Interpretation:** Higher values indicate better signal quality
+
+#### Compression Ratio
+- **Calculation:** `original_size / svg_size`
+- **Target:** 2.0+ for efficient compression
+- **Interpretation:** Higher values indicate better size reduction
+
+#### Quality Score
+- **Calculation:** `ssim * 0.7 + (compression_ratio / 10.0) * 0.3`
+- **Range:** 0.0 - 1.0+
+- **Interpretation:** Combined quality and efficiency metric
 
 ---
 
