@@ -1,0 +1,40 @@
+# docker-compose.ai.yml - Extends production setup with AI services
+version: '3.8'
+
+services:
+  svg-ai:
+    extends:
+      file: docker-compose.prod.yml
+      service: svg-ai
+    build:
+      context: .
+      dockerfile: Dockerfile.ai
+    image: svg-ai:ai-latest
+    environment:
+      - AI_ENHANCED=true
+      - MODEL_DIR=/app/models/production
+      - CLASSIFIER_MODEL=classifier.pth
+      - OPTIMIZER_MODEL=optimizer.xgb
+      - QUALITY_TRACKING_DB=postgresql://postgres:password@postgres:5432/svgai_quality
+    volumes:
+      - ./models:/app/models:ro
+      - ai-model-cache:/app/models/cache
+    depends_on:
+      - redis
+      - postgres
+
+  # AI Quality Tracking Database
+  postgres:
+    extends:
+      file: docker-compose.prod.yml
+      service: postgres
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=svgai,svgai_quality
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./scripts/init-multiple-databases.sh:/docker-entrypoint-initdb.d/init-multiple-databases.sh
+
+volumes:
+  ai-model-cache:
+  postgres-data:
+    external: true  # Reuse from base production setup
