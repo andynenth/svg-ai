@@ -1,654 +1,705 @@
 #!/usr/bin/env python3
 """
-Comprehensive Performance Benchmarking Suite for Week 2 Implementation
-
-This script runs comprehensive performance benchmarks across all system components
-and generates detailed performance reports for production readiness validation.
+Performance Benchmarking Suite - Task 2 Implementation
+Comprehensive benchmark testing for AI pipeline performance validation.
 """
 
-import os
 import sys
 import time
 import json
+import logging
+import argparse
+import tracemalloc
 import statistics
 import tempfile
 from pathlib import Path
 from typing import Dict, List, Any, Optional
-from dataclasses import dataclass, asdict
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from dataclasses import dataclass, asdict
 import psutil
-from PIL import Image
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+# Import pipeline and components
+try:
+    from backend.ai_modules.pipeline.unified_ai_pipeline import UnifiedAIPipeline, PipelineResult
+    from backend.converters.ai_enhanced_converter import AIEnhancedConverter
+    from backend.converters.vtracer_converter import VTracerConverter
+except ImportError as e:
+    print(f"Warning: Failed to import required modules: {e}")
+    print("Some benchmarks may not be available")
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 
 @dataclass
-class BenchmarkResult:
-    """Structured benchmark result data."""
+class BenchmarkMetrics:
+    """Container for benchmark metrics."""
     test_name: str
-    success: bool
-    duration: float
-    memory_delta_mb: float
+    tier: Optional[int]
+    processing_time: float
+    memory_current_mb: float
+    memory_peak_mb: float
     cpu_usage_percent: float
-    output_size: int
-    quality_score: Optional[float]
-    error_message: Optional[str]
-    timestamp: float
-    metadata: Dict[str, Any]
+    success: bool
+    error_message: Optional[str] = None
+    quality_score: Optional[float] = None
+    output_size_bytes: Optional[int] = None
+    timestamp: str = ""
+
+    def __post_init__(self):
+        if not self.timestamp:
+            self.timestamp = datetime.now().isoformat()
 
 
-class PerformanceBenchmarkSuite:
-    """Comprehensive performance benchmarking suite."""
+class PerformanceBenchmark:
+    """
+    Comprehensive performance benchmarking suite for AI pipeline validation.
+    """
 
-    def __init__(self, output_dir: str = "performance_reports"):
-        self.output_dir = Path(output_dir)
-        self.output_dir.mkdir(exist_ok=True)
+    def __init__(self, output_file: str = "benchmarks.json"):
+        """
+        Initialize performance benchmark suite.
 
-        self.results: List[BenchmarkResult] = []
-        self.system_info = self._collect_system_info()
-        self.start_time = time.time()
+        Args:
+            output_file: Output file for benchmark results
+        """
+        self.output_file = output_file
+        self.results: List[BenchmarkMetrics] = []
 
-    def _collect_system_info(self) -> Dict[str, Any]:
-        """Collect system information for benchmark context."""
-        return {
-            'cpu_count': psutil.cpu_count(),
-            'cpu_freq': psutil.cpu_freq()._asdict() if psutil.cpu_freq() else None,
-            'memory_total_gb': psutil.virtual_memory().total / (1024**3),
-            'python_version': sys.version,
-            'platform': sys.platform,
-            'timestamp': datetime.now().isoformat()
+        # Performance targets (as specified in DAY10_VALIDATION.md)
+        self.metrics = {
+            'tier1': {'target': 2.0, 'results': []},
+            'tier2': {'target': 5.0, 'results': []},
+            'tier3': {'target': 15.0, 'results': []},
         }
+
+        # Initialize pipeline
+        self.pipeline = None
+        self.baseline_converter = None
+        self._initialize_components()
+
+        # Load test images
+        self.test_images = self._load_test_images()
+
+        logger.info(f"Performance benchmark initialized with {len(self.test_images)} test images")
+
+    def _initialize_components(self):
+        """Initialize pipeline and converter components."""
+        try:
+            self.pipeline = UnifiedAIPipeline(
+                enable_caching=True,
+                enable_fallbacks=True,
+                performance_mode="balanced"
+            )
+            logger.info("✓ Unified AI Pipeline initialized")
+        except Exception as e:
+            logger.error(f"✗ Failed to initialize AI pipeline: {e}")
+            self.pipeline = None
+
+        try:
+            self.baseline_converter = VTracerConverter()
+            logger.info("✓ Baseline converter initialized")
+        except Exception as e:
+            logger.error(f"✗ Failed to initialize baseline converter: {e}")
+            self.baseline_converter = None
+
+    def _load_test_images(self) -> List[str]:
+        """Load test images for benchmarking."""
+        test_images = []
+        base_path = Path("data/logos")
+
+        if not base_path.exists():
+            logger.warning(f"Test data path {base_path} not found")
+            return []
+
+        categories = ["simple_geometric", "text_based", "gradients", "complex", "abstract"]
+
+        for category in categories:
+            category_path = base_path / category
+            if category_path.exists():
+                # Get 3 images per category for performance testing
+                category_images = list(category_path.glob("*.png"))
+                # Filter out processed images
+                category_images = [
+                    str(img) for img in category_images
+                    if "optimized" not in str(img) and ".cache" not in str(img)
+                ][:3]  # Take first 3
+                test_images.extend(category_images)
+
+        logger.info(f"Loaded {len(test_images)} test images for benchmarking")
+        return test_images
+
+    def benchmark_processing_times(self):
+        """Measure processing times for each tier."""
+        logger.info("Starting processing time benchmarks...")
+
+        if not self.pipeline:
+            logger.error("Pipeline not available for processing time benchmarks")
+            return
+
+        if not self.test_images:
+            logger.error("No test images available for benchmarking")
+            return
+
+        for tier in [1, 2, 3]:
+            logger.info(f"Benchmarking Tier {tier} processing times...")
+
+            tier_results = []
+
+            for i, image_path in enumerate(self.test_images[:10]):  # Test 10 images per tier
+                logger.info(f"  Testing image {i+1}/10: {Path(image_path).name}")
+
+                try:
+                    # Measure memory before
+                    memory_before = self._get_memory_usage()
+                    cpu_before = psutil.cpu_percent()
+
+                    # Process with specific tier
+                    start = time.perf_counter()
+                    result = self._process_with_tier(image_path, tier)
+                    duration = time.perf_counter() - start
+
+                    # Measure memory after
+                    memory_after = self._get_memory_usage()
+                    cpu_after = psutil.cpu_percent()
+
+                    # Calculate metrics
+                    memory_delta = memory_after - memory_before
+                    cpu_usage = (cpu_before + cpu_after) / 2
+
+                    # Get output size if successful
+                    output_size = len(result.svg_content) if result and result.success and result.svg_content else 0
+
+                    # Record metrics
+                    metrics = BenchmarkMetrics(
+                        test_name=f"tier{tier}_processing",
+                        tier=tier,
+                        processing_time=duration,
+                        memory_current_mb=memory_after,
+                        memory_peak_mb=memory_delta,
+                        cpu_usage_percent=cpu_usage,
+                        success=result.success if result else False,
+                        error_message=result.error_message if result and not result.success else None,
+                        quality_score=result.quality_score if result else None,
+                        output_size_bytes=output_size
+                    )
+
+                    self.results.append(metrics)
+                    self.metrics[f'tier{tier}']['results'].append(duration)
+                    tier_results.append(duration)
+
+                    logger.info(f"    Processed in {duration:.3f}s (target: {self.metrics[f'tier{tier}']['target']}s)")
+
+                except Exception as e:
+                    logger.error(f"    Failed to process {Path(image_path).name}: {e}")
+
+                    # Record failure
+                    metrics = BenchmarkMetrics(
+                        test_name=f"tier{tier}_processing",
+                        tier=tier,
+                        processing_time=0.0,
+                        memory_current_mb=self._get_memory_usage(),
+                        memory_peak_mb=0.0,
+                        cpu_usage_percent=0.0,
+                        success=False,
+                        error_message=str(e)
+                    )
+                    self.results.append(metrics)
+
+            # Calculate tier statistics
+            if tier_results:
+                avg_time = statistics.mean(tier_results)
+                p95_time = statistics.quantiles(tier_results, n=20)[18] if len(tier_results) >= 5 else max(tier_results)
+                target = self.metrics[f'tier{tier}']['target']
+
+                logger.info(f"Tier {tier} Results:")
+                logger.info(f"  Average time: {avg_time:.3f}s")
+                logger.info(f"  95th percentile: {p95_time:.3f}s")
+                logger.info(f"  Target: {target}s")
+                logger.info(f"  Meets target: {'✓' if p95_time < target else '✗'}")
+
+    def _process_with_tier(self, image_path: str, tier: int) -> Optional[PipelineResult]:
+        """Process image with specific tier."""
+        try:
+            # Configure time constraint based on tier
+            time_constraints = {1: 2.0, 2: 5.0, 3: 15.0}
+            time_constraint = time_constraints.get(tier, 30.0)
+
+            # For now, process with pipeline (tier routing happens internally)
+            result = self.pipeline.process(
+                image_path=image_path,
+                target_quality=0.85,
+                time_constraint=time_constraint
+            )
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Tier {tier} processing failed for {image_path}: {e}")
+            return None
+
+    def benchmark_memory_usage(self):
+        """Track memory consumption during processing."""
+        logger.info("Starting memory usage benchmarks...")
+
+        if not self.pipeline or not self.test_images:
+            logger.error("Pipeline or test images not available for memory benchmarks")
+            return
+
+        # Start memory tracking
+        tracemalloc.start()
+
+        try:
+            # Process batch of images
+            test_batch = self.test_images[:10]
+            logger.info(f"Processing batch of {len(test_batch)} images for memory analysis...")
+
+            memory_samples = []
+            initial_memory = self._get_memory_usage()
+
+            for i, image_path in enumerate(test_batch):
+                logger.info(f"  Processing image {i+1}/{len(test_batch)}: {Path(image_path).name}")
+
+                try:
+                    # Measure memory before processing
+                    memory_before = self._get_memory_usage()
+
+                    # Process image
+                    result = self.pipeline.process(image_path)
+
+                    # Measure memory after processing
+                    memory_after = self._get_memory_usage()
+                    memory_delta = memory_after - memory_before
+
+                    memory_samples.append({
+                        'image': Path(image_path).name,
+                        'memory_before_mb': memory_before,
+                        'memory_after_mb': memory_after,
+                        'memory_delta_mb': memory_delta,
+                        'success': result.success if result else False
+                    })
+
+                    logger.info(f"    Memory delta: {memory_delta:+.1f} MB")
+
+                except Exception as e:
+                    logger.error(f"    Memory test failed for {Path(image_path).name}: {e}")
+
+            # Get final memory statistics
+            current, peak = tracemalloc.get_traced_memory()
+            tracemalloc.stop()
+
+            final_memory = self._get_memory_usage()
+            total_delta = final_memory - initial_memory
+
+            memory_metrics = {
+                'initial_memory_mb': initial_memory,
+                'final_memory_mb': final_memory,
+                'total_delta_mb': total_delta,
+                'tracemalloc_current_mb': current / 1024 / 1024,
+                'tracemalloc_peak_mb': peak / 1024 / 1024,
+                'samples': memory_samples,
+                'target_peak_mb': 500.0,  # Target from DAY10_VALIDATION.md
+                'meets_target': peak / 1024 / 1024 < 500.0
+            }
+
+            # Record overall memory metrics
+            overall_metrics = BenchmarkMetrics(
+                test_name="memory_usage",
+                tier=None,
+                processing_time=0.0,
+                memory_current_mb=memory_metrics['tracemalloc_current_mb'],
+                memory_peak_mb=memory_metrics['tracemalloc_peak_mb'],
+                cpu_usage_percent=0.0,
+                success=memory_metrics['meets_target']
+            )
+            self.results.append(overall_metrics)
+
+            logger.info(f"Memory Usage Results:")
+            logger.info(f"  Peak memory: {memory_metrics['tracemalloc_peak_mb']:.1f} MB")
+            logger.info(f"  Target: 500 MB")
+            logger.info(f"  Meets target: {'✓' if memory_metrics['meets_target'] else '✗'}")
+
+            return memory_metrics
+
+        except Exception as e:
+            logger.error(f"Memory benchmark failed: {e}")
+            tracemalloc.stop()
+            return None
+
+    def benchmark_concurrent_processing(self):
+        """Test concurrent request handling."""
+        logger.info("Starting concurrent processing benchmarks...")
+
+        if not self.pipeline or not self.test_images:
+            logger.error("Pipeline or test images not available for concurrent benchmarks")
+            return
+
+        # Test with different concurrency levels
+        concurrency_levels = [1, 2, 4, 8]
+        test_images_subset = self.test_images[:20]  # Use 20 images for concurrent testing
+
+        for max_workers in concurrency_levels:
+            logger.info(f"Testing concurrent processing with {max_workers} workers...")
+
+            try:
+                start_time = time.perf_counter()
+                memory_before = self._get_memory_usage()
+
+                # Run concurrent processing
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    # Submit all tasks
+                    futures = []
+                    for image_path in test_images_subset:
+                        future = executor.submit(self._process_concurrent, image_path)
+                        futures.append((future, image_path))
+
+                    # Collect results
+                    successful = 0
+                    failed = 0
+                    processing_times = []
+
+                    for future, image_path in futures:
+                        try:
+                            result, duration = future.result(timeout=60)  # 60 second timeout
+                            if result and result.success:
+                                successful += 1
+                                processing_times.append(duration)
+                            else:
+                                failed += 1
+                        except Exception as e:
+                            logger.warning(f"Concurrent processing failed for {Path(image_path).name}: {e}")
+                            failed += 1
+
+                total_time = time.perf_counter() - start_time
+                memory_after = self._get_memory_usage()
+
+                # Calculate metrics
+                if processing_times:
+                    avg_individual_time = statistics.mean(processing_times)
+                    throughput = successful / total_time  # images per second
+                else:
+                    avg_individual_time = 0
+                    throughput = 0
+
+                concurrent_metrics = BenchmarkMetrics(
+                    test_name=f"concurrent_{max_workers}_workers",
+                    tier=None,
+                    processing_time=total_time,
+                    memory_current_mb=memory_after,
+                    memory_peak_mb=memory_after - memory_before,
+                    cpu_usage_percent=psutil.cpu_percent(),
+                    success=successful > 0,
+                    quality_score=throughput,  # Use quality_score field for throughput
+                    output_size_bytes=successful
+                )
+                self.results.append(concurrent_metrics)
+
+                logger.info(f"  Concurrency {max_workers} Results:")
+                logger.info(f"    Total time: {total_time:.3f}s")
+                logger.info(f"    Successful: {successful}/{len(test_images_subset)}")
+                logger.info(f"    Failed: {failed}")
+                logger.info(f"    Throughput: {throughput:.2f} images/second")
+                logger.info(f"    Avg individual time: {avg_individual_time:.3f}s")
+
+            except Exception as e:
+                logger.error(f"Concurrent benchmark failed for {max_workers} workers: {e}")
+
+    def _process_concurrent(self, image_path: str) -> tuple:
+        """Process image for concurrent testing."""
+        start_time = time.perf_counter()
+        try:
+            result = self.pipeline.process(image_path)
+            duration = time.perf_counter() - start_time
+            return result, duration
+        except Exception as e:
+            duration = time.perf_counter() - start_time
+            logger.error(f"Concurrent processing error for {image_path}: {e}")
+            return None, duration
+
+    def profile_bottlenecks(self):
+        """Profile and identify performance bottlenecks."""
+        logger.info("Starting bottleneck profiling...")
+
+        if not self.pipeline or not self.test_images:
+            logger.error("Pipeline or test images not available for profiling")
+            return
+
+        # Profile with a representative image
+        test_image = self.test_images[0]
+        logger.info(f"Profiling with image: {Path(test_image).name}")
+
+        try:
+            import cProfile
+            import pstats
+            import io
+
+            # Profile the processing
+            profiler = cProfile.Profile()
+            profiler.enable()
+
+            start_time = time.perf_counter()
+            result = self.pipeline.process(test_image)
+            total_time = time.perf_counter() - start_time
+
+            profiler.disable()
+
+            # Analyze profiling results
+            s = io.StringIO()
+            ps = pstats.Stats(profiler, stream=s).sort_stats('cumulative')
+            ps.print_stats(20)  # Top 20 functions
+
+            profiling_output = s.getvalue()
+
+            profiling_metrics = BenchmarkMetrics(
+                test_name="bottleneck_profiling",
+                tier=None,
+                processing_time=total_time,
+                memory_current_mb=self._get_memory_usage(),
+                memory_peak_mb=0.0,
+                cpu_usage_percent=0.0,
+                success=result.success if result else False
+            )
+            self.results.append(profiling_metrics)
+
+            logger.info(f"Profiling completed in {total_time:.3f}s")
+            logger.info("Top performance bottlenecks:")
+
+            # Extract key insights from profiling
+            lines = profiling_output.split('\n')[:25]  # First 25 lines
+            for line in lines:
+                if line.strip() and 'function calls' not in line:
+                    logger.info(f"  {line}")
+
+            return profiling_output
+
+        except ImportError:
+            logger.warning("cProfile not available for bottleneck analysis")
+            return None
+        except Exception as e:
+            logger.error(f"Profiling failed: {e}")
+            return None
 
     def _get_memory_usage(self) -> float:
         """Get current memory usage in MB."""
-        process = psutil.Process()
-        return process.memory_info().rss / (1024**2)
-
-    def _get_cpu_usage(self) -> float:
-        """Get current CPU usage percentage."""
-        return psutil.cpu_percent(interval=0.1)
-
-    def create_test_images(self) -> List[str]:
-        """Create standardized test images for benchmarking."""
-        test_images = []
-
-        # Test image specifications
-        test_specs = [
-            {'name': 'simple_small', 'size': (100, 100), 'type': 'simple'},
-            {'name': 'simple_medium', 'size': (500, 500), 'type': 'simple'},
-            {'name': 'simple_large', 'size': (1000, 1000), 'type': 'simple'},
-            {'name': 'complex_small', 'size': (100, 100), 'type': 'complex'},
-            {'name': 'complex_medium', 'size': (500, 500), 'type': 'complex'},
-            {'name': 'text_medium', 'size': (400, 200), 'type': 'text'},
-            {'name': 'gradient_medium', 'size': (300, 300), 'type': 'gradient'}
-        ]
-
-        for spec in test_specs:
-            image_path = self._create_test_image(spec)
-            test_images.append(image_path)
-
-        return test_images
-
-    def _create_test_image(self, spec: Dict[str, Any]) -> str:
-        """Create a single test image based on specification."""
-        width, height = spec['size']
-        img_type = spec['type']
-
-        if img_type == 'simple':
-            # Simple geometric shape
-            img = Image.new('RGB', (width, height), color='white')
-            from PIL import ImageDraw
-            draw = ImageDraw.Draw(img)
-            margin = min(width, height) // 10
-            draw.ellipse([margin, margin, width-margin, height-margin], fill='blue')
-
-        elif img_type == 'complex':
-            # Complex pattern
-            img = Image.new('RGB', (width, height))
-            pixels = img.load()
-            for x in range(width):
-                for y in range(height):
-                    r = (x * y) % 256
-                    g = (x + y * 2) % 256
-                    b = (x * 2 + y) % 256
-                    pixels[x, y] = (r, g, b)
-
-        elif img_type == 'text':
-            # Text-like rectangles
-            img = Image.new('RGB', (width, height), color='white')
-            from PIL import ImageDraw
-            draw = ImageDraw.Draw(img)
-            for i in range(5):
-                x = 20 + i * 60
-                draw.rectangle([x, height//2-20, x+40, height//2+20], fill='black')
-
-        elif img_type == 'gradient':
-            # Gradient image
-            img = Image.new('RGB', (width, height))
-            pixels = img.load()
-            for x in range(width):
-                for y in range(height):
-                    r = int(255 * x / width)
-                    g = int(255 * y / height)
-                    b = 128
-                    pixels[x, y] = (r, g, b)
-
-        # Save image
-        temp_file = tempfile.NamedTemporaryFile(suffix=f'_{spec["name"]}.png', delete=False)
-        img.save(temp_file.name, 'PNG')
-        return temp_file.name
-
-    def benchmark_basic_conversion(self, test_images: List[str]) -> Dict[str, Any]:
-        """Benchmark basic VTracer conversion performance."""
-        print("Running basic conversion benchmarks...")
-
         try:
-            from backend.converters.vtracer_converter import VTracerConverter
-            converter = VTracerConverter()
+            process = psutil.Process()
+            return process.memory_info().rss / (1024 * 1024)
+        except Exception:
+            return 0.0
 
-            conversion_results = []
-
-            for image_path in test_images:
-                # Pre-benchmark state
-                memory_before = self._get_memory_usage()
-
-                start_time = time.time()
-                cpu_before = self._get_cpu_usage()
-
-                try:
-                    result = converter.convert_with_metrics(image_path)
-
-                    end_time = time.time()
-                    memory_after = self._get_memory_usage()
-                    cpu_after = self._get_cpu_usage()
-
-                    benchmark_result = BenchmarkResult(
-                        test_name=f"basic_conversion_{Path(image_path).stem}",
-                        success=result['success'],
-                        duration=end_time - start_time,
-                        memory_delta_mb=memory_after - memory_before,
-                        cpu_usage_percent=max(cpu_before, cpu_after),
-                        output_size=len(result.get('svg', '')),
-                        quality_score=None,
-                        error_message=None,
-                        timestamp=start_time,
-                        metadata={
-                            'converter': 'VTracerConverter',
-                            'image_path': Path(image_path).name,
-                            'conversion_time': result.get('time', 0)
-                        }
-                    )
-
-                except Exception as e:
-                    benchmark_result = BenchmarkResult(
-                        test_name=f"basic_conversion_{Path(image_path).stem}",
-                        success=False,
-                        duration=time.time() - start_time,
-                        memory_delta_mb=0,
-                        cpu_usage_percent=0,
-                        output_size=0,
-                        quality_score=None,
-                        error_message=str(e),
-                        timestamp=start_time,
-                        metadata={'converter': 'VTracerConverter', 'image_path': Path(image_path).name}
-                    )
-
-                conversion_results.append(benchmark_result)
-                self.results.append(benchmark_result)
-
-        except ImportError as e:
-            print(f"VTracer converter not available: {e}")
-            return {'error': 'VTracer converter not available'}
-
-        # Analyze results
-        successful_conversions = [r for r in conversion_results if r.success]
-
-        if not successful_conversions:
-            return {'error': 'No successful conversions'}
-
-        analysis = {
-            'total_tests': len(conversion_results),
-            'successful_tests': len(successful_conversions),
-            'success_rate': len(successful_conversions) / len(conversion_results) * 100,
-            'avg_duration': statistics.mean([r.duration for r in successful_conversions]),
-            'min_duration': min([r.duration for r in successful_conversions]),
-            'max_duration': max([r.duration for r in successful_conversions]),
-            'avg_memory_delta': statistics.mean([r.memory_delta_mb for r in successful_conversions]),
-            'avg_output_size': statistics.mean([r.output_size for r in successful_conversions])
-        }
-
-        print(f"Basic conversion benchmark complete: {analysis['success_rate']:.1f}% success rate")
-        return analysis
-
-    def benchmark_ai_enhanced_conversion(self, test_images: List[str]) -> Dict[str, Any]:
-        """Benchmark AI-enhanced conversion performance."""
-        print("Running AI-enhanced conversion benchmarks...")
-
-        try:
-            from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
-            converter = AIEnhancedSVGConverter(enable_ai=True, ai_timeout=10.0)
-
-            ai_results = []
-
-            for image_path in test_images:
-                memory_before = self._get_memory_usage()
-                start_time = time.time()
-
-                try:
-                    result = converter.convert_with_ai_analysis(image_path)
-
-                    end_time = time.time()
-                    memory_after = self._get_memory_usage()
-
-                    benchmark_result = BenchmarkResult(
-                        test_name=f"ai_enhanced_{Path(image_path).stem}",
-                        success=result['success'],
-                        duration=end_time - start_time,
-                        memory_delta_mb=memory_after - memory_before,
-                        cpu_usage_percent=self._get_cpu_usage(),
-                        output_size=len(result.get('svg', '')),
-                        quality_score=result.get('classification', {}).get('confidence', 0),
-                        error_message=None,
-                        timestamp=start_time,
-                        metadata={
-                            'converter': 'AIEnhancedSVGConverter',
-                            'ai_enhanced': result.get('ai_enhanced', False),
-                            'logo_type': result.get('classification', {}).get('logo_type', 'unknown'),
-                            'confidence': result.get('classification', {}).get('confidence', 0),
-                            'ai_analysis_time': result.get('ai_analysis_time', 0),
-                            'conversion_time': result.get('conversion_time', 0)
-                        }
-                    )
-
-                except Exception as e:
-                    benchmark_result = BenchmarkResult(
-                        test_name=f"ai_enhanced_{Path(image_path).stem}",
-                        success=False,
-                        duration=time.time() - start_time,
-                        memory_delta_mb=0,
-                        cpu_usage_percent=0,
-                        output_size=0,
-                        quality_score=None,
-                        error_message=str(e),
-                        timestamp=start_time,
-                        metadata={'converter': 'AIEnhancedSVGConverter'}
-                    )
-
-                ai_results.append(benchmark_result)
-                self.results.append(benchmark_result)
-
-        except ImportError as e:
-            print(f"AI-enhanced converter not available: {e}")
-            return {'error': 'AI-enhanced converter not available', 'ai_available': False}
-
-        # Analyze AI-enhanced results
-        successful_ai = [r for r in ai_results if r.success]
-        ai_enhanced = [r for r in ai_results if r.metadata.get('ai_enhanced', False)]
-
-        if not successful_ai:
-            return {'error': 'No successful AI conversions', 'ai_available': True}
-
-        analysis = {
-            'ai_available': True,
-            'total_tests': len(ai_results),
-            'successful_tests': len(successful_ai),
-            'ai_enhanced_conversions': len(ai_enhanced),
-            'ai_enhancement_rate': len(ai_enhanced) / len(successful_ai) * 100 if successful_ai else 0,
-            'avg_duration': statistics.mean([r.duration for r in successful_ai]),
-            'avg_ai_analysis_time': statistics.mean([r.metadata.get('ai_analysis_time', 0) for r in ai_enhanced]) if ai_enhanced else 0,
-            'avg_confidence': statistics.mean([r.quality_score for r in successful_ai if r.quality_score]),
-            'logo_type_distribution': self._analyze_logo_types(ai_enhanced)
-        }
-
-        print(f"AI-enhanced benchmark complete: {analysis['ai_enhancement_rate']:.1f}% AI enhancement rate")
-        return analysis
-
-    def benchmark_cache_performance(self, test_images: List[str]) -> Dict[str, Any]:
-        """Benchmark caching system performance."""
-        print("Running cache performance benchmarks...")
-
-        try:
-            from backend.ai_modules.advanced_cache import MultiLevelCache
-            cache = MultiLevelCache()
-
-            cache_results = []
-
-            # Test cache performance with feature extraction
-            try:
-                from backend.ai_modules.cached_components import CachedFeatureExtractor
-                extractor = CachedFeatureExtractor(cache=cache)
-
-                for image_path in test_images:
-                    # First extraction (cache miss)
-                    start_time = time.time()
-                    first_result = extractor.extract_features(image_path)
-                    first_time = time.time() - start_time
-
-                    # Second extraction (cache hit)
-                    start_time = time.time()
-                    second_result = extractor.extract_features(image_path)
-                    second_time = time.time() - start_time
-
-                    speedup = first_time / second_time if second_time > 0 else float('inf')
-
-                    cache_result = BenchmarkResult(
-                        test_name=f"cache_performance_{Path(image_path).stem}",
-                        success=first_result == second_result,
-                        duration=second_time,
-                        memory_delta_mb=0,
-                        cpu_usage_percent=0,
-                        output_size=len(str(second_result)),
-                        quality_score=speedup,
-                        error_message=None,
-                        timestamp=start_time,
-                        metadata={
-                            'first_extraction_time': first_time,
-                            'cached_extraction_time': second_time,
-                            'speedup_ratio': speedup,
-                            'cache_hit': True,
-                            'results_match': first_result == second_result
-                        }
-                    )
-
-                    cache_results.append(cache_result)
-                    self.results.append(cache_result)
-
-            except ImportError:
-                return {'error': 'Cached components not available'}
-
-        except ImportError:
-            return {'error': 'Cache system not available'}
-
-        # Analyze cache performance
-        successful_cache = [r for r in cache_results if r.success]
-
-        if not successful_cache:
-            return {'error': 'No successful cache tests'}
-
-        analysis = {
-            'cache_available': True,
-            'total_tests': len(cache_results),
-            'successful_tests': len(successful_cache),
-            'avg_speedup': statistics.mean([r.quality_score for r in successful_cache]),
-            'min_speedup': min([r.quality_score for r in successful_cache]),
-            'max_speedup': max([r.quality_score for r in successful_cache]),
-            'cache_effectiveness': sum(1 for r in successful_cache if r.quality_score > 2.0) / len(successful_cache) * 100
-        }
-
-        print(f"Cache benchmark complete: {analysis['avg_speedup']:.1f}x average speedup")
-        return analysis
-
-    def benchmark_concurrent_performance(self, test_images: List[str], max_workers: int = 5) -> Dict[str, Any]:
-        """Benchmark concurrent processing performance."""
-        print(f"Running concurrent performance benchmarks with {max_workers} workers...")
-
-        try:
-            from backend.converters.vtracer_converter import VTracerConverter
-
-            def convert_single_image(image_path):
-                converter = VTracerConverter()
-                start_time = time.time()
-                memory_before = self._get_memory_usage()
-
-                try:
-                    result = converter.convert_with_metrics(image_path)
-                    duration = time.time() - start_time
-                    memory_after = self._get_memory_usage()
-
-                    return {
-                        'success': result['success'],
-                        'duration': duration,
-                        'memory_delta': memory_after - memory_before,
-                        'output_size': len(result.get('svg', '')),
-                        'image_path': image_path
-                    }
-                except Exception as e:
-                    return {
-                        'success': False,
-                        'duration': time.time() - start_time,
-                        'error': str(e),
-                        'image_path': image_path
-                    }
-
-            # Sequential processing baseline
-            sequential_start = time.time()
-            sequential_results = []
-
-            for image_path in test_images:
-                result = convert_single_image(image_path)
-                sequential_results.append(result)
-
-            sequential_time = time.time() - sequential_start
-
-            # Concurrent processing
-            concurrent_start = time.time()
-            concurrent_results = []
-
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                futures = {executor.submit(convert_single_image, img): img for img in test_images}
-
-                for future in as_completed(futures):
-                    result = future.result()
-                    concurrent_results.append(result)
-
-            concurrent_time = time.time() - concurrent_start
-
-            # Analyze concurrent performance
-            sequential_successful = sum(1 for r in sequential_results if r['success'])
-            concurrent_successful = sum(1 for r in concurrent_results if r['success'])
-
-            analysis = {
-                'sequential_time': sequential_time,
-                'concurrent_time': concurrent_time,
-                'speedup_ratio': sequential_time / concurrent_time if concurrent_time > 0 else 0,
-                'sequential_success_rate': sequential_successful / len(sequential_results) * 100,
-                'concurrent_success_rate': concurrent_successful / len(concurrent_results) * 100,
-                'max_workers': max_workers,
-                'throughput_improvement': (len(test_images) / concurrent_time) / (len(test_images) / sequential_time) if sequential_time > 0 else 0
-            }
-
-            print(f"Concurrent benchmark complete: {analysis['speedup_ratio']:.2f}x speedup with {max_workers} workers")
-            return analysis
-
-        except ImportError:
-            return {'error': 'VTracer converter not available for concurrent testing'}
-
-    def _analyze_logo_types(self, results: List[BenchmarkResult]) -> Dict[str, int]:
-        """Analyze distribution of logo types in AI-enhanced results."""
-        logo_types = {}
-        for result in results:
-            logo_type = result.metadata.get('logo_type', 'unknown')
-            logo_types[logo_type] = logo_types.get(logo_type, 0) + 1
-        return logo_types
-
-    def generate_comprehensive_report(self) -> Dict[str, Any]:
+    def generate_performance_report(self) -> Dict[str, Any]:
         """Generate comprehensive performance report."""
-        print("Generating comprehensive performance report...")
+        logger.info("Generating performance report...")
 
-        # Create test images
-        test_images = self.create_test_images()
+        # Calculate summary statistics
+        tier_summaries = {}
+        for tier in [1, 2, 3]:
+            tier_results = self.metrics[f'tier{tier}']['results']
+            target = self.metrics[f'tier{tier}']['target']
 
-        # Run all benchmarks
-        basic_results = self.benchmark_basic_conversion(test_images)
-        ai_results = self.benchmark_ai_enhanced_conversion(test_images)
-        cache_results = self.benchmark_cache_performance(test_images)
-        concurrent_results = self.benchmark_concurrent_performance(test_images)
+            if tier_results:
+                avg_time = statistics.mean(tier_results)
+                p95_time = statistics.quantiles(tier_results, n=20)[18] if len(tier_results) >= 5 else max(tier_results)
+                meets_target = p95_time < target
 
-        # Overall analysis
-        total_duration = time.time() - self.start_time
+                tier_summaries[f'tier{tier}'] = {
+                    'count': len(tier_results),
+                    'average_time': avg_time,
+                    'p95_time': p95_time,
+                    'target_time': target,
+                    'meets_target': meets_target,
+                    'all_times': tier_results
+                }
+            else:
+                tier_summaries[f'tier{tier}'] = {
+                    'count': 0,
+                    'average_time': 0,
+                    'p95_time': 0,
+                    'target_time': target,
+                    'meets_target': False,
+                    'all_times': []
+                }
+
+        # Overall success metrics
+        successful_tests = sum(1 for r in self.results if r.success)
+        total_tests = len(self.results)
+        success_rate = successful_tests / total_tests if total_tests > 0 else 0
+
+        # Memory analysis
+        memory_tests = [r for r in self.results if r.test_name == "memory_usage"]
+        peak_memory = memory_tests[0].memory_peak_mb if memory_tests else 0
+        memory_target_met = peak_memory < 500.0
+
+        # Performance targets assessment
+        targets_met = {
+            'tier1_performance': tier_summaries['tier1']['meets_target'],
+            'tier2_performance': tier_summaries['tier2']['meets_target'],
+            'tier3_performance': tier_summaries['tier3']['meets_target'],
+            'memory_usage': memory_target_met
+        }
+
+        all_targets_met = all(targets_met.values())
 
         report = {
-            'benchmark_info': {
-                'timestamp': datetime.now().isoformat(),
-                'total_duration': total_duration,
-                'system_info': self.system_info,
-                'test_images_count': len(test_images)
+            'summary': {
+                'total_tests': total_tests,
+                'successful_tests': successful_tests,
+                'success_rate': success_rate,
+                'all_targets_met': all_targets_met,
+                'timestamp': datetime.now().isoformat()
             },
-            'results': {
-                'basic_conversion': basic_results,
-                'ai_enhanced_conversion': ai_results,
-                'cache_performance': cache_results,
-                'concurrent_performance': concurrent_results
+            'tier_performance': tier_summaries,
+            'targets_assessment': targets_met,
+            'memory_analysis': {
+                'peak_memory_mb': peak_memory,
+                'target_memory_mb': 500.0,
+                'meets_target': memory_target_met
             },
-            'overall_statistics': self._calculate_overall_statistics(),
-            'recommendations': self._generate_recommendations(),
-            'detailed_results': [asdict(r) for r in self.results]
+            'detailed_results': [asdict(r) for r in self.results],
+            'recommendations': self._generate_recommendations(targets_met, tier_summaries)
         }
-
-        # Save report
-        report_file = self.output_dir / f"performance_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        with open(report_file, 'w') as f:
-            json.dump(report, f, indent=2)
-
-        print(f"Performance report saved to: {report_file}")
-
-        # Cleanup test images
-        for image_path in test_images:
-            try:
-                os.unlink(image_path)
-            except:
-                pass
 
         return report
 
-    def _calculate_overall_statistics(self) -> Dict[str, Any]:
-        """Calculate overall performance statistics."""
-        if not self.results:
-            return {'error': 'No results available'}
-
-        successful_results = [r for r in self.results if r.success]
-
-        if not successful_results:
-            return {'error': 'No successful tests'}
-
-        return {
-            'total_tests': len(self.results),
-            'successful_tests': len(successful_results),
-            'overall_success_rate': len(successful_results) / len(self.results) * 100,
-            'avg_duration': statistics.mean([r.duration for r in successful_results]),
-            'median_duration': statistics.median([r.duration for r in successful_results]),
-            'min_duration': min([r.duration for r in successful_results]),
-            'max_duration': max([r.duration for r in successful_results]),
-            'avg_memory_usage': statistics.mean([r.memory_delta_mb for r in successful_results]),
-            'total_output_size': sum([r.output_size for r in successful_results])
-        }
-
-    def _generate_recommendations(self) -> List[str]:
-        """Generate performance optimization recommendations."""
+    def _generate_recommendations(self, targets_met: Dict[str, bool], tier_summaries: Dict[str, Any]) -> List[str]:
+        """Generate performance improvement recommendations."""
         recommendations = []
 
-        successful_results = [r for r in self.results if r.success]
-
-        if not successful_results:
-            return ["No successful tests to analyze"]
-
-        # Analyze performance patterns
-        avg_duration = statistics.mean([r.duration for r in successful_results])
-        max_duration = max([r.duration for r in successful_results])
-        avg_memory = statistics.mean([r.memory_delta_mb for r in successful_results])
-
-        # Duration recommendations
-        if avg_duration > 2.0:
-            recommendations.append("Average conversion time is slow (>2s). Consider optimizing parameters or upgrading hardware.")
-        elif avg_duration < 0.5:
-            recommendations.append("Excellent conversion speed achieved (<0.5s average).")
-
-        if max_duration > 10.0:
-            recommendations.append("Some conversions are very slow (>10s). Consider timeout limits and parameter optimization.")
+        # Tier-specific recommendations
+        for tier in [1, 2, 3]:
+            if not targets_met.get(f'tier{tier}_performance', False):
+                tier_data = tier_summaries[f'tier{tier}']
+                if tier_data['count'] > 0:
+                    recommendations.append(
+                        f"Tier {tier} performance below target: {tier_data['p95_time']:.2f}s > {tier_data['target_time']}s. "
+                        f"Consider optimizing tier {tier} processing pipeline."
+                    )
 
         # Memory recommendations
-        if avg_memory > 100:
-            recommendations.append("High memory usage detected (>100MB per conversion). Consider memory optimization.")
-        elif avg_memory < 20:
-            recommendations.append("Good memory efficiency achieved (<20MB per conversion).")
+        if not targets_met.get('memory_usage', False):
+            recommendations.append(
+                "Memory usage exceeds 500MB target. Consider implementing more aggressive caching "
+                "or reducing memory footprint of AI models."
+            )
 
-        # AI-specific recommendations
-        ai_results = [r for r in self.results if 'ai_enhanced' in r.metadata]
-        if ai_results:
-            ai_enhanced_count = sum(1 for r in ai_results if r.metadata.get('ai_enhanced', False))
-            ai_rate = ai_enhanced_count / len(ai_results) * 100
+        # General recommendations
+        if targets_met.get('tier1_performance', False):
+            recommendations.append("✓ Tier 1 performance meets targets - suitable for real-time processing")
 
-            if ai_rate > 80:
-                recommendations.append("Excellent AI enhancement rate (>80%). AI system is working well.")
-            elif ai_rate < 50:
-                recommendations.append("Low AI enhancement rate (<50%). Check AI module configuration.")
-
-        # Cache recommendations
-        cache_results = [r for r in self.results if 'speedup_ratio' in r.metadata]
-        if cache_results:
-            avg_speedup = statistics.mean([r.metadata['speedup_ratio'] for r in cache_results])
-
-            if avg_speedup > 5.0:
-                recommendations.append("Excellent cache performance (>5x speedup). Cache is highly effective.")
-            elif avg_speedup < 2.0:
-                recommendations.append("Cache performance could be improved (<2x speedup). Check cache configuration.")
+        if all(targets_met.values()):
+            recommendations.append("✓ All performance targets met - system ready for production deployment")
+        else:
+            recommendations.append("⚠ Some performance targets not met - optimization required before production")
 
         return recommendations
 
-    def print_summary_report(self, report: Dict[str, Any]):
-        """Print a summary of the performance report."""
+    def save_results(self, filename: Optional[str] = None):
+        """Save benchmark results to file."""
+        if filename is None:
+            filename = self.output_file
+
+        report = self.generate_performance_report()
+
+        try:
+            with open(filename, 'w') as f:
+                json.dump(report, f, indent=2, default=str)
+            logger.info(f"Benchmark results saved to {filename}")
+        except Exception as e:
+            logger.error(f"Failed to save results to {filename}: {e}")
+
+    def print_summary(self):
+        """Print human-readable summary of benchmark results."""
+        report = self.generate_performance_report()
+
         print("\n" + "="*80)
-        print("PERFORMANCE BENCHMARK SUMMARY")
+        print("PERFORMANCE BENCHMARK RESULTS")
         print("="*80)
 
-        # System info
-        system_info = report['benchmark_info']['system_info']
-        print(f"System: {system_info['cpu_count']} CPUs, {system_info['memory_total_gb']:.1f}GB RAM")
-        print(f"Test Duration: {report['benchmark_info']['total_duration']:.1f}s")
-        print(f"Test Images: {report['benchmark_info']['test_images_count']}")
+        # Summary
+        summary = report['summary']
+        print(f"\n📊 TEST SUMMARY:")
+        print(f"   • Total tests: {summary['total_tests']}")
+        print(f"   • Successful: {summary['successful_tests']}")
+        print(f"   • Success rate: {summary['success_rate']:.1%}")
+        print(f"   • All targets met: {'✅' if summary['all_targets_met'] else '❌'}")
 
-        # Overall statistics
-        stats = report['overall_statistics']
-        if 'error' not in stats:
-            print(f"\nOverall Results:")
-            print(f"  Success Rate: {stats['overall_success_rate']:.1f}%")
-            print(f"  Average Duration: {stats['avg_duration']:.3f}s")
-            print(f"  Memory Usage: {stats['avg_memory_usage']:.1f}MB")
+        # Tier performance
+        print(f"\n⚡ TIER PERFORMANCE:")
+        for tier in [1, 2, 3]:
+            tier_data = report['tier_performance'][f'tier{tier}']
+            status = "✅" if tier_data['meets_target'] else "❌"
+            print(f"   • Tier {tier}: {status}")
+            if tier_data['count'] > 0:
+                print(f"     95th percentile: {tier_data['p95_time']:.3f}s (target: {tier_data['target_time']}s)")
+                print(f"     Average: {tier_data['average_time']:.3f}s")
+                print(f"     Tests: {tier_data['count']}")
 
-        # Component results
-        print(f"\nComponent Performance:")
-
-        basic = report['results']['basic_conversion']
-        if 'error' not in basic:
-            print(f"  Basic Conversion: {basic['success_rate']:.1f}% success, {basic['avg_duration']:.3f}s avg")
-
-        ai = report['results']['ai_enhanced_conversion']
-        if 'error' not in ai and ai.get('ai_available'):
-            print(f"  AI Enhanced: {ai['ai_enhancement_rate']:.1f}% AI rate, {ai['avg_duration']:.3f}s avg")
-
-        cache = report['results']['cache_performance']
-        if 'error' not in cache and cache.get('cache_available'):
-            print(f"  Cache System: {cache['avg_speedup']:.1f}x speedup, {cache['cache_effectiveness']:.1f}% effective")
-
-        concurrent = report['results']['concurrent_performance']
-        if 'error' not in concurrent:
-            print(f"  Concurrent Processing: {concurrent['speedup_ratio']:.1f}x speedup with {concurrent['max_workers']} workers")
+        # Memory analysis
+        memory = report['memory_analysis']
+        status = "✅" if memory['meets_target'] else "❌"
+        print(f"\n💾 MEMORY USAGE: {status}")
+        print(f"   • Peak memory: {memory['peak_memory_mb']:.1f} MB")
+        print(f"   • Target: {memory['target_memory_mb']} MB")
 
         # Recommendations
-        print(f"\nRecommendations:")
+        print(f"\n💡 RECOMMENDATIONS:")
         for rec in report['recommendations']:
-            print(f"  • {rec}")
+            print(f"   • {rec}")
 
-        print("="*80)
+        print("\n" + "="*80)
 
 
 def main():
-    """Run comprehensive performance benchmarks."""
-    print("Starting comprehensive performance benchmark suite...")
+    """Main benchmark execution function."""
+    parser = argparse.ArgumentParser(description="Performance Benchmark Suite")
+    parser.add_argument("--full", action="store_true", help="Run full benchmark suite")
+    parser.add_argument("--output", default="benchmarks.json", help="Output file for results")
+    parser.add_argument("--memory-only", action="store_true", help="Run only memory benchmarks")
+    parser.add_argument("--concurrent-only", action="store_true", help="Run only concurrent benchmarks")
+    parser.add_argument("--profile", action="store_true", help="Include performance profiling")
 
-    # Initialize benchmark suite
-    suite = PerformanceBenchmarkSuite()
+    args = parser.parse_args()
 
-    # Generate comprehensive report
-    report = suite.generate_comprehensive_report()
+    try:
+        benchmark = PerformanceBenchmark(output_file=args.output)
 
-    # Print summary
-    suite.print_summary_report(report)
+        if args.memory_only:
+            benchmark.benchmark_memory_usage()
+        elif args.concurrent_only:
+            benchmark.benchmark_concurrent_processing()
+        elif args.full:
+            benchmark.benchmark_processing_times()
+            benchmark.benchmark_memory_usage()
+            benchmark.benchmark_concurrent_processing()
+            if args.profile:
+                benchmark.profile_bottlenecks()
+        else:
+            # Default: run processing time benchmarks
+            benchmark.benchmark_processing_times()
 
-    print(f"\nBenchmark complete! Full report available in: {suite.output_dir}")
+        # Generate and save results
+        benchmark.save_results()
+        benchmark.print_summary()
+
+        # Exit with appropriate code
+        report = benchmark.generate_performance_report()
+        if report['summary']['all_targets_met']:
+            logger.info("🎉 All performance targets met!")
+            return 0
+        else:
+            logger.warning("⚠️ Some performance targets not met")
+            return 1
+
+    except Exception as e:
+        logger.error(f"Benchmark failed: {e}")
+        return 2
 
 
 if __name__ == "__main__":
-    main()
+    exit(main())
