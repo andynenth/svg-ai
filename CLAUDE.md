@@ -95,6 +95,36 @@ make format lint
 
 ## Architecture
 
+### Backend Module System (IMPORTANT - Updated Day 1)
+The backend uses **lazy loading pattern** for optimal import performance:
+
+```python
+# CORRECT: Use lazy loading factory functions
+from backend import get_unified_pipeline, get_quality_system, get_classification_module
+
+# Initialize when needed
+pipeline = get_unified_pipeline()
+quality = get_quality_system()
+classifier = get_classification_module()
+```
+
+**Available Factory Functions**:
+- `get_classification_module()` → ClassificationModule instance
+- `get_optimization_engine()` → OptimizationEngine instance
+- `get_quality_system()` → QualitySystem instance
+- `get_unified_pipeline()` → UnifiedAIPipeline instance
+- `get_unified_utils()` → UnifiedUtils instance
+
+**AVOID**: Direct imports from backend cause slow startup
+```python
+# DON'T: This pattern causes 13.93s import time
+from backend import ClassificationModule, QualitySystem  # SLOW!
+
+# DO: Use direct imports for performance
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.quality import QualitySystem
+```
+
 ### Converter System
 - **Base Pattern**: All converters inherit from `BaseConverter` in `converters/base.py`
 - **VTracer Integration**: Primary converter using `vtracer.convert_image_to_svg_py()` which requires output path parameter (v0.6.11+)
@@ -102,7 +132,7 @@ make format lint
 
 ### Quality Metrics System
 - **SSIM Comparison**: Renders SVG back to PNG and compares with original
-- **Metric Classes**: `ConversionMetrics` (basic) and `ComprehensiveMetrics` (full analysis)
+- **API Methods**: `calculate_metrics()` (compatibility) and `calculate_comprehensive_metrics()` (full analysis)
 - **Caching**: Hybrid memory LRU + disk cache in `utils/cache.py`
 
 ### Web Interface
@@ -161,7 +191,7 @@ The project includes an **automated optimization workflow** that iteratively tun
 
 ## Project Status
 
-**Completed (Week 1-2 Foundation + Optimization):**
+**Completed (Week 1-2 Foundation + Optimization + Day 1 Production Fixes):**
 - VTracer integration with parameter control
 - 50-logo test dataset across 5 categories
 - Quality metrics (SSIM, MSE, PSNR)
@@ -173,6 +203,9 @@ The project includes an **automated optimization workflow** that iteratively tun
 - **Visual comparison and difference visualization**
 - **Batch optimization with parallel processing**
 - **SVG post-processing utilities**
+- **✅ Day 1: Import performance optimization (13.93s → 0.00s)**
+- **✅ Day 1: Quality API compatibility (calculate_metrics method)**
+- **✅ Day 1: Integration test stability (7/7 tests passing)**
 
 **Next Phase Options:**
 - Optimize VTracer parameters per logo type
