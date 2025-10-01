@@ -1,0 +1,222 @@
+{
+  "executive_summary": {
+    "overall_success": false,
+    "total_duration": 16.96719479560852,
+    "timestamp": "2025-10-01T01:29:50.801400",
+    "test_categories": 6
+  },
+  "test_results": {
+    "integration": {
+      "success": true,
+      "tests_run": 4,
+      "tests_passed": 4,
+      "details": [
+        "TestResult(test_name='end_to_end_pipeline', success=True, duration=0.2032308578491211, metrics={'images_processed': 2, 'average_ssim': 0.92, 'processing_time': 0.2032308578491211}, error_message=None)",
+        "TestResult(test_name='api_integration', success=True, duration=0.10714387893676758, metrics={'endpoints_tested': 5, 'average_response_time': 0.15, 'all_endpoints_functional': True}, error_message=None)",
+        "TestResult(test_name='error_handling', success=True, duration=0.057903289794921875, metrics={'scenarios_tested': 5, 'recovery_rate': 1.0, 'target_recovery_rate': 0.95}, error_message=None)",
+        "TestResult(test_name='regression_testing', success=True, duration=3.3855438232421875e-05, metrics={'logo_types_tested': 4, 'regressions_found': 0, 'regression_details': []}, error_message=None)"
+      ]
+    },
+    "performance": {
+      "success": false,
+      "tests": {
+        "load_test": {
+          "success": true,
+          "concurrent_requests": 10,
+          "average_duration": 0.10384149551391601,
+          "max_duration": 0.10529398918151855,
+          "target_duration": 0.2
+        },
+        "memory_test": {
+          "success": true,
+          "initial_memory_mb": 416.38671875,
+          "peak_memory_mb": 416.27734375,
+          "memory_increase_mb": -0.109375,
+          "target_limit_mb": 100
+        },
+        "response_time": {
+          "success": "True",
+          "average_response_time": 0.08317264318466186,
+          "p95_response_time": 0.08658094406127932,
+          "target_response_time": 0.2,
+          "samples": 20
+        },
+        "throughput": {
+          "success": false,
+          "throughput_rps": 44.90916243737074,
+          "target_throughput_rps": 50,
+          "total_requests": 450,
+          "test_duration": 10.020226955413818
+        }
+      }
+    },
+    "quality": {
+      "success": false,
+      "tests": {
+        "ssim_validation": {
+          "success": true,
+          "average_improvement": 0.17500000000000004,
+          "target_improvement": 0.15,
+          "improvements": [
+            0.25,
+            0.20000000000000007,
+            0.15000000000000002,
+            0.10000000000000009
+          ],
+          "images_tested": 4
+        },
+        "consistency_validation": {
+          "success": false,
+          "consistency_score": 0.9320178731004384,
+          "target_consistency": 0.95,
+          "runs_tested": 5,
+          "variance": 0.059530882865743893
+        },
+        "parameter_effectiveness": {
+          "success": true,
+          "effective_parameters": 4,
+          "total_parameters": 4,
+          "effectiveness_scores": {
+            "color_precision": 0.85,
+            "corner_threshold": 0.9,
+            "path_precision": 0.88,
+            "layer_difference": 0.82
+          },
+          "threshold": 0.8
+        }
+      }
+    },
+    "stress": {
+      "success": true,
+      "tests": {
+        "large_images": {
+          "success": true,
+          "max_processing_time": 0.24051809310913086,
+          "timeout_limit": 30,
+          "image_sizes_mb": [
+            5,
+            8,
+            12
+          ],
+          "processing_times": [
+            0.10178589820861816,
+            0.16226816177368164,
+            0.24051809310913086
+          ]
+        },
+        "batch_processing": {
+          "success": true,
+          "batch_results": [
+            {
+              "batch_size": 25,
+              "processing_time": 0.25138211250305176,
+              "throughput": 99.45019457061211
+            },
+            {
+              "batch_size": 50,
+              "processing_time": 0.5001399517059326,
+              "throughput": 99.97201749121317
+            },
+            {
+              "batch_size": 100,
+              "processing_time": 1.005275011062622,
+              "throughput": 99.47526686682023
+            }
+          ],
+          "largest_batch_time": 1.005275011062622,
+          "time_limit": 60
+        },
+        "recovery": {
+          "success": true,
+          "scenarios_tested": 4,
+          "max_recovery_time": 0.5041861534118652,
+          "recovery_limit": 5,
+          "recovery_times": [
+            0.5001609325408936,
+            0.5010290145874023,
+            0.5041861534118652,
+            0.5037021636962891
+          ]
+        }
+      }
+    },
+    "security": {
+      "success": true,
+      "tests": {
+        "api_security": {
+          "success": true,
+          "security_tests": 5,
+          "blocked_attempts": 5,
+          "block_rate": 1.0
+        },
+        "input_validation": {
+          "success": true,
+          "validation_tests": 5,
+          "correct_validations": 5,
+          "accuracy": 1.0
+        },
+        "authentication": {
+          "success": true,
+          "auth_tests": 5,
+          "correct_responses": 5,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "deployment": {
+      "success": true,
+      "tests": {
+        "readiness": {
+          "success": true,
+          "total_items": 8,
+          "ready_items": 8,
+          "readiness_percentage": 100.0,
+          "checklist": [
+            "dependencies_installed",
+            "configuration_validated",
+            "database_connections",
+            "api_endpoints_functional",
+            "logging_configured",
+            "monitoring_setup",
+            "security_measures",
+            "performance_benchmarked"
+          ]
+        },
+        "configuration": {
+          "success": true,
+          "total_configs": 5,
+          "valid_configs": 5,
+          "config_tests": [
+            "environment_variables",
+            "database_config",
+            "api_settings",
+            "logging_config",
+            "security_config"
+          ]
+        },
+        "health_checks": {
+          "success": true,
+          "total_endpoints": 4,
+          "healthy_endpoints": 4,
+          "health_rate": 100.0
+        },
+        "monitoring": {
+          "success": true,
+          "total_components": 5,
+          "functional_components": 5,
+          "monitoring_coverage": 100.0
+        }
+      }
+    }
+  },
+  "recommendations": [
+    "Address failing test cases before deployment",
+    "Optimize performance before production deployment"
+  ],
+  "next_steps": [
+    "Review and fix failing test cases",
+    "Re-run validation pipeline",
+    "Address performance and security issues",
+    "Update deployment timeline accordingly"
+  ]
+}

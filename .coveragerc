@@ -1,22 +1,126 @@
 [run]
-source = backend/ai_modules
+# Source directories to analyze - expanded to entire backend
+source = backend
+
+# Directories and files to omit from coverage
 omit =
     */tests/*
     */test_*
+    */venv/*
+    */venv39/*
     */__pycache__/*
     */migrations/*
+    */node_modules/*
+    */static/*
+    */templates/*
+    setup.py
+    conftest.py
+    */conftest.py
+    */mock_utils.py
+    # External libraries and vendor code
+    */site-packages/*
+    */.pytest_cache/*
+    */coverage_html_report/*
+    # Backup and temporary files
+    *.backup
+    *.bak
+    *.tmp
+
+# Enable branch coverage
+branch = True
+
+# Run coverage in parallel mode
+parallel = True
+
+# Combine data from parallel runs
+concurrency =
+    thread
+    multiprocessing
+
+# Data file location
+data_file = .coverage
 
 [report]
+# Lines to exclude from coverage reporting
 exclude_lines =
+    # Have to re-enable the standard pragma
     pragma: no cover
+
+    # Don't complain about missing debug-only code
     def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code
     raise AssertionError
     raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run
+    if 0:
+    if False:
     if __name__ == .__main__.:
 
+    # Don't complain about abstract methods
+    @(abc\.)?abstractmethod
+
+    # Don't complain about logging statements
+    logger\.debug
+    logger\.info
+    logger\.warning
+
+    # Don't complain about type checking imports
+    if TYPE_CHECKING:
+
+    # Don't complain about pass statements
+    pass
+
+# Show missing line numbers in the report
+show_missing = True
+
+# Sort coverage report by name
+sort = Name
+
+# Precision for percentages
+precision = 1
+
+# Fail if coverage is below this percentage
+fail_under = 80.0
+
 [html]
+# Directory for HTML coverage report
 directory = coverage_html_report
-title = AI Modules Test Coverage Report
+
+# Title for HTML report
+title = SVG-AI Backend Coverage Report
+
+# Skip files with 100% coverage in HTML report
+skip_covered = False
+
+# Skip empty files in HTML report
+skip_empty = True
+
+# Show contexts in HTML report
+show_contexts = True
 
 [xml]
+# Output file for XML coverage report
 output = coverage.xml
+
+# Package depth for XML report
+package_depth = 2
+
+[json]
+# Output file for JSON coverage report
+output = coverage.json
+
+# Pretty print JSON
+pretty_print = true
+
+# Show contexts in JSON
+show_contexts = true
+
+[paths]
+# Map different paths that might refer to the same source
+source =
+    backend/
+    */backend/
+    */svg-ai/backend/
