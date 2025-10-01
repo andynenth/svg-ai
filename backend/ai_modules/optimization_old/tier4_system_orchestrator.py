@@ -21,8 +21,8 @@ from .intelligent_router import IntelligentRouter, RoutingDecision
 from .enhanced_router_integration import get_enhanced_router, EnhancedRoutingDecision
 from .feature_mapping import FeatureMappingOptimizer
 from .regression_optimizer import RegressionBasedOptimizer
-from .ppo_optimizer import PPOOptimizer
-from .performance_optimizer import PerformanceOptimizer
+from .ppo_optimizer import PPOVTracerOptimizer
+from .performance_optimizer import Method1PerformanceOptimizer
 from .error_handler import OptimizationErrorHandler
 from ..feature_extraction import ImageFeatureExtractor
 from ...utils.quality_metrics import ComprehensiveMetrics
@@ -110,8 +110,8 @@ class Tier4SystemOrchestrator:
         self.optimization_methods = {
             'feature_mapping': FeatureMappingOptimizer(),
             'regression': RegressionBasedOptimizer(),
-            'ppo': PPOOptimizer(),
-            'performance': PerformanceOptimizer()
+            'ppo': PPOVTracerOptimizer(),
+            'performance': Method1PerformanceOptimizer()
         }
 
         # System state and monitoring

@@ -14,11 +14,11 @@ from pathlib import Path
 import vtracer
 
 from .base import BaseConverter
-from ..ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
+from ..ai_modules.optimization_old.feature_mapping import FeatureMappingOptimizer
 from ..ai_modules.feature_extraction import ImageFeatureExtractor
-from ..ai_modules.optimization.error_handler import OptimizationErrorHandler
+from ..ai_modules.optimization_old.error_handler import OptimizationErrorHandler
 from ..utils.quality_metrics import ComprehensiveMetrics
-from ..ai_modules.optimization.performance_optimizer import Method1PerformanceOptimizer
+from ..ai_modules.optimization_old.performance_optimizer import Method1PerformanceOptimizer
 
 
 class AIEnhancedConverter(BaseConverter):

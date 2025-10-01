@@ -333,7 +333,7 @@ class TestAPIEndpoints:
         # Note: File cleanup testing requires access to filesystem
         # This test documents expected behavior
 
-    def test_concurrent_api_requests(self, client, sample_image_bytes):
+    def test_concurrent_api_requests(self, sample_image_bytes):
         """Test API behavior under concurrent requests."""
         import threading
         import queue
@@ -342,10 +342,14 @@ class TestAPIEndpoints:
 
         def make_request(thread_id):
             try:
-                response = client.post('/api/upload',
-                                     data={'file': (io.BytesIO(sample_image_bytes), f'concurrent{thread_id}.png')},
-                                     content_type='multipart/form-data')
-                results.put((thread_id, response.status_code))
+                # Create a separate test client for each thread to avoid context conflicts
+                app.config['TESTING'] = True
+                app.config['UPLOAD_FOLDER'] = tempfile.mkdtemp()
+                with app.test_client() as thread_client:
+                    response = thread_client.post('/api/upload',
+                                         data={'file': (io.BytesIO(sample_image_bytes), f'concurrent{thread_id}.png')},
+                                         content_type='multipart/form-data')
+                    results.put((thread_id, response.status_code))
             except Exception as e:
                 results.put((thread_id, f"Error: {e}"))
 

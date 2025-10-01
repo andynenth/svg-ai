@@ -16,14 +16,14 @@ from datetime import datetime, timedelta
 from io import BytesIO
 import base64
 
-from fastapi import APIRouter, HTTPException, BackgroundTasks, UploadFile, File, Depends, status, Request, Query
+from fastapi import APIRouter, HTTPException, BackgroundTasks, UploadFile, File, Body, Depends, status, Request, Query
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, Field, validator
 import aiofiles
 
 # 4-Tier System Integration
-from ..ai_modules.optimization.tier4_system_orchestrator import (
+from ..ai_modules.optimization_old.tier4_system_orchestrator import (
     Tier4SystemOrchestrator,
     create_4tier_orchestrator,
     OptimizationTier
@@ -458,7 +458,7 @@ async def optimize_image_4tier(
 @router.post("/optimize-batch", response_model=BatchOptimizationResponse)
 async def optimize_batch_4tier(
     files: List[UploadFile] = File(...),
-    batch_request: BatchOptimizationRequest = BatchOptimizationRequest(),
+    batch_request: BatchOptimizationRequest = Body(...),
     background_tasks: BackgroundTasks = BackgroundTasks(),
     api_key: str = Depends(verify_api_key)
 ) -> BatchOptimizationResponse:
@@ -894,18 +894,7 @@ async def perform_quality_validation(
         }
 
 # ============================================================================
-# Error Handlers
+# Error Handlers - Registered at app level, not router level
 # ============================================================================
 
-@router.exception_handler(Exception)
-async def general_exception_handler(request: Request, exc: Exception):
-    """Handle unexpected exceptions"""
-    logger.error(f"Unexpected error in 4-tier API: {str(exc)}")
-    return JSONResponse(
-        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={
-            "detail": "Internal server error in 4-tier optimization system",
-            "request_id": generate_request_id(),
-            "timestamp": datetime.now().isoformat()
-        }
-    )
+# Exception handlers are registered at the FastAPI app level in the main app.py file

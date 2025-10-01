@@ -1,0 +1,237 @@
+{
+  "timestamp": "1759295402.891814",
+  "test_summary": {
+    "total_tests": 4,
+    "passed_tests": 4,
+    "success_rate": 100.0
+  },
+  "detailed_results": {
+    "basic_batch_conversion": {
+      "success_rate": 100.0,
+      "avg_conversion_time": 0.022322456041971844,
+      "avg_ssim": 0.9886702594628702,
+      "total_time": 1.7736101150512695,
+      "processed_count": 12,
+      "successful_count": 12,
+      "results": [
+        {
+          "image": "data/logos/simple_geometric/cross_08.png",
+          "category": "simple_geometric",
+          "success": true,
+          "conversion_time": 0.0182802677154541,
+          "svg_size": 511,
+          "quality": {
+            "ssim": 1.0,
+            "mse": 0.0,
+            "psnr": 100.0
+          }
+        },
+        {
+          "image": "data/logos/simple_geometric/square_01.png",
+          "category": "simple_geometric",
+          "success": true,
+          "conversion_time": 0.011784791946411133,
+          "svg_size": 308,
+          "quality": {
+            "ssim": 1.0,
+            "mse": 0.0,
+            "psnr": 100.0
+          }
+        },
+        {
+          "image": "data/logos/simple_geometric/oval_07.png",
+          "category": "simple_geometric",
+          "success": true,
+          "conversion_time": 0.010174036026000977,
+          "svg_size": 586,
+          "quality": {
+            "ssim": 0.9936181647927261,
+            "mse": 24.299702962239582,
+            "psnr": 34.27479396020574
+          }
+        },
+        {
+          "image": "data/logos/text_based/text_web_05.png",
+          "category": "text_based",
+          "success": true,
+          "conversion_time": 0.019105911254882812,
+          "svg_size": 2341,
+          "quality": {
+            "ssim": 0.9957749823543892,
+            "mse": 51.97088623046875,
+            "psnr": 30.973202382008974
+          }
+        },
+        {
+          "image": "data/logos/text_based/text_data_02.png",
+          "category": "text_based",
+          "success": true,
+          "conversion_time": 0.012641191482543945,
+          "svg_size": 2756,
+          "quality": {
+            "ssim": 0.9938972381483838,
+            "mse": 75.37001546223958,
+            "psnr": 29.35881756500132
+          }
+        },
+        {
+          "image": "data/logos/text_based/text_net_07.png",
+          "category": "text_based",
+          "success": true,
+          "conversion_time": 0.014606237411499023,
+          "svg_size": 1327,
+          "quality": {
+            "ssim": 0.9983356675983848,
+            "mse": 8.961771647135416,
+            "psnr": 38.60686487308795
+          }
+        },
+        {
+          "image": "data/logos/gradients/gradient_radial_06.png",
+          "category": "gradients",
+          "success": true,
+          "conversion_time": 0.05571889877319336,
+          "svg_size": 7777,
+          "quality": {
+            "ssim": 0.9750511722301347,
+            "mse": 109.84747823079427,
+            "psnr": 27.72290269597924
+          }
+        },
+        {
+          "image": "data/logos/gradients/gradient_radial_07.png",
+          "category": "gradients",
+          "success": true,
+          "conversion_time": 0.04154396057128906,
+          "svg_size": 7338,
+          "quality": {
+            "ssim": 0.9768595729601014,
+            "mse": 62.23841857910156,
+            "psnr": 30.190218117689124
+          }
+        },
+        {
+          "image": "data/logos/gradients/gradient_radial_05.png",
+          "category": "gradients",
+          "success": true,
+          "conversion_time": 0.03722119331359863,
+          "svg_size": 7338,
+          "quality": {
+            "ssim": 0.9763090345595217,
+            "mse": 55.268778483072914,
+            "psnr": 30.70600494692564
+          }
+        },
+        {
+          "image": "data/logos/complex/complex_multi_08.png",
+          "category": "complex",
+          "success": true,
+          "conversion_time": 0.02235102653503418,
+          "svg_size": 3717,
+          "quality": {
+            "ssim": 0.9770400380678015,
+            "mse": 97.03465270996094,
+            "psnr": 28.26153505022413
+          }
+        },
+        {
+          "image": "data/logos/complex/complex_multi_09.png",
+          "category": "complex",
+          "success": true,
+          "conversion_time": 0.013736963272094727,
+          "svg_size": 4054,
+          "quality": {
+            "ssim": 0.9860283942570278,
+            "mse": 64.83083597819011,
+            "psnr": 30.012987391049858
+          }
+        },
+        {
+          "image": "data/logos/complex/complex_multi_02.png",
+          "category": "complex",
+          "success": true,
+          "conversion_time": 0.010704994201660156,
+          "svg_size": 2119,
+          "quality": {
+            "ssim": 0.9911288485859707,
+            "mse": 43.1028798421224,
+            "psnr": 31.785740731257413
+          }
+        }
+      ]
+    },
+    "parallel_batch_processing": {
+      "performance_results": {
+        "1": {
+          "total_time": 0.10539412498474121,
+          "success_rate": 100.0,
+          "avg_conversion_time": 0.010426139831542969,
+          "threads_used": 1,
+          "throughput": 94.88194907873455
+        },
+        "2": {
+          "total_time": 0.09423828125,
+          "success_rate": 100.0,
+          "avg_conversion_time": 0.018639779090881346,
+          "threads_used": 2,
+          "throughput": 106.11398963730569
+        },
+        "4": {
+          "total_time": 0.0931708812713623,
+          "success_rate": 100.0,
+          "avg_conversion_time": 0.03307030200958252,
+          "threads_used": 4,
+          "throughput": 107.3296706389926
+        }
+      },
+      "speedup": 1.1311916721897095,
+      "best_workers": 4
+    },
+    "memory_efficient_batch": {
+      "initial_memory": 315.453125,
+      "final_memory": 311.7734375,
+      "peak_memory": 315.46875,
+      "memory_growth": -3.6796875,
+      "processed_count": 30,
+      "memory_per_image": -0.12265625,
+      "memory_efficient": true
+    },
+    "error_resilience": {
+      "valid_success_rate": 100.0,
+      "invalid_graceful_rate": 100.0,
+      "resilient": true,
+      "results": [
+        {
+          "case_type": "valid",
+          "file_path": "data/logos/simple_geometric/cross_08.png",
+          "success": true,
+          "error": null
+        },
+        {
+          "case_type": "valid",
+          "file_path": "data/logos/simple_geometric/square_01.png",
+          "success": true,
+          "error": null
+        },
+        {
+          "case_type": "nonexistent",
+          "file_path": "nonexistent_file.png",
+          "success": false,
+          "error": "File not found: nonexistent_file.png"
+        },
+        {
+          "case_type": "invalid_path",
+          "file_path": "",
+          "success": false,
+          "error": "File extension '' not allowed. Supported: ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff']"
+        },
+        {
+          "case_type": "bad_extension",
+          "file_path": "test.txt",
+          "success": false,
+          "error": "File not found: test.txt"
+        }
+      ]
+    }
+  }
+}

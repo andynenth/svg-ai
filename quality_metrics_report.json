@@ -1,0 +1,126 @@
+{
+  "timestamp": "1759297661.582295",
+  "test_summary": {
+    "total_tests": 4,
+    "passed_tests": 3,
+    "success_rate": 75.0
+  },
+  "quality_reliable": true,
+  "detailed_results": {
+    "accuracy": {
+      "accuracy_correct": false,
+      "perfect_metrics": {
+        "ssim": 1.0,
+        "mse": 0.0,
+        "psnr": 100.0
+      },
+      "slight_metrics": {
+        "ssim": 0.9900400469589904,
+        "mse": 4.879866666666667,
+        "psnr": 41.246724049967575
+      },
+      "very_diff_metrics": {
+        "ssim": 1.0,
+        "mse": 43350.0,
+        "psnr": 1.7609125905568115
+      },
+      "ssim_ordering": false,
+      "mse_ordering": true
+    },
+    "real_images": {
+      "images_tested": 6,
+      "avg_ssim": 0.996937675482314,
+      "high_quality_rate": 100.0,
+      "results": [
+        {
+          "image": "data/logos/simple_geometric/cross_08.png",
+          "metrics": {
+            "ssim": 1.0,
+            "mse": 0.0,
+            "psnr": 100.0
+          },
+          "quality_level": "High",
+          "high_quality": true
+        },
+        {
+          "image": "data/logos/simple_geometric/square_01.png",
+          "metrics": {
+            "ssim": 1.0,
+            "mse": 0.0,
+            "psnr": 100.0
+          },
+          "quality_level": "High",
+          "high_quality": true
+        },
+        {
+          "image": "data/logos/simple_geometric/oval_07.png",
+          "metrics": {
+            "ssim": 0.9936181647927261,
+            "mse": 24.299702962239582,
+            "psnr": 34.27479396020574
+          },
+          "quality_level": "High",
+          "high_quality": true
+        },
+        {
+          "image": "data/logos/text_based/text_web_05.png",
+          "metrics": {
+            "ssim": 0.9957749823543892,
+            "mse": 51.97088623046875,
+            "psnr": 30.973202382008974
+          },
+          "quality_level": "High",
+          "high_quality": true
+        },
+        {
+          "image": "data/logos/text_based/text_data_02.png",
+          "metrics": {
+            "ssim": 0.9938972381483838,
+            "mse": 75.37001546223958,
+            "psnr": 29.35881756500132
+          },
+          "quality_level": "High",
+          "high_quality": true
+        },
+        {
+          "image": "data/logos/text_based/text_net_07.png",
+          "metrics": {
+            "ssim": 0.9983356675983848,
+            "mse": 8.961771647135416,
+            "psnr": 38.60686487308795
+          },
+          "quality_level": "High",
+          "high_quality": true
+        }
+      ]
+    },
+    "consistency": false,
+    "edge_cases": {
+      "cases_tested": 4,
+      "success_rate": 0.0,
+      "perfect_rate": 0,
+      "edge_cases": [
+        {
+          "case": "small_images",
+          "error": "'utf-8' codec can't decode byte 0x89 in position 0: invalid start byte",
+          "success": false
+        },
+        {
+          "case": "large_images",
+          "error": "'utf-8' codec can't decode byte 0x89 in position 0: invalid start byte",
+          "success": false
+        },
+        {
+          "case": "grayscale",
+          "error": "'utf-8' codec can't decode byte 0x89 in position 0: invalid start byte",
+          "success": false
+        },
+        {
+          "case": "black_white",
+          "error": "'utf-8' codec can't decode byte 0x89 in position 0: invalid start byte",
+          "success": false
+        }
+      ]
+    }
+  }
+}

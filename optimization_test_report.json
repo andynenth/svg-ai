@@ -1,0 +1,53 @@
+{
+  "timestamp": "1759295190.7754931",
+  "test_results": {
+    "iterative_optimization": {
+      "initial_ssim": 1.0,
+      "final_ssim": 1.0,
+      "improvement": 0.0,
+      "optimization_time": 3.1948089599609375e-05,
+      "base_params": {
+        "color_precision": 8,
+        "layer_difference": 8,
+        "max_iterations": 10,
+        "min_area": 10,
+        "path_precision": 8,
+        "corner_threshold": 60,
+        "length_threshold": 4.0,
+        "splice_threshold": 45
+      },
+      "optimized_params": {
+        "color_precision": 7,
+        "layer_difference": 8,
+        "max_iterations": 10,
+        "min_area": 10,
+        "path_precision": 8,
+        "corner_threshold": 60,
+        "length_threshold": 4.0,
+        "splice_threshold": 45
+      }
+    },
+    "batch_optimization": {
+      "success_rate": 100.0,
+      "avg_ssim": 0.9973696265899372,
+      "min_ssim": 0.9937805039277087,
+      "max_ssim": 1.0,
+      "results": [
+        {
+          "image": "data/logos/simple_geometric/cross_08.png",
+          "success": true,
+          "ssim": 1.0,
+          "params": {
+            "color_precision": 8,
+            "layer_difference": 8,
+            "max_iterations": 10,
+            "min_area": 10,
+            "path_precision": 8,
+            "corner_threshold": 60,
+            "length_threshold": 4.0,
+            "splice_threshold": 45
+          },
+          "features": {
+            "unique_colors": 2,
+            "complexity": 0.02001843662735954,
+            "has_text": 

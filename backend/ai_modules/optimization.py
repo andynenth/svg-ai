@@ -2,13 +2,17 @@
 Unified Optimization Module
 Parameter optimization, tuning, and continuous learning
 """
-from pathlib import Path
-from typing import Dict, List, Tuple, Optional
-import cachetools
+# Standard library imports
 import hashlib
 import json
-import numpy as np
 import pickle
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Tuple, Optional
+
+# Third-party imports
+import cachetools
+import numpy as np
 import xgboost as xgb
 
 class OptimizationEngine:
@@ -57,7 +61,7 @@ class OptimizationEngine:
         adjustment = (edge_density - 0.5) * 20
         return base_threshold + adjustment
 
-    def load_model(self, model_path: str):
+    def load_model(self, model_path: str) -> None:
         """Load pre-trained XGBoost model"""
         if Path(model_path).exists():
             self.xgb_model = xgb.Booster()
@@ -112,12 +116,12 @@ class OptimizationEngine:
                     break
         return best_params
 
-    def enable_online_learning(self):
+    def enable_online_learning(self) -> None:
         """Enable continuous learning from results"""
         self.online_learning_enabled = True
         self.parameter_history = []
 
-    def record_result(self, features: Dict, params: Dict, quality: float):
+    def record_result(self, features: Dict, params: Dict, quality: float) -> None:
         """Record conversion result for learning"""
         if self.online_learning_enabled:
             self.parameter_history.append({'features': features, 'params': params, 'quality': quality, 'timestamp': datetime.now().isoformat()})
@@ -186,7 +190,7 @@ class LearnedCorrelationsManager:
         self.correlations = {}
         self.confidence_scores = {}
 
-    def update_correlation(self, param_name: str, correlation: float, confidence: float):
+    def update_correlation(self, param_name: str, correlation: float, confidence: float) -> None:
         """Update a parameter correlation"""
         self.correlations[param_name] = correlation
         self.confidence_scores[param_name] = confidence

@@ -5,13 +5,14 @@ Converter wrapper module for backend API
 
 import tempfile
 import logging
-from converters.alpha_converter import AlphaConverter
-from converters.vtracer_converter import VTracerConverter
-from converters.potrace_converter import PotraceConverter
-from converters.smart_potrace_converter import SmartPotraceConverter
-from converters.smart_auto_converter import SmartAutoConverter
-from utils.quality_metrics import QualityMetrics
-from utils.error_messages import ErrorMessageFactory, log_error_with_context
+from typing import Dict, Any, Optional
+from .converters.alpha_converter import AlphaConverter
+from .converters.vtracer_converter import VTracerConverter
+from .converters.potrace_converter import PotraceConverter
+from .converters.smart_potrace_converter import SmartPotraceConverter
+from .converters.smart_auto_converter import SmartAutoConverter
+from .utils.quality_metrics import QualityMetrics
+from .utils.error_messages import ErrorMessageFactory, log_error_with_context
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +20,7 @@ logger = logging.getLogger(__name__)
 metrics = QualityMetrics()
 
 
-def convert_image(input_path, converter_type="alpha", **params):
+def convert_image(input_path: str, converter_type: str = "alpha", **params: Any) -> Dict[str, Any]:
     """
     Convert image to SVG using specified converter.
 

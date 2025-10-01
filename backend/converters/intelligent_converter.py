@@ -13,11 +13,11 @@ from pathlib import Path
 from dataclasses import dataclass
 
 from .ai_enhanced_converter import AIEnhancedConverter
-from ..ai_modules.optimization.adaptive_optimizer import AdaptiveOptimizer
-from ..ai_modules.optimization.parameter_router import ParameterRouter
+from ..ai_modules.optimization_old.adaptive_optimizer import AdaptiveOptimizer
+from ..ai_modules.optimization_old.parameter_router import ParameterRouter
 
 try:
-    from ..ai_modules.optimization.ppo_optimizer import PPOVTracerOptimizer
+    from ..ai_modules.optimization_old.ppo_optimizer import PPOVTracerOptimizer
     PPO_AVAILABLE = True
 except ImportError:
     PPO_AVAILABLE = False

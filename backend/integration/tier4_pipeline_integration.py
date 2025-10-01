@@ -24,7 +24,7 @@ from utils.quality_metrics import ComprehensiveMetrics
 from utils.cache import CacheManager
 
 # 4-Tier system imports
-from ..ai_modules.optimization.tier4_system_orchestrator import (
+from ..ai_modules.optimization_old.tier4_system_orchestrator import (
     Tier4SystemOrchestrator,
     create_4tier_orchestrator,
     OptimizationTier

@@ -3,15 +3,18 @@ Unified Classification Module
 Combines statistical classification, logo type detection, and feature extraction
 """
 
+# Standard library imports
+from pathlib import Path
+from typing import Dict, List, Tuple, Optional
+
+# Third-party imports
+import cv2
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from PIL import Image
-from typing import Dict, List, Tuple, Optional
-import cv2
-from pathlib import Path
 import torchvision.transforms as transforms
+from PIL import Image
 from torchvision import models
 
 
@@ -21,7 +24,7 @@ class ClassificationModule:
     def __init__(self) -> None:
         self.statistical_classifier = None
         self.neural_classifier = None
-        self.feature_extractor = FeatureExtractor()
+        self.feature_extractor = self.FeatureExtractor()
         self.model_loaded = False
 
     # === Feature Extraction ===
@@ -31,7 +34,7 @@ class ClassificationModule:
 
         def extract(self, image_path: str) -> Dict:
             """Extract all relevant features from image"""
-            image = Image.open(image_path)
+            image = Image.open(image_path).convert('RGB')
 
             features = {
                 'size': image.size,
@@ -59,6 +62,15 @@ class ClassificationModule:
         def _get_dominant_colors(self, img_array: np.ndarray) -> List:
             """Get dominant colors using k-means clustering"""
             from sklearn.cluster import KMeans
+
+            # Handle both grayscale and RGB images
+            if len(img_array.shape) == 2:  # Grayscale
+                # Convert to RGB by repeating the single channel
+                img_array = np.stack([img_array, img_array, img_array], axis=-1)
+            elif len(img_array.shape) == 3 and img_array.shape[2] == 1:  # Grayscale with channel dimension
+                img_array = np.repeat(img_array, 3, axis=2)
+            elif len(img_array.shape) == 3 and img_array.shape[2] == 4:  # RGBA
+                img_array = img_array[:, :, :3]  # Drop alpha channel
 
             # Reshape image to be a list of pixels
             pixels = img_array.reshape(-1, 3)
@@ -158,7 +170,7 @@ class ClassificationModule:
 
     # === Neural Classification ===
 
-    def load_neural_model(self, model_path: str):
+    def load_neural_model(self, model_path: str) -> None:
         """Load pre-trained neural classifier"""
         if not self.model_loaded:
             if Path(model_path).exists():
