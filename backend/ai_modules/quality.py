@@ -42,6 +42,23 @@ class QualitySystem:
         metrics['quality_score'] = metrics['ssim'] * 0.7 + metrics['compression_ratio'] / 10.0 * 0.3
         return metrics
 
+    def calculate_metrics(self, original_path: str, converted_path: str) -> dict:
+        """
+        Compatibility wrapper for integration tests.
+
+        Maps the expected calculate_metrics API to the existing
+        calculate_comprehensive_metrics implementation.
+
+        Args:
+            original_path: Path to the original image file
+            converted_path: Path to the converted SVG file
+
+        Returns:
+            dict: Quality metrics including SSIM, MSE, PSNR, file sizes,
+                  compression ratio, and overall quality score
+        """
+        return self.calculate_comprehensive_metrics(original_path, converted_path)
+
 
 # Legacy compatibility
 ENHANCEDMETRICS = QualitySystem
