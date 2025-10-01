@@ -17,15 +17,11 @@ import sys
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-# Import AI components
-from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
-from backend.ai_modules.classification.statistical_classifier import StatisticalClassifier
-from backend.ai_modules.classification.rule_based_classifier import RuleBasedClassifier
-from backend.ai_modules.optimization.learned_correlations import LearnedCorrelations
-from backend.ai_modules.optimization.correlation_formulas import CorrelationFormulas
-from backend.ai_modules.optimization.feature_mapping_optimizer_v2 import FeatureMappingOptimizerV2
-from backend.ai_modules.optimization.intelligent_router import IntelligentRouter
-from backend.ai_modules.optimization.quality_prediction_integration import QualityPredictionIntegrator
+# Import AI components (updated for consolidated modules)
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.quality import QualitySystem
+from backend.ai_modules.utils import UnifiedUtils
 
 # Import converter
 from backend.converters.ai_enhanced_converter import AIEnhancedConverter
@@ -120,7 +116,7 @@ class UnifiedAIPipeline:
 
         # 1. Feature Extractor (required)
         try:
-            self.feature_extractor = ImageFeatureExtractor(cache_enabled=self.enable_caching)
+            self.feature_extractor = ClassificationModule().feature_extractor
             self.components_loaded['feature_extractor'] = True
             logger.info("✓ Feature extractor loaded")
         except Exception as e:
@@ -130,7 +126,7 @@ class UnifiedAIPipeline:
 
         # 2. Classifier (with fallback)
         try:
-            self.primary_classifier = StatisticalClassifier()
+            self.primary_classifier = ClassificationModule()
             self.components_loaded['primary_classifier'] = True
             logger.info("✓ Primary classifier (statistical) loaded")
         except Exception as e:
@@ -141,7 +137,7 @@ class UnifiedAIPipeline:
         # Fallback classifier
         if self.enable_fallbacks:
             try:
-                self.fallback_classifier = RuleBasedClassifier()
+                self.fallback_classifier = ClassificationModule()
                 self.components_loaded['fallback_classifier'] = True
                 logger.info("✓ Fallback classifier (rule-based) loaded")
             except Exception as e:
@@ -151,7 +147,7 @@ class UnifiedAIPipeline:
 
         # 3. Router (optional)
         try:
-            self.router = IntelligentRouter()
+            self.router = OptimizationEngine()  # Router functionality is part of optimization
             self.components_loaded['router'] = True
             logger.info("✓ Intelligent router loaded")
         except Exception as e:
@@ -161,7 +157,7 @@ class UnifiedAIPipeline:
 
         # 4. Optimizer (with fallback)
         try:
-            self.primary_optimizer = FeatureMappingOptimizerV2()
+            self.primary_optimizer = OptimizationEngine()
             self.components_loaded['primary_optimizer'] = True
             logger.info("✓ Primary optimizer (learned) loaded")
         except Exception as e:
@@ -172,7 +168,7 @@ class UnifiedAIPipeline:
         # Fallback optimizer
         if self.enable_fallbacks:
             try:
-                self.fallback_optimizer = CorrelationFormulas()
+                self.fallback_optimizer = OptimizationEngine()
                 self.components_loaded['fallback_optimizer'] = True
                 logger.info("✓ Fallback optimizer (formulas) loaded")
             except Exception as e:
@@ -182,7 +178,7 @@ class UnifiedAIPipeline:
 
         # 5. Quality Predictor (optional)
         try:
-            self.quality_predictor = QualityPredictionIntegrator()
+            self.quality_predictor = QualitySystem()
             self.components_loaded['quality_predictor'] = True
             logger.info("✓ Quality predictor loaded")
         except Exception as e:

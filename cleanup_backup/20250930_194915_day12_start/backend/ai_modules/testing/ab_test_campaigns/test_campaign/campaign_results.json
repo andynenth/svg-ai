@@ -1,0 +1,103 @@
+{
+  "campaign": {
+    "name": "test_campaign",
+    "started_at": "2025-09-30T18:25:12.245382",
+    "completed_at": "2025-09-30T18:25:12.344945",
+    "duration_seconds": 0.099563,
+    "samples_collected": 5,
+    "early_stopped": false,
+    "stop_reason": null
+  },
+  "analysis": {
+    "sample_sizes": {
+      "control": 2,
+      "treatment": 3,
+      "total": 5
+    },
+    "metrics": {
+      "duration": "StatisticalResult(metric_name='duration', control_mean=5.054473876953125e-05, treatment_mean=0.00017547607421875, control_std=1.7533088980531917e-05, treatment_std=0.00020999683236864306, improvement_pct=-247.16981132075472, improvement_absolute=-0.00012493133544921875, t_statistic=1.025086405644633, p_value=0.4112333811725213, significant=False, confidence_interval=(-0.00038934315599169114, 0.0006392058268901286), effect_size=0.7273588439455683, power=0.0627563337625428, sample_size_sufficient=False)"
+    },
+    "overall_summary": {},
+    "multiple_testing": {
+      "original_alpha": 0.05,
+      "bonferroni_alpha": 0.05,
+      "corrections": {
+        "duration": {
+          "original_p": 0.4112333811725213,
+          "adjusted_p": 0.4112333811725213,
+          "bonferroni_significant": false,
+          "fdr_significant": false
+        }
+      }
+    }
+  },
+  "visualizations": {
+    "batch_comparisons": [],
+    "html_report": "ab_test_campaigns/test_campaign/visualizations/visual_report.html",
+    "output_directory": "ab_test_campaigns/test_campaign/visualizations"
+  },
+  "report": {
+    "executive_summary": {
+      "campaign_name": "test_campaign",
+      "recommendation": "CONTINUE TESTING",
+      "recommendation_reason": "No significant difference detected (p=1.0000)",
+      "quality_improvement_pct": 0,
+      "statistical_significance": false,
+      "p_value": 1.0,
+      "effect_size": 0,
+      "confidence_interval": [
+        0,
+        0
+      ],
+      "samples_collected": 5,
+      "duration_hours": 2.5096944444444443e-05,
+      "early_stopped": false,
+      "stop_reason": null
+    },
+    "detailed_metrics": {
+      "duration": {
+        "control_mean": 5.054473876953125e-05,
+        "treatment_mean": 0.00017547607421875,
+        "improvement_pct": -247.16981132075472,
+        "p_value": 0.4112333811725213,
+        "significant": "False",
+        "effect_size": 0.7273588439455683
+      }
+    },
+    "power_analysis": {},
+    "multiple_testing_correction": {
+      "original_alpha": 0.05,
+      "bonferroni_alpha": 0.05,
+      "corrections": {
+        "duration": {
+          "original_p": 0.4112333811725213,
+          "adjusted_p": 0.4112333811725213,
+          "bonferroni_significant": false,
+          "fdr_significant": false
+        }
+      }
+    },
+    "campaign_configuration": {
+      "name": "test_campaign",
+      "image_set": "/tmp/orchestrator_test_images",
+      "sample_size_target": 10,
+      "min_sample_size": 5,
+      "max_duration_hours": 0.1,
+      "significance_threshold": 0.05,
+      "early_stopping": true,
+      "early_stopping_checks": 5,
+      "continuous_mode": false,
+      "traffic_percentage": 100.0,
+      "output_directory": "ab_test_campaigns",
+      "generate_visuals": true,
+      "generate_report": true
+    },
+    "visualizations": {
+      "batch_comparisons": [],
+      "html_report": "ab_test_campaigns/test_campaign/visualizations/visual_report.html",
+      "output_directory": "ab_test_campaigns/test_campaign/visualizations"
+    },
+    "generated_at": "2025-09-30T18:25:12.354822"
+  },
+  "success": true
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": "2025-09-30T19:59:47.608007",
+  "duplicate_formulas": {},
+  "consolidated_file": "backend/ai_modules/optimization/unified_parameter_formulas.py",
+  "updated_imports": [
+    "scripts/remove_duplicates.py"
+  ],
+  "training_scripts_to_remove": [
+    "scripts/training_improvements.py",
+    "scripts/training_improvements.py",
+    "scripts/analyze_training_results.py",
+    "scripts/train_efficientnet_classifier.py",
+    "scripts/train_efficientnet_classifier.py",
+    "scripts/prepare_training_data.py",
+    "scripts/train_ppo_optimizer.py",
+    "scripts/validate_training_data.py",
+    "backend/ai_modules/optimization/training_pipeline.py",
+    "backend/ai_modules/optimization/training_pipeline.py",
+    "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "backend/ai_modules/optimization/colab_training_orchestrator.py",
+    "backend/ai_modules/optimization/colab_training_visualization.py",
+    "backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "backend/ai_modules/optimization/training_monitor.py",
+    "backend/ai_modules/optimization/training_monitor.py",
+    "backend/ai_modules/optimization/stage1_training_executor.py",
+    "scripts/demo_ppo_training.py",
+    "backend/ai_modules/optimization/training_execution_engine.py",
+    "scripts/test_ppo_training_integration.py",
+    "backend/ai_modules/optimization/training_data_manager.py",
+    "backend/ai_modules/optimization/training_data_manager.py",
+    "backend/ai_modules/optimization/training_visualizer.py",
+    "backend/ai_modules/optimization/training_visualizer.py",
+    "backend/ai_modules/optimization/training_orchestrator.py",
+    "backend/ai_modules/optimization/training_orchestrator.py",
+    "scripts/training_monitoring.py",
+    "scripts/training_monitoring.py"
+  ],
+  "utility_categorization": {
+    "image": [
+      "backend/utils/image_utils.py"
+    ],
+    "file": [
+      "backend/ai_modules/prediction/model_utils.py"
+    ],
+    "math": [],
+    "validation": [],
+    "conversion": []
+  }
+}

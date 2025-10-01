@@ -47,3 +47,6 @@ pydantic==2.11.9
 
 # Parallel processing
 joblib==1.5.2
+
+# Caching
+cachetools==5.3.1

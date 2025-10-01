@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPO Training Monitor - Real-time Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .connected {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .disconnected {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #2a2a2a;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #404040;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: #4ade80;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #4ade80;
+            padding-bottom: 8px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #404040;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #b3b3b3;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 15px;
+        }
+
+        .wide-card {
+            grid-column: 1 / -1;
+        }
+
+        .training-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+
+        .alerts-container {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            color: #93c5fd;
+        }
+
+        .alert-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        .alert-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+            color: #fca5a5;
+        }
+
+        .alert-critical {
+            background-color: rgba(220, 38, 127, 0.1);
+            border-color: #dc2626;
+            color: #f87171;
+        }
+
+        .alert-time {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            float: right;
+        }
+
+        .system-health {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .health-metric {
+            background-color: #333333;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .health-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .health-label {
+            color: #b3b3b3;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666666;
+            border-top: 1px solid #404040;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .system-health {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 PPO Training Monitor</h1>
+            <p>Real-time monitoring dashboard for VTracer parameter optimization</p>
+            <div id="connectionStatus" class="connection-status disconnected">
+                <span class="status-dot"></span>
+                <span>Disconnected</span>
+            </div>
+        </div>
+
+        <div class="training-controls">
+            <button class="btn btn-primary" onclick="connectWebSocket()">Connect</button>
+            <button class="btn btn-secondary" onclick="disconnectWebSocket()">Disconnect</button>
+            <button class="btn btn-secondary" onclick="clearCharts()">Clear Charts</button>
+        </div>
+
+        <div class="grid">
+            <!-- Training Metrics -->
+            <div class="card">
+                <h3>📊 Training Metrics</h3>
+                <div class="metric-row">
+                    <span class="metric-label">Total Episodes:</span>
+                    <span class="metric-value" id="totalEpisodes">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Latest Reward:</span>
+                    <span class="metric-value" id="latestReward">0.000</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Average Reward:</span>
+                    <span class="metric-value" id="averageReward">0.000</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Latest Quality:</span>
+                    <span class="metric-value" id="latestQuality">0.000</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Success Rate:</span>
+                    <span class="metric-value" id="successRate">0.0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Training Time:</span>
+                    <span class="metric-value" id="trainingTime">0m 0s</span>
+                </div>
+            </div>
+
+            <!-- System Health -->
+            <div class="card">
+                <h3>💻 System Health</h3>
+                <div class="system-health">
+                    <div class="health-metric">
+                        <div class="health-value" id="cpuUsage">0%</div>
+                        <div class="health-label">CPU Usage</div>
+                    </div>
+                    <div class="health-metric">
+                        <div class="health-value" id="memoryUsage">0%</div>
+                        <div class="health-label">Memory Usage</div>
+                    </div>
+                    <div class="health-metric">
+                        <div class="health-value" id="gpuMemory">N/A</div>
+                        <div class="health-label">GPU Memory</div>
+                    </div>
+                    <div class="health-metric">
+                        <div class="health-value" id="trainingStatus">Idle</div>
+                        <div class="health-label">Training Status</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reward Chart -->
+            <div class="card wide-card">
+                <h3>📈 Reward Progress</h3>
+                <div class="chart-container">
+                    <canvas id="rewardChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Quality Chart -->
+            <div class="card wide-card">
+                <h3>🎯 Quality Progress</h3>
+                <div class="chart-container">
+                    <canvas id="qualityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Alerts -->
+            <div class="card">
+                <h3>🚨 Recent Alerts</h3>
+                <div class="alerts-container" id="alertsContainer">
+                    <div class="alert alert-info">
+                        <span class="alert-time">00:00:00</span>
+                        <div>System initialized and ready for monitoring</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connection Log -->
+            <div class="card">
+                <h3>📡 Connection Log</h3>
+                <div class="alerts-container" id="connectionLog">
+                    <div class="alert alert-info">
+                        <span class="alert-time">00:00:00</span>
+                        <div>Dashboard initialized</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>PPO Training Monitor v1.0 | Real-time WebSocket Connection | Task B7.1 Component 3</p>
+        </div>
+    </div>
+
+    <script>
+        // WebSocket connection
+        let socket = null;
+        let isConnected = false;
+
+        // Chart instances
+        let rewardChart = null;
+        let qualityChart = null;
+
+        // Data storage
+        let rewardData = [];
+        let qualityData = [];
+        let episodeLabels = [];
+
+        // Initialize charts
+        function initializeCharts() {
+            // Reward Chart
+            const rewardCtx = document.getElementById('rewardChart').getContext('2d');
+            rewardChart = new Chart(rewardCtx, {
+                type: 'line',
+                data: {
+                    labels: episodeLabels,
+                    datasets: [{
+                        label: 'Episode Reward',
+                        data: rewardData,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#ffffff' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#b3b3b3' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        y: {
+                            ticks: { color: '#b3b3b3' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            // Quality Chart
+            const qualityCtx = document.getElementById('qualityChart').getContext('2d');
+            qualityChart = new Chart(qualityCtx, {
+                type: 'line',
+                data: {
+                    labels: episodeLabels,
+                    datasets: [{
+                        label: 'Quality (SSIM)',
+                        data: qualityData,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#ffffff' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#b3b3b3' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        y: {
+                            min: 0,
+                            max: 1,
+                            ticks: { color: '#b3b3b3' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // WebSocket functions
+        function connectWebSocket() {
+            const wsUrl = 'ws://localhost:8765';
+
+            try {
+                socket = new WebSocket(wsUrl);
+
+                socket.onopen = function(event) {
+                    isConnected = true;
+                    updateConnectionStatus(true);
+                    addLogMessage('Connected to monitoring server', 'info');
+                };
+
+                socket.onmessage = function(event) {
+                    try {
+                        const data = JSON.parse(event.data);
+                        handleWebSocketMessage(data);
+                    } catch (error) {
+                        console.error('Error parsing WebSocket message:', error);
+                    }
+                };
+
+                socket.onclose = function(event) {
+                    isConnected = false;
+                    updateConnectionStatus(false);
+                    addLogMessage('Disconnected from monitoring server', 'warning');
+                };
+
+                socket.onerror = function(error) {
+                    console.error('WebSocket error:', error);
+                    addLogMessage('WebSocket connection error', 'error');
+                };
+
+            } catch (error) {
+                console.error('Failed to connect:', error);
+                addLogMessage('Failed to connect to monitoring server', 'error');
+            }
+        }
+
+        function disconnectWebSocket() {
+            if (socket && isConnected) {
+                socket.close();
+                addLogMessage('Manually disconnected', 'info');
+            }
+        }
+
+        function updateConnectionStatus(connected) {
+            const statusElement = document.getElementById('connectionStatus');
+            if (connected) {
+                statusElement.className = 'connection-status connected';
+                statusElement.innerHTML = '<span class="status-dot"></span><span>Connected</span>';
+            } else {
+                statusElement.className = 'connection-status disconnected';
+                statusElement.innerHTML = '<span class="status-dot"></span><span>Disconnected</span>';
+            }
+        }
+
+        // Handle WebSocket messages
+        function handleWebSocketMessage(data) {
+            switch (data.type) {
+                case 'episode_metrics':
+                    updateTrainingMetrics(data.metrics);
+                    break;
+                case 'system_metrics':
+                    updateSystemMetrics(data.metrics);
+                    break;
+                case 'training_summary':
+                    updateTrainingSummary(data.summary);
+                    break;
+                case 'alert':
+                    addAlert(data.alert);
+                    break;
+                case 'training_event':
+                    handleTrainingEvent(data);
+                    break;
+                case 'connection':
+                    addLogMessage('Connection confirmed', 'info');
+                    break;
+                default:
+                    console.log('Unknown message type:', data.type);
+            }
+        }
+
+        // Update functions
+        function updateTrainingMetrics(metrics) {
+            // Update charts
+            if (rewardData.length >= 100) {
+                rewardData.shift();
+                qualityData.shift();
+                episodeLabels.shift();
+            }
+
+            rewardData.push(metrics.reward);
+            qualityData.push(metrics.quality);
+            episodeLabels.push(metrics.episode);
+
+            rewardChart.update('none');
+            qualityChart.update('none');
+
+            // Update display values
+            document.getElementById('latestReward').textContent = metrics.reward.toFixed(3);
+            document.getElementById('latestQuality').textContent = metrics.quality.toFixed(3);
+        }
+
+        function updateSystemMetrics(metrics) {
+            document.getElementById('cpuUsage').textContent = metrics.cpu_percent.toFixed(1) + '%';
+            document.getElementById('memoryUsage').textContent = metrics.memory_percent.toFixed(1) + '%';
+
+            if (metrics.gpu_memory_used && metrics.gpu_memory_total) {
+                const gpuPercent = (metrics.gpu_memory_used / metrics.gpu_memory_total * 100).toFixed(1);
+                document.getElementById('gpuMemory').textContent = gpuPercent + '%';
+            }
+
+            document.getElementById('trainingStatus').textContent = metrics.training_active ? 'Training' : 'Idle';
+            document.getElementById('totalEpisodes').textContent = metrics.episodes_completed;
+
+            if (metrics.training_time > 0) {
+                const minutes = Math.floor(metrics.training_time / 60);
+                const seconds = Math.floor(metrics.training_time % 60);
+                document.getElementById('trainingTime').textContent = `${minutes}m ${seconds}s`;
+            }
+        }
+
+        function updateTrainingSummary(summary) {
+            if (summary.average_reward !== undefined) {
+                document.getElementById('averageReward').textContent = summary.average_reward.toFixed(3);
+            }
+            if (summary.success_rate !== undefined) {
+                document.getElementById('successRate').textContent = (summary.success_rate * 100).toFixed(1) + '%';
+            }
+        }
+
+        function addAlert(alert) {
+            const alertsContainer = document.getElementById('alertsContainer');
+            const alertElement = document.createElement('div');
+            alertElement.className = `alert alert-${alert.level}`;
+
+            const time = new Date(alert.timestamp * 1000).toLocaleTimeString();
+            alertElement.innerHTML = `
+                <span class="alert-time">${time}</span>
+                <div>${alert.message}</div>
+            `;
+
+            alertsContainer.insertBefore(alertElement, alertsContainer.firstChild);
+
+            // Keep only last 10 alerts
+            while (alertsContainer.children.length > 10) {
+                alertsContainer.removeChild(alertsContainer.lastChild);
+            }
+        }
+
+        function addLogMessage(message, level = 'info') {
+            const logContainer = document.getElementById('connectionLog');
+            const logElement = document.createElement('div');
+            logElement.className = `alert alert-${level}`;
+
+            const time = new Date().toLocaleTimeString();
+            logElement.innerHTML = `
+                <span class="alert-time">${time}</span>
+                <div>${message}</div>
+            `;
+
+            logContainer.insertBefore(logElement, logContainer.firstChild);
+
+            // Keep only last 10 log entries
+            while (logContainer.children.length > 10) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+
+        function handleTrainingEvent(data) {
+            const eventMessage = data.event === 'training_started' ?
+                'Training session started' :
+                `Training session ended (${data.total_episodes} episodes)`;
+
+            addLogMessage(eventMessage, 'info');
+        }
+
+        function clearCharts() {
+            rewardData.length = 0;
+            qualityData.length = 0;
+            episodeLabels.length = 0;
+
+            rewardChart.update();
+            qualityChart.update();
+
+            addLogMessage('Charts cleared', 'info');
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+            addLogMessage('Dashboard initialized', 'info');
+
+            // Auto-connect after 1 second
+            setTimeout(connectWebSocket, 1000);
+        });
+
+        // Ping function to keep connection alive
+        setInterval(function() {
+            if (socket && isConnected) {
+                socket.send(JSON.stringify({type: 'ping'}));
+            }
+        }, 30000); // Ping every 30 seconds
+    </script>
+</body>
+</html>

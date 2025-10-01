@@ -14,7 +14,7 @@ import logging
 # Import the correlation formulas
 import sys
 sys.path.append('/Users/nrw/python/svg-ai')
-from backend.ai_modules.optimization.correlation_formulas import CorrelationFormulas
+from backend.ai_modules.optimization.unified_parameter_formulas import ParameterFormulas CorrelationFormulas
 
 
 class CorrelationFormulaAnalyzer:

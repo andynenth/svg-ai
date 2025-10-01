@@ -1,0 +1,1402 @@
+{
+  "total_files": 193,
+  "total_lines": 108390,
+  "unused_files": [
+    "backend/ai_modules/optimization/parameter_tuner.py",
+    "backend/ai_modules/testing/report_generator.py",
+    "backend/ai_modules/management/memory_monitor.py",
+    "backend/ai_modules/routing/routing_config.py",
+    "backend/ai_modules/optimization/validator.py",
+    "backend/ai_modules/routing/routing_analytics.py",
+    "backend/ai_modules/rule_based_classifier_refactored.py",
+    "backend/ai_modules/production_readiness.py",
+    "backend/utils/svg_optimizer.py",
+    "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "backend/api/monitoring_api.py",
+    "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "backend/ai_modules/pipeline/component_interfaces.py",
+    "backend/ai_modules/optimization/tests/optimization/test_feature_mapping_optimizer.py",
+    "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "backend/ai_modules/optimization/optimization_logger.py",
+    "backend/integration/tier4_pipeline_integration.py",
+    "backend/utils/__init__.py",
+    "backend/ai_modules/optimization/learned_optimizer.py",
+    "backend/ai_modules/base_ai_converter.py",
+    "backend/ai_modules/prediction/model_utils.py",
+    "backend/config.py",
+    "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+    "backend/ai_modules/optimization/correlation_formulas_old.py",
+    "backend/ai_modules/optimization/correlation_visualizer.py",
+    "backend/ai_modules/optimization/quality_validator.py",
+    "backend/ai_modules/management/model_cache.py",
+    "backend/ai_modules/optimization/feedback_integrator.py",
+    "backend/ai_modules/optimization/validation_framework.py",
+    "backend/ai_modules/routing/__init__.py",
+    "backend/ai_modules/__init__.py",
+    "backend/ai_modules/pipeline/pipeline_monitor.py",
+    "backend/ai_modules/optimization/task_12_2_master_pipeline.py",
+    "backend/ai_modules/optimization/stage1_training_executor.py",
+    "backend/api/optimization_api.py",
+    "backend/ai_modules/optimization/training_orchestrator.py",
+    "backend/ai_modules/testing/__init__.py",
+    "backend/ai_modules/training/__init__.py",
+    "backend/ai_modules/training/logo_dataset.py",
+    "backend/ai_modules/feature_pipeline.py",
+    "backend/ai_modules/utils/parallel_processor.py",
+    "backend/ai_modules/utils/lazy_loader.py",
+    "backend/ai_modules/optimization/quality_metrics.py",
+    "backend/ai_modules/optimization/day12_model_validator.py",
+    "backend/api/unified_optimization_api.py",
+    "backend/utils/preprocessor.py",
+    "backend/utils/visual_compare.py",
+    "backend/ai_modules/utils/cache_manager.py",
+    "backend/ai_modules/optimization/rl_optimizer.py",
+    "backend/ai_modules/optimization/training_visualizer.py",
+    "backend/converters/intelligent_converter.py",
+    "backend/utils/metrics.py",
+    "backend/ai_modules/classification/__init__.py",
+    "backend/ai_modules/optimization/correlation_rollout.py",
+    "backend/utils/error_messages.py",
+    "backend/ai_modules/testing/test_orchestrator.py",
+    "backend/ai_modules/optimization/test_enhanced_router_system.py",
+    "backend/ai_modules/quality/realtime_monitor.py",
+    "backend/ai_modules/prediction/__init__.py",
+    "backend/ai_modules/utils/profiler.py",
+    "backend/converters/mock_converter.py",
+    "backend/utils/cache.py",
+    "backend/ai_modules/utils/performance_monitor.py",
+    "backend/ai_modules/optimization/day12_model_export_manager.py",
+    "backend/ai_modules/optimization/action_mapping.py",
+    "backend/__init__.py",
+    "backend/ai_modules/optimization/__init__.py",
+    "backend/ai_modules/optimization/training_monitor.py",
+    "backend/ai_modules/utils/__init__.py",
+    "backend/ai_modules/routing/complexity_analyzer.py",
+    "backend/ai_modules/routing/intelligent_tier_selector.py",
+    "backend/converters/__init__.py",
+    "backend/ai_modules/optimization/deployment_readiness_validator.py",
+    "backend/ai_modules/optimization/online_learner.py",
+    "backend/utils/image_loader.py",
+    "backend/ai_modules/pipeline/__init__.py",
+    "backend/ai_modules/optimization/training_execution_engine.py",
+    "backend/ai_modules/routing/adaptive_router.py",
+    "backend/ai_modules/prediction/quality_predictor.py",
+    "backend/ai_modules/classification/logo_classifier.py",
+    "backend/ai_modules/quality/ab_testing.py",
+    "backend/utils/parameter_cache.py",
+    "backend/ai_modules/pipeline/pipeline_config.py",
+    "backend/utils/svg_post_processor.py",
+    "backend/ai_modules/optimization/training_pipeline.py"
+  ],
+  "duplicate_functions": {
+    "__init__(self,config)": [
+      "backend/integration/tier4_pipeline_integration.py",
+      "backend/integration/tier4_pipeline_integration.py",
+      "backend/ai_modules/production_readiness.py",
+      "backend/ai_modules/optimization/gpu_model_architecture.py",
+      "backend/ai_modules/optimization/training_orchestrator.py",
+      "backend/ai_modules/optimization/local_inference_optimizer.py",
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/gpu_training_pipeline.py",
+      "backend/ai_modules/optimization/training_execution_engine.py",
+      "backend/ai_modules/optimization/export_validation_framework.py",
+      "backend/ai_modules/optimization/model_export_pipeline.py",
+      "backend/ai_modules/optimization/stage1_training_executor.py",
+      "backend/ai_modules/optimization/unified_prediction_api.py",
+      "backend/ai_modules/optimization/colab_persistence_manager.py",
+      "backend/ai_modules/optimization/performance_testing_framework.py",
+      "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py",
+      "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+      "backend/ai_modules/optimization/end_to_end_validation.py",
+      "backend/ai_modules/optimization/task_12_2_master_pipeline.py",
+      "backend/ai_modules/testing/ab_framework.py"
+    ],
+    "get_integration_status(self)": [
+      "backend/integration/tier4_pipeline_integration.py",
+      "backend/ai_modules/optimization/enhanced_router_integration.py"
+    ],
+    "convert(self,image_path)": [
+      "backend/integration/tier4_pipeline_integration.py",
+      "backend/converters/intelligent_converter.py",
+      "backend/converters/smart_potrace_converter.py",
+      "backend/converters/potrace_converter.py",
+      "backend/converters/potrace_converter.py",
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/converters/smart_auto_converter.py",
+      "backend/converters/alpha_converter.py",
+      "backend/converters/vtracer_converter.py",
+      "backend/converters/base.py",
+      "backend/converters/mock_converter.py",
+      "backend/ai_modules/testing/ab_framework.py"
+    ],
+    "get_performance_summary(self)": [
+      "backend/integration/tier4_pipeline_integration.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+      "backend/ai_modules/optimization/adaptive_optimizer.py"
+    ],
+    "__init__(self)": [
+      "backend/converters/intelligent_converter.py",
+      "backend/converters/smart_potrace_converter.py",
+      "backend/converters/potrace_converter.py",
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/converters/smart_auto_converter.py",
+      "backend/converters/alpha_converter.py",
+      "backend/converters/mock_converter.py",
+      "backend/utils/svg_optimizer.py",
+      "backend/utils/quality_metrics.py",
+      "backend/utils/visual_compare.py",
+      "backend/utils/image_loader.py",
+      "backend/utils/color_detector.py",
+      "backend/ai_modules/production_readiness.py",
+      "backend/ai_modules/analytics_dashboard.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/parameter_optimizer.py",
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/rule_based_classifier.py",
+      "backend/ai_modules/smart_cache.py",
+      "backend/ai_modules/cache_monitor.py",
+      "backend/ai_modules/classification/rule_based_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/pipeline/unified_ai_pipeline.py",
+      "backend/ai_modules/optimization/validator.py",
+      "backend/ai_modules/optimization/training_visualizer.py",
+      "backend/ai_modules/optimization/training_visualizer.py",
+      "backend/ai_modules/optimization/training_visualizer.py",
+      "backend/ai_modules/optimization/training_visualizer.py",
+      "backend/ai_modules/optimization/day13_performance_optimizer.py",
+      "backend/ai_modules/optimization/day13_performance_optimizer.py",
+      "backend/ai_modules/optimization/test_enhanced_router_system.py",
+      "backend/ai_modules/optimization/enhanced_router_integration.py",
+      "backend/ai_modules/optimization/day12_training_visualization.py",
+      "backend/ai_modules/optimization/feature_mapping.py",
+      "backend/ai_modules/optimization/feature_mapping.py",
+      "backend/ai_modules/optimization/local_inference_optimizer.py",
+      "backend/ai_modules/optimization/local_inference_optimizer.py",
+      "backend/ai_modules/optimization/local_inference_optimizer.py",
+      "backend/ai_modules/optimization/gpu_training_pipeline.py",
+      "backend/ai_modules/optimization/parameter_router.py",
+      "backend/ai_modules/optimization/learned_correlations.py",
+      "backend/ai_modules/optimization/quality_metrics.py",
+      "backend/ai_modules/optimization/export_validation_framework.py",
+      "backend/ai_modules/optimization/action_mapping.py",
+      "backend/ai_modules/optimization/quality_validator.py",
+      "backend/ai_modules/optimization/training_data_manager.py",
+      "backend/ai_modules/optimization/unified_prediction_api.py",
+      "backend/ai_modules/optimization/spatial_analysis.py",
+      "backend/ai_modules/optimization/refined_correlation_formulas.py",
+      "backend/ai_modules/optimization/refined_correlation_formulas.py",
+      "backend/ai_modules/optimization/regression_optimizer.py",
+      "backend/ai_modules/optimization/feature_mapping_optimizer.py",
+      "backend/ai_modules/optimization/resource_monitor.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/error_handler.py",
+      "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+      "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+      "backend/ai_modules/optimization/day13_export_optimizer.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+      "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+      "backend/ai_modules/optimization/colab_training_visualization.py",
+      "backend/ai_modules/optimization/adaptive_optimizer.py",
+      "backend/ai_modules/management/memory_monitor.py",
+      "backend/ai_modules/utils/parallel_processor.py",
+      "backend/ai_modules/utils/logging_config.py",
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/performance_monitor.py",
+      "backend/ai_modules/utils/model_adapter.py",
+      "backend/ai_modules/utils/profiler.py",
+      "backend/ai_modules/testing/test_orchestrator.py"
+    ],
+    "_calculate_complexity_score(self,features)": [
+      "backend/converters/intelligent_converter.py",
+      "backend/ai_modules/routing/hybrid_intelligent_router.py"
+    ],
+    "get_routing_analytics(self)": [
+      "backend/converters/intelligent_converter.py",
+      "backend/ai_modules/optimization/intelligent_router.py",
+      "backend/ai_modules/optimization/parameter_router.py"
+    ],
+    "get_name(self)": [
+      "backend/converters/smart_potrace_converter.py",
+      "backend/converters/potrace_converter.py",
+      "backend/converters/potrace_converter.py",
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/converters/smart_auto_converter.py",
+      "backend/converters/alpha_converter.py",
+      "backend/converters/vtracer_converter.py",
+      "backend/converters/base.py",
+      "backend/converters/mock_converter.py"
+    ],
+    "_find_potrace(self)": [
+      "backend/converters/smart_potrace_converter.py",
+      "backend/converters/potrace_converter.py",
+      "backend/converters/alpha_converter.py"
+    ],
+    "convert_with_params(self,input_path,output_path)": [
+      "backend/converters/smart_potrace_converter.py",
+      "backend/converters/alpha_converter.py"
+    ],
+    "_get_install_instructions(self)": [
+      "backend/converters/potrace_converter.py",
+      "backend/converters/potrace_converter.py"
+    ],
+    "_infer_logo_type(self,features)": [
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/ai_modules/optimization/base_optimizer.py",
+      "backend/ai_modules/optimization/unified_prediction_api.py"
+    ],
+    "_get_default_features(self)": [
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/ai_modules/classification/base_feature_extractor.py"
+    ],
+    "get_optimization_stats(self)": [
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/ai_modules/parameter_optimizer.py",
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/optimized_pipeline.py",
+      "backend/ai_modules/optimization/base_optimizer.py",
+      "backend/ai_modules/optimization/learned_optimizer.py"
+    ],
+    "configure(self)": [
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/ai_modules/optimization/vtracer_env.py",
+      "backend/ai_modules/optimization/reward_functions.py"
+    ],
+    "clear_cache(self)": [
+      "backend/converters/ai_enhanced_converter.py",
+      "backend/utils/parameter_cache.py",
+      "backend/ai_modules/feature_pipeline.py",
+      "backend/ai_modules/classification/base_feature_extractor.py",
+      "backend/ai_modules/quality/enhanced_metrics.py",
+      "backend/ai_modules/optimization/vtracer_test.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py",
+      "backend/ai_modules/management/model_cache.py"
+    ],
+    "__init__(self,name)": [
+      "backend/converters/base.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/base_ai_converter.py",
+      "backend/ai_modules/optimization/base_optimizer.py",
+      "backend/ai_modules/prediction/base_predictor.py"
+    ],
+    "get_stats(self)": [
+      "backend/converters/base.py",
+      "backend/utils/cache.py",
+      "backend/utils/cache.py",
+      "backend/utils/cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/smart_cache.py",
+      "backend/ai_modules/classification/base_feature_extractor.py",
+      "backend/ai_modules/optimization/vtracer_environment.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py",
+      "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/request_queue.py",
+      "backend/ai_modules/utils/request_queue.py"
+    ],
+    "to_dict(self)": [
+      "backend/utils/error_messages.py",
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/pipeline/unified_ai_pipeline.py"
+    ],
+    "round_match(match)": [
+      "backend/utils/svg_post_processor.py",
+      "backend/utils/svg_optimizer.py"
+    ],
+    "__init__(self,max_workers,use_processes)": [
+      "backend/utils/parallel_processor.py",
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/utils/parallel_processor.py"
+    ],
+    "get_summary(self)": [
+      "backend/utils/parallel_processor.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/optimization/gpu_training_pipeline.py",
+      "backend/ai_modules/optimization/validation_pipeline.py",
+      "backend/ai_modules/optimization/optimization_logger.py"
+    ],
+    "stop(self)": [
+      "backend/utils/parallel_processor.py",
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/request_queue.py",
+      "backend/ai_modules/utils/request_queue.py"
+    ],
+    "calculate_mse(img1,img2)": [
+      "backend/utils/quality_metrics.py",
+      "backend/utils/quality_metrics.py"
+    ],
+    "calculate_psnr(img1,img2)": [
+      "backend/utils/quality_metrics.py",
+      "backend/utils/quality_metrics.py"
+    ],
+    "svg_to_png(self,svg_path_or_content,output_size)": [
+      "backend/utils/improved_visual_compare.py",
+      "backend/utils/visual_compare.py"
+    ],
+    "create_comparison_grid(self,original_path,svg_content)": [
+      "backend/utils/improved_visual_compare.py",
+      "backend/utils/visual_compare.py"
+    ],
+    "_load_index(self)": [
+      "backend/utils/cache.py",
+      "backend/ai_modules/utils/cache_manager.py"
+    ],
+    "_save_index(self)": [
+      "backend/utils/cache.py",
+      "backend/ai_modules/utils/cache_manager.py"
+    ],
+    "get(self,image_path,converter_name,converter_params)": [
+      "backend/utils/cache.py",
+      "backend/utils/cache.py"
+    ],
+    "set(self,image_path,converter_name,svg_content,converter_params)": [
+      "backend/utils/cache.py",
+      "backend/utils/cache.py"
+    ],
+    "__init__(self,max_size)": [
+      "backend/utils/cache.py",
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py"
+    ],
+    "clear(self)": [
+      "backend/utils/cache.py",
+      "backend/utils/cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/profiler.py"
+    ],
+    "get_statistics(self)": [
+      "backend/utils/parameter_cache.py",
+      "backend/ai_modules/pipeline/pipeline_monitor.py",
+      "backend/ai_modules/optimization/gpu_training_pipeline.py",
+      "backend/ai_modules/routing/intelligent_tier_selector.py",
+      "backend/ai_modules/routing/routing_analytics.py"
+    ],
+    "_count_unique_colors(self,image)": [
+      "backend/utils/visual_compare.py",
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/classification/feature_extractor.py",
+      "backend/ai_modules/utils/parallel_processor.py"
+    ],
+    "main()": [
+      "backend/utils/color_detector.py",
+      "backend/ai_modules/quality/enhanced_metrics.py",
+      "backend/ai_modules/optimization/test_enhanced_router_system.py",
+      "backend/ai_modules/optimization/deployment_readiness_validator.py",
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/optimization/learned_optimizer.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "decorator(func)": [
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/utils/performance_monitor.py"
+    ],
+    "wrapper()": [
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/utils/validation.py",
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/utils/performance_monitor.py",
+      "backend/ai_modules/utils/profiler.py"
+    ],
+    "run_comprehensive_validation(self)": [
+      "backend/ai_modules/production_readiness.py",
+      "backend/ai_modules/optimization/end_to_end_validation.py"
+    ],
+    "__init__(self,cache,cache_ttl)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py"
+    ],
+    "extract_features(self,image_path)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/base_ai_converter.py",
+      "backend/ai_modules/classification/base_feature_extractor.py",
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/routing/hybrid_intelligent_router.py"
+    ],
+    "get_cache_stats(self)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/quality/enhanced_metrics.py",
+      "backend/ai_modules/optimization/quality_prediction_cache.py",
+      "backend/ai_modules/optimization/vtracer_test.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py",
+      "backend/ai_modules/management/model_cache.py"
+    ],
+    "classify_with_details(self,features)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/rule_based_classifier.py"
+    ],
+    "classify(self,features)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/rule_based_classifier_refactored.py",
+      "backend/ai_modules/rule_based_classifier.py",
+      "backend/ai_modules/classification/rule_based_classifier.py"
+    ],
+    "optimize_parameters(self,classification,features,base_parameters,user_overrides)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/parameter_optimizer.py"
+    ],
+    "__init__(self,cache)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/smart_cache.py"
+    ],
+    "process_image(self,image_path)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/feature_pipeline.py"
+    ],
+    "get_comprehensive_stats(self)": [
+      "backend/ai_modules/cached_components.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/optimized_pipeline.py",
+      "backend/ai_modules/utils/request_queue.py"
+    ],
+    "_calculate_ssim(self,img1,img2)": [
+      "backend/ai_modules/quality_validator.py",
+      "backend/ai_modules/quality/enhanced_metrics.py"
+    ],
+    "get(self,key)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/smart_cache.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py"
+    ],
+    "set(self,key,value,ttl)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py"
+    ],
+    "delete(self,key)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py"
+    ],
+    "size(self)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py"
+    ],
+    "_evict_lru(self)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py"
+    ],
+    "_get_memory_usage(self)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/optimization/training_monitor.py"
+    ],
+    "_init_database(self)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/quality/quality_tracker.py",
+      "backend/ai_modules/optimization/feedback_integrator.py"
+    ],
+    "_compress_data(self,data)": [
+      "backend/ai_modules/advanced_cache.py",
+      "backend/ai_modules/database_cache.py"
+    ],
+    "_setup_logging(self,log_level)": [
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/rule_based_classifier_refactored.py"
+    ],
+    "_calculate_edge_density(self,image)": [
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/classification/feature_extractor.py"
+    ],
+    "_calculate_entropy(self,image)": [
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/classification/feature_extractor.py",
+      "backend/ai_modules/classification/statistical_classifier.py"
+    ],
+    "_calculate_corner_density(self,image)": [
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/classification/feature_extractor.py"
+    ],
+    "_calculate_gradient_strength(self,image)": [
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/classification/feature_extractor.py"
+    ],
+    "_calculate_complexity_score(self,image)": [
+      "backend/ai_modules/feature_extraction.py",
+      "backend/ai_modules/classification/feature_extractor.py"
+    ],
+    "_classify_simple_hierarchical(self,features)": [
+      "backend/ai_modules/rule_based_classifier_refactored.py",
+      "backend/ai_modules/rule_based_classifier.py"
+    ],
+    "_classify_gradient_hierarchical(self,features)": [
+      "backend/ai_modules/rule_based_classifier_refactored.py",
+      "backend/ai_modules/rule_based_classifier.py"
+    ],
+    "_classify_text_hierarchical(self,features)": [
+      "backend/ai_modules/rule_based_classifier_refactored.py",
+      "backend/ai_modules/rule_based_classifier.py"
+    ],
+    "_classify_complex_hierarchical(self,features)": [
+      "backend/ai_modules/rule_based_classifier_refactored.py",
+      "backend/ai_modules/rule_based_classifier.py"
+    ],
+    "_create_error_result(self,error_message)": [
+      "backend/ai_modules/rule_based_classifier_refactored.py",
+      "backend/ai_modules/quality/enhanced_metrics.py",
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/optimization/learned_optimizer.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "connect(self)": [
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py"
+    ],
+    "disconnect(self)": [
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py"
+    ],
+    "create_schema(self)": [
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py"
+    ],
+    "set(self,key,data,ttl)": [
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py"
+    ],
+    "cleanup_expired(self)": [
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py",
+      "backend/ai_modules/database_cache.py"
+    ],
+    "get_parameter_bounds(self)": [
+      "backend/ai_modules/parameter_optimizer.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "predict_quality(self,image_path,parameters)": [
+      "backend/ai_modules/base_ai_converter.py",
+      "backend/ai_modules/prediction/base_predictor.py"
+    ],
+    "profile_function(self,func)": [
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/optimization/performance_optimizer.py"
+    ],
+    "get_performance_report(self)": [
+      "backend/ai_modules/performance_profiler.py",
+      "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+      "backend/ai_modules/utils/performance_monitor.py"
+    ],
+    "set(self,key,value)": [
+      "backend/ai_modules/smart_cache.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/cache_manager.py"
+    ],
+    "__init__(self,cache,access_patterns)": [
+      "backend/ai_modules/smart_cache.py",
+      "backend/ai_modules/smart_cache.py"
+    ],
+    "__init__(self,cache_enabled)": [
+      "backend/ai_modules/feature_pipeline.py",
+      "backend/ai_modules/classification/base_feature_extractor.py",
+      "backend/ai_modules/classification/feature_extractor.py"
+    ],
+    "_get_cache_key(self,image_path)": [
+      "backend/ai_modules/feature_pipeline.py",
+      "backend/ai_modules/routing/complexity_analyzer.py"
+    ],
+    "resolve_alert(self,alert_id)": [
+      "backend/ai_modules/cache_monitor.py",
+      "backend/ai_modules/optimization/resource_monitor.py"
+    ],
+    "get_active_alerts(self)": [
+      "backend/ai_modules/cache_monitor.py",
+      "backend/ai_modules/quality/realtime_monitor.py",
+      "backend/ai_modules/optimization/resource_monitor.py"
+    ],
+    "start_monitoring(self)": [
+      "backend/ai_modules/cache_monitor.py",
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+      "backend/ai_modules/optimization/real_time_monitor.py",
+      "backend/ai_modules/optimization/performance_testing_framework.py",
+      "backend/ai_modules/optimization/resource_monitor.py",
+      "backend/ai_modules/optimization/system_monitoring_analytics.py"
+    ],
+    "stop_monitoring(self)": [
+      "backend/ai_modules/cache_monitor.py",
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+      "backend/ai_modules/optimization/real_time_monitor.py",
+      "backend/ai_modules/optimization/performance_testing_framework.py",
+      "backend/ai_modules/optimization/resource_monitor.py",
+      "backend/ai_modules/optimization/system_monitoring_analytics.py"
+    ],
+    "_monitoring_loop(self)": [
+      "backend/ai_modules/cache_monitor.py",
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/resource_monitor.py",
+      "backend/ai_modules/optimization/system_monitoring_analytics.py",
+      "backend/ai_modules/utils/request_queue.py"
+    ],
+    "_get_transforms(self)": [
+      "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+      "backend/ai_modules/classification/efficientnet_classifier.py"
+    ],
+    "classify(self,image_path)": [
+      "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+      "backend/ai_modules/classification/logo_classifier.py",
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/classification/efficientnet_classifier.py"
+    ],
+    "_create_error_result(self,error_message,image_path)": [
+      "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+      "backend/ai_modules/classification/statistical_classifier.py"
+    ],
+    "get_model_info(self)": [
+      "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/classification/efficientnet_classifier.py",
+      "backend/ai_modules/optimization/online_learner.py",
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/optimization/learned_optimizer.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py",
+      "backend/ai_modules/prediction/quality_predictor.py"
+    ],
+    "save_model(self,path)": [
+      "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+      "backend/ai_modules/classification/efficientnet_classifier.py",
+      "backend/ai_modules/prediction/quality_predictor.py"
+    ],
+    "is_ready(self)": [
+      "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+      "backend/ai_modules/optimization/learned_optimizer.py"
+    ],
+    "_extract_features_impl(self,image_path)": [
+      "backend/ai_modules/classification/base_feature_extractor.py",
+      "backend/ai_modules/classification/feature_extractor.py"
+    ],
+    "__init__(self,model_path)": [
+      "backend/ai_modules/classification/logo_classifier.py",
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/rl_optimizer.py",
+      "backend/ai_modules/prediction/quality_predictor.py"
+    ],
+    "_create_model(self)": [
+      "backend/ai_modules/classification/logo_classifier.py",
+      "backend/ai_modules/prediction/quality_predictor.py"
+    ],
+    "load_model(self)": [
+      "backend/ai_modules/classification/logo_classifier.py",
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "_get_image_hash(self,image_path)": [
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py"
+    ],
+    "get_calibration_stats(self)": [
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py"
+    ],
+    "get_memory_usage(self)": [
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/optimization/local_inference_optimizer.py",
+      "backend/ai_modules/optimization/colab_training_visualization.py",
+      "backend/ai_modules/utils/lazy_loader.py"
+    ],
+    "classify_batch(self,image_paths,time_budget_per_image)": [
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py"
+    ],
+    "_update_performance_stats(self,result,processing_time)": [
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/optimization/adaptive_optimizer.py"
+    ],
+    "get_performance_stats(self)": [
+      "backend/ai_modules/classification/hybrid_classifier.py",
+      "backend/ai_modules/optimization/unified_prediction_api.py"
+    ],
+    "train_model(self)": [
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py"
+    ],
+    "save_model(self)": [
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/optimization/intelligent_router.py",
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "__post_init__(self)": [
+      "backend/ai_modules/pipeline/pipeline_monitor.py",
+      "backend/ai_modules/pipeline/pipeline_monitor.py",
+      "backend/ai_modules/optimization/gpu_model_architecture.py",
+      "backend/ai_modules/optimization/day13_integration_tester.py",
+      "backend/ai_modules/optimization/enhanced_router_integration.py",
+      "backend/ai_modules/optimization/local_inference_optimizer.py",
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/training_execution_engine.py",
+      "backend/ai_modules/optimization/training_pipeline.py",
+      "backend/ai_modules/optimization/export_validation_framework.py",
+      "backend/ai_modules/optimization/validation_framework.py",
+      "backend/ai_modules/optimization/enhanced_intelligent_router.py",
+      "backend/ai_modules/optimization/production_deployment_package.py",
+      "backend/ai_modules/optimization/performance_testing_framework.py",
+      "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/quality_prediction_cache.py",
+      "backend/ai_modules/optimization/error_handler.py",
+      "backend/ai_modules/optimization/end_to_end_validation.py",
+      "backend/ai_modules/optimization/task_12_2_master_pipeline.py",
+      "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+      "backend/ai_modules/testing/ab_framework.py"
+    ],
+    "export_metrics(self,file_path)": [
+      "backend/ai_modules/pipeline/pipeline_monitor.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py"
+    ],
+    "generate_performance_report(self)": [
+      "backend/ai_modules/pipeline/pipeline_monitor.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py"
+    ],
+    "reset_metrics(self)": [
+      "backend/ai_modules/pipeline/pipeline_monitor.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py"
+    ],
+    "get_feature_names(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "validate_image(self,image_path)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/optimization/training_data_manager.py"
+    ],
+    "classify(self,image_path,features)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/routing/hybrid_intelligent_router.py"
+    ],
+    "get_supported_types(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "is_trained(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "optimize(self,features,logo_type,tier)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "validate_parameters(self,parameters)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "predict(self,image_path,features,parameters)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "get_quality_metrics(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "is_available(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "route(self,image_path,features,classification,target_quality,time_constraint,user_preferences)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "get_available_methods(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/optimization/unified_prediction_api.py"
+    ],
+    "get_tier_descriptions(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "convert(self,image_path,parameters)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "get_supported_formats(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/pipeline/component_interfaces.py"
+    ],
+    "_get_default_parameters(self)": [
+      "backend/ai_modules/pipeline/component_interfaces.py",
+      "backend/ai_modules/optimization/learned_correlations.py",
+      "backend/ai_modules/optimization/vtracer_environment.py"
+    ],
+    "_initialize_components(self)": [
+      "backend/ai_modules/pipeline/unified_ai_pipeline.py",
+      "backend/ai_modules/optimization/unified_prediction_api.py"
+    ],
+    "health_check(self)": [
+      "backend/ai_modules/pipeline/unified_ai_pipeline.py",
+      "backend/ai_modules/optimization/enhanced_router_integration.py",
+      "backend/ai_modules/optimization/correlation_rollout.py"
+    ],
+    "__repr__(self)": [
+      "backend/ai_modules/pipeline/unified_ai_pipeline.py",
+      "backend/ai_modules/optimization/learned_correlations.py",
+      "backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+      "backend/ai_modules/optimization/correlation_rollout.py"
+    ],
+    "_load_configuration(self)": [
+      "backend/ai_modules/pipeline/pipeline_config.py",
+      "backend/ai_modules/optimization/correlation_rollout.py"
+    ],
+    "cleanup(self)": [
+      "backend/ai_modules/pipeline/pipeline_config.py",
+      "backend/ai_modules/optimization/validation_pipeline.py",
+      "backend/ai_modules/optimization/quality_metrics.py",
+      "backend/ai_modules/optimization/quality_validator.py",
+      "backend/ai_modules/optimization/unified_prediction_api.py",
+      "backend/ai_modules/optimization/performance_testing_framework.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py",
+      "backend/ai_modules/optimization/error_handler.py",
+      "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+      "backend/ai_modules/optimization/performance_optimizer.py",
+      "backend/ai_modules/optimization/performance_optimizer.py"
+    ],
+    "__enter__(self)": [
+      "backend/ai_modules/pipeline/pipeline_config.py",
+      "backend/ai_modules/optimization/performance_optimizer.py"
+    ],
+    "__exit__(self,exc_type,exc_val,exc_tb)": [
+      "backend/ai_modules/pipeline/pipeline_config.py",
+      "backend/ai_modules/optimization/performance_optimizer.py"
+    ],
+    "__init__(self,cache_size)": [
+      "backend/ai_modules/quality/enhanced_metrics.py",
+      "backend/ai_modules/optimization/performance_optimizer.py"
+    ],
+    "_cache_result(self,cache_key,result)": [
+      "backend/ai_modules/quality/enhanced_metrics.py",
+      "backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+      "backend/ai_modules/optimization/adaptive_optimizer.py",
+      "backend/ai_modules/routing/complexity_analyzer.py"
+    ],
+    "__init__(self,output_dir)": [
+      "backend/ai_modules/quality/ab_testing.py",
+      "backend/ai_modules/optimization/training_visualizer.py",
+      "backend/ai_modules/optimization/training_orchestrator.py",
+      "backend/ai_modules/optimization/end_to_end_validation.py",
+      "backend/ai_modules/testing/visual_comparison.py"
+    ],
+    "get_dashboard_data(self)": [
+      "backend/ai_modules/quality/realtime_monitor.py",
+      "backend/ai_modules/optimization/real_time_monitor.py"
+    ],
+    "__init__(self,db_path)": [
+      "backend/ai_modules/quality/quality_tracker.py",
+      "backend/ai_modules/optimization/system_monitoring_analytics.py"
+    ],
+    "validate_parameters(self,params)": [
+      "backend/ai_modules/optimization/validator.py",
+      "backend/ai_modules/optimization/learned_correlations.py"
+    ],
+    "__init__(self,device)": [
+      "backend/ai_modules/optimization/gpu_model_architecture.py",
+      "backend/ai_modules/optimization/day12_gpu_training_executor.py"
+    ],
+    "forward(self,x)": [
+      "backend/ai_modules/optimization/gpu_model_architecture.py",
+      "backend/ai_modules/optimization/day13_performance_optimizer.py",
+      "backend/ai_modules/optimization/day13_performance_optimizer.py",
+      "backend/ai_modules/optimization/day13_export_optimizer.py"
+    ],
+    "predict_quality(self,image_features,vtracer_params)": [
+      "backend/ai_modules/optimization/gpu_model_architecture.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/local_integration_tester.py",
+      "backend/ai_modules/optimization/local_integration_tester.py"
+    ],
+    "generate_monitoring_report(self)": [
+      "backend/ai_modules/optimization/training_orchestrator.py",
+      "backend/ai_modules/optimization/real_time_monitor.py",
+      "backend/ai_modules/optimization/resource_monitor.py",
+      "backend/ai_modules/optimization/stage1_monitoring_dashboard.py"
+    ],
+    "__init__(self,base_config)": [
+      "backend/ai_modules/optimization/training_orchestrator.py",
+      "backend/ai_modules/optimization/day12_gpu_training_executor.py"
+    ],
+    "_prepare_training_data(self)": [
+      "backend/ai_modules/optimization/training_orchestrator.py",
+      "backend/ai_modules/optimization/online_learner.py"
+    ],
+    "_test_accuracy_preservation(self,original_model,optimized_model,sample_input)": [
+      "backend/ai_modules/optimization/day13_performance_optimizer.py",
+      "backend/ai_modules/optimization/day13_export_optimizer.py"
+    ],
+    "route_with_quality_prediction(self,image_path,features)": [
+      "backend/ai_modules/optimization/enhanced_router_integration.py",
+      "backend/ai_modules/optimization/enhanced_router_integration.py"
+    ],
+    "predict_method_quality(self,method,features,parameters)": [
+      "backend/ai_modules/optimization/enhanced_router_integration.py",
+      "backend/ai_modules/optimization/enhanced_router_integration.py"
+    ],
+    "get_enhancement_status(self)": [
+      "backend/ai_modules/optimization/enhanced_router_integration.py",
+      "backend/ai_modules/optimization/enhanced_router_integration.py"
+    ],
+    "_on_step(self)": [
+      "backend/ai_modules/optimization/ppo_optimizer.py",
+      "backend/ai_modules/optimization/real_time_monitor.py"
+    ],
+    "_on_rollout_end(self)": [
+      "backend/ai_modules/optimization/ppo_optimizer.py",
+      "backend/ai_modules/optimization/real_time_monitor.py"
+    ],
+    "_default_model_config(self)": [
+      "backend/ai_modules/optimization/ppo_optimizer.py",
+      "backend/ai_modules/optimization/training_pipeline.py",
+      "backend/ai_modules/optimization/stage1_training_executor.py"
+    ],
+    "load_model(self,model_path)": [
+      "backend/ai_modules/optimization/ppo_optimizer.py",
+      "backend/ai_modules/optimization/learned_correlations.py",
+      "backend/ai_modules/optimization/training_pipeline.py"
+    ],
+    "close(self)": [
+      "backend/ai_modules/optimization/ppo_optimizer.py",
+      "backend/ai_modules/optimization/vtracer_env.py",
+      "backend/ai_modules/optimization/training_pipeline.py",
+      "backend/ai_modules/optimization/training_monitor.py",
+      "backend/ai_modules/optimization/agent_interface.py"
+    ],
+    "__init__(self,save_dir)": [
+      "backend/ai_modules/optimization/day12_training_visualization.py",
+      "backend/ai_modules/optimization/stage1_training_executor.py",
+      "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+      "backend/ai_modules/optimization/stage1_monitoring_dashboard.py"
+    ],
+    "_optimize_impl(self,features,logo_type)": [
+      "backend/ai_modules/optimization/feature_mapping.py",
+      "backend/ai_modules/optimization/base_optimizer.py",
+      "backend/ai_modules/optimization/rl_optimizer.py"
+    ],
+    "get_feature_importance(self)": [
+      "backend/ai_modules/optimization/feature_mapping.py",
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "_test_batch_performance(self,model,device)": [
+      "backend/ai_modules/optimization/local_inference_optimizer.py",
+      "backend/ai_modules/optimization/export_validation_framework.py"
+    ],
+    "reset(self,seed,options)": [
+      "backend/ai_modules/optimization/vtracer_env.py",
+      "backend/ai_modules/optimization/vtracer_environment.py"
+    ],
+    "step(self,action)": [
+      "backend/ai_modules/optimization/vtracer_env.py",
+      "backend/ai_modules/optimization/vtracer_environment.py"
+    ],
+    "_setup_logging(self)": [
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/training_monitor.py"
+    ],
+    "predict_quality(self,image_path,vtracer_params)": [
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/performance_testing_framework.py"
+    ],
+    "predict_quality_batch(self,image_paths,vtracer_params_list)": [
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py"
+    ],
+    "shutdown(self)": [
+      "backend/ai_modules/optimization/production_deployment_framework.py",
+      "backend/ai_modules/optimization/intelligent_router.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+      "backend/ai_modules/optimization/enhanced_intelligent_router.py",
+      "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+      "backend/ai_modules/optimization/quality_prediction_cache.py",
+      "backend/ai_modules/routing/adaptive_router.py",
+      "backend/ai_modules/routing/routing_config.py"
+    ],
+    "_initialize_system(self)": [
+      "backend/ai_modules/optimization/intelligent_router.py",
+      "backend/ai_modules/optimization/tier4_system_orchestrator.py"
+    ],
+    "_get_system_state(self)": [
+      "backend/ai_modules/optimization/intelligent_router.py",
+      "backend/ai_modules/optimization/tier4_system_orchestrator.py"
+    ],
+    "_load_model(self)": [
+      "backend/ai_modules/optimization/intelligent_router.py",
+      "backend/ai_modules/optimization/quality_prediction_integration.py",
+      "backend/ai_modules/prediction/quality_predictor.py",
+      "backend/ai_modules/prediction/base_predictor.py"
+    ],
+    "_normalize_vtracer_params(self,params)": [
+      "backend/ai_modules/optimization/gpu_training_pipeline.py",
+      "backend/ai_modules/optimization/day12_model_validator.py"
+    ],
+    "__len__(self)": [
+      "backend/ai_modules/optimization/gpu_training_pipeline.py",
+      "backend/ai_modules/training/logo_dataset.py"
+    ],
+    "__getitem__(self,idx)": [
+      "backend/ai_modules/optimization/gpu_training_pipeline.py",
+      "backend/ai_modules/training/logo_dataset.py"
+    ],
+    "_calculate_feature_confidence(self,features)": [
+      "backend/ai_modules/optimization/parameter_router.py",
+      "backend/ai_modules/optimization/tier4_system_orchestrator.py"
+    ],
+    "_analyze_performance_trends(self)": [
+      "backend/ai_modules/optimization/parameter_router.py",
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py"
+    ],
+    "load_checkpoint(self,checkpoint_path)": [
+      "backend/ai_modules/optimization/training_pipeline.py",
+      "backend/ai_modules/optimization/colab_persistence_manager.py"
+    ],
+    "get_validation_summary(self)": [
+      "backend/ai_modules/optimization/validation_framework.py",
+      "backend/ai_modules/optimization/stage1_training_executor.py"
+    ],
+    "__init__(self,model_save_path)": [
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "load_training_data(self)": [
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "load_validation_data(self)": [
+      "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+      "backend/ai_modules/prediction/statistical_quality_predictor.py"
+    ],
+    "_generate_recommendations(self)": [
+      "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+      "backend/ai_modules/utils/profiler.py",
+      "backend/ai_modules/routing/routing_analytics.py"
+    ],
+    "_monitor_loop(self)": [
+      "backend/ai_modules/optimization/real_time_monitor.py",
+      "backend/ai_modules/optimization/performance_testing_framework.py"
+    ],
+    "save_monitoring_data(self)": [
+      "backend/ai_modules/optimization/real_time_monitor.py",
+      "backend/ai_modules/optimization/stage1_monitoring_dashboard.py"
+    ],
+    "create_dashboard_data(self)": [
+      "backend/ai_modules/optimization/training_monitor.py",
+      "backend/ai_modules/optimization/optimization_logger.py"
+    ],
+    "edge_to_corner_threshold(edge_density)": [
+      "backend/ai_modules/optimization/correlation_formulas.py",
+      "backend/ai_modules/optimization/correlation_formulas_backup.py"
+    ],
+    "colors_to_precision(unique_colors)": [
+      "backend/ai_modules/optimization/correlation_formulas.py",
+      "backend/ai_modules/optimization/correlation_formulas_backup.py"
+    ],
+    "entropy_to_path_precision(entropy)": [
+      "backend/ai_modules/optimization/correlation_formulas.py",
+      "backend/ai_modules/optimization/correlation_formulas_backup.py"
+    ],
+    "corners_to_length_threshold(corner_density)": [
+      "backend/ai_modules/optimization/correlation_formulas.py",
+      "backend/ai_modules/optimization/correlation_formulas_backup.py"
+    ],
+    "gradient_to_splice_threshold(gradient_strength)": [
+      "backend/ai_modules/optimization/correlation_formulas.py",
+      "backend/ai_modules/optimization/correlation_formulas_backup.py"
+    ],
+    "complexity_to_iterations(complexity_score)": [
+      "backend/ai_modules/optimization/correlation_formulas.py",
+      "backend/ai_modules/optimization/correlation_formulas_backup.py"
+    ],
+    "test_formulas_with_known_inputs()": [
+      "backend/ai_modules/optimization/correlation_formulas.py",
+      "backend/ai_modules/optimization/correlation_formulas_backup.py"
+    ],
+    "_cleanup_old_checkpoints(self)": [
+      "backend/ai_modules/optimization/colab_persistence_manager.py",
+      "backend/ai_modules/optimization/checkpoint_manager.py"
+    ],
+    "optimize(self,features)": [
+      "backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+      "backend/ai_modules/optimization/feature_mapping_optimizer.py",
+      "backend/ai_modules/optimization/learned_optimizer.py"
+    ],
+    "_get_cache_key(self,features)": [
+      "backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+      "backend/ai_modules/optimization/feature_mapping_optimizer.py"
+    ],
+    "_create_package_structure(self)": [
+      "backend/ai_modules/optimization/production_deployment_package.py",
+      "backend/ai_modules/optimization/day13_deployment_packager.py"
+    ],
+    "_initialize_test_environment(self)": [
+      "backend/ai_modules/optimization/performance_testing_framework.py",
+      "backend/ai_modules/optimization/end_to_end_validation.py"
+    ],
+    "_update_memory_usage(self)": [
+      "backend/ai_modules/optimization/quality_prediction_cache.py",
+      "backend/ai_modules/management/model_cache.py"
+    ],
+    "__init__(self,export_base_dir)": [
+      "backend/ai_modules/optimization/day13_export_optimizer.py",
+      "backend/ai_modules/optimization/day12_model_export_manager.py"
+    ],
+    "_validate_and_benchmark_exports(self,export_results,validation_data)": [
+      "backend/ai_modules/optimization/day13_export_optimizer.py",
+      "backend/ai_modules/optimization/day12_model_export_manager.py"
+    ],
+    "analyze_results(self,results)": [
+      "backend/ai_modules/optimization/vtracer_test.py",
+      "backend/ai_modules/testing/statistical_analysis.py"
+    ],
+    "_validate_overall_performance(self,model,test_examples)": [
+      "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+      "backend/ai_modules/optimization/day12_model_validator.py"
+    ],
+    "_validate_by_logo_type(self,model,test_examples)": [
+      "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+      "backend/ai_modules/optimization/day12_model_validator.py"
+    ],
+    "_assess_export_readiness(self,validation_results)": [
+      "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+      "backend/ai_modules/optimization/day12_model_validator.py"
+    ],
+    "__init__(self,db)": [
+      "backend/ai_modules/optimization/system_monitoring_analytics.py",
+      "backend/ai_modules/optimization/system_monitoring_analytics.py",
+      "backend/ai_modules/optimization/system_monitoring_analytics.py"
+    ],
+    "record_api_request(self,response_time,error)": [
+      "backend/ai_modules/optimization/system_monitoring_analytics.py",
+      "backend/ai_modules/optimization/system_monitoring_analytics.py"
+    ],
+    "_evaluate_config(self,config,objective_function,trial_id)": [
+      "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+      "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py"
+    ],
+    "add_milestone(self,milestone)": [
+      "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+      "backend/ai_modules/optimization/stage1_monitoring_dashboard.py"
+    ],
+    "add_alert(self,alert)": [
+      "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+      "backend/ai_modules/optimization/stage1_monitoring_dashboard.py"
+    ],
+    "_predict_impl(self,features,parameters)": [
+      "backend/ai_modules/prediction/quality_predictor.py",
+      "backend/ai_modules/prediction/base_predictor.py"
+    ],
+    "_ensure_loaded(self)": [
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/profiler.py"
+    ],
+    "__getattr__(self,name)": [
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/profiler.py"
+    ],
+    "__call__(self)": [
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/profiler.py"
+    ],
+    "start(self)": [
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/request_queue.py",
+      "backend/ai_modules/utils/request_queue.py"
+    ],
+    "__init__(self,model_manager)": [
+      "backend/ai_modules/inference/optimized_quality_predictor.py",
+      "backend/ai_modules/routing/hybrid_intelligent_router.py"
+    ],
+    "validate_speed_priority(cls,v)": [
+      "backend/api/optimization_api.py",
+      "backend/api/unified_optimization_api.py"
+    ],
+    "validate_optimization_method(cls,v)": [
+      "backend/api/optimization_api.py",
+      "backend/api/unified_optimization_api.py"
+    ]
+  },
+  "largest_files": [
+    {
+      "path": "backend/ai_modules/optimization/production_deployment_package.py",
+      "lines": 1805
+    },
+    {
+      "path": "backend/ai_modules/optimization/day12_model_export_manager.py",
+      "lines": 1721
+    },
+    {
+      "path": "backend/ai_modules/optimization/quality_validator.py",
+      "lines": 1610
+    },
+    {
+      "path": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+      "lines": 1544
+    },
+    {
+      "path": "backend/ai_modules/optimization/day13_deployment_packager.py",
+      "lines": 1519
+    },
+    {
+      "path": "backend/ai_modules/classification/hybrid_classifier.py",
+      "lines": 1380
+    },
+    {
+      "path": "backend/ai_modules/optimization/training_visualizer.py",
+      "lines": 1323
+    },
+    {
+      "path": "backend/ai_modules/optimization/day12_model_validator.py",
+      "lines": 1307
+    },
+    {
+      "path": "backend/ai_modules/optimization/intelligent_router.py",
+      "lines": 1241
+    },
+    {
+      "path": "backend/ai_modules/optimization/day13_export_optimizer.py",
+      "lines": 1225
+    }
+  ],
+  "least_used_files": [
+    {
+      "path": "backend/converters/__init__.py",
+      "score": 0.0,
+      "lines": 0
+    },
+    {
+      "path": "backend/utils/__init__.py",
+      "score": 0.0,
+      "lines": 0
+    },
+    {
+      "path": "backend/__init__.py",
+      "score": 0.08,
+      "lines": 8
+    },
+    {
+      "path": "backend/ai_modules/training/__init__.py",
+      "score": 0.08,
+      "lines": 8
+    },
+    {
+      "path": "backend/ai_modules/prediction/__init__.py",
+      "score": 0.08,
+      "lines": 8
+    },
+    {
+      "path": "backend/ai_modules/classification/__init__.py",
+      "score": 0.09,
+      "lines": 9
+    },
+    {
+      "path": "backend/ai_modules/routing/__init__.py",
+      "score": 1.07,
+      "lines": 7
+    },
+    {
+      "path": "backend/ai_modules/pipeline/__init__.py",
+      "score": 1.1,
+      "lines": 10
+    },
+    {
+      "path": "backend/config.py",
+      "score": 1.3,
+      "lines": 30
+    },
+    {
+      "path": "backend/ai_modules/testing/__init__.py",
+      "score": 3.07,
+      "lines": 7
+    }
+  ],
+  "circular_dependencies": [
+    [
+      "backend/ai_modules/utils/request_queue.py"
+    ]
+  ],
+  "recommendations": [
+    "Remove 85 unused files",
+    "Consolidate 211 duplicate functions",
+    "Resolve 1 circular dependencies",
+    "Consider refactoring 5 large files (>500 lines)"
+  ],
+  "error_files": []
+}

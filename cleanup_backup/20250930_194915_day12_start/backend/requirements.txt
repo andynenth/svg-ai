@@ -1,0 +1,21 @@
+# Backend Dependencies for SVG-AI Converter
+
+# Web Framework
+flask==3.0.0
+flask-cors==4.0.0
+werkzeug==3.0.0
+
+# Image Processing
+Pillow==10.2.0
+numpy==1.26.4
+
+# SVG Conversion
+vtracer==0.6.11
+cairosvg==2.7.1
+
+# Quality Metrics
+scikit-image==0.24.0
+scipy==1.13.1
+
+# Utilities
+python-multipart==0.0.6

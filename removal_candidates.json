@@ -1,0 +1,3968 @@
+[
+  {
+    "file": "backend/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/base_ai_converter.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/logo_classifier.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/feature_pipeline.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/management/memory_monitor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/management/model_cache.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/action_mapping.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_old.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_rollout.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_visualizer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_export_manager.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_validator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/deployment_readiness_validator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feedback_integrator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_optimizer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/online_learner.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/optimization_logger.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/parameter_tuner.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_metrics.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_validator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/rl_optimizer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_training_executor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/task_12_2_master_pipeline.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/test_enhanced_router_system.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tests/optimization/test_feature_mapping_optimizer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_execution_engine.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_monitor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_orchestrator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_pipeline.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_visualizer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/validation_framework.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/validator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/pipeline_config.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/pipeline_monitor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/model_utils.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/quality_predictor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/production_readiness.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/ab_testing.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/realtime_monitor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/adaptive_router.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/complexity_analyzer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/intelligent_tier_selector.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/routing_analytics.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/routing_config.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier_refactored.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/report_generator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/test_orchestrator.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/training/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/training/logo_dataset.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/lazy_loader.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/parallel_processor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/performance_monitor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/api/monitoring_api.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/api/optimization_api.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/api/unified_optimization_api.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/config.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/intelligent_converter.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/mock_converter.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/integration/tier4_pipeline_integration.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/__init__.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/cache.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/error_messages.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/image_loader.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/metrics.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/parameter_cache.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/preprocessor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/svg_optimizer.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/svg_post_processor.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/visual_compare.py",
+    "priority": 1,
+    "reason": "No imports or references found",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/advanced_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/analytics_dashboard.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/base_ai_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/base_ai_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cache_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/cached_components.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/base_feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/base_feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/base_feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/base_feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/base_feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/efficientnet_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/efficientnet_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/efficientnet_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/efficientnet_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/visual_compare.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_extraction.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_extraction.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_extraction.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_extraction.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_extraction.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/feature_extractor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/base_feature_extractor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/hybrid_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/logo_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/statistical_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/statistical_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_extraction.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/statistical_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/statistical_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/statistical_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/statistical_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/classification/statistical_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/database_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/database_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/feature_extraction.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/visual_compare.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/feature_extraction.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/feature_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/feature_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/management/memory_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/management/model_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/management/model_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/management/model_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/quality_prediction_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/action_mapping.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/adaptive_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/adaptive_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/adaptive_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/adaptive_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/enhanced_metrics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/agent_interface.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/base_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/base_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/base_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/base_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/feature_mapping.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/checkpoint_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/colab_persistence_manager.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/colab_persistence_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/colab_persistence_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/training_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/colab_training_visualization.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/colab_training_visualization.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/correlation_formulas.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/correlation_formulas.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/correlation_formulas.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/correlation_formulas.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/correlation_formulas.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/correlation_formulas.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/correlation_formulas.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_rollout.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_rollout.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_rollout.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/performance_profiler.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_model_architecture.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/training_orchestrator.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day12_training_visualization.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_export_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day13_export_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_export_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day13_export_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_model_validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day12_gpu_training_executor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day12_training_visualization.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_deployment_packager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_package.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_export_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_export_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_model_architecture.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_export_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day13_performance_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_model_architecture.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/day13_performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_model_architecture.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/deployment_readiness_validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/color_detector.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/end_to_end_validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/end_to_end_validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/production_readiness.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/end_to_end_validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/end_to_end_validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/ab_testing.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/end_to_end_validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/performance_testing_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/parameter_router.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_router_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_router_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_router_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_router_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_router_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/enhanced_router_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_router_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/enhanced_router_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/enhanced_router_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/enhanced_router_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/error_handler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/error_handler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/error_handler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/export_validation_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/export_validation_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/export_validation_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/export_validation_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/local_inference_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feature_mapping.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feature_mapping.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feature_mapping_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feature_mapping_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feature_mapping_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/enhanced_metrics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/feedback_integrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/gpu_model_architecture.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/gpu_model_architecture.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parameter_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/statistical_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_correlations.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_correlations.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_correlations.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_correlations.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/validator.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_correlations.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/color_detector.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/learned_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_inference_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_inference_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_inference_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_inference_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_inference_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_inference_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_model_architecture.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_model_architecture.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/local_integration_tester.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_model_architecture.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/model_export_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/online_learner.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/online_learner.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/training_orchestrator.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/optimization_logger.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/optimization_logger.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/training_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/parameter_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/parameter_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/performance_profiler.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/enhanced_metrics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_testing_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_testing_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_testing_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_testing_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_testing_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_testing_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/performance_testing_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/real_time_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/production_deployment_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/production_deployment_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/production_deployment_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/production_deployment_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/production_deployment_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/production_deployment_package.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_prediction_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/intelligent_router.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/quality_validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/real_time_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/real_time_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/real_time_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/realtime_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/real_time_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/training_orchestrator.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/real_time_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/real_time_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/refined_correlation_formulas.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/refined_correlation_formulas.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/regression_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/resource_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/resource_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/resource_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/resource_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/resource_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/resource_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/resource_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/training_orchestrator.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/reward_functions.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/rl_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/rl_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/feature_mapping.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/spatial_analysis.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/training_orchestrator.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day12_training_visualization.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/real_time_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/day12_training_visualization.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/stage1_training_executor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/validation_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/color_detector.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/statistical_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/statistical_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/feature_mapping.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/quality_tracker.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/system_monitoring_analytics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/task_12_2_master_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/task_12_2_master_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/test_enhanced_router_system.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/test_enhanced_router_system.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/color_detector.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/intelligent_router.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/intelligent_router.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/parameter_router.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_data_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_data_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_execution_engine.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_execution_engine.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/ab_testing.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_visualizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_visualizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_visualizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_visualizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/training_visualizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/ab_testing.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/unified_prediction_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/unified_prediction_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/unified_prediction_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/unified_prediction_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/unified_prediction_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/unified_prediction_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/unified_prediction_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/validation_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/validation_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/validation_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_config.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/validator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_env.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_env.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/ppo_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_environment.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_environment.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_environment.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/vtracer_env.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_environment.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/vtracer_env.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_test.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_test.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimized_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimized_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/parameter_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/parameter_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/parameter_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/performance_profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/performance_profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/performance_profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/performance_profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/error_messages.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/performance_profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/performance_profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/parameter_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/parameter_optimizer.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/component_interfaces.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/pipeline_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parameter_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/pipeline_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/pipeline/unified_ai_pipeline.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/error_messages.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/base_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/base_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/base_ai_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/base_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/intelligent_router.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/base_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/prediction/quality_predictor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/intelligent_router.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/color_detector.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/logo_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/statistical_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/feature_mapping.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/statistical_parameter_predictor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/production_readiness.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/production_readiness.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/enhanced_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/enhanced_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/color_detector.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/enhanced_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/enhanced_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality_validator.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/enhanced_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/quality_tracker.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/quality/realtime_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/adaptive_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/complexity_analyzer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/complexity_analyzer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/enhanced_metrics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/hybrid_intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/hybrid_intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/hybrid_intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/component_interfaces.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/hybrid_intelligent_router.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/inference/optimized_quality_predictor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/intelligent_tier_selector.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parameter_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/routing_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parameter_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/routing_analytics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/routing/routing_config.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/production_deployment_framework.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/rule_based_classifier_refactored.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier_refactored.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/rule_based_classifier_refactored.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/feature_extraction.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/smart_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/smart_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/smart_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/smart_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/smart_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/smart_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/ab_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/ab_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/ab_framework.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/pipeline/pipeline_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/statistical_analysis.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/vtracer_test.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/test_orchestrator.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/visual_comparison.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/quality/ab_testing.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/training/logo_dataset.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/training/logo_dataset.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/gpu_training_pipeline.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/advanced_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/smart_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/smart_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/smart_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/cache_manager.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/smart_cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/lazy_loader.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/lazy_loader.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/lazy_loader.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/lazy_loader.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/lazy_loader.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/classification/hybrid_classifier.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/logging_config.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/model_adapter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/parallel_processor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/parallel_processor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/parallel_processor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/visual_compare.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/performance_monitor.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/performance_profiler.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/optimization/enhanced_performance_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/utils/lazy_loader.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/utils/lazy_loader.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/profiler.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/utils/lazy_loader.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/parallel_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cached_components.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/cache_monitor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/utils/lazy_loader.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/utils/request_queue.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/ai_modules/utils/lazy_loader.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/api/unified_optimization_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/api/optimization_api.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/api/unified_optimization_api.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/api/optimization_api.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/ai_enhanced_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/ai_enhanced_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/ai_enhanced_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/alpha_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/alpha_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/alpha_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/alpha_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/alpha_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/base.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/base.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/intelligent_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/mock_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/mock_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/mock_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/smart_auto_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/smart_auto_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/smart_auto_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/smart_potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/smart_potrace_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/vtracer_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/converters/vtracer_converter.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/smart_potrace_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/integration/tier4_pipeline_integration.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/integration/tier4_pipeline_integration.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/base.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/cache.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/color_detector.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/image_loader.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/parameter_cache.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/ai_enhanced_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/quality_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/quality_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/quality_metrics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/quality_metrics.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/quality_metrics.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/svg_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/svg_optimizer.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/svg_post_processor.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/validation.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/validation.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/visual_compare.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/converters/intelligent_converter.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/visual_compare.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/improved_visual_compare.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/utils/visual_compare.py",
+    "priority": 2,
+    "reason": "Duplicate of backend/utils/improved_visual_compare.py",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+    "priority": 3,
+    "reason": "Experimental, test, or backup file",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/correlation_formulas_old.py",
+    "priority": 3,
+    "reason": "Experimental, test, or backup file",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/test_enhanced_router_system.py",
+    "priority": 3,
+    "reason": "Experimental, test, or backup file",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/tests/optimization/test_feature_mapping_optimizer.py",
+    "priority": 3,
+    "reason": "Experimental, test, or backup file",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/optimization/vtracer_test.py",
+    "priority": 3,
+    "reason": "Experimental, test, or backup file",
+    "risk": "low"
+  },
+  {
+    "file": "backend/ai_modules/testing/test_orchestrator.py",
+    "priority": 3,
+    "reason": "Experimental, test, or backup file",
+    "risk": "low"
+  }
+]

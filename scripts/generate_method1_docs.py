@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     from backend.ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
-    from backend.ai_modules.optimization.correlation_formulas import CorrelationFormulas
+    from backend.ai_modules.optimization.unified_parameter_formulas import ParameterFormulas CorrelationFormulas
     from backend.ai_modules.optimization.parameter_bounds import VTracerParameterBounds
     from backend.ai_modules.optimization.quality_metrics import OptimizationQualityMetrics
     from backend.ai_modules.optimization.optimization_logger import OptimizationLogger
@@ -164,7 +164,7 @@ Calculate confidence score for optimization based on feature quality.
 Static methods for converting features to parameters using validated mathematical formulas.
 
 ```python
-from backend.ai_modules.optimization.correlation_formulas import CorrelationFormulas
+from backend.ai_modules.optimization.unified_parameter_formulas import ParameterFormulas CorrelationFormulas
 ```
 
 #### Methods

@@ -1,0 +1,980 @@
+{
+  "timestamp": "2025-09-30",
+  "current_file_count": 194,
+  "target_file_count": 15,
+  "reduction_target": 179,
+  "analysis": {
+    "current_count": 158,
+    "essential": [
+      {
+        "path": "backend/ai_modules/config.py",
+        "lines": 205,
+        "functions": 3,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/base_ai_converter.py",
+        "lines": 74,
+        "functions": 6,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/cache_monitor.py",
+        "lines": 486,
+        "functions": 26,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/classification/efficientnet_classifier_fixed.py",
+        "lines": 483,
+        "functions": 12,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/classification/base_feature_extractor.py",
+        "lines": 85,
+        "functions": 6,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/classification/logo_classifier.py",
+        "lines": 199,
+        "functions": 8,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/classification/feature_extractor.py",
+        "lines": 167,
+        "functions": 10,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/classification/rule_based_classifier.py",
+        "lines": 252,
+        "functions": 8,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/classification/efficientnet_classifier.py",
+        "lines": 274,
+        "functions": 7,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/quality/realtime_monitor.py",
+        "lines": 480,
+        "functions": 17,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/quality/quality_tracker.py",
+        "lines": 483,
+        "functions": 10,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/validator.py",
+        "lines": 355,
+        "functions": 11,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/colab_training_orchestrator.py",
+        "lines": 487,
+        "functions": 12,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/gpu_model_architecture.py",
+        "lines": 404,
+        "functions": 15,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/parameter_bounds.py",
+        "lines": 312,
+        "functions": 9,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/ppo_optimizer.py",
+        "lines": 460,
+        "functions": 18,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/feature_mapping.py",
+        "lines": 253,
+        "functions": 11,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/gpu_training_pipeline.py",
+        "lines": 483,
+        "functions": 20,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/optimization/base_optimizer.py",
+        "lines": 122,
+        "functions": 7,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/action_mapping.py",
+        "lines": 457,
+        "functions": 18,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/__init__.py",
+        "lines": 63,
+        "functions": 0,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/optimization/correlation_formulas.py",
+        "lines": 354,
+        "functions": 7,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/correlation_visualizer.py",
+        "lines": 299,
+        "functions": 7,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/colab_persistence_manager.py",
+        "lines": 439,
+        "functions": 13,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/feature_mapping_optimizer_v2.py",
+        "lines": 414,
+        "functions": 13,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/refined_correlation_formulas.py",
+        "lines": 461,
+        "functions": 11,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/vtracer_environment.py",
+        "lines": 329,
+        "functions": 17,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/regression_optimizer.py",
+        "lines": 368,
+        "functions": 8,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/feature_mapping_optimizer.py",
+        "lines": 480,
+        "functions": 7,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/agent_interface.py",
+        "lines": 376,
+        "functions": 11,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/unified_parameter_formulas.py",
+        "lines": 183,
+        "functions": 12,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/correlation_formulas_backup.py",
+        "lines": 354,
+        "functions": 7,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/correlation_formulas_old.py",
+        "lines": 313,
+        "functions": 10,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/rl_optimizer.py",
+        "lines": 228,
+        "functions": 9,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/colab_training_visualization.py",
+        "lines": 470,
+        "functions": 13,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/training/logo_dataset.py",
+        "lines": 261,
+        "functions": 9,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/prediction/model_utils.py",
+        "lines": 393,
+        "functions": 11,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/prediction/quality_predictor.py",
+        "lines": 278,
+        "functions": 9,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/prediction/base_predictor.py",
+        "lines": 149,
+        "functions": 7,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/management/production_model_manager.py",
+        "lines": 95,
+        "functions": 5,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/management/memory_monitor.py",
+        "lines": 54,
+        "functions": 3,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/management/model_cache.py",
+        "lines": 83,
+        "functions": 8,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/utils/parallel_processor.py",
+        "lines": 403,
+        "functions": 20,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/utils/logging_config.py",
+        "lines": 292,
+        "functions": 14,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/utils/lazy_loader.py",
+        "lines": 436,
+        "functions": 32,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/utils/cache_manager.py",
+        "lines": 304,
+        "functions": 24,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/utils/performance_monitor.py",
+        "lines": 213,
+        "functions": 16,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/utils/profiler.py",
+        "lines": 446,
+        "functions": 25,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/inference/optimized_quality_predictor.py",
+        "lines": 178,
+        "functions": 9,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/routing/hybrid_intelligent_router.py",
+        "lines": 441,
+        "functions": 17,
+        "classes": 3
+      }
+    ],
+    "can_merge": [
+      {
+        "path": "backend/ai_modules/__init__.py",
+        "lines": 24,
+        "functions": 1,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/classification/__init__.py",
+        "lines": 9,
+        "functions": 0,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/pipeline/__init__.py",
+        "lines": 10,
+        "functions": 0,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/training/__init__.py",
+        "lines": 8,
+        "functions": 0,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/prediction/__init__.py",
+        "lines": 8,
+        "functions": 0,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/utils/__init__.py",
+        "lines": 23,
+        "functions": 0,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/testing/__init__.py",
+        "lines": 7,
+        "functions": 0,
+        "classes": 0
+      },
+      {
+        "path": "backend/ai_modules/routing/__init__.py",
+        "lines": 7,
+        "functions": 0,
+        "classes": 0
+      }
+    ],
+    "can_remove": [
+      {
+        "path": "backend/ai_modules/quality/ab_testing.py",
+        "lines": 577,
+        "functions": 12,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/day13_integration_tester.py",
+        "lines": 728,
+        "functions": 21,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/test_enhanced_router_system.py",
+        "lines": 805,
+        "functions": 13,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/performance_testing_framework.py",
+        "lines": 891,
+        "functions": 31,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/local_integration_tester.py",
+        "lines": 902,
+        "functions": 29,
+        "classes": 8
+      },
+      {
+        "path": "backend/ai_modules/optimization/vtracer_test.py",
+        "lines": 387,
+        "functions": 11,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/tests/optimization/test_feature_mapping_optimizer.py",
+        "lines": 56,
+        "functions": 2,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/testing/test_orchestrator.py",
+        "lines": 764,
+        "functions": 14,
+        "classes": 3
+      }
+    ],
+    "needs_refactor": [
+      {
+        "path": "backend/ai_modules/production_readiness.py",
+        "lines": 1024,
+        "functions": 25,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/analytics_dashboard.py",
+        "lines": 516,
+        "functions": 21,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/cached_components.py",
+        "lines": 625,
+        "functions": 27,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/quality_validator.py",
+        "lines": 721,
+        "functions": 17,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/advanced_cache.py",
+        "lines": 749,
+        "functions": 60,
+        "classes": 8
+      },
+      {
+        "path": "backend/ai_modules/feature_extraction.py",
+        "lines": 1171,
+        "functions": 27,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/rule_based_classifier_refactored.py",
+        "lines": 689,
+        "functions": 26,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/database_cache.py",
+        "lines": 1070,
+        "functions": 46,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/parameter_optimizer.py",
+        "lines": 675,
+        "functions": 14,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/performance_profiler.py",
+        "lines": 614,
+        "functions": 29,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimized_pipeline.py",
+        "lines": 575,
+        "functions": 18,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/rule_based_classifier.py",
+        "lines": 991,
+        "functions": 20,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/smart_cache.py",
+        "lines": 719,
+        "functions": 33,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/feature_pipeline.py",
+        "lines": 537,
+        "functions": 15,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/classification/hybrid_classifier.py",
+        "lines": 1380,
+        "functions": 48,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/classification/statistical_classifier.py",
+        "lines": 547,
+        "functions": 16,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/pipeline/pipeline_monitor.py",
+        "lines": 696,
+        "functions": 17,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/pipeline/component_interfaces.py",
+        "lines": 834,
+        "functions": 47,
+        "classes": 18
+      },
+      {
+        "path": "backend/ai_modules/pipeline/pipeline_config.py",
+        "lines": 704,
+        "functions": 31,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/quality/enhanced_metrics.py",
+        "lines": 555,
+        "functions": 23,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/training_visualizer.py",
+        "lines": 1323,
+        "functions": 31,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/training_orchestrator.py",
+        "lines": 626,
+        "functions": 24,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/day13_performance_optimizer.py",
+        "lines": 868,
+        "functions": 21,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/optimization/enhanced_router_integration.py",
+        "lines": 537,
+        "functions": 24,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/day12_training_visualization.py",
+        "lines": 606,
+        "functions": 19,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/local_inference_optimizer.py",
+        "lines": 746,
+        "functions": 21,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/vtracer_env.py",
+        "lines": 618,
+        "functions": 17,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/production_deployment_framework.py",
+        "lines": 968,
+        "functions": 35,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/optimization/intelligent_router.py",
+        "lines": 1241,
+        "functions": 37,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/deployment_readiness_validator.py",
+        "lines": 701,
+        "functions": 13,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/training_execution_engine.py",
+        "lines": 805,
+        "functions": 10,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/validation_pipeline.py",
+        "lines": 648,
+        "functions": 10,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/parameter_router.py",
+        "lines": 1068,
+        "functions": 29,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/feedback_integrator.py",
+        "lines": 660,
+        "functions": 18,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/quality_metrics.py",
+        "lines": 571,
+        "functions": 12,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/online_learner.py",
+        "lines": 535,
+        "functions": 21,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/training_pipeline.py",
+        "lines": 694,
+        "functions": 25,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/export_validation_framework.py",
+        "lines": 850,
+        "functions": 24,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/correlation_analysis.py",
+        "lines": 635,
+        "functions": 14,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/validation_framework.py",
+        "lines": 741,
+        "functions": 24,
+        "classes": 7
+      },
+      {
+        "path": "backend/ai_modules/optimization/quality_validator.py",
+        "lines": 1610,
+        "functions": 29,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/statistical_parameter_predictor.py",
+        "lines": 607,
+        "functions": 15,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/enhanced_performance_monitor.py",
+        "lines": 842,
+        "functions": 28,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/model_export_pipeline.py",
+        "lines": 612,
+        "functions": 14,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/real_time_monitor.py",
+        "lines": 756,
+        "functions": 31,
+        "classes": 8
+      },
+      {
+        "path": "backend/ai_modules/optimization/stage1_training_executor.py",
+        "lines": 1102,
+        "functions": 27,
+        "classes": 9
+      },
+      {
+        "path": "backend/ai_modules/optimization/training_monitor.py",
+        "lines": 953,
+        "functions": 22,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/training_data_manager.py",
+        "lines": 735,
+        "functions": 21,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/unified_prediction_api.py",
+        "lines": 718,
+        "functions": 24,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/spatial_analysis.py",
+        "lines": 770,
+        "functions": 30,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/optimization/optimization_logger.py",
+        "lines": 720,
+        "functions": 20,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/enhanced_intelligent_router.py",
+        "lines": 1115,
+        "functions": 29,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/reward_functions.py",
+        "lines": 609,
+        "functions": 18,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/production_deployment_package.py",
+        "lines": 1805,
+        "functions": 28,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/resource_monitor.py",
+        "lines": 817,
+        "functions": 24,
+        "classes": 7
+      },
+      {
+        "path": "backend/ai_modules/optimization/learned_optimizer.py",
+        "lines": 511,
+        "functions": 14,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/tier4_system_orchestrator.py",
+        "lines": 1035,
+        "functions": 25,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/quality_prediction_cache.py",
+        "lines": 665,
+        "functions": 21,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/day13_deployment_packager.py",
+        "lines": 1519,
+        "functions": 23,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/quality_prediction_integration.py",
+        "lines": 756,
+        "functions": 33,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/error_handler.py",
+        "lines": 843,
+        "functions": 41,
+        "classes": 7
+      },
+      {
+        "path": "backend/ai_modules/optimization/cpu_performance_optimizer.py",
+        "lines": 580,
+        "functions": 31,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/day13_export_optimizer.py",
+        "lines": 1225,
+        "functions": 26,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/parameter_tuner.py",
+        "lines": 569,
+        "functions": 19,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/pattern_analyzer.py",
+        "lines": 543,
+        "functions": 18,
+        "classes": 4
+      },
+      {
+        "path": "backend/ai_modules/optimization/performance_optimizer.py",
+        "lines": 727,
+        "functions": 46,
+        "classes": 7
+      },
+      {
+        "path": "backend/ai_modules/optimization/regional_optimizer.py",
+        "lines": 605,
+        "functions": 17,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/end_to_end_validation.py",
+        "lines": 1166,
+        "functions": 30,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/optimization/day12_gpu_training_executor.py",
+        "lines": 1094,
+        "functions": 32,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/optimization/system_monitoring_analytics.py",
+        "lines": 1544,
+        "functions": 66,
+        "classes": 8
+      },
+      {
+        "path": "backend/ai_modules/optimization/task_12_2_master_pipeline.py",
+        "lines": 727,
+        "functions": 20,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/day12_model_export_manager.py",
+        "lines": 1721,
+        "functions": 48,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/optimization/day12_hyperparameter_optimizer.py",
+        "lines": 836,
+        "functions": 29,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/optimization/checkpoint_manager.py",
+        "lines": 636,
+        "functions": 27,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/optimization/day12_model_validator.py",
+        "lines": 1307,
+        "functions": 30,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/optimization/adaptive_optimizer.py",
+        "lines": 593,
+        "functions": 14,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/optimization/stage1_monitoring_dashboard.py",
+        "lines": 825,
+        "functions": 24,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/prediction/statistical_quality_predictor.py",
+        "lines": 687,
+        "functions": 17,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/utils/request_queue.py",
+        "lines": 513,
+        "functions": 29,
+        "classes": 6
+      },
+      {
+        "path": "backend/ai_modules/utils/model_adapter.py",
+        "lines": 539,
+        "functions": 13,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/testing/ab_framework.py",
+        "lines": 555,
+        "functions": 21,
+        "classes": 5
+      },
+      {
+        "path": "backend/ai_modules/testing/visual_comparison.py",
+        "lines": 759,
+        "functions": 17,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/testing/report_generator.py",
+        "lines": 805,
+        "functions": 12,
+        "classes": 1
+      },
+      {
+        "path": "backend/ai_modules/testing/statistical_analysis.py",
+        "lines": 735,
+        "functions": 19,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/routing/complexity_analyzer.py",
+        "lines": 737,
+        "functions": 17,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/routing/adaptive_router.py",
+        "lines": 653,
+        "functions": 19,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/routing/routing_config.py",
+        "lines": 632,
+        "functions": 22,
+        "classes": 3
+      },
+      {
+        "path": "backend/ai_modules/routing/intelligent_tier_selector.py",
+        "lines": 866,
+        "functions": 22,
+        "classes": 2
+      },
+      {
+        "path": "backend/ai_modules/routing/routing_analytics.py",
+        "lines": 810,
+        "functions": 22,
+        "classes": 3
+      }
+    ]
+  },
+  "merge_opportunities": [],
+  "final_structure": {
+    "backend/": {
+      "app.py": "Main FastAPI application",
+      "api/": {
+        "ai_endpoints.py": "All API endpoints"
+      },
+      "converters/": {
+        "ai_enhanced_converter.py": "Unified converter"
+      },
+      "ai_modules/": {
+        "classification.py": "Logo classification (merged)",
+        "optimization.py": "Parameter optimization (merged)",
+        "quality.py": "Quality metrics (merged)",
+        "pipeline.py": "Unified pipeline",
+        "utils.py": "All utilities (merged)"
+      }
+    },
+    "scripts/": {
+      "train_models.py": "Unified training script",
+      "benchmark.py": "Performance benchmarking",
+      "validate.py": "Validation script"
+    },
+    "tests/": {
+      "test_integration.py": "Integration tests",
+      "test_models.py": "Model tests",
+      "test_api.py": "API tests"
+    }
+  },
+  "recommendations": [
+    "Remove 8 test/demo files",
+    "Refactor 89 large files"
+  ]
+}

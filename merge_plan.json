@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Merge Classification Modules",
+    "target": "backend/ai_modules/classification.py",
+    "sources": [
+      "backend/ai_modules/classification/statistical_classifier.py",
+      "backend/ai_modules/classification/logo_classifier.py",
+      "backend/ai_modules/classification/feature_extractor.py",
+      "backend/ai_modules/classification/efficientnet_classifier.py",
+      "backend/ai_modules/classification/hybrid_classifier.py"
+    ],
+    "strategy": "Combine into single ClassificationModule class"
+  },
+  {
+    "name": "Merge Optimization Modules",
+    "target": "backend/ai_modules/optimization.py",
+    "sources": [
+      "backend/ai_modules/optimization/learned_optimizer.py",
+      "backend/ai_modules/optimization/parameter_tuner.py",
+      "backend/ai_modules/optimization/online_learner.py",
+      "backend/ai_modules/optimization/unified_parameter_formulas.py",
+      "backend/ai_modules/optimization/learned_correlations.py",
+      "backend/ai_modules/optimization/correlation_rollout.py"
+    ],
+    "strategy": "Create OptimizationEngine with all methods"
+  },
+  {
+    "name": "Merge Quality Modules",
+    "target": "backend/ai_modules/quality.py",
+    "sources": [
+      "backend/ai_modules/quality/enhanced_metrics.py",
+      "backend/ai_modules/quality/quality_tracker.py",
+      "backend/ai_modules/quality/ab_testing.py"
+    ],
+    "strategy": "Unified QualitySystem class"
+  },
+  {
+    "name": "Merge Utilities",
+    "target": "backend/ai_modules/utils.py",
+    "sources": [
+      "backend/ai_modules/utils/cache_manager.py",
+      "backend/ai_modules/utils/parallel_processor.py",
+      "backend/ai_modules/utils/lazy_loader.py",
+      "backend/ai_modules/utils/request_queue.py"
+    ],
+    "strategy": "Organize as utility submodules"
+  }
+]
