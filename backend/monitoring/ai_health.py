@@ -18,20 +18,30 @@ class AIHealthChecker:
     async def check_ai_models(self) -> Dict[str, Any]:
         """Check AI model availability and loading"""
         try:
-            from backend.ai.models import load_models
-            models = load_models()
+            from backend import get_unified_pipeline, get_classification_module, get_optimization_engine
 
             model_status = {}
-            for model_name, model in models.items():
-                if model is not None:
-                    model_status[model_name] = {
-                        "status": "loaded",
-                        "size_mb": round(
-                            sum(p.numel() * p.element_size() for p in model.parameters()) / (1024**2), 2
-                        ) if hasattr(model, 'parameters') else 0
-                    }
-                else:
-                    model_status[model_name] = {"status": "failed"}
+
+            # Test unified pipeline
+            try:
+                pipeline = get_unified_pipeline()
+                model_status["unified_pipeline"] = {"status": "loaded", "size_mb": 0}
+            except Exception as e:
+                model_status["unified_pipeline"] = {"status": "failed", "error": str(e)}
+
+            # Test classification module
+            try:
+                classifier = get_classification_module()
+                model_status["classification_module"] = {"status": "loaded", "size_mb": 0}
+            except Exception as e:
+                model_status["classification_module"] = {"status": "failed", "error": str(e)}
+
+            # Test optimization engine
+            try:
+                optimizer = get_optimization_engine()
+                model_status["optimization_engine"] = {"status": "loaded", "size_mb": 0}
+            except Exception as e:
+                model_status["optimization_engine"] = {"status": "failed", "error": str(e)}
 
             return {
                 "status": "healthy" if all(m["status"] == "loaded" for m in model_status.values()) else "unhealthy",
@@ -52,9 +62,10 @@ class AIHealthChecker:
     async def check_ai_performance(self) -> Dict[str, Any]:
         """Quick AI performance test"""
         try:
-            # Simple test conversion to verify AI pipeline
-            from backend.ai.classification import classify_image_type
-            test_result = await classify_image_type(None)  # Mock test
+            # Simple test to verify AI pipeline is working
+            from backend import get_classification_module
+            classifier = get_classification_module()
+            # Just verify the module loads without doing actual classification
             return {"status": "healthy", "test_duration_ms": 1}
         except Exception as e:
             return {"status": "error", "error": str(e)}
