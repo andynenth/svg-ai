@@ -116,9 +116,9 @@ class TestFullPipelineIntegration:
         start_time = time.time()
 
         try:
-            from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+            from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
-            converter = AIEnhancedSVGConverter(enable_ai=True, ai_timeout=10.0)
+            converter = AIEnhancedConverter(enable_ai=True, ai_timeout=10.0)
 
             # Test with detailed AI analysis
             result = converter.convert_with_ai_analysis(temp_png_file)
@@ -237,10 +237,10 @@ class TestAIEnhancementValidation:
             standard_result = standard_converter.convert_with_metrics(temp_png_file)
 
             try:
-                from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+                from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
                 # AI-enhanced conversion
-                ai_converter = AIEnhancedSVGConverter(enable_ai=True)
+                ai_converter = AIEnhancedConverter(enable_ai=True)
                 ai_result = ai_converter.convert_with_ai_analysis(temp_png_file)
 
                 # Compare results
@@ -296,9 +296,9 @@ class TestAIEnhancementValidation:
         start_time = time.time()
 
         try:
-            from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+            from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
-            converter = AIEnhancedSVGConverter(enable_ai=True)
+            converter = AIEnhancedConverter(enable_ai=True)
 
             # Test conversion with AI optimization
             result = converter.convert_with_ai_analysis(temp_png_file)
@@ -404,17 +404,17 @@ class TestErrorHandlingAndRecovery:
         start_time = time.time()
 
         try:
-            from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+            from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
             # Test with AI disabled
-            converter_disabled = AIEnhancedSVGConverter(enable_ai=False)
+            converter_disabled = AIEnhancedConverter(enable_ai=False)
             result_disabled = converter_disabled.convert_with_ai_analysis(temp_png_file)
 
             assert result_disabled['success'] is True
             assert result_disabled['ai_enhanced'] is False
 
             # Test with AI enabled but forced fallback
-            converter_enabled = AIEnhancedSVGConverter(enable_ai=True)
+            converter_enabled = AIEnhancedConverter(enable_ai=True)
             result_fallback = converter_enabled.convert(temp_png_file, ai_disable=True)
 
             assert result_fallback is not None

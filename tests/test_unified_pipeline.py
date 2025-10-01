@@ -372,10 +372,10 @@ class TestComponentIntegration:
     def test_adapter_functionality(self):
         """Test component adapters work correctly."""
         # Test feature extractor adapter
-        from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
+        from backend.ai_modules.classification import ClassificationModule
 
         try:
-            original_extractor = ImageFeatureExtractor()
+            original_extractor = ClassificationModule().feature_extractor()
             adapter = FeatureExtractorAdapter(original_extractor)
 
             assert hasattr(adapter, 'extract_features')

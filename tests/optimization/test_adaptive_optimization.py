@@ -26,7 +26,7 @@ from dataclasses import dataclass, asdict
 
 # Test imports (will be available after other agents complete their work)
 try:
-    from backend.ai_modules.optimization.adaptive_optimizer import AdaptiveOptimizer
+    from backend.ai_modules.optimization import OptimizationEngine
     from backend.ai_modules.optimization.spatial_analysis import SpatialComplexityAnalyzer
     from backend.ai_modules.optimization.regional_optimizer import RegionalParameterOptimizer
     ADAPTIVE_COMPONENTS_AVAILABLE = True
@@ -37,7 +37,7 @@ except ImportError:
     RegionalParameterOptimizer = Mock
     ADAPTIVE_COMPONENTS_AVAILABLE = False
 
-from backend.ai_modules.optimization.quality_metrics import OptimizationQualityMetrics
+from backend.ai_modules.optimization import OptimizationEngine
 from backend.utils.metrics import ConversionMetrics
 from backend.utils.image_utils import ImageUtils
 
@@ -76,7 +76,7 @@ class AdaptiveOptimizationTestSuite:
     def __init__(self):
         """Initialize test suite with mock or real components"""
         if ADAPTIVE_COMPONENTS_AVAILABLE:
-            self.optimizer = AdaptiveOptimizer()
+            self.optimizer = OptimizationEngine()
             self.spatial_analyzer = SpatialComplexityAnalyzer()
             self.regional_optimizer = RegionalParameterOptimizer()
         else:
@@ -85,7 +85,7 @@ class AdaptiveOptimizationTestSuite:
             self.spatial_analyzer = Mock()
             self.regional_optimizer = Mock()
 
-        self.quality_metrics = OptimizationQualityMetrics()
+        self.quality_metrics = OptimizationEngine()
         self.test_images = self._load_test_dataset()
         self.baseline_results = {}
         self.test_results = {}

@@ -17,21 +17,21 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from backend.ai_modules.base_ai_converter import BaseAIConverter
-from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
-from backend.ai_modules.classification.rule_based_classifier import RuleBasedClassifier
-from backend.ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.optimization import OptimizationEngine
 from backend.ai_modules.prediction.quality_predictor import QualityPredictor
-from backend.ai_modules.utils.performance_monitor import performance_monitor
-from backend.ai_modules.utils.logging_config import setup_ai_logging, get_ai_logger
+from backend.ai_modules.utils_old.performance_monitor import performance_monitor
+from backend.ai_modules.utils_old.logging_config import setup_ai_logging, get_ai_logger
 
 class MockAIConverter(BaseAIConverter):
     """Mock AI converter for comprehensive integration testing"""
 
     def __init__(self):
         super().__init__("Comprehensive Test AI Converter")
-        self.feature_extractor = ImageFeatureExtractor()
-        self.classifier = RuleBasedClassifier()
-        self.optimizer = FeatureMappingOptimizer()
+        self.feature_extractor = ClassificationModule().feature_extractor()
+        self.classifier = ClassificationModule()
+        self.optimizer = OptimizationEngine()
         self.predictor = QualityPredictor()
         self.logger = get_ai_logger("integration.test")
 

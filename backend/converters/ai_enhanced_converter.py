@@ -70,21 +70,33 @@ class AIEnhancedConverter(BaseConverter):
             if not Path(image_path).exists():
                 raise FileNotFoundError(f"Image file not found: {image_path}")
 
-            # Extract or retrieve cached features
-            features = self._get_features_with_cache(image_path)
+            # Check if explicit parameters are provided
+            explicit_parameters = kwargs.pop('parameters', None)
 
-            # Get optimization result with caching
-            optimization_result = self._get_optimization_with_cache(features, image_path)
+            if explicit_parameters is not None:
+                # Use provided parameters directly
+                parameters = explicit_parameters
+                features = self._get_features_with_cache(image_path)
+            else:
+                # Extract or retrieve cached features
+                features = self._get_features_with_cache(image_path)
+
+                # Get optimization result with caching
+                optimization_result = self._get_optimization_with_cache(features, image_path)
+                parameters = optimization_result['parameters']
 
             # Apply optimized parameters for conversion
             svg_content = self._convert_with_optimized_params(
                 image_path,
-                optimization_result['parameters'],
+                parameters,
                 **kwargs
             )
 
             # Track conversion results
             conversion_time = time.time() - start_time
+            if explicit_parameters is not None:
+                # Create dummy optimization result for tracking
+                optimization_result = {'parameters': parameters}
             self._track_conversion_result(
                 image_path, features, optimization_result,
                 conversion_time, svg_content, **kwargs

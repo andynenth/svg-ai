@@ -19,7 +19,7 @@ import numpy as np
 from PIL import Image
 
 # System under test
-from backend.ai_modules.optimization.tier4_system_orchestrator import (
+from backend.ai_modules.optimization_old.tier4_system_orchestrator import (
     Tier4SystemOrchestrator,
     create_4tier_orchestrator,
     OptimizationTier
@@ -697,7 +697,7 @@ class PerformanceProfiler:
 # Extension methods for orchestrator testing
 def _create_test_context(self, image_path: str):
     """Create test execution context"""
-    from backend.ai_modules.optimization.tier4_system_orchestrator import SystemExecutionContext
+    from backend.ai_modules.optimization_old.tier4_system_orchestrator import SystemExecutionContext
     import uuid
 
     return SystemExecutionContext(

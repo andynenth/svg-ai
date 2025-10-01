@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "import_time_ok": false,
+    "conversion_speed_ok": false,
+    "memory_ok": true,
+    "batch_ok": true
+  },
+  "details": {
+    "import_time": 12.261847237,
+    "conversion_times": {
+      "simple": {
+        "mean": 2.0453707575999998,
+        "min": 1.2353809730000016,
+        "max": 3.3727025389999987,
+        "std": 0.9704277637196366
+      },
+      "text": {
+        "mean": 0.7082404178000005,
+        "min": 0.5884887320000018,
+        "max": 0.9642947829999997,
+        "std": 0.1611971889858794
+      },
+      "gradient": {
+        "mean": 1.8722616024000012,
+        "min": 1.352193482000004,
+        "max": 2.6251354460000016,
+        "std": 0.4859747910329841
+      },
+      "complex": {
+        "mean": 1.0814281572000013,
+        "min": 0.9322240999999991,
+        "max": 1.377624908999998,
+        "std": 0.1790245692878359
+      }
+    },
+    "memory_usage": {
+      "baseline_mb": 275.16015625,
+      "peak_mb": 274.52734375,
+      "used_mb": -0.6328125
+    },
+    "batch_processing": {
+      "single_threaded": 0.031234025955200195,
+      "parallel": 0.014692068099975586,
+      "speedup": 2.1259107800658845
+    }
+  },
+  "recommendations": [
+    "Optimize import time - consider lazy imports"
+  ]
+}

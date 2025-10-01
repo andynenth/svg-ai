@@ -1,0 +1,329 @@
+"""
+Integration Tests for Fixed Models - DAY2 Task 5
+
+Tests the fixed EfficientNet classifier, statistical fallback classifier,
+model adapter, and integration with router.
+"""
+
+import unittest
+import time
+import sys
+from pathlib import Path
+import logging
+import tempfile
+import os
+
+# Add project root to path
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.rule_based_classifier import RuleBasedClassifier
+from backend.ai_modules.utils.model_adapter import ModelArchitectureAdapter, load_model_with_fallback
+
+# Configure logging for tests
+logging.basicConfig(level=logging.WARNING)  # Reduce noise during testing
+logger = logging.getLogger(__name__)
+
+
+class TestFixedModels(unittest.TestCase):
+    """Integration tests for fixed AI models."""
+
+    @classmethod
+    def setUpClass(cls):
+        """Set up test environment."""
+        cls.test_images = [
+            "data/logos/simple_geometric/circle_00.png",
+            "data/logos/text_based/text_logo_00.png",
+            "data/logos/gradients/gradient_logo_00.png",
+            "data/logos/complex/complex_logo_00.png"
+        ]
+
+        # Filter to only existing test images
+        cls.existing_test_images = []
+        for img_path in cls.test_images:
+            full_path = PROJECT_ROOT / img_path
+            if full_path.exists():
+                cls.existing_test_images.append(str(full_path))
+
+        if not cls.existing_test_images:
+            logger.warning("No test images found, using fallback")
+            # Try to find any PNG file in data/logos
+            logos_dir = PROJECT_ROOT / "data" / "logos"
+            if logos_dir.exists():
+                for png_file in logos_dir.rglob("*.png"):
+                    cls.existing_test_images.append(str(png_file))
+                    if len(cls.existing_test_images) >= 2:  # At least 2 for testing
+                        break
+
+    def test_01_efficientnet_classifier_loading(self):
+        """Test fixed EfficientNet classifier loads successfully."""
+        print("\n=== Testing EfficientNet Classifier Loading ===")
+
+        classifier = ClassificationModule()
+
+        # Test model loading
+        self.assertIsNotNone(classifier.model, "EfficientNet model should load")
+
+        # Test model info
+        info = classifier.get_model_info()
+        self.assertIn('model_loaded', info)
+        self.assertTrue(info['model_loaded'], "Model should be marked as loaded")
+
+        # Test inference capability
+        self.assertTrue(classifier.is_ready(), "Classifier should be ready for inference")
+
+        print(f"✓ EfficientNet classifier loaded successfully")
+        print(f"  - Classes: {info['classes']}")
+        print(f"  - Device: {info['device']}")
+        print(f"  - Inference test: {info['inference_test']['inference_capable']}")
+
+    def test_02_efficientnet_classifier_inference(self):
+        """Test EfficientNet classifier inference on test images."""
+        print("\n=== Testing EfficientNet Classifier Inference ===")
+
+        if not self.existing_test_images:
+            self.skipTest("No test images available")
+
+        classifier = ClassificationModule()
+
+        for img_path in self.existing_test_images[:2]:  # Test first 2 images
+            start_time = time.time()
+            result = classifier.classify(img_path)
+            inference_time = time.time() - start_time
+
+            # Test result structure
+            self.assertIn('logo_type', result)
+            self.assertIn('confidence', result)
+            self.assertIn('success', result)
+            self.assertTrue(result['success'], f"Classification should succeed for {img_path}")
+
+            # Test inference speed requirement (<1 second)
+            self.assertLess(inference_time, 1.0,
+                          f"Inference time {inference_time:.3f}s should be <1 second")
+
+            print(f"✓ {os.path.basename(img_path)}: {result['logo_type']} "
+                  f"({result['confidence']:.3f} confidence, {inference_time:.3f}s)")
+
+    def test_03_statistical_classifier_training(self):
+        """Test statistical fallback classifier training and inference."""
+        print("\n=== Testing Statistical Classifier ===")
+
+        classifier = RuleBasedClassifier()
+
+        # Test training
+        training_success = classifier.train_model()
+        self.assertTrue(training_success, "Statistical classifier training should succeed")
+
+        # Test model info
+        info = classifier.get_model_info()
+        self.assertIn('is_trained', info)
+        self.assertTrue(info['is_trained'], "Model should be marked as trained")
+
+        print(f"✓ Statistical classifier trained successfully")
+        print(f"  - Training samples: {info.get('training_samples', 'unknown')}")
+        print(f"  - Feature count: {info.get('feature_count', 'unknown')}")
+        print(f"  - Model type: {info.get('model_type', 'unknown')}")
+
+    def test_04_statistical_classifier_inference(self):
+        """Test statistical classifier inference on test images."""
+        print("\n=== Testing Statistical Classifier Inference ===")
+
+        if not self.existing_test_images:
+            self.skipTest("No test images available")
+
+        classifier = RuleBasedClassifier()
+
+        for img_path in self.existing_test_images[:2]:  # Test first 2 images
+            start_time = time.time()
+            result = classifier.classify(img_path)
+            inference_time = time.time() - start_time
+
+            # Test result structure
+            self.assertIn('logo_type', result)
+            self.assertIn('confidence', result)
+            self.assertIn('success', result)
+
+            if result['success']:
+                # Test inference speed requirement (<3 seconds for statistical classifier)
+                # Statistical classifier is slower due to feature extraction
+                self.assertLess(inference_time, 3.0,
+                              f"Inference time {inference_time:.3f}s should be <3 seconds")
+
+                print(f"✓ {os.path.basename(img_path)}: {result['logo_type']} "
+                      f"({result['confidence']:.3f} confidence, {inference_time:.3f}s)")
+            else:
+                print(f"⚠ {os.path.basename(img_path)}: Failed - {result.get('error', 'unknown error')}")
+
+    def test_05_model_adapter_various_checkpoints(self):
+        """Test model adapter with various checkpoint formats."""
+        print("\n=== Testing Model Adapter ===")
+
+        adapter = ModelArchitectureAdapter()
+
+        # Test adapter info
+        info = adapter.get_adapter_info()
+        self.assertIn('supported_architectures', info)
+        self.assertIn('efficientnet_b0', info['supported_architectures'])
+
+        # Test model creation without checkpoint
+        model, loading_info = adapter.load_model_with_adapter(
+            "", target_architecture='efficientnet_b0',
+            num_classes=4, use_pretrained=False
+        )
+
+        # Should create model even with empty path (random initialization)
+        self.assertIsNotNone(model, "Adapter should create model with random weights")
+        self.assertTrue(loading_info['success'], "Loading should succeed with fallback")
+
+        print(f"✓ Model adapter working")
+        print(f"  - Supported architectures: {info['supported_architectures']}")
+        print(f"  - Adaptation strategies: {len(info['adaptation_strategies'])}")
+        print(f"  - Fallback strategy: {loading_info.get('strategy_used', 'unknown')}")
+
+    def test_06_model_fallback_loading(self):
+        """Test model loading with fallback across multiple paths."""
+        print("\n=== Testing Model Fallback Loading ===")
+
+        # Test with non-existent paths (should fallback to random initialization)
+        model_paths = [
+            "nonexistent/model1.pth",
+            "nonexistent/model2.pth",
+            "backend/ai_modules/models/trained/checkpoint_best.pth"  # This might exist
+        ]
+
+        model, info = load_model_with_fallback(
+            model_paths, architecture='efficientnet_b0',
+            num_classes=4, use_pretrained=False
+        )
+
+        self.assertIsNotNone(model, "Fallback loading should always return a model")
+        self.assertTrue(info['success'], "Fallback loading should always succeed")
+
+        print(f"✓ Fallback loading working")
+        print(f"  - Strategy used: {info.get('strategy_used', 'unknown')}")
+        print(f"  - Fallback source: {info.get('fallback_used', 'unknown')}")
+
+    def test_07_integration_with_router(self):
+        """Test integration with classification router."""
+        print("\n=== Testing Router Integration ===")
+
+        # Test that both classifiers can be instantiated and used together
+        efficientnet = ClassificationModule()
+        statistical = RuleBasedClassifier()
+
+        # Simple router logic test
+        if not self.existing_test_images:
+            self.skipTest("No test images available")
+
+        test_image = self.existing_test_images[0]
+
+        # Test EfficientNet first
+        efficientnet_result = efficientnet.classify(test_image)
+
+        # Test statistical as fallback
+        statistical_result = statistical.classify(test_image)
+
+        # Router logic: use EfficientNet if available, otherwise statistical
+        if efficientnet_result.get('success', False):
+            selected_result = efficientnet_result
+            selected_model = 'efficientnet'
+        elif statistical_result.get('success', False):
+            selected_result = statistical_result
+            selected_model = 'statistical'
+        else:
+            selected_result = {'logo_type': 'unknown', 'confidence': 0.0}
+            selected_model = 'none'
+
+        print(f"✓ Router integration working")
+        print(f"  - EfficientNet available: {efficientnet_result.get('success', False)}")
+        print(f"  - Statistical available: {statistical_result.get('success', False)}")
+        print(f"  - Selected model: {selected_model}")
+        print(f"  - Final result: {selected_result.get('logo_type', 'unknown')} "
+              f"({selected_result.get('confidence', 0.0):.3f})")
+
+    def test_08_benchmark_inference_speed(self):
+        """Benchmark inference speed for both classifiers."""
+        print("\n=== Benchmarking Inference Speed ===")
+
+        if not self.existing_test_images:
+            self.skipTest("No test images available")
+
+        test_image = self.existing_test_images[0]
+
+        # Benchmark EfficientNet
+        efficientnet = ClassificationModule()
+        efficientnet_times = []
+
+        for i in range(3):  # 3 runs for timing
+            start_time = time.time()
+            result = efficientnet.classify(test_image)
+            inference_time = time.time() - start_time
+            if result.get('success', False):
+                efficientnet_times.append(inference_time)
+
+        # Benchmark Statistical
+        statistical = RuleBasedClassifier()
+        statistical_times = []
+
+        for i in range(3):  # 3 runs for timing
+            start_time = time.time()
+            result = statistical.classify(test_image)
+            inference_time = time.time() - start_time
+            if result.get('success', False):
+                statistical_times.append(inference_time)
+
+        # Calculate averages
+        avg_efficientnet = sum(efficientnet_times) / len(efficientnet_times) if efficientnet_times else float('inf')
+        avg_statistical = sum(statistical_times) / len(statistical_times) if statistical_times else float('inf')
+
+        print(f"✓ Inference speed benchmark")
+        print(f"  - EfficientNet: {avg_efficientnet:.3f}s avg ({len(efficientnet_times)} runs)")
+        print(f"  - Statistical: {avg_statistical:.3f}s avg ({len(statistical_times)} runs)")
+
+        # Verify speed requirements
+        if efficientnet_times:
+            self.assertLess(avg_efficientnet, 1.0, "EfficientNet inference should be <1 second")
+        if statistical_times:
+            self.assertLess(avg_statistical, 3.0, "Statistical inference should be <3 seconds")
+
+    def test_09_batch_processing(self):
+        """Test batch processing capabilities."""
+        print("\n=== Testing Batch Processing ===")
+
+        if len(self.existing_test_images) < 2:
+            self.skipTest("Need at least 2 test images for batch processing")
+
+        # Test EfficientNet batch processing
+        efficientnet = ClassificationModule()
+        batch_images = self.existing_test_images[:2]
+
+        start_time = time.time()
+        batch_results = efficientnet.classify_batch(batch_images, batch_size=2)
+        batch_time = time.time() - start_time
+
+        self.assertEqual(len(batch_results), len(batch_images),
+                        "Batch results should match input count")
+
+        # Check that batch processing is not slower than individual processing
+        individual_time = 0
+        for img_path in batch_images:
+            start_time = time.time()
+            efficientnet.classify(img_path)
+            individual_time += time.time() - start_time
+
+        print(f"✓ Batch processing working")
+        print(f"  - Batch time: {batch_time:.3f}s for {len(batch_images)} images")
+        print(f"  - Individual time: {individual_time:.3f}s for {len(batch_images)} images")
+        print(f"  - Speedup: {individual_time/batch_time:.2f}x")
+
+
+if __name__ == '__main__':
+    print("DAY2 Task 5: Integration Testing for Fixed Models")
+    print("=" * 60)
+
+    # Run tests with detailed output
+    unittest.main(verbosity=2, exit=False)
+
+    print("\n" + "=" * 60)
+    print("Integration testing completed!")

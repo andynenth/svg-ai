@@ -5,7 +5,7 @@ import shutil
 import json
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
-from backend.ai_modules.optimization.validation_pipeline import (
+from backend.ai_modules.optimization_old.validation_pipeline import (
     Method1ValidationPipeline,
     ValidationResult
 )

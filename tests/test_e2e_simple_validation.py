@@ -109,10 +109,10 @@ def test_ai_enhanced_converter_availability():
     start_time = time.time()
 
     try:
-        from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+        from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
         # Test initialization
-        converter = AIEnhancedSVGConverter(enable_ai=True, ai_timeout=5.0)
+        converter = AIEnhancedConverter(enable_ai=True, ai_timeout=5.0)
         assert converter is not None
 
         # Test basic conversion (may fallback to standard)

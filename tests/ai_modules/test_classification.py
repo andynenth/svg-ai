@@ -3,15 +3,15 @@
 
 import unittest
 import numpy as np
-from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
-from backend.ai_modules.classification.logo_classifier import LogoClassifier
-from backend.ai_modules.classification.rule_based_classifier import RuleBasedClassifier
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.classification import ClassificationModule
 
 class TestImageFeatureExtractor(unittest.TestCase):
     """Test ImageFeatureExtractor class"""
 
     def setUp(self):
-        self.extractor = ImageFeatureExtractor(cache_enabled=True)
+        self.extractor = ClassificationModule().feature_extractor(cache_enabled=True)
 
     def test_initialization(self):
         """Test extractor initialization"""
@@ -53,7 +53,7 @@ class TestLogoClassifier(unittest.TestCase):
     """Test LogoClassifier class"""
 
     def setUp(self):
-        self.classifier = LogoClassifier()
+        self.classifier = ClassificationModule()
 
     def test_initialization(self):
         """Test classifier initialization"""
@@ -111,7 +111,7 @@ class TestRuleBasedClassifier(unittest.TestCase):
     """Test RuleBasedClassifier class"""
 
     def setUp(self):
-        self.classifier = RuleBasedClassifier()
+        self.classifier = ClassificationModule()
 
     def test_initialization(self):
         """Test classifier initialization"""

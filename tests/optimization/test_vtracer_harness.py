@@ -4,8 +4,8 @@ import tempfile
 import json
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
-from backend.ai_modules.optimization.vtracer_test import VTracerTestHarness
-from backend.ai_modules.optimization.parameter_bounds import VTracerParameterBounds
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
 
 
 class TestVTracerTestHarness:
@@ -13,11 +13,11 @@ class TestVTracerTestHarness:
 
     def setup_method(self):
         """Setup for each test"""
-        self.harness = VTracerTestHarness(timeout=10)
+        self.harness = OptimizationEngine()(timeout=10)
 
     def test_initialization(self):
         """Test harness initialization"""
-        harness = VTracerTestHarness(timeout=15)
+        harness = OptimizationEngine()(timeout=15)
         assert harness.timeout == 15
         assert harness.results_cache == {}
         assert harness.validator is not None
@@ -95,7 +95,7 @@ class TestVTracerTestHarness:
         mock_vtracer.convert_image_to_svg_py.side_effect = slow_conversion
 
         # Use very short timeout
-        harness = VTracerTestHarness(timeout=0.1)
+        harness = OptimizationEngine()(timeout=0.1)
         result = harness.test_parameters("test.png", sample_vtracer_params)
 
         assert result["success"] is False

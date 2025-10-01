@@ -7,9 +7,9 @@ import cv2
 import numpy as np
 import os
 from backend.ai_modules.base_ai_converter import BaseAIConverter
-from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
-from backend.ai_modules.classification.rule_based_classifier import RuleBasedClassifier
-from backend.ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.optimization import OptimizationEngine
 from backend.ai_modules.prediction.quality_predictor import QualityPredictor
 
 class MockAIConverter(BaseAIConverter):
@@ -17,9 +17,9 @@ class MockAIConverter(BaseAIConverter):
 
     def __init__(self):
         super().__init__("Mock AI Converter")
-        self.feature_extractor = ImageFeatureExtractor()
-        self.classifier = RuleBasedClassifier()
-        self.optimizer = FeatureMappingOptimizer()
+        self.feature_extractor = ClassificationModule().feature_extractor()
+        self.classifier = ClassificationModule()
+        self.optimizer = OptimizationEngine()
         self.predictor = QualityPredictor()
 
     def extract_features(self, image_path: str):

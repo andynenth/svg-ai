@@ -16,8 +16,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
 
-from backend.ai_modules.optimization.feature_mapping_optimizer import FeatureMappingOptimizer
-from backend.ai_modules.optimization.parameter_bounds import VTracerParameterBounds
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
 
 # Mock classes for components that may not be available
 class MockFeatureExtractor:
@@ -193,11 +193,11 @@ class TestMethod1Integration:
 
     def setup_method(self):
         """Setup for each test"""
-        self.optimizer = FeatureMappingOptimizer()
+        self.optimizer = OptimizationEngine()
         self.feature_extractor = MockFeatureExtractor()
         self.quality_metrics = MockQualityMetrics()
         self.vtracer_harness = MockVTracerTestHarness()
-        self.bounds = VTracerParameterBounds()
+        self.bounds = OptimizationEngine()
 
         # Create mock test images
         self.test_images = {

@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path
 from datetime import datetime, timedelta
 from unittest.mock import Mock, patch, MagicMock
-from backend.ai_modules.optimization.optimization_logger import OptimizationLogger
+from backend.ai_modules.optimization import OptimizationEngine
 
 
 class TestOptimizationLogger:
@@ -19,7 +19,7 @@ class TestOptimizationLogger:
         # Clear any existing logs in temp dir
         for file in Path(self.temp_dir).glob("*"):
             file.unlink()
-        self.logger = OptimizationLogger(log_dir=self.temp_dir)
+        self.logger = OptimizationEngine()(log_dir=self.temp_dir)
 
     def teardown_method(self):
         """Cleanup after each test"""
@@ -27,7 +27,7 @@ class TestOptimizationLogger:
 
     def test_initialization(self):
         """Test logger initialization"""
-        logger = OptimizationLogger(log_dir=self.temp_dir)
+        logger = OptimizationEngine()(log_dir=self.temp_dir)
 
         assert logger.log_dir.exists()
         assert logger.json_log.exists() or True  # May not exist until first write

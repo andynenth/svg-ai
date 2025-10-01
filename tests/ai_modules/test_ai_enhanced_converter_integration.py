@@ -23,7 +23,7 @@ import sys
 # Add project root to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
-from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 from backend.converters.vtracer_converter import VTracerConverter
 
 
@@ -33,7 +33,7 @@ class TestAIEnhancedConverterIntegration(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up test environment once for all tests"""
-        cls.ai_converter = AIEnhancedSVGConverter()
+        cls.ai_converter = AIEnhancedConverter()
         cls.standard_converter = VTracerConverter()
         cls.test_images = []
         cls.temp_dir = tempfile.mkdtemp(prefix="ai_converter_test_")
@@ -441,7 +441,7 @@ class TestAIConverterPerformanceComparison(unittest.TestCase):
 
     def setUp(self):
         """Set up converters for performance testing"""
-        self.ai_converter = AIEnhancedSVGConverter()
+        self.ai_converter = AIEnhancedConverter()
         self.standard_converter = VTracerConverter()
 
     def test_performance_comparison_detailed(self):

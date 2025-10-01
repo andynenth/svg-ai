@@ -32,7 +32,7 @@ import warnings
 
 # Import system components
 from backend.converters.intelligent_converter import IntelligentConverter
-from backend.ai_modules.optimization.quality_metrics import OptimizationQualityMetrics
+from backend.ai_modules.optimization import OptimizationEngine
 
 # Test data management
 try:
@@ -52,7 +52,7 @@ class MultiMethodOptimizationTestSuite:
 
     def __init__(self):
         self.converter = IntelligentConverter()
-        self.quality_metrics = OptimizationQualityMetrics()
+        self.quality_metrics = OptimizationEngine()
 
         # Test configuration - exactly as specified in document
         self.test_images = self._load_test_dataset()

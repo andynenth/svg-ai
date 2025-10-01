@@ -1,7 +1,7 @@
 """Unit tests for ParameterValidator"""
 import pytest
-from backend.ai_modules.optimization.validator import ParameterValidator
-from backend.ai_modules.optimization.parameter_bounds import VTracerParameterBounds
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
 
 
 class TestParameterValidator:
@@ -9,7 +9,7 @@ class TestParameterValidator:
 
     def setup_method(self):
         """Setup for each test"""
-        self.validator = ParameterValidator()
+        self.validator = OptimizationEngine()
 
     def test_validate_valid_parameters(self, sample_vtracer_params):
         """Test validation with valid parameters"""

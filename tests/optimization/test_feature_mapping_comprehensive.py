@@ -9,8 +9,8 @@ import json
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
 
-from backend.ai_modules.optimization.feature_mapping_optimizer import FeatureMappingOptimizer
-from backend.ai_modules.optimization.parameter_bounds import VTracerParameterBounds
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
 
 
 class TestFeatureMappingOptimizer:
@@ -18,8 +18,8 @@ class TestFeatureMappingOptimizer:
 
     def setup_method(self):
         """Setup test fixtures"""
-        self.optimizer = FeatureMappingOptimizer()
-        self.bounds = VTracerParameterBounds()
+        self.optimizer = OptimizationEngine()
+        self.bounds = OptimizationEngine()
 
     def test_optimize_with_known_features(self):
         """Test FeatureMappingOptimizer.optimize() with known features"""

@@ -20,9 +20,9 @@ sys.path.insert(0, str(PROJECT_ROOT))
 # Import pipeline and components
 try:
     from backend.ai_modules.pipeline.unified_ai_pipeline import UnifiedAIPipeline, PipelineResult
-    from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
-    from backend.ai_modules.classification.rule_based_classifier import RuleBasedClassifier
-    from backend.ai_modules.optimization.intelligent_router import IntelligentRouter
+    from backend.ai_modules.classification import ClassificationModule
+    from backend.ai_modules.classification import ClassificationModule
+    from backend.ai_modules.optimization import OptimizationEngine
     from backend.converters.ai_enhanced_converter import AIEnhancedConverter
     from backend.converters.vtracer_converter import VTracerConverter
 except ImportError as e:

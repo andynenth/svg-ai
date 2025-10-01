@@ -25,9 +25,9 @@ import gc
 import sys
 sys.path.append('/Users/nrw/python/svg-ai')
 
-from backend.ai_modules.optimization.intelligent_router import IntelligentRouter
-from backend.ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
-from backend.ai_modules.optimization.regression_optimizer import RegressionBasedOptimizer
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
 from backend.ai_modules.optimization.ppo_optimizer import PPOVTracerOptimizer
 from backend.ai_modules.optimization.performance_optimizer import Method1PerformanceOptimizer
 from utils.feature_extraction import ImageFeatureExtractor
@@ -183,14 +183,14 @@ class PerformanceBenchmarkSuite:
         self.results_dir.mkdir(parents=True, exist_ok=True)
 
         # Initialize system components
-        self.intelligent_router = IntelligentRouter()
-        self.feature_extractor = ImageFeatureExtractor()
+        self.intelligent_router = OptimizationEngine()
+        self.feature_extractor = ClassificationModule().feature_extractor()
         self.resource_monitor = SystemResourceMonitor()
 
         # Optimization methods
         self.optimizers = {
-            'feature_mapping': FeatureMappingOptimizer(),
-            'regression': RegressionBasedOptimizer(),
+            'feature_mapping': OptimizationEngine(),
+            'regression': OptimizationEngine(),
             'ppo': PPOVTracerOptimizer(),
             'performance': Method1PerformanceOptimizer()
         }

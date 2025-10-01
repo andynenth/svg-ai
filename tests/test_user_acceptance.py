@@ -205,13 +205,13 @@ class TestUserScenarios:
         start_time = time.time()
 
         try:
-            from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+            from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
             # Simulate user with complex logo wanting AI enhancement
             logo_path = self.create_test_logo('complex', (300, 300))
 
             try:
-                converter = AIEnhancedSVGConverter(enable_ai=True, ai_timeout=10.0)
+                converter = AIEnhancedConverter(enable_ai=True, ai_timeout=10.0)
 
                 # User expects intelligent parameter optimization
                 result = converter.convert_with_ai_analysis(logo_path)

@@ -3,15 +3,15 @@
 
 import unittest
 import numpy as np
-from backend.ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
-from backend.ai_modules.optimization.adaptive_optimizer import AdaptiveOptimizer
-from backend.ai_modules.optimization.vtracer_environment import VTracerEnvironment
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
 
 class TestFeatureMappingOptimizer(unittest.TestCase):
     """Test FeatureMappingOptimizer class"""
 
     def setUp(self):
-        self.optimizer = FeatureMappingOptimizer()
+        self.optimizer = OptimizationEngine()
 
     def test_initialization(self):
         """Test optimizer initialization"""
@@ -111,7 +111,7 @@ class TestAdaptiveOptimizer(unittest.TestCase):
     """Test AdaptiveOptimizer class"""
 
     def setUp(self):
-        self.optimizer = AdaptiveOptimizer()
+        self.optimizer = OptimizationEngine()
 
     def test_initialization(self):
         """Test optimizer initialization"""
@@ -190,7 +190,7 @@ class TestVTracerEnvironment(unittest.TestCase):
             'corner_density': 0.02,
             'gradient_strength': 30.0
         }
-        self.env = VTracerEnvironment(features)
+        self.env = OptimizationEngine()(features)
 
     def test_initialization(self):
         """Test environment initialization"""

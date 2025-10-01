@@ -13,8 +13,8 @@ import logging
 # Add project root to path for imports
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from scripts.benchmark_method1 import Method1Benchmark
-from backend.ai_modules.optimization.validation_pipeline import Method1ValidationPipeline
+# from scripts.benchmark_method1 import Method1Benchmark  # Module not available
+from backend.ai_modules.optimization_old.validation_pipeline import Method1ValidationPipeline
 
 logger = logging.getLogger(__name__)
 

@@ -9,8 +9,8 @@ import os
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
 
-from backend.ai_modules.optimization.correlation_formulas import CorrelationFormulas
-from backend.ai_modules.optimization.parameter_bounds import VTracerParameterBounds
+from backend.ai_modules.optimization import OptimizationEngine
+from backend.ai_modules.optimization import OptimizationEngine
 
 
 class TestCorrelationFormulas:
@@ -18,7 +18,7 @@ class TestCorrelationFormulas:
 
     def setup_method(self):
         """Setup test fixtures"""
-        self.bounds = VTracerParameterBounds()
+        self.bounds = OptimizationEngine()
 
     def test_edge_to_corner_threshold_boundary_values(self):
         """Test edge density to corner threshold mapping with boundary values"""

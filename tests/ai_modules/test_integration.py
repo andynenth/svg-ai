@@ -2,9 +2,9 @@
 """Integration tests for complete AI pipeline"""
 
 import unittest
-from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
-from backend.ai_modules.classification.rule_based_classifier import RuleBasedClassifier
-from backend.ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.classification import ClassificationModule
+from backend.ai_modules.optimization import OptimizationEngine
 from backend.ai_modules.prediction.quality_predictor import QualityPredictor
 from backend.ai_modules.config import get_config_summary
 
@@ -12,9 +12,9 @@ class TestAIIntegration(unittest.TestCase):
     """Test complete AI pipeline integration"""
 
     def setUp(self):
-        self.feature_extractor = ImageFeatureExtractor(cache_enabled=False)
-        self.classifier = RuleBasedClassifier()
-        self.optimizer = FeatureMappingOptimizer()
+        self.feature_extractor = ClassificationModule().feature_extractor(cache_enabled=False)
+        self.classifier = ClassificationModule()
+        self.optimizer = OptimizationEngine()
         self.predictor = QualityPredictor()
 
     def test_complete_ai_pipeline(self):
@@ -183,13 +183,13 @@ class TestAIIntegration(unittest.TestCase):
         """Test that all AI modules can be imported correctly"""
         try:
             # Import all main AI classes
-            from backend.ai_modules.classification.feature_extractor import ImageFeatureExtractor
-            from backend.ai_modules.classification.logo_classifier import LogoClassifier
-            from backend.ai_modules.classification.rule_based_classifier import RuleBasedClassifier
+            from backend.ai_modules.classification import ClassificationModule
+            from backend.ai_modules.classification import ClassificationModule
+            from backend.ai_modules.classification import ClassificationModule
 
-            from backend.ai_modules.optimization.feature_mapping import FeatureMappingOptimizer
-            from backend.ai_modules.optimization.adaptive_optimizer import AdaptiveOptimizer
-            from backend.ai_modules.optimization.vtracer_environment import VTracerEnvironment
+            from backend.ai_modules.optimization import OptimizationEngine
+            from backend.ai_modules.optimization import OptimizationEngine
+            from backend.ai_modules.optimization import OptimizationEngine
 
             from backend.ai_modules.prediction.quality_predictor import QualityPredictor
             from backend.ai_modules.prediction.model_utils import ModelUtils

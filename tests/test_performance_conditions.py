@@ -265,14 +265,14 @@ class TestConcurrentProcessing:
         start_time = time.time()
 
         try:
-            from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+            from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
             num_threads = 2  # Fewer threads for AI processing
             conversions_per_thread = 2
 
             def ai_worker_conversion():
                 """Worker function for concurrent AI conversion."""
-                converter = AIEnhancedSVGConverter(enable_ai=True, ai_timeout=10.0)
+                converter = AIEnhancedConverter(enable_ai=True, ai_timeout=10.0)
                 worker_results = []
 
                 for _ in range(conversions_per_thread):
@@ -400,10 +400,10 @@ class TestResourceConstraints:
         start_time = time.time()
 
         try:
-            from backend.converters.ai_enhanced_converter import AIEnhancedSVGConverter
+            from backend.converters.ai_enhanced_converter import AIEnhancedConverter
 
             # Test with very short AI timeout
-            converter = AIEnhancedSVGConverter(enable_ai=True, ai_timeout=0.1)  # 100ms timeout
+            converter = AIEnhancedConverter(enable_ai=True, ai_timeout=0.1)  # 100ms timeout
 
             result = converter.convert_with_ai_analysis(temp_png_file)
 

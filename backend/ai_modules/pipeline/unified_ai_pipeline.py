@@ -331,7 +331,7 @@ class UnifiedAIPipeline:
             return None
 
         try:
-            return self.feature_extractor.extract_features(image_path)
+            return self.feature_extractor.extract(image_path)
         except Exception as e:
             logger.error(f"Feature extraction failed: {e}")
             return None

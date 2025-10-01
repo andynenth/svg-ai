@@ -2,7 +2,7 @@
 """Unit tests for VTracer parameter bounds system"""
 
 import pytest
-from backend.ai_modules.optimization.parameter_bounds import VTracerParameterBounds
+from backend.ai_modules.optimization import OptimizationEngine
 
 
 class TestVTracerParameterBounds:
