@@ -1,0 +1,128 @@
+{
+  "config": {
+    "name": "test_campaign_test",
+    "assignment_method": "random",
+    "split_ratio": 0.5,
+    "sample_size_target": 10,
+    "min_sample_size": 5,
+    "significance_threshold": 0.05,
+    "quality_metrics": [
+      "ssim",
+      "mse",
+      "psnr"
+    ],
+    "output_directory": "ab_test_results",
+    "continuous_mode": false,
+    "early_stopping": true
+  },
+  "results": [
+    {
+      "image": "/tmp/orchestrator_test_images/test_3.png",
+      "group": "treatment",
+      "quality": {
+        "error": true,
+        "reason": "missing_svg"
+      },
+      "duration": 0.0004177093505859375,
+      "parameters": {
+        "mock": true,
+        "type": "ai_enhanced"
+      },
+      "timestamp": "2025-09-30T18:25:12.334786",
+      "success": true,
+      "error": null,
+      "svg_path": "/tmp/mock_ai_enhanced.svg",
+      "file_size": null
+    },
+    {
+      "image": "/tmp/orchestrator_test_images/test_2.png",
+      "group": "treatment",
+      "quality": {
+        "error": true,
+        "reason": "missing_svg"
+      },
+      "duration": 6.389617919921875e-05,
+      "parameters": {
+        "mock": true,
+        "type": "ai_enhanced"
+      },
+      "timestamp": "2025-09-30T18:25:12.335192",
+      "success": true,
+      "error": null,
+      "svg_path": "/tmp/mock_ai_enhanced.svg",
+      "file_size": null
+    },
+    {
+      "image": "/tmp/orchestrator_test_images/test_0.png",
+      "group": "treatment",
+      "quality": {
+        "error": true,
+        "reason": "missing_svg"
+      },
+      "duration": 4.482269287109375e-05,
+      "parameters": {
+        "mock": true,
+        "type": "ai_enhanced"
+      },
+      "timestamp": "2025-09-30T18:25:12.335367",
+      "success": true,
+      "error": null,
+      "svg_path": "/tmp/mock_ai_enhanced.svg",
+      "file_size": null
+    },
+    {
+      "image": "/tmp/orchestrator_test_images/test_1.png",
+      "group": "control",
+      "quality": {
+        "error": true,
+        "reason": "missing_svg"
+      },
+      "duration": 6.29425048828125e-05,
+      "parameters": {
+        "mock": true,
+        "type": "baseline"
+      },
+      "timestamp": "2025-09-30T18:25:12.335551",
+      "success": true,
+      "error": null,
+      "svg_path": "/tmp/mock_baseline.svg",
+      "file_size": null
+    },
+    {
+      "image": "/tmp/orchestrator_test_images/test_4.png",
+      "group": "control",
+      "quality": {
+        "error": true,
+        "reason": "missing_svg"
+      },
+      "duration": 3.814697265625e-05,
+      "parameters": {
+        "mock": true,
+        "type": "baseline"
+      },
+      "timestamp": "2025-09-30T18:25:12.335713",
+      "success": true,
+      "error": null,
+      "svg_path": "/tmp/mock_baseline.svg",
+      "file_size": null
+    }
+  ],
+  "summary": {
+    "total_tests": 5,
+    "control_count": 2,
+    "treatment_count": 3,
+    "success_rate": {
+      "control": 1.0,
+      "treatment": 1.0
+    },
+    "control_avg": {
+      "ssim": 0.0,
+      "duration": 5.054473876953125e-05
+    },
+    "treatment_avg": {
+      "ssim": 0.0,
+      "duration": 0.00017547607421875
+    }
+  },
+  "generated_at": "2025-09-30T18:25:12.357827"
+}

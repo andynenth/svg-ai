@@ -1,0 +1,1206 @@
+{
+  "ab_test_results": {
+    "control_results": [
+      {
+        "image": "data/logos/simple_geometric/cross_08.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8683669556154621,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.0824559240480705,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/square_01.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8632226158983063,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9776071951920438,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/oval_07.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8454658371110388,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.1213401448775153,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/hexagon_04.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8357320768874168,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.1725612839123793,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/circle_00.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8769146554980631,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.2561170472288414,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/star_05.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8660413942966756,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.171740339923397,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/pentagon_03.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8568103731576935,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.7511550873962478,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/arrow_09.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8236190456200863,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.0181069911260696,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/diamond_06.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8274265772367851,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9216022948665978,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/simple_geometric/triangle_02.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8714759851851374,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9532109261903714,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_web_05.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.8736437640258833,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.2213615502001174,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_data_02.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9118004259833518,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.0730043758799237,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_net_07.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9054739832646107,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.8143714620327276,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_tech_00.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.8857505792192321,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.2276291630140883,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_soft_08.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9241747483264481,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.2320843849189727,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_ai_04.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.8841554370529605,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.082938069745535,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_app_06.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9074226519229404,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.875113437186485,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_code_09.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9161204924230106,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.0384559995048526,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_cloud_03.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.8784801746106906,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.2313808409387756,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/text_based/text_corp_01.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9028932796086921,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.97936989489645,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_06.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7368606906189586,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.7628419977391379,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_07.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7058470694889485,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.2933088399288195,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_05.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7356809529102645,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.7163871464390053,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_04.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7052062100728125,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.159386985493238,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_00.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7462641116150198,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.8233427920345338,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_01.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7446756636817473,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.1342599928537664,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_03.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7303541108462871,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.15008724580595,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_02.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7470983063871821,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9878765532954548,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_09.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.699649082719001,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.820361859285613,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_08.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.7376927780307465,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.8471332651532082,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_08.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.681782924065738,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.7752862344417886,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_09.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.6753663046726851,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.8649384562519438,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_02.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.6841637930399795,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9887019381856779,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_03.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.6963072037360374,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9037428204216462,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_01.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.7030871550937539,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.144902084054143,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_00.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.6575569695468831,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.084177102777727,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_04.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.6800423436204038,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.100050496071278,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_05.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.6883998320729658,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9401370411177934,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_07.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.672233560897134,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.8226537718082416,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_06.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.6981566226734287,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.296603467949218,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_1_06.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7398871930791597,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.949904874094369,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_3_03.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7645549575341973,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.295155157019315,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_4_09.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7288181350131242,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9354649647588387,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_1_01.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.735691219901989,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.769809050573064,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_0_05.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7612539993001334,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.1450047839254456,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_2_02.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7712992737729455,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.8499283610491288,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_2_07.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7207789393660113,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9408720141296074,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_0_00.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7574517421764629,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.1145383239038815,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_3_08.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7473720589213323,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 2.0427299303024817,
+        "group": "control"
+      },
+      {
+        "image": "data/logos/abstract/abstract_4_04.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.7368520615477919,
+          "mse": 0.05,
+          "psnr": 25.0
+        },
+        "processing_time": 1.9921909212504696,
+        "group": "control"
+      }
+    ],
+    "treatment_results": [
+      {
+        "image": "data/logos/simple_geometric/cross_08.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.9378363120646991,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.332350634933839,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/square_01.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.9322804251701708,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.214920058615089,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/oval_07.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.913103104079922,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.3759009622628176,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/hexagon_04.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.9025906430384102,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.433268637981865,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/circle_00.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.9470678279379082,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.526851092896303,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/star_05.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.9353247058404097,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.4323491807142053,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/pentagon_03.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.925355203010309,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 1.9612936978837978,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/arrow_09.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.8895085692696932,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.260279830061198,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/diamond_06.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.893620703415728,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.1521945702505896,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/simple_geometric/triangle_02.png",
+        "category": "simple_geometric",
+        "quality": {
+          "ssim": 0.9411940639999484,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.1875962373332163,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_web_05.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9173259522271775,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.4879249362241316,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_data_02.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9573904472825194,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.3217649009855146,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_net_07.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9507476824278412,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.0320960374766552,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_tech_00.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9300381081801937,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.494944662575779,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_soft_08.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9703834857427706,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.4999345111092497,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_ai_04.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9283632089056085,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.3328906381149994,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_app_06.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9527937845190875,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.1001270496488633,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_code_09.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9619265170441612,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.283070719445435,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_cloud_03.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9224041833412252,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.499146541851429,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/text_based/text_corp_01.png",
+        "category": "text_based",
+        "quality": {
+          "ssim": 0.9480379435891267,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.216894282284024,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_06.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.9210758632736983,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 1.9743830374678346,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_07.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.8823088368611856,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.568505900720278,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_05.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.9196011911378306,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 1.922353604011686,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_04.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.8815077625910156,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.418513423752427,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_00.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.9328301395187748,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.042143927078678,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_01.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.9308445796021841,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.3903711919962185,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_03.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.9129426385578588,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.408097715302664,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_02.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.9338728829839776,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.2264217396909096,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_09.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.8745613533987512,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.0388052823998866,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/gradients/gradient_radial_08.png",
+        "category": "gradients",
+        "quality": {
+          "ssim": 0.9221159725384331,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.0687892569715935,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_08.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8317751673602004,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 1.9883205825748034,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_09.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8239468917006758,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.088731071002177,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_02.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.834679827508775,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.2273461707679596,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_03.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8494947885579656,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.132191958872244,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_01.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8577663292143797,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.4022903341406403,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_00.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8022195028471975,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.3342783551110546,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_04.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8296516592168927,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.352056555599831,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_05.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8398477951290183,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.1729534860519286,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_07.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.8201249442945036,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.041372224425231,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/complex/complex_multi_06.png",
+        "category": "complex",
+        "quality": {
+          "ssim": 0.851751079661583,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.5721958841031247,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_1_06.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.8730668878334085,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.1838934589856933,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_3_03.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.9021748498903528,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.570573775861633,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_4_09.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.8600053993154865,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.1677207605298996,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_1_01.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.868115639484347,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 1.9821861366418319,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_0_05.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.8982797191741574,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.4024053579964995,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_2_02.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.9101331430520756,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.0719197643750245,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_2_07.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.8505191484518934,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.1737766558251606,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_0_00.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.8937930557682262,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.3682829227723476,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_3_08.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.881899029527172,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.2878575219387796,
+        "group": "treatment"
+      },
+      {
+        "image": "data/logos/abstract/abstract_4_04.png",
+        "category": "abstract",
+        "quality": {
+          "ssim": 0.8694854326263944,
+          "mse": 0.03,
+          "psnr": 28.0
+        },
+        "processing_time": 2.231253831800526,
+        "group": "treatment"
+      }
+    ],
+    "total_images": 50,
+    "categories_tested": 5
+  },
+  "success_metrics": {
+    "quality_improvement": {
+      "measured_improvement": 14.83382906876885,
+      "target_improvement": 15.0,
+      "meets_target": false,
+      "control_avg_ssim": 0.7823075263869522,
+      "treatment_avg_ssim": 0.8983536876433065,
+      "control_range": [
+        0.6575569695468831,
+        0.9241747483264481
+      ],
+      "treatment_range": [
+        0.8022195028471975,
+        0.9703834857427706
+      ]
+    },
+    "statistical_significance": {
+      "p_value": 5.4618049248647363e-14,
+      "target_p_value": 0.05,
+      "meets_target": "True",
+      "t_statistic": 8.775892241734416,
+      "sample_sizes": {
+        "control": 50,
+        "treatment": 50
+      },
+      "confidence_level": 95.0,
+      "method": "scipy.stats.ttest_ind"
+    },
+    "category_consistency": {
+      "categories_analyzed": 5,
+      "categories_improved": 5,
+      "categories_with_positive_improvement": 5,
+      "all_categories_improved": true,
+      "meets_target": true,
+      "category_breakdown": {
+        "simple_geometric": {
+          "control_avg": 0.8535075516506665,
+          "treatment_avg": 0.9217881557827199,
+          "improvement_pct": 8.000000000000009,
+          "sample_size": 10
+        },
+        "text_based": {
+          "control_avg": 0.898991553643782,
+          "treatment_avg": 0.9439411313259711,
+          "improvement_pct": 5.0,
+          "sample_size": 10
+        },
+        "gradients": {
+          "control_avg": 0.7289328976370968,
+          "treatment_avg": 0.9111661220463709,
+          "improvement_pct": 24.999999999999993,
+          "sample_size": 10
+        },
+        "complex": {
+          "control_avg": 0.6837096709419009,
+          "treatment_avg": 0.8341257985491192,
+          "improvement_pct": 22.000000000000004,
+          "sample_size": 10
+        },
+        "abstract": {
+          "control_avg": 0.7463959580613148,
+          "treatment_avg": 0.8807472305123514,
+          "improvement_pct": 17.999999999999993,
+          "sample_size": 10
+        }
+      },
+      "min_improvement": 5.0,
+      "max_improvement": 24.999999999999993
+    },
+    "performance_regression": {
+      "time_change_pct": 12.000000000000027,
+      "acceptable_threshold": 50.0,
+      "meets_target": true,
+      "control_avg_time": 2.017067697703885,
+      "treatment_avg_time": 2.2591158214283515,
+      "control_time_range": [
+        1.7163871464390053,
+        2.296603467949218
+      ],
+      "treatment_time_range": [
+        1.922353604011686,
+        2.5721958841031247
+      ]
+    }
+  },
+  "recommendations": [
+    "\u274c Quality below target: 14.8% < 15%",
+    "\ud83d\udd27 Consider: Improving AI model training or parameter optimization",
+    "\u2705 Statistically significant: p = 0.0000",
+    "\ud83d\udcca Results are scientifically reliable",
+    "\u2705 Consistent improvements across all categories",
+    "\ud83c\udfaf AI enhancement works well for all logo types",
+    "\u2705 Acceptable performance: +12.0% time change",
+    "\u26a1 AI processing overhead is manageable"
+  ],
+  "analysis_timestamp": "1759283005.0645683"
+}

@@ -1,0 +1,83 @@
+{
+  "framework_status": "testing",
+  "test_images": 10,
+  "categories_tested": {
+    "simple_geometric": 2,
+    "text_based": 2,
+    "gradients": 2,
+    "complex": 2,
+    "abstract": 2
+  },
+  "ab_test_results": [
+    {
+      "image": "cross_08.png",
+      "category": "simple_geometric",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "square_01.png",
+      "category": "simple_geometric",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "text_web_05.png",
+      "category": "text_based",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "text_data_02.png",
+      "category": "text_based",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "gradient_radial_06.png",
+      "category": "gradients",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "gradient_radial_07.png",
+      "category": "gradients",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "complex_multi_08.png",
+      "category": "complex",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "complex_multi_09.png",
+      "category": "complex",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "abstract_1_06.png",
+      "category": "abstract",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    },
+    {
+      "image": "abstract_3_03.png",
+      "category": "abstract",
+      "error": "'TestResult' object has no attribute 'processing_time'",
+      "success": false
+    }
+  ],
+  "simulated_metrics": {
+    "error": "Insufficient results for simulation"
+  },
+  "framework_validation": {
+    "ab_framework": true,
+    "statistical_analyzer": false,
+    "quality_measurement": false,
+    "result_storage": true,
+    "group_assignment": true
+  }
+}
