@@ -30,6 +30,11 @@ class ProductionModelManager:
         self.loading_lock = threading.Lock()
         self.models_found = False  # Track if any models were successfully loaded
 
+    def load_models(self) -> Dict[str, Any]:
+        """Public facade method to load all models"""
+        with self.loading_lock:
+            return self._load_all_exported_models()
+
     @monitor_model_loading()
     def _load_all_exported_models(self) -> Dict[str, Any]:
         """Load all exported models with error handling"""
@@ -68,6 +73,9 @@ class ProductionModelManager:
         except Exception as e:
             logging.warning(f"⚠️ Correlation models unavailable: {e}")
             models['correlation_models'] = None
+
+        # Persist loaded models to instance
+        self.models = models
 
         # Update models_found flag based on whether any models loaded
         self.models_found = any(model is not None for model in models.values())

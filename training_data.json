@@ -1,0 +1,1052 @@
+[
+  {
+    "image_path": "data/logos/abstract/abstract_1_06.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9352307913728571,
+    "mse": 533.3170979817709,
+    "psnr": 20.86094853614618,
+    "file_size": 8923,
+    "conversion_time": 0.4388291835784912
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_1_06.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9324916933066434,
+    "mse": 574.84375,
+    "psnr": 20.535305470206705,
+    "file_size": 8578,
+    "conversion_time": 0.06638693809509277
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_1_06.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9352307913728571,
+    "mse": 533.3170979817709,
+    "psnr": 20.86094853614618,
+    "file_size": 8923,
+    "conversion_time": 0.07221293449401855
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_3_03.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.94502783497896,
+    "mse": 400.0259145100911,
+    "psnr": 22.109922341294975,
+    "file_size": 20359,
+    "conversion_time": 0.07783079147338867
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_3_03.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.943646317415991,
+    "mse": 403.46116129557294,
+    "psnr": 22.072786266347343,
+    "file_size": 19623,
+    "conversion_time": 0.07295489311218262
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_3_03.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9427171439994627,
+    "mse": 423.2876790364583,
+    "psnr": 21.864447335570322,
+    "file_size": 24984,
+    "conversion_time": 0.07608509063720703
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_4_09.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9490640098787492,
+    "mse": 504.50755818684894,
+    "psnr": 21.10212683943636,
+    "file_size": 22648,
+    "conversion_time": 0.08105993270874023
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_4_09.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9493791877276617,
+    "mse": 507.1741943359375,
+    "psnr": 21.07923212884256,
+    "file_size": 20418,
+    "conversion_time": 0.08013677597045898
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_4_09.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9481329000972847,
+    "mse": 509.6202341715495,
+    "psnr": 21.058336977914124,
+    "file_size": 25031,
+    "conversion_time": 0.08191275596618652
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_1_01.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9352307913728571,
+    "mse": 533.3170979817709,
+    "psnr": 20.86094853614618,
+    "file_size": 8923,
+    "conversion_time": 0.0648660659790039
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_1_01.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9324916933066434,
+    "mse": 574.84375,
+    "psnr": 20.535305470206705,
+    "file_size": 8578,
+    "conversion_time": 0.06446409225463867
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_1_01.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9352307913728571,
+    "mse": 533.3170979817709,
+    "psnr": 20.86094853614618,
+    "file_size": 8923,
+    "conversion_time": 0.06587982177734375
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_0_05.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9845289373314199,
+    "mse": 101.50514729817708,
+    "psnr": 28.065922951062184,
+    "file_size": 9560,
+    "conversion_time": 0.0652778148651123
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_0_05.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9884741384853526,
+    "mse": 101.05091349283855,
+    "psnr": 28.08540117008613,
+    "file_size": 7854,
+    "conversion_time": 0.06617903709411621
+  },
+  {
+    "image_path": "data/logos/abstract/abstract_0_05.png",
+    "logo_type": "abstract",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9844498497261356,
+    "mse": 101.4673563639323,
+    "psnr": 28.0675401547821,
+    "file_size": 9737,
+    "conversion_time": 0.06454801559448242
+  },
+  {
+    "image_path": "data/logos/text_based/text_web_05.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9957749823543892,
+    "mse": 51.97088623046875,
+    "psnr": 30.973202382008974,
+    "file_size": 2341,
+    "conversion_time": 0.05571889877319336
+  },
+  {
+    "image_path": "data/logos/text_based/text_web_05.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9961408429125198,
+    "mse": 51.903717041015625,
+    "psnr": 30.978819002719057,
+    "file_size": 2061,
+    "conversion_time": 0.05603981018066406
+  },
+  {
+    "image_path": "data/logos/text_based/text_web_05.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9930580288548988,
+    "mse": 82.11342366536458,
+    "psnr": 28.9866620073693,
+    "file_size": 3156,
+    "conversion_time": 0.05529928207397461
+  },
+  {
+    "image_path": "data/logos/text_based/text_data_02.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9938972381483838,
+    "mse": 75.37001546223958,
+    "psnr": 29.35881756500132,
+    "file_size": 2756,
+    "conversion_time": 0.05934476852416992
+  },
+  {
+    "image_path": "data/logos/text_based/text_data_02.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9942669878255865,
+    "mse": 76.87209574381511,
+    "psnr": 29.27311639580516,
+    "file_size": 1945,
+    "conversion_time": 0.058709144592285156
+  },
+  {
+    "image_path": "data/logos/text_based/text_data_02.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9923599523514749,
+    "mse": 84.80963134765625,
+    "psnr": 28.84635185455292,
+    "file_size": 3426,
+    "conversion_time": 0.05725288391113281
+  },
+  {
+    "image_path": "data/logos/text_based/text_net_07.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9983356675983848,
+    "mse": 8.961771647135416,
+    "psnr": 38.60686487308795,
+    "file_size": 1327,
+    "conversion_time": 0.05518293380737305
+  },
+  {
+    "image_path": "data/logos/text_based/text_net_07.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9987355592859868,
+    "mse": 7.326375325520833,
+    "psnr": 39.48191197341008,
+    "file_size": 1023,
+    "conversion_time": 0.053526878356933594
+  },
+  {
+    "image_path": "data/logos/text_based/text_net_07.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9975771449078785,
+    "mse": 13.000457763671875,
+    "psnr": 36.99121716196721,
+    "file_size": 1875,
+    "conversion_time": 0.055871009826660156
+  },
+  {
+    "image_path": "data/logos/text_based/text_tech_00.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9939220525186585,
+    "mse": 29.955210367838543,
+    "psnr": 33.36607986990912,
+    "file_size": 5940,
+    "conversion_time": 0.06196880340576172
+  },
+  {
+    "image_path": "data/logos/text_based/text_tech_00.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9948732372910466,
+    "mse": 28.0555419921875,
+    "psnr": 33.65061697810876,
+    "file_size": 5010,
+    "conversion_time": 0.06090712547302246
+  },
+  {
+    "image_path": "data/logos/text_based/text_tech_00.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9938479458931012,
+    "mse": 30.342091878255207,
+    "psnr": 33.31034841771674,
+    "file_size": 6558,
+    "conversion_time": 0.060801029205322266
+  },
+  {
+    "image_path": "data/logos/text_based/text_soft_08.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9963624196236631,
+    "mse": 16.35692850748698,
+    "psnr": 35.99378605388609,
+    "file_size": 2366,
+    "conversion_time": 0.055001258850097656
+  },
+  {
+    "image_path": "data/logos/text_based/text_soft_08.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9968884446826483,
+    "mse": 15.930898030598959,
+    "psnr": 36.10840103036584,
+    "file_size": 2571,
+    "conversion_time": 0.056854963302612305
+  },
+  {
+    "image_path": "data/logos/text_based/text_soft_08.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9966108605860207,
+    "mse": 14.602045694986979,
+    "psnr": 36.486666576993386,
+    "file_size": 2264,
+    "conversion_time": 0.062352895736694336
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_08.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9770400380678015,
+    "mse": 97.03465270996094,
+    "psnr": 28.26153505022413,
+    "file_size": 3717,
+    "conversion_time": 0.062229156494140625
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_08.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.977234681615556,
+    "mse": 94.98401896158855,
+    "psnr": 28.354298193751806,
+    "file_size": 3628,
+    "conversion_time": 0.06466197967529297
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_08.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9577671004081507,
+    "mse": 257.81360880533856,
+    "psnr": 24.01774522819207,
+    "file_size": 4134,
+    "conversion_time": 0.07096385955810547
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_09.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9860283942570278,
+    "mse": 64.83083597819011,
+    "psnr": 30.012987391049858,
+    "file_size": 4054,
+    "conversion_time": 0.058934926986694336
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_09.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9848916714024921,
+    "mse": 69.29335021972656,
+    "psnr": 29.723888016016563,
+    "file_size": 3441,
+    "conversion_time": 0.06558799743652344
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_09.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9656108834831311,
+    "mse": 294.0187174479167,
+    "psnr": 23.447053820693764,
+    "file_size": 4716,
+    "conversion_time": 0.08824300765991211
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_02.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9911288485859707,
+    "mse": 43.1028798421224,
+    "psnr": 31.785740731257413,
+    "file_size": 2119,
+    "conversion_time": 0.056059837341308594
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_02.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.990821935816299,
+    "mse": 45.50397237141927,
+    "psnr": 31.55031049844126,
+    "file_size": 1968,
+    "conversion_time": 0.0561981201171875
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_02.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.990966383226022,
+    "mse": 43.81462605794271,
+    "psnr": 31.71461251369891,
+    "file_size": 2229,
+    "conversion_time": 0.05788111686706543
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_03.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9793857024609551,
+    "mse": 73.68152364095052,
+    "psnr": 29.45721762924293,
+    "file_size": 5473,
+    "conversion_time": 0.060701847076416016
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_03.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9776245462443495,
+    "mse": 80.35176086425781,
+    "psnr": 29.080849623416505,
+    "file_size": 5298,
+    "conversion_time": 0.06018781661987305
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_03.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9568434985959358,
+    "mse": 230.3931121826172,
+    "psnr": 24.506108695620302,
+    "file_size": 5651,
+    "conversion_time": 0.059975385665893555
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_01.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.988468792907553,
+    "mse": 39.56700134277344,
+    "psnr": 32.157472231526526,
+    "file_size": 3382,
+    "conversion_time": 0.057070016860961914
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_01.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9887943788606042,
+    "mse": 40.079935709635414,
+    "psnr": 32.10153344639784,
+    "file_size": 3239,
+    "conversion_time": 0.05888509750366211
+  },
+  {
+    "image_path": "data/logos/complex/complex_multi_01.png",
+    "logo_type": "complex",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9846706891226741,
+    "mse": 51.534769694010414,
+    "psnr": 31.009800213191845,
+    "file_size": 4191,
+    "conversion_time": 0.05638599395751953
+  },
+  {
+    "image_path": "data/logos/simple_geometric/cross_08.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 1.0,
+    "mse": 0.0,
+    "psnr": 100.0,
+    "file_size": 511,
+    "conversion_time": 0.05536603927612305
+  },
+  {
+    "image_path": "data/logos/simple_geometric/cross_08.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 1.0,
+    "mse": 0.0,
+    "psnr": 100.0,
+    "file_size": 511,
+    "conversion_time": 0.054579973220825195
+  },
+  {
+    "image_path": "data/logos/simple_geometric/cross_08.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 1.0,
+    "mse": 0.0,
+    "psnr": 100.0,
+    "file_size": 511,
+    "conversion_time": 0.06188607215881348
+  },
+  {
+    "image_path": "data/logos/simple_geometric/square_01.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 1.0,
+    "mse": 0.0,
+    "psnr": 100.0,
+    "file_size": 308,
+    "conversion_time": 0.07049298286437988
+  },
+  {
+    "image_path": "data/logos/simple_geometric/square_01.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 1.0,
+    "mse": 0.0,
+    "psnr": 100.0,
+    "file_size": 308,
+    "conversion_time": 0.05450296401977539
+  },
+  {
+    "image_path": "data/logos/simple_geometric/square_01.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 1.0,
+    "mse": 0.0,
+    "psnr": 100.0,
+    "file_size": 308,
+    "conversion_time": 0.05470895767211914
+  },
+  {
+    "image_path": "data/logos/simple_geometric/oval_07.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9936181647927261,
+    "mse": 24.299702962239582,
+    "psnr": 34.27479396020574,
+    "file_size": 586,
+    "conversion_time": 0.05482077598571777
+  },
+  {
+    "image_path": "data/logos/simple_geometric/oval_07.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9936181647927261,
+    "mse": 24.299702962239582,
+    "psnr": 34.27479396020574,
+    "file_size": 586,
+    "conversion_time": 0.05509495735168457
+  },
+  {
+    "image_path": "data/logos/simple_geometric/oval_07.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9936181647927261,
+    "mse": 24.299702962239582,
+    "psnr": 34.27479396020574,
+    "file_size": 586,
+    "conversion_time": 0.055664777755737305
+  },
+  {
+    "image_path": "data/logos/simple_geometric/hexagon_04.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9737775713278598,
+    "mse": 175.30430603027344,
+    "psnr": 25.6928777699192,
+    "file_size": 2086,
+    "conversion_time": 0.054347991943359375
+  },
+  {
+    "image_path": "data/logos/simple_geometric/hexagon_04.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.993332642324178,
+    "mse": 31.051320393880207,
+    "psnr": 33.21000288478218,
+    "file_size": 764,
+    "conversion_time": 0.05409502983093262
+  },
+  {
+    "image_path": "data/logos/simple_geometric/hexagon_04.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9722969779389807,
+    "mse": 188.1513468424479,
+    "psnr": 25.385730293937993,
+    "file_size": 2336,
+    "conversion_time": 0.054788827896118164
+  },
+  {
+    "image_path": "data/logos/simple_geometric/circle_00.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9903156782501289,
+    "mse": 57.969757080078125,
+    "psnr": 30.498788803867825,
+    "file_size": 617,
+    "conversion_time": 0.05756211280822754
+  },
+  {
+    "image_path": "data/logos/simple_geometric/circle_00.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9903156782501289,
+    "mse": 57.969757080078125,
+    "psnr": 30.498788803867825,
+    "file_size": 617,
+    "conversion_time": 0.05510234832763672
+  },
+  {
+    "image_path": "data/logos/simple_geometric/circle_00.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9903156782501289,
+    "mse": 57.969757080078125,
+    "psnr": 30.498788803867825,
+    "file_size": 617,
+    "conversion_time": 0.05477499961853027
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_06.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9750511722301347,
+    "mse": 109.84747823079427,
+    "psnr": 27.72290269597924,
+    "file_size": 7777,
+    "conversion_time": 0.07461285591125488
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_06.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9089845679813071,
+    "mse": 287.70533243815106,
+    "psnr": 23.541324495267585,
+    "file_size": 607,
+    "conversion_time": 0.056269168853759766
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_06.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9750511722301347,
+    "mse": 109.84747823079427,
+    "psnr": 27.72290269597924,
+    "file_size": 7777,
+    "conversion_time": 0.07808518409729004
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_07.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9768595729601014,
+    "mse": 62.23841857910156,
+    "psnr": 30.190218117689124,
+    "file_size": 7338,
+    "conversion_time": 0.07744002342224121
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_07.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.8572337931223816,
+    "mse": 130.67415364583334,
+    "psnr": 26.968906649401703,
+    "file_size": 1505,
+    "conversion_time": 0.05931997299194336
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_07.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9768595729601014,
+    "mse": 62.23841857910156,
+    "psnr": 30.190218117689124,
+    "file_size": 7338,
+    "conversion_time": 0.07304787635803223
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_05.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9763090345595217,
+    "mse": 55.268778483072914,
+    "psnr": 30.70600494692564,
+    "file_size": 7338,
+    "conversion_time": 0.07211804389953613
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_05.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.8302373482537841,
+    "mse": 165.2694295247396,
+    "psnr": 25.94887832865416,
+    "file_size": 1505,
+    "conversion_time": 0.0598750114440918
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_05.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9763090345595217,
+    "mse": 55.268778483072914,
+    "psnr": 30.70600494692564,
+    "file_size": 7338,
+    "conversion_time": 0.0778799057006836
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_04.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9763090345595217,
+    "mse": 55.268778483072914,
+    "psnr": 30.70600494692564,
+    "file_size": 7338,
+    "conversion_time": 0.09972691535949707
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_04.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.8302373482537841,
+    "mse": 165.2694295247396,
+    "psnr": 25.94887832865416,
+    "file_size": 1505,
+    "conversion_time": 0.06204581260681152
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_04.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9763090345595217,
+    "mse": 55.268778483072914,
+    "psnr": 30.70600494692564,
+    "file_size": 7338,
+    "conversion_time": 0.07593011856079102
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_00.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9790636727932914,
+    "mse": 106.74942525227864,
+    "psnr": 27.847148154419106,
+    "file_size": 7338,
+    "conversion_time": 0.07251286506652832
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_00.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 30,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9143460241181224,
+    "mse": 126.31165568033855,
+    "psnr": 27.116369330038438,
+    "file_size": 1505,
+    "conversion_time": 0.06206512451171875
+  },
+  {
+    "image_path": "data/logos/gradients/gradient_radial_00.png",
+    "logo_type": "gradients",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 90,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9790636727932914,
+    "mse": 106.74942525227864,
+    "psnr": 27.847148154419106,
+    "file_size": 7338,
+    "conversion_time": 0.07297492027282715
+  }
+]

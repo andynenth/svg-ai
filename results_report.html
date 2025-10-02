@@ -1,0 +1,271 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>AI Training Results Report</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+            h1 { color: #333; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+            h2 { color: #666; margin-top: 30px; }
+            .summary { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .metric { display: inline-block; margin: 10px 20px; }
+            .metric-label { color: #888; font-size: 12px; }
+            .metric-value { font-size: 24px; font-weight: bold; color: #4CAF50; }
+            table { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            th { background: #4CAF50; color: white; padding: 12px; text-align: left; }
+            td { padding: 10px; border-bottom: 1px solid #eee; }
+            tr:hover { background: #f9f9f9; }
+            .score-high { color: #4CAF50; font-weight: bold; }
+            .score-medium { color: #FF9800; font-weight: bold; }
+            .score-low { color: #f44336; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <h1>🤖 AI Training Results Report</h1>
+    
+        <div class="summary">
+            <h2>Overall Performance</h2>
+            <div class="metric">
+                <div class="metric-label">Total Logos</div>
+                <div class="metric-value">20</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Average SSIM</div>
+                <div class="metric-value">0.381</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Best SSIM</div>
+                <div class="metric-value">0.998</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Training Samples</div>
+                <div class="metric-value">120</div>
+            </div>
+        </div>
+    
+            <h2>Simple Geometric Logos</h2>
+            <div class="summary">
+                <div class="metric">
+                    <div class="metric-label">Count</div>
+                    <div class="metric-value">12</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Avg SSIM</div>
+                    <div class="metric-value">0.324</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Best SSIM</div>
+                    <div class="metric-value">0.998</div>
+                </div>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Logo File</th>
+                    <th>SSIM Score</th>
+                    <th>Color Precision</th>
+                    <th>Corner Threshold</th>
+                    <th>File Size</th>
+                    <th>Conversion Time</th>
+                </tr>
+        
+                <tr>
+                    <td>apple-icon-1024x1024.png</td>
+                    <td class="score-high">0.998</td>
+                    <td>3</td>
+                    <td>30</td>
+                    <td>14,488 bytes</td>
+                    <td>2.15s</td>
+                </tr>
+            
+                <tr>
+                    <td>12633577.png</td>
+                    <td class="score-low">0.659</td>
+                    <td>3</td>
+                    <td>30</td>
+                    <td>4,831 bytes</td>
+                    <td>0.14s</td>
+                </tr>
+            
+                <tr>
+                    <td>11680866.png</td>
+                    <td class="score-low">0.576</td>
+                    <td>7</td>
+                    <td>70</td>
+                    <td>8,144 bytes</td>
+                    <td>0.15s</td>
+                </tr>
+            
+                <tr>
+                    <td>12205449.png</td>
+                    <td class="score-low">0.438</td>
+                    <td>10</td>
+                    <td>90</td>
+                    <td>9,620 bytes</td>
+                    <td>0.15s</td>
+                </tr>
+            
+                <tr>
+                    <td>10372041.png</td>
+                    <td class="score-low">0.399</td>
+                    <td>3</td>
+                    <td>30</td>
+                    <td>26,283 bytes</td>
+                    <td>0.16s</td>
+                </tr>
+            
+                <tr>
+                    <td>11618772.png</td>
+                    <td class="score-low">0.263</td>
+                    <td>6</td>
+                    <td>60</td>
+                    <td>14,533 bytes</td>
+                    <td>0.16s</td>
+                </tr>
+            
+                <tr>
+                    <td>3124892.png</td>
+                    <td class="score-low">0.233</td>
+                    <td>3</td>
+                    <td>30</td>
+                    <td>13,142 bytes</td>
+                    <td>0.16s</td>
+                </tr>
+            
+                <tr>
+                    <td>14379686.png</td>
+                    <td class="score-low">0.134</td>
+                    <td>6</td>
+                    <td>60</td>
+                    <td>26,553 bytes</td>
+                    <td>0.17s</td>
+                </tr>
+            
+                <tr>
+                    <td>5856402.png</td>
+                    <td class="score-low">0.110</td>
+                    <td>4</td>
+                    <td>40</td>
+                    <td>7,134 bytes</td>
+                    <td>0.14s</td>
+                </tr>
+            
+                <tr>
+                    <td>14379662.png</td>
+                    <td class="score-low">0.055</td>
+                    <td>6</td>
+                    <td>60</td>
+                    <td>8,555 bytes</td>
+                    <td>0.15s</td>
+                </tr>
+            </table>
+            <h2>Text Based Logos</h2>
+            <div class="summary">
+                <div class="metric">
+                    <div class="metric-label">Count</div>
+                    <div class="metric-value">8</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Avg SSIM</div>
+                    <div class="metric-value">0.467</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Best SSIM</div>
+                    <div class="metric-value">0.741</div>
+                </div>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Logo File</th>
+                    <th>SSIM Score</th>
+                    <th>Color Precision</th>
+                    <th>Corner Threshold</th>
+                    <th>File Size</th>
+                    <th>Conversion Time</th>
+                </tr>
+        
+                <tr>
+                    <td>1562952.png</td>
+                    <td class="score-low">0.741</td>
+                    <td>7</td>
+                    <td>70</td>
+                    <td>20,350 bytes</td>
+                    <td>0.24s</td>
+                </tr>
+            
+                <tr>
+                    <td>3344776.png</td>
+                    <td class="score-low">0.658</td>
+                    <td>6</td>
+                    <td>60</td>
+                    <td>46,075 bytes</td>
+                    <td>0.22s</td>
+                </tr>
+            
+                <tr>
+                    <td>4399391.png</td>
+                    <td class="score-low">0.604</td>
+                    <td>3</td>
+                    <td>30</td>
+                    <td>6,050 bytes</td>
+                    <td>0.16s</td>
+                </tr>
+            
+                <tr>
+                    <td>17836688.png</td>
+                    <td class="score-low">0.563</td>
+                    <td>4</td>
+                    <td>40</td>
+                    <td>19,537 bytes</td>
+                    <td>0.18s</td>
+                </tr>
+            
+                <tr>
+                    <td>9710836.png</td>
+                    <td class="score-low">0.497</td>
+                    <td>7</td>
+                    <td>70</td>
+                    <td>17,083 bytes</td>
+                    <td>0.16s</td>
+                </tr>
+            
+                <tr>
+                    <td>4814852.png</td>
+                    <td class="score-low">0.495</td>
+                    <td>6</td>
+                    <td>60</td>
+                    <td>45,839 bytes</td>
+                    <td>0.21s</td>
+                </tr>
+            
+                <tr>
+                    <td>11771671.png</td>
+                    <td class="score-low">0.235</td>
+                    <td>6</td>
+                    <td>60</td>
+                    <td>27,088 bytes</td>
+                    <td>0.16s</td>
+                </tr>
+            
+                <tr>
+                    <td>11744644.png</td>
+                    <td class="score-low">-0.058</td>
+                    <td>6</td>
+                    <td>60</td>
+                    <td>24,191 bytes</td>
+                    <td>0.16s</td>
+                </tr>
+            </table>
+        <div class="summary" style="margin-top: 40px;">
+            <h3>Next Steps</h3>
+            <ol>
+                <li>Train classifier model with this data</li>
+                <li>Train quality predictor model</li>
+                <li>Train parameter optimizer</li>
+                <li>Deploy models to production</li>
+            </ol>
+        </div>
+    </body>
+    </html>
+    

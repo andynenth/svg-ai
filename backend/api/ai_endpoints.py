@@ -23,7 +23,7 @@ def get_ai_components():
         try:
             model_manager = ProductionModelManager()
             # Load models and check if any were found
-            model_manager._load_all_exported_models()
+            model_manager.load_models()
 
             _ai_components['model_manager'] = model_manager
             _ai_components['models_found'] = model_manager.models_found
@@ -187,7 +187,7 @@ def perform_ai_conversion(
         try:
             from ..converter import convert_image
             logging.info("Attempting fallback to basic VTracer conversion")
-            basic_result = convert_image(image_path, converter='vtracer')
+            basic_result = convert_image(image_path, converter_type='vtracer')
 
             # Verify fallback conversion succeeded
             if not basic_result.get('success', False) or not basic_result.get('svg'):

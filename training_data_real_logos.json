@@ -1,0 +1,2162 @@
+[
+  {
+    "image_path": "data/raw_logos/4902237.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.0015076379076096496,
+    "file_size": 8260,
+    "conversion_time": 0.49294018745422363,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4902237.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.0014292961567379371,
+    "file_size": 8801,
+    "conversion_time": 0.14040088653564453,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4902237.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.0014375061218465971,
+    "file_size": 9587,
+    "conversion_time": 0.14163708686828613,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4902237.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.0014375061218465971,
+    "file_size": 9587,
+    "conversion_time": 0.1380748748779297,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4902237.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.001413581383065976,
+    "file_size": 11865,
+    "conversion_time": 0.14559602737426758,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4902237.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.001413581383065976,
+    "file_size": 11865,
+    "conversion_time": 0.13923883438110352,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/9710836.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.48123807097437055,
+    "file_size": 8679,
+    "conversion_time": 0.15789413452148438,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01165771484375,
+      "gradient_strength": 2.1486549377441406,
+      "horizontal_variance": 11089493.041992188
+    }
+  },
+  {
+    "image_path": "data/raw_logos/9710836.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.48123807097437055,
+    "file_size": 8679,
+    "conversion_time": 0.1837010383605957,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01165771484375,
+      "gradient_strength": 2.1486549377441406,
+      "horizontal_variance": 11089493.041992188
+    }
+  },
+  {
+    "image_path": "data/raw_logos/9710836.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.496914176027849,
+    "file_size": 17101,
+    "conversion_time": 0.1864640712738037,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01165771484375,
+      "gradient_strength": 2.1486549377441406,
+      "horizontal_variance": 11089493.041992188
+    }
+  },
+  {
+    "image_path": "data/raw_logos/9710836.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.49709106408582265,
+    "file_size": 17083,
+    "conversion_time": 0.16359329223632812,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01165771484375,
+      "gradient_strength": 2.1486549377441406,
+      "horizontal_variance": 11089493.041992188
+    }
+  },
+  {
+    "image_path": "data/raw_logos/9710836.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.49702178599367974,
+    "file_size": 16964,
+    "conversion_time": 0.16575217247009277,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01165771484375,
+      "gradient_strength": 2.1486549377441406,
+      "horizontal_variance": 11089493.041992188
+    }
+  },
+  {
+    "image_path": "data/raw_logos/9710836.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.48123807097437055,
+    "file_size": 8679,
+    "conversion_time": 0.14809608459472656,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01165771484375,
+      "gradient_strength": 2.1486549377441406,
+      "horizontal_variance": 11089493.041992188
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11771671.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.21601993968401392,
+    "file_size": 10028,
+    "conversion_time": 0.15023589134216309,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01340484619140625,
+      "gradient_strength": 2.5763072967529297,
+      "horizontal_variance": 5558422.051620483
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11771671.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.22104586475050012,
+    "file_size": 11873,
+    "conversion_time": 0.15422320365905762,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01340484619140625,
+      "gradient_strength": 2.5763072967529297,
+      "horizontal_variance": 5558422.051620483
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11771671.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.2353776534643064,
+    "file_size": 27088,
+    "conversion_time": 0.16080093383789062,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01340484619140625,
+      "gradient_strength": 2.5763072967529297,
+      "horizontal_variance": 5558422.051620483
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11771671.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.23518452696180142,
+    "file_size": 27068,
+    "conversion_time": 0.16535186767578125,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01340484619140625,
+      "gradient_strength": 2.5763072967529297,
+      "horizontal_variance": 5558422.051620483
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11771671.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.23537123243597663,
+    "file_size": 27785,
+    "conversion_time": 0.16185283660888672,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01340484619140625,
+      "gradient_strength": 2.5763072967529297,
+      "horizontal_variance": 5558422.051620483
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11771671.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.21954919472780374,
+    "file_size": 17633,
+    "conversion_time": 0.15067791938781738,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.01340484619140625,
+      "gradient_strength": 2.5763072967529297,
+      "horizontal_variance": 5558422.051620483
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11680866.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.5757158303172017,
+    "file_size": 6849,
+    "conversion_time": 0.15129590034484863,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11680866.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.5757206382545177,
+    "file_size": 6841,
+    "conversion_time": 0.15044808387756348,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11680866.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.5756912902822132,
+    "file_size": 7345,
+    "conversion_time": 0.15990996360778809,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11680866.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.5758842201722625,
+    "file_size": 8144,
+    "conversion_time": 0.1512608528137207,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11680866.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.5758809625465338,
+    "file_size": 8259,
+    "conversion_time": 0.1514301300048828,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11680866.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.5758658340654857,
+    "file_size": 8445,
+    "conversion_time": 0.14879083633422852,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379686.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.13183284683206267,
+    "file_size": 14062,
+    "conversion_time": 0.16689419746398926,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379686.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.13413674869655157,
+    "file_size": 21665,
+    "conversion_time": 0.17158102989196777,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379686.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.1344148386441647,
+    "file_size": 26553,
+    "conversion_time": 0.1663200855255127,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379686.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.1344148386441647,
+    "file_size": 26553,
+    "conversion_time": 0.16490697860717773,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379686.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.13431363525317788,
+    "file_size": 26840,
+    "conversion_time": 0.16614508628845215,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379686.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.1282546963482219,
+    "file_size": 28912,
+    "conversion_time": 0.16478395462036133,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/17836688.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.5235116202409958,
+    "file_size": 17661,
+    "conversion_time": 0.1746690273284912,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.024456024169921875,
+      "gradient_strength": 3.6572837829589844,
+      "horizontal_variance": 147497244.3022728
+    }
+  },
+  {
+    "image_path": "data/raw_logos/17836688.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.5632431517222302,
+    "file_size": 19537,
+    "conversion_time": 0.1804828643798828,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.024456024169921875,
+      "gradient_strength": 3.6572837829589844,
+      "horizontal_variance": 147497244.3022728
+    }
+  },
+  {
+    "image_path": "data/raw_logos/17836688.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.5614279340423375,
+    "file_size": 24629,
+    "conversion_time": 0.18800115585327148,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.024456024169921875,
+      "gradient_strength": 3.6572837829589844,
+      "horizontal_variance": 147497244.3022728
+    }
+  },
+  {
+    "image_path": "data/raw_logos/17836688.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.5614380742613432,
+    "file_size": 24625,
+    "conversion_time": 0.17806506156921387,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.024456024169921875,
+      "gradient_strength": 3.6572837829589844,
+      "horizontal_variance": 147497244.3022728
+    }
+  },
+  {
+    "image_path": "data/raw_logos/17836688.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.561469806377515,
+    "file_size": 24625,
+    "conversion_time": 0.1799757480621338,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.024456024169921875,
+      "gradient_strength": 3.6572837829589844,
+      "horizontal_variance": 147497244.3022728
+    }
+  },
+  {
+    "image_path": "data/raw_logos/17836688.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.40807759606941024,
+    "file_size": 8047,
+    "conversion_time": 0.15000391006469727,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.024456024169921875,
+      "gradient_strength": 3.6572837829589844,
+      "horizontal_variance": 147497244.3022728
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12205449.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.40795939782792373,
+    "file_size": 4250,
+    "conversion_time": 0.14052414894104004,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12205449.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.40795939782792373,
+    "file_size": 4250,
+    "conversion_time": 0.14246392250061035,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12205449.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.40795939782792373,
+    "file_size": 4250,
+    "conversion_time": 0.14191198348999023,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12205449.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.40795939782792373,
+    "file_size": 4250,
+    "conversion_time": 0.1425490379333496,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12205449.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.40899685342789976,
+    "file_size": 6948,
+    "conversion_time": 0.14199233055114746,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12205449.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.4382182101155639,
+    "file_size": 9620,
+    "conversion_time": 0.146104097366333,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4814852.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.3783821424025588,
+    "file_size": 23474,
+    "conversion_time": 0.1717357635498047,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0227203369140625,
+      "gradient_strength": 3.9072265625,
+      "horizontal_variance": 39154825.18157959
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4814852.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.4811770586237223,
+    "file_size": 31752,
+    "conversion_time": 0.18144607543945312,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0227203369140625,
+      "gradient_strength": 3.9072265625,
+      "horizontal_variance": 39154825.18157959
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4814852.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.4949220452257773,
+    "file_size": 45839,
+    "conversion_time": 0.20626378059387207,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0227203369140625,
+      "gradient_strength": 3.9072265625,
+      "horizontal_variance": 39154825.18157959
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4814852.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.494637314022925,
+    "file_size": 46144,
+    "conversion_time": 0.20118403434753418,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0227203369140625,
+      "gradient_strength": 3.9072265625,
+      "horizontal_variance": 39154825.18157959
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4814852.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.4932924503780736,
+    "file_size": 46633,
+    "conversion_time": 0.19220209121704102,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0227203369140625,
+      "gradient_strength": 3.9072265625,
+      "horizontal_variance": 39154825.18157959
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4814852.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.23424651370406546,
+    "file_size": 17792,
+    "conversion_time": 0.1565392017364502,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0227203369140625,
+      "gradient_strength": 3.9072265625,
+      "horizontal_variance": 39154825.18157959
+    }
+  },
+  {
+    "image_path": "data/raw_logos/6181580.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.025391864980631583,
+    "file_size": 9154,
+    "conversion_time": 0.14507079124450684,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/6181580.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.025388069639342578,
+    "file_size": 10579,
+    "conversion_time": 0.14421296119689941,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/6181580.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.025480920463570457,
+    "file_size": 11305,
+    "conversion_time": 0.14423704147338867,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/6181580.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.025481395910853518,
+    "file_size": 11323,
+    "conversion_time": 0.14547014236450195,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/6181580.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.0254807721353557,
+    "file_size": 11322,
+    "conversion_time": 0.1427462100982666,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/6181580.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.0254807721353557,
+    "file_size": 11322,
+    "conversion_time": 0.14452815055847168,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/1562952.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.7398692812186461,
+    "file_size": 20194,
+    "conversion_time": 0.20638108253479004,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.02910614013671875,
+      "gradient_strength": 4.4279632568359375,
+      "horizontal_variance": 1976292.2756195068
+    }
+  },
+  {
+    "image_path": "data/raw_logos/1562952.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.7376517332072269,
+    "file_size": 20510,
+    "conversion_time": 0.20815300941467285,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.02910614013671875,
+      "gradient_strength": 4.4279632568359375,
+      "horizontal_variance": 1976292.2756195068
+    }
+  },
+  {
+    "image_path": "data/raw_logos/1562952.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.7392630132588162,
+    "file_size": 20056,
+    "conversion_time": 0.21779775619506836,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.02910614013671875,
+      "gradient_strength": 4.4279632568359375,
+      "horizontal_variance": 1976292.2756195068
+    }
+  },
+  {
+    "image_path": "data/raw_logos/1562952.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.7410269344964167,
+    "file_size": 20350,
+    "conversion_time": 0.24118590354919434,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.02910614013671875,
+      "gradient_strength": 4.4279632568359375,
+      "horizontal_variance": 1976292.2756195068
+    }
+  },
+  {
+    "image_path": "data/raw_logos/1562952.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.74101439809375,
+    "file_size": 20352,
+    "conversion_time": 0.2140200138092041,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.02910614013671875,
+      "gradient_strength": 4.4279632568359375,
+      "horizontal_variance": 1976292.2756195068
+    }
+  },
+  {
+    "image_path": "data/raw_logos/1562952.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.481826741991928,
+    "file_size": 3547,
+    "conversion_time": 0.15123414993286133,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.02910614013671875,
+      "gradient_strength": 4.4279632568359375,
+      "horizontal_variance": 1976292.2756195068
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379662.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.05494282481536339,
+    "file_size": 7755,
+    "conversion_time": 0.1536848545074463,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379662.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.05504009233679613,
+    "file_size": 8263,
+    "conversion_time": 0.15018010139465332,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379662.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.05531002621714719,
+    "file_size": 8555,
+    "conversion_time": 0.14833378791809082,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379662.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.05531002621714719,
+    "file_size": 8555,
+    "conversion_time": 0.1509709358215332,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379662.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.05531002621714719,
+    "file_size": 8555,
+    "conversion_time": 0.15402483940124512,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/14379662.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.05531002621714719,
+    "file_size": 8555,
+    "conversion_time": 0.15245604515075684,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3124892.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.23267858454754062,
+    "file_size": 13142,
+    "conversion_time": 0.16200494766235352,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3124892.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.23261555733612047,
+    "file_size": 13918,
+    "conversion_time": 0.1764390468597412,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3124892.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.22699578695553976,
+    "file_size": 20599,
+    "conversion_time": 0.18157625198364258,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3124892.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.2238866638666917,
+    "file_size": 22805,
+    "conversion_time": 0.17843103408813477,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3124892.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.22386977939901545,
+    "file_size": 23051,
+    "conversion_time": 0.1872098445892334,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3124892.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.22386977939901545,
+    "file_size": 23051,
+    "conversion_time": 0.22251510620117188,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4399391.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.6043488926292315,
+    "file_size": 6050,
+    "conversion_time": 0.16004586219787598,
+    "features": {
+      "unique_colors": 185,
+      "edge_ratio": 0.00643157958984375,
+      "gradient_strength": 1.2222137451171875,
+      "horizontal_variance": 229880.48057556152
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4399391.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.6037850827377148,
+    "file_size": 6674,
+    "conversion_time": 0.15981578826904297,
+    "features": {
+      "unique_colors": 185,
+      "edge_ratio": 0.00643157958984375,
+      "gradient_strength": 1.2222137451171875,
+      "horizontal_variance": 229880.48057556152
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4399391.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.6020972141257708,
+    "file_size": 7325,
+    "conversion_time": 0.16163206100463867,
+    "features": {
+      "unique_colors": 185,
+      "edge_ratio": 0.00643157958984375,
+      "gradient_strength": 1.2222137451171875,
+      "horizontal_variance": 229880.48057556152
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4399391.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.6020972141257708,
+    "file_size": 7325,
+    "conversion_time": 0.15700888633728027,
+    "features": {
+      "unique_colors": 185,
+      "edge_ratio": 0.00643157958984375,
+      "gradient_strength": 1.2222137451171875,
+      "horizontal_variance": 229880.48057556152
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4399391.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.6020972141257708,
+    "file_size": 7325,
+    "conversion_time": 0.15865325927734375,
+    "features": {
+      "unique_colors": 185,
+      "edge_ratio": 0.00643157958984375,
+      "gradient_strength": 1.2222137451171875,
+      "horizontal_variance": 229880.48057556152
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4399391.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.5970132512999302,
+    "file_size": 4591,
+    "conversion_time": 0.14713597297668457,
+    "features": {
+      "unique_colors": 185,
+      "edge_ratio": 0.00643157958984375,
+      "gradient_strength": 1.2222137451171875,
+      "horizontal_variance": 229880.48057556152
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11744644.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": -0.059132259343239034,
+    "file_size": 19402,
+    "conversion_time": 0.1844639778137207,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.032520294189453125,
+      "gradient_strength": 6.018732070922852,
+      "horizontal_variance": 93629703.23324203
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11744644.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": -0.05819721202036846,
+    "file_size": 21713,
+    "conversion_time": 0.16734910011291504,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.032520294189453125,
+      "gradient_strength": 6.018732070922852,
+      "horizontal_variance": 93629703.23324203
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11744644.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": -0.057599983327014624,
+    "file_size": 24191,
+    "conversion_time": 0.1648578643798828,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.032520294189453125,
+      "gradient_strength": 6.018732070922852,
+      "horizontal_variance": 93629703.23324203
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11744644.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": -0.05929861287036278,
+    "file_size": 24802,
+    "conversion_time": 0.16434597969055176,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.032520294189453125,
+      "gradient_strength": 6.018732070922852,
+      "horizontal_variance": 93629703.23324203
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11744644.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": -0.059206887329325976,
+    "file_size": 24996,
+    "conversion_time": 0.21672296524047852,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.032520294189453125,
+      "gradient_strength": 6.018732070922852,
+      "horizontal_variance": 93629703.23324203
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11744644.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": -0.05903898223576326,
+    "file_size": 25703,
+    "conversion_time": 0.18229293823242188,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.032520294189453125,
+      "gradient_strength": 6.018732070922852,
+      "horizontal_variance": 93629703.23324203
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3344776.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.6344984325413228,
+    "file_size": 31153,
+    "conversion_time": 0.20223498344421387,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.03630828857421875,
+      "gradient_strength": 5.637172698974609,
+      "horizontal_variance": 54450800.5153656
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3344776.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.6559057888580926,
+    "file_size": 41097,
+    "conversion_time": 0.2091820240020752,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.03630828857421875,
+      "gradient_strength": 5.637172698974609,
+      "horizontal_variance": 54450800.5153656
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3344776.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.6579202746264772,
+    "file_size": 46075,
+    "conversion_time": 0.2163088321685791,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.03630828857421875,
+      "gradient_strength": 5.637172698974609,
+      "horizontal_variance": 54450800.5153656
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3344776.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.6577657829691351,
+    "file_size": 46888,
+    "conversion_time": 0.21331191062927246,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.03630828857421875,
+      "gradient_strength": 5.637172698974609,
+      "horizontal_variance": 54450800.5153656
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3344776.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.6576704090839913,
+    "file_size": 47031,
+    "conversion_time": 0.21841001510620117,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.03630828857421875,
+      "gradient_strength": 5.637172698974609,
+      "horizontal_variance": 54450800.5153656
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3344776.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.32548816273457404,
+    "file_size": 9943,
+    "conversion_time": 0.15440082550048828,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.03630828857421875,
+      "gradient_strength": 5.637172698974609,
+      "horizontal_variance": 54450800.5153656
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12633577.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.6592936626240171,
+    "file_size": 4831,
+    "conversion_time": 0.14456892013549805,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12633577.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.6592936626240171,
+    "file_size": 4831,
+    "conversion_time": 0.1438920497894287,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12633577.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.6592936626240171,
+    "file_size": 4831,
+    "conversion_time": 0.14445018768310547,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12633577.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.6592936626240171,
+    "file_size": 4831,
+    "conversion_time": 0.14314699172973633,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12633577.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.6592936626240171,
+    "file_size": 4831,
+    "conversion_time": 0.15343403816223145,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/12633577.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.6592936626240171,
+    "file_size": 4831,
+    "conversion_time": 0.1446678638458252,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.9983187145304502,
+    "file_size": 14488,
+    "conversion_time": 2.150533676147461,
+    "features": {
+      "unique_colors": 6,
+      "edge_ratio": 0.002094223132590653,
+      "gradient_strength": 0.27349276101921055,
+      "horizontal_variance": 43090533.55485318
+    }
+  },
+  {
+    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.9981889889690194,
+    "file_size": 13813,
+    "conversion_time": 2.177690029144287,
+    "features": {
+      "unique_colors": 6,
+      "edge_ratio": 0.002094223132590653,
+      "gradient_strength": 0.27349276101921055,
+      "horizontal_variance": 43090533.55485318
+    }
+  },
+  {
+    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.9978122227924191,
+    "file_size": 17046,
+    "conversion_time": 2.1433708667755127,
+    "features": {
+      "unique_colors": 6,
+      "edge_ratio": 0.002094223132590653,
+      "gradient_strength": 0.27349276101921055,
+      "horizontal_variance": 43090533.55485318
+    }
+  },
+  {
+    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.9978110162901733,
+    "file_size": 17047,
+    "conversion_time": 2.1218559741973877,
+    "features": {
+      "unique_colors": 6,
+      "edge_ratio": 0.002094223132590653,
+      "gradient_strength": 0.27349276101921055,
+      "horizontal_variance": 43090533.55485318
+    }
+  },
+  {
+    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.9978110162901733,
+    "file_size": 17047,
+    "conversion_time": 2.1447060108184814,
+    "features": {
+      "unique_colors": 6,
+      "edge_ratio": 0.002094223132590653,
+      "gradient_strength": 0.27349276101921055,
+      "horizontal_variance": 43090533.55485318
+    }
+  },
+  {
+    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.9364080115078862,
+    "file_size": 330,
+    "conversion_time": 1.9934749603271484,
+    "features": {
+      "unique_colors": 6,
+      "edge_ratio": 0.002094223132590653,
+      "gradient_strength": 0.27349276101921055,
+      "horizontal_variance": 43090533.55485318
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11618772.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.26302490884118834,
+    "file_size": 13689,
+    "conversion_time": 0.328477144241333,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11618772.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.26302474584449964,
+    "file_size": 13687,
+    "conversion_time": 0.16400408744812012,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11618772.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.2631753070843793,
+    "file_size": 14533,
+    "conversion_time": 0.1588420867919922,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11618772.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.26316060807798086,
+    "file_size": 15403,
+    "conversion_time": 0.15297889709472656,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11618772.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.2631576644954777,
+    "file_size": 15702,
+    "conversion_time": 0.1606128215789795,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11618772.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.26311226771883944,
+    "file_size": 16493,
+    "conversion_time": 0.15146493911743164,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/5856402.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.1097038881567103,
+    "file_size": 7172,
+    "conversion_time": 0.13992810249328613,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/5856402.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.10978017856447327,
+    "file_size": 7134,
+    "conversion_time": 0.13797831535339355,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/5856402.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.10978017856447327,
+    "file_size": 7134,
+    "conversion_time": 0.14538335800170898,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/5856402.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.10978017856447327,
+    "file_size": 7134,
+    "conversion_time": 0.14122915267944336,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/5856402.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.10978017856447327,
+    "file_size": 7134,
+    "conversion_time": 0.1488790512084961,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/5856402.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.10978017856447327,
+    "file_size": 7134,
+    "conversion_time": 0.13672804832458496,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/10372041.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.3992806710598576,
+    "file_size": 26283,
+    "conversion_time": 0.16420602798461914,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/10372041.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.3988038091284203,
+    "file_size": 28654,
+    "conversion_time": 0.1627798080444336,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/10372041.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.3985426129105817,
+    "file_size": 30501,
+    "conversion_time": 0.16456294059753418,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/10372041.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.39845235252510636,
+    "file_size": 30612,
+    "conversion_time": 0.16559576988220215,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/10372041.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.3983967856174861,
+    "file_size": 30895,
+    "conversion_time": 0.16403484344482422,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/10372041.png",
+    "logo_type": "simple_geometric",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.3985339963793544,
+    "file_size": 31402,
+    "conversion_time": 0.16241788864135742,
+    "features": {
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
+    }
+  }
+]

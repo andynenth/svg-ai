@@ -40,10 +40,15 @@ from .utils.resource_manager import managed_temp_files, managed_memory_context, 
 # Import security validation
 from .utils.security import SecurityValidator
 
-# Import rate limiting
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-import redis
+# Import rate limiting (optional)
+try:
+    from flask_limiter import Limiter
+    from flask_limiter.util import get_remote_address
+    import redis
+    RATE_LIMITING_AVAILABLE = True
+except ImportError:
+    RATE_LIMITING_AVAILABLE = False
+    print("⚠️ Rate limiting disabled - install flask-limiter and redis for API protection")
 
 # Import classification modules
 from .ai_modules.classification import HybridClassifier
@@ -63,13 +68,22 @@ CORS(app, origins=['http://localhost:3000', 'http://localhost:8080', 'http://loc
      methods=['GET', 'POST', 'OPTIONS'],
      allow_headers=['Content-Type'])
 
-# Initialize rate limiter
-limiter = Limiter(
-    app,
-    key_func=get_remote_address,
-    storage_uri="redis://localhost:6379",
-    default_limits=["200 per day", "50 per hour"]
-)
+# Initialize rate limiter (if available)
+if RATE_LIMITING_AVAILABLE:
+    limiter = Limiter(
+        app,
+        key_func=get_remote_address,
+        storage_uri="redis://localhost:6379",
+        default_limits=["200 per day", "50 per hour"]
+    )
+else:
+    # Create a dummy limiter that does nothing
+    class DummyLimiter:
+        def limit(self, *args, **kwargs):
+            def decorator(f):
+                return f
+            return decorator
+    limiter = DummyLimiter()
 
 # Register AI blueprint
 # app.register_blueprint(ai_bp)  # Temporarily disabled due to import issues
