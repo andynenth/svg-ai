@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG to SVG Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PNG to SVG Converter</h1>
+        <p class="subtitle">Convert PNG images to scalable SVG format</p>
+
+        <div class="upload-section">
+            <div id="dropzone" class="dropzone">
+                <input type="file" id="fileInput" hidden accept=".png,.jpg,.jpeg" name="file">
+                <div class="upload-icon">📤</div>
+                <p>Drag & Drop your PNG here</p>
+                <p class="small">or click to browse</p>
+            </div>
+        </div>
+
+        <div id="mainContent" class="hidden">
+            <!-- Hidden elements for upload/conversion process -->
+            <div style="display: none;">
+                <img id="originalImage" alt="Original">
+                <div id="svgContainer"></div>
+            </div>
+
+            <!-- Split View Container - Only Interface -->
+            <div id="splitViewContainer" class="split-view-container">
+                <div class="split-panel left-panel">
+                    <div class="panel-header">
+                        <h3>Original PNG</h3>
+                    </div>
+                    <div class="image-viewer" id="splitLeftViewer">
+                        <img id="splitOriginalImage" alt="Original" style="display:none;">
+                    </div>
+                </div>
+
+                <div class="split-divider"
+                     id="splitDivider"
+                     role="separator"
+                     aria-label="Resize split panels"
+                     tabindex="0">
+                    <div class="divider-handle">⫶</div>
+                </div>
+
+                <div class="split-panel right-panel">
+                    <div class="panel-header">
+                        <h3>Converted SVG</h3>
+                        <div class="panel-controls">
+                            <div class="zoom-controls">
+                                <button class="zoom-btn" data-action="zoom-in" title="Zoom In">+</button>
+                                <button class="zoom-btn" data-action="zoom-out" title="Zoom Out">−</button>
+                                <button class="zoom-btn" data-action="zoom-reset" title="Reset">⌂</button>
+                                <span class="zoom-level">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-viewer" id="splitRightViewer">
+                        <div id="splitSvgContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <h2>Parameters</h2>
+                <div class="control-group">
+                    <label for="converter">Converter:</label>
+                    <select id="converter">
+                        <option value="ai" selected>AI Enhanced (Best Quality)</option>
+                        <option value="smart_auto">Smart Auto</option>
+                        <option value="smart">Smart Potrace (B&W/Grayscale)</option>
+                        <option value="vtracer">VTracer (Color/Complex)</option>
+                    </select>
+                </div>
+
+                <!-- AI Classification Options -->
+                <div class="ai-options">
+                    <h3>AI Classification Options</h3>
+
+                    <div class="classification-method">
+                        <label>Classification Method:</label>
+                        <select id="classificationMethod">
+                            <option value="auto">Auto (Recommended)</option>
+                            <option value="rule_based">Rule-Based (Fast)</option>
+                            <option value="neural_network">Neural Network (Accurate)</option>
+                        </select>
+                    </div>
+
+                    <div class="ai-features">
+                        <label>
+                            <input type="checkbox" id="showFeatures">
+                            Show detailed features analysis
+                        </label>
+                        <label>
+                            <input type="checkbox" id="useAIConversion">
+                            Use AI-optimized conversion parameters
+                        </label>
+                    </div>
+
+                    <div class="time-budget">
+                        <label>Max processing time:</label>
+                        <select id="timeBudget">
+                            <option value="">No limit</option>
+                            <option value="1">1 second (Fast)</option>
+                            <option value="3">3 seconds (Balanced)</option>
+                            <option value="10">10 seconds (Best quality)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Results display areas -->
+                <div id="classificationResults" class="classification-results hidden"></div>
+                <div id="featuresAnalysis" class="features-analysis hidden"></div>
+
+                <!-- Dynamic Parameter Containers -->
+                <div id="potraceParams" class="param-group hidden">
+                    <h3>Potrace Parameters</h3>
+
+                    <div class="control-group">
+                        <label for="potraceThreshold">Black Level: <span id="potraceThresholdValue">128</span><span class="info-icon" data-tooltip="How dark must a pixel be to become black? Lower = more black areas">i</span></label>
+                        <input type="range" id="potraceThreshold" min="0" max="255" value="128">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceTurnpolicy">Corner Style:<span class="info-icon" data-tooltip="How to handle ambiguous corners. Black = sharp, White = smooth">i</span></label>
+                        <select id="potraceTurnpolicy">
+                            <option value="black">Black (Sharp)</option>
+                            <option value="white">White (Smooth)</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                            <option value="minority">Minority</option>
+                            <option value="majority">Majority</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceTurdsize">Remove Noise: <span id="potraceTurdsizeValue">2</span><span class="info-icon" data-tooltip="Removes spots smaller than this many pixels">i</span></label>
+                        <input type="range" id="potraceTurdsize" min="0" max="100" step="1" value="2">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceAlphamax">Smoothness: <span id="potraceAlphamaxValue">1.0</span><span class="info-icon" data-tooltip="How rounded corners should be. Higher = smoother">i</span></label>
+                        <input type="range" id="potraceAlphamax" min="0" max="134" step="1" value="100">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potraceOpttolerance">Accuracy: <span id="potraceOpttoleranceValue">0.20</span><span class="info-icon" data-tooltip="Curve optimization tolerance. Lower = more precise curves & larger files. Higher = simplified curves & smaller files.">i</span></label>
+                        <input type="range" id="potraceOpttolerance" min="0" max="100" step="1" value="20">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="potracePreset">Preset:</label>
+                        <select id="potracePreset">
+                            <option value="ultra-precise">Ultra Precise</option>
+                            <option value="quality" selected>Quality</option>
+                            <option value="fast">Fast</option>
+                            <option value="ultra-fast">Ultra Fast</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="vtracerParams" class="param-group hidden">
+                    <h3>VTracer Parameters</h3>
+
+                    <div class="control-group">
+                        <label>Mode:<span class="info-icon" data-tooltip="Color mode or black & white">i</span></label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="vtracerColormode" value="color" checked> Color</label>
+                            <label><input type="radio" name="vtracerColormode" value="binary"> B&W</label>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerColorPrecision">Colors: <span id="vtracerColorPrecisionValue">6</span><span class="info-icon" data-tooltip="Number of colors to detect. Lower = simpler image">i</span></label>
+                        <input type="range" id="vtracerColorPrecision" min="1" max="10" value="6">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerLayerDifference">Color Diff: <span id="vtracerLayerDifferenceValue">16</span></label>
+                        <input type="range" id="vtracerLayerDifference" min="0" max="256" value="16">
+                        <small class="tooltip">Minimum difference between colors. Higher = fewer colors</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerPathPrecision">Smoothness: <span id="vtracerPathPrecisionValue">5</span></label>
+                        <input type="range" id="vtracerPathPrecision" min="0" max="10" value="5">
+                        <small class="tooltip">Path curve smoothness. Higher = smoother</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerCornerThreshold">Corner Angle: <span id="vtracerCornerThresholdValue">60</span>°</label>
+                        <input type="range" id="vtracerCornerThreshold" min="0" max="180" value="60">
+                        <small class="tooltip">Angle that defines a corner. Higher = fewer corners</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerLengthThreshold">Min Path:</label>
+                        <input type="number" id="vtracerLengthThreshold" min="0" max="100" step="0.1" value="5.0">
+                        <small class="tooltip">Ignore paths shorter than this</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerMaxIterations">Quality: <span id="vtracerMaxIterationsValue">10</span></label>
+                        <input type="range" id="vtracerMaxIterations" min="1" max="50" value="10">
+                        <small class="tooltip">Number of refinement passes. More = better but slower</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerSpliceThreshold">Join Paths: <span id="vtracerSpliceThresholdValue">45</span>°</label>
+                        <input type="range" id="vtracerSpliceThreshold" min="0" max="180" value="45">
+                        <small class="tooltip">Angle for connecting paths. Higher = more connected</small>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="vtracerPreset">Preset:</label>
+                        <select id="vtracerPreset">
+                            <option value="quality" selected>Quality</option>
+                            <option value="fast">Fast</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="alphaParams" class="param-group hidden">
+                    <h3>Alpha-aware Parameters</h3>
+
+                    <div class="control-group">
+                        <label for="alphaThreshold">Alpha Level: <span id="alphaThresholdValue">128</span><span class="info-icon" data-tooltip="Minimum opacity to include. Lower = more semi-transparent areas">i</span></label>
+                        <input type="range" id="alphaThreshold" min="0" max="255" value="128">
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="alphaUsePotrace" checked> Clean Edges<span class="info-icon" data-tooltip="Use Potrace for sharper edges. Off preserves soft edges">i</span>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="alphaPreserveAntialiasing"> Anti-aliasing<span class="info-icon" data-tooltip="Preserve smooth edges. Larger file but smoother">i</span>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="alphaPreset">Preset:</label>
+                        <select id="alphaPreset">
+                            <option value="quality" selected>Quality</option>
+                            <option value="fast">Fast</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="routingInfo" class="routing-info hidden">
+                    <h3>Smart Auto Routing</h3>
+                    <p>Selected: <span id="routedTo">-</span></p>
+                    <p>Image Type: <span id="imageType">-</span></p>
+                    <p>Confidence: <span id="routingConfidence">-</span></p>
+                    <p>Unique Colors: <span id="uniqueColors">-</span></p>
+                </div>
+
+                <div id="metrics" class="metrics hidden">
+                    <p>Quality Score (SSIM): <span id="ssimScore">-</span></p>
+                    <p>File Size: <span id="fileSize">-</span></p>
+                    <p>SVG Paths: <span id="pathCount">-</span></p>
+                    <p>Avg Path Length: <span id="avgPathLength">-</span> chars</p>
+                    <div class="button-group">
+                        <button id="convertBtn" class="btn-primary">Convert to SVG</button>
+                        <button id="downloadBtn" class="btn-secondary">Download SVG</button>
+                        <button id="newFileBtn" class="btn-secondary">Convert New File</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="loading-card">
+                <div class="spinner"></div>
+                <p>Converting your image...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOMPurify for SVG sanitization to prevent XSS attacks -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <!-- Load modular JavaScript application -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

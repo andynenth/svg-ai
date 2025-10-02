@@ -1,0 +1,132 @@
+{
+    "ReservationId": "r-07a111bb3ba225097",
+    "OwnerId": "300079938592",
+    "Groups": [],
+    "Instances": [
+        {
+            "Architecture": "x86_64",
+            "BlockDeviceMappings": [],
+            "ClientToken": "8bd25b9c-714f-45ae-88c8-c00ec3d83632",
+            "EbsOptimized": false,
+            "EnaSupport": true,
+            "Hypervisor": "xen",
+            "NetworkInterfaces": [
+                {
+                    "Attachment": {
+                        "AttachTime": "2025-10-02T17:59:54+00:00",
+                        "AttachmentId": "eni-attach-0b620439480445e4d",
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": 0,
+                        "Status": "attaching",
+                        "NetworkCardIndex": 0
+                    },
+                    "Description": "",
+                    "Groups": [
+                        {
+                            "GroupId": "sg-0057a3e8a61fac0f8",
+                            "GroupName": "svg-ai-free-sg"
+                        }
+                    ],
+                    "Ipv6Addresses": [],
+                    "MacAddress": "0a:ff:f7:f4:a0:8d",
+                    "NetworkInterfaceId": "eni-0f9e5b9de7f047ecf",
+                    "OwnerId": "300079938592",
+                    "PrivateDnsName": "ip-172-31-29-141.ec2.internal",
+                    "PrivateIpAddress": "172.31.29.141",
+                    "PrivateIpAddresses": [
+                        {
+                            "Primary": true,
+                            "PrivateDnsName": "ip-172-31-29-141.ec2.internal",
+                            "PrivateIpAddress": "172.31.29.141"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Status": "in-use",
+                    "SubnetId": "subnet-0abea883d70f485ee",
+                    "VpcId": "vpc-00f76a9d1c8daf46a",
+                    "InterfaceType": "interface",
+                    "Operator": {
+                        "Managed": false
+                    }
+                }
+            ],
+            "RootDeviceName": "/dev/sda1",
+            "RootDeviceType": "ebs",
+            "SecurityGroups": [
+                {
+                    "GroupId": "sg-0057a3e8a61fac0f8",
+                    "GroupName": "svg-ai-free-sg"
+                }
+            ],
+            "SourceDestCheck": true,
+            "StateReason": {
+                "Code": "pending",
+                "Message": "pending"
+            },
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "svg-ai-free"
+                }
+            ],
+            "VirtualizationType": "hvm",
+            "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 1
+            },
+            "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+            },
+            "MetadataOptions": {
+                "State": "pending",
+                "HttpTokens": "optional",
+                "HttpPutResponseHopLimit": 1,
+                "HttpEndpoint": "enabled",
+                "HttpProtocolIpv6": "disabled",
+                "InstanceMetadataTags": "disabled"
+            },
+            "EnclaveOptions": {
+                "Enabled": false
+            },
+            "BootMode": "uefi-preferred",
+            "PrivateDnsNameOptions": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "MaintenanceOptions": {
+                "AutoRecovery": "default",
+                "RebootMigration": "default"
+            },
+            "CurrentInstanceBootMode": "legacy-bios",
+            "Operator": {
+                "Managed": false
+            },
+            "InstanceId": "i-09afc9b0014ddb9fb",
+            "ImageId": "ami-0d016af584f4febe3",
+            "State": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "PrivateDnsName": "ip-172-31-29-141.ec2.internal",
+            "PublicDnsName": "",
+            "StateTransitionReason": "",
+            "KeyName": "svg-ai-free-key",
+            "AmiLaunchIndex": 0,
+            "ProductCodes": [],
+            "InstanceType": "t2.micro",
+            "LaunchTime": "2025-10-02T17:59:54+00:00",
+            "Placement": {
+                "GroupName": "",
+                "Tenancy": "default",
+                "AvailabilityZone": "us-east-1b"
+            },
+            "Monitoring": {
+                "State": "disabled"
+            },
+            "SubnetId": "subnet-0abea883d70f485ee",
+            "VpcId": "vpc-00f76a9d1c8daf46a",
+            "PrivateIpAddress": "172.31.29.141"
+        }
+    ]
+}

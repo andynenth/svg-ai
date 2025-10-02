@@ -1,13 +1,21 @@
 # 🚀 AWS Production Deployment Checklist for SVG-AI
 
+## 🔑 AWS Account Details
+- **Account ID**: 300079938592
+- **IAM User**: Andy
+- **Default Region**: us-east-1
+- **ECR Registry**: 300079938592.dkr.ecr.us-east-1.amazonaws.com
+
 ## 📋 Pre-Deployment Preparation
 
-### Account & Access Setup (2 hours)
-- [ ] Create AWS account or use existing
-- [ ] Install AWS CLI: `brew install awscli`
-- [ ] Configure AWS credentials: `aws configure`
-- [ ] Create IAM user for deployment with programmatic access
-- [ ] Attach `AdministratorAccess` policy temporarily (restrict later)
+### Account & Access Setup (30 mins - Partially Complete ✅)
+- [x] ✅ AWS account exists (Account: 300079938592)
+- [x] ✅ AWS CLI installed and configured
+- [x] ✅ AWS credentials configured (User: Andy, Region: us-east-1)
+- [ ] Verify AWS access: `aws sts get-caller-identity`
+- [ ] ⚠️ **Security**: Rotate existing access keys (current keys in use)
+- [ ] Create deployment-specific IAM user (separate from Andy user)
+- [ ] Enable MFA for Andy user: `aws iam enable-mfa-device`
 - [ ] Install Terraform: `brew install terraform`
 - [ ] Install Docker Desktop for Mac
 - [ ] Create deployment workspace: `mkdir ~/svg-ai-deploy`
@@ -23,24 +31,25 @@
 ## 🏗️ Phase 1: Core Infrastructure (Day 1)
 
 ### 1.1 S3 Buckets Creation (30 mins)
-- [ ] Create main bucket: `aws s3 mb s3://svg-ai-production-{random-id}`
-- [ ] Create frontend bucket: `aws s3 mb s3://svg-ai-frontend-{random-id}`
-- [ ] Create models bucket: `aws s3 mb s3://svg-ai-models-{random-id}`
-- [ ] Create uploads bucket: `aws s3 mb s3://svg-ai-uploads-{random-id}`
-- [ ] Enable versioning: `aws s3api put-bucket-versioning --bucket svg-ai-production-{id} --versioning-configuration Status=Enabled`
+- [ ] Generate unique bucket suffix: `export BUCKET_ID=$(date +%s)`
+- [ ] Create main bucket: `aws s3 mb s3://svg-ai-production-${BUCKET_ID}`
+- [ ] Create frontend bucket: `aws s3 mb s3://svg-ai-frontend-${BUCKET_ID}`
+- [ ] Create models bucket: `aws s3 mb s3://svg-ai-models-${BUCKET_ID}`
+- [ ] Create uploads bucket: `aws s3 mb s3://svg-ai-uploads-${BUCKET_ID}`
+- [ ] Enable versioning: `aws s3api put-bucket-versioning --bucket svg-ai-production-${BUCKET_ID} --versioning-configuration Status=Enabled`
 - [ ] Configure CORS for frontend bucket
 - [ ] Set bucket policies for public read on frontend bucket
 - [ ] Create lifecycle rules for old uploads (delete after 7 days)
 
 ### 1.2 Upload AI Models (15 mins)
 - [ ] Compress models: `tar -czf models.tar.gz models/production/`
-- [ ] Upload to S3: `aws s3 cp models.tar.gz s3://svg-ai-models-{id}/`
+- [ ] Upload to S3: `aws s3 cp models.tar.gz s3://svg-ai-models-${BUCKET_ID}/`
 - [ ] Upload individual models:
-  - [ ] `aws s3 cp models/production/logo_classifier.torchscript s3://svg-ai-models-{id}/`
-  - [ ] `aws s3 cp models/production/quality_predictor.torchscript s3://svg-ai-models-{id}/`
-  - [ ] `aws s3 cp models/production/correlation_models.pkl s3://svg-ai-models-{id}/`
+  - [ ] `aws s3 cp models/production/logo_classifier.torchscript s3://svg-ai-models-${BUCKET_ID}/`
+  - [ ] `aws s3 cp models/production/quality_predictor.torchscript s3://svg-ai-models-${BUCKET_ID}/`
+  - [ ] `aws s3 cp models/production/correlation_models.pkl s3://svg-ai-models-${BUCKET_ID}/`
 - [ ] Set public read permissions for model files
-- [ ] Test download: `aws s3 cp s3://svg-ai-models-{id}/logo_classifier.torchscript /tmp/test.model`
+- [ ] Test download: `aws s3 cp s3://svg-ai-models-${BUCKET_ID}/logo_classifier.torchscript /tmp/test.model`
 
 ### 1.3 VPC Setup (45 mins)
 - [ ] Create VPC: `aws ec2 create-vpc --cidr-block 10.0.0.0/16`
@@ -99,9 +108,9 @@
 
 ### 2.2 Create ECR Repository (15 mins)
 - [ ] Create ECR repo: `aws ecr create-repository --repository-name svg-ai`
-- [ ] Get login token: `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin {account-id}.dkr.ecr.us-east-1.amazonaws.com`
-- [ ] Tag image: `docker tag svg-ai:test {account-id}.dkr.ecr.us-east-1.amazonaws.com/svg-ai:latest`
-- [ ] Push image: `docker push {account-id}.dkr.ecr.us-east-1.amazonaws.com/svg-ai:latest`
+- [ ] Get login token: `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 300079938592.dkr.ecr.us-east-1.amazonaws.com`
+- [ ] Tag image: `docker tag svg-ai:test 300079938592.dkr.ecr.us-east-1.amazonaws.com/svg-ai:latest`
+- [ ] Push image: `docker push 300079938592.dkr.ecr.us-east-1.amazonaws.com/svg-ai:latest`
 - [ ] Verify image in ECR console
 - [ ] Set lifecycle policy to keep only last 10 images
 
@@ -153,8 +162,8 @@
     "requiresCompatibilities": ["FARGATE"],
     "cpu": "1024",
     "memory": "2048",
-    "executionRoleArn": "arn:aws:iam::{account-id}:role/ecsTaskExecutionRole",
-    "taskRoleArn": "arn:aws:iam::{account-id}:role/svg-ai-task-role"
+    "executionRoleArn": "arn:aws:iam::300079938592:role/ecsTaskExecutionRole",
+    "taskRoleArn": "arn:aws:iam::300079938592:role/svg-ai-task-role"
   }
   ```
 - [ ] Add container definition:

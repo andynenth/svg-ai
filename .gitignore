@@ -85,4 +85,5 @@ setup_python39.sh
 converters/mock_converter.py
 
 # Claude files
-@CLAUDE.md
+@CLAUDE.mdsvg-ai-minimal.tar.gz
+*.tar.gz
