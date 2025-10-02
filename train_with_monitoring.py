@@ -12,6 +12,7 @@ from PIL import Image
 import json
 import numpy as np
 import time
+from utils.image_utils import load_image_safe
 import sys
 import os
 from pathlib import Path
@@ -399,7 +400,7 @@ def create_simple_dataset(data_file="training_data.json"):
 
         def __getitem__(self, idx):
             item = self.data[idx]
-            image = Image.open(item['image_path']).convert('RGB')
+            image = load_image_safe(item['image_path'])
             image = self.transform(image)
             label = self.class_to_idx.get(item['logo_type'], 0)
             return image, label

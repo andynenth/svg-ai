@@ -11,6 +11,7 @@ import json
 import os
 from PIL import Image
 import cv2
+from utils.image_utils import load_image_safe
 
 class QualityPredictor(nn.Module):
     def __init__(self):
@@ -35,7 +36,7 @@ class QualityPredictor(nn.Module):
 def extract_features(image_path):
     """Extract simple features from image"""
     try:
-        img = Image.open(image_path).convert('RGB')
+        img = load_image_safe(image_path)
         cv_img = cv2.imread(image_path)
 
         if cv_img is None:

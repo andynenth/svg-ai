@@ -55,7 +55,7 @@ from .ai_modules.classification import HybridClassifier
 # from backend.converters.ai_enhanced_converter import AIEnhancedConverter  # Temporarily disabled due to import issues
 
 # Import AI endpoints
-# from backend.api.ai_endpoints import ai_bp  # Temporarily disabled due to import issues
+from backend.api.ai_endpoints import ai_bp
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -86,7 +86,7 @@ else:
     limiter = DummyLimiter()
 
 # Register AI blueprint
-# app.register_blueprint(ai_bp)  # Temporarily disabled due to import issues
+app.register_blueprint(ai_bp)
 
 # Setup structured logging
 structured_logger = StructuredLogger("svg-ai")

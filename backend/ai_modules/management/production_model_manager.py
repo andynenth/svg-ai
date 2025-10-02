@@ -52,12 +52,13 @@ class ProductionModelManager:
             logging.warning(f"⚠️ Quality predictor unavailable: {e}")
             models['quality_predictor'] = None
 
-        # Logo Classifier (ONNX)
+        # Logo Classifier (TorchScript)
         try:
-            import onnxruntime as ort
-            models['logo_classifier'] = ort.InferenceSession(
-                str(self.model_dir / 'logo_classifier.onnx')
+            import torch
+            models['logo_classifier'] = torch.jit.load(
+                str(self.model_dir / 'logo_classifier.torchscript')
             )
+            models['logo_classifier'].eval()
             logging.info("✅ Logo classifier loaded")
         except Exception as e:
             logging.warning(f"⚠️ Logo classifier unavailable: {e}")

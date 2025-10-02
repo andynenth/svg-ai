@@ -1,339 +1,231 @@
 [
   {
-    "image_path": "data/raw_logos/4902237.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 3,
-      "corner_threshold": 30,
-      "segment_length": 6.0
-    },
-    "quality_score": 0.0015076379076096496,
-    "file_size": 8260,
-    "conversion_time": 0.49294018745422363,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4902237.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 4,
-      "corner_threshold": 40,
-      "segment_length": 5.0
-    },
-    "quality_score": 0.0014292961567379371,
-    "file_size": 8801,
-    "conversion_time": 0.14040088653564453,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4902237.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 6,
-      "corner_threshold": 60,
-      "segment_length": 4.0
-    },
-    "quality_score": 0.0014375061218465971,
-    "file_size": 9587,
-    "conversion_time": 0.14163708686828613,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4902237.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 7,
-      "corner_threshold": 70,
-      "segment_length": 3.5
-    },
-    "quality_score": 0.0014375061218465971,
-    "file_size": 9587,
-    "conversion_time": 0.1380748748779297,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4902237.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 8,
-      "corner_threshold": 80,
-      "segment_length": 3.0
-    },
-    "quality_score": 0.001413581383065976,
-    "file_size": 11865,
-    "conversion_time": 0.14559602737426758,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4902237.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 10,
-      "corner_threshold": 90,
-      "segment_length": 2.5
-    },
-    "quality_score": 0.001413581383065976,
-    "file_size": 11865,
-    "conversion_time": 0.13923883438110352,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/9710836.png",
+    "image_path": "data/raw_logos/11933711.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.48123807097437055,
-    "file_size": 8679,
-    "conversion_time": 0.15789413452148438,
+    "quality_score": -0.08748841897415899,
+    "file_size": 12463,
+    "conversion_time": 0.49994802474975586,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01165771484375,
-      "gradient_strength": 2.1486549377441406,
-      "horizontal_variance": 11089493.041992188
+      "edge_ratio": 0.0191497802734375,
+      "gradient_strength": 3.6693344116210938,
+      "horizontal_variance": 2065111.2899780273
     }
   },
   {
-    "image_path": "data/raw_logos/9710836.png",
+    "image_path": "data/raw_logos/11933711.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.48123807097437055,
-    "file_size": 8679,
-    "conversion_time": 0.1837010383605957,
+    "quality_score": -0.08727354741142554,
+    "file_size": 13304,
+    "conversion_time": 0.1581578254699707,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01165771484375,
-      "gradient_strength": 2.1486549377441406,
-      "horizontal_variance": 11089493.041992188
+      "edge_ratio": 0.0191497802734375,
+      "gradient_strength": 3.6693344116210938,
+      "horizontal_variance": 2065111.2899780273
     }
   },
   {
-    "image_path": "data/raw_logos/9710836.png",
+    "image_path": "data/raw_logos/11933711.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.496914176027849,
-    "file_size": 17101,
-    "conversion_time": 0.1864640712738037,
+    "quality_score": -0.08654504229887858,
+    "file_size": 14617,
+    "conversion_time": 0.15449213981628418,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01165771484375,
-      "gradient_strength": 2.1486549377441406,
-      "horizontal_variance": 11089493.041992188
+      "edge_ratio": 0.0191497802734375,
+      "gradient_strength": 3.6693344116210938,
+      "horizontal_variance": 2065111.2899780273
     }
   },
   {
-    "image_path": "data/raw_logos/9710836.png",
+    "image_path": "data/raw_logos/11933711.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.49709106408582265,
-    "file_size": 17083,
-    "conversion_time": 0.16359329223632812,
+    "quality_score": -0.08594281029783438,
+    "file_size": 16950,
+    "conversion_time": 0.15870165824890137,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01165771484375,
-      "gradient_strength": 2.1486549377441406,
-      "horizontal_variance": 11089493.041992188
+      "edge_ratio": 0.0191497802734375,
+      "gradient_strength": 3.6693344116210938,
+      "horizontal_variance": 2065111.2899780273
     }
   },
   {
-    "image_path": "data/raw_logos/9710836.png",
+    "image_path": "data/raw_logos/11933711.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.49702178599367974,
-    "file_size": 16964,
-    "conversion_time": 0.16575217247009277,
+    "quality_score": -0.08594248153787636,
+    "file_size": 17056,
+    "conversion_time": 0.15309596061706543,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01165771484375,
-      "gradient_strength": 2.1486549377441406,
-      "horizontal_variance": 11089493.041992188
+      "edge_ratio": 0.0191497802734375,
+      "gradient_strength": 3.6693344116210938,
+      "horizontal_variance": 2065111.2899780273
     }
   },
   {
-    "image_path": "data/raw_logos/9710836.png",
+    "image_path": "data/raw_logos/11933711.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.48123807097437055,
-    "file_size": 8679,
-    "conversion_time": 0.14809608459472656,
+    "quality_score": -0.08593861093665402,
+    "file_size": 17056,
+    "conversion_time": 0.15372323989868164,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01165771484375,
-      "gradient_strength": 2.1486549377441406,
-      "horizontal_variance": 11089493.041992188
+      "edge_ratio": 0.0191497802734375,
+      "gradient_strength": 3.6693344116210938,
+      "horizontal_variance": 2065111.2899780273
     }
   },
   {
-    "image_path": "data/raw_logos/11771671.png",
+    "image_path": "data/raw_logos/1474244.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.21601993968401392,
-    "file_size": 10028,
-    "conversion_time": 0.15023589134216309,
+    "quality_score": 0.009006461509418785,
+    "file_size": 23139,
+    "conversion_time": 0.16235589981079102,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01340484619140625,
-      "gradient_strength": 2.5763072967529297,
-      "horizontal_variance": 5558422.051620483
+      "edge_ratio": 0.0378265380859375,
+      "gradient_strength": 7.103994369506836,
+      "horizontal_variance": 85735331.52923584
     }
   },
   {
-    "image_path": "data/raw_logos/11771671.png",
+    "image_path": "data/raw_logos/1474244.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.22104586475050012,
-    "file_size": 11873,
-    "conversion_time": 0.15422320365905762,
+    "quality_score": 0.008880200616523174,
+    "file_size": 23858,
+    "conversion_time": 0.16377592086791992,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01340484619140625,
-      "gradient_strength": 2.5763072967529297,
-      "horizontal_variance": 5558422.051620483
+      "edge_ratio": 0.0378265380859375,
+      "gradient_strength": 7.103994369506836,
+      "horizontal_variance": 85735331.52923584
     }
   },
   {
-    "image_path": "data/raw_logos/11771671.png",
+    "image_path": "data/raw_logos/1474244.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.2353776534643064,
-    "file_size": 27088,
-    "conversion_time": 0.16080093383789062,
+    "quality_score": 0.001108637035750913,
+    "file_size": 29410,
+    "conversion_time": 0.17261910438537598,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01340484619140625,
-      "gradient_strength": 2.5763072967529297,
-      "horizontal_variance": 5558422.051620483
+      "edge_ratio": 0.0378265380859375,
+      "gradient_strength": 7.103994369506836,
+      "horizontal_variance": 85735331.52923584
     }
   },
   {
-    "image_path": "data/raw_logos/11771671.png",
+    "image_path": "data/raw_logos/1474244.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.23518452696180142,
-    "file_size": 27068,
-    "conversion_time": 0.16535186767578125,
+    "quality_score": 0.0011139177351515781,
+    "file_size": 29535,
+    "conversion_time": 0.17340588569641113,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01340484619140625,
-      "gradient_strength": 2.5763072967529297,
-      "horizontal_variance": 5558422.051620483
+      "edge_ratio": 0.0378265380859375,
+      "gradient_strength": 7.103994369506836,
+      "horizontal_variance": 85735331.52923584
     }
   },
   {
-    "image_path": "data/raw_logos/11771671.png",
+    "image_path": "data/raw_logos/1474244.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.23537123243597663,
-    "file_size": 27785,
-    "conversion_time": 0.16185283660888672,
+    "quality_score": 0.0011576046963420654,
+    "file_size": 29694,
+    "conversion_time": 0.17809510231018066,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01340484619140625,
-      "gradient_strength": 2.5763072967529297,
-      "horizontal_variance": 5558422.051620483
+      "edge_ratio": 0.0378265380859375,
+      "gradient_strength": 7.103994369506836,
+      "horizontal_variance": 85735331.52923584
     }
   },
   {
-    "image_path": "data/raw_logos/11771671.png",
+    "image_path": "data/raw_logos/1474244.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.21954919472780374,
-    "file_size": 17633,
-    "conversion_time": 0.15067791938781738,
+    "quality_score": 0.0011864159232402739,
+    "file_size": 29293,
+    "conversion_time": 0.16579890251159668,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.01340484619140625,
-      "gradient_strength": 2.5763072967529297,
-      "horizontal_variance": 5558422.051620483
+      "edge_ratio": 0.0378265380859375,
+      "gradient_strength": 7.103994369506836,
+      "horizontal_variance": 85735331.52923584
     }
   },
   {
-    "image_path": "data/raw_logos/11680866.png",
+    "image_path": "data/raw_logos/6790878.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.5757158303172017,
-    "file_size": 6849,
-    "conversion_time": 0.15129590034484863,
+    "quality_score": 0.13868268417157437,
+    "file_size": 19170,
+    "conversion_time": 0.1515340805053711,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -342,16 +234,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11680866.png",
+    "image_path": "data/raw_logos/6790878.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.5757206382545177,
-    "file_size": 6841,
-    "conversion_time": 0.15044808387756348,
+    "quality_score": 0.13416562270201407,
+    "file_size": 21566,
+    "conversion_time": 0.1635279655456543,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -360,16 +252,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11680866.png",
+    "image_path": "data/raw_logos/6790878.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.5756912902822132,
-    "file_size": 7345,
-    "conversion_time": 0.15990996360778809,
+    "quality_score": 0.13321627350410667,
+    "file_size": 27216,
+    "conversion_time": 0.16210722923278809,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -378,16 +270,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11680866.png",
+    "image_path": "data/raw_logos/6790878.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.5758842201722625,
-    "file_size": 8144,
-    "conversion_time": 0.1512608528137207,
+    "quality_score": 0.13101174063389703,
+    "file_size": 29227,
+    "conversion_time": 0.15959906578063965,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -396,16 +288,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11680866.png",
+    "image_path": "data/raw_logos/6790878.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.5758809625465338,
-    "file_size": 8259,
-    "conversion_time": 0.1514301300048828,
+    "quality_score": 0.13098015015430284,
+    "file_size": 29649,
+    "conversion_time": 0.15748929977416992,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -414,16 +306,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11680866.png",
+    "image_path": "data/raw_logos/6790878.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.5758658340654857,
-    "file_size": 8445,
-    "conversion_time": 0.14879083633422852,
+    "quality_score": 0.13091188505459705,
+    "file_size": 30941,
+    "conversion_time": 0.17200589179992676,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -432,16 +324,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379686.png",
+    "image_path": "data/raw_logos/5636838.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.13183284683206267,
-    "file_size": 14062,
-    "conversion_time": 0.16689419746398926,
+    "quality_score": 0.10964075301968512,
+    "file_size": 8451,
+    "conversion_time": 0.1434330940246582,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -450,16 +342,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379686.png",
+    "image_path": "data/raw_logos/5636838.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.13413674869655157,
-    "file_size": 21665,
-    "conversion_time": 0.17158102989196777,
+    "quality_score": 0.10964075301968512,
+    "file_size": 8451,
+    "conversion_time": 0.1456279754638672,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -468,16 +360,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379686.png",
+    "image_path": "data/raw_logos/5636838.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.1344148386441647,
-    "file_size": 26553,
-    "conversion_time": 0.1663200855255127,
+    "quality_score": 0.1097104840447633,
+    "file_size": 8878,
+    "conversion_time": 0.14403104782104492,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -486,16 +378,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379686.png",
+    "image_path": "data/raw_logos/5636838.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.1344148386441647,
-    "file_size": 26553,
-    "conversion_time": 0.16490697860717773,
+    "quality_score": 0.1097104840447633,
+    "file_size": 8878,
+    "conversion_time": 0.14501190185546875,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -504,16 +396,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379686.png",
+    "image_path": "data/raw_logos/5636838.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.13431363525317788,
-    "file_size": 26840,
-    "conversion_time": 0.16614508628845215,
+    "quality_score": 0.1097104840447633,
+    "file_size": 8878,
+    "conversion_time": 0.15098905563354492,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -522,16 +414,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379686.png",
+    "image_path": "data/raw_logos/5636838.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.1282546963482219,
-    "file_size": 28912,
-    "conversion_time": 0.16478395462036133,
+    "quality_score": 0.09814071042068102,
+    "file_size": 8354,
+    "conversion_time": 0.17458581924438477,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -540,124 +432,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/17836688.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 3,
-      "corner_threshold": 30,
-      "segment_length": 6.0
-    },
-    "quality_score": 0.5235116202409958,
-    "file_size": 17661,
-    "conversion_time": 0.1746690273284912,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.024456024169921875,
-      "gradient_strength": 3.6572837829589844,
-      "horizontal_variance": 147497244.3022728
-    }
-  },
-  {
-    "image_path": "data/raw_logos/17836688.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 4,
-      "corner_threshold": 40,
-      "segment_length": 5.0
-    },
-    "quality_score": 0.5632431517222302,
-    "file_size": 19537,
-    "conversion_time": 0.1804828643798828,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.024456024169921875,
-      "gradient_strength": 3.6572837829589844,
-      "horizontal_variance": 147497244.3022728
-    }
-  },
-  {
-    "image_path": "data/raw_logos/17836688.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 6,
-      "corner_threshold": 60,
-      "segment_length": 4.0
-    },
-    "quality_score": 0.5614279340423375,
-    "file_size": 24629,
-    "conversion_time": 0.18800115585327148,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.024456024169921875,
-      "gradient_strength": 3.6572837829589844,
-      "horizontal_variance": 147497244.3022728
-    }
-  },
-  {
-    "image_path": "data/raw_logos/17836688.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 7,
-      "corner_threshold": 70,
-      "segment_length": 3.5
-    },
-    "quality_score": 0.5614380742613432,
-    "file_size": 24625,
-    "conversion_time": 0.17806506156921387,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.024456024169921875,
-      "gradient_strength": 3.6572837829589844,
-      "horizontal_variance": 147497244.3022728
-    }
-  },
-  {
-    "image_path": "data/raw_logos/17836688.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 8,
-      "corner_threshold": 80,
-      "segment_length": 3.0
-    },
-    "quality_score": 0.561469806377515,
-    "file_size": 24625,
-    "conversion_time": 0.1799757480621338,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.024456024169921875,
-      "gradient_strength": 3.6572837829589844,
-      "horizontal_variance": 147497244.3022728
-    }
-  },
-  {
-    "image_path": "data/raw_logos/17836688.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 10,
-      "corner_threshold": 90,
-      "segment_length": 2.5
-    },
-    "quality_score": 0.40807759606941024,
-    "file_size": 8047,
-    "conversion_time": 0.15000391006469727,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.024456024169921875,
-      "gradient_strength": 3.6572837829589844,
-      "horizontal_variance": 147497244.3022728
-    }
-  },
-  {
-    "image_path": "data/raw_logos/12205449.png",
+    "image_path": "data/raw_logos/3694833.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.40795939782792373,
-    "file_size": 4250,
-    "conversion_time": 0.14052414894104004,
+    "quality_score": 0.16304741835987258,
+    "file_size": 14508,
+    "conversion_time": 0.15809988975524902,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -666,16 +450,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12205449.png",
+    "image_path": "data/raw_logos/3694833.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.40795939782792373,
-    "file_size": 4250,
-    "conversion_time": 0.14246392250061035,
+    "quality_score": 0.16366374053135155,
+    "file_size": 19302,
+    "conversion_time": 0.16042709350585938,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -684,16 +468,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12205449.png",
+    "image_path": "data/raw_logos/3694833.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.40795939782792373,
-    "file_size": 4250,
-    "conversion_time": 0.14191198348999023,
+    "quality_score": 0.16378509753118972,
+    "file_size": 20848,
+    "conversion_time": 0.1573648452758789,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -702,16 +486,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12205449.png",
+    "image_path": "data/raw_logos/3694833.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.40795939782792373,
-    "file_size": 4250,
-    "conversion_time": 0.1425490379333496,
+    "quality_score": 0.16378509753118972,
+    "file_size": 20848,
+    "conversion_time": 0.15825486183166504,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -720,16 +504,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12205449.png",
+    "image_path": "data/raw_logos/3694833.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.40899685342789976,
-    "file_size": 6948,
-    "conversion_time": 0.14199233055114746,
+    "quality_score": 0.16378509753118972,
+    "file_size": 20848,
+    "conversion_time": 0.15886306762695312,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -738,16 +522,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12205449.png",
+    "image_path": "data/raw_logos/3694833.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.4382182101155639,
-    "file_size": 9620,
-    "conversion_time": 0.146104097366333,
+    "quality_score": 0.16378509753118972,
+    "file_size": 20848,
+    "conversion_time": 0.16101813316345215,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -756,124 +540,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/4814852.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 3,
-      "corner_threshold": 30,
-      "segment_length": 6.0
-    },
-    "quality_score": 0.3783821424025588,
-    "file_size": 23474,
-    "conversion_time": 0.1717357635498047,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.0227203369140625,
-      "gradient_strength": 3.9072265625,
-      "horizontal_variance": 39154825.18157959
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4814852.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 4,
-      "corner_threshold": 40,
-      "segment_length": 5.0
-    },
-    "quality_score": 0.4811770586237223,
-    "file_size": 31752,
-    "conversion_time": 0.18144607543945312,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.0227203369140625,
-      "gradient_strength": 3.9072265625,
-      "horizontal_variance": 39154825.18157959
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4814852.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 6,
-      "corner_threshold": 60,
-      "segment_length": 4.0
-    },
-    "quality_score": 0.4949220452257773,
-    "file_size": 45839,
-    "conversion_time": 0.20626378059387207,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.0227203369140625,
-      "gradient_strength": 3.9072265625,
-      "horizontal_variance": 39154825.18157959
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4814852.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 7,
-      "corner_threshold": 70,
-      "segment_length": 3.5
-    },
-    "quality_score": 0.494637314022925,
-    "file_size": 46144,
-    "conversion_time": 0.20118403434753418,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.0227203369140625,
-      "gradient_strength": 3.9072265625,
-      "horizontal_variance": 39154825.18157959
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4814852.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 8,
-      "corner_threshold": 80,
-      "segment_length": 3.0
-    },
-    "quality_score": 0.4932924503780736,
-    "file_size": 46633,
-    "conversion_time": 0.19220209121704102,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.0227203369140625,
-      "gradient_strength": 3.9072265625,
-      "horizontal_variance": 39154825.18157959
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4814852.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 10,
-      "corner_threshold": 90,
-      "segment_length": 2.5
-    },
-    "quality_score": 0.23424651370406546,
-    "file_size": 17792,
-    "conversion_time": 0.1565392017364502,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.0227203369140625,
-      "gradient_strength": 3.9072265625,
-      "horizontal_variance": 39154825.18157959
-    }
-  },
-  {
-    "image_path": "data/raw_logos/6181580.png",
+    "image_path": "data/raw_logos/11837077.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.025391864980631583,
-    "file_size": 9154,
-    "conversion_time": 0.14507079124450684,
+    "quality_score": 0.012455180392437724,
+    "file_size": 5369,
+    "conversion_time": 0.13650107383728027,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -882,16 +558,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/6181580.png",
+    "image_path": "data/raw_logos/11837077.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.025388069639342578,
-    "file_size": 10579,
-    "conversion_time": 0.14421296119689941,
+    "quality_score": 0.01247957122444366,
+    "file_size": 5624,
+    "conversion_time": 0.13455700874328613,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -900,16 +576,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/6181580.png",
+    "image_path": "data/raw_logos/11837077.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.025480920463570457,
-    "file_size": 11305,
-    "conversion_time": 0.14423704147338867,
+    "quality_score": 0.019621979617670513,
+    "file_size": 6452,
+    "conversion_time": 0.14417505264282227,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -918,16 +594,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/6181580.png",
+    "image_path": "data/raw_logos/11837077.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.025481395910853518,
-    "file_size": 11323,
-    "conversion_time": 0.14547014236450195,
+    "quality_score": 0.01946357263727404,
+    "file_size": 6751,
+    "conversion_time": 0.15630483627319336,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -936,16 +612,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/6181580.png",
+    "image_path": "data/raw_logos/11837077.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.0254807721353557,
-    "file_size": 11322,
-    "conversion_time": 0.1427462100982666,
+    "quality_score": 0.01946357263727404,
+    "file_size": 6751,
+    "conversion_time": 0.13704681396484375,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -954,16 +630,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/6181580.png",
+    "image_path": "data/raw_logos/11837077.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.0254807721353557,
-    "file_size": 11322,
-    "conversion_time": 0.14452815055847168,
+    "quality_score": 0.01946357263727404,
+    "file_size": 6751,
+    "conversion_time": 0.13485383987426758,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -972,124 +648,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/1562952.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 3,
-      "corner_threshold": 30,
-      "segment_length": 6.0
-    },
-    "quality_score": 0.7398692812186461,
-    "file_size": 20194,
-    "conversion_time": 0.20638108253479004,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.02910614013671875,
-      "gradient_strength": 4.4279632568359375,
-      "horizontal_variance": 1976292.2756195068
-    }
-  },
-  {
-    "image_path": "data/raw_logos/1562952.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 4,
-      "corner_threshold": 40,
-      "segment_length": 5.0
-    },
-    "quality_score": 0.7376517332072269,
-    "file_size": 20510,
-    "conversion_time": 0.20815300941467285,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.02910614013671875,
-      "gradient_strength": 4.4279632568359375,
-      "horizontal_variance": 1976292.2756195068
-    }
-  },
-  {
-    "image_path": "data/raw_logos/1562952.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 6,
-      "corner_threshold": 60,
-      "segment_length": 4.0
-    },
-    "quality_score": 0.7392630132588162,
-    "file_size": 20056,
-    "conversion_time": 0.21779775619506836,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.02910614013671875,
-      "gradient_strength": 4.4279632568359375,
-      "horizontal_variance": 1976292.2756195068
-    }
-  },
-  {
-    "image_path": "data/raw_logos/1562952.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 7,
-      "corner_threshold": 70,
-      "segment_length": 3.5
-    },
-    "quality_score": 0.7410269344964167,
-    "file_size": 20350,
-    "conversion_time": 0.24118590354919434,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.02910614013671875,
-      "gradient_strength": 4.4279632568359375,
-      "horizontal_variance": 1976292.2756195068
-    }
-  },
-  {
-    "image_path": "data/raw_logos/1562952.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 8,
-      "corner_threshold": 80,
-      "segment_length": 3.0
-    },
-    "quality_score": 0.74101439809375,
-    "file_size": 20352,
-    "conversion_time": 0.2140200138092041,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.02910614013671875,
-      "gradient_strength": 4.4279632568359375,
-      "horizontal_variance": 1976292.2756195068
-    }
-  },
-  {
-    "image_path": "data/raw_logos/1562952.png",
-    "logo_type": "text_based",
-    "parameters": {
-      "color_precision": 10,
-      "corner_threshold": 90,
-      "segment_length": 2.5
-    },
-    "quality_score": 0.481826741991928,
-    "file_size": 3547,
-    "conversion_time": 0.15123414993286133,
-    "features": {
-      "unique_colors": 256,
-      "edge_ratio": 0.02910614013671875,
-      "gradient_strength": 4.4279632568359375,
-      "horizontal_variance": 1976292.2756195068
-    }
-  },
-  {
-    "image_path": "data/raw_logos/14379662.png",
+    "image_path": "data/raw_logos/17055304.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.05494282481536339,
-    "file_size": 7755,
-    "conversion_time": 0.1536848545074463,
+    "quality_score": 0.3143378070706509,
+    "file_size": 10603,
+    "conversion_time": 0.14744997024536133,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1098,16 +666,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379662.png",
+    "image_path": "data/raw_logos/17055304.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.05504009233679613,
-    "file_size": 8263,
-    "conversion_time": 0.15018010139465332,
+    "quality_score": 0.3143378070706509,
+    "file_size": 10603,
+    "conversion_time": 0.16526389122009277,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1116,16 +684,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379662.png",
+    "image_path": "data/raw_logos/17055304.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.05531002621714719,
-    "file_size": 8555,
-    "conversion_time": 0.14833378791809082,
+    "quality_score": 0.3142580060263958,
+    "file_size": 10964,
+    "conversion_time": 0.15197491645812988,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1134,16 +702,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379662.png",
+    "image_path": "data/raw_logos/17055304.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.05531002621714719,
-    "file_size": 8555,
-    "conversion_time": 0.1509709358215332,
+    "quality_score": 0.3140321263901498,
+    "file_size": 11025,
+    "conversion_time": 0.14674830436706543,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1152,16 +720,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379662.png",
+    "image_path": "data/raw_logos/17055304.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.05531002621714719,
-    "file_size": 8555,
-    "conversion_time": 0.15402483940124512,
+    "quality_score": 0.3140321263901498,
+    "file_size": 11025,
+    "conversion_time": 0.14947104454040527,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1170,16 +738,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/14379662.png",
+    "image_path": "data/raw_logos/17055304.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.05531002621714719,
-    "file_size": 8555,
-    "conversion_time": 0.15245604515075684,
+    "quality_score": 0.3140321263901498,
+    "file_size": 11025,
+    "conversion_time": 0.1486349105834961,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1188,448 +756,340 @@
     }
   },
   {
-    "image_path": "data/raw_logos/3124892.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 3,
-      "corner_threshold": 30,
-      "segment_length": 6.0
-    },
-    "quality_score": 0.23267858454754062,
-    "file_size": 13142,
-    "conversion_time": 0.16200494766235352,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/3124892.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 4,
-      "corner_threshold": 40,
-      "segment_length": 5.0
-    },
-    "quality_score": 0.23261555733612047,
-    "file_size": 13918,
-    "conversion_time": 0.1764390468597412,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/3124892.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 6,
-      "corner_threshold": 60,
-      "segment_length": 4.0
-    },
-    "quality_score": 0.22699578695553976,
-    "file_size": 20599,
-    "conversion_time": 0.18157625198364258,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/3124892.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 7,
-      "corner_threshold": 70,
-      "segment_length": 3.5
-    },
-    "quality_score": 0.2238866638666917,
-    "file_size": 22805,
-    "conversion_time": 0.17843103408813477,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/3124892.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 8,
-      "corner_threshold": 80,
-      "segment_length": 3.0
-    },
-    "quality_score": 0.22386977939901545,
-    "file_size": 23051,
-    "conversion_time": 0.1872098445892334,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/3124892.png",
-    "logo_type": "simple_geometric",
-    "parameters": {
-      "color_precision": 10,
-      "corner_threshold": 90,
-      "segment_length": 2.5
-    },
-    "quality_score": 0.22386977939901545,
-    "file_size": 23051,
-    "conversion_time": 0.22251510620117188,
-    "features": {
-      "unique_colors": 1,
-      "edge_ratio": 0.0,
-      "gradient_strength": 0.0,
-      "horizontal_variance": 0.0
-    }
-  },
-  {
-    "image_path": "data/raw_logos/4399391.png",
+    "image_path": "data/raw_logos/18524313.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.6043488926292315,
-    "file_size": 6050,
-    "conversion_time": 0.16004586219787598,
+    "quality_score": 0.049897078992555806,
+    "file_size": 7990,
+    "conversion_time": 0.15063095092773438,
     "features": {
-      "unique_colors": 185,
-      "edge_ratio": 0.00643157958984375,
-      "gradient_strength": 1.2222137451171875,
-      "horizontal_variance": 229880.48057556152
+      "unique_colors": 56,
+      "edge_ratio": 0.02088165283203125,
+      "gradient_strength": 1.6892280578613281,
+      "horizontal_variance": 148565518.50242615
     }
   },
   {
-    "image_path": "data/raw_logos/4399391.png",
+    "image_path": "data/raw_logos/18524313.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.6037850827377148,
-    "file_size": 6674,
-    "conversion_time": 0.15981578826904297,
+    "quality_score": 0.05580439549554146,
+    "file_size": 9363,
+    "conversion_time": 0.14781522750854492,
     "features": {
-      "unique_colors": 185,
-      "edge_ratio": 0.00643157958984375,
-      "gradient_strength": 1.2222137451171875,
-      "horizontal_variance": 229880.48057556152
+      "unique_colors": 56,
+      "edge_ratio": 0.02088165283203125,
+      "gradient_strength": 1.6892280578613281,
+      "horizontal_variance": 148565518.50242615
     }
   },
   {
-    "image_path": "data/raw_logos/4399391.png",
+    "image_path": "data/raw_logos/18524313.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.6020972141257708,
-    "file_size": 7325,
-    "conversion_time": 0.16163206100463867,
+    "quality_score": 0.05580439549554146,
+    "file_size": 9363,
+    "conversion_time": 0.15116429328918457,
     "features": {
-      "unique_colors": 185,
-      "edge_ratio": 0.00643157958984375,
-      "gradient_strength": 1.2222137451171875,
-      "horizontal_variance": 229880.48057556152
+      "unique_colors": 56,
+      "edge_ratio": 0.02088165283203125,
+      "gradient_strength": 1.6892280578613281,
+      "horizontal_variance": 148565518.50242615
     }
   },
   {
-    "image_path": "data/raw_logos/4399391.png",
+    "image_path": "data/raw_logos/18524313.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.6020972141257708,
-    "file_size": 7325,
-    "conversion_time": 0.15700888633728027,
+    "quality_score": 0.05580439549554146,
+    "file_size": 9363,
+    "conversion_time": 0.14925885200500488,
     "features": {
-      "unique_colors": 185,
-      "edge_ratio": 0.00643157958984375,
-      "gradient_strength": 1.2222137451171875,
-      "horizontal_variance": 229880.48057556152
+      "unique_colors": 56,
+      "edge_ratio": 0.02088165283203125,
+      "gradient_strength": 1.6892280578613281,
+      "horizontal_variance": 148565518.50242615
     }
   },
   {
-    "image_path": "data/raw_logos/4399391.png",
+    "image_path": "data/raw_logos/18524313.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.6020972141257708,
-    "file_size": 7325,
-    "conversion_time": 0.15865325927734375,
+    "quality_score": 0.05580439549554146,
+    "file_size": 9363,
+    "conversion_time": 0.15172481536865234,
     "features": {
-      "unique_colors": 185,
-      "edge_ratio": 0.00643157958984375,
-      "gradient_strength": 1.2222137451171875,
-      "horizontal_variance": 229880.48057556152
+      "unique_colors": 56,
+      "edge_ratio": 0.02088165283203125,
+      "gradient_strength": 1.6892280578613281,
+      "horizontal_variance": 148565518.50242615
     }
   },
   {
-    "image_path": "data/raw_logos/4399391.png",
+    "image_path": "data/raw_logos/18524313.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.5970132512999302,
-    "file_size": 4591,
-    "conversion_time": 0.14713597297668457,
+    "quality_score": 0.033719546144216093,
+    "file_size": 8846,
+    "conversion_time": 0.14604496955871582,
     "features": {
-      "unique_colors": 185,
-      "edge_ratio": 0.00643157958984375,
-      "gradient_strength": 1.2222137451171875,
-      "horizontal_variance": 229880.48057556152
+      "unique_colors": 56,
+      "edge_ratio": 0.02088165283203125,
+      "gradient_strength": 1.6892280578613281,
+      "horizontal_variance": 148565518.50242615
     }
   },
   {
-    "image_path": "data/raw_logos/11744644.png",
+    "image_path": "data/raw_logos/1385807.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": -0.059132259343239034,
-    "file_size": 19402,
-    "conversion_time": 0.1844639778137207,
+    "quality_score": 0.9745842908285095,
+    "file_size": 7487,
+    "conversion_time": 0.16936087608337402,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.032520294189453125,
-      "gradient_strength": 6.018732070922852,
-      "horizontal_variance": 93629703.23324203
+      "edge_ratio": 0.012142181396484375,
+      "gradient_strength": 0.9695358276367188,
+      "horizontal_variance": 6981670.183467865
     }
   },
   {
-    "image_path": "data/raw_logos/11744644.png",
+    "image_path": "data/raw_logos/1385807.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": -0.05819721202036846,
-    "file_size": 21713,
-    "conversion_time": 0.16734910011291504,
+    "quality_score": 0.978344658068498,
+    "file_size": 8757,
+    "conversion_time": 0.16424798965454102,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.032520294189453125,
-      "gradient_strength": 6.018732070922852,
-      "horizontal_variance": 93629703.23324203
+      "edge_ratio": 0.012142181396484375,
+      "gradient_strength": 0.9695358276367188,
+      "horizontal_variance": 6981670.183467865
     }
   },
   {
-    "image_path": "data/raw_logos/11744644.png",
+    "image_path": "data/raw_logos/1385807.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": -0.057599983327014624,
-    "file_size": 24191,
-    "conversion_time": 0.1648578643798828,
+    "quality_score": 0.9821411483172522,
+    "file_size": 11806,
+    "conversion_time": 0.19541597366333008,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.032520294189453125,
-      "gradient_strength": 6.018732070922852,
-      "horizontal_variance": 93629703.23324203
+      "edge_ratio": 0.012142181396484375,
+      "gradient_strength": 0.9695358276367188,
+      "horizontal_variance": 6981670.183467865
     }
   },
   {
-    "image_path": "data/raw_logos/11744644.png",
+    "image_path": "data/raw_logos/1385807.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": -0.05929861287036278,
-    "file_size": 24802,
-    "conversion_time": 0.16434597969055176,
+    "quality_score": 0.9826458708551231,
+    "file_size": 14370,
+    "conversion_time": 0.16931724548339844,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.032520294189453125,
-      "gradient_strength": 6.018732070922852,
-      "horizontal_variance": 93629703.23324203
+      "edge_ratio": 0.012142181396484375,
+      "gradient_strength": 0.9695358276367188,
+      "horizontal_variance": 6981670.183467865
     }
   },
   {
-    "image_path": "data/raw_logos/11744644.png",
+    "image_path": "data/raw_logos/1385807.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": -0.059206887329325976,
-    "file_size": 24996,
-    "conversion_time": 0.21672296524047852,
+    "quality_score": 0.976273967221478,
+    "file_size": 15847,
+    "conversion_time": 0.17096781730651855,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.032520294189453125,
-      "gradient_strength": 6.018732070922852,
-      "horizontal_variance": 93629703.23324203
+      "edge_ratio": 0.012142181396484375,
+      "gradient_strength": 0.9695358276367188,
+      "horizontal_variance": 6981670.183467865
     }
   },
   {
-    "image_path": "data/raw_logos/11744644.png",
+    "image_path": "data/raw_logos/1385807.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": -0.05903898223576326,
-    "file_size": 25703,
-    "conversion_time": 0.18229293823242188,
+    "quality_score": 0.8767249723649048,
+    "file_size": 2089,
+    "conversion_time": 0.15290403366088867,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.032520294189453125,
-      "gradient_strength": 6.018732070922852,
-      "horizontal_variance": 93629703.23324203
+      "edge_ratio": 0.012142181396484375,
+      "gradient_strength": 0.9695358276367188,
+      "horizontal_variance": 6981670.183467865
     }
   },
   {
-    "image_path": "data/raw_logos/3344776.png",
+    "image_path": "data/raw_logos/1562948.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.6344984325413228,
-    "file_size": 31153,
-    "conversion_time": 0.20223498344421387,
+    "quality_score": 0.7391039895374395,
+    "file_size": 10052,
+    "conversion_time": 0.17690086364746094,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.03630828857421875,
-      "gradient_strength": 5.637172698974609,
-      "horizontal_variance": 54450800.5153656
+      "edge_ratio": 0.0145721435546875,
+      "gradient_strength": 2.322286605834961,
+      "horizontal_variance": 900598.6312866211
     }
   },
   {
-    "image_path": "data/raw_logos/3344776.png",
+    "image_path": "data/raw_logos/1562948.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.6559057888580926,
-    "file_size": 41097,
-    "conversion_time": 0.2091820240020752,
+    "quality_score": 0.7389616427089051,
+    "file_size": 10085,
+    "conversion_time": 0.17978787422180176,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.03630828857421875,
-      "gradient_strength": 5.637172698974609,
-      "horizontal_variance": 54450800.5153656
+      "edge_ratio": 0.0145721435546875,
+      "gradient_strength": 2.322286605834961,
+      "horizontal_variance": 900598.6312866211
     }
   },
   {
-    "image_path": "data/raw_logos/3344776.png",
+    "image_path": "data/raw_logos/1562948.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.6579202746264772,
-    "file_size": 46075,
-    "conversion_time": 0.2163088321685791,
+    "quality_score": 0.7393519617064791,
+    "file_size": 9799,
+    "conversion_time": 0.17649221420288086,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.03630828857421875,
-      "gradient_strength": 5.637172698974609,
-      "horizontal_variance": 54450800.5153656
+      "edge_ratio": 0.0145721435546875,
+      "gradient_strength": 2.322286605834961,
+      "horizontal_variance": 900598.6312866211
     }
   },
   {
-    "image_path": "data/raw_logos/3344776.png",
+    "image_path": "data/raw_logos/1562948.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.6577657829691351,
-    "file_size": 46888,
-    "conversion_time": 0.21331191062927246,
+    "quality_score": 0.7386049688042254,
+    "file_size": 9862,
+    "conversion_time": 0.1759331226348877,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.03630828857421875,
-      "gradient_strength": 5.637172698974609,
-      "horizontal_variance": 54450800.5153656
+      "edge_ratio": 0.0145721435546875,
+      "gradient_strength": 2.322286605834961,
+      "horizontal_variance": 900598.6312866211
     }
   },
   {
-    "image_path": "data/raw_logos/3344776.png",
+    "image_path": "data/raw_logos/1562948.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.6576704090839913,
-    "file_size": 47031,
-    "conversion_time": 0.21841001510620117,
+    "quality_score": 0.7386049688042254,
+    "file_size": 9862,
+    "conversion_time": 0.17235708236694336,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.03630828857421875,
-      "gradient_strength": 5.637172698974609,
-      "horizontal_variance": 54450800.5153656
+      "edge_ratio": 0.0145721435546875,
+      "gradient_strength": 2.322286605834961,
+      "horizontal_variance": 900598.6312866211
     }
   },
   {
-    "image_path": "data/raw_logos/3344776.png",
+    "image_path": "data/raw_logos/1562948.png",
     "logo_type": "text_based",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.32548816273457404,
-    "file_size": 9943,
-    "conversion_time": 0.15440082550048828,
+    "quality_score": 0.6483556951764091,
+    "file_size": 3303,
+    "conversion_time": 0.15146303176879883,
     "features": {
       "unique_colors": 256,
-      "edge_ratio": 0.03630828857421875,
-      "gradient_strength": 5.637172698974609,
-      "horizontal_variance": 54450800.5153656
+      "edge_ratio": 0.0145721435546875,
+      "gradient_strength": 2.322286605834961,
+      "horizontal_variance": 900598.6312866211
     }
   },
   {
-    "image_path": "data/raw_logos/12633577.png",
+    "image_path": "data/raw_logos/4377030.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.6592936626240171,
-    "file_size": 4831,
-    "conversion_time": 0.14456892013549805,
+    "quality_score": 0.16610043688707102,
+    "file_size": 13117,
+    "conversion_time": 0.14673733711242676,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1638,16 +1098,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12633577.png",
+    "image_path": "data/raw_logos/4377030.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.6592936626240171,
-    "file_size": 4831,
-    "conversion_time": 0.1438920497894287,
+    "quality_score": 0.1660111767882575,
+    "file_size": 13420,
+    "conversion_time": 0.14754486083984375,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1656,16 +1116,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12633577.png",
+    "image_path": "data/raw_logos/4377030.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.6592936626240171,
-    "file_size": 4831,
-    "conversion_time": 0.14445018768310547,
+    "quality_score": 0.16690136514563841,
+    "file_size": 15016,
+    "conversion_time": 0.14831876754760742,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1674,16 +1134,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12633577.png",
+    "image_path": "data/raw_logos/4377030.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.6592936626240171,
-    "file_size": 4831,
-    "conversion_time": 0.14314699172973633,
+    "quality_score": 0.16640729354643755,
+    "file_size": 15730,
+    "conversion_time": 0.17178893089294434,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1692,16 +1152,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12633577.png",
+    "image_path": "data/raw_logos/4377030.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.6592936626240171,
-    "file_size": 4831,
-    "conversion_time": 0.15343403816223145,
+    "quality_score": 0.16662450170419665,
+    "file_size": 16154,
+    "conversion_time": 0.1476290225982666,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1710,16 +1170,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/12633577.png",
+    "image_path": "data/raw_logos/4377030.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.6592936626240171,
-    "file_size": 4831,
-    "conversion_time": 0.1446678638458252,
+    "quality_score": 0.17168795998100872,
+    "file_size": 17160,
+    "conversion_time": 0.14757084846496582,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1728,124 +1188,232 @@
     }
   },
   {
-    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "image_path": "data/raw_logos/2279398.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.6536821862661747,
+    "file_size": 24524,
+    "conversion_time": 0.18410491943359375,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.021297454833984375,
+      "gradient_strength": 5.119041442871094,
+      "horizontal_variance": 46593753.99084091
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2279398.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.6566589217379992,
+    "file_size": 27029,
+    "conversion_time": 0.18542909622192383,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.021297454833984375,
+      "gradient_strength": 5.119041442871094,
+      "horizontal_variance": 46593753.99084091
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2279398.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.6546667633293667,
+    "file_size": 34015,
+    "conversion_time": 0.18932080268859863,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.021297454833984375,
+      "gradient_strength": 5.119041442871094,
+      "horizontal_variance": 46593753.99084091
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2279398.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.654643077915142,
+    "file_size": 34119,
+    "conversion_time": 0.19112896919250488,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.021297454833984375,
+      "gradient_strength": 5.119041442871094,
+      "horizontal_variance": 46593753.99084091
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2279398.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.6547094193231682,
+    "file_size": 34032,
+    "conversion_time": 0.19011712074279785,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.021297454833984375,
+      "gradient_strength": 5.119041442871094,
+      "horizontal_variance": 46593753.99084091
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2279398.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.41097181235245417,
+    "file_size": 11625,
+    "conversion_time": 0.1543588638305664,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.021297454833984375,
+      "gradient_strength": 5.119041442871094,
+      "horizontal_variance": 46593753.99084091
+    }
+  },
+  {
+    "image_path": "data/raw_logos/6271164.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.9983187145304502,
-    "file_size": 14488,
-    "conversion_time": 2.150533676147461,
+    "quality_score": 0.14468019603042342,
+    "file_size": 18100,
+    "conversion_time": 0.14626574516296387,
     "features": {
-      "unique_colors": 6,
-      "edge_ratio": 0.002094223132590653,
-      "gradient_strength": 0.27349276101921055,
-      "horizontal_variance": 43090533.55485318
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
     }
   },
   {
-    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "image_path": "data/raw_logos/6271164.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.9981889889690194,
-    "file_size": 13813,
-    "conversion_time": 2.177690029144287,
+    "quality_score": 0.14436696975593918,
+    "file_size": 19737,
+    "conversion_time": 0.14625000953674316,
     "features": {
-      "unique_colors": 6,
-      "edge_ratio": 0.002094223132590653,
-      "gradient_strength": 0.27349276101921055,
-      "horizontal_variance": 43090533.55485318
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
     }
   },
   {
-    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "image_path": "data/raw_logos/6271164.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.9978122227924191,
-    "file_size": 17046,
-    "conversion_time": 2.1433708667755127,
+    "quality_score": 0.1443507323703642,
+    "file_size": 19766,
+    "conversion_time": 0.15187287330627441,
     "features": {
-      "unique_colors": 6,
-      "edge_ratio": 0.002094223132590653,
-      "gradient_strength": 0.27349276101921055,
-      "horizontal_variance": 43090533.55485318
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
     }
   },
   {
-    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "image_path": "data/raw_logos/6271164.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.9978110162901733,
-    "file_size": 17047,
-    "conversion_time": 2.1218559741973877,
+    "quality_score": 0.14340603462482834,
+    "file_size": 20593,
+    "conversion_time": 0.1607837677001953,
     "features": {
-      "unique_colors": 6,
-      "edge_ratio": 0.002094223132590653,
-      "gradient_strength": 0.27349276101921055,
-      "horizontal_variance": 43090533.55485318
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
     }
   },
   {
-    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "image_path": "data/raw_logos/6271164.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.9978110162901733,
-    "file_size": 17047,
-    "conversion_time": 2.1447060108184814,
+    "quality_score": 0.14340603462482834,
+    "file_size": 20593,
+    "conversion_time": 0.15614604949951172,
     "features": {
-      "unique_colors": 6,
-      "edge_ratio": 0.002094223132590653,
-      "gradient_strength": 0.27349276101921055,
-      "horizontal_variance": 43090533.55485318
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
     }
   },
   {
-    "image_path": "data/raw_logos/apple-icon-1024x1024.png",
+    "image_path": "data/raw_logos/6271164.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.9364080115078862,
-    "file_size": 330,
-    "conversion_time": 1.9934749603271484,
+    "quality_score": 0.1433717380001771,
+    "file_size": 20595,
+    "conversion_time": 0.14977097511291504,
     "features": {
-      "unique_colors": 6,
-      "edge_ratio": 0.002094223132590653,
-      "gradient_strength": 0.27349276101921055,
-      "horizontal_variance": 43090533.55485318
+      "unique_colors": 1,
+      "edge_ratio": 0.0,
+      "gradient_strength": 0.0,
+      "horizontal_variance": 0.0
     }
   },
   {
-    "image_path": "data/raw_logos/11618772.png",
+    "image_path": "data/raw_logos/5994055.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.26302490884118834,
-    "file_size": 13689,
-    "conversion_time": 0.328477144241333,
+    "quality_score": 0.08659461952242915,
+    "file_size": 3772,
+    "conversion_time": 0.1357710361480713,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1854,16 +1422,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11618772.png",
+    "image_path": "data/raw_logos/5994055.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.26302474584449964,
-    "file_size": 13687,
-    "conversion_time": 0.16400408744812012,
+    "quality_score": 0.08673354097486573,
+    "file_size": 3772,
+    "conversion_time": 0.13312005996704102,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1872,16 +1440,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11618772.png",
+    "image_path": "data/raw_logos/5994055.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.2631753070843793,
-    "file_size": 14533,
-    "conversion_time": 0.1588420867919922,
+    "quality_score": 0.08673354097486573,
+    "file_size": 3772,
+    "conversion_time": 0.13362979888916016,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1890,16 +1458,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11618772.png",
+    "image_path": "data/raw_logos/5994055.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.26316060807798086,
-    "file_size": 15403,
-    "conversion_time": 0.15297889709472656,
+    "quality_score": 0.086527104506388,
+    "file_size": 4127,
+    "conversion_time": 0.1410810947418213,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1908,16 +1476,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11618772.png",
+    "image_path": "data/raw_logos/5994055.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.2631576644954777,
-    "file_size": 15702,
-    "conversion_time": 0.1606128215789795,
+    "quality_score": 0.086527104506388,
+    "file_size": 4127,
+    "conversion_time": 0.13600897789001465,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1926,16 +1494,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/11618772.png",
+    "image_path": "data/raw_logos/5994055.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.26311226771883944,
-    "file_size": 16493,
-    "conversion_time": 0.15146493911743164,
+    "quality_score": 0.086527104506388,
+    "file_size": 4127,
+    "conversion_time": 0.13599109649658203,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1944,16 +1512,232 @@
     }
   },
   {
-    "image_path": "data/raw_logos/5856402.png",
+    "image_path": "data/raw_logos/18024607.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.2416760440433962,
+    "file_size": 17492,
+    "conversion_time": 0.15945696830749512,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.018951416015625,
+      "gradient_strength": 3.0998363494873047,
+      "horizontal_variance": 10143249.114990234
+    }
+  },
+  {
+    "image_path": "data/raw_logos/18024607.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.2505830630850931,
+    "file_size": 21298,
+    "conversion_time": 0.16540288925170898,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.018951416015625,
+      "gradient_strength": 3.0998363494873047,
+      "horizontal_variance": 10143249.114990234
+    }
+  },
+  {
+    "image_path": "data/raw_logos/18024607.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.2578647556790795,
+    "file_size": 33985,
+    "conversion_time": 0.17325425148010254,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.018951416015625,
+      "gradient_strength": 3.0998363494873047,
+      "horizontal_variance": 10143249.114990234
+    }
+  },
+  {
+    "image_path": "data/raw_logos/18024607.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.2609358228217873,
+    "file_size": 37058,
+    "conversion_time": 0.17451691627502441,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.018951416015625,
+      "gradient_strength": 3.0998363494873047,
+      "horizontal_variance": 10143249.114990234
+    }
+  },
+  {
+    "image_path": "data/raw_logos/18024607.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.2605009084888496,
+    "file_size": 37917,
+    "conversion_time": 0.18231987953186035,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.018951416015625,
+      "gradient_strength": 3.0998363494873047,
+      "horizontal_variance": 10143249.114990234
+    }
+  },
+  {
+    "image_path": "data/raw_logos/18024607.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.16979842160540243,
+    "file_size": 15870,
+    "conversion_time": 0.17536592483520508,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.018951416015625,
+      "gradient_strength": 3.0998363494873047,
+      "horizontal_variance": 10143249.114990234
+    }
+  },
+  {
+    "image_path": "data/raw_logos/16649166.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.1694971370241277,
+    "file_size": 5316,
+    "conversion_time": 0.14117980003356934,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.011016845703125,
+      "gradient_strength": 1.6537361145019531,
+      "horizontal_variance": 10815724.45678711
+    }
+  },
+  {
+    "image_path": "data/raw_logos/16649166.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.16962659914809614,
+    "file_size": 5626,
+    "conversion_time": 0.1427168846130371,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.011016845703125,
+      "gradient_strength": 1.6537361145019531,
+      "horizontal_variance": 10815724.45678711
+    }
+  },
+  {
+    "image_path": "data/raw_logos/16649166.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.17066496336072243,
+    "file_size": 7275,
+    "conversion_time": 0.14217901229858398,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.011016845703125,
+      "gradient_strength": 1.6537361145019531,
+      "horizontal_variance": 10815724.45678711
+    }
+  },
+  {
+    "image_path": "data/raw_logos/16649166.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.17073487175441257,
+    "file_size": 7331,
+    "conversion_time": 0.14319205284118652,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.011016845703125,
+      "gradient_strength": 1.6537361145019531,
+      "horizontal_variance": 10815724.45678711
+    }
+  },
+  {
+    "image_path": "data/raw_logos/16649166.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.17073487175441257,
+    "file_size": 7331,
+    "conversion_time": 0.14380097389221191,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.011016845703125,
+      "gradient_strength": 1.6537361145019531,
+      "horizontal_variance": 10815724.45678711
+    }
+  },
+  {
+    "image_path": "data/raw_logos/16649166.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.17073487175441257,
+    "file_size": 7331,
+    "conversion_time": 0.14280128479003906,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.011016845703125,
+      "gradient_strength": 1.6537361145019531,
+      "horizontal_variance": 10815724.45678711
+    }
+  },
+  {
+    "image_path": "data/raw_logos/11837160.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.1097038881567103,
-    "file_size": 7172,
-    "conversion_time": 0.13992810249328613,
+    "quality_score": 0.21735769122431184,
+    "file_size": 1841,
+    "conversion_time": 0.14347386360168457,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1962,16 +1746,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/5856402.png",
+    "image_path": "data/raw_logos/11837160.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.10978017856447327,
-    "file_size": 7134,
-    "conversion_time": 0.13797831535339355,
+    "quality_score": 0.21735769122431184,
+    "file_size": 1841,
+    "conversion_time": 0.1357119083404541,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1980,16 +1764,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/5856402.png",
+    "image_path": "data/raw_logos/11837160.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.10978017856447327,
-    "file_size": 7134,
-    "conversion_time": 0.14538335800170898,
+    "quality_score": 0.21260396147155275,
+    "file_size": 1540,
+    "conversion_time": 0.13409686088562012,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -1998,16 +1782,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/5856402.png",
+    "image_path": "data/raw_logos/11837160.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.10978017856447327,
-    "file_size": 7134,
-    "conversion_time": 0.14122915267944336,
+    "quality_score": 0.21260396147155275,
+    "file_size": 1540,
+    "conversion_time": 0.1329631805419922,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2016,16 +1800,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/5856402.png",
+    "image_path": "data/raw_logos/11837160.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.10978017856447327,
-    "file_size": 7134,
-    "conversion_time": 0.1488790512084961,
+    "quality_score": 0.21281589592402417,
+    "file_size": 2226,
+    "conversion_time": 0.13245582580566406,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2034,16 +1818,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/5856402.png",
+    "image_path": "data/raw_logos/11837160.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.10978017856447327,
-    "file_size": 7134,
-    "conversion_time": 0.13672804832458496,
+    "quality_score": 0.21879786225842138,
+    "file_size": 2882,
+    "conversion_time": 0.13613224029541016,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2052,16 +1836,124 @@
     }
   },
   {
-    "image_path": "data/raw_logos/10372041.png",
+    "image_path": "data/raw_logos/2414121.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.03438254737249228,
+    "file_size": 748,
+    "conversion_time": 0.12932801246643066,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0057830810546875,
+      "gradient_strength": 0.95367431640625,
+      "horizontal_variance": 28103146.97113037
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2414121.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.03438254737249228,
+    "file_size": 748,
+    "conversion_time": 0.12967681884765625,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0057830810546875,
+      "gradient_strength": 0.95367431640625,
+      "horizontal_variance": 28103146.97113037
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2414121.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.03438254737249228,
+    "file_size": 748,
+    "conversion_time": 0.14821505546569824,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0057830810546875,
+      "gradient_strength": 0.95367431640625,
+      "horizontal_variance": 28103146.97113037
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2414121.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.03438254737249228,
+    "file_size": 748,
+    "conversion_time": 0.1325240135192871,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0057830810546875,
+      "gradient_strength": 0.95367431640625,
+      "horizontal_variance": 28103146.97113037
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2414121.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.03438254737249228,
+    "file_size": 748,
+    "conversion_time": 0.12898898124694824,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0057830810546875,
+      "gradient_strength": 0.95367431640625,
+      "horizontal_variance": 28103146.97113037
+    }
+  },
+  {
+    "image_path": "data/raw_logos/2414121.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.03438254737249228,
+    "file_size": 748,
+    "conversion_time": 0.12974214553833008,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.0057830810546875,
+      "gradient_strength": 0.95367431640625,
+      "horizontal_variance": 28103146.97113037
+    }
+  },
+  {
+    "image_path": "data/raw_logos/3992748.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 3,
       "corner_threshold": 30,
       "segment_length": 6.0
     },
-    "quality_score": 0.3992806710598576,
-    "file_size": 26283,
-    "conversion_time": 0.16420602798461914,
+    "quality_score": 0.1505488717160917,
+    "file_size": 7242,
+    "conversion_time": 0.15035700798034668,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2070,16 +1962,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/10372041.png",
+    "image_path": "data/raw_logos/3992748.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 4,
       "corner_threshold": 40,
       "segment_length": 5.0
     },
-    "quality_score": 0.3988038091284203,
-    "file_size": 28654,
-    "conversion_time": 0.1627798080444336,
+    "quality_score": 0.15062333380873785,
+    "file_size": 7552,
+    "conversion_time": 0.1491100788116455,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2088,16 +1980,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/10372041.png",
+    "image_path": "data/raw_logos/3992748.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 6,
       "corner_threshold": 60,
       "segment_length": 4.0
     },
-    "quality_score": 0.3985426129105817,
-    "file_size": 30501,
-    "conversion_time": 0.16456294059753418,
+    "quality_score": 0.15062333380873785,
+    "file_size": 7552,
+    "conversion_time": 0.1481471061706543,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2106,16 +1998,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/10372041.png",
+    "image_path": "data/raw_logos/3992748.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 7,
       "corner_threshold": 70,
       "segment_length": 3.5
     },
-    "quality_score": 0.39845235252510636,
-    "file_size": 30612,
-    "conversion_time": 0.16559576988220215,
+    "quality_score": 0.15062333380873785,
+    "file_size": 7552,
+    "conversion_time": 0.15326714515686035,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2124,16 +2016,16 @@
     }
   },
   {
-    "image_path": "data/raw_logos/10372041.png",
+    "image_path": "data/raw_logos/3992748.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 8,
       "corner_threshold": 80,
       "segment_length": 3.0
     },
-    "quality_score": 0.3983967856174861,
-    "file_size": 30895,
-    "conversion_time": 0.16403484344482422,
+    "quality_score": 0.15062333380873785,
+    "file_size": 7552,
+    "conversion_time": 0.15278387069702148,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
@@ -2142,21 +2034,129 @@
     }
   },
   {
-    "image_path": "data/raw_logos/10372041.png",
+    "image_path": "data/raw_logos/3992748.png",
     "logo_type": "simple_geometric",
     "parameters": {
       "color_precision": 10,
       "corner_threshold": 90,
       "segment_length": 2.5
     },
-    "quality_score": 0.3985339963793544,
-    "file_size": 31402,
-    "conversion_time": 0.16241788864135742,
+    "quality_score": 0.15062333380873785,
+    "file_size": 7552,
+    "conversion_time": 0.1503620147705078,
     "features": {
       "unique_colors": 1,
       "edge_ratio": 0.0,
       "gradient_strength": 0.0,
       "horizontal_variance": 0.0
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4252296.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 3,
+      "corner_threshold": 30,
+      "segment_length": 6.0
+    },
+    "quality_score": 0.14731772362488127,
+    "file_size": 28376,
+    "conversion_time": 0.17714786529541016,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.028820037841796875,
+      "gradient_strength": 3.884265899658203,
+      "horizontal_variance": 137778638.1239891
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4252296.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 4,
+      "corner_threshold": 40,
+      "segment_length": 5.0
+    },
+    "quality_score": 0.2055659761984236,
+    "file_size": 36046,
+    "conversion_time": 0.19621610641479492,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.028820037841796875,
+      "gradient_strength": 3.884265899658203,
+      "horizontal_variance": 137778638.1239891
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4252296.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 6,
+      "corner_threshold": 60,
+      "segment_length": 4.0
+    },
+    "quality_score": 0.2233774553629354,
+    "file_size": 68668,
+    "conversion_time": 0.2131788730621338,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.028820037841796875,
+      "gradient_strength": 3.884265899658203,
+      "horizontal_variance": 137778638.1239891
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4252296.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 7,
+      "corner_threshold": 70,
+      "segment_length": 3.5
+    },
+    "quality_score": 0.22519807305721648,
+    "file_size": 70926,
+    "conversion_time": 0.23520922660827637,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.028820037841796875,
+      "gradient_strength": 3.884265899658203,
+      "horizontal_variance": 137778638.1239891
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4252296.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 8,
+      "corner_threshold": 80,
+      "segment_length": 3.0
+    },
+    "quality_score": 0.22513566875008326,
+    "file_size": 73617,
+    "conversion_time": 0.21337294578552246,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.028820037841796875,
+      "gradient_strength": 3.884265899658203,
+      "horizontal_variance": 137778638.1239891
+    }
+  },
+  {
+    "image_path": "data/raw_logos/4252296.png",
+    "logo_type": "text_based",
+    "parameters": {
+      "color_precision": 10,
+      "corner_threshold": 90,
+      "segment_length": 2.5
+    },
+    "quality_score": 0.13266187486851053,
+    "file_size": 21213,
+    "conversion_time": 0.1553490161895752,
+    "features": {
+      "unique_colors": 256,
+      "edge_ratio": 0.028820037841796875,
+      "gradient_strength": 3.884265899658203,
+      "horizontal_variance": 137778638.1239891
     }
   }
 ]

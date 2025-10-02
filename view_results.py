@@ -13,6 +13,7 @@ from backend.converter import convert_image
 import cairosvg
 import io
 import random
+from utils.image_utils import load_image_safe, load_image_bytes_safe
 
 def view_training_results(training_file="training_data_real_logos.json", num_samples=10):
     """
@@ -105,8 +106,8 @@ def view_training_results(training_file="training_data_real_logos.json", num_sam
         image_path = result['image_path']
 
         try:
-            # Load original image
-            original = Image.open(image_path).convert('RGB')
+            # Load original image (handle transparency properly)
+            original = load_image_safe(image_path)
 
             # Convert with best parameters
             params = result['parameters']
@@ -115,7 +116,7 @@ def view_training_results(training_file="training_data_real_logos.json", num_sam
             if conversion['success'] and conversion['svg']:
                 # Convert SVG to PNG for display
                 svg_png_bytes = cairosvg.svg2png(bytestring=conversion['svg'].encode('utf-8'))
-                svg_image = Image.open(io.BytesIO(svg_png_bytes)).convert('RGB')
+                svg_image = load_image_bytes_safe(svg_png_bytes)
 
                 # Calculate difference
                 orig_array = np.array(original.resize((256, 256)))

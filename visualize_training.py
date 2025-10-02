@@ -16,6 +16,7 @@ import pandas as pd
 from typing import Dict, List, Any, Optional
 from PIL import Image
 import io
+from utils.image_utils import load_image_safe, load_image_bytes_safe
 
 # Import existing visualization components
 from backend.ai_modules.optimization_old.visualization import TrainingVisualizer
@@ -250,7 +251,7 @@ class UnifiedVisualizationSystem:
         try:
             # Original image
             ax1 = fig.add_subplot(gs_row[0])
-            original = Image.open(item['image_path']).convert('RGB')
+            original = load_image_safe(item['image_path'])
             ax1.imshow(original)
             ax1.set_title(f"{title} - Original", fontsize=10)
             ax1.axis('off')
@@ -264,7 +265,7 @@ class UnifiedVisualizationSystem:
                 # SVG result
                 ax2 = fig.add_subplot(gs_row[1])
                 svg_png = cairosvg.svg2png(bytestring=result['svg'].encode('utf-8'))
-                svg_img = Image.open(io.BytesIO(svg_png)).convert('RGB')
+                svg_img = load_image_bytes_safe(svg_png)
                 ax2.imshow(svg_img)
                 ax2.set_title(f"SVG (SSIM: {item['quality_score']:.3f})", fontsize=10)
                 ax2.axis('off')

@@ -1,0 +1,9 @@
+{
+  "export_date": "/Users/nrw/python/svg-ai",
+  "models_exported": 0,
+  "model_types": {
+    "logo_classifier": "torchscript",
+    "quality_predictor": "torchscript",
+    "parameter_optimizer": "pickle"
+  }
+}

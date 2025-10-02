@@ -13,10 +13,11 @@ from PIL import Image
 import cv2
 from collections import Counter
 import time
+from utils.image_utils import load_image_safe
 
 def analyze_logo(image_path):
     """Analyze logo to auto-classify its type"""
-    img = Image.open(image_path).convert('RGB')
+    img = load_image_safe(image_path)
     cv_img = cv2.imread(str(image_path))
     gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)
 

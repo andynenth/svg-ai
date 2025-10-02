@@ -11,6 +11,7 @@ from PIL import Image
 import json
 import os
 from pathlib import Path
+from utils.image_utils import load_image_safe
 
 class LogoDataset(Dataset):
     def __init__(self, data_file="training_data.json"):
@@ -32,7 +33,7 @@ class LogoDataset(Dataset):
 
     def __getitem__(self, idx):
         item = self.data[idx]
-        image = Image.open(item['image_path']).convert('RGB')
+        image = load_image_safe(item['image_path'])
         image = self.transform(image)
 
         label = self.class_to_idx.get(item['logo_type'], 4)  # default to 'abstract'
@@ -146,7 +147,7 @@ def train_classifier():
     # Test on a sample
     print("\nTesting on a sample image...")
     test_image = "data/logos/simple_geometric/circle_00.png"
-    img = Image.open(test_image).convert('RGB')
+    img = load_image_safe(test_image)
     img_tensor = dataset.transform(img).unsqueeze(0).to(device)
 
     with torch.no_grad():
