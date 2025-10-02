@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test AI Frontend</title>
+</head>
+<body>
+    <h1>Test AI Conversion Metrics</h1>
+    <button onclick="testConversion()">Test AI Conversion</button>
+    <pre id="output"></pre>
+
+    <script>
+    async function testConversion() {
+        const output = document.getElementById('output');
+        output.textContent = 'Testing...\n';
+
+        try {
+            // Upload a test image
+            const uploadForm = new FormData();
+            const response1 = await fetch('data/raw_logos/103944.png');
+            const blob = await response1.blob();
+            uploadForm.append('file', blob, 'test.png');
+
+            const uploadResponse = await fetch('http://localhost:8001/api/upload', {
+                method: 'POST',
+                body: uploadForm
+            });
+
+            const uploadResult = await uploadResponse.json();
+            output.textContent += `✅ Uploaded: ${uploadResult.file_id}\n`;
+
+            // Convert using AI endpoint
+            const convertResponse = await fetch('http://localhost:8001/api/convert-ai', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ file_id: uploadResult.file_id })
+            });
+
+            const result = await convertResponse.json();
+            output.textContent += '\n📊 AI Response Structure:\n';
+            output.textContent += JSON.stringify(Object.keys(result), null, 2) + '\n';
+
+            // Test metric extraction
+            if (result.svg) {
+                const svgSize = new Blob([result.svg]).size;
+                const pathMatches = result.svg.match(/<path/g);
+                const pathCount = pathMatches ? pathMatches.length : 0;
+
+                output.textContent += '\n📈 Extracted Metrics:\n';
+                output.textContent += `- File size: ${(svgSize / 1024).toFixed(2)} KB\n`;
+                output.textContent += `- Path count: ${pathCount}\n`;
+                output.textContent += `- Quality: ${result.quality_score ? (result.quality_score * 100).toFixed(1) + '%' : 'AI Optimized'}\n`;
+            }
+
+        } catch (error) {
+            output.textContent += `\n❌ Error: ${error.message}\n`;
+        }
+    }
+    </script>
+</body>
+</html>

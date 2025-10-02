@@ -245,9 +245,20 @@ class ConverterModule {
                 converter: converter
             };
 
+            // Determine which API endpoint to use
+            let apiEndpoint = '/api/convert';
+
             // Add converter-specific parameters
             console.log('[Frontend] Selected converter:', converter);
             switch(converter) {
+                case 'ai':
+                    // Use AI-enhanced conversion endpoint
+                    apiEndpoint = '/api/convert-ai';
+                    console.log('🤖 [AI-CONVERSION] Using AI-enhanced conversion via /api/convert-ai');
+                    console.log('🤖 [AI-CONVERSION] File ID:', appState.currentFileId);
+                    // AI endpoint only needs file_id
+                    requestData = { file_id: appState.currentFileId };
+                    break;
                 case 'smart_auto':
                     // Smart Auto automatically selects optimal parameters
                     console.log('[Frontend] Smart Auto - using automatic parameter selection');
@@ -269,9 +280,9 @@ class ConverterModule {
                     break;
             }
 
-            console.log('[Frontend] Sending conversion request:', requestData);
+            console.log('[Frontend] Sending conversion request to', apiEndpoint, ':', requestData);
 
-            const response = await fetch(`${this.apiBase}/api/convert`, {
+            const response = await fetch(`${this.apiBase}${apiEndpoint}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)
@@ -318,11 +329,58 @@ class ConverterModule {
         console.log('[Frontend] SVG length:', result.svg.length);
         console.log('[Frontend] SVG preview:', result.svg.substring(0, 300));
 
+        // Log AI conversion details if available
+        if (converter === 'ai') {
+            console.log('🤖 [AI-CONVERSION-RESULT] Conversion completed via AI endpoint');
+            if (result.classification) {
+                console.log('🤖 [AI-CLASSIFICATION] Logo type:', result.classification.logo_type);
+                console.log('🤖 [AI-CLASSIFICATION] Confidence:', result.classification.confidence);
+            }
+            if (result.parameters_optimized) {
+                console.log('🤖 [AI-PARAMETERS] Optimized parameters:', result.parameters_optimized);
+            }
+            if (result.quality_score) {
+                console.log('🤖 [AI-QUALITY] Quality score:', result.quality_score);
+            }
+        }
+
         // Display metrics
-        document.getElementById('ssimScore').textContent = (result.ssim * 100).toFixed(1) + '%';
-        document.getElementById('fileSize').textContent = this.formatFileSize(result.size);
-        document.getElementById('pathCount').textContent = result.path_count || '-';
-        document.getElementById('avgPathLength').textContent = result.avg_path_length || '-';
+        // AI endpoint returns different fields than regular convert
+        if (converter === 'ai') {
+            // AI endpoint doesn't provide these metrics yet
+            document.getElementById('ssimScore').textContent = result.quality_score ?
+                (result.quality_score * 100).toFixed(1) + '%' : 'AI Optimized';
+
+            // Calculate file size from SVG content
+            const svgSize = result.svg ? new Blob([result.svg]).size : 0;
+            document.getElementById('fileSize').textContent = this.formatFileSize(svgSize);
+
+            // Path count - try to extract from SVG
+            const pathMatches = result.svg ? result.svg.match(/<path/g) : null;
+            document.getElementById('pathCount').textContent = pathMatches ? pathMatches.length : '-';
+
+            // Average path length - estimate from SVG
+            if (pathMatches && pathMatches.length > 0) {
+                const pathLengths = result.svg.match(/d="[^"]+"/g);
+                if (pathLengths) {
+                    const avgLength = pathLengths.reduce((sum, p) => sum + p.length, 0) / pathLengths.length;
+                    document.getElementById('avgPathLength').textContent = Math.round(avgLength) + ' chars';
+                } else {
+                    document.getElementById('avgPathLength').textContent = '-';
+                }
+            } else {
+                document.getElementById('avgPathLength').textContent = '-';
+            }
+        } else {
+            // Regular endpoints return standard metrics
+            document.getElementById('ssimScore').textContent = result.ssim ?
+                (result.ssim * 100).toFixed(1) + '%' : '-';
+            document.getElementById('fileSize').textContent = result.size ?
+                this.formatFileSize(result.size) : '-';
+            document.getElementById('pathCount').textContent = result.path_count || '-';
+            document.getElementById('avgPathLength').textContent = result.avg_path_length ?
+                result.avg_path_length + ' chars' : '-';
+        }
 
         // Show routing information if using smart_auto
         if (converter === 'smart_auto' && result.routing_info) {
