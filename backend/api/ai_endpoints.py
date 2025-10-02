@@ -21,7 +21,13 @@ def get_ai_components():
     """Lazy initialization of AI components"""
     if not _ai_components:
         try:
-            _ai_components['model_manager'] = ProductionModelManager()
+            model_manager = ProductionModelManager()
+            # Load models and check if any were found
+            model_manager._load_all_exported_models()
+
+            _ai_components['model_manager'] = model_manager
+            _ai_components['models_found'] = model_manager.models_found
+            _ai_components['model_dir'] = str(model_manager.model_dir)
             _ai_components['quality_predictor'] = OptimizedQualityPredictor(
                 _ai_components['model_manager']
             )
@@ -30,11 +36,16 @@ def get_ai_components():
             )
             _ai_components['converter'] = AIEnhancedConverter()
             _ai_components['initialized'] = True
-            logging.info("✅ AI components initialized successfully")
+
+            if not model_manager.models_found:
+                logging.warning(f"⚠️ AI components initialized but no models found in {model_manager.model_dir}")
+            else:
+                logging.info("✅ AI components initialized successfully with models")
         except Exception as e:
             logging.error(f"❌ AI components initialization failed: {e}")
             _ai_components['initialized'] = False
             _ai_components['error'] = str(e)
+            _ai_components['models_found'] = False
 
     return _ai_components
 
@@ -161,21 +172,45 @@ def perform_ai_conversion(
         }
 
     except Exception as e:
-        logging.error(f"AI conversion failed: {e}")
+        # Log detailed error context
+        error_context = {
+            'converter': converter.__class__.__name__ if 'converter' in locals() and converter else 'None',
+            'tier_attempted': selected_tier if 'selected_tier' in locals() else tier,
+            'target_quality': target_quality,
+            'time_budget': time_budget,
+            'error_type': type(e).__name__,
+            'error_message': str(e)
+        }
+        logging.error(f"AI conversion failed with context: {error_context}")
+
         # Fallback to basic conversion
         try:
             from ..converter import convert_image
+            logging.info("Attempting fallback to basic VTracer conversion")
             basic_result = convert_image(image_path, converter='vtracer')
+
+            # Verify fallback conversion succeeded
+            if not basic_result.get('success', False) or not basic_result.get('svg'):
+                raise Exception("Fallback conversion did not produce valid SVG")
+
             return {
                 'success': True,
                 'svg': basic_result['svg'],
                 'ai_metadata': {
                     'fallback_used': True,
                     'fallback_reason': str(e),
-                    'tier_used': 'fallback'
+                    'tier_attempted': error_context['tier_attempted'],
+                    'tier_used': 'fallback',
+                    'error_context': error_context,
+                    'quality_metrics': {
+                        'ssim': basic_result.get('ssim', 0.0),
+                        'mse': basic_result.get('mse', 0.0),
+                        'psnr': basic_result.get('psnr', 0.0)
+                    }
                 }
             }
         except Exception as fallback_error:
+            logging.error(f"Fallback conversion also failed: {fallback_error}")
             raise Exception(f"AI conversion failed: {e}, Fallback also failed: {fallback_error}")
 
 @ai_bp.route('/ai-health', methods=['GET'])
@@ -233,6 +268,8 @@ def check_model_manager_health(ai_components: Dict) -> Dict[str, Any]:
         # Test model loading
         models = model_manager.models
         loaded_models = [name for name, model in models.items() if model is not None]
+        models_found = ai_components.get('models_found', False)
+        model_dir = ai_components.get('model_dir', 'unknown')
 
         # Memory check
         try:
@@ -241,12 +278,26 @@ def check_model_manager_health(ai_components: Dict) -> Dict[str, Any]:
             # If memory monitor not available, create basic report
             memory_report = {'current_memory_mb': 0, 'within_limits': True}
 
-        return {
-            'status': 'healthy' if len(loaded_models) > 0 else 'degraded',
+        health_info = {
+            'status': 'healthy' if models_found else 'degraded',
+            'models_found': models_found,
+            'model_directory': model_dir,
             'loaded_models': loaded_models,
             'memory_usage_mb': memory_report['current_memory_mb'],
             'within_memory_limits': memory_report['within_limits']
         }
+
+        # Add actionable guidance if no models found
+        if not models_found:
+            health_info['guidance'] = f"No AI models found. To enable AI features, export models to: {model_dir}"
+            health_info['instructions'] = [
+                "1. Export quality_predictor.torchscript to the model directory",
+                "2. Export logo_classifier.onnx to the model directory",
+                "3. Export correlation_models.pkl to the model directory",
+                "4. Restart the service to load models"
+            ]
+
+        return health_info
 
     except Exception as e:
         return {'status': 'error', 'error': str(e)}

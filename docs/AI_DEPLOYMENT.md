@@ -72,6 +72,12 @@ curl http://localhost/api/ai-status
 - `/metrics` - Includes AI-specific metrics
 - See base documentation for other endpoints
 
+### AI Endpoint Fallback Behavior
+- When exported models are unavailable, `/api/convert-ai` will return heuristic results using baseline converters and annotate responses with fallback metadata.
+- `/api/ai-health` exposes a `model_assets` block showing `models_loaded`, the active `model_dir`, and any guidance emitted by the service (e.g., "upload exports to models/production/").
+- Server logs provide the same guidance so operators know where to place TorchScript/ONNX bundles or how to override `MODEL_DIR`.
+- After provisioning the required assets, rerun `/api/ai-health` to confirm recovery (`models_loaded: true`).
+
 ### Common AI Issues
 - **Model loading failures**: Check `MODEL_DIR` permissions and model file integrity
 - **High inference times**: Monitor `ai_model_inference_seconds` metric

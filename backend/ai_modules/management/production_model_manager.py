@@ -1,4 +1,5 @@
 # backend/ai_modules/management/production_model_manager.py
+import os
 import threading
 import logging
 from pathlib import Path
@@ -8,11 +9,26 @@ from typing import Dict, Any
 from backend.utils.performance_monitor import monitor_model_loading
 
 class ProductionModelManager:
-    def __init__(self, model_dir: str = "backend/ai_modules/models/exported"):
+    def __init__(self, model_dir: str = None):
+        # Configuration-driven model location with fallback
+        if model_dir is None:
+            # Check environment variable first
+            model_dir = os.environ.get('MODEL_DIR', None)
+            if model_dir is None:
+                # Check if production models directory exists
+                if Path('models/production').exists():
+                    model_dir = 'models/production'
+                elif Path('models').exists():
+                    model_dir = 'models'
+                else:
+                    # Fallback to legacy path for compatibility
+                    model_dir = "backend/ai_modules/models/exported"
+
         self.model_dir = Path(model_dir)
         self.models = {}
         self.model_metadata = {}
         self.loading_lock = threading.Lock()
+        self.models_found = False  # Track if any models were successfully loaded
 
     @monitor_model_loading()
     def _load_all_exported_models(self) -> Dict[str, Any]:
@@ -52,6 +68,13 @@ class ProductionModelManager:
         except Exception as e:
             logging.warning(f"⚠️ Correlation models unavailable: {e}")
             models['correlation_models'] = None
+
+        # Update models_found flag based on whether any models loaded
+        self.models_found = any(model is not None for model in models.values())
+
+        if not self.models_found:
+            logging.warning(f"⚠️ No models found in {self.model_dir}")
+            logging.info(f"💡 To enable AI features, export models to: {self.model_dir.absolute()}")
 
         return models
 

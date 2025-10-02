@@ -11,13 +11,13 @@ from .converters.vtracer_converter import VTracerConverter
 from .converters.potrace_converter import PotraceConverter
 from .converters.smart_potrace_converter import SmartPotraceConverter
 from .converters.smart_auto_converter import SmartAutoConverter
-from .utils.quality_metrics import QualityMetrics
+from .utils.quality_metrics import ComprehensiveMetrics
 from .utils.error_messages import ErrorMessageFactory, log_error_with_context
 
 logger = logging.getLogger(__name__)
 
 # Create instance
-metrics = QualityMetrics()
+metrics = ComprehensiveMetrics()
 
 
 def convert_image(input_path: str, converter_type: str = "alpha", **params: Any) -> Dict[str, Any]:
@@ -84,8 +84,19 @@ def convert_image(input_path: str, converter_type: str = "alpha", **params: Any)
         with open(svg_path, "w") as f:
             f.write(svg_content)
 
-        # Calculate SSIM
-        ssim_score = 0.95  # Placeholder - actual implementation would use metrics.calculate_ssim()
+        # Calculate real SSIM using ComprehensiveMetrics
+        try:
+            comprehensive_metrics = ComprehensiveMetrics()
+            metrics_result = comprehensive_metrics.compare_images(input_path, svg_path)
+            ssim_score = metrics_result.get('ssim', 0.0)
+            mse_score = metrics_result.get('mse', 0.0)
+            psnr_score = metrics_result.get('psnr', 0.0)
+        except Exception as e:
+            logging.warning(f"Failed to calculate quality metrics: {e}")
+            # Fallback to 0 to indicate calculation failure
+            ssim_score = 0.0
+            mse_score = 0.0
+            psnr_score = 0.0
 
         # Calculate additional metrics
         path_count = svg_content.count('<path')
@@ -97,6 +108,8 @@ def convert_image(input_path: str, converter_type: str = "alpha", **params: Any)
             "svg": svg_content,
             "size": len(svg_content),
             "ssim": ssim_score,
+            "mse": mse_score,
+            "psnr": psnr_score,
             "path_count": path_count,
             "avg_path_length": round(avg_path_length),
             "converter_type": converter_type,

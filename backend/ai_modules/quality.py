@@ -34,7 +34,60 @@ class QualitySystem:
 
     def calculate_comprehensive_metrics(self, original_path: str, svg_path: str) -> Dict:
         """Calculate all quality metrics"""
-        metrics = {'ssim': 0.85, 'mse': 100.0, 'psnr': 30.0, 'file_size_original': Path(original_path).stat().st_size if Path(original_path).exists() else 0, 'file_size_svg': Path(svg_path).stat().st_size if Path(svg_path).exists() else 0}
+        # Calculate real metrics
+        try:
+            # Render SVG to PNG for comparison
+            import cairosvg
+            import tempfile
+            import os
+
+            # Create temp file for rendered PNG
+            with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp_png:
+                tmp_png_path = tmp_png.name
+
+            # Render SVG to PNG
+            cairosvg.svg2png(url=svg_path, write_to=tmp_png_path)
+
+            # Calculate real SSIM
+            ssim_value = self.calculate_ssim(original_path, tmp_png_path)
+
+            # Calculate MSE and PSNR
+            original = cv2.imread(original_path)
+            rendered = cv2.imread(tmp_png_path)
+
+            if original is not None and rendered is not None:
+                # Resize if needed
+                if original.shape != rendered.shape:
+                    rendered = cv2.resize(rendered, (original.shape[1], original.shape[0]))
+
+                # Calculate MSE
+                mse_value = np.mean((original.astype(float) - rendered.astype(float)) ** 2)
+
+                # Calculate PSNR
+                if mse_value > 0:
+                    psnr_value = 20 * np.log10(255.0 / np.sqrt(mse_value))
+                else:
+                    psnr_value = float('inf')  # Perfect match
+            else:
+                mse_value = 0.0
+                psnr_value = 0.0
+
+            # Clean up temp file
+            os.unlink(tmp_png_path)
+
+        except Exception as e:
+            # Fallback to defaults if calculation fails
+            ssim_value = 0.0
+            mse_value = 0.0
+            psnr_value = 0.0
+
+        metrics = {
+            'ssim': ssim_value,
+            'mse': mse_value,
+            'psnr': psnr_value,
+            'file_size_original': Path(original_path).stat().st_size if Path(original_path).exists() else 0,
+            'file_size_svg': Path(svg_path).stat().st_size if Path(svg_path).exists() else 0
+        }
         if metrics['file_size_original'] > 0 and metrics['file_size_svg'] > 0:
             metrics['compression_ratio'] = metrics['file_size_original'] / metrics['file_size_svg']
         else:
